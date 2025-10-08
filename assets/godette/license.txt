@@ -1,0 +1,11 @@
+Model Information:
+* title:	Godette (Rigged)
+* source:	https://sketchfab.com/3d-models/godette-rigged-dd05b69799a2438e97c90d166f6e416a
+* author:	zahlenmaler (https://sketchfab.com/zahlenmaler)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Godette (Rigged)" (https://sketchfab.com/3d-models/godette-rigged-dd05b69799a2438e97c90d166f6e416a) by zahlenmaler (https://sketchfab.com/zahlenmaler) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
