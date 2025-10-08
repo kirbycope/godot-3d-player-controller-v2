@@ -1,6 +1,7 @@
-[gd_scene load_steps=42 format=4 uid="uid://f6xpywa7euq2"]
+[gd_scene load_steps=43 format=4 uid="uid://f6xpywa7euq2"]
 
 [ext_resource type="Script" uid="uid://b7plmenqhwlu4" path="res://addons/3d_player_controller_v2/player.gd" id="1_ifhah"]
+[ext_resource type="Script" uid="uid://lsm3ddt2fwo7" path="res://addons/3d_player_controller_v2/controls.gd" id="2_3ybeu"]
 [ext_resource type="Texture2D" uid="uid://bid7dym4yy68k" path="res://assets/godette/textures/Tex_Godette.png" id="2_ifhah"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ifhah"]
@@ -18037,6 +18038,9 @@ transform = Transform3D(1, 0, 0, 0, 0.9659258, 0.25881904, 0, -0.25881904, 0.965
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
 shape = SubResource("CapsuleShape3D_ifhah")
+
+[node name="Controls" type="CanvasLayer" parent="."]
+script = ExtResource("2_3ybeu")
 
 [node name="Visuals" type="Node3D" parent="."]
 

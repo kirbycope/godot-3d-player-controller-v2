@@ -1,0 +1,3 @@
+- [Godette (Rigged)](https://sketchfab.com/3d-models/godette-rigged-dd05b69799a2438e97c90d166f6e416a)
+- [Kenney Game Assets All-in-1](https://kenney.itch.io/kenney-game-assets)
+- [Universal Animation Library](https://quaternius.itch.io/universal-animation-library)
