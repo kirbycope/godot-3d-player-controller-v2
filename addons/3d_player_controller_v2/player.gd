@@ -1,7 +1,12 @@
 extends CharacterBody3D
 
-@export_group("Movement Settings")
+enum Perspective {
+	THIRD_PERSON,
+	FIRST_PERSON
+}
+
 @export var jump_velocity: float = 4.5 ## Jump velocity
+@export var perspective: Perspective = Perspective.THIRD_PERSON ## Camera perspective
 @export var speed_climbing: float = 0.5 ## Speed while climbing
 @export var speed_crawling: float = 0.75 ## Speed while crawling
 @export var speed_flying: float = 5.0 ## Speed while flying
@@ -13,8 +18,13 @@ extends CharacterBody3D
 @export var speed_swimming: float = 3.0 ## Speed while swimming
 @export var speed_walking: float = 1.0 ## Speed while walking
 
+var current_state: States.State ## The current state of the player.
+var is_jumping: bool = false ## Is the player jumping?
+var is_running: bool = false ## Is the player running?
+var is_standing: bool = true ## Is the player standing?
+var is_walking: bool = false ## Is the player walking?
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity") ## Default gravity value
-var speed_current: float = 3.0 ## Current speed
+var speed_current: float = 0.0 ## Current speed
 
 @onready var animation_player: AnimationPlayer = $Visuals/Godette/AnimationPlayer
 @onready var camera_mount = $CameraMount
@@ -22,14 +32,10 @@ var speed_current: float = 3.0 ## Current speed
 @onready var controls = $Controls
 
 
-## Called when the object's script is instantiated.
-func _init():
-	speed_current = speed_running
-
-
 ## Called when the node is "ready", i.e. when both the node and its children have entered the scene tree.
 func _ready():
-	pass
+	# Start "standing"
+	$States/Standing.start()
 
 
 ## Called when there is an input event.

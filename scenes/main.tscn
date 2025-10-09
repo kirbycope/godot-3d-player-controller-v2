@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://dey7ls45vvlck"]
+[gd_scene load_steps=14 format=3 uid="uid://dey7ls45vvlck"]
 
 [ext_resource type="Script" uid="uid://dhm0w0mgw28o6" path="res://scenes/main.gd" id="1_o5qli"]
 [ext_resource type="Texture2D" uid="uid://brerfykle8g6t" path="res://icon.svg" id="2_0wfyh"]
+[ext_resource type="Texture2D" uid="uid://bpo2vwd0ruriv" path="res://assets/textures/prototype_textures/Dark/texture_08.png" id="2_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://f6xpywa7euq2" path="res://addons/3d_player_controller_v2/player.tscn" id="3_sugp2"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sugp2"]
@@ -18,7 +19,7 @@ tonemap_mode = 2
 glow_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sugp2"]
-albedo_texture = ExtResource("2_0wfyh")
+albedo_texture = ExtResource("2_jyhfs")
 uv1_triplanar = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_jyhfs"]
@@ -67,4 +68,4 @@ shape = SubResource("BoxShape3D_tefeu")
 mesh = SubResource("BoxMesh_tipki")
 
 [node name="Player" parent="." instance=ExtResource("3_sugp2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
