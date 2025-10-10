@@ -342,15 +342,3 @@ func _ready() -> void:
 		var key_event = InputEventKey.new()
 		key_event.physical_keycode = KEY_T
 		InputMap.action_add_event(button_15, key_event)
-
-
-## Called when there is an input event.
-func _input(event):
-	pass
-	# Show touch controls only on touch screen devices
-	#visible = event is InputEventScreenTouch
-
-
-## Called every frame. '_delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	pass

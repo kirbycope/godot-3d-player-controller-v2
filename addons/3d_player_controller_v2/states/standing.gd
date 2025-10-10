@@ -2,34 +2,22 @@ extends BaseState
 
 const ANIMATION_STANDING := "AnimationLibrary_Godot/Idle"
 const NODE_NAME := "Standing"
+const NODE_STATE := States.State.STANDING
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+## Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
-	# Check if the player is moving
-	if player.velocity != Vector3.ZERO:
-		# Check if the player is not on a floor
-		if !player.is_on_floor():
-			# Start "falling"
-			transition(NODE_NAME, "Falling")
-		# Check if the player is holding the "sprint" button
-		elif Input.is_action_pressed(player.controls.button_1):
-			# Start "sprinting"
-			transition(NODE_NAME, "Sprinting")
-		# Check if the player is slower than or equal to "walking"
-		elif (0.0 < player.speed_current) and (player.speed_current <= player.speed_walking):
-			# Start "walking"
-			transition(NODE_NAME, "Walking")
-		# Check if the player speed is faster than "walking" but slower than or equal to "running"
-		elif (player.speed_walking < player.speed_current) and (player.speed_current <= player.speed_running):
-			# Start "running"
-			transition(NODE_NAME, "Running")
-	# Check if the player is "standing"
-	if player.is_standing:
-		# Play the animation
-		play_animation()
+
+	# Ⓨ/[Ctrl] _pressed_ -> Start "crouching"
+	if Input.is_action_pressed(player.controls.button_3) \
+	and player.is_on_floor():
+		transition_state(NODE_STATE, States.State.CROUCHING)
+		return
+
+	# Play the animation
+	play_animation()
 
 
 ## Plays the appropriate animation based on player state.
@@ -49,7 +37,7 @@ func start() -> void:
 	# Flag the player as "standing"
 	player.is_standing = true
 	# Set the player's speed
-	player.speed_current = player.speed_walking
+	player.speed_current = 0.0
 	# Set the player's velocity
 	player.velocity = Vector3.ZERO
 
