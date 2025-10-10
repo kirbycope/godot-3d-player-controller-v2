@@ -88,27 +88,38 @@ func _physics_process(delta):
 	if speed_current == 0.0 and input_direction != Vector2.ZERO:
 		speed_current = input_direction.length() * speed_running
 
-	# Convert the 2D vector into a 3D vector and then normalize the result
-	var direction = (transform.basis * Vector3(input_direction.x, 0, input_direction.y)).normalized()
-	if direction:
-		# Update linear velocities based on direction and speed
-		velocity.x = direction.x * speed_current
-		velocity.z = direction.z * speed_current
-		# Update the visuals to look in the direction based on player input
-		visuals.look_at(position + direction, up_direction)
-
-	# Apply gravity
+	# Determine the gravity direction and the new up_direction
+	var gravity_direction: Vector3
+	var new_up: Vector3
+	var gravity_accel: Vector3
+	# Check if using local gravity (e.g. planet)
 	if gravitating_towards:
-		# Calculate the direction towards the gravity source center
-		var gravity_direction = (gravitating_towards.global_position - global_position).normalized()
-		# Apply gravity towards the target object's center
-		velocity += gravity_direction * gravity * delta
-		# Set the new "up" direction based on gravity
-		up_direction = -gravity_direction
+		gravity_direction = (gravitating_towards.global_position - global_position).normalized()
+		new_up = -gravity_direction
+		gravity_accel = gravity_direction * gravity
+	# Must be using global gravity
 	else:
-		# Update the vertical velocity with global gravity
-		velocity.y -= gravity * delta
-		up_direction = Vector3.UP
+		gravity_direction = -Vector3.UP
+		new_up = Vector3.UP
+		gravity_accel = -Vector3.UP * gravity
+
+	# Convert the 2D input into a 3D world-space direction and project onto the tangent plane (orthogonal to new_up)
+	var raw_dir: Vector3 = transform.basis * Vector3(input_direction.x, 0, input_direction.y)
+	var lateral_dir: Vector3 = raw_dir - new_up * raw_dir.dot(new_up)
+	lateral_dir = lateral_dir.normalized()
+	if lateral_dir:
+		# Compute desired tangential (horizontal) velocity on the surface
+		var tangential_velocity: Vector3 = lateral_dir * speed_current
+		# Preserve current vertical speed along the NEW up direction
+		var vertical_speed: float = velocity.dot(new_up)
+		velocity = tangential_velocity + new_up * vertical_speed
+		# Update the visuals to look in the direction based on player input
+		visuals.look_at(position + lateral_dir, new_up)
+
+	# Apply gravity for this tick
+	velocity += gravity_accel * delta
+	# Commit the new up direction after applying gravity
+	up_direction = new_up
 
 	# Move the body based on velocity
 	move_and_slide()
