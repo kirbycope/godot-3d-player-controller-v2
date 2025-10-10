@@ -19,7 +19,7 @@ func camera_rotate_by_mouse(event: InputEvent) -> void:
 
 	# Rotate the player along the y-axis (left/right, "yaw")
 	var new_rotation_y = -event.relative.x * look_sensitivity_mouse
-	player.rotate_y(deg_to_rad(new_rotation_y))
+	player.rotate(player.basis.y, deg_to_rad(new_rotation_y))
 
 	# [Third-person] Rotate the visuals with the camera's horizontal rotation
 	if player.perspective == player.Perspective.THIRD_PERSON:

@@ -1,9 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://dey7ls45vvlck"]
+[gd_scene load_steps=18 format=3 uid="uid://dey7ls45vvlck"]
 
 [ext_resource type="Script" uid="uid://dhm0w0mgw28o6" path="res://scenes/main.gd" id="1_o5qli"]
 [ext_resource type="Texture2D" uid="uid://brerfykle8g6t" path="res://icon.svg" id="2_0wfyh"]
 [ext_resource type="Texture2D" uid="uid://bpo2vwd0ruriv" path="res://assets/textures/prototype_textures/Dark/texture_08.png" id="2_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://f6xpywa7euq2" path="res://addons/3d_player_controller_v2/player.tscn" id="3_sugp2"]
+[ext_resource type="Texture2D" uid="uid://c2yhnwwbe08c4" path="res://assets/textures/prototype_textures/Dark/texture_03.png" id="5_tbgi4"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sugp2"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -24,7 +25,7 @@ uv1_triplanar = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_jyhfs"]
 material = SubResource("StandardMaterial3D_sugp2")
-size = Vector3(64, 0.01, 64)
+size = Vector3(64, 0.1, 64)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_tbgi4"]
 size = Vector3(64, 0.1, 64)
@@ -39,6 +40,18 @@ uv1_triplanar = true
 [sub_resource type="BoxMesh" id="BoxMesh_tipki"]
 material = SubResource("StandardMaterial3D_o6xl0")
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tipki"]
+albedo_texture = ExtResource("5_tbgi4")
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tefeu"]
+albedo_texture = ExtResource("2_jyhfs")
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tbgi4"]
+albedo_texture = ExtResource("2_jyhfs")
+uv1_triplanar = true
+
 [node name="Main" type="Node3D"]
 script = ExtResource("1_o5qli")
 
@@ -50,7 +63,7 @@ transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545
 shadow_enabled = true
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.005, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
 mesh = SubResource("BoxMesh_jyhfs")
@@ -69,3 +82,82 @@ mesh = SubResource("BoxMesh_tipki")
 
 [node name="Player" parent="." instance=ExtResource("3_sugp2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -6)
+use_collision = true
+size = Vector3(2, 2, 2)
+material = SubResource("StandardMaterial3D_tipki")
+
+[node name="Stairs" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.1)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Stairs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+use_collision = true
+size = Vector3(1, 0.2, 0.2)
+material = SubResource("StandardMaterial3D_tefeu")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Stairs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, -0.20000005)
+use_collision = true
+size = Vector3(1, 0.2, 0.2)
+material = SubResource("StandardMaterial3D_tefeu")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Stairs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -0.4000001)
+use_collision = true
+size = Vector3(1, 0.2, 0.2)
+material = SubResource("StandardMaterial3D_tefeu")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Stairs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, -0.60000014)
+use_collision = true
+size = Vector3(1, 0.2, 0.2)
+material = SubResource("StandardMaterial3D_tefeu")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Stairs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, -0.8000002)
+use_collision = true
+size = Vector3(1, 0.2, 0.2)
+material = SubResource("StandardMaterial3D_tefeu")
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="Stairs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, -1)
+use_collision = true
+size = Vector3(1, 0.2, 0.2)
+material = SubResource("StandardMaterial3D_tefeu")
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="Stairs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3000001, -1.1999998)
+use_collision = true
+size = Vector3(1, 0.2, 0.2)
+material = SubResource("StandardMaterial3D_tefeu")
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="Stairs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5000001, -1.3999996)
+use_collision = true
+size = Vector3(1, 0.2, 0.2)
+material = SubResource("StandardMaterial3D_tefeu")
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="Stairs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7000002, -1.5999994)
+use_collision = true
+size = Vector3(1, 0.2, 0.2)
+material = SubResource("StandardMaterial3D_tefeu")
+
+[node name="CSGBox3D10" type="CSGBox3D" parent="Stairs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9000002, -1.7999992)
+use_collision = true
+size = Vector3(1, 0.2, 0.2)
+material = SubResource("StandardMaterial3D_tefeu")
+
+[node name="Ramp" type="CSGBox3D" parent="."]
+transform = Transform3D(0.8660254, -0.5, 0, 0.5, 0.8660254, 0, 0, 0, 1, -2.7066743, 0.9585296, -6)
+use_collision = true
+size = Vector3(4, 0.1, 1.999)
+material = SubResource("StandardMaterial3D_tbgi4")
+
+[node name="Label3D" type="Label3D" parent="Ramp"]
+transform = Transform3D(1.2904784e-08, 0.8660254, 0.5, 2.235174e-08, -0.5, 0.8660254, 1, 0, -4.371139e-08, -2.1185896, 0.11899996, 0)
+text = "30° Ramp"
