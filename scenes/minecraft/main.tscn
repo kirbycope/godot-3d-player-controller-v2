@@ -104,14 +104,15 @@ script = ExtResource("1_lbibe")
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_m3hx4")
 
-[node name="Player" parent="." instance=ExtResource("5_gww7y")]
-transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -1.5, 0, 1.5)
-
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
 shadow_enabled = true
 
+[node name="Player" parent="." instance=ExtResource("5_gww7y")]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, 1.5, 0, 1.5)
+
 [node name="SkyIsland" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
 
 [node name="Section1" type="Node3D" parent="SkyIsland"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, 1.5)
@@ -366,7 +367,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.5, -1)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -2.5, -1)
 
 [node name="Tree" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, -2.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5000001, 0, -2.5)
 
 [node name="TrunkBlock" parent="Tree" instance=ExtResource("5_hxnpf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
@@ -567,7 +568,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 5.5, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 5.5, 0)
 
 [node name="Grass1" type="Node3D" parent="."]
-transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, -1.5, 0, -0.6)
+transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, 1.5000001, 0, -0.6)
 
 [node name="Side1" type="MeshInstance3D" parent="Grass1"]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0.25, 0)
@@ -580,7 +581,7 @@ mesh = SubResource("PlaneMesh_hxnpf")
 skeleton = NodePath("../..")
 
 [node name="Grass1_2" type="Node3D" parent="."]
-transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, -2.5, 0, 1.4)
+transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, 0.50000006, 0, 1.4)
 
 [node name="Side1" type="MeshInstance3D" parent="Grass1_2"]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0.25, 0)
@@ -593,7 +594,7 @@ mesh = SubResource("PlaneMesh_hxnpf")
 skeleton = NodePath("../..")
 
 [node name="Grass2" type="Node3D" parent="."]
-transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, -1.5, 0, -1.6)
+transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, 1.5000001, 0, -1.6)
 
 [node name="Side1" type="MeshInstance3D" parent="Grass2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
@@ -604,7 +605,7 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0
 mesh = SubResource("PlaneMesh_8vsgy")
 
 [node name="Grass2_2" type="Node3D" parent="."]
-transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, -2.5, 0, 0.39999998)
+transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, 0.50000006, 0, 0.39999998)
 
 [node name="Side1" type="MeshInstance3D" parent="Grass2_2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
@@ -615,7 +616,7 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0
 mesh = SubResource("PlaneMesh_8vsgy")
 
 [node name="Grass2_3" type="Node3D" parent="."]
-transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, -1.5, 0, 1.4)
+transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, 1.5000001, 0, 1.4)
 
 [node name="Side1" type="MeshInstance3D" parent="Grass2_3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
@@ -626,7 +627,7 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0
 mesh = SubResource("PlaneMesh_8vsgy")
 
 [node name="Grass3" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0, -1.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.50000006, 0, -1.5)
 
 [node name="Side1" type="MeshInstance3D" parent="Grass3"]
 transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, 0, 0.25, 0)
@@ -637,7 +638,7 @@ transform = Transform3D(-0.7071068, 0, -0.7071067, 0, 1, 0, 0.7071067, 0, -0.707
 mesh = SubResource("PlaneMesh_j3sw6")
 
 [node name="Grass3_2" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0, 2.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.50000006, 0, 2.5)
 
 [node name="Side1" type="MeshInstance3D" parent="Grass3_2"]
 transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, 0, 0.25, 0)
@@ -648,7 +649,7 @@ transform = Transform3D(-0.7071068, 0, -0.7071067, 0, 1, 0, 0.7071067, 0, -0.707
 mesh = SubResource("PlaneMesh_j3sw6")
 
 [node name="Grass4" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0, -0.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.50000006, 0, -0.5)
 
 [node name="Side1" type="MeshInstance3D" parent="Grass4"]
 transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, 0, 0.25, 0)
@@ -659,7 +660,7 @@ transform = Transform3D(-0.7071068, 0, -0.7071067, 0, 1, 0, 0.7071067, 0, -0.707
 mesh = SubResource("PlaneMesh_3ypik")
 
 [node name="Grass4_2" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 0, 2.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.49999997, 0, 2.5)
 
 [node name="Side1" type="MeshInstance3D" parent="Grass4_2"]
 transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, 0, 0.25, 0)
@@ -670,7 +671,7 @@ transform = Transform3D(-0.7071068, 0, -0.7071067, 0, 1, 0, 0.7071067, 0, -0.707
 mesh = SubResource("PlaneMesh_3ypik")
 
 [node name="FlowerRed" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, 2.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5000001, 0, 2.5)
 
 [node name="Side1" type="MeshInstance3D" parent="FlowerRed"]
 transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, 0, 0.25, 0)
@@ -681,7 +682,7 @@ transform = Transform3D(-0.7071068, 0, -0.7071067, 0, 1, 0, 0.7071067, 0, -0.707
 mesh = SubResource("PlaneMesh_fda56")
 
 [node name="FlowersYellow" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, -1.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, -1.5)
 
 [node name="Side1" type="MeshInstance3D" parent="FlowersYellow"]
 transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, 0, 0.25, 0)
@@ -692,4 +693,4 @@ transform = Transform3D(-0.7071068, 0, -0.7071067, 0, 1, 0, 0.7071067, 0, -0.707
 mesh = SubResource("PlaneMesh_7uwy1")
 
 [node name="TableBlock" parent="." instance=ExtResource("11_hxnpf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, 0.5, 1.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0.5, 1.5)

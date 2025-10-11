@@ -1,6 +1,50 @@
-[gd_scene load_steps=2 format=3 uid="uid://blvtbcmgwjrqv"]
+[gd_scene load_steps=10 format=3 uid="uid://blvtbcmgwjrqv"]
 
 [ext_resource type="Script" uid="uid://dqy82fkbjuexv" path="res://scenes/zelda_breath_of_the_wild/main.gd" id="1_2puyk"]
+[ext_resource type="PackedScene" uid="uid://f6xpywa7euq2" path="res://addons/3d_player_controller_v2/player.tscn" id="2_mho6g"]
+[ext_resource type="Texture2D" uid="uid://c1ax5lk3860xr" path="res://assets/textures/prototype_textures/Green/texture_09.png" id="3_ddrrl"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_op0ck"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_3lfau"]
+sky_material = SubResource("ProceduralSkyMaterial_op0ck")
+
+[sub_resource type="Environment" id="Environment_2infd"]
+background_mode = 2
+sky = SubResource("Sky_3lfau")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ehmat"]
+size = Vector3(64, 0.1, 64)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6cbml"]
+albedo_texture = ExtResource("3_ddrrl")
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_papcc"]
+material = SubResource("StandardMaterial3D_6cbml")
+size = Vector3(64, 0.1, 64)
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_2puyk")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_2infd")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Player" parent="." instance=ExtResource("2_mho6g")]
+
+[node name="Ground" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+shape = SubResource("BoxShape3D_ehmat")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+mesh = SubResource("BoxMesh_papcc")
