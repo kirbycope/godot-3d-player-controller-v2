@@ -1,13 +1,13 @@
 [gd_scene load_steps=13 format=3 uid="uid://s28pdmd70xtv"]
 
-[ext_resource type="Texture2D" uid="uid://cbj1ys7p3s00k" path="res://assets/textures/nasa/lroc_color_poles_1k.jpg" id="1_errlg"]
-[ext_resource type="Texture2D" uid="uid://cjqg0eprmq4vj" path="res://assets/textures/nasa/starmap_g8k.jpg" id="1_iyx0m"]
-[ext_resource type="Script" uid="uid://bq18sfoeqsn18" path="res://scenes/test.gd" id="1_j5jx5"]
-[ext_resource type="Script" uid="uid://fp0a2rkcoitr" path="res://scenes/planet.gd" id="2_74lek"]
-[ext_resource type="PackedScene" uid="uid://f6xpywa7euq2" path="res://addons/3d_player_controller_v2/player.tscn" id="2_bl13t"]
+[ext_resource type="Script" uid="uid://bq18sfoeqsn18" path="res://scenes/super_mario_galaxy/main.gd" id="1_nxw74"]
+[ext_resource type="Texture2D" uid="uid://cjqg0eprmq4vj" path="res://assets/textures/nasa/starmap_g8k.jpg" id="2_chkq5"]
+[ext_resource type="Script" uid="uid://fp0a2rkcoitr" path="res://scenes/super_mario_galaxy/planet.gd" id="3_gfmp0"]
+[ext_resource type="Texture2D" uid="uid://cbj1ys7p3s00k" path="res://assets/textures/nasa/lroc_color_poles_1k.jpg" id="4_mdthr"]
+[ext_resource type="PackedScene" uid="uid://f6xpywa7euq2" path="res://addons/3d_player_controller_v2/player.tscn" id="5_guwhr"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_74lek"]
-panorama = ExtResource("1_iyx0m")
+panorama = ExtResource("2_chkq5")
 
 [sub_resource type="Sky" id="Sky_j5jx5"]
 sky_material = SubResource("PanoramaSkyMaterial_74lek")
@@ -27,7 +27,7 @@ radius = 24.0
 radius = 14.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bl13t"]
-albedo_texture = ExtResource("1_errlg")
+albedo_texture = ExtResource("4_mdthr")
 
 [sub_resource type="SphereMesh" id="SphereMesh_bl13t"]
 material = SubResource("StandardMaterial3D_bl13t")
@@ -35,7 +35,7 @@ radius = 14.0
 height = 28.0
 
 [node name="test" type="Node3D"]
-script = ExtResource("1_j5jx5")
+script = ExtResource("1_nxw74")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
@@ -45,7 +45,7 @@ shadow_enabled = true
 environment = SubResource("Environment_lpvoh")
 
 [node name="Planet" type="StaticBody3D" parent="."]
-script = ExtResource("2_74lek")
+script = ExtResource("3_gfmp0")
 
 [node name="Area3D" type="Area3D" parent="Planet"]
 
@@ -58,7 +58,7 @@ shape = SubResource("SphereShape3D_errlg")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Planet"]
 mesh = SubResource("SphereMesh_bl13t")
 
-[node name="Player" parent="." instance=ExtResource("2_bl13t")]
+[node name="Player" parent="." instance=ExtResource("5_guwhr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14, 0)
 
 [connection signal="body_entered" from="Planet/Area3D" to="Planet" method="_on_area_3d_body_entered"]

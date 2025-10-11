@@ -1,0 +1,235 @@
+[gd_scene load_steps=14 format=3 uid="uid://7bmrbudeq40y"]
+
+[ext_resource type="Script" uid="uid://cw48aw6pubuwl" path="res://scenes/level_select.gd" id="1_p0wlc"]
+[ext_resource type="Texture2D" uid="uid://7fjc1etvog52" path="res://scenes/beta/sample.png" id="2_2epne"]
+[ext_resource type="Texture2D" uid="uid://cr2mxxoiwbrta" path="res://scenes/super_mario_galaxy/preview.png" id="3_2epne"]
+[ext_resource type="Texture2D" uid="uid://b2aj55v7b6d6g" path="res://scenes/animal_crossing_new_leaf/preview.png" id="3_o2xx4"]
+[ext_resource type="Texture2D" uid="uid://t5iy8syqok2g" path="res://scenes/guild_wars/preview.png" id="3_rif6e"]
+[ext_resource type="Texture2D" uid="uid://dgr47oep1n57i" path="res://scenes/minecraft/preview.png" id="5_htctk"]
+[ext_resource type="Texture2D" uid="uid://m8twggk6t78x" path="res://scenes/portal/preview.png" id="6_s6tf7"]
+[ext_resource type="Texture2D" uid="uid://csbdn3rxc1rxt" path="res://scenes/super_mario_odyssey/preview.png" id="8_u4mbh"]
+[ext_resource type="Texture2D" uid="uid://cwekv3qhsrb64" path="res://scenes/zelda_breath_of_the_wild/preview.png" id="9_rovvv"]
+[ext_resource type="Texture2D" uid="uid://djy2ysommtucl" path="res://scenes/zelda_links_awakening/preview.png" id="10_0wyvj"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_64kqf"]
+size = Vector2(480, 320)
+
+[sub_resource type="LabelSettings" id="LabelSettings_64kqf"]
+font_size = 24
+shadow_size = 4
+shadow_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_p0wlc"]
+font_size = 32
+
+[node name="LevelSelect" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_p0wlc")
+
+[node name="Center" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -360.0
+offset_top = -240.0
+offset_right = 360.0
+offset_bottom = 240.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Center"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -160.0
+offset_right = 213.0
+offset_bottom = 160.0
+grow_vertical = 2
+
+[node name="Beta" type="Button" parent="Center/VBoxContainer"]
+layout_mode = 2
+toggle_mode = true
+text = "Beta (QA World)"
+
+[node name="AnimalCrossingNewLeaf" type="Button" parent="Center/VBoxContainer"]
+layout_mode = 2
+toggle_mode = true
+text = "Animal Crossing: New Leaf"
+
+[node name="GuildWars" type="Button" parent="Center/VBoxContainer"]
+layout_mode = 2
+toggle_mode = true
+text = "Guild Wars"
+
+[node name="Minecraft" type="Button" parent="Center/VBoxContainer"]
+layout_mode = 2
+toggle_mode = true
+text = "Minecraft"
+
+[node name="Portal" type="Button" parent="Center/VBoxContainer"]
+layout_mode = 2
+toggle_mode = true
+text = "Portal"
+
+[node name="SuperMarioGalaxy" type="Button" parent="Center/VBoxContainer"]
+layout_mode = 2
+toggle_mode = true
+text = "Super Mario Galaxy"
+
+[node name="SuperMarioOdyssey" type="Button" parent="Center/VBoxContainer"]
+layout_mode = 2
+toggle_mode = true
+text = "Super Mario Odyssey"
+
+[node name="ZeldaBreathOfTheWild" type="Button" parent="Center/VBoxContainer"]
+layout_mode = 2
+toggle_mode = true
+text = "Zelda: Breath of the Wild"
+
+[node name="ZeldaLinksAwakening" type="Button" parent="Center/VBoxContainer"]
+layout_mode = 2
+toggle_mode = true
+text = "Zelda: Link's Awakening"
+
+[node name="CenterContainer" type="CenterContainer" parent="Center"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -480.0
+offset_top = -160.0
+offset_bottom = 160.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="Placeholder" type="TextureRect" parent="Center/CenterContainer"]
+layout_mode = 2
+texture = SubResource("PlaceholderTexture2D_64kqf")
+
+[node name="Beta" type="TextureRect" parent="Center/CenterContainer"]
+visible = false
+layout_mode = 2
+texture = ExtResource("2_2epne")
+stretch_mode = 5
+
+[node name="AnimalCrossingNewLeaf" type="TextureRect" parent="Center/CenterContainer"]
+visible = false
+layout_mode = 2
+texture = ExtResource("3_o2xx4")
+
+[node name="GuildWars" type="TextureRect" parent="Center/CenterContainer"]
+visible = false
+layout_mode = 2
+texture = ExtResource("3_rif6e")
+
+[node name="Minecraft" type="TextureRect" parent="Center/CenterContainer"]
+visible = false
+layout_mode = 2
+texture = ExtResource("5_htctk")
+
+[node name="Portal" type="TextureRect" parent="Center/CenterContainer"]
+visible = false
+layout_mode = 2
+texture = ExtResource("6_s6tf7")
+
+[node name="SuperMarioGalaxy" type="TextureRect" parent="Center/CenterContainer"]
+visible = false
+layout_mode = 2
+texture = ExtResource("3_2epne")
+
+[node name="SuperMarioOdyssey" type="TextureRect" parent="Center/CenterContainer"]
+visible = false
+layout_mode = 2
+texture = ExtResource("8_u4mbh")
+
+[node name="ZeldaBreathOfTheWild" type="TextureRect" parent="Center/CenterContainer"]
+visible = false
+layout_mode = 2
+texture = ExtResource("9_rovvv")
+
+[node name="ZeldaLinksAwakening" type="TextureRect" parent="Center/CenterContainer"]
+visible = false
+layout_mode = 2
+texture = ExtResource("10_0wyvj")
+
+[node name="EnterLevel" type="Button" parent="Center"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -94.0
+offset_top = -31.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Enter Level"
+
+[node name="Label" type="Label" parent="Center"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -106.5
+offset_right = 106.5
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "LEVEL SELECT"
+label_settings = SubResource("LabelSettings_64kqf")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Loading" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1920.0
+offset_top = -1080.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(1920, 1080)
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="Loading"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Loading..."
+label_settings = SubResource("LabelSettings_p0wlc")
+
+[connection signal="pressed" from="Center/VBoxContainer/Beta" to="." method="_on_beta_pressed"]
+[connection signal="pressed" from="Center/VBoxContainer/AnimalCrossingNewLeaf" to="." method="_on_animal_crossing_new_leaf_pressed"]
+[connection signal="pressed" from="Center/VBoxContainer/GuildWars" to="." method="_on_guild_wars_pressed"]
+[connection signal="pressed" from="Center/VBoxContainer/Minecraft" to="." method="_on_minecraft_pressed"]
+[connection signal="pressed" from="Center/VBoxContainer/Portal" to="." method="_on_portal_pressed"]
+[connection signal="pressed" from="Center/VBoxContainer/SuperMarioGalaxy" to="." method="_on_super_mario_galaxy_pressed"]
+[connection signal="pressed" from="Center/VBoxContainer/SuperMarioOdyssey" to="." method="_on_super_mario_odyssey_pressed"]
+[connection signal="pressed" from="Center/VBoxContainer/ZeldaBreathOfTheWild" to="." method="_on_zelda_breath_of_the_wild_pressed"]
+[connection signal="pressed" from="Center/VBoxContainer/ZeldaLinksAwakening" to="." method="_on_zelda_links_awakening_pressed"]
+[connection signal="pressed" from="Center/EnterLevel" to="." method="_on_enter_level_pressed"]

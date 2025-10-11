@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ow6nqynfpmes"]
+
+[ext_resource type="Script" uid="uid://bprj02u3jovlr" path="res://scenes/guild_wars/main.gd" id="1_fbclb"]
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_fbclb")
