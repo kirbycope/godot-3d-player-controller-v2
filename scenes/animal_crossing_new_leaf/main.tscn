@@ -1,15 +1,25 @@
-[gd_scene load_steps=10 format=3 uid="uid://cuv5tyqdnexh7"]
+[gd_scene load_steps=12 format=3 uid="uid://cuv5tyqdnexh7"]
 
 [ext_resource type="Script" uid="uid://bej28j4s4snv4" path="res://scenes/animal_crossing_new_leaf/main.gd" id="1_snl0e"]
 [ext_resource type="Texture2D" uid="uid://biofuj8err0ch" path="res://assets/textures/prototype_textures/Green/texture_08.png" id="2_3fdqk"]
+[ext_resource type="Shader" uid="uid://ee3nunu0omht" path="res://scenes/animal_crossing_new_leaf/sky.gdshader" id="2_5orwh"]
 [ext_resource type="PackedScene" uid="uid://f6xpywa7euq2" path="res://addons/3d_player_controller_v2/player.tscn" id="3_5orwh"]
+[ext_resource type="Texture2D" uid="uid://rhk6o1flmsl8" path="res://scenes/animal_crossing_new_leaf/tex_cloud.png" id="3_hgwfd"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_hgwfd"]
-sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
-ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hgwfd"]
+shader = ExtResource("2_5orwh")
+shader_parameter/sky_top_color = Color(0.2, 0.4, 1, 1)
+shader_parameter/sky_horizon_color = Color(0.4, 0.6, 1, 1)
+shader_parameter/horizon_blur = 0.05
+shader_parameter/noise_texture = ExtResource("3_hgwfd")
+shader_parameter/cloud_color = Color(1, 1, 1, 1)
+shader_parameter/cloud_scale = 2.0
+shader_parameter/cloud_density = 0.5
+shader_parameter/cloud_speed = 0.01
+shader_parameter/time = 0.0
 
 [sub_resource type="Sky" id="Sky_ieuxx"]
-sky_material = SubResource("ProceduralSkyMaterial_hgwfd")
+sky_material = SubResource("ShaderMaterial_hgwfd")
 
 [sub_resource type="Environment" id="Environment_ed38x"]
 background_mode = 2

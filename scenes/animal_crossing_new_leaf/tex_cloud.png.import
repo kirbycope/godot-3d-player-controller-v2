@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c1ax5lk3860xr"
-path.s3tc="res://.godot/imported/texture_09.png-5644dc138685b06386e5b98f1fc1fb11.s3tc.ctex"
+uid="uid://rhk6o1flmsl8"
+path.s3tc="res://.godot/imported/tex_cloud.png-3ff729a71df15597683851e99234ba19.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/textures/prototype_textures/Green/texture_09.png"
-dest_files=["res://.godot/imported/texture_09.png-5644dc138685b06386e5b98f1fc1fb11.s3tc.ctex"]
+source_file="res://scenes/animal_crossing_new_leaf/tex_cloud.png"
+dest_files=["res://.godot/imported/tex_cloud.png-3ff729a71df15597683851e99234ba19.s3tc.ctex"]
 
 [params]
 
