@@ -44,6 +44,9 @@ shadow_enabled = true
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_lpvoh")
 
+[node name="Player" parent="." instance=ExtResource("5_guwhr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14, 0)
+
 [node name="Planet" type="StaticBody3D" parent="."]
 script = ExtResource("3_gfmp0")
 
@@ -57,9 +60,6 @@ shape = SubResource("SphereShape3D_errlg")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Planet"]
 mesh = SubResource("SphereMesh_bl13t")
-
-[node name="Player" parent="." instance=ExtResource("5_guwhr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14, 0)
 
 [connection signal="body_entered" from="Planet/Area3D" to="Planet" method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="Planet/Area3D" to="Planet" method="_on_area_3d_body_exited"]

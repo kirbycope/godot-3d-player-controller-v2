@@ -21,6 +21,17 @@ sky = SubResource("Sky_fjfy8")
 tonemap_mode = 2
 glow_enabled = true
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_dxoj2"]
+size = Vector3(64, 0.1, 64)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6sefq"]
+albedo_texture = ExtResource("4_t3s5l")
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_wco57"]
+material = SubResource("StandardMaterial3D_6sefq")
+size = Vector3(64, 0.1, 64)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_60hin"]
 size = Vector3(0.76, 0.76, 0.76)
 
@@ -32,17 +43,6 @@ uv1_triplanar = true
 [sub_resource type="BoxMesh" id="BoxMesh_uwnby"]
 material = SubResource("StandardMaterial3D_14dpn")
 size = Vector3(0.76, 0.76, 0.76)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_dxoj2"]
-size = Vector3(64, 0.1, 64)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6sefq"]
-albedo_texture = ExtResource("4_t3s5l")
-uv1_triplanar = true
-
-[sub_resource type="BoxMesh" id="BoxMesh_wco57"]
-material = SubResource("StandardMaterial3D_6sefq")
-size = Vector3(64, 0.1, 64)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8bgvx"]
 size = Vector3(1, 2, 0.11)
@@ -157,15 +157,6 @@ environment = SubResource("Environment_t3s5l")
 [node name="Player" parent="." instance=ExtResource("2_r7k4e")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
 
-[node name="FriendlyCube" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.38, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="FriendlyCube"]
-shape = SubResource("BoxShape3D_60hin")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="FriendlyCube"]
-mesh = SubResource("BoxMesh_uwnby")
-
 [node name="Floor" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
 
@@ -174,6 +165,15 @@ shape = SubResource("BoxShape3D_dxoj2")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
 mesh = SubResource("BoxMesh_wco57")
+
+[node name="FriendlyFreight" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.38, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FriendlyFreight"]
+shape = SubResource("BoxShape3D_60hin")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="FriendlyFreight"]
+mesh = SubResource("BoxMesh_uwnby")
 
 [node name="PortalPanel1x2h" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
