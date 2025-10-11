@@ -1,18 +1,16 @@
-[gd_scene load_steps=52 format=3 uid="uid://begj0slbblw6d"]
+[gd_scene load_steps=29 format=3 uid="uid://begj0slbblw6d"]
 
 [ext_resource type="Script" uid="uid://bgxu1puoa0ev7" path="res://scenes/minecraft/main.gd" id="1_lbibe"]
-[ext_resource type="Texture2D" uid="uid://dgycy03umala6" path="res://assets/textures/voxel/Tiles/grass_top.png" id="2_oxeit"]
-[ext_resource type="Texture2D" uid="uid://bs1rgj4ryg5pa" path="res://assets/textures/voxel/Tiles/dirt.png" id="4_gww7y"]
-[ext_resource type="Texture2D" uid="uid://jv2lpf5wtonn" path="res://assets/textures/voxel/Tiles/trunk_side.png" id="4_q6u7f"]
+[ext_resource type="PackedScene" uid="uid://j5twp0ffld88" path="res://scenes/minecraft/blocks/grass_block.tscn" id="3_fd5ct"]
+[ext_resource type="PackedScene" uid="uid://o0sk0jyjm1dv" path="res://scenes/minecraft/blocks/dirt_block.tscn" id="4_8vsgy"]
 [ext_resource type="PackedScene" uid="uid://f6xpywa7euq2" path="res://addons/3d_player_controller_v2/player.tscn" id="5_gww7y"]
-[ext_resource type="Texture2D" uid="uid://cc7cwu52yupax" path="res://assets/textures/voxel/Tiles/trunk_top.png" id="6_m3hx4"]
-[ext_resource type="Texture2D" uid="uid://cxeiwhox4dxvl" path="res://assets/textures/voxel/Tiles/leaves_transparent.png" id="7_m3hx4"]
+[ext_resource type="PackedScene" uid="uid://3mm4idt2mfsn" path="res://scenes/minecraft/blocks/trunk_block.tscn" id="5_hxnpf"]
+[ext_resource type="PackedScene" uid="uid://cwrls7vellfhn" path="res://scenes/minecraft/blocks/leaves_block.tscn" id="6_hxnpf"]
 [ext_resource type="Texture2D" uid="uid://bwhcwtjejhvfk" path="res://assets/textures/voxel/Tiles/grass1.png" id="8_n03mq"]
 [ext_resource type="Texture2D" uid="uid://dvqrkgbh8iysp" path="res://assets/textures/voxel/Tiles/grass2.png" id="9_mubsw"]
 [ext_resource type="Texture2D" uid="uid://b84phpsjskbcj" path="res://assets/textures/voxel/Tiles/grass3.png" id="10_2f0pr"]
+[ext_resource type="PackedScene" uid="uid://b2vdq21kfmov7" path="res://scenes/minecraft/blocks/table_block.tscn" id="11_hxnpf"]
 [ext_resource type="Texture2D" uid="uid://co63c7x8876gi" path="res://assets/textures/voxel/Tiles/grass4.png" id="11_svb63"]
-[ext_resource type="Texture2D" uid="uid://cgeydxvawxrmp" path="res://assets/textures/voxel/Tiles/table.png" id="12_hxnpf"]
-[ext_resource type="Texture2D" uid="uid://d3gdan0e2sker" path="res://assets/textures/voxel/Tiles/wood.png" id="13_fd5ct"]
 [ext_resource type="Texture2D" uid="uid://bv18dk4oyqlx8" path="res://assets/textures/voxel_expansion/tile_flowerRed.png" id="14_fd5ct"]
 [ext_resource type="Texture2D" uid="uid://bpphvcjayw7wc" path="res://assets/textures/voxel_expansion/tile_flowerSun.png" id="15_8vsgy"]
 
@@ -28,65 +26,6 @@ background_mode = 2
 sky = SubResource("Sky_q6u7f")
 tonemap_mode = 2
 glow_enabled = true
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_lbibe"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rtqbc"]
-albedo_texture = ExtResource("2_oxeit")
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_wlwc7"]
-material = SubResource("StandardMaterial3D_rtqbc")
-size = Vector2(1, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q6u7f"]
-albedo_texture = ExtResource("4_gww7y")
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_m3hx4"]
-material = SubResource("StandardMaterial3D_q6u7f")
-size = Vector2(1, 1)
-orientation = 2
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lpqhp"]
-albedo_texture = ExtResource("4_gww7y")
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_fwt4p"]
-material = SubResource("StandardMaterial3D_lpqhp")
-size = Vector2(1, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wlwc7"]
-albedo_texture = ExtResource("4_gww7y")
-uv1_triplanar = true
-
-[sub_resource type="BoxMesh" id="BoxMesh_gww7y"]
-material = SubResource("StandardMaterial3D_wlwc7")
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_lpqhp"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fwt4p"]
-albedo_texture = ExtResource("6_m3hx4")
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_n03mq"]
-material = SubResource("StandardMaterial3D_fwt4p")
-size = Vector2(1, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m3hx4"]
-albedo_texture = ExtResource("4_q6u7f")
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_gww7y"]
-material = SubResource("StandardMaterial3D_m3hx4")
-size = Vector2(1, 1)
-orientation = 2
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n03mq"]
-transparency = 2
-alpha_scissor_threshold = 0.5
-alpha_antialiasing_mode = 0
-cull_mode = 2
-albedo_texture = ExtResource("7_m3hx4")
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_mubsw"]
-material = SubResource("StandardMaterial3D_n03mq")
-size = Vector2(1, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_svb63"]
 transparency = 2
@@ -135,23 +74,6 @@ material = SubResource("StandardMaterial3D_8vsgy")
 size = Vector2(0.5, 0.5)
 orientation = 2
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_j3sw6"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fda56"]
-albedo_texture = ExtResource("12_hxnpf")
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_js4mj"]
-material = SubResource("StandardMaterial3D_fda56")
-size = Vector2(1, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7uwy1"]
-albedo_texture = ExtResource("13_fd5ct")
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_aunsk"]
-material = SubResource("StandardMaterial3D_7uwy1")
-size = Vector2(1, 1)
-orientation = 2
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j3sw6"]
 transparency = 2
 alpha_scissor_threshold = 0.5
@@ -191,3284 +113,458 @@ shadow_enabled = true
 
 [node name="SkyIsland" type="Node3D" parent="."]
 
-[node name="GrassBlock" type="StaticBody3D" parent="SkyIsland"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -0.5, 2.5)
+[node name="Section1" type="Node3D" parent="SkyIsland"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, 1.5)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkyIsland/GrassBlock"]
-shape = SubResource("BoxShape3D_lbibe")
+[node name="GrassBlock" parent="SkyIsland/Section1" instance=ExtResource("3_fd5ct")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -0.5, 1)
 
-[node name="UVTop" type="MeshInstance3D" parent="SkyIsland/GrassBlock"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_wlwc7")
+[node name="GrassBlock2" parent="SkyIsland/Section1" instance=ExtResource("3_fd5ct")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 1)
 
-[node name="UVNorth" type="MeshInstance3D" parent="SkyIsland/GrassBlock"]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_m3hx4")
+[node name="GrassBlock3" parent="SkyIsland/Section1" instance=ExtResource("3_fd5ct")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -0.5, 1)
 
-[node name="UVEast" type="MeshInstance3D" parent="SkyIsland/GrassBlock"]
-transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_m3hx4")
+[node name="GrassBlock4" parent="SkyIsland/Section1" instance=ExtResource("3_fd5ct")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -0.5, 0)
 
-[node name="UVSouth" type="MeshInstance3D" parent="SkyIsland/GrassBlock"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_m3hx4")
+[node name="GrassBlock5" parent="SkyIsland/Section1" instance=ExtResource("3_fd5ct")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
-[node name="UVWest" type="MeshInstance3D" parent="SkyIsland/GrassBlock"]
-transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_m3hx4")
+[node name="GrassBlock6" parent="SkyIsland/Section1" instance=ExtResource("3_fd5ct")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -0.5, 0)
 
-[node name="UVBottom" type="MeshInstance3D" parent="SkyIsland/GrassBlock"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_fwt4p")
+[node name="GrassBlock7" parent="SkyIsland/Section1" instance=ExtResource("3_fd5ct")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -0.5, -1)
 
-[node name="GrassBlock2" type="StaticBody3D" parent="SkyIsland"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, -0.5, 2.5)
+[node name="GrassBlock8" parent="SkyIsland/Section1" instance=ExtResource("3_fd5ct")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, -1)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkyIsland/GrassBlock2"]
-shape = SubResource("BoxShape3D_lbibe")
+[node name="GrassBlock9" parent="SkyIsland/Section1" instance=ExtResource("3_fd5ct")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -0.5, -1)
 
-[node name="UVTop" type="MeshInstance3D" parent="SkyIsland/GrassBlock2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_wlwc7")
+[node name="DirtBlock1" parent="SkyIsland/Section1" instance=ExtResource("4_8vsgy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -1.5, 1)
 
-[node name="UVNorth" type="MeshInstance3D" parent="SkyIsland/GrassBlock2"]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_m3hx4")
+[node name="DirtBlock2" parent="SkyIsland/Section1" instance=ExtResource("4_8vsgy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 1)
 
-[node name="UVEast" type="MeshInstance3D" parent="SkyIsland/GrassBlock2"]
-transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_m3hx4")
+[node name="DirtBlock3" parent="SkyIsland/Section1" instance=ExtResource("4_8vsgy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -1.5, 1)
 
-[node name="UVSouth" type="MeshInstance3D" parent="SkyIsland/GrassBlock2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_m3hx4")
+[node name="DirtBlock4" parent="SkyIsland/Section1" instance=ExtResource("4_8vsgy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -1.5, 0)
 
-[node name="UVWest" type="MeshInstance3D" parent="SkyIsland/GrassBlock2"]
-transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_m3hx4")
+[node name="DirtBlock5" parent="SkyIsland/Section1" instance=ExtResource("4_8vsgy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
 
-[node name="UVBottom" type="MeshInstance3D" parent="SkyIsland/GrassBlock2"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_fwt4p")
+[node name="DirtBlock6" parent="SkyIsland/Section1" instance=ExtResource("4_8vsgy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -1.5, 0)
 
-[node name="GrassBlock3" type="StaticBody3D" parent="SkyIsland"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, -0.5, 2.5)
+[node name="DirtBlock7" parent="SkyIsland/Section1" instance=ExtResource("4_8vsgy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -1.5, -1)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkyIsland/GrassBlock3"]
-shape = SubResource("BoxShape3D_lbibe")
+[node name="DirtBlock8" parent="SkyIsland/Section1" instance=ExtResource("4_8vsgy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, -1)
 
-[node name="UVTop" type="MeshInstance3D" parent="SkyIsland/GrassBlock3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_wlwc7")
+[node name="DirtBlock9" parent="SkyIsland/Section1" instance=ExtResource("4_8vsgy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -1.5, -1)
 
-[node name="UVNorth" type="MeshInstance3D" parent="SkyIsland/GrassBlock3"]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_m3hx4")
+[node name="DirtBlock10" parent="SkyIsland/Section1" instance=ExtResource("4_8vsgy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -2.5, 1)
 
-[node name="UVEast" type="MeshInstance3D" parent="SkyIsland/GrassBlock3"]
-transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_m3hx4")
+[node name="DirtBlock11" parent="SkyIsland/Section1" instance=ExtResource("4_8vsgy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.5, 1)
 
-[node name="UVSouth" type="MeshInstance3D" parent="SkyIsland/GrassBlock3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_m3hx4")
+[node name="DirtBlock12" parent="SkyIsland/Section1" instance=ExtResource("4_8vsgy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -2.5, 1)
 
-[node name="UVWest" type="MeshInstance3D" parent="SkyIsland/GrassBlock3"]
-transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_m3hx4")
+[node name="DirtBlock13" parent="SkyIsland/Section1" instance=ExtResource("4_8vsgy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -2.5, 0)
 
-[node name="UVBottom" type="MeshInstance3D" parent="SkyIsland/GrassBlock3"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_fwt4p")
+[node name="DirtBlock14" parent="SkyIsland/Section1" instance=ExtResource("4_8vsgy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.5, 0)
 
-[node name="GrassBlock4" type="StaticBody3D" parent="SkyIsland"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -0.5, 1.5)
+[node name="DirtBlock15" parent="SkyIsland/Section1" instance=ExtResource("4_8vsgy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -2.5, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkyIsland/GrassBlock4"]
-shape = SubResource("BoxShape3D_lbibe")
+[node name="DirtBlock16" parent="SkyIsland/Section1" instance=ExtResource("4_8vsgy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -2.5, -1)
 
-[node name="UVTop" type="MeshInstance3D" parent="SkyIsland/GrassBlock4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_wlwc7")
+[node name="DirtBlock17" parent="SkyIsland/Section1" instance=ExtResource("4_8vsgy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.5, -1)
 
-[node name="UVNorth" type="MeshInstance3D" parent="SkyIsland/GrassBlock4"]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_m3hx4")
+[node name="DirtBlock18" parent="SkyIsland/Section1" instance=ExtResource("4_8vsgy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -2.5, -1)
 
-[node name="UVEast" type="MeshInstance3D" parent="SkyIsland/GrassBlock4"]
-transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_m3hx4")
+[node name="Section2" type="Node3D" parent="SkyIsland"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 0, 1.5)
 
-[node name="UVSouth" type="MeshInstance3D" parent="SkyIsland/GrassBlock4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_m3hx4")
+[node name="GrassBlock" parent="SkyIsland/Section2" instance=ExtResource("3_fd5ct")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -0.5, 1)
 
-[node name="UVWest" type="MeshInstance3D" parent="SkyIsland/GrassBlock4"]
-transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_m3hx4")
+[node name="GrassBlock2" parent="SkyIsland/Section2" instance=ExtResource("3_fd5ct")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 1)
 
-[node name="UVBottom" type="MeshInstance3D" parent="SkyIsland/GrassBlock4"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_fwt4p")
+[node name="GrassBlock3" parent="SkyIsland/Section2" instance=ExtResource("3_fd5ct")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -0.5, 1)
 
-[node name="GrassBlock5" type="StaticBody3D" parent="SkyIsland"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, -0.5, 1.5)
+[node name="GrassBlock4" parent="SkyIsland/Section2" instance=ExtResource("3_fd5ct")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -0.5, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkyIsland/GrassBlock5"]
-shape = SubResource("BoxShape3D_lbibe")
+[node name="GrassBlock5" parent="SkyIsland/Section2" instance=ExtResource("3_fd5ct")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
-[node name="UVTop" type="MeshInstance3D" parent="SkyIsland/GrassBlock5"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_wlwc7")
+[node name="GrassBlock6" parent="SkyIsland/Section2" instance=ExtResource("3_fd5ct")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -0.5, 0)
 
-[node name="UVNorth" type="MeshInstance3D" parent="SkyIsland/GrassBlock5"]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_m3hx4")
+[node name="GrassBlock7" parent="SkyIsland/Section2" instance=ExtResource("3_fd5ct")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -0.5, -1)
 
-[node name="UVEast" type="MeshInstance3D" parent="SkyIsland/GrassBlock5"]
-transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_m3hx4")
+[node name="GrassBlock8" parent="SkyIsland/Section2" instance=ExtResource("3_fd5ct")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, -1)
 
-[node name="UVSouth" type="MeshInstance3D" parent="SkyIsland/GrassBlock5"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_m3hx4")
+[node name="GrassBlock9" parent="SkyIsland/Section2" instance=ExtResource("3_fd5ct")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -0.5, -1)
 
-[node name="UVWest" type="MeshInstance3D" parent="SkyIsland/GrassBlock5"]
-transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_m3hx4")
+[node name="DirtBlock1" parent="SkyIsland/Section2" instance=ExtResource("4_8vsgy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -1.5, 1)
 
-[node name="UVBottom" type="MeshInstance3D" parent="SkyIsland/GrassBlock5"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_fwt4p")
+[node name="DirtBlock2" parent="SkyIsland/Section2" instance=ExtResource("4_8vsgy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 1)
 
-[node name="GrassBlock6" type="StaticBody3D" parent="SkyIsland"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, -0.5, 1.5)
+[node name="DirtBlock3" parent="SkyIsland/Section2" instance=ExtResource("4_8vsgy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -1.5, 1)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkyIsland/GrassBlock6"]
-shape = SubResource("BoxShape3D_lbibe")
+[node name="DirtBlock4" parent="SkyIsland/Section2" instance=ExtResource("4_8vsgy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -1.5, 0)
 
-[node name="UVTop" type="MeshInstance3D" parent="SkyIsland/GrassBlock6"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_wlwc7")
+[node name="DirtBlock5" parent="SkyIsland/Section2" instance=ExtResource("4_8vsgy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
 
-[node name="UVNorth" type="MeshInstance3D" parent="SkyIsland/GrassBlock6"]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_m3hx4")
+[node name="DirtBlock6" parent="SkyIsland/Section2" instance=ExtResource("4_8vsgy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -1.5, 0)
 
-[node name="UVEast" type="MeshInstance3D" parent="SkyIsland/GrassBlock6"]
-transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_m3hx4")
+[node name="DirtBlock7" parent="SkyIsland/Section2" instance=ExtResource("4_8vsgy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -1.5, -1)
 
-[node name="UVSouth" type="MeshInstance3D" parent="SkyIsland/GrassBlock6"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_m3hx4")
+[node name="DirtBlock8" parent="SkyIsland/Section2" instance=ExtResource("4_8vsgy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, -1)
 
-[node name="UVWest" type="MeshInstance3D" parent="SkyIsland/GrassBlock6"]
-transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_m3hx4")
+[node name="DirtBlock9" parent="SkyIsland/Section2" instance=ExtResource("4_8vsgy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -1.5, -1)
 
-[node name="UVBottom" type="MeshInstance3D" parent="SkyIsland/GrassBlock6"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_fwt4p")
+[node name="DirtBlock10" parent="SkyIsland/Section2" instance=ExtResource("4_8vsgy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -2.5, 1)
 
-[node name="GrassBlock7" type="StaticBody3D" parent="SkyIsland"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -0.5, 0.5)
+[node name="DirtBlock11" parent="SkyIsland/Section2" instance=ExtResource("4_8vsgy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.5, 1)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkyIsland/GrassBlock7"]
-shape = SubResource("BoxShape3D_lbibe")
+[node name="DirtBlock12" parent="SkyIsland/Section2" instance=ExtResource("4_8vsgy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -2.5, 1)
 
-[node name="UVTop" type="MeshInstance3D" parent="SkyIsland/GrassBlock7"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_wlwc7")
+[node name="DirtBlock13" parent="SkyIsland/Section2" instance=ExtResource("4_8vsgy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -2.5, 0)
 
-[node name="UVNorth" type="MeshInstance3D" parent="SkyIsland/GrassBlock7"]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_m3hx4")
+[node name="DirtBlock14" parent="SkyIsland/Section2" instance=ExtResource("4_8vsgy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.5, 0)
 
-[node name="UVEast" type="MeshInstance3D" parent="SkyIsland/GrassBlock7"]
-transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_m3hx4")
+[node name="DirtBlock15" parent="SkyIsland/Section2" instance=ExtResource("4_8vsgy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -2.5, 0)
 
-[node name="UVSouth" type="MeshInstance3D" parent="SkyIsland/GrassBlock7"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_m3hx4")
+[node name="DirtBlock16" parent="SkyIsland/Section2" instance=ExtResource("4_8vsgy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -2.5, -1)
 
-[node name="UVWest" type="MeshInstance3D" parent="SkyIsland/GrassBlock7"]
-transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_m3hx4")
+[node name="DirtBlock17" parent="SkyIsland/Section2" instance=ExtResource("4_8vsgy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.5, -1)
 
-[node name="UVBottom" type="MeshInstance3D" parent="SkyIsland/GrassBlock7"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_fwt4p")
+[node name="DirtBlock18" parent="SkyIsland/Section2" instance=ExtResource("4_8vsgy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -2.5, -1)
 
-[node name="GrassBlock8" type="StaticBody3D" parent="SkyIsland"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, -0.5, 0.5)
+[node name="Section3" type="Node3D" parent="SkyIsland"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, -1.5)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkyIsland/GrassBlock8"]
-shape = SubResource("BoxShape3D_lbibe")
+[node name="GrassBlock" parent="SkyIsland/Section3" instance=ExtResource("3_fd5ct")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -0.5, 1)
 
-[node name="UVTop" type="MeshInstance3D" parent="SkyIsland/GrassBlock8"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_wlwc7")
+[node name="GrassBlock2" parent="SkyIsland/Section3" instance=ExtResource("3_fd5ct")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 1)
 
-[node name="UVNorth" type="MeshInstance3D" parent="SkyIsland/GrassBlock8"]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_m3hx4")
+[node name="GrassBlock3" parent="SkyIsland/Section3" instance=ExtResource("3_fd5ct")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -0.5, 1)
 
-[node name="UVEast" type="MeshInstance3D" parent="SkyIsland/GrassBlock8"]
-transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_m3hx4")
+[node name="GrassBlock4" parent="SkyIsland/Section3" instance=ExtResource("3_fd5ct")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -0.5, 0)
 
-[node name="UVSouth" type="MeshInstance3D" parent="SkyIsland/GrassBlock8"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_m3hx4")
+[node name="GrassBlock5" parent="SkyIsland/Section3" instance=ExtResource("3_fd5ct")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
-[node name="UVWest" type="MeshInstance3D" parent="SkyIsland/GrassBlock8"]
-transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_m3hx4")
+[node name="GrassBlock6" parent="SkyIsland/Section3" instance=ExtResource("3_fd5ct")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -0.5, 0)
 
-[node name="UVBottom" type="MeshInstance3D" parent="SkyIsland/GrassBlock8"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_fwt4p")
+[node name="GrassBlock7" parent="SkyIsland/Section3" instance=ExtResource("3_fd5ct")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -0.5, -1)
 
-[node name="GrassBlock9" type="StaticBody3D" parent="SkyIsland"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, -0.5, 0.5)
+[node name="GrassBlock8" parent="SkyIsland/Section3" instance=ExtResource("3_fd5ct")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, -1)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkyIsland/GrassBlock9"]
-shape = SubResource("BoxShape3D_lbibe")
+[node name="GrassBlock9" parent="SkyIsland/Section3" instance=ExtResource("3_fd5ct")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -0.5, -1)
 
-[node name="UVTop" type="MeshInstance3D" parent="SkyIsland/GrassBlock9"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_wlwc7")
+[node name="DirtBlock1" parent="SkyIsland/Section3" instance=ExtResource("4_8vsgy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -1.5, 1)
 
-[node name="UVNorth" type="MeshInstance3D" parent="SkyIsland/GrassBlock9"]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_m3hx4")
+[node name="DirtBlock2" parent="SkyIsland/Section3" instance=ExtResource("4_8vsgy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 1)
 
-[node name="UVEast" type="MeshInstance3D" parent="SkyIsland/GrassBlock9"]
-transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_m3hx4")
+[node name="DirtBlock3" parent="SkyIsland/Section3" instance=ExtResource("4_8vsgy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -1.5, 1)
 
-[node name="UVSouth" type="MeshInstance3D" parent="SkyIsland/GrassBlock9"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_m3hx4")
+[node name="DirtBlock4" parent="SkyIsland/Section3" instance=ExtResource("4_8vsgy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -1.5, 0)
 
-[node name="UVWest" type="MeshInstance3D" parent="SkyIsland/GrassBlock9"]
-transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_m3hx4")
+[node name="DirtBlock5" parent="SkyIsland/Section3" instance=ExtResource("4_8vsgy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
 
-[node name="UVBottom" type="MeshInstance3D" parent="SkyIsland/GrassBlock9"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_fwt4p")
+[node name="DirtBlock6" parent="SkyIsland/Section3" instance=ExtResource("4_8vsgy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -1.5, 0)
 
-[node name="DirtBlock" type="StaticBody3D" parent="SkyIsland"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -1.5, 2.5)
+[node name="DirtBlock7" parent="SkyIsland/Section3" instance=ExtResource("4_8vsgy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -1.5, -1)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkyIsland/DirtBlock"]
-shape = SubResource("BoxShape3D_lbibe")
+[node name="DirtBlock8" parent="SkyIsland/Section3" instance=ExtResource("4_8vsgy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, -1)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SkyIsland/DirtBlock"]
-mesh = SubResource("BoxMesh_gww7y")
+[node name="DirtBlock9" parent="SkyIsland/Section3" instance=ExtResource("4_8vsgy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -1.5, -1)
 
-[node name="DirtBlock2" type="StaticBody3D" parent="SkyIsland"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, -1.5, 2.5)
+[node name="DirtBlock10" parent="SkyIsland/Section3" instance=ExtResource("4_8vsgy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -2.5, 1)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkyIsland/DirtBlock2"]
-shape = SubResource("BoxShape3D_lbibe")
+[node name="DirtBlock11" parent="SkyIsland/Section3" instance=ExtResource("4_8vsgy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.5, 1)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SkyIsland/DirtBlock2"]
-mesh = SubResource("BoxMesh_gww7y")
+[node name="DirtBlock12" parent="SkyIsland/Section3" instance=ExtResource("4_8vsgy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -2.5, 1)
 
-[node name="DirtBlock3" type="StaticBody3D" parent="SkyIsland"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, -1.5, 2.5)
+[node name="DirtBlock13" parent="SkyIsland/Section3" instance=ExtResource("4_8vsgy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -2.5, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkyIsland/DirtBlock3"]
-shape = SubResource("BoxShape3D_lbibe")
+[node name="DirtBlock14" parent="SkyIsland/Section3" instance=ExtResource("4_8vsgy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.5, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SkyIsland/DirtBlock3"]
-mesh = SubResource("BoxMesh_gww7y")
+[node name="DirtBlock15" parent="SkyIsland/Section3" instance=ExtResource("4_8vsgy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -2.5, 0)
 
-[node name="DirtBlock4" type="StaticBody3D" parent="SkyIsland"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -1.5, 1.5)
+[node name="DirtBlock16" parent="SkyIsland/Section3" instance=ExtResource("4_8vsgy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -2.5, -1)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkyIsland/DirtBlock4"]
-shape = SubResource("BoxShape3D_lbibe")
+[node name="DirtBlock17" parent="SkyIsland/Section3" instance=ExtResource("4_8vsgy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.5, -1)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SkyIsland/DirtBlock4"]
-mesh = SubResource("BoxMesh_gww7y")
-
-[node name="DirtBlock5" type="StaticBody3D" parent="SkyIsland"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, -1.5, 1.5)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkyIsland/DirtBlock5"]
-shape = SubResource("BoxShape3D_lbibe")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SkyIsland/DirtBlock5"]
-mesh = SubResource("BoxMesh_gww7y")
-
-[node name="DirtBlock6" type="StaticBody3D" parent="SkyIsland"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, -1.5, 1.5)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkyIsland/DirtBlock6"]
-shape = SubResource("BoxShape3D_lbibe")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SkyIsland/DirtBlock6"]
-mesh = SubResource("BoxMesh_gww7y")
-
-[node name="DirtBlock7" type="StaticBody3D" parent="SkyIsland"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -1.5, 0.5)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkyIsland/DirtBlock7"]
-shape = SubResource("BoxShape3D_lbibe")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SkyIsland/DirtBlock7"]
-mesh = SubResource("BoxMesh_gww7y")
-
-[node name="DirtBlock8" type="StaticBody3D" parent="SkyIsland"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, -1.5, 0.5)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkyIsland/DirtBlock8"]
-shape = SubResource("BoxShape3D_lbibe")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SkyIsland/DirtBlock8"]
-mesh = SubResource("BoxMesh_gww7y")
-
-[node name="DirtBlock9" type="StaticBody3D" parent="SkyIsland"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, -1.5, 0.5)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkyIsland/DirtBlock9"]
-shape = SubResource("BoxShape3D_lbibe")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SkyIsland/DirtBlock9"]
-mesh = SubResource("BoxMesh_gww7y")
-
-[node name="DirtBlock10" type="StaticBody3D" parent="SkyIsland"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -2.5, 2.5)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkyIsland/DirtBlock10"]
-shape = SubResource("BoxShape3D_lbibe")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SkyIsland/DirtBlock10"]
-mesh = SubResource("BoxMesh_gww7y")
-
-[node name="DirtBlock11" type="StaticBody3D" parent="SkyIsland"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, -2.5, 2.5)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkyIsland/DirtBlock11"]
-shape = SubResource("BoxShape3D_lbibe")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SkyIsland/DirtBlock11"]
-mesh = SubResource("BoxMesh_gww7y")
-
-[node name="DirtBlock12" type="StaticBody3D" parent="SkyIsland"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, -2.5, 2.5)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkyIsland/DirtBlock12"]
-shape = SubResource("BoxShape3D_lbibe")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SkyIsland/DirtBlock12"]
-mesh = SubResource("BoxMesh_gww7y")
-
-[node name="DirtBlock13" type="StaticBody3D" parent="SkyIsland"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -2.5, 1.5)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkyIsland/DirtBlock13"]
-shape = SubResource("BoxShape3D_lbibe")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SkyIsland/DirtBlock13"]
-mesh = SubResource("BoxMesh_gww7y")
-
-[node name="DirtBlock14" type="StaticBody3D" parent="SkyIsland"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, -2.5, 1.5)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkyIsland/DirtBlock14"]
-shape = SubResource("BoxShape3D_lbibe")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SkyIsland/DirtBlock14"]
-mesh = SubResource("BoxMesh_gww7y")
-
-[node name="DirtBlock15" type="StaticBody3D" parent="SkyIsland"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, -2.5, 1.5)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkyIsland/DirtBlock15"]
-shape = SubResource("BoxShape3D_lbibe")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SkyIsland/DirtBlock15"]
-mesh = SubResource("BoxMesh_gww7y")
-
-[node name="DirtBlock16" type="StaticBody3D" parent="SkyIsland"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -2.5, 0.5)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkyIsland/DirtBlock16"]
-shape = SubResource("BoxShape3D_lbibe")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SkyIsland/DirtBlock16"]
-mesh = SubResource("BoxMesh_gww7y")
-
-[node name="DirtBlock17" type="StaticBody3D" parent="SkyIsland"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, -2.5, 0.5)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkyIsland/DirtBlock17"]
-shape = SubResource("BoxShape3D_lbibe")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SkyIsland/DirtBlock17"]
-mesh = SubResource("BoxMesh_gww7y")
-
-[node name="DirtBlock18" type="StaticBody3D" parent="SkyIsland"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, -2.5, 0.5)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkyIsland/DirtBlock18"]
-shape = SubResource("BoxShape3D_lbibe")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SkyIsland/DirtBlock18"]
-mesh = SubResource("BoxMesh_gww7y")
-
-[node name="GrassBlock10" type="StaticBody3D" parent="SkyIsland"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, -0.5, 2.5)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkyIsland/GrassBlock10"]
-shape = SubResource("BoxShape3D_lbibe")
-
-[node name="UVTop" type="MeshInstance3D" parent="SkyIsland/GrassBlock10"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_wlwc7")
-
-[node name="UVNorth" type="MeshInstance3D" parent="SkyIsland/GrassBlock10"]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_m3hx4")
-
-[node name="UVEast" type="MeshInstance3D" parent="SkyIsland/GrassBlock10"]
-transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_m3hx4")
-
-[node name="UVSouth" type="MeshInstance3D" parent="SkyIsland/GrassBlock10"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_m3hx4")
-
-[node name="UVWest" type="MeshInstance3D" parent="SkyIsland/GrassBlock10"]
-transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_m3hx4")
-
-[node name="UVBottom" type="MeshInstance3D" parent="SkyIsland/GrassBlock10"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_fwt4p")
-
-[node name="GrassBlock11" type="StaticBody3D" parent="SkyIsland"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, -0.5, 2.5)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkyIsland/GrassBlock11"]
-shape = SubResource("BoxShape3D_lbibe")
-
-[node name="UVTop" type="MeshInstance3D" parent="SkyIsland/GrassBlock11"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_wlwc7")
-
-[node name="UVNorth" type="MeshInstance3D" parent="SkyIsland/GrassBlock11"]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_m3hx4")
-
-[node name="UVEast" type="MeshInstance3D" parent="SkyIsland/GrassBlock11"]
-transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_m3hx4")
-
-[node name="UVSouth" type="MeshInstance3D" parent="SkyIsland/GrassBlock11"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_m3hx4")
-
-[node name="UVWest" type="MeshInstance3D" parent="SkyIsland/GrassBlock11"]
-transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_m3hx4")
-
-[node name="UVBottom" type="MeshInstance3D" parent="SkyIsland/GrassBlock11"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_fwt4p")
-
-[node name="GrassBlock12" type="StaticBody3D" parent="SkyIsland"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, -0.5, 2.5)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkyIsland/GrassBlock12"]
-shape = SubResource("BoxShape3D_lbibe")
-
-[node name="UVTop" type="MeshInstance3D" parent="SkyIsland/GrassBlock12"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_wlwc7")
-
-[node name="UVNorth" type="MeshInstance3D" parent="SkyIsland/GrassBlock12"]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_m3hx4")
-
-[node name="UVEast" type="MeshInstance3D" parent="SkyIsland/GrassBlock12"]
-transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_m3hx4")
-
-[node name="UVSouth" type="MeshInstance3D" parent="SkyIsland/GrassBlock12"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_m3hx4")
-
-[node name="UVWest" type="MeshInstance3D" parent="SkyIsland/GrassBlock12"]
-transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_m3hx4")
-
-[node name="UVBottom" type="MeshInstance3D" parent="SkyIsland/GrassBlock12"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_fwt4p")
-
-[node name="GrassBlock13" type="StaticBody3D" parent="SkyIsland"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, -0.5, 1.5)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkyIsland/GrassBlock13"]
-shape = SubResource("BoxShape3D_lbibe")
-
-[node name="UVTop" type="MeshInstance3D" parent="SkyIsland/GrassBlock13"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_wlwc7")
-
-[node name="UVNorth" type="MeshInstance3D" parent="SkyIsland/GrassBlock13"]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_m3hx4")
-
-[node name="UVEast" type="MeshInstance3D" parent="SkyIsland/GrassBlock13"]
-transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_m3hx4")
-
-[node name="UVSouth" type="MeshInstance3D" parent="SkyIsland/GrassBlock13"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_m3hx4")
-
-[node name="UVWest" type="MeshInstance3D" parent="SkyIsland/GrassBlock13"]
-transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_m3hx4")
-
-[node name="UVBottom" type="MeshInstance3D" parent="SkyIsland/GrassBlock13"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_fwt4p")
-
-[node name="GrassBlock14" type="StaticBody3D" parent="SkyIsland"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, -0.5, 1.5)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkyIsland/GrassBlock14"]
-shape = SubResource("BoxShape3D_lbibe")
-
-[node name="UVTop" type="MeshInstance3D" parent="SkyIsland/GrassBlock14"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_wlwc7")
-
-[node name="UVNorth" type="MeshInstance3D" parent="SkyIsland/GrassBlock14"]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_m3hx4")
-
-[node name="UVEast" type="MeshInstance3D" parent="SkyIsland/GrassBlock14"]
-transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_m3hx4")
-
-[node name="UVSouth" type="MeshInstance3D" parent="SkyIsland/GrassBlock14"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_m3hx4")
-
-[node name="UVWest" type="MeshInstance3D" parent="SkyIsland/GrassBlock14"]
-transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_m3hx4")
-
-[node name="UVBottom" type="MeshInstance3D" parent="SkyIsland/GrassBlock14"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_fwt4p")
-
-[node name="GrassBlock15" type="StaticBody3D" parent="SkyIsland"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, -0.5, 1.5)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkyIsland/GrassBlock15"]
-shape = SubResource("BoxShape3D_lbibe")
-
-[node name="UVTop" type="MeshInstance3D" parent="SkyIsland/GrassBlock15"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_wlwc7")
-
-[node name="UVNorth" type="MeshInstance3D" parent="SkyIsland/GrassBlock15"]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_m3hx4")
-
-[node name="UVEast" type="MeshInstance3D" parent="SkyIsland/GrassBlock15"]
-transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_m3hx4")
-
-[node name="UVSouth" type="MeshInstance3D" parent="SkyIsland/GrassBlock15"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_m3hx4")
-
-[node name="UVWest" type="MeshInstance3D" parent="SkyIsland/GrassBlock15"]
-transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_m3hx4")
-
-[node name="UVBottom" type="MeshInstance3D" parent="SkyIsland/GrassBlock15"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_fwt4p")
-
-[node name="GrassBlock16" type="StaticBody3D" parent="SkyIsland"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, -0.5, 0.5)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkyIsland/GrassBlock16"]
-shape = SubResource("BoxShape3D_lbibe")
-
-[node name="UVTop" type="MeshInstance3D" parent="SkyIsland/GrassBlock16"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_wlwc7")
-
-[node name="UVNorth" type="MeshInstance3D" parent="SkyIsland/GrassBlock16"]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_m3hx4")
-
-[node name="UVEast" type="MeshInstance3D" parent="SkyIsland/GrassBlock16"]
-transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_m3hx4")
-
-[node name="UVSouth" type="MeshInstance3D" parent="SkyIsland/GrassBlock16"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_m3hx4")
-
-[node name="UVWest" type="MeshInstance3D" parent="SkyIsland/GrassBlock16"]
-transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_m3hx4")
-
-[node name="UVBottom" type="MeshInstance3D" parent="SkyIsland/GrassBlock16"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_fwt4p")
-
-[node name="GrassBlock17" type="StaticBody3D" parent="SkyIsland"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, -0.5, 0.5)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkyIsland/GrassBlock17"]
-shape = SubResource("BoxShape3D_lbibe")
-
-[node name="UVTop" type="MeshInstance3D" parent="SkyIsland/GrassBlock17"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_wlwc7")
-
-[node name="UVNorth" type="MeshInstance3D" parent="SkyIsland/GrassBlock17"]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_m3hx4")
-
-[node name="UVEast" type="MeshInstance3D" parent="SkyIsland/GrassBlock17"]
-transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_m3hx4")
-
-[node name="UVSouth" type="MeshInstance3D" parent="SkyIsland/GrassBlock17"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_m3hx4")
-
-[node name="UVWest" type="MeshInstance3D" parent="SkyIsland/GrassBlock17"]
-transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_m3hx4")
-
-[node name="UVBottom" type="MeshInstance3D" parent="SkyIsland/GrassBlock17"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_fwt4p")
-
-[node name="GrassBlock18" type="StaticBody3D" parent="SkyIsland"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, -0.5, 0.5)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkyIsland/GrassBlock18"]
-shape = SubResource("BoxShape3D_lbibe")
-
-[node name="UVTop" type="MeshInstance3D" parent="SkyIsland/GrassBlock18"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_wlwc7")
-
-[node name="UVNorth" type="MeshInstance3D" parent="SkyIsland/GrassBlock18"]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_m3hx4")
-
-[node name="UVEast" type="MeshInstance3D" parent="SkyIsland/GrassBlock18"]
-transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_m3hx4")
-
-[node name="UVSouth" type="MeshInstance3D" parent="SkyIsland/GrassBlock18"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_m3hx4")
-
-[node name="UVWest" type="MeshInstance3D" parent="SkyIsland/GrassBlock18"]
-transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_m3hx4")
-
-[node name="UVBottom" type="MeshInstance3D" parent="SkyIsland/GrassBlock18"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_fwt4p")
-
-[node name="DirtBlock19" type="StaticBody3D" parent="SkyIsland"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, -1.5, 2.5)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkyIsland/DirtBlock19"]
-shape = SubResource("BoxShape3D_lbibe")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SkyIsland/DirtBlock19"]
-mesh = SubResource("BoxMesh_gww7y")
-
-[node name="DirtBlock20" type="StaticBody3D" parent="SkyIsland"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, -1.5, 2.5)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkyIsland/DirtBlock20"]
-shape = SubResource("BoxShape3D_lbibe")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SkyIsland/DirtBlock20"]
-mesh = SubResource("BoxMesh_gww7y")
-
-[node name="DirtBlock21" type="StaticBody3D" parent="SkyIsland"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, -1.5, 2.5)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkyIsland/DirtBlock21"]
-shape = SubResource("BoxShape3D_lbibe")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SkyIsland/DirtBlock21"]
-mesh = SubResource("BoxMesh_gww7y")
-
-[node name="DirtBlock22" type="StaticBody3D" parent="SkyIsland"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, -1.5, 1.5)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkyIsland/DirtBlock22"]
-shape = SubResource("BoxShape3D_lbibe")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SkyIsland/DirtBlock22"]
-mesh = SubResource("BoxMesh_gww7y")
-
-[node name="DirtBlock23" type="StaticBody3D" parent="SkyIsland"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, -1.5, 1.5)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkyIsland/DirtBlock23"]
-shape = SubResource("BoxShape3D_lbibe")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SkyIsland/DirtBlock23"]
-mesh = SubResource("BoxMesh_gww7y")
-
-[node name="DirtBlock24" type="StaticBody3D" parent="SkyIsland"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, -1.5, 1.5)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkyIsland/DirtBlock24"]
-shape = SubResource("BoxShape3D_lbibe")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SkyIsland/DirtBlock24"]
-mesh = SubResource("BoxMesh_gww7y")
-
-[node name="DirtBlock25" type="StaticBody3D" parent="SkyIsland"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, -1.5, 0.5)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkyIsland/DirtBlock25"]
-shape = SubResource("BoxShape3D_lbibe")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SkyIsland/DirtBlock25"]
-mesh = SubResource("BoxMesh_gww7y")
-
-[node name="DirtBlock26" type="StaticBody3D" parent="SkyIsland"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, -1.5, 0.5)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkyIsland/DirtBlock26"]
-shape = SubResource("BoxShape3D_lbibe")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SkyIsland/DirtBlock26"]
-mesh = SubResource("BoxMesh_gww7y")
-
-[node name="DirtBlock27" type="StaticBody3D" parent="SkyIsland"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, -1.5, 0.5)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkyIsland/DirtBlock27"]
-shape = SubResource("BoxShape3D_lbibe")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SkyIsland/DirtBlock27"]
-mesh = SubResource("BoxMesh_gww7y")
-
-[node name="DirtBlock28" type="StaticBody3D" parent="SkyIsland"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, -2.5, 2.5)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkyIsland/DirtBlock28"]
-shape = SubResource("BoxShape3D_lbibe")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SkyIsland/DirtBlock28"]
-mesh = SubResource("BoxMesh_gww7y")
-
-[node name="DirtBlock29" type="StaticBody3D" parent="SkyIsland"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, -2.5, 2.5)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkyIsland/DirtBlock29"]
-shape = SubResource("BoxShape3D_lbibe")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SkyIsland/DirtBlock29"]
-mesh = SubResource("BoxMesh_gww7y")
-
-[node name="DirtBlock30" type="StaticBody3D" parent="SkyIsland"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, -2.5, 2.5)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkyIsland/DirtBlock30"]
-shape = SubResource("BoxShape3D_lbibe")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SkyIsland/DirtBlock30"]
-mesh = SubResource("BoxMesh_gww7y")
-
-[node name="DirtBlock31" type="StaticBody3D" parent="SkyIsland"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, -2.5, 1.5)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkyIsland/DirtBlock31"]
-shape = SubResource("BoxShape3D_lbibe")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SkyIsland/DirtBlock31"]
-mesh = SubResource("BoxMesh_gww7y")
-
-[node name="DirtBlock32" type="StaticBody3D" parent="SkyIsland"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, -2.5, 1.5)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkyIsland/DirtBlock32"]
-shape = SubResource("BoxShape3D_lbibe")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SkyIsland/DirtBlock32"]
-mesh = SubResource("BoxMesh_gww7y")
-
-[node name="DirtBlock33" type="StaticBody3D" parent="SkyIsland"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, -2.5, 1.5)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkyIsland/DirtBlock33"]
-shape = SubResource("BoxShape3D_lbibe")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SkyIsland/DirtBlock33"]
-mesh = SubResource("BoxMesh_gww7y")
-
-[node name="DirtBlock34" type="StaticBody3D" parent="SkyIsland"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, -2.5, 0.5)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkyIsland/DirtBlock34"]
-shape = SubResource("BoxShape3D_lbibe")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SkyIsland/DirtBlock34"]
-mesh = SubResource("BoxMesh_gww7y")
-
-[node name="DirtBlock35" type="StaticBody3D" parent="SkyIsland"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, -2.5, 0.5)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkyIsland/DirtBlock35"]
-shape = SubResource("BoxShape3D_lbibe")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SkyIsland/DirtBlock35"]
-mesh = SubResource("BoxMesh_gww7y")
-
-[node name="DirtBlock36" type="StaticBody3D" parent="SkyIsland"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, -2.5, 0.5)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkyIsland/DirtBlock36"]
-shape = SubResource("BoxShape3D_lbibe")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SkyIsland/DirtBlock36"]
-mesh = SubResource("BoxMesh_gww7y")
-
-[node name="GrassBlock19" type="StaticBody3D" parent="SkyIsland"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -0.5, -0.5)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkyIsland/GrassBlock19"]
-shape = SubResource("BoxShape3D_lbibe")
-
-[node name="UVTop" type="MeshInstance3D" parent="SkyIsland/GrassBlock19"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_wlwc7")
-
-[node name="UVNorth" type="MeshInstance3D" parent="SkyIsland/GrassBlock19"]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_m3hx4")
-
-[node name="UVEast" type="MeshInstance3D" parent="SkyIsland/GrassBlock19"]
-transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_m3hx4")
-
-[node name="UVSouth" type="MeshInstance3D" parent="SkyIsland/GrassBlock19"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_m3hx4")
-
-[node name="UVWest" type="MeshInstance3D" parent="SkyIsland/GrassBlock19"]
-transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_m3hx4")
-
-[node name="UVBottom" type="MeshInstance3D" parent="SkyIsland/GrassBlock19"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_fwt4p")
-
-[node name="GrassBlock20" type="StaticBody3D" parent="SkyIsland"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, -0.5, -0.5)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkyIsland/GrassBlock20"]
-shape = SubResource("BoxShape3D_lbibe")
-
-[node name="UVTop" type="MeshInstance3D" parent="SkyIsland/GrassBlock20"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_wlwc7")
-
-[node name="UVNorth" type="MeshInstance3D" parent="SkyIsland/GrassBlock20"]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_m3hx4")
-
-[node name="UVEast" type="MeshInstance3D" parent="SkyIsland/GrassBlock20"]
-transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_m3hx4")
-
-[node name="UVSouth" type="MeshInstance3D" parent="SkyIsland/GrassBlock20"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_m3hx4")
-
-[node name="UVWest" type="MeshInstance3D" parent="SkyIsland/GrassBlock20"]
-transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_m3hx4")
-
-[node name="UVBottom" type="MeshInstance3D" parent="SkyIsland/GrassBlock20"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_fwt4p")
-
-[node name="GrassBlock21" type="StaticBody3D" parent="SkyIsland"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, -0.5, -0.5)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkyIsland/GrassBlock21"]
-shape = SubResource("BoxShape3D_lbibe")
-
-[node name="UVTop" type="MeshInstance3D" parent="SkyIsland/GrassBlock21"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_wlwc7")
-
-[node name="UVNorth" type="MeshInstance3D" parent="SkyIsland/GrassBlock21"]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_m3hx4")
-
-[node name="UVEast" type="MeshInstance3D" parent="SkyIsland/GrassBlock21"]
-transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_m3hx4")
-
-[node name="UVSouth" type="MeshInstance3D" parent="SkyIsland/GrassBlock21"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_m3hx4")
-
-[node name="UVWest" type="MeshInstance3D" parent="SkyIsland/GrassBlock21"]
-transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_m3hx4")
-
-[node name="UVBottom" type="MeshInstance3D" parent="SkyIsland/GrassBlock21"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_fwt4p")
-
-[node name="GrassBlock22" type="StaticBody3D" parent="SkyIsland"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -0.5, -1.5)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkyIsland/GrassBlock22"]
-shape = SubResource("BoxShape3D_lbibe")
-
-[node name="UVTop" type="MeshInstance3D" parent="SkyIsland/GrassBlock22"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_wlwc7")
-
-[node name="UVNorth" type="MeshInstance3D" parent="SkyIsland/GrassBlock22"]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_m3hx4")
-
-[node name="UVEast" type="MeshInstance3D" parent="SkyIsland/GrassBlock22"]
-transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_m3hx4")
-
-[node name="UVSouth" type="MeshInstance3D" parent="SkyIsland/GrassBlock22"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_m3hx4")
-
-[node name="UVWest" type="MeshInstance3D" parent="SkyIsland/GrassBlock22"]
-transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_m3hx4")
-
-[node name="UVBottom" type="MeshInstance3D" parent="SkyIsland/GrassBlock22"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_fwt4p")
-
-[node name="GrassBlock23" type="StaticBody3D" parent="SkyIsland"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, -0.5, -1.5)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkyIsland/GrassBlock23"]
-shape = SubResource("BoxShape3D_lbibe")
-
-[node name="UVTop" type="MeshInstance3D" parent="SkyIsland/GrassBlock23"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_wlwc7")
-
-[node name="UVNorth" type="MeshInstance3D" parent="SkyIsland/GrassBlock23"]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_m3hx4")
-
-[node name="UVEast" type="MeshInstance3D" parent="SkyIsland/GrassBlock23"]
-transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_m3hx4")
-
-[node name="UVSouth" type="MeshInstance3D" parent="SkyIsland/GrassBlock23"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_m3hx4")
-
-[node name="UVWest" type="MeshInstance3D" parent="SkyIsland/GrassBlock23"]
-transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_m3hx4")
-
-[node name="UVBottom" type="MeshInstance3D" parent="SkyIsland/GrassBlock23"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_fwt4p")
-
-[node name="GrassBlock24" type="StaticBody3D" parent="SkyIsland"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, -0.5, -1.5)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkyIsland/GrassBlock24"]
-shape = SubResource("BoxShape3D_lbibe")
-
-[node name="UVTop" type="MeshInstance3D" parent="SkyIsland/GrassBlock24"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_wlwc7")
-
-[node name="UVNorth" type="MeshInstance3D" parent="SkyIsland/GrassBlock24"]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_m3hx4")
-
-[node name="UVEast" type="MeshInstance3D" parent="SkyIsland/GrassBlock24"]
-transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_m3hx4")
-
-[node name="UVSouth" type="MeshInstance3D" parent="SkyIsland/GrassBlock24"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_m3hx4")
-
-[node name="UVWest" type="MeshInstance3D" parent="SkyIsland/GrassBlock24"]
-transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_m3hx4")
-
-[node name="UVBottom" type="MeshInstance3D" parent="SkyIsland/GrassBlock24"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_fwt4p")
-
-[node name="GrassBlock25" type="StaticBody3D" parent="SkyIsland"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -0.5, -2.5)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkyIsland/GrassBlock25"]
-shape = SubResource("BoxShape3D_lbibe")
-
-[node name="UVTop" type="MeshInstance3D" parent="SkyIsland/GrassBlock25"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_wlwc7")
-
-[node name="UVNorth" type="MeshInstance3D" parent="SkyIsland/GrassBlock25"]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_m3hx4")
-
-[node name="UVEast" type="MeshInstance3D" parent="SkyIsland/GrassBlock25"]
-transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_m3hx4")
-
-[node name="UVSouth" type="MeshInstance3D" parent="SkyIsland/GrassBlock25"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_m3hx4")
-
-[node name="UVWest" type="MeshInstance3D" parent="SkyIsland/GrassBlock25"]
-transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_m3hx4")
-
-[node name="UVBottom" type="MeshInstance3D" parent="SkyIsland/GrassBlock25"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_fwt4p")
-
-[node name="GrassBlock26" type="StaticBody3D" parent="SkyIsland"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, -0.5, -2.5)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkyIsland/GrassBlock26"]
-shape = SubResource("BoxShape3D_lbibe")
-
-[node name="UVTop" type="MeshInstance3D" parent="SkyIsland/GrassBlock26"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_wlwc7")
-
-[node name="UVNorth" type="MeshInstance3D" parent="SkyIsland/GrassBlock26"]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_m3hx4")
-
-[node name="UVEast" type="MeshInstance3D" parent="SkyIsland/GrassBlock26"]
-transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_m3hx4")
-
-[node name="UVSouth" type="MeshInstance3D" parent="SkyIsland/GrassBlock26"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_m3hx4")
-
-[node name="UVWest" type="MeshInstance3D" parent="SkyIsland/GrassBlock26"]
-transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_m3hx4")
-
-[node name="UVBottom" type="MeshInstance3D" parent="SkyIsland/GrassBlock26"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_fwt4p")
-
-[node name="GrassBlock27" type="StaticBody3D" parent="SkyIsland"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, -0.5, -2.5)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkyIsland/GrassBlock27"]
-shape = SubResource("BoxShape3D_lbibe")
-
-[node name="UVTop" type="MeshInstance3D" parent="SkyIsland/GrassBlock27"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_wlwc7")
-
-[node name="UVNorth" type="MeshInstance3D" parent="SkyIsland/GrassBlock27"]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_m3hx4")
-
-[node name="UVEast" type="MeshInstance3D" parent="SkyIsland/GrassBlock27"]
-transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_m3hx4")
-
-[node name="UVSouth" type="MeshInstance3D" parent="SkyIsland/GrassBlock27"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_m3hx4")
-
-[node name="UVWest" type="MeshInstance3D" parent="SkyIsland/GrassBlock27"]
-transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_m3hx4")
-
-[node name="UVBottom" type="MeshInstance3D" parent="SkyIsland/GrassBlock27"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_fwt4p")
-
-[node name="DirtBlock37" type="StaticBody3D" parent="SkyIsland"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -1.5, -0.5)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkyIsland/DirtBlock37"]
-shape = SubResource("BoxShape3D_lbibe")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SkyIsland/DirtBlock37"]
-mesh = SubResource("BoxMesh_gww7y")
-
-[node name="DirtBlock38" type="StaticBody3D" parent="SkyIsland"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, -1.5, -0.5)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkyIsland/DirtBlock38"]
-shape = SubResource("BoxShape3D_lbibe")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SkyIsland/DirtBlock38"]
-mesh = SubResource("BoxMesh_gww7y")
-
-[node name="DirtBlock39" type="StaticBody3D" parent="SkyIsland"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, -1.5, -0.5)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkyIsland/DirtBlock39"]
-shape = SubResource("BoxShape3D_lbibe")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SkyIsland/DirtBlock39"]
-mesh = SubResource("BoxMesh_gww7y")
-
-[node name="DirtBlock40" type="StaticBody3D" parent="SkyIsland"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -1.5, -1.5)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkyIsland/DirtBlock40"]
-shape = SubResource("BoxShape3D_lbibe")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SkyIsland/DirtBlock40"]
-mesh = SubResource("BoxMesh_gww7y")
-
-[node name="DirtBlock41" type="StaticBody3D" parent="SkyIsland"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, -1.5, -1.5)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkyIsland/DirtBlock41"]
-shape = SubResource("BoxShape3D_lbibe")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SkyIsland/DirtBlock41"]
-mesh = SubResource("BoxMesh_gww7y")
-
-[node name="DirtBlock42" type="StaticBody3D" parent="SkyIsland"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, -1.5, -1.5)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkyIsland/DirtBlock42"]
-shape = SubResource("BoxShape3D_lbibe")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SkyIsland/DirtBlock42"]
-mesh = SubResource("BoxMesh_gww7y")
-
-[node name="DirtBlock43" type="StaticBody3D" parent="SkyIsland"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -1.5, -2.5)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkyIsland/DirtBlock43"]
-shape = SubResource("BoxShape3D_lbibe")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SkyIsland/DirtBlock43"]
-mesh = SubResource("BoxMesh_gww7y")
-
-[node name="DirtBlock44" type="StaticBody3D" parent="SkyIsland"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, -1.5, -2.5)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkyIsland/DirtBlock44"]
-shape = SubResource("BoxShape3D_lbibe")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SkyIsland/DirtBlock44"]
-mesh = SubResource("BoxMesh_gww7y")
-
-[node name="DirtBlock45" type="StaticBody3D" parent="SkyIsland"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, -1.5, -2.5)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkyIsland/DirtBlock45"]
-shape = SubResource("BoxShape3D_lbibe")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SkyIsland/DirtBlock45"]
-mesh = SubResource("BoxMesh_gww7y")
-
-[node name="DirtBlock46" type="StaticBody3D" parent="SkyIsland"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -2.5, -0.5)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkyIsland/DirtBlock46"]
-shape = SubResource("BoxShape3D_lbibe")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SkyIsland/DirtBlock46"]
-mesh = SubResource("BoxMesh_gww7y")
-
-[node name="DirtBlock47" type="StaticBody3D" parent="SkyIsland"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, -2.5, -0.5)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkyIsland/DirtBlock47"]
-shape = SubResource("BoxShape3D_lbibe")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SkyIsland/DirtBlock47"]
-mesh = SubResource("BoxMesh_gww7y")
-
-[node name="DirtBlock48" type="StaticBody3D" parent="SkyIsland"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, -2.5, -0.5)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkyIsland/DirtBlock48"]
-shape = SubResource("BoxShape3D_lbibe")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SkyIsland/DirtBlock48"]
-mesh = SubResource("BoxMesh_gww7y")
-
-[node name="DirtBlock49" type="StaticBody3D" parent="SkyIsland"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -2.5, -1.5)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkyIsland/DirtBlock49"]
-shape = SubResource("BoxShape3D_lbibe")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SkyIsland/DirtBlock49"]
-mesh = SubResource("BoxMesh_gww7y")
-
-[node name="DirtBlock50" type="StaticBody3D" parent="SkyIsland"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, -2.5, -1.5)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkyIsland/DirtBlock50"]
-shape = SubResource("BoxShape3D_lbibe")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SkyIsland/DirtBlock50"]
-mesh = SubResource("BoxMesh_gww7y")
-
-[node name="DirtBlock51" type="StaticBody3D" parent="SkyIsland"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, -2.5, -1.5)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkyIsland/DirtBlock51"]
-shape = SubResource("BoxShape3D_lbibe")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SkyIsland/DirtBlock51"]
-mesh = SubResource("BoxMesh_gww7y")
-
-[node name="DirtBlock52" type="StaticBody3D" parent="SkyIsland"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -2.5, -2.5)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkyIsland/DirtBlock52"]
-shape = SubResource("BoxShape3D_lbibe")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SkyIsland/DirtBlock52"]
-mesh = SubResource("BoxMesh_gww7y")
-
-[node name="DirtBlock53" type="StaticBody3D" parent="SkyIsland"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, -2.5, -2.5)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkyIsland/DirtBlock53"]
-shape = SubResource("BoxShape3D_lbibe")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SkyIsland/DirtBlock53"]
-mesh = SubResource("BoxMesh_gww7y")
-
-[node name="DirtBlock54" type="StaticBody3D" parent="SkyIsland"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, -2.5, -2.5)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkyIsland/DirtBlock54"]
-shape = SubResource("BoxShape3D_lbibe")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SkyIsland/DirtBlock54"]
-mesh = SubResource("BoxMesh_gww7y")
+[node name="DirtBlock18" parent="SkyIsland/Section3" instance=ExtResource("4_8vsgy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -2.5, -1)
 
 [node name="Tree" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, -2.5)
 
-[node name="Trunk" type="StaticBody3D" parent="Tree"]
+[node name="TrunkBlock" parent="Tree" instance=ExtResource("5_hxnpf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Tree/Trunk"]
-shape = SubResource("BoxShape3D_lpqhp")
-
-[node name="UVTop" type="MeshInstance3D" parent="Tree/Trunk"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_n03mq")
-
-[node name="UVNorth" type="MeshInstance3D" parent="Tree/Trunk"]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_gww7y")
-
-[node name="UVEast" type="MeshInstance3D" parent="Tree/Trunk"]
-transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_gww7y")
-
-[node name="UVSouth" type="MeshInstance3D" parent="Tree/Trunk"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_gww7y")
-
-[node name="UVWest" type="MeshInstance3D" parent="Tree/Trunk"]
-transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_gww7y")
-
-[node name="UVBottom" type="MeshInstance3D" parent="Tree/Trunk"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_n03mq")
-
-[node name="Trunk2" type="StaticBody3D" parent="Tree"]
+[node name="TrunkBlock2" parent="Tree" instance=ExtResource("5_hxnpf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Tree/Trunk2"]
-shape = SubResource("BoxShape3D_lpqhp")
-
-[node name="UVTop" type="MeshInstance3D" parent="Tree/Trunk2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_n03mq")
-
-[node name="UVNorth" type="MeshInstance3D" parent="Tree/Trunk2"]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_gww7y")
-
-[node name="UVEast" type="MeshInstance3D" parent="Tree/Trunk2"]
-transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_gww7y")
-
-[node name="UVSouth" type="MeshInstance3D" parent="Tree/Trunk2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_gww7y")
-
-[node name="UVWest" type="MeshInstance3D" parent="Tree/Trunk2"]
-transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_gww7y")
-
-[node name="UVBottom" type="MeshInstance3D" parent="Tree/Trunk2"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_n03mq")
-
-[node name="Trunk3" type="StaticBody3D" parent="Tree"]
+[node name="TrunkBlock3" parent="Tree" instance=ExtResource("5_hxnpf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Tree/Trunk3"]
-shape = SubResource("BoxShape3D_lpqhp")
-
-[node name="UVTop" type="MeshInstance3D" parent="Tree/Trunk3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_n03mq")
-
-[node name="UVNorth" type="MeshInstance3D" parent="Tree/Trunk3"]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_gww7y")
-
-[node name="UVEast" type="MeshInstance3D" parent="Tree/Trunk3"]
-transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_gww7y")
-
-[node name="UVSouth" type="MeshInstance3D" parent="Tree/Trunk3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_gww7y")
-
-[node name="UVWest" type="MeshInstance3D" parent="Tree/Trunk3"]
-transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_gww7y")
-
-[node name="UVBottom" type="MeshInstance3D" parent="Tree/Trunk3"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_n03mq")
-
-[node name="Leaves" type="StaticBody3D" parent="Tree"]
+[node name="LeavesBlock" parent="Tree" instance=ExtResource("6_hxnpf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 1)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Tree/Leaves"]
-shape = SubResource("BoxShape3D_lpqhp")
-
-[node name="UVTop" type="MeshInstance3D" parent="Tree/Leaves"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVNorth" type="MeshInstance3D" parent="Tree/Leaves"]
-transform = Transform3D(-1, 0, -8.742278e-08, 8.742278e-08, -4.371139e-08, -1, -3.821371e-15, -1, 4.371139e-08, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVEast" type="MeshInstance3D" parent="Tree/Leaves"]
-transform = Transform3D(1.9106853e-15, 1, -4.371139e-08, 4.371138e-08, -4.371139e-08, -1, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVSouth" type="MeshInstance3D" parent="Tree/Leaves"]
-transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVWest" type="MeshInstance3D" parent="Tree/Leaves"]
-transform = Transform3D(-5.732056e-15, -1, 4.371139e-08, 1.3113416e-07, -4.371139e-08, -1, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVBottom" type="MeshInstance3D" parent="Tree/Leaves"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="Leaves2" type="StaticBody3D" parent="Tree"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2.5, 1)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Tree/Leaves2"]
-shape = SubResource("BoxShape3D_lpqhp")
-
-[node name="UVTop" type="MeshInstance3D" parent="Tree/Leaves2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVNorth" type="MeshInstance3D" parent="Tree/Leaves2"]
-transform = Transform3D(-1, 0, -8.742278e-08, 8.742278e-08, -4.371139e-08, -1, -3.821371e-15, -1, 4.371139e-08, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVEast" type="MeshInstance3D" parent="Tree/Leaves2"]
-transform = Transform3D(1.9106853e-15, 1, -4.371139e-08, 4.371138e-08, -4.371139e-08, -1, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVSouth" type="MeshInstance3D" parent="Tree/Leaves2"]
-transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVWest" type="MeshInstance3D" parent="Tree/Leaves2"]
-transform = Transform3D(-5.732056e-15, -1, 4.371139e-08, 1.3113416e-07, -4.371139e-08, -1, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVBottom" type="MeshInstance3D" parent="Tree/Leaves2"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="Leaves3" type="StaticBody3D" parent="Tree"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2.5, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Tree/Leaves3"]
-shape = SubResource("BoxShape3D_lpqhp")
-
-[node name="UVTop" type="MeshInstance3D" parent="Tree/Leaves3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVNorth" type="MeshInstance3D" parent="Tree/Leaves3"]
-transform = Transform3D(-1, 0, -8.742278e-08, 8.742278e-08, -4.371139e-08, -1, -3.821371e-15, -1, 4.371139e-08, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVEast" type="MeshInstance3D" parent="Tree/Leaves3"]
-transform = Transform3D(1.9106853e-15, 1, -4.371139e-08, 4.371138e-08, -4.371139e-08, -1, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVSouth" type="MeshInstance3D" parent="Tree/Leaves3"]
-transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVWest" type="MeshInstance3D" parent="Tree/Leaves3"]
-transform = Transform3D(-5.732056e-15, -1, 4.371139e-08, 1.3113416e-07, -4.371139e-08, -1, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVBottom" type="MeshInstance3D" parent="Tree/Leaves3"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="Leaves4" type="StaticBody3D" parent="Tree"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2.5, -1)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Tree/Leaves4"]
-shape = SubResource("BoxShape3D_lpqhp")
-
-[node name="UVTop" type="MeshInstance3D" parent="Tree/Leaves4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVNorth" type="MeshInstance3D" parent="Tree/Leaves4"]
-transform = Transform3D(-1, 0, -8.742278e-08, 8.742278e-08, -4.371139e-08, -1, -3.821371e-15, -1, 4.371139e-08, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVEast" type="MeshInstance3D" parent="Tree/Leaves4"]
-transform = Transform3D(1.9106853e-15, 1, -4.371139e-08, 4.371138e-08, -4.371139e-08, -1, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVSouth" type="MeshInstance3D" parent="Tree/Leaves4"]
-transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVWest" type="MeshInstance3D" parent="Tree/Leaves4"]
-transform = Transform3D(-5.732056e-15, -1, 4.371139e-08, 1.3113416e-07, -4.371139e-08, -1, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVBottom" type="MeshInstance3D" parent="Tree/Leaves4"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="Leaves5" type="StaticBody3D" parent="Tree"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, -1)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Tree/Leaves5"]
-shape = SubResource("BoxShape3D_lpqhp")
-
-[node name="UVTop" type="MeshInstance3D" parent="Tree/Leaves5"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVNorth" type="MeshInstance3D" parent="Tree/Leaves5"]
-transform = Transform3D(-1, 0, -8.742278e-08, 8.742278e-08, -4.371139e-08, -1, -3.821371e-15, -1, 4.371139e-08, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVEast" type="MeshInstance3D" parent="Tree/Leaves5"]
-transform = Transform3D(1.9106853e-15, 1, -4.371139e-08, 4.371138e-08, -4.371139e-08, -1, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVSouth" type="MeshInstance3D" parent="Tree/Leaves5"]
-transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVWest" type="MeshInstance3D" parent="Tree/Leaves5"]
-transform = Transform3D(-5.732056e-15, -1, 4.371139e-08, 1.3113416e-07, -4.371139e-08, -1, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVBottom" type="MeshInstance3D" parent="Tree/Leaves5"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="Leaves6" type="StaticBody3D" parent="Tree"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 2.5, -1)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Tree/Leaves6"]
-shape = SubResource("BoxShape3D_lpqhp")
-
-[node name="UVTop" type="MeshInstance3D" parent="Tree/Leaves6"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVNorth" type="MeshInstance3D" parent="Tree/Leaves6"]
-transform = Transform3D(-1, 0, -8.742278e-08, 8.742278e-08, -4.371139e-08, -1, -3.821371e-15, -1, 4.371139e-08, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVEast" type="MeshInstance3D" parent="Tree/Leaves6"]
-transform = Transform3D(1.9106853e-15, 1, -4.371139e-08, 4.371138e-08, -4.371139e-08, -1, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVSouth" type="MeshInstance3D" parent="Tree/Leaves6"]
-transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVWest" type="MeshInstance3D" parent="Tree/Leaves6"]
-transform = Transform3D(-5.732056e-15, -1, 4.371139e-08, 1.3113416e-07, -4.371139e-08, -1, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVBottom" type="MeshInstance3D" parent="Tree/Leaves6"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="Leaves7" type="StaticBody3D" parent="Tree"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 2.5, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Tree/Leaves7"]
-shape = SubResource("BoxShape3D_lpqhp")
-
-[node name="UVTop" type="MeshInstance3D" parent="Tree/Leaves7"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVNorth" type="MeshInstance3D" parent="Tree/Leaves7"]
-transform = Transform3D(-1, 0, -8.742278e-08, 8.742278e-08, -4.371139e-08, -1, -3.821371e-15, -1, 4.371139e-08, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVEast" type="MeshInstance3D" parent="Tree/Leaves7"]
-transform = Transform3D(1.9106853e-15, 1, -4.371139e-08, 4.371138e-08, -4.371139e-08, -1, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVSouth" type="MeshInstance3D" parent="Tree/Leaves7"]
-transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVWest" type="MeshInstance3D" parent="Tree/Leaves7"]
-transform = Transform3D(-5.732056e-15, -1, 4.371139e-08, 1.3113416e-07, -4.371139e-08, -1, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVBottom" type="MeshInstance3D" parent="Tree/Leaves7"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="Leaves8" type="StaticBody3D" parent="Tree"]
+[node name="LeavesBlock2" parent="Tree" instance=ExtResource("6_hxnpf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 2.5, 1)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Tree/Leaves8"]
-shape = SubResource("BoxShape3D_lpqhp")
+[node name="LeavesBlock3" parent="Tree" instance=ExtResource("6_hxnpf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 2.5, 0)
 
-[node name="UVTop" type="MeshInstance3D" parent="Tree/Leaves8"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
+[node name="LeavesBlock4" parent="Tree" instance=ExtResource("6_hxnpf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 2.5, -1)
 
-[node name="UVNorth" type="MeshInstance3D" parent="Tree/Leaves8"]
-transform = Transform3D(-1, 0, -8.742278e-08, 8.742278e-08, -4.371139e-08, -1, -3.821371e-15, -1, 4.371139e-08, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_mubsw")
+[node name="LeavesBlock5" parent="Tree" instance=ExtResource("6_hxnpf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, -1)
 
-[node name="UVEast" type="MeshInstance3D" parent="Tree/Leaves8"]
-transform = Transform3D(1.9106853e-15, 1, -4.371139e-08, 4.371138e-08, -4.371139e-08, -1, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
+[node name="LeavesBlock6" parent="Tree" instance=ExtResource("6_hxnpf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2.5, -1)
 
-[node name="UVSouth" type="MeshInstance3D" parent="Tree/Leaves8"]
-transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_mubsw")
+[node name="LeavesBlock7" parent="Tree" instance=ExtResource("6_hxnpf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2.5, 0)
 
-[node name="UVWest" type="MeshInstance3D" parent="Tree/Leaves8"]
-transform = Transform3D(-5.732056e-15, -1, 4.371139e-08, 1.3113416e-07, -4.371139e-08, -1, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
+[node name="LeavesBlock8" parent="Tree" instance=ExtResource("6_hxnpf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2.5, 1)
 
-[node name="UVBottom" type="MeshInstance3D" parent="Tree/Leaves8"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="Leaves9" type="StaticBody3D" parent="Tree"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 2.5, 2)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Tree/Leaves9"]
-shape = SubResource("BoxShape3D_lpqhp")
-
-[node name="UVTop" type="MeshInstance3D" parent="Tree/Leaves9"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVNorth" type="MeshInstance3D" parent="Tree/Leaves9"]
-transform = Transform3D(-1, 0, -8.742278e-08, 8.742278e-08, -4.371139e-08, -1, -3.821371e-15, -1, 4.371139e-08, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVEast" type="MeshInstance3D" parent="Tree/Leaves9"]
-transform = Transform3D(1.9106853e-15, 1, -4.371139e-08, 4.371138e-08, -4.371139e-08, -1, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVSouth" type="MeshInstance3D" parent="Tree/Leaves9"]
-transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVWest" type="MeshInstance3D" parent="Tree/Leaves9"]
-transform = Transform3D(-5.732056e-15, -1, 4.371139e-08, 1.3113416e-07, -4.371139e-08, -1, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVBottom" type="MeshInstance3D" parent="Tree/Leaves9"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="Leaves10" type="StaticBody3D" parent="Tree"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 2)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Tree/Leaves10"]
-shape = SubResource("BoxShape3D_lpqhp")
-
-[node name="UVTop" type="MeshInstance3D" parent="Tree/Leaves10"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVNorth" type="MeshInstance3D" parent="Tree/Leaves10"]
-transform = Transform3D(-1, 0, -8.742278e-08, 8.742278e-08, -4.371139e-08, -1, -3.821371e-15, -1, 4.371139e-08, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVEast" type="MeshInstance3D" parent="Tree/Leaves10"]
-transform = Transform3D(1.9106853e-15, 1, -4.371139e-08, 4.371138e-08, -4.371139e-08, -1, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVSouth" type="MeshInstance3D" parent="Tree/Leaves10"]
-transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVWest" type="MeshInstance3D" parent="Tree/Leaves10"]
-transform = Transform3D(-5.732056e-15, -1, 4.371139e-08, 1.3113416e-07, -4.371139e-08, -1, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVBottom" type="MeshInstance3D" parent="Tree/Leaves10"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="Leaves11" type="StaticBody3D" parent="Tree"]
+[node name="LeavesBlock9" parent="Tree" instance=ExtResource("6_hxnpf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2.5, 2)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Tree/Leaves11"]
-shape = SubResource("BoxShape3D_lpqhp")
+[node name="LeavesBlock10" parent="Tree" instance=ExtResource("6_hxnpf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 2)
 
-[node name="UVTop" type="MeshInstance3D" parent="Tree/Leaves11"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
+[node name="LeavesBlock11" parent="Tree" instance=ExtResource("6_hxnpf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 2.5, 2)
 
-[node name="UVNorth" type="MeshInstance3D" parent="Tree/Leaves11"]
-transform = Transform3D(-1, 0, -8.742278e-08, 8.742278e-08, -4.371139e-08, -1, -3.821371e-15, -1, 4.371139e-08, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVEast" type="MeshInstance3D" parent="Tree/Leaves11"]
-transform = Transform3D(1.9106853e-15, 1, -4.371139e-08, 4.371138e-08, -4.371139e-08, -1, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVSouth" type="MeshInstance3D" parent="Tree/Leaves11"]
-transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVWest" type="MeshInstance3D" parent="Tree/Leaves11"]
-transform = Transform3D(-5.732056e-15, -1, 4.371139e-08, 1.3113416e-07, -4.371139e-08, -1, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVBottom" type="MeshInstance3D" parent="Tree/Leaves11"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="Leaves12" type="StaticBody3D" parent="Tree"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2.5, 2)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Tree/Leaves12"]
-shape = SubResource("BoxShape3D_lpqhp")
-
-[node name="UVTop" type="MeshInstance3D" parent="Tree/Leaves12"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVNorth" type="MeshInstance3D" parent="Tree/Leaves12"]
-transform = Transform3D(-1, 0, -8.742278e-08, 8.742278e-08, -4.371139e-08, -1, -3.821371e-15, -1, 4.371139e-08, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVEast" type="MeshInstance3D" parent="Tree/Leaves12"]
-transform = Transform3D(1.9106853e-15, 1, -4.371139e-08, 4.371138e-08, -4.371139e-08, -1, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVSouth" type="MeshInstance3D" parent="Tree/Leaves12"]
-transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVWest" type="MeshInstance3D" parent="Tree/Leaves12"]
-transform = Transform3D(-5.732056e-15, -1, 4.371139e-08, 1.3113416e-07, -4.371139e-08, -1, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVBottom" type="MeshInstance3D" parent="Tree/Leaves12"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="Leaves13" type="StaticBody3D" parent="Tree"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2.5, 1)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Tree/Leaves13"]
-shape = SubResource("BoxShape3D_lpqhp")
-
-[node name="UVTop" type="MeshInstance3D" parent="Tree/Leaves13"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVNorth" type="MeshInstance3D" parent="Tree/Leaves13"]
-transform = Transform3D(-1, 0, -8.742278e-08, 8.742278e-08, -4.371139e-08, -1, -3.821371e-15, -1, 4.371139e-08, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVEast" type="MeshInstance3D" parent="Tree/Leaves13"]
-transform = Transform3D(1.9106853e-15, 1, -4.371139e-08, 4.371138e-08, -4.371139e-08, -1, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVSouth" type="MeshInstance3D" parent="Tree/Leaves13"]
-transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVWest" type="MeshInstance3D" parent="Tree/Leaves13"]
-transform = Transform3D(-5.732056e-15, -1, 4.371139e-08, 1.3113416e-07, -4.371139e-08, -1, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVBottom" type="MeshInstance3D" parent="Tree/Leaves13"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="Leaves14" type="StaticBody3D" parent="Tree"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2.5, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Tree/Leaves14"]
-shape = SubResource("BoxShape3D_lpqhp")
-
-[node name="UVTop" type="MeshInstance3D" parent="Tree/Leaves14"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVNorth" type="MeshInstance3D" parent="Tree/Leaves14"]
-transform = Transform3D(-1, 0, -8.742278e-08, 8.742278e-08, -4.371139e-08, -1, -3.821371e-15, -1, 4.371139e-08, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVEast" type="MeshInstance3D" parent="Tree/Leaves14"]
-transform = Transform3D(1.9106853e-15, 1, -4.371139e-08, 4.371138e-08, -4.371139e-08, -1, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVSouth" type="MeshInstance3D" parent="Tree/Leaves14"]
-transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVWest" type="MeshInstance3D" parent="Tree/Leaves14"]
-transform = Transform3D(-5.732056e-15, -1, 4.371139e-08, 1.3113416e-07, -4.371139e-08, -1, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVBottom" type="MeshInstance3D" parent="Tree/Leaves14"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="Leaves15" type="StaticBody3D" parent="Tree"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2.5, -1)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Tree/Leaves15"]
-shape = SubResource("BoxShape3D_lpqhp")
-
-[node name="UVTop" type="MeshInstance3D" parent="Tree/Leaves15"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVNorth" type="MeshInstance3D" parent="Tree/Leaves15"]
-transform = Transform3D(-1, 0, -8.742278e-08, 8.742278e-08, -4.371139e-08, -1, -3.821371e-15, -1, 4.371139e-08, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVEast" type="MeshInstance3D" parent="Tree/Leaves15"]
-transform = Transform3D(1.9106853e-15, 1, -4.371139e-08, 4.371138e-08, -4.371139e-08, -1, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVSouth" type="MeshInstance3D" parent="Tree/Leaves15"]
-transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVWest" type="MeshInstance3D" parent="Tree/Leaves15"]
-transform = Transform3D(-5.732056e-15, -1, 4.371139e-08, 1.3113416e-07, -4.371139e-08, -1, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVBottom" type="MeshInstance3D" parent="Tree/Leaves15"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="Leaves16" type="StaticBody3D" parent="Tree"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2.5, -2)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Tree/Leaves16"]
-shape = SubResource("BoxShape3D_lpqhp")
-
-[node name="UVTop" type="MeshInstance3D" parent="Tree/Leaves16"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVNorth" type="MeshInstance3D" parent="Tree/Leaves16"]
-transform = Transform3D(-1, 0, -8.742278e-08, 8.742278e-08, -4.371139e-08, -1, -3.821371e-15, -1, 4.371139e-08, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVEast" type="MeshInstance3D" parent="Tree/Leaves16"]
-transform = Transform3D(1.9106853e-15, 1, -4.371139e-08, 4.371138e-08, -4.371139e-08, -1, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVSouth" type="MeshInstance3D" parent="Tree/Leaves16"]
-transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVWest" type="MeshInstance3D" parent="Tree/Leaves16"]
-transform = Transform3D(-5.732056e-15, -1, 4.371139e-08, 1.3113416e-07, -4.371139e-08, -1, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVBottom" type="MeshInstance3D" parent="Tree/Leaves16"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="Leaves17" type="StaticBody3D" parent="Tree"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2.5, -2)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Tree/Leaves17"]
-shape = SubResource("BoxShape3D_lpqhp")
-
-[node name="UVTop" type="MeshInstance3D" parent="Tree/Leaves17"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVNorth" type="MeshInstance3D" parent="Tree/Leaves17"]
-transform = Transform3D(-1, 0, -8.742278e-08, 8.742278e-08, -4.371139e-08, -1, -3.821371e-15, -1, 4.371139e-08, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVEast" type="MeshInstance3D" parent="Tree/Leaves17"]
-transform = Transform3D(1.9106853e-15, 1, -4.371139e-08, 4.371138e-08, -4.371139e-08, -1, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVSouth" type="MeshInstance3D" parent="Tree/Leaves17"]
-transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVWest" type="MeshInstance3D" parent="Tree/Leaves17"]
-transform = Transform3D(-5.732056e-15, -1, 4.371139e-08, 1.3113416e-07, -4.371139e-08, -1, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVBottom" type="MeshInstance3D" parent="Tree/Leaves17"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="Leaves18" type="StaticBody3D" parent="Tree"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, -2)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Tree/Leaves18"]
-shape = SubResource("BoxShape3D_lpqhp")
-
-[node name="UVTop" type="MeshInstance3D" parent="Tree/Leaves18"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVNorth" type="MeshInstance3D" parent="Tree/Leaves18"]
-transform = Transform3D(-1, 0, -8.742278e-08, 8.742278e-08, -4.371139e-08, -1, -3.821371e-15, -1, 4.371139e-08, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVEast" type="MeshInstance3D" parent="Tree/Leaves18"]
-transform = Transform3D(1.9106853e-15, 1, -4.371139e-08, 4.371138e-08, -4.371139e-08, -1, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVSouth" type="MeshInstance3D" parent="Tree/Leaves18"]
-transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVWest" type="MeshInstance3D" parent="Tree/Leaves18"]
-transform = Transform3D(-5.732056e-15, -1, 4.371139e-08, 1.3113416e-07, -4.371139e-08, -1, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVBottom" type="MeshInstance3D" parent="Tree/Leaves18"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="Leaves19" type="StaticBody3D" parent="Tree"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 2.5, -2)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Tree/Leaves19"]
-shape = SubResource("BoxShape3D_lpqhp")
-
-[node name="UVTop" type="MeshInstance3D" parent="Tree/Leaves19"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVNorth" type="MeshInstance3D" parent="Tree/Leaves19"]
-transform = Transform3D(-1, 0, -8.742278e-08, 8.742278e-08, -4.371139e-08, -1, -3.821371e-15, -1, 4.371139e-08, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVEast" type="MeshInstance3D" parent="Tree/Leaves19"]
-transform = Transform3D(1.9106853e-15, 1, -4.371139e-08, 4.371138e-08, -4.371139e-08, -1, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVSouth" type="MeshInstance3D" parent="Tree/Leaves19"]
-transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVWest" type="MeshInstance3D" parent="Tree/Leaves19"]
-transform = Transform3D(-5.732056e-15, -1, 4.371139e-08, 1.3113416e-07, -4.371139e-08, -1, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVBottom" type="MeshInstance3D" parent="Tree/Leaves19"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="Leaves20" type="StaticBody3D" parent="Tree"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2.5, -2)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Tree/Leaves20"]
-shape = SubResource("BoxShape3D_lpqhp")
-
-[node name="UVTop" type="MeshInstance3D" parent="Tree/Leaves20"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVNorth" type="MeshInstance3D" parent="Tree/Leaves20"]
-transform = Transform3D(-1, 0, -8.742278e-08, 8.742278e-08, -4.371139e-08, -1, -3.821371e-15, -1, 4.371139e-08, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVEast" type="MeshInstance3D" parent="Tree/Leaves20"]
-transform = Transform3D(1.9106853e-15, 1, -4.371139e-08, 4.371138e-08, -4.371139e-08, -1, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVSouth" type="MeshInstance3D" parent="Tree/Leaves20"]
-transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVWest" type="MeshInstance3D" parent="Tree/Leaves20"]
-transform = Transform3D(-5.732056e-15, -1, 4.371139e-08, 1.3113416e-07, -4.371139e-08, -1, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVBottom" type="MeshInstance3D" parent="Tree/Leaves20"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="Leaves21" type="StaticBody3D" parent="Tree"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2.5, -1)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Tree/Leaves21"]
-shape = SubResource("BoxShape3D_lpqhp")
-
-[node name="UVTop" type="MeshInstance3D" parent="Tree/Leaves21"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVNorth" type="MeshInstance3D" parent="Tree/Leaves21"]
-transform = Transform3D(-1, 0, -8.742278e-08, 8.742278e-08, -4.371139e-08, -1, -3.821371e-15, -1, 4.371139e-08, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVEast" type="MeshInstance3D" parent="Tree/Leaves21"]
-transform = Transform3D(1.9106853e-15, 1, -4.371139e-08, 4.371138e-08, -4.371139e-08, -1, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVSouth" type="MeshInstance3D" parent="Tree/Leaves21"]
-transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVWest" type="MeshInstance3D" parent="Tree/Leaves21"]
-transform = Transform3D(-5.732056e-15, -1, 4.371139e-08, 1.3113416e-07, -4.371139e-08, -1, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVBottom" type="MeshInstance3D" parent="Tree/Leaves21"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="Leaves22" type="StaticBody3D" parent="Tree"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2.5, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Tree/Leaves22"]
-shape = SubResource("BoxShape3D_lpqhp")
-
-[node name="UVTop" type="MeshInstance3D" parent="Tree/Leaves22"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVNorth" type="MeshInstance3D" parent="Tree/Leaves22"]
-transform = Transform3D(-1, 0, -8.742278e-08, 8.742278e-08, -4.371139e-08, -1, -3.821371e-15, -1, 4.371139e-08, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVEast" type="MeshInstance3D" parent="Tree/Leaves22"]
-transform = Transform3D(1.9106853e-15, 1, -4.371139e-08, 4.371138e-08, -4.371139e-08, -1, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVSouth" type="MeshInstance3D" parent="Tree/Leaves22"]
-transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVWest" type="MeshInstance3D" parent="Tree/Leaves22"]
-transform = Transform3D(-5.732056e-15, -1, 4.371139e-08, 1.3113416e-07, -4.371139e-08, -1, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVBottom" type="MeshInstance3D" parent="Tree/Leaves22"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="Leaves23" type="StaticBody3D" parent="Tree"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2.5, 1)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Tree/Leaves23"]
-shape = SubResource("BoxShape3D_lpqhp")
-
-[node name="UVTop" type="MeshInstance3D" parent="Tree/Leaves23"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVNorth" type="MeshInstance3D" parent="Tree/Leaves23"]
-transform = Transform3D(-1, 0, -8.742278e-08, 8.742278e-08, -4.371139e-08, -1, -3.821371e-15, -1, 4.371139e-08, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVEast" type="MeshInstance3D" parent="Tree/Leaves23"]
-transform = Transform3D(1.9106853e-15, 1, -4.371139e-08, 4.371138e-08, -4.371139e-08, -1, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVSouth" type="MeshInstance3D" parent="Tree/Leaves23"]
-transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVWest" type="MeshInstance3D" parent="Tree/Leaves23"]
-transform = Transform3D(-5.732056e-15, -1, 4.371139e-08, 1.3113416e-07, -4.371139e-08, -1, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVBottom" type="MeshInstance3D" parent="Tree/Leaves23"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="Leaves24" type="StaticBody3D" parent="Tree"]
+[node name="LeavesBlock12" parent="Tree" instance=ExtResource("6_hxnpf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2.5, 2)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Tree/Leaves24"]
-shape = SubResource("BoxShape3D_lpqhp")
+[node name="LeavesBlock13" parent="Tree" instance=ExtResource("6_hxnpf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2.5, 1)
 
-[node name="UVTop" type="MeshInstance3D" parent="Tree/Leaves24"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
+[node name="LeavesBlock14" parent="Tree" instance=ExtResource("6_hxnpf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2.5, 0)
 
-[node name="UVNorth" type="MeshInstance3D" parent="Tree/Leaves24"]
-transform = Transform3D(-1, 0, -8.742278e-08, 8.742278e-08, -4.371139e-08, -1, -3.821371e-15, -1, 4.371139e-08, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_mubsw")
+[node name="LeavesBlock15" parent="Tree" instance=ExtResource("6_hxnpf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2.5, -1)
 
-[node name="UVEast" type="MeshInstance3D" parent="Tree/Leaves24"]
-transform = Transform3D(1.9106853e-15, 1, -4.371139e-08, 4.371138e-08, -4.371139e-08, -1, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
+[node name="LeavesBlock16" parent="Tree" instance=ExtResource("6_hxnpf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2.5, -2)
 
-[node name="UVSouth" type="MeshInstance3D" parent="Tree/Leaves24"]
-transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_mubsw")
+[node name="LeavesBlock17" parent="Tree" instance=ExtResource("6_hxnpf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 2.5, -2)
 
-[node name="UVWest" type="MeshInstance3D" parent="Tree/Leaves24"]
-transform = Transform3D(-5.732056e-15, -1, 4.371139e-08, 1.3113416e-07, -4.371139e-08, -1, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
+[node name="LeavesBlock18" parent="Tree" instance=ExtResource("6_hxnpf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, -2)
 
-[node name="UVBottom" type="MeshInstance3D" parent="Tree/Leaves24"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
+[node name="LeavesBlock19" parent="Tree" instance=ExtResource("6_hxnpf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2.5, -2)
 
-[node name="Trunk4" type="StaticBody3D" parent="Tree"]
+[node name="LeavesBlock20" parent="Tree" instance=ExtResource("6_hxnpf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2.5, -2)
+
+[node name="LeavesBlock21" parent="Tree" instance=ExtResource("6_hxnpf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2.5, -1)
+
+[node name="LeavesBlock22" parent="Tree" instance=ExtResource("6_hxnpf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2.5, 0)
+
+[node name="LeavesBlock23" parent="Tree" instance=ExtResource("6_hxnpf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2.5, 1)
+
+[node name="LeavesBlock24" parent="Tree" instance=ExtResource("6_hxnpf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2.5, 2)
+
+[node name="TrunkBlock4" parent="Tree" instance=ExtResource("5_hxnpf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Tree/Trunk4"]
-shape = SubResource("BoxShape3D_lpqhp")
-
-[node name="UVTop" type="MeshInstance3D" parent="Tree/Trunk4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_n03mq")
-
-[node name="UVNorth" type="MeshInstance3D" parent="Tree/Trunk4"]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_gww7y")
-
-[node name="UVEast" type="MeshInstance3D" parent="Tree/Trunk4"]
-transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_gww7y")
-
-[node name="UVSouth" type="MeshInstance3D" parent="Tree/Trunk4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_gww7y")
-
-[node name="UVWest" type="MeshInstance3D" parent="Tree/Trunk4"]
-transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_gww7y")
-
-[node name="UVBottom" type="MeshInstance3D" parent="Tree/Trunk4"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_n03mq")
-
-[node name="Leaves25" type="StaticBody3D" parent="Tree"]
+[node name="LeavesBlock25" parent="Tree" instance=ExtResource("6_hxnpf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, 1)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Tree/Leaves25"]
-shape = SubResource("BoxShape3D_lpqhp")
-
-[node name="UVTop" type="MeshInstance3D" parent="Tree/Leaves25"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVNorth" type="MeshInstance3D" parent="Tree/Leaves25"]
-transform = Transform3D(-1, 0, -8.742278e-08, 8.742278e-08, -4.371139e-08, -1, -3.821371e-15, -1, 4.371139e-08, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVEast" type="MeshInstance3D" parent="Tree/Leaves25"]
-transform = Transform3D(1.9106853e-15, 1, -4.371139e-08, 4.371138e-08, -4.371139e-08, -1, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVSouth" type="MeshInstance3D" parent="Tree/Leaves25"]
-transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVWest" type="MeshInstance3D" parent="Tree/Leaves25"]
-transform = Transform3D(-5.732056e-15, -1, 4.371139e-08, 1.3113416e-07, -4.371139e-08, -1, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVBottom" type="MeshInstance3D" parent="Tree/Leaves25"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="Leaves26" type="StaticBody3D" parent="Tree"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 3.5, 1)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Tree/Leaves26"]
-shape = SubResource("BoxShape3D_lpqhp")
-
-[node name="UVTop" type="MeshInstance3D" parent="Tree/Leaves26"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVNorth" type="MeshInstance3D" parent="Tree/Leaves26"]
-transform = Transform3D(-1, 0, -8.742278e-08, 8.742278e-08, -4.371139e-08, -1, -3.821371e-15, -1, 4.371139e-08, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVEast" type="MeshInstance3D" parent="Tree/Leaves26"]
-transform = Transform3D(1.9106853e-15, 1, -4.371139e-08, 4.371138e-08, -4.371139e-08, -1, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVSouth" type="MeshInstance3D" parent="Tree/Leaves26"]
-transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVWest" type="MeshInstance3D" parent="Tree/Leaves26"]
-transform = Transform3D(-5.732056e-15, -1, 4.371139e-08, 1.3113416e-07, -4.371139e-08, -1, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVBottom" type="MeshInstance3D" parent="Tree/Leaves26"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="Leaves27" type="StaticBody3D" parent="Tree"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 3.5, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Tree/Leaves27"]
-shape = SubResource("BoxShape3D_lpqhp")
-
-[node name="UVTop" type="MeshInstance3D" parent="Tree/Leaves27"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVNorth" type="MeshInstance3D" parent="Tree/Leaves27"]
-transform = Transform3D(-1, 0, -8.742278e-08, 8.742278e-08, -4.371139e-08, -1, -3.821371e-15, -1, 4.371139e-08, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVEast" type="MeshInstance3D" parent="Tree/Leaves27"]
-transform = Transform3D(1.9106853e-15, 1, -4.371139e-08, 4.371138e-08, -4.371139e-08, -1, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVSouth" type="MeshInstance3D" parent="Tree/Leaves27"]
-transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVWest" type="MeshInstance3D" parent="Tree/Leaves27"]
-transform = Transform3D(-5.732056e-15, -1, 4.371139e-08, 1.3113416e-07, -4.371139e-08, -1, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVBottom" type="MeshInstance3D" parent="Tree/Leaves27"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="Leaves28" type="StaticBody3D" parent="Tree"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 3.5, -1)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Tree/Leaves28"]
-shape = SubResource("BoxShape3D_lpqhp")
-
-[node name="UVTop" type="MeshInstance3D" parent="Tree/Leaves28"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVNorth" type="MeshInstance3D" parent="Tree/Leaves28"]
-transform = Transform3D(-1, 0, -8.742278e-08, 8.742278e-08, -4.371139e-08, -1, -3.821371e-15, -1, 4.371139e-08, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVEast" type="MeshInstance3D" parent="Tree/Leaves28"]
-transform = Transform3D(1.9106853e-15, 1, -4.371139e-08, 4.371138e-08, -4.371139e-08, -1, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVSouth" type="MeshInstance3D" parent="Tree/Leaves28"]
-transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVWest" type="MeshInstance3D" parent="Tree/Leaves28"]
-transform = Transform3D(-5.732056e-15, -1, 4.371139e-08, 1.3113416e-07, -4.371139e-08, -1, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVBottom" type="MeshInstance3D" parent="Tree/Leaves28"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="Leaves29" type="StaticBody3D" parent="Tree"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, -1)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Tree/Leaves29"]
-shape = SubResource("BoxShape3D_lpqhp")
-
-[node name="UVTop" type="MeshInstance3D" parent="Tree/Leaves29"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVNorth" type="MeshInstance3D" parent="Tree/Leaves29"]
-transform = Transform3D(-1, 0, -8.742278e-08, 8.742278e-08, -4.371139e-08, -1, -3.821371e-15, -1, 4.371139e-08, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVEast" type="MeshInstance3D" parent="Tree/Leaves29"]
-transform = Transform3D(1.9106853e-15, 1, -4.371139e-08, 4.371138e-08, -4.371139e-08, -1, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVSouth" type="MeshInstance3D" parent="Tree/Leaves29"]
-transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVWest" type="MeshInstance3D" parent="Tree/Leaves29"]
-transform = Transform3D(-5.732056e-15, -1, 4.371139e-08, 1.3113416e-07, -4.371139e-08, -1, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVBottom" type="MeshInstance3D" parent="Tree/Leaves29"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="Leaves30" type="StaticBody3D" parent="Tree"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 3.5, -1)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Tree/Leaves30"]
-shape = SubResource("BoxShape3D_lpqhp")
-
-[node name="UVTop" type="MeshInstance3D" parent="Tree/Leaves30"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVNorth" type="MeshInstance3D" parent="Tree/Leaves30"]
-transform = Transform3D(-1, 0, -8.742278e-08, 8.742278e-08, -4.371139e-08, -1, -3.821371e-15, -1, 4.371139e-08, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVEast" type="MeshInstance3D" parent="Tree/Leaves30"]
-transform = Transform3D(1.9106853e-15, 1, -4.371139e-08, 4.371138e-08, -4.371139e-08, -1, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVSouth" type="MeshInstance3D" parent="Tree/Leaves30"]
-transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVWest" type="MeshInstance3D" parent="Tree/Leaves30"]
-transform = Transform3D(-5.732056e-15, -1, 4.371139e-08, 1.3113416e-07, -4.371139e-08, -1, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVBottom" type="MeshInstance3D" parent="Tree/Leaves30"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="Leaves31" type="StaticBody3D" parent="Tree"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 3.5, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Tree/Leaves31"]
-shape = SubResource("BoxShape3D_lpqhp")
-
-[node name="UVTop" type="MeshInstance3D" parent="Tree/Leaves31"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVNorth" type="MeshInstance3D" parent="Tree/Leaves31"]
-transform = Transform3D(-1, 0, -8.742278e-08, 8.742278e-08, -4.371139e-08, -1, -3.821371e-15, -1, 4.371139e-08, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVEast" type="MeshInstance3D" parent="Tree/Leaves31"]
-transform = Transform3D(1.9106853e-15, 1, -4.371139e-08, 4.371138e-08, -4.371139e-08, -1, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVSouth" type="MeshInstance3D" parent="Tree/Leaves31"]
-transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVWest" type="MeshInstance3D" parent="Tree/Leaves31"]
-transform = Transform3D(-5.732056e-15, -1, 4.371139e-08, 1.3113416e-07, -4.371139e-08, -1, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVBottom" type="MeshInstance3D" parent="Tree/Leaves31"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="Leaves32" type="StaticBody3D" parent="Tree"]
+[node name="LeavesBlock26" parent="Tree" instance=ExtResource("6_hxnpf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 3.5, 1)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Tree/Leaves32"]
-shape = SubResource("BoxShape3D_lpqhp")
+[node name="LeavesBlock27" parent="Tree" instance=ExtResource("6_hxnpf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 3.5, 0)
 
-[node name="UVTop" type="MeshInstance3D" parent="Tree/Leaves32"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
+[node name="LeavesBlock28" parent="Tree" instance=ExtResource("6_hxnpf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 3.5, -1)
 
-[node name="UVNorth" type="MeshInstance3D" parent="Tree/Leaves32"]
-transform = Transform3D(-1, 0, -8.742278e-08, 8.742278e-08, -4.371139e-08, -1, -3.821371e-15, -1, 4.371139e-08, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_mubsw")
+[node name="LeavesBlock29" parent="Tree" instance=ExtResource("6_hxnpf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, -1)
 
-[node name="UVEast" type="MeshInstance3D" parent="Tree/Leaves32"]
-transform = Transform3D(1.9106853e-15, 1, -4.371139e-08, 4.371138e-08, -4.371139e-08, -1, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
+[node name="LeavesBlock30" parent="Tree" instance=ExtResource("6_hxnpf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 3.5, -1)
 
-[node name="UVSouth" type="MeshInstance3D" parent="Tree/Leaves32"]
-transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_mubsw")
+[node name="LeavesBlock31" parent="Tree" instance=ExtResource("6_hxnpf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 3.5, 0)
 
-[node name="UVWest" type="MeshInstance3D" parent="Tree/Leaves32"]
-transform = Transform3D(-5.732056e-15, -1, 4.371139e-08, 1.3113416e-07, -4.371139e-08, -1, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
+[node name="LeavesBlock32" parent="Tree" instance=ExtResource("6_hxnpf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 3.5, 1)
 
-[node name="UVBottom" type="MeshInstance3D" parent="Tree/Leaves32"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="Leaves33" type="StaticBody3D" parent="Tree"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 3.5, 2)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Tree/Leaves33"]
-shape = SubResource("BoxShape3D_lpqhp")
-
-[node name="UVTop" type="MeshInstance3D" parent="Tree/Leaves33"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVNorth" type="MeshInstance3D" parent="Tree/Leaves33"]
-transform = Transform3D(-1, 0, -8.742278e-08, 8.742278e-08, -4.371139e-08, -1, -3.821371e-15, -1, 4.371139e-08, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVEast" type="MeshInstance3D" parent="Tree/Leaves33"]
-transform = Transform3D(1.9106853e-15, 1, -4.371139e-08, 4.371138e-08, -4.371139e-08, -1, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVSouth" type="MeshInstance3D" parent="Tree/Leaves33"]
-transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVWest" type="MeshInstance3D" parent="Tree/Leaves33"]
-transform = Transform3D(-5.732056e-15, -1, 4.371139e-08, 1.3113416e-07, -4.371139e-08, -1, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVBottom" type="MeshInstance3D" parent="Tree/Leaves33"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="Leaves34" type="StaticBody3D" parent="Tree"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, 2)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Tree/Leaves34"]
-shape = SubResource("BoxShape3D_lpqhp")
-
-[node name="UVTop" type="MeshInstance3D" parent="Tree/Leaves34"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVNorth" type="MeshInstance3D" parent="Tree/Leaves34"]
-transform = Transform3D(-1, 0, -8.742278e-08, 8.742278e-08, -4.371139e-08, -1, -3.821371e-15, -1, 4.371139e-08, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVEast" type="MeshInstance3D" parent="Tree/Leaves34"]
-transform = Transform3D(1.9106853e-15, 1, -4.371139e-08, 4.371138e-08, -4.371139e-08, -1, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVSouth" type="MeshInstance3D" parent="Tree/Leaves34"]
-transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVWest" type="MeshInstance3D" parent="Tree/Leaves34"]
-transform = Transform3D(-5.732056e-15, -1, 4.371139e-08, 1.3113416e-07, -4.371139e-08, -1, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVBottom" type="MeshInstance3D" parent="Tree/Leaves34"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="Leaves35" type="StaticBody3D" parent="Tree"]
+[node name="LeavesBlock33" parent="Tree" instance=ExtResource("6_hxnpf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 3.5, 2)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Tree/Leaves35"]
-shape = SubResource("BoxShape3D_lpqhp")
+[node name="LeavesBlock34" parent="Tree" instance=ExtResource("6_hxnpf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, 2)
 
-[node name="UVTop" type="MeshInstance3D" parent="Tree/Leaves35"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
+[node name="LeavesBlock35" parent="Tree" instance=ExtResource("6_hxnpf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 3.5, 2)
 
-[node name="UVNorth" type="MeshInstance3D" parent="Tree/Leaves35"]
-transform = Transform3D(-1, 0, -8.742278e-08, 8.742278e-08, -4.371139e-08, -1, -3.821371e-15, -1, 4.371139e-08, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVEast" type="MeshInstance3D" parent="Tree/Leaves35"]
-transform = Transform3D(1.9106853e-15, 1, -4.371139e-08, 4.371138e-08, -4.371139e-08, -1, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVSouth" type="MeshInstance3D" parent="Tree/Leaves35"]
-transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVWest" type="MeshInstance3D" parent="Tree/Leaves35"]
-transform = Transform3D(-5.732056e-15, -1, 4.371139e-08, 1.3113416e-07, -4.371139e-08, -1, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVBottom" type="MeshInstance3D" parent="Tree/Leaves35"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="Leaves36" type="StaticBody3D" parent="Tree"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 3.5, 2)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Tree/Leaves36"]
-shape = SubResource("BoxShape3D_lpqhp")
-
-[node name="UVTop" type="MeshInstance3D" parent="Tree/Leaves36"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVNorth" type="MeshInstance3D" parent="Tree/Leaves36"]
-transform = Transform3D(-1, 0, -8.742278e-08, 8.742278e-08, -4.371139e-08, -1, -3.821371e-15, -1, 4.371139e-08, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVEast" type="MeshInstance3D" parent="Tree/Leaves36"]
-transform = Transform3D(1.9106853e-15, 1, -4.371139e-08, 4.371138e-08, -4.371139e-08, -1, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVSouth" type="MeshInstance3D" parent="Tree/Leaves36"]
-transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVWest" type="MeshInstance3D" parent="Tree/Leaves36"]
-transform = Transform3D(-5.732056e-15, -1, 4.371139e-08, 1.3113416e-07, -4.371139e-08, -1, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVBottom" type="MeshInstance3D" parent="Tree/Leaves36"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="Leaves37" type="StaticBody3D" parent="Tree"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 3.5, 1)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Tree/Leaves37"]
-shape = SubResource("BoxShape3D_lpqhp")
-
-[node name="UVTop" type="MeshInstance3D" parent="Tree/Leaves37"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVNorth" type="MeshInstance3D" parent="Tree/Leaves37"]
-transform = Transform3D(-1, 0, -8.742278e-08, 8.742278e-08, -4.371139e-08, -1, -3.821371e-15, -1, 4.371139e-08, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVEast" type="MeshInstance3D" parent="Tree/Leaves37"]
-transform = Transform3D(1.9106853e-15, 1, -4.371139e-08, 4.371138e-08, -4.371139e-08, -1, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVSouth" type="MeshInstance3D" parent="Tree/Leaves37"]
-transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVWest" type="MeshInstance3D" parent="Tree/Leaves37"]
-transform = Transform3D(-5.732056e-15, -1, 4.371139e-08, 1.3113416e-07, -4.371139e-08, -1, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVBottom" type="MeshInstance3D" parent="Tree/Leaves37"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="Leaves38" type="StaticBody3D" parent="Tree"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 3.5, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Tree/Leaves38"]
-shape = SubResource("BoxShape3D_lpqhp")
-
-[node name="UVTop" type="MeshInstance3D" parent="Tree/Leaves38"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVNorth" type="MeshInstance3D" parent="Tree/Leaves38"]
-transform = Transform3D(-1, 0, -8.742278e-08, 8.742278e-08, -4.371139e-08, -1, -3.821371e-15, -1, 4.371139e-08, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVEast" type="MeshInstance3D" parent="Tree/Leaves38"]
-transform = Transform3D(1.9106853e-15, 1, -4.371139e-08, 4.371138e-08, -4.371139e-08, -1, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVSouth" type="MeshInstance3D" parent="Tree/Leaves38"]
-transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVWest" type="MeshInstance3D" parent="Tree/Leaves38"]
-transform = Transform3D(-5.732056e-15, -1, 4.371139e-08, 1.3113416e-07, -4.371139e-08, -1, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVBottom" type="MeshInstance3D" parent="Tree/Leaves38"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="Leaves39" type="StaticBody3D" parent="Tree"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 3.5, -1)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Tree/Leaves39"]
-shape = SubResource("BoxShape3D_lpqhp")
-
-[node name="UVTop" type="MeshInstance3D" parent="Tree/Leaves39"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVNorth" type="MeshInstance3D" parent="Tree/Leaves39"]
-transform = Transform3D(-1, 0, -8.742278e-08, 8.742278e-08, -4.371139e-08, -1, -3.821371e-15, -1, 4.371139e-08, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVEast" type="MeshInstance3D" parent="Tree/Leaves39"]
-transform = Transform3D(1.9106853e-15, 1, -4.371139e-08, 4.371138e-08, -4.371139e-08, -1, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVSouth" type="MeshInstance3D" parent="Tree/Leaves39"]
-transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVWest" type="MeshInstance3D" parent="Tree/Leaves39"]
-transform = Transform3D(-5.732056e-15, -1, 4.371139e-08, 1.3113416e-07, -4.371139e-08, -1, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVBottom" type="MeshInstance3D" parent="Tree/Leaves39"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="Leaves40" type="StaticBody3D" parent="Tree"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 3.5, -2)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Tree/Leaves40"]
-shape = SubResource("BoxShape3D_lpqhp")
-
-[node name="UVTop" type="MeshInstance3D" parent="Tree/Leaves40"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVNorth" type="MeshInstance3D" parent="Tree/Leaves40"]
-transform = Transform3D(-1, 0, -8.742278e-08, 8.742278e-08, -4.371139e-08, -1, -3.821371e-15, -1, 4.371139e-08, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVEast" type="MeshInstance3D" parent="Tree/Leaves40"]
-transform = Transform3D(1.9106853e-15, 1, -4.371139e-08, 4.371138e-08, -4.371139e-08, -1, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVSouth" type="MeshInstance3D" parent="Tree/Leaves40"]
-transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVWest" type="MeshInstance3D" parent="Tree/Leaves40"]
-transform = Transform3D(-5.732056e-15, -1, 4.371139e-08, 1.3113416e-07, -4.371139e-08, -1, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVBottom" type="MeshInstance3D" parent="Tree/Leaves40"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="Leaves41" type="StaticBody3D" parent="Tree"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 3.5, -2)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Tree/Leaves41"]
-shape = SubResource("BoxShape3D_lpqhp")
-
-[node name="UVTop" type="MeshInstance3D" parent="Tree/Leaves41"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVNorth" type="MeshInstance3D" parent="Tree/Leaves41"]
-transform = Transform3D(-1, 0, -8.742278e-08, 8.742278e-08, -4.371139e-08, -1, -3.821371e-15, -1, 4.371139e-08, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVEast" type="MeshInstance3D" parent="Tree/Leaves41"]
-transform = Transform3D(1.9106853e-15, 1, -4.371139e-08, 4.371138e-08, -4.371139e-08, -1, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVSouth" type="MeshInstance3D" parent="Tree/Leaves41"]
-transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVWest" type="MeshInstance3D" parent="Tree/Leaves41"]
-transform = Transform3D(-5.732056e-15, -1, 4.371139e-08, 1.3113416e-07, -4.371139e-08, -1, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVBottom" type="MeshInstance3D" parent="Tree/Leaves41"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="Leaves42" type="StaticBody3D" parent="Tree"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, -2)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Tree/Leaves42"]
-shape = SubResource("BoxShape3D_lpqhp")
-
-[node name="UVTop" type="MeshInstance3D" parent="Tree/Leaves42"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVNorth" type="MeshInstance3D" parent="Tree/Leaves42"]
-transform = Transform3D(-1, 0, -8.742278e-08, 8.742278e-08, -4.371139e-08, -1, -3.821371e-15, -1, 4.371139e-08, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVEast" type="MeshInstance3D" parent="Tree/Leaves42"]
-transform = Transform3D(1.9106853e-15, 1, -4.371139e-08, 4.371138e-08, -4.371139e-08, -1, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVSouth" type="MeshInstance3D" parent="Tree/Leaves42"]
-transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVWest" type="MeshInstance3D" parent="Tree/Leaves42"]
-transform = Transform3D(-5.732056e-15, -1, 4.371139e-08, 1.3113416e-07, -4.371139e-08, -1, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVBottom" type="MeshInstance3D" parent="Tree/Leaves42"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="Leaves43" type="StaticBody3D" parent="Tree"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 3.5, -2)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Tree/Leaves43"]
-shape = SubResource("BoxShape3D_lpqhp")
-
-[node name="UVTop" type="MeshInstance3D" parent="Tree/Leaves43"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVNorth" type="MeshInstance3D" parent="Tree/Leaves43"]
-transform = Transform3D(-1, 0, -8.742278e-08, 8.742278e-08, -4.371139e-08, -1, -3.821371e-15, -1, 4.371139e-08, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVEast" type="MeshInstance3D" parent="Tree/Leaves43"]
-transform = Transform3D(1.9106853e-15, 1, -4.371139e-08, 4.371138e-08, -4.371139e-08, -1, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVSouth" type="MeshInstance3D" parent="Tree/Leaves43"]
-transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVWest" type="MeshInstance3D" parent="Tree/Leaves43"]
-transform = Transform3D(-5.732056e-15, -1, 4.371139e-08, 1.3113416e-07, -4.371139e-08, -1, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVBottom" type="MeshInstance3D" parent="Tree/Leaves43"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="Leaves44" type="StaticBody3D" parent="Tree"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 3.5, -2)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Tree/Leaves44"]
-shape = SubResource("BoxShape3D_lpqhp")
-
-[node name="UVTop" type="MeshInstance3D" parent="Tree/Leaves44"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVNorth" type="MeshInstance3D" parent="Tree/Leaves44"]
-transform = Transform3D(-1, 0, -8.742278e-08, 8.742278e-08, -4.371139e-08, -1, -3.821371e-15, -1, 4.371139e-08, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVEast" type="MeshInstance3D" parent="Tree/Leaves44"]
-transform = Transform3D(1.9106853e-15, 1, -4.371139e-08, 4.371138e-08, -4.371139e-08, -1, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVSouth" type="MeshInstance3D" parent="Tree/Leaves44"]
-transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVWest" type="MeshInstance3D" parent="Tree/Leaves44"]
-transform = Transform3D(-5.732056e-15, -1, 4.371139e-08, 1.3113416e-07, -4.371139e-08, -1, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVBottom" type="MeshInstance3D" parent="Tree/Leaves44"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="Leaves45" type="StaticBody3D" parent="Tree"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 3.5, -1)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Tree/Leaves45"]
-shape = SubResource("BoxShape3D_lpqhp")
-
-[node name="UVTop" type="MeshInstance3D" parent="Tree/Leaves45"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVNorth" type="MeshInstance3D" parent="Tree/Leaves45"]
-transform = Transform3D(-1, 0, -8.742278e-08, 8.742278e-08, -4.371139e-08, -1, -3.821371e-15, -1, 4.371139e-08, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVEast" type="MeshInstance3D" parent="Tree/Leaves45"]
-transform = Transform3D(1.9106853e-15, 1, -4.371139e-08, 4.371138e-08, -4.371139e-08, -1, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVSouth" type="MeshInstance3D" parent="Tree/Leaves45"]
-transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVWest" type="MeshInstance3D" parent="Tree/Leaves45"]
-transform = Transform3D(-5.732056e-15, -1, 4.371139e-08, 1.3113416e-07, -4.371139e-08, -1, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVBottom" type="MeshInstance3D" parent="Tree/Leaves45"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="Leaves46" type="StaticBody3D" parent="Tree"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 3.5, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Tree/Leaves46"]
-shape = SubResource("BoxShape3D_lpqhp")
-
-[node name="UVTop" type="MeshInstance3D" parent="Tree/Leaves46"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVNorth" type="MeshInstance3D" parent="Tree/Leaves46"]
-transform = Transform3D(-1, 0, -8.742278e-08, 8.742278e-08, -4.371139e-08, -1, -3.821371e-15, -1, 4.371139e-08, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVEast" type="MeshInstance3D" parent="Tree/Leaves46"]
-transform = Transform3D(1.9106853e-15, 1, -4.371139e-08, 4.371138e-08, -4.371139e-08, -1, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVSouth" type="MeshInstance3D" parent="Tree/Leaves46"]
-transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVWest" type="MeshInstance3D" parent="Tree/Leaves46"]
-transform = Transform3D(-5.732056e-15, -1, 4.371139e-08, 1.3113416e-07, -4.371139e-08, -1, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVBottom" type="MeshInstance3D" parent="Tree/Leaves46"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="Leaves47" type="StaticBody3D" parent="Tree"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 3.5, 1)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Tree/Leaves47"]
-shape = SubResource("BoxShape3D_lpqhp")
-
-[node name="UVTop" type="MeshInstance3D" parent="Tree/Leaves47"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVNorth" type="MeshInstance3D" parent="Tree/Leaves47"]
-transform = Transform3D(-1, 0, -8.742278e-08, 8.742278e-08, -4.371139e-08, -1, -3.821371e-15, -1, 4.371139e-08, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVEast" type="MeshInstance3D" parent="Tree/Leaves47"]
-transform = Transform3D(1.9106853e-15, 1, -4.371139e-08, 4.371138e-08, -4.371139e-08, -1, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVSouth" type="MeshInstance3D" parent="Tree/Leaves47"]
-transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVWest" type="MeshInstance3D" parent="Tree/Leaves47"]
-transform = Transform3D(-5.732056e-15, -1, 4.371139e-08, 1.3113416e-07, -4.371139e-08, -1, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVBottom" type="MeshInstance3D" parent="Tree/Leaves47"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="Leaves48" type="StaticBody3D" parent="Tree"]
+[node name="LeavesBlock36" parent="Tree" instance=ExtResource("6_hxnpf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 3.5, 2)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Tree/Leaves48"]
-shape = SubResource("BoxShape3D_lpqhp")
+[node name="LeavesBlock37" parent="Tree" instance=ExtResource("6_hxnpf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 3.5, 1)
 
-[node name="UVTop" type="MeshInstance3D" parent="Tree/Leaves48"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
+[node name="LeavesBlock38" parent="Tree" instance=ExtResource("6_hxnpf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 3.5, 0)
 
-[node name="UVNorth" type="MeshInstance3D" parent="Tree/Leaves48"]
-transform = Transform3D(-1, 0, -8.742278e-08, 8.742278e-08, -4.371139e-08, -1, -3.821371e-15, -1, 4.371139e-08, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_mubsw")
+[node name="LeavesBlock39" parent="Tree" instance=ExtResource("6_hxnpf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 3.5, -1)
 
-[node name="UVEast" type="MeshInstance3D" parent="Tree/Leaves48"]
-transform = Transform3D(1.9106853e-15, 1, -4.371139e-08, 4.371138e-08, -4.371139e-08, -1, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
+[node name="LeavesBlock40" parent="Tree" instance=ExtResource("6_hxnpf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 3.5, -2)
 
-[node name="UVSouth" type="MeshInstance3D" parent="Tree/Leaves48"]
-transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_mubsw")
+[node name="LeavesBlock41" parent="Tree" instance=ExtResource("6_hxnpf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 3.5, -2)
 
-[node name="UVWest" type="MeshInstance3D" parent="Tree/Leaves48"]
-transform = Transform3D(-5.732056e-15, -1, 4.371139e-08, 1.3113416e-07, -4.371139e-08, -1, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
+[node name="LeavesBlock42" parent="Tree" instance=ExtResource("6_hxnpf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, -2)
 
-[node name="UVBottom" type="MeshInstance3D" parent="Tree/Leaves48"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
+[node name="LeavesBlock43" parent="Tree" instance=ExtResource("6_hxnpf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 3.5, -2)
 
-[node name="Trunk5" type="StaticBody3D" parent="Tree"]
+[node name="LeavesBlock44" parent="Tree" instance=ExtResource("6_hxnpf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 3.5, -2)
+
+[node name="LeavesBlock45" parent="Tree" instance=ExtResource("6_hxnpf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 3.5, -1)
+
+[node name="LeavesBlock46" parent="Tree" instance=ExtResource("6_hxnpf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 3.5, 0)
+
+[node name="LeavesBlock47" parent="Tree" instance=ExtResource("6_hxnpf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 3.5, 1)
+
+[node name="LeavesBlock48" parent="Tree" instance=ExtResource("6_hxnpf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 3.5, 2)
+
+[node name="TrunkBlock5" parent="Tree" instance=ExtResource("5_hxnpf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.5, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Tree/Trunk5"]
-shape = SubResource("BoxShape3D_lpqhp")
-
-[node name="UVTop" type="MeshInstance3D" parent="Tree/Trunk5"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_n03mq")
-
-[node name="UVNorth" type="MeshInstance3D" parent="Tree/Trunk5"]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_gww7y")
-
-[node name="UVEast" type="MeshInstance3D" parent="Tree/Trunk5"]
-transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_gww7y")
-
-[node name="UVSouth" type="MeshInstance3D" parent="Tree/Trunk5"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_gww7y")
-
-[node name="UVWest" type="MeshInstance3D" parent="Tree/Trunk5"]
-transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_gww7y")
-
-[node name="UVBottom" type="MeshInstance3D" parent="Tree/Trunk5"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_n03mq")
-
-[node name="Leaves49" type="StaticBody3D" parent="Tree"]
+[node name="LeavesBlock49" parent="Tree" instance=ExtResource("6_hxnpf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.5, 1)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Tree/Leaves49"]
-shape = SubResource("BoxShape3D_lpqhp")
-
-[node name="UVTop" type="MeshInstance3D" parent="Tree/Leaves49"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVNorth" type="MeshInstance3D" parent="Tree/Leaves49"]
-transform = Transform3D(-1, 0, -8.742278e-08, 8.742278e-08, -4.371139e-08, -1, -3.821371e-15, -1, 4.371139e-08, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVEast" type="MeshInstance3D" parent="Tree/Leaves49"]
-transform = Transform3D(1.9106853e-15, 1, -4.371139e-08, 4.371138e-08, -4.371139e-08, -1, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVSouth" type="MeshInstance3D" parent="Tree/Leaves49"]
-transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVWest" type="MeshInstance3D" parent="Tree/Leaves49"]
-transform = Transform3D(-5.732056e-15, -1, 4.371139e-08, 1.3113416e-07, -4.371139e-08, -1, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVBottom" type="MeshInstance3D" parent="Tree/Leaves49"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="Leaves50" type="StaticBody3D" parent="Tree"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 4.5, 1)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Tree/Leaves50"]
-shape = SubResource("BoxShape3D_lpqhp")
-
-[node name="UVTop" type="MeshInstance3D" parent="Tree/Leaves50"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVNorth" type="MeshInstance3D" parent="Tree/Leaves50"]
-transform = Transform3D(-1, 0, -8.742278e-08, 8.742278e-08, -4.371139e-08, -1, -3.821371e-15, -1, 4.371139e-08, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVEast" type="MeshInstance3D" parent="Tree/Leaves50"]
-transform = Transform3D(1.9106853e-15, 1, -4.371139e-08, 4.371138e-08, -4.371139e-08, -1, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVSouth" type="MeshInstance3D" parent="Tree/Leaves50"]
-transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVWest" type="MeshInstance3D" parent="Tree/Leaves50"]
-transform = Transform3D(-5.732056e-15, -1, 4.371139e-08, 1.3113416e-07, -4.371139e-08, -1, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVBottom" type="MeshInstance3D" parent="Tree/Leaves50"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="Leaves51" type="StaticBody3D" parent="Tree"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 4.5, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Tree/Leaves51"]
-shape = SubResource("BoxShape3D_lpqhp")
-
-[node name="UVTop" type="MeshInstance3D" parent="Tree/Leaves51"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVNorth" type="MeshInstance3D" parent="Tree/Leaves51"]
-transform = Transform3D(-1, 0, -8.742278e-08, 8.742278e-08, -4.371139e-08, -1, -3.821371e-15, -1, 4.371139e-08, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVEast" type="MeshInstance3D" parent="Tree/Leaves51"]
-transform = Transform3D(1.9106853e-15, 1, -4.371139e-08, 4.371138e-08, -4.371139e-08, -1, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVSouth" type="MeshInstance3D" parent="Tree/Leaves51"]
-transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVWest" type="MeshInstance3D" parent="Tree/Leaves51"]
-transform = Transform3D(-5.732056e-15, -1, 4.371139e-08, 1.3113416e-07, -4.371139e-08, -1, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVBottom" type="MeshInstance3D" parent="Tree/Leaves51"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="Leaves52" type="StaticBody3D" parent="Tree"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 4.5, -1)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Tree/Leaves52"]
-shape = SubResource("BoxShape3D_lpqhp")
-
-[node name="UVTop" type="MeshInstance3D" parent="Tree/Leaves52"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVNorth" type="MeshInstance3D" parent="Tree/Leaves52"]
-transform = Transform3D(-1, 0, -8.742278e-08, 8.742278e-08, -4.371139e-08, -1, -3.821371e-15, -1, 4.371139e-08, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVEast" type="MeshInstance3D" parent="Tree/Leaves52"]
-transform = Transform3D(1.9106853e-15, 1, -4.371139e-08, 4.371138e-08, -4.371139e-08, -1, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVSouth" type="MeshInstance3D" parent="Tree/Leaves52"]
-transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVWest" type="MeshInstance3D" parent="Tree/Leaves52"]
-transform = Transform3D(-5.732056e-15, -1, 4.371139e-08, 1.3113416e-07, -4.371139e-08, -1, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVBottom" type="MeshInstance3D" parent="Tree/Leaves52"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="Leaves53" type="StaticBody3D" parent="Tree"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.5, -1)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Tree/Leaves53"]
-shape = SubResource("BoxShape3D_lpqhp")
-
-[node name="UVTop" type="MeshInstance3D" parent="Tree/Leaves53"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVNorth" type="MeshInstance3D" parent="Tree/Leaves53"]
-transform = Transform3D(-1, 0, -8.742278e-08, 8.742278e-08, -4.371139e-08, -1, -3.821371e-15, -1, 4.371139e-08, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVEast" type="MeshInstance3D" parent="Tree/Leaves53"]
-transform = Transform3D(1.9106853e-15, 1, -4.371139e-08, 4.371138e-08, -4.371139e-08, -1, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVSouth" type="MeshInstance3D" parent="Tree/Leaves53"]
-transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVWest" type="MeshInstance3D" parent="Tree/Leaves53"]
-transform = Transform3D(-5.732056e-15, -1, 4.371139e-08, 1.3113416e-07, -4.371139e-08, -1, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVBottom" type="MeshInstance3D" parent="Tree/Leaves53"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="Leaves54" type="StaticBody3D" parent="Tree"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 4.5, -1)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Tree/Leaves54"]
-shape = SubResource("BoxShape3D_lpqhp")
-
-[node name="UVTop" type="MeshInstance3D" parent="Tree/Leaves54"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVNorth" type="MeshInstance3D" parent="Tree/Leaves54"]
-transform = Transform3D(-1, 0, -8.742278e-08, 8.742278e-08, -4.371139e-08, -1, -3.821371e-15, -1, 4.371139e-08, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVEast" type="MeshInstance3D" parent="Tree/Leaves54"]
-transform = Transform3D(1.9106853e-15, 1, -4.371139e-08, 4.371138e-08, -4.371139e-08, -1, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVSouth" type="MeshInstance3D" parent="Tree/Leaves54"]
-transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVWest" type="MeshInstance3D" parent="Tree/Leaves54"]
-transform = Transform3D(-5.732056e-15, -1, 4.371139e-08, 1.3113416e-07, -4.371139e-08, -1, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVBottom" type="MeshInstance3D" parent="Tree/Leaves54"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="Leaves55" type="StaticBody3D" parent="Tree"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 4.5, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Tree/Leaves55"]
-shape = SubResource("BoxShape3D_lpqhp")
-
-[node name="UVTop" type="MeshInstance3D" parent="Tree/Leaves55"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVNorth" type="MeshInstance3D" parent="Tree/Leaves55"]
-transform = Transform3D(-1, 0, -8.742278e-08, 8.742278e-08, -4.371139e-08, -1, -3.821371e-15, -1, 4.371139e-08, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVEast" type="MeshInstance3D" parent="Tree/Leaves55"]
-transform = Transform3D(1.9106853e-15, 1, -4.371139e-08, 4.371138e-08, -4.371139e-08, -1, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVSouth" type="MeshInstance3D" parent="Tree/Leaves55"]
-transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVWest" type="MeshInstance3D" parent="Tree/Leaves55"]
-transform = Transform3D(-5.732056e-15, -1, 4.371139e-08, 1.3113416e-07, -4.371139e-08, -1, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVBottom" type="MeshInstance3D" parent="Tree/Leaves55"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="Leaves56" type="StaticBody3D" parent="Tree"]
+[node name="LeavesBlock50" parent="Tree" instance=ExtResource("6_hxnpf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 4.5, 1)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Tree/Leaves56"]
-shape = SubResource("BoxShape3D_lpqhp")
+[node name="LeavesBlock51" parent="Tree" instance=ExtResource("6_hxnpf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 4.5, 0)
 
-[node name="UVTop" type="MeshInstance3D" parent="Tree/Leaves56"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
+[node name="LeavesBlock52" parent="Tree" instance=ExtResource("6_hxnpf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 4.5, -1)
 
-[node name="UVNorth" type="MeshInstance3D" parent="Tree/Leaves56"]
-transform = Transform3D(-1, 0, -8.742278e-08, 8.742278e-08, -4.371139e-08, -1, -3.821371e-15, -1, 4.371139e-08, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_mubsw")
+[node name="LeavesBlock53" parent="Tree" instance=ExtResource("6_hxnpf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.5, -1)
 
-[node name="UVEast" type="MeshInstance3D" parent="Tree/Leaves56"]
-transform = Transform3D(1.9106853e-15, 1, -4.371139e-08, 4.371138e-08, -4.371139e-08, -1, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
+[node name="LeavesBlock54" parent="Tree" instance=ExtResource("6_hxnpf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 4.5, -1)
 
-[node name="UVSouth" type="MeshInstance3D" parent="Tree/Leaves56"]
-transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_mubsw")
+[node name="LeavesBlock55" parent="Tree" instance=ExtResource("6_hxnpf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 4.5, 0)
 
-[node name="UVWest" type="MeshInstance3D" parent="Tree/Leaves56"]
-transform = Transform3D(-5.732056e-15, -1, 4.371139e-08, 1.3113416e-07, -4.371139e-08, -1, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
+[node name="LeavesBlock56" parent="Tree" instance=ExtResource("6_hxnpf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 4.5, 1)
 
-[node name="UVBottom" type="MeshInstance3D" parent="Tree/Leaves56"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="Leaves57" type="StaticBody3D" parent="Tree"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Tree/Leaves57"]
-shape = SubResource("BoxShape3D_lpqhp")
-
-[node name="UVTop" type="MeshInstance3D" parent="Tree/Leaves57"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVNorth" type="MeshInstance3D" parent="Tree/Leaves57"]
-transform = Transform3D(-1, 0, -8.742278e-08, 8.742278e-08, -4.371139e-08, -1, -3.821371e-15, -1, 4.371139e-08, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVEast" type="MeshInstance3D" parent="Tree/Leaves57"]
-transform = Transform3D(1.9106853e-15, 1, -4.371139e-08, 4.371138e-08, -4.371139e-08, -1, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVSouth" type="MeshInstance3D" parent="Tree/Leaves57"]
-transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVWest" type="MeshInstance3D" parent="Tree/Leaves57"]
-transform = Transform3D(-5.732056e-15, -1, 4.371139e-08, 1.3113416e-07, -4.371139e-08, -1, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVBottom" type="MeshInstance3D" parent="Tree/Leaves57"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="Leaves58" type="StaticBody3D" parent="Tree"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, -1)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Tree/Leaves58"]
-shape = SubResource("BoxShape3D_lpqhp")
-
-[node name="UVTop" type="MeshInstance3D" parent="Tree/Leaves58"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVNorth" type="MeshInstance3D" parent="Tree/Leaves58"]
-transform = Transform3D(-1, 0, -8.742278e-08, 8.742278e-08, -4.371139e-08, -1, -3.821371e-15, -1, 4.371139e-08, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVEast" type="MeshInstance3D" parent="Tree/Leaves58"]
-transform = Transform3D(1.9106853e-15, 1, -4.371139e-08, 4.371138e-08, -4.371139e-08, -1, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVSouth" type="MeshInstance3D" parent="Tree/Leaves58"]
-transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVWest" type="MeshInstance3D" parent="Tree/Leaves58"]
-transform = Transform3D(-5.732056e-15, -1, 4.371139e-08, 1.3113416e-07, -4.371139e-08, -1, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVBottom" type="MeshInstance3D" parent="Tree/Leaves58"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="Leaves59" type="StaticBody3D" parent="Tree"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 5.5, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Tree/Leaves59"]
-shape = SubResource("BoxShape3D_lpqhp")
-
-[node name="UVTop" type="MeshInstance3D" parent="Tree/Leaves59"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVNorth" type="MeshInstance3D" parent="Tree/Leaves59"]
-transform = Transform3D(-1, 0, -8.742278e-08, 8.742278e-08, -4.371139e-08, -1, -3.821371e-15, -1, 4.371139e-08, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVEast" type="MeshInstance3D" parent="Tree/Leaves59"]
-transform = Transform3D(1.9106853e-15, 1, -4.371139e-08, 4.371138e-08, -4.371139e-08, -1, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVSouth" type="MeshInstance3D" parent="Tree/Leaves59"]
-transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVWest" type="MeshInstance3D" parent="Tree/Leaves59"]
-transform = Transform3D(-5.732056e-15, -1, 4.371139e-08, 1.3113416e-07, -4.371139e-08, -1, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVBottom" type="MeshInstance3D" parent="Tree/Leaves59"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="Leaves60" type="StaticBody3D" parent="Tree"]
+[node name="LeavesBlock57" parent="Tree" instance=ExtResource("6_hxnpf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, 1)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Tree/Leaves60"]
-shape = SubResource("BoxShape3D_lpqhp")
+[node name="LeavesBlock58" parent="Tree" instance=ExtResource("6_hxnpf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, 0)
 
-[node name="UVTop" type="MeshInstance3D" parent="Tree/Leaves60"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
+[node name="LeavesBlock59" parent="Tree" instance=ExtResource("6_hxnpf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, -1)
 
-[node name="UVNorth" type="MeshInstance3D" parent="Tree/Leaves60"]
-transform = Transform3D(-1, 0, -8.742278e-08, 8.742278e-08, -4.371139e-08, -1, -3.821371e-15, -1, 4.371139e-08, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVEast" type="MeshInstance3D" parent="Tree/Leaves60"]
-transform = Transform3D(1.9106853e-15, 1, -4.371139e-08, 4.371138e-08, -4.371139e-08, -1, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVSouth" type="MeshInstance3D" parent="Tree/Leaves60"]
-transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVWest" type="MeshInstance3D" parent="Tree/Leaves60"]
-transform = Transform3D(-5.732056e-15, -1, 4.371139e-08, 1.3113416e-07, -4.371139e-08, -1, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVBottom" type="MeshInstance3D" parent="Tree/Leaves60"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="Leaves61" type="StaticBody3D" parent="Tree"]
+[node name="LeavesBlock60" parent="Tree" instance=ExtResource("6_hxnpf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 5.5, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Tree/Leaves61"]
-shape = SubResource("BoxShape3D_lpqhp")
-
-[node name="UVTop" type="MeshInstance3D" parent="Tree/Leaves61"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVNorth" type="MeshInstance3D" parent="Tree/Leaves61"]
-transform = Transform3D(-1, 0, -8.742278e-08, 8.742278e-08, -4.371139e-08, -1, -3.821371e-15, -1, 4.371139e-08, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVEast" type="MeshInstance3D" parent="Tree/Leaves61"]
-transform = Transform3D(1.9106853e-15, 1, -4.371139e-08, 4.371138e-08, -4.371139e-08, -1, -1, 0, -4.371138e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVSouth" type="MeshInstance3D" parent="Tree/Leaves61"]
-transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVWest" type="MeshInstance3D" parent="Tree/Leaves61"]
-transform = Transform3D(-5.732056e-15, -1, 4.371139e-08, 1.3113416e-07, -4.371139e-08, -1, 1, 0, 1.3113416e-07, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_mubsw")
-
-[node name="UVBottom" type="MeshInstance3D" parent="Tree/Leaves61"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("PlaneMesh_mubsw")
+[node name="LeavesBlock61" parent="Tree" instance=ExtResource("6_hxnpf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 5.5, 0)
 
 [node name="Grass1" type="Node3D" parent="."]
 transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, -1.5, 0, -0.6)
@@ -3573,32 +669,6 @@ mesh = SubResource("PlaneMesh_3ypik")
 transform = Transform3D(-0.7071068, 0, -0.7071067, 0, 1, 0, 0.7071067, 0, -0.7071068, 0, 0.25, 0)
 mesh = SubResource("PlaneMesh_3ypik")
 
-[node name="Table" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 0.5, 1.5)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Table"]
-shape = SubResource("BoxShape3D_j3sw6")
-
-[node name="UVTop" type="MeshInstance3D" parent="Table"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_js4mj")
-
-[node name="UVNorth" type="MeshInstance3D" parent="Table"]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_aunsk")
-
-[node name="UVEast" type="MeshInstance3D" parent="Table"]
-transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, 0.5, 0, 2.2351742e-08)
-mesh = SubResource("PlaneMesh_aunsk")
-
-[node name="UVSouth" type="MeshInstance3D" parent="Table"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_aunsk")
-
-[node name="UVWest" type="MeshInstance3D" parent="Table"]
-transform = Transform3D(-2.1855693e-07, 0, -1, 0, 1, 0, 1, 0, -2.1855693e-07, -0.5, 0, 2.2351742e-08)
-mesh = SubResource("PlaneMesh_aunsk")
-
 [node name="FlowerRed" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, 2.5)
 
@@ -3620,3 +690,6 @@ mesh = SubResource("PlaneMesh_7uwy1")
 [node name="Side2" type="MeshInstance3D" parent="FlowersYellow"]
 transform = Transform3D(-0.7071068, 0, -0.7071067, 0, 1, 0, 0.7071067, 0, -0.7071068, 0, 0.25, 0)
 mesh = SubResource("PlaneMesh_7uwy1")
+
+[node name="TableBlock" parent="." instance=ExtResource("11_hxnpf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, 0.5, 1.5)

@@ -1,0 +1,50 @@
+[gd_scene load_steps=8 format=3 uid="uid://3mm4idt2mfsn"]
+
+[ext_resource type="Texture2D" uid="uid://cc7cwu52yupax" path="res://assets/textures/voxel/Tiles/trunk_top.png" id="1_f2ck6"]
+[ext_resource type="Texture2D" uid="uid://jv2lpf5wtonn" path="res://assets/textures/voxel/Tiles/trunk_side.png" id="2_loff6"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_eorhw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fwt4p"]
+albedo_texture = ExtResource("1_f2ck6")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_nxyk3"]
+material = SubResource("StandardMaterial3D_fwt4p")
+size = Vector2(1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m3hx4"]
+albedo_texture = ExtResource("2_loff6")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_5hg5e"]
+material = SubResource("StandardMaterial3D_m3hx4")
+size = Vector2(1, 1)
+orientation = 2
+
+[node name="TrunkBlock" type="StaticBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_eorhw")
+
+[node name="UVTop" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("PlaneMesh_nxyk3")
+
+[node name="UVNorth" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -0.5)
+mesh = SubResource("PlaneMesh_5hg5e")
+
+[node name="UVEast" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, 0.5, 0, 0)
+mesh = SubResource("PlaneMesh_5hg5e")
+
+[node name="UVSouth" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
+mesh = SubResource("PlaneMesh_5hg5e")
+
+[node name="UVWest" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, -0.5, 0, 0)
+mesh = SubResource("PlaneMesh_5hg5e")
+
+[node name="UVBottom" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
+mesh = SubResource("PlaneMesh_nxyk3")

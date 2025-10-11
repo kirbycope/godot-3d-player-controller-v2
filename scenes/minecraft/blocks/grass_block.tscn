@@ -1,0 +1,58 @@
+[gd_scene load_steps=11 format=3 uid="uid://j5twp0ffld88"]
+
+[ext_resource type="Texture2D" uid="uid://dgycy03umala6" path="res://assets/textures/voxel/Tiles/grass_top.png" id="1_nrika"]
+[ext_resource type="Texture2D" uid="uid://cmk0hjqhagddc" path="res://assets/textures/voxel/Tiles/dirt_grass.png" id="2_8fxkl"]
+[ext_resource type="Texture2D" uid="uid://bs1rgj4ryg5pa" path="res://assets/textures/voxel/Tiles/dirt.png" id="2_voj85"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8fxkl"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rtqbc"]
+albedo_texture = ExtResource("1_nrika")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_euloe"]
+material = SubResource("StandardMaterial3D_rtqbc")
+size = Vector2(1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q6u7f"]
+albedo_texture = ExtResource("2_8fxkl")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_efmof"]
+material = SubResource("StandardMaterial3D_q6u7f")
+size = Vector2(1, 1)
+orientation = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lpqhp"]
+albedo_texture = ExtResource("2_voj85")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_f1bt0"]
+material = SubResource("StandardMaterial3D_lpqhp")
+size = Vector2(1, 1)
+
+[node name="GrassBlock" type="StaticBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_8fxkl")
+
+[node name="UVTop" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("PlaneMesh_euloe")
+
+[node name="UVNorth" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -0.5)
+mesh = SubResource("PlaneMesh_efmof")
+
+[node name="UVEast" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, 0.5, 0, 0)
+mesh = SubResource("PlaneMesh_efmof")
+
+[node name="UVSouth" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
+mesh = SubResource("PlaneMesh_efmof")
+
+[node name="UVWest" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, -0.5, 0, 0)
+mesh = SubResource("PlaneMesh_efmof")
+
+[node name="UVBottom" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
+mesh = SubResource("PlaneMesh_f1bt0")
