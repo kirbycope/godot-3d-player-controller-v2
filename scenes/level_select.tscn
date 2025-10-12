@@ -163,20 +163,7 @@ visible = false
 layout_mode = 2
 texture = ExtResource("10_0wyvj")
 
-[node name="EnterLevel" type="Button" parent="Center"]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -94.0
-offset_top = -31.0
-grow_horizontal = 0
-grow_vertical = 0
-text = "Enter Level"
-
-[node name="Label" type="Label" parent="Center"]
+[node name="LevelSelect" type="Label" parent="Center"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -189,6 +176,33 @@ text = "LEVEL SELECT"
 label_settings = SubResource("LabelSettings_64kqf")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Description" type="Label" parent="Center"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -120.0
+offset_top = -79.0
+offset_right = 247.0
+grow_horizontal = 2
+grow_vertical = 0
+autowrap_mode = 2
+
+[node name="EnterLevel" type="Button" parent="Center"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -94.0
+offset_top = -31.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Enter Level"
 
 [node name="Loading" type="ColorRect" parent="."]
 visible = false

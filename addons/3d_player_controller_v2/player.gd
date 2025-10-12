@@ -35,7 +35,8 @@ var speed_current: float = 0.0 ## Current speed
 @onready var animation_player: AnimationPlayer = $Visuals/Godette/AnimationPlayer
 @onready var base_state: BaseState = $States/Base
 @onready var camera_mount = $CameraMount
-@onready var camera = camera_mount.get_node("Camera3D")
+@onready var spring_arm = camera_mount.get_node("SpringArm3D")
+@onready var camera = spring_arm.get_node("Camera3D")
 @onready var controls = $Controls
 @onready var visuals = $Visuals
 

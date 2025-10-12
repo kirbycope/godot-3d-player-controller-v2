@@ -21,6 +21,7 @@ var current_index = -1
 @onready var super_mario_galaxy_preview = preview_container.get_node("SuperMarioGalaxy")
 @onready var super_mario_odyssey_preview = preview_container.get_node("SuperMarioOdyssey")
 @onready var zelda_breath_of_the_wild_preview = preview_container.get_node("ZeldaBreathOfTheWild")
+@onready var description = $Center/Description
 @onready var zelda_links_awakening_preview = preview_container.get_node("ZeldaLinksAwakening")
 @onready var loading = $Loading
 
@@ -51,6 +52,7 @@ func reset_buttons():
 
 
 func _on_beta_pressed():
+	description.text = "Prototype level for testing all the things."
 	hide_previews()
 	beta_preview.visible = true
 	reset_buttons()
@@ -59,6 +61,7 @@ func _on_beta_pressed():
 
 
 func _on_animal_crossing_new_leaf_pressed():
+	description.text = "Move the player side-to-side and rotate the world up-and-down."
 	hide_previews()
 	animal_crossing_new_leaf_preview.visible = true
 	reset_buttons()
@@ -67,6 +70,7 @@ func _on_animal_crossing_new_leaf_pressed():
 
 
 func _on_guild_wars_pressed():
+	description.text = "Third-person perspective. Mouse unlocked. Click-to-move."
 	hide_previews()
 	guild_wars_preview.visible = true
 	reset_buttons()
@@ -75,6 +79,7 @@ func _on_guild_wars_pressed():
 
 
 func _on_minecraft_pressed():
+	description.text = "Multiple perspectives."
 	hide_previews()
 	minecraft_preview.visible = true
 	reset_buttons()
@@ -83,6 +88,7 @@ func _on_minecraft_pressed():
 
 
 func _on_portal_pressed():
+	description.text = "First-person perspective. Interact with environment."
 	hide_previews()
 	portal_preview.visible = true
 	reset_buttons()
@@ -92,6 +98,7 @@ func _on_portal_pressed():
 
 
 func _on_super_mario_galaxy_pressed():
+	description.text = "Third-person perspective. Local (planetary) gravity."
 	hide_previews()
 	super_mario_galaxy_preview.visible = true
 	reset_buttons()
@@ -100,6 +107,7 @@ func _on_super_mario_galaxy_pressed():
 
 
 func _on_super_mario_odyssey_pressed():
+	description.text = "Third-person perspective. 3D platforming."
 	hide_previews()
 	super_mario_odyssey_preview.visible = true
 	reset_buttons()
@@ -109,6 +117,7 @@ func _on_super_mario_odyssey_pressed():
 
 
 func _on_zelda_breath_of_the_wild_pressed():
+	description.text = "Third-person perspective. Climbable surfaces. Stamina."
 	hide_previews()
 	zelda_breath_of_the_wild_preview.visible = true
 	reset_buttons()
@@ -118,6 +127,7 @@ func _on_zelda_breath_of_the_wild_pressed():
 
 
 func _on_zelda_links_awakening_pressed():
+	description.text = "Top-down perspective. Locked camera."
 	hide_previews()
 	zelda_links_awakening_preview.visible = true
 	reset_buttons()

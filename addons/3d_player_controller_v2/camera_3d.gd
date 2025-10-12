@@ -2,8 +2,8 @@ extends Camera3D
 
 @export var look_sensitivity_mouse: float = 0.2 ## Mouse look sensitivity
 
-@onready var camera_mount: Node3D = get_parent()
-@onready var player: CharacterBody3D = get_parent().get_parent()
+@onready var camera_mount: Node3D = get_parent().get_parent()
+@onready var player: CharacterBody3D = get_parent().get_parent().get_parent()
 
 
 ## Rotate camera using the mouse motion.
