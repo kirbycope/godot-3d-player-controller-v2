@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=4 uid="uid://f6xpywa7euq2"]
+[gd_scene load_steps=57 format=4 uid="uid://f6xpywa7euq2"]
 
 [ext_resource type="Script" uid="uid://b7plmenqhwlu4" path="res://addons/3d_player_controller_v2/player.gd" id="1_ifhah"]
 [ext_resource type="Script" uid="uid://lsm3ddt2fwo7" path="res://addons/3d_player_controller_v2/controls.gd" id="2_3ybeu"]
@@ -20,6 +20,9 @@
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ifhah"]
 radius = 0.3
 height = 1.8
+
+[sub_resource type="LabelSettings" id="LabelSettings_uu7fq"]
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ktiga"]
 resource_name = "Godette"
@@ -18555,11 +18558,11 @@ layout_mode = 0
 offset_right = 164.0
 offset_bottom = 23.0
 
-[node name="ShowMouse" type="CheckButton" parent="Debug/Configuration"]
+[node name="Option1" type="CheckButton" parent="Debug/Configuration"]
 layout_mode = 2
-text = "show_mouse"
+text = "option_1"
 
-[node name="Panel" type="Panel" parent="Debug/Configuration/ShowMouse"]
+[node name="Panel" type="Panel" parent="Debug/Configuration/Option1"]
 z_index = -1
 layout_mode = 1
 anchors_preset = 1
@@ -18700,65 +18703,68 @@ offset_bottom = 23.0
 text = "FPS: 0000"
 horizontal_alignment = 1
 
-[node name="Label" type="Label" parent="Debug"]
+[node name="Control" type="Control" parent="Debug"]
+layout_mode = 3
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -98.0
-offset_top = -39.0
-offset_right = 98.0
-offset_bottom = -16.0
+offset_left = -147.0
+offset_top = -50.0
+offset_right = 147.0
 grow_horizontal = 2
 grow_vertical = 0
-text = "Coordinates"
+
+[node name="Panel" type="Panel" parent="Debug/Control"]
+modulate = Color(1, 1, 1, 0.4862745)
+layout_mode = 0
+offset_right = 290.0
+offset_bottom = 50.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Debug/Control"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -25.0
+offset_right = 94.0
+offset_bottom = 25.0
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Debug/Control/VBoxContainer"]
+layout_mode = 2
+text = " Coordinates"
+label_settings = SubResource("LabelSettings_uu7fq")
 horizontal_alignment = 1
 
-[node name="Coordinates" type="RichTextLabel" parent="Debug"]
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -98.0
-offset_top = -23.0
-offset_right = 98.0
-grow_horizontal = 2
-grow_vertical = 0
-pivot_offset = Vector2(98, 11)
+[node name="Label2" type="Label" parent="Debug/Control/VBoxContainer"]
+layout_mode = 2
+text = "Velocity"
+horizontal_alignment = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Debug/Control"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -196.0
+offset_top = -25.0
+offset_bottom = 25.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="Coordinates" type="RichTextLabel" parent="Debug/Control/VBoxContainer2"]
+layout_mode = 2
 bbcode_enabled = true
 text = "[center][color=red]X:[/color]0.000 [color=green]Y:[/color]0.000 [color=blue]Z:[/color]0.000[/center]"
 fit_content = true
 scroll_active = false
 
-[node name="Label2" type="Label" parent="Debug"]
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -354.0
-offset_top = -39.0
-offset_right = -168.0
-offset_bottom = -16.0
-grow_horizontal = 0
-grow_vertical = 0
-text = "Velocity"
-horizontal_alignment = 1
-
-[node name="Velocity" type="RichTextLabel" parent="Debug"]
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -354.0
-offset_top = -23.0
-offset_right = -168.0
-grow_horizontal = 0
-grow_vertical = 0
-pivot_offset = Vector2(93, 11)
+[node name="Velocity" type="RichTextLabel" parent="Debug/Control/VBoxContainer2"]
+layout_mode = 2
 bbcode_enabled = true
 text = "[center][color=red]X:[/color]0.000 [color=green]Y:[/color]0.000 [color=blue]Z:[/color]0.000[/center]"
 fit_content = true
@@ -20409,5 +20415,3 @@ libraries = {
 &"AnimationLibrary_Godot": ExtResource("4_xnki8")
 }
 playback_default_blend_time = 0.2
-
-[connection signal="toggled" from="Debug/Configuration/ShowMouse" to="Debug" method="_on_show_mouse_toggled"]

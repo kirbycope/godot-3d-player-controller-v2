@@ -1,6 +1,9 @@
 extends CanvasLayer
 
-@onready var show_mouse = $Configuration/ShowMouse
+var green_sphere: MeshInstance3D
+var red_sphere: MeshInstance3D
+var yellow_sphere: MeshInstance3D
+
 @onready var is_crawling = $States/IsCrawling
 @onready var is_crouching = $States/IsCrouching
 @onready var is_falling = $States/IsFalling
@@ -12,14 +15,27 @@ extends CanvasLayer
 @onready var is_walking = $States/IsWalking
 @onready var fps = $Performance/FPS
 @onready var player: CharacterBody3D = get_parent()
-@onready var coordinates = $Coordinates
-@onready var velocity = $Velocity
+@onready var coordinates = $Control/VBoxContainer2/Coordinates
+@onready var velocity = $Control/VBoxContainer2/Velocity
+
+
+## Called when there is an input event.
+func _input(event):
+	# Do nothing if not the authority
+	if !is_multiplayer_authority(): return
+
+	# Toggle debug visibility
+	if event.is_action_pressed(player.controls.button_9):
+		visible = !visible
 
 
 ## Called every frame. '_delta' is the elapsed time since the previous frame.
 func _process(_delta):
+	# Do nothing if not the authority
+	if !is_multiplayer_authority(): return
+
+	# Update debug info if visible
 	if visible:
-		show_mouse.button_pressed = Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE
 		is_crawling.button_pressed = player.is_crawling
 		is_crouching.button_pressed = player.is_crouching
 		is_falling.button_pressed = player.is_falling
@@ -34,9 +50,47 @@ func _process(_delta):
 		fps.text = "FPS: %d" % Engine.get_frames_per_second()
 
 
-func _on_show_mouse_toggled(toggled_on):
-	show_mouse.button_pressed = toggled_on
-	if toggled_on:
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	else:
-		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+## Draws a debug sphere at the specified position and with the specified color.
+func draw_debug_sphere(pos: Vector3, color: Color) -> MeshInstance3D:
+	# Create a new mesh instance for the debug sphere
+	var debug_sphere = MeshInstance3D.new()
+	# Add the debug sphere to the scene tree
+	player.get_tree().get_root().add_child(debug_sphere)
+	# Create a visual sphere mesh
+	var sphere_mesh = SphereMesh.new()
+	# Set the radius of the sphere mesh
+	sphere_mesh.radius = 0.1
+	# Set the height of the sphere mesh
+	sphere_mesh.height = 0.2
+	# Add the visual mesh to the debug sphere's "mesh"property
+	debug_sphere.mesh = sphere_mesh
+	# Create a new material for the debug sphere
+	var material = StandardMaterial3D.new()
+	# Set the albedo color of the material to the specified color
+	material.albedo_color = color
+	# Add the material to the debug sphere's "material_override"
+	debug_sphere.material_override = material
+	debug_sphere.global_position = pos
+	# Return the debug sphere instance
+	return debug_sphere
+
+
+## 🟢 Place/Move a green debug sphere at the specified position.
+func draw_green_sphere(pos: Vector3) -> void:
+	if green_sphere:
+		green_sphere.queue_free()
+	green_sphere = draw_debug_sphere(pos, Color.GREEN)
+
+
+## 🔴 Place/Move a red debug sphere at the specified position.
+func draw_red_sphere(pos: Vector3) -> void:
+	if red_sphere:
+		red_sphere.queue_free()
+	red_sphere = draw_debug_sphere(pos, Color.RED)
+
+
+## 🟡 Place/Move a yellow debug sphere at the specified position.
+func draw_yellow_sphere(pos: Vector3) -> void:
+	if yellow_sphere:
+		yellow_sphere.queue_free()
+	yellow_sphere = draw_debug_sphere(pos, Color.YELLOW)
