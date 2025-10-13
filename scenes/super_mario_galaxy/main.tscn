@@ -1,10 +1,11 @@
-[gd_scene load_steps=17 format=3 uid="uid://s28pdmd70xtv"]
+[gd_scene load_steps=18 format=3 uid="uid://s28pdmd70xtv"]
 
 [ext_resource type="Script" uid="uid://bq18sfoeqsn18" path="res://scenes/super_mario_galaxy/main.gd" id="1_nxw74"]
 [ext_resource type="Texture2D" uid="uid://cjqg0eprmq4vj" path="res://assets/textures/nasa/starmap_g8k.jpg" id="2_chkq5"]
 [ext_resource type="Script" uid="uid://fp0a2rkcoitr" path="res://scenes/super_mario_galaxy/planet.gd" id="3_gfmp0"]
 [ext_resource type="Texture2D" uid="uid://cbj1ys7p3s00k" path="res://assets/textures/nasa/lroc_color_poles_1k.jpg" id="4_mdthr"]
 [ext_resource type="PackedScene" uid="uid://f6xpywa7euq2" path="res://addons/3d_player_controller_v2/player.tscn" id="5_guwhr"]
+[ext_resource type="PackedScene" uid="uid://dkot3p2xn8i5q" path="res://scenes/super_mario_galaxy/collectable.tscn" id="6_2nbnl"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_74lek"]
 panorama = ExtResource("2_chkq5")
@@ -86,6 +87,9 @@ shape = SubResource("SphereShape3D_syuhu")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Kickball"]
 mesh = SubResource("SphereMesh_2nbnl")
+
+[node name="Collectable" parent="." instance=ExtResource("6_2nbnl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 16, -4)
 
 [connection signal="body_entered" from="Planet/Area3D" to="Planet" method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="Planet/Area3D" to="Planet" method="_on_area_3d_body_exited"]

@@ -4,6 +4,7 @@ var green_sphere: MeshInstance3D
 var red_sphere: MeshInstance3D
 var yellow_sphere: MeshInstance3D
 
+@onready var enable_navigation = $Configuration/EnableNavigation
 @onready var is_crawling = $States/IsCrawling
 @onready var is_crouching = $States/IsCrouching
 @onready var is_falling = $States/IsFalling
@@ -36,6 +37,7 @@ func _process(_delta):
 
 	# Update debug info if visible
 	if visible:
+		enable_navigation.button_pressed = player.enable_navigation
 		is_crawling.button_pressed = player.is_crawling
 		is_crouching.button_pressed = player.is_crouching
 		is_falling.button_pressed = player.is_falling
@@ -94,3 +96,7 @@ func draw_yellow_sphere(pos: Vector3) -> void:
 	if yellow_sphere:
 		yellow_sphere.queue_free()
 	yellow_sphere = draw_debug_sphere(pos, Color.YELLOW)
+
+
+func _on_enable_navigation_toggled(toggled_on):
+	player.enable_navigation = toggled_on

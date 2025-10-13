@@ -1,4 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://dkot3p2xn8i5q"]
+[gd_scene load_steps=6 format=3 uid="uid://dkot3p2xn8i5q"]
+
+[ext_resource type="Script" uid="uid://b0g4sil827vyu" path="res://scenes/super_mario_galaxy/collectable.gd" id="1_jsdfa"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_jsdfa"]
+bounce = 0.5
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_idpyv"]
 size = Vector3(0.1, 0.1, 0.1)
@@ -6,7 +11,15 @@ size = Vector3(0.1, 0.1, 0.1)
 [sub_resource type="BoxMesh" id="BoxMesh_jsdfa"]
 size = Vector3(0.1, 0.1, 0.1)
 
-[node name="Collectable" type="StaticBody3D"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_jsdfa"]
+radius = 0.15
+
+[node name="Collectable" type="RigidBody3D"]
+physics_material_override = SubResource("PhysicsMaterial_jsdfa")
+script = ExtResource("1_jsdfa")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+volume_db = -10.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 0, 0, 1, 0, 0, 0)
@@ -23,3 +36,10 @@ shape = SubResource("BoxShape3D_idpyv")
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.70710677, -0.70710677, 0, 0.70710677, 0.70710677, 0, 0, 0)
 mesh = SubResource("BoxMesh_jsdfa")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_jsdfa")
+
+[connection signal="mouse_entered" from="Area3D" to="." method="_on_area_3d_mouse_entered"]

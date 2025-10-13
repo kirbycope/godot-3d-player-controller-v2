@@ -5,6 +5,7 @@ enum Perspective {
 	FIRST_PERSON
 }
 
+@export var enable_navigation: bool = false ## Click-to-navigate
 @export var jump_velocity: float = 4.5 ## Jump velocity
 @export var perspective: Perspective = Perspective.THIRD_PERSON ## Camera perspective
 @export var speed_climbing: float = 0.5 ## Speed while climbing
@@ -58,15 +59,17 @@ func _input(event):
 	if event.is_action_pressed(controls.button_0) and is_on_floor():
 		base_state.transition_state(current_state, States.State.JUMPING)
 
-	# Check for mouse click
-	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) \
-	and Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE:
-		# Find out where to click
-		var from = camera.project_ray_origin(event.position)
-		var to = from + camera.project_ray_normal(event.position) * 10000
-		var cursor_position = Plane(up_direction, transform.origin.y).intersects_ray(from, to)
-		if cursor_position:
-			debug.draw_red_sphere(cursor_position)
+	# Check if navigation is enabled
+	if enable_navigation:
+		# Check for mouse click
+		if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) \
+		and Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE:
+			# Find out where to click
+			var from = camera.project_ray_origin(event.position)
+			var to = from + camera.project_ray_normal(event.position) * 10000
+			var cursor_position = Plane(up_direction, transform.origin.y).intersects_ray(from, to)
+			if cursor_position:
+				debug.draw_red_sphere(cursor_position)
 
 	# Check for mouse motion
 	if event is InputEventMouseMotion:
