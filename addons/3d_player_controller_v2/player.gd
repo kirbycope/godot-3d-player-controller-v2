@@ -62,6 +62,11 @@ func _input(event):
 		if Input.get_mouse_mode() in [Input.MOUSE_MODE_CAPTURED, Input.MOUSE_MODE_HIDDEN]:
 			# Rotate camera based on mouse movement
 			camera.camera_rotate_by_mouse(event)
+		# Check if the mouse is visible and the right mouse button is pressed
+		if Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE \
+		and Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
+			# Rotate camera based on mouse movement
+			camera.camera_rotate_by_mouse(event)
 
 
 ## Called on each idle frame, prior to rendering, and after physics ticks have been processed.

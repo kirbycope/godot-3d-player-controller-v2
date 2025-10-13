@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-
+@onready var show_mouse = $Configuration/ShowMouse
 @onready var is_crawling = $States/IsCrawling
 @onready var is_crouching = $States/IsCrouching
 @onready var is_falling = $States/IsFalling
@@ -10,9 +10,6 @@ extends CanvasLayer
 @onready var is_sprinting = $States/IsSprinting
 @onready var is_standing = $States/IsStanding
 @onready var is_walking = $States/IsWalking
-@onready var cpu = $Performance/CPU
-@onready var gpu = $Performance/GPU
-@onready var ram = $Performance/RAM
 @onready var fps = $Performance/FPS
 @onready var player: CharacterBody3D = get_parent()
 @onready var coordinates = $Coordinates
@@ -22,6 +19,7 @@ extends CanvasLayer
 ## Called every frame. '_delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	if visible:
+		show_mouse.button_pressed = Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE
 		is_crawling.button_pressed = player.is_crawling
 		is_crouching.button_pressed = player.is_crouching
 		is_falling.button_pressed = player.is_falling
@@ -33,7 +31,12 @@ func _process(_delta):
 		is_walking.button_pressed = player.is_walking
 		coordinates.text = "[center][color=red]X:[/color]%.1f [color=green]Y:[/color]%.1f [color=blue]Z:[/color]%.1f[/center]" % [player.global_position.x, player.global_position.y, player.global_position.z]
 		velocity.text = "[center][color=red]X:[/color]%.1f [color=green]Y:[/color]%.1f [color=blue]Z:[/color]%.1f[/center]" % [player.velocity.x, player.velocity.y, player.velocity.z]
-		cpu.text = "CPU: %.1f%%" % (Performance.get_monitor(Performance.TIME_PROCESS) * 100.0)
-		gpu.text = "GPU: %.1f%%" % (Performance.get_monitor(Performance.TIME_PHYSICS_PROCESS) * 100.0)
-		ram.text = "RAM: %.2f MB" % (OS.get_static_memory_usage() / 1024.0 / 1024.0)
 		fps.text = "FPS: %d" % Engine.get_frames_per_second()
+
+
+func _on_show_mouse_toggled(toggled_on):
+	show_mouse.button_pressed = toggled_on
+	if toggled_on:
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	else:
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)

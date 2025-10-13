@@ -14,3 +14,8 @@ config/name="Godot 3D Player Controller v2"
 run/main_scene="uid://7bmrbudeq40y"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720

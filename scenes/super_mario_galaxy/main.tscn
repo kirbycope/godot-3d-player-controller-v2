@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://s28pdmd70xtv"]
+[gd_scene load_steps=17 format=3 uid="uid://s28pdmd70xtv"]
 
 [ext_resource type="Script" uid="uid://bq18sfoeqsn18" path="res://scenes/super_mario_galaxy/main.gd" id="1_nxw74"]
 [ext_resource type="Texture2D" uid="uid://cjqg0eprmq4vj" path="res://assets/textures/nasa/starmap_g8k.jpg" id="2_chkq5"]
@@ -34,6 +34,20 @@ material = SubResource("StandardMaterial3D_bl13t")
 radius = 14.0
 height = 28.0
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_syuhu"]
+bounce = 0.5
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_syuhu"]
+radius = 0.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_syuhu"]
+albedo_color = Color(0.65892774, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_2nbnl"]
+material = SubResource("StandardMaterial3D_syuhu")
+radius = 0.2
+height = 0.4
+
 [node name="test" type="Node3D"]
 script = ExtResource("1_nxw74")
 
@@ -51,6 +65,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14, 0)
 script = ExtResource("3_gfmp0")
 
 [node name="Area3D" type="Area3D" parent="Planet"]
+gravity_space_override = 3
+gravity_point = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Planet/Area3D"]
 shape = SubResource("SphereShape3D_ij1v8")
@@ -60,6 +76,16 @@ shape = SubResource("SphereShape3D_errlg")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Planet"]
 mesh = SubResource("SphereMesh_bl13t")
+
+[node name="Kickball" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15.182488, -1.7)
+physics_material_override = SubResource("PhysicsMaterial_syuhu")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Kickball"]
+shape = SubResource("SphereShape3D_syuhu")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Kickball"]
+mesh = SubResource("SphereMesh_2nbnl")
 
 [connection signal="body_entered" from="Planet/Area3D" to="Planet" method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="Planet/Area3D" to="Planet" method="_on_area_3d_body_exited"]
