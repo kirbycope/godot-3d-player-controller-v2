@@ -11,10 +11,11 @@ func _process(delta):
 	if !is_multiplayer_authority(): return
 
 	# Ⓨ/[Ctrl] _pressed_ -> Start "crouching"
-	if Input.is_action_pressed(player.controls.button_3) \
-	and player.is_on_floor():
-		transition_state(NODE_STATE, States.State.CROUCHING)
-		return
+	if player.enable_crouching:
+		if Input.is_action_pressed(player.controls.button_3) \
+		and player.is_on_floor():
+			transition_state(NODE_STATE, States.State.CROUCHING)
+			return
 
 	# Play the animation
 	play_animation()

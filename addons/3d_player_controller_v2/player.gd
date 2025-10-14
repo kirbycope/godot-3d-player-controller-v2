@@ -1,35 +1,51 @@
 extends CharacterBody3D
 
-enum Perspective {
-	THIRD_PERSON,
-	FIRST_PERSON
-}
-
-@export var enable_navigation: bool = false ## Click-to-navigate
-@export var jump_velocity: float = 4.5 ## Jump velocity
-@export var perspective: Perspective = Perspective.THIRD_PERSON ## Camera perspective
+@export_group("CONFIG")
+@export var enable_climbing: bool = false ## Enable climbing
+@export var enable_crawling: bool = true ## Enable crawling
+@export var enable_crouching: bool = true ## Enable crouching
+@export var enable_double_jumping: bool = false ## Enable double jumping
+@export var enable_flying: bool = false ## Enable flying
+@export var enable_jumping: bool = true ## Enable jumping
+@export var enable_kicking: bool = false ## Enable kicking
+@export var enable_navigation: bool = false ## Enable navigation (pathfinding)
+@export var enable_punching: bool = false ## Enable punching
+@export var enable_rolling: bool = false ## Enable rolling
+@export var enable_sprinting: bool = true ## Enable sprinting
+@export var enable_swimming: bool = true ## Enable swimming
+@export var lock_movement_x: bool = false ## Lock movement along the X axis
+@export var lock_movement_y: bool = false ## Lock movement along the Y axis
+@export var lock_movement_z: bool = false ## Lock movement along the Z axis
+@export_group("SPEED")
 @export var speed_climbing: float = 0.5 ## Speed while climbing
 @export var speed_crawling: float = 0.75 ## Speed while crawling
 @export var speed_flying: float = 5.0 ## Speed while flying
 @export var speed_flying_fast: float = 10.0 ## Speed while flying fast
 @export var speed_hanging: float = 0.25 ## Speed while hanging (shimmying)
+@export var speed_jumping: float = 4.5 ## Speed while jumping
 @export var speed_rolling: float = 2.0 ## Speed while rolling
 @export var speed_running: float = 3.5 ## Speed while running
 @export var speed_sprinting: float = 5.0 ## Speed while sprinting
 @export var speed_swimming: float = 3.0 ## Speed while swimming
 @export var speed_walking: float = 1.0 ## Speed while walking
 
-var _is_rotating_camera: bool = false
 var current_state: States.State ## The current state of the player.
 var input_direction: Vector2 = Vector2.ZERO ## The direction of the player input (UP/DOWN, LEFT/RIGHT).
+var is_climbing: bool = false ## Is the player climbing?
 var is_crawling: bool = false ## Is the player crawling?
 var is_crouching: bool = false ## Is the player crouching?
+var is_double_jumping: bool = false ## Is the player double jumping?
 var is_falling: bool = false ## Is the player falling?
+var is_flying: bool = false ## Is the player flying?
 var is_jumping: bool = false ## Is the player jumping?
+var is_kicking: bool = false ## Is the player kicking?
 var is_navigating: bool = false ## Is the player navigating?
+var is_punching: bool = false ## Is the player punching?
+var is_rolling: bool = false ## Is the player rolling?
 var is_running: bool = false ## Is the player running?
 var is_standing: bool = false ## Is the player standing?
 var is_sprinting: bool = false ## Is the player sprinting?
+var is_swimming: bool = false ## Is the player swimming?
 var is_walking: bool = false ## Is the player walking?
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity") ## Default gravity value
 var gravitating_towards ## The Node the player is being pulled towards (if any)
@@ -58,12 +74,12 @@ func _input(event):
 	if !is_multiplayer_authority(): return
 
 	# Ⓐ/[Space] _pressed_ and jumping is enabled -> Start "jumping"
-	if event.is_action_pressed(controls.button_0) and is_on_floor():
-		base_state.transition_state(current_state, States.State.JUMPING)
+	if enable_jumping:
+		if event.is_action_pressed(controls.button_0) and is_on_floor():
+			base_state.transition_state(current_state, States.State.JUMPING)
 
-	# Check if navigation is enabled
+	# [Left Mouse Button] _pressed_ -> Start "navigating"
 	if enable_navigation:
-		# [Left Mouse Button] _pressed_ -> Start "navigating"
 		if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) \
 		and Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE:
 			# Find out where to click
@@ -77,54 +93,13 @@ func _input(event):
 					# Start "navigating"
 					base_state.transition_state(current_state, States.State.NAVIGATING)
 
-		# Check if currently navigating
-		if is_navigating:
-			# Check for player input
-			if event.is_action_pressed("move_up") \
-			or event.is_action_pressed("move_down") \
-			or event.is_action_pressed("move_left") \
-			or event.is_action_pressed("move_right"):
-				# Set target position to the player's current position (ending navigation)
-				navigation_agent_3d.target_position = global_position
 
-	# Check for mouse motion
-	if event is InputEventMouseMotion:
-		# Check if the mouse is captured
-		if Input.get_mouse_mode() in [Input.MOUSE_MODE_CAPTURED, Input.MOUSE_MODE_HIDDEN] \
-		and not _is_rotating_camera:
-			# Rotate camera based on mouse movement
-			camera.camera_rotate_by_mouse(event)
-
-		# Check if the mouse is visible and the right mouse button is pressed
-		if Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE \
-		and Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
-			# Flag the camera as rotating
-			_is_rotating_camera = true
-			# Hide the mouse
-			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-			# Rotate camera based on mouse movement
-			camera.camera_rotate_by_mouse(event)
-
-		# Check if the mouse is captured and the camera is rotating
-		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED and _is_rotating_camera:
-			# Rotate camera based on mouse movement
-			camera.camera_rotate_by_mouse(event)
-
-	# Check if the right mouse button is released while rotating the camera
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT \
-	and event.is_pressed() == false and _is_rotating_camera:
-		# Flag the camera as not rotating
-		_is_rotating_camera = false
-		# Show the mouse
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-
-
-## Called on each idle frame, prior to rendering, and after physics ticks have been processed.
+## Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
 
-	# Rotate the player to align with the new up direction
+	# Rotate the player to align with the current "up direction"
 	var target_basis = Basis()
 	target_basis.y = up_direction
 	target_basis.x = - transform.basis.z.cross(up_direction).normalized()
@@ -140,13 +115,6 @@ func _physics_process(delta):
 
 	# Calculate movement if not navigating
 	if not is_navigating:
-		# Get the input vector by specifying four actions for the positive and negative X and Y axes
-		input_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
-
-		# Set the player's movement speed based on the input magnitude
-		if speed_current == 0.0 and input_direction != Vector2.ZERO:
-			speed_current = input_direction.length() * speed_running
-
 		# Determine the gravity direction and the new up_direction
 		var gravity_direction: Vector3
 		var new_up: Vector3
@@ -161,6 +129,13 @@ func _physics_process(delta):
 			gravity_direction = - Vector3.UP
 			new_up = Vector3.UP
 			gravity_accel = - Vector3.UP * gravity
+
+		# Get the input vector by specifying four actions for the positive and negative X and Y axes
+		input_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+
+		# Set the player's movement speed based on the input magnitude
+		if speed_current == 0.0 and input_direction != Vector2.ZERO:
+			speed_current = input_direction.length() * speed_running
 
 		# Convert the 2D input into a 3D world-space direction and project onto the tangent plane (orthogonal to new_up)
 		var raw_dir: Vector3 = transform.basis * Vector3(input_direction.x, 0, input_direction.y)

@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://cuv5tyqdnexh7"]
+[gd_scene load_steps=13 format=3 uid="uid://cuv5tyqdnexh7"]
 
 [ext_resource type="Script" uid="uid://bej28j4s4snv4" path="res://scenes/animal_crossing_new_leaf/main.gd" id="1_snl0e"]
 [ext_resource type="Shader" uid="uid://ee3nunu0omht" path="res://scenes/animal_crossing_new_leaf/sky.gdshader" id="2_5orwh"]
 [ext_resource type="PackedScene" uid="uid://f6xpywa7euq2" path="res://addons/3d_player_controller_v2/player.tscn" id="3_5orwh"]
 [ext_resource type="Texture2D" uid="uid://rhk6o1flmsl8" path="res://scenes/animal_crossing_new_leaf/tex_cloud.png" id="3_hgwfd"]
 [ext_resource type="Texture2D" uid="uid://dgycy03umala6" path="res://assets/textures/voxel/Tiles/grass_top.png" id="5_hgwfd"]
+[ext_resource type="PackedScene" uid="uid://ct4lxo11yu7sv" path="res://scenes/guild_wars/tree.tscn" id="6_ieuxx"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hgwfd"]
 shader = ExtResource("2_5orwh")
@@ -63,3 +64,6 @@ shape = SubResource("CylinderShape3D_heivl")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
 transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("CylinderMesh_r5aou")
+
+[node name="Tree" parent="Ground" instance=ExtResource("6_ieuxx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 11, 0)

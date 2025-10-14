@@ -16,9 +16,10 @@ func _process(delta):
 		return
 
 	# Check if the player is moving -> Start "crawling"
-	if player.input_direction != Vector2.ZERO:
-		transition_state(NODE_STATE, States.State.CRAWLING)
-		return
+	if player.enable_crawling:
+		if player.input_direction != Vector2.ZERO:
+			transition_state(NODE_STATE, States.State.CRAWLING)
+			return
 
 	# Play the animation
 	play_animation()

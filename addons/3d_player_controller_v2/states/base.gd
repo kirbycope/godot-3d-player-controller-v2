@@ -11,11 +11,12 @@ func _input(event):
 	if !is_multiplayer_authority(): return
 
 	# Ⓑ/[shift] _pressed_ -> Start "sprinting"
-	if event.is_action_pressed(player.controls.button_1) \
-	and not player.is_sprinting \
-	and player.is_on_floor():
-		transition_state(player.current_state, States.State.SPRINTING)
-		return
+	if player.enable_sprinting:
+		if event.is_action_pressed(player.controls.button_1) \
+		and not player.is_sprinting \
+		and player.is_on_floor():
+			transition_state(player.current_state, States.State.SPRINTING)
+			return
 
 
 ## Called once on each physics tick, and allows Nodes to synchronize their logic with physics ticks.

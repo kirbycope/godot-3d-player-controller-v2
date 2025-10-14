@@ -9,8 +9,8 @@ outline_color = Color(0, 0, 0, 1)
 script = ExtResource("1_k3k7b")
 
 [node name="Configuration" type="VBoxContainer" parent="."]
-offset_left = 1090.0
-offset_right = 1280.0
+offset_left = 1062.0
+offset_right = 1282.0
 offset_bottom = 720.0
 
 [node name="Label" type="Label" parent="Configuration"]
@@ -21,8 +21,120 @@ horizontal_alignment = 1
 [node name="Panel" type="Panel" parent="Configuration/Label"]
 z_index = -1
 layout_mode = 0
-offset_right = 190.0
+offset_right = 218.0
 offset_bottom = 23.0
+
+[node name="EnableClimbing" type="CheckButton" parent="Configuration"]
+layout_mode = 2
+text = "EnableClimbing"
+
+[node name="Panel" type="Panel" parent="Configuration/EnableClimbing"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -222.0
+offset_right = -2.0
+offset_bottom = 31.0
+grow_horizontal = 0
+mouse_filter = 1
+
+[node name="EnableCrawling" type="CheckButton" parent="Configuration"]
+layout_mode = 2
+text = "EnableCrawling"
+
+[node name="Panel" type="Panel" parent="Configuration/EnableCrawling"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -222.0
+offset_right = -2.0
+offset_bottom = 31.0
+grow_horizontal = 0
+mouse_filter = 1
+
+[node name="EnableCrouching" type="CheckButton" parent="Configuration"]
+layout_mode = 2
+text = "EnableCrouching"
+
+[node name="Panel" type="Panel" parent="Configuration/EnableCrouching"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -222.0
+offset_right = -2.0
+offset_bottom = 31.0
+grow_horizontal = 0
+mouse_filter = 1
+
+[node name="EnableDoubleJumping" type="CheckButton" parent="Configuration"]
+layout_mode = 2
+text = "EnableDoubleJumping"
+
+[node name="Panel" type="Panel" parent="Configuration/EnableDoubleJumping"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -222.0
+offset_right = -2.0
+offset_bottom = 31.0
+grow_horizontal = 0
+mouse_filter = 1
+
+[node name="EnableFlying" type="CheckButton" parent="Configuration"]
+layout_mode = 2
+text = "EnableFlying"
+
+[node name="Panel" type="Panel" parent="Configuration/EnableFlying"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -222.0
+offset_right = -2.0
+offset_bottom = 31.0
+grow_horizontal = 0
+mouse_filter = 1
+
+[node name="EnableJumping" type="CheckButton" parent="Configuration"]
+layout_mode = 2
+text = "EnableJumping"
+
+[node name="Panel" type="Panel" parent="Configuration/EnableJumping"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -222.0
+offset_right = -2.0
+offset_bottom = 31.0
+grow_horizontal = 0
+mouse_filter = 1
+
+[node name="EnableKicking" type="CheckButton" parent="Configuration"]
+layout_mode = 2
+text = "EnableKicking"
+
+[node name="Panel" type="Panel" parent="Configuration/EnableKicking"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -222.0
+offset_right = -2.0
+offset_bottom = 31.0
+grow_horizontal = 0
+mouse_filter = 1
 
 [node name="EnableNavigation" type="CheckButton" parent="Configuration"]
 layout_mode = 2
@@ -34,7 +146,88 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -190.0
+offset_left = -222.0
+offset_right = -2.0
+offset_bottom = 31.0
+grow_horizontal = 0
+mouse_filter = 1
+
+[node name="EnablePunching" type="CheckButton" parent="Configuration"]
+layout_mode = 2
+text = "EnablePunching"
+
+[node name="Panel" type="Panel" parent="Configuration/EnablePunching"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -222.0
+offset_right = -2.0
+offset_bottom = 31.0
+grow_horizontal = 0
+mouse_filter = 1
+
+[node name="EnableRolling" type="CheckButton" parent="Configuration"]
+layout_mode = 2
+text = "EnableRolling"
+
+[node name="Panel" type="Panel" parent="Configuration/EnableRolling"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -222.0
+offset_right = -2.0
+offset_bottom = 31.0
+grow_horizontal = 0
+mouse_filter = 1
+
+[node name="EnableSprinting" type="CheckButton" parent="Configuration"]
+layout_mode = 2
+text = "EnableSprinting"
+
+[node name="Panel" type="Panel" parent="Configuration/EnableSprinting"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -222.0
+offset_right = -2.0
+offset_bottom = 31.0
+grow_horizontal = 0
+mouse_filter = 1
+
+[node name="EnableSwimming" type="CheckButton" parent="Configuration"]
+layout_mode = 2
+text = "Enable Swimming"
+
+[node name="Panel" type="Panel" parent="Configuration/EnableSwimming"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -222.0
+offset_right = -2.0
+offset_bottom = 31.0
+grow_horizontal = 0
+mouse_filter = 1
+
+[node name="LockCamera" type="CheckButton" parent="Configuration"]
+layout_mode = 2
+text = "LockCamera"
+
+[node name="Panel" type="Panel" parent="Configuration/LockCamera"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -222.0
+offset_right = -2.0
 offset_bottom = 31.0
 grow_horizontal = 0
 mouse_filter = 1
@@ -247,4 +440,16 @@ text = "[center][color=red]X:[/color]0.000 [color=green]Y:[/color]0.000 [color=b
 fit_content = true
 scroll_active = false
 
+[connection signal="toggled" from="Configuration/EnableClimbing" to="." method="_on_enable_climbing_toggled"]
+[connection signal="toggled" from="Configuration/EnableCrawling" to="." method="_on_enable_crawling_toggled"]
+[connection signal="toggled" from="Configuration/EnableCrouching" to="." method="_on_enable_crouching_toggled"]
+[connection signal="toggled" from="Configuration/EnableDoubleJumping" to="." method="_on_enable_double_jumping_toggled"]
+[connection signal="toggled" from="Configuration/EnableFlying" to="." method="_on_enable_flying_toggled"]
+[connection signal="toggled" from="Configuration/EnableJumping" to="." method="_on_enable_jumping_toggled"]
+[connection signal="toggled" from="Configuration/EnableKicking" to="." method="_on_enable_kicking_toggled"]
 [connection signal="toggled" from="Configuration/EnableNavigation" to="." method="_on_enable_navigation_toggled"]
+[connection signal="toggled" from="Configuration/EnablePunching" to="." method="_on_enable_punching_toggled"]
+[connection signal="toggled" from="Configuration/EnableRolling" to="." method="_on_enable_rolling_toggled"]
+[connection signal="toggled" from="Configuration/EnableSprinting" to="." method="_on_enable_sprinting_toggled"]
+[connection signal="toggled" from="Configuration/EnableSwimming" to="." method="_on_enable_swimming_toggled"]
+[connection signal="toggled" from="Configuration/LockCamera" to="." method="_on_lock_camera_toggled"]

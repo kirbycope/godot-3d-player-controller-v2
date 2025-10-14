@@ -15,6 +15,11 @@ func _ready():
 	spawn_collectables()
 
 
+## Called when the node is about to leave the SceneTree.
+func _exit_tree():
+	Input.set_custom_mouse_cursor(null, Input.CURSOR_ARROW)
+
+
 ## Set the cursor to a custom texture.
 func change_cursor():
 	var resized_texture = ImageTexture.new()

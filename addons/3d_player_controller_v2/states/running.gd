@@ -32,7 +32,7 @@ func _process(delta):
 ## Plays the appropriate animation based on player state.
 func play_animation() -> void:
 	# Check if in first person and moving backwards
-	var play_backwards = (player.perspective == player.Perspective.FIRST_PERSON) and Input.is_action_pressed(player.controls.move_down)
+	var play_backwards = (player.camera.perspective == player.camera.Perspective.FIRST_PERSON) and Input.is_action_pressed(player.controls.move_down)
 
 	# Check if the animation player is not already playing the appropriate animation
 	if player.animation_player.current_animation != ANIMATION_RUNNING:

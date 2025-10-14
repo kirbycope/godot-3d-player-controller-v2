@@ -13,6 +13,20 @@ func _ready():
 	navigation_agent_3d.navigation_finished.connect(_on_navigation_finished)
 
 
+## Called when there is an input event.
+func _input(event):
+	# Do nothing if not the authority
+	if !is_multiplayer_authority(): return
+
+	# Check for player input
+	if event.is_action_pressed("move_up") \
+	or event.is_action_pressed("move_down") \
+	or event.is_action_pressed("move_left") \
+	or event.is_action_pressed("move_right"):
+		# Set target position to the player's current position (ending navigation)
+		navigation_agent_3d.target_position = player.global_position
+
+
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	# Do nothing if not the authority

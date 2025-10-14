@@ -4,7 +4,19 @@ var green_sphere: MeshInstance3D
 var red_sphere: MeshInstance3D
 var yellow_sphere: MeshInstance3D
 
+@onready var enable_climbing = $Configuration/EnableClimbing
+@onready var enable_crawling = $Configuration/EnableCrawling
+@onready var enable_crouching = $Configuration/EnableCrouching
+@onready var enable_double_jumping = $Configuration/EnableDoubleJumping
+@onready var enable_flying = $Configuration/EnableFlying
+@onready var enable_jumping = $Configuration/EnableJumping
+@onready var enable_kicking = $Configuration/EnableKicking
 @onready var enable_navigation = $Configuration/EnableNavigation
+@onready var enable_punching = $Configuration/EnablePunching
+@onready var enable_rolling = $Configuration/EnableRolling
+@onready var enable_sprinting = $Configuration/EnableSprinting
+@onready var enable_swimming = $Configuration/EnableSwimming
+@onready var lock_camera = $Configuration/LockCamera
 @onready var is_crawling = $States/IsCrawling
 @onready var is_crouching = $States/IsCrouching
 @onready var is_falling = $States/IsFalling
@@ -38,7 +50,19 @@ func _process(_delta):
 
 	# Update debug info if visible
 	if visible:
+		enable_climbing.button_pressed = player.enable_climbing
+		enable_crawling.button_pressed = player.enable_crawling
+		enable_crouching.button_pressed = player.enable_crouching
+		enable_double_jumping.button_pressed = player.enable_double_jumping
+		enable_flying.button_pressed = player.enable_flying
+		enable_jumping.button_pressed = player.enable_jumping
+		enable_kicking.button_pressed = player.enable_kicking
 		enable_navigation.button_pressed = player.enable_navigation
+		enable_punching.button_pressed = player.enable_punching
+		enable_rolling.button_pressed = player.enable_rolling
+		enable_sprinting.button_pressed = player.enable_sprinting
+		enable_swimming.button_pressed = player.enable_swimming
+		lock_camera.button_pressed = player.camera.lock_camera
 		is_crawling.button_pressed = player.is_crawling
 		is_crouching.button_pressed = player.is_crouching
 		is_falling.button_pressed = player.is_falling
@@ -100,5 +124,53 @@ func draw_yellow_sphere(pos: Vector3) -> void:
 	yellow_sphere = draw_debug_sphere(pos, Color.YELLOW)
 
 
+func _on_enable_climbing_toggled(toggled_on):
+	player.enable_climbing = toggled_on
+
+
+func _on_enable_crawling_toggled(toggled_on):
+	player.enable_crawling = toggled_on
+
+
+func _on_enable_crouching_toggled(toggled_on):
+	player.enable_crouching = toggled_on
+
+
+func _on_enable_double_jumping_toggled(toggled_on):
+	player.enable_double_jumping = toggled_on
+
+
+func _on_enable_flying_toggled(toggled_on):
+	player.enable_flying = toggled_on
+
+
+func _on_enable_jumping_toggled(toggled_on):
+	player.enable_jumping = toggled_on
+
+
+func _on_enable_kicking_toggled(toggled_on):
+	player.enable_kicking = toggled_on
+
+
 func _on_enable_navigation_toggled(toggled_on):
 	player.enable_navigation = toggled_on
+
+
+func _on_enable_punching_toggled(toggled_on):
+	player.enable_punching = toggled_on
+
+
+func _on_enable_rolling_toggled(toggled_on):
+	player.enable_rolling = toggled_on
+
+
+func _on_enable_sprinting_toggled(toggled_on):
+	player.enable_sprinting = toggled_on
+
+
+func _on_enable_swimming_toggled(toggled_on):
+	player.enable_swimming = toggled_on
+
+
+func _on_lock_camera_toggled(toggled_on):
+	player.camera.lock_camera = toggled_on
