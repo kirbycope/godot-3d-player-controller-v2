@@ -26,6 +26,7 @@ var is_crawling: bool = false ## Is the player crawling?
 var is_crouching: bool = false ## Is the player crouching?
 var is_falling: bool = false ## Is the player falling?
 var is_jumping: bool = false ## Is the player jumping?
+var is_navigating: bool = false ## Is the player navigating?
 var is_running: bool = false ## Is the player running?
 var is_standing: bool = false ## Is the player standing?
 var is_sprinting: bool = false ## Is the player sprinting?
@@ -40,7 +41,8 @@ var speed_current: float = 0.0 ## Current speed
 @onready var spring_arm = camera_mount.get_node("SpringArm3D")
 @onready var camera = spring_arm.get_node("Camera3D")
 @onready var controls = $Controls
-@onready var debug = $Debug
+@onready var debug = $Debug/Control/Panel
+@onready var navigation_agent_3d: NavigationAgent3D = $NavigationAgent3D
 @onready var visuals = $Visuals
 
 
@@ -61,7 +63,7 @@ func _input(event):
 
 	# Check if navigation is enabled
 	if enable_navigation:
-		# Check for mouse click
+		# [Left Mouse Button] _pressed_ -> Start "navigating"
 		if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) \
 		and Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE:
 			# Find out where to click
@@ -69,7 +71,21 @@ func _input(event):
 			var to = from + camera.project_ray_normal(event.position) * 10000
 			var cursor_position = Plane(up_direction, transform.origin.y).intersects_ray(from, to)
 			if cursor_position:
-				debug.draw_red_sphere(cursor_position)
+				#debug.draw_red_sphere(cursor_position) ## DEBUGGING
+				navigation_agent_3d.target_position = cursor_position
+				if not is_navigating:
+					# Start "navigating"
+					base_state.transition_state(current_state, States.State.NAVIGATING)
+
+		# Check if currently navigating
+		if is_navigating:
+			# Check for player input
+			if event.is_action_pressed("move_up") \
+			or event.is_action_pressed("move_down") \
+			or event.is_action_pressed("move_left") \
+			or event.is_action_pressed("move_right"):
+				# Set target position to the player's current position (ending navigation)
+				navigation_agent_3d.target_position = global_position
 
 	# Check for mouse motion
 	if event is InputEventMouseMotion:
@@ -122,45 +138,47 @@ func _physics_process(delta):
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
 
-	# Get the input vector by specifying four actions for the positive and negative X and Y axes
-	input_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	# Calculate movement if not navigating
+	if not is_navigating:
+		# Get the input vector by specifying four actions for the positive and negative X and Y axes
+		input_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 
-	# Set the player's movement speed based on the input magnitude
-	if speed_current == 0.0 and input_direction != Vector2.ZERO:
-		speed_current = input_direction.length() * speed_running
+		# Set the player's movement speed based on the input magnitude
+		if speed_current == 0.0 and input_direction != Vector2.ZERO:
+			speed_current = input_direction.length() * speed_running
 
-	# Determine the gravity direction and the new up_direction
-	var gravity_direction: Vector3
-	var new_up: Vector3
-	var gravity_accel: Vector3
-	# Check if using local gravity (e.g. planet)
-	if gravitating_towards:
-		gravity_direction = (gravitating_towards.global_position - global_position).normalized()
-		new_up = - gravity_direction
-		gravity_accel = gravity_direction * gravity
-	# Must be using global gravity
-	else:
-		gravity_direction = - Vector3.UP
-		new_up = Vector3.UP
-		gravity_accel = - Vector3.UP * gravity
+		# Determine the gravity direction and the new up_direction
+		var gravity_direction: Vector3
+		var new_up: Vector3
+		var gravity_accel: Vector3
+		# Check if using local gravity (e.g. planet)
+		if gravitating_towards:
+			gravity_direction = (gravitating_towards.global_position - global_position).normalized()
+			new_up = - gravity_direction
+			gravity_accel = gravity_direction * gravity
+		# Must be using global gravity
+		else:
+			gravity_direction = - Vector3.UP
+			new_up = Vector3.UP
+			gravity_accel = - Vector3.UP * gravity
 
-	# Convert the 2D input into a 3D world-space direction and project onto the tangent plane (orthogonal to new_up)
-	var raw_dir: Vector3 = transform.basis * Vector3(input_direction.x, 0, input_direction.y)
-	var lateral_dir: Vector3 = raw_dir - new_up * raw_dir.dot(new_up)
-	lateral_dir = lateral_dir.normalized()
-	if lateral_dir:
-		# Compute desired tangential (horizontal) velocity on the surface
-		var tangential_velocity: Vector3 = lateral_dir * speed_current
-		# Preserve current vertical speed along the NEW up direction
-		var vertical_speed: float = velocity.dot(new_up)
-		velocity = tangential_velocity + new_up * vertical_speed
-		# Update the visuals to look in the direction based on player input
-		visuals.look_at(position + lateral_dir, new_up)
+		# Convert the 2D input into a 3D world-space direction and project onto the tangent plane (orthogonal to new_up)
+		var raw_dir: Vector3 = transform.basis * Vector3(input_direction.x, 0, input_direction.y)
+		var lateral_dir: Vector3 = raw_dir - new_up * raw_dir.dot(new_up)
+		lateral_dir = lateral_dir.normalized()
+		if lateral_dir:
+			# Compute desired tangential (horizontal) velocity on the surface
+			var tangential_velocity: Vector3 = lateral_dir * speed_current
+			# Preserve current vertical speed along the NEW up direction
+			var vertical_speed: float = velocity.dot(new_up)
+			velocity = tangential_velocity + new_up * vertical_speed
+			# Update the visuals to look in the direction based on player input
+			visuals.look_at(position + lateral_dir, new_up)
 
-	# Apply gravity for this tick
-	velocity += gravity_accel * delta
-	# Commit the new up direction after applying gravity
-	up_direction = new_up
+		# Apply gravity for this tick
+		velocity += gravity_accel * delta
+		# Commit the new up direction after applying gravity
+		up_direction = new_up
 
 	# Move the body based on velocity
 	move_and_slide()

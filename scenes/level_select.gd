@@ -165,4 +165,4 @@ func _on_enter_level_pressed():
 		elif current_index == 8:
 			var zla_scene = load("res://scenes/zelda_links_awakening/main.tscn").instantiate()
 			get_tree().root.add_child(zla_scene)
-		get_tree().current_scene.queue_free()
+		queue_free()

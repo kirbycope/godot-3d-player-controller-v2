@@ -5,11 +5,12 @@ const COLLECTABLE = preload("uid://dkot3p2xn8i5q")
 const MOUSE_CURSOR_ARROW = preload("uid://dmw8j7h0b8bri")
 
 @onready var collectable = $Collectable
-"res://scenes/super_mario_galaxy/collectable.tscn"
+@onready var player = $Player
 
 
 ## Called when the node enters the scene tree for the first time.
 func _ready():
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	change_cursor()
 	spawn_collectables()
 

@@ -10,6 +10,7 @@ var yellow_sphere: MeshInstance3D
 @onready var is_falling = $States/IsFalling
 @onready var is_jumping = $States/IsJumping
 @onready var is_on_floor = $States/IsOnFloor
+@onready var is_navigating = $States/IsNavigating
 @onready var is_running = $States/IsRunning
 @onready var is_sprinting = $States/IsSprinting
 @onready var is_standing = $States/IsStanding
@@ -26,7 +27,7 @@ func _input(event):
 	if !is_multiplayer_authority(): return
 
 	# Toggle debug visibility
-	if event.is_action_pressed(player.controls.button_9):
+	if event is InputEventKey and event.pressed and event.keycode == KEY_F3:
 		visible = !visible
 
 
@@ -43,6 +44,7 @@ func _process(_delta):
 		is_falling.button_pressed = player.is_falling
 		is_jumping.button_pressed = player.is_jumping
 		is_on_floor.button_pressed = player.is_on_floor()
+		is_navigating.button_pressed = player.is_navigating
 		is_running.button_pressed = player.is_running
 		is_sprinting.button_pressed = player.is_sprinting
 		is_standing.button_pressed = player.is_standing

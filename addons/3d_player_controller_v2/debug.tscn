@@ -1,0 +1,250 @@
+[gd_scene load_steps=3 format=3 uid="uid://dvpsvwsy5wedp"]
+
+[ext_resource type="Script" uid="uid://b5k6lxvw3d3xa" path="res://addons/3d_player_controller_v2/debug.gd" id="1_k3k7b"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_3bd2f"]
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Debug" type="CanvasLayer"]
+script = ExtResource("1_k3k7b")
+
+[node name="Configuration" type="VBoxContainer" parent="."]
+offset_left = 1090.0
+offset_right = 1280.0
+offset_bottom = 720.0
+
+[node name="Label" type="Label" parent="Configuration"]
+layout_mode = 2
+text = "CONFIG"
+horizontal_alignment = 1
+
+[node name="Panel" type="Panel" parent="Configuration/Label"]
+z_index = -1
+layout_mode = 0
+offset_right = 190.0
+offset_bottom = 23.0
+
+[node name="EnableNavigation" type="CheckButton" parent="Configuration"]
+layout_mode = 2
+text = "EnableNavigation"
+
+[node name="Panel" type="Panel" parent="Configuration/EnableNavigation"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -190.0
+offset_bottom = 31.0
+grow_horizontal = 0
+mouse_filter = 1
+
+[node name="States" type="VBoxContainer" parent="."]
+offset_right = 128.0
+offset_bottom = 720.0
+
+[node name="Label" type="Label" parent="States"]
+layout_mode = 2
+text = "STATES"
+horizontal_alignment = 1
+
+[node name="Panel" type="Panel" parent="States/Label"]
+z_index = -1
+layout_mode = 0
+offset_right = 128.0
+offset_bottom = 23.0
+
+[node name="IsCrawling" type="CheckBox" parent="States"]
+layout_mode = 2
+disabled = true
+text = "IsCrawling"
+
+[node name="Panel" type="Panel" parent="States/IsCrawling"]
+z_index = -1
+layout_mode = 0
+offset_right = 128.0
+offset_bottom = 31.0
+
+[node name="IsCrouching" type="CheckBox" parent="States"]
+layout_mode = 2
+disabled = true
+text = "IsCrouching"
+
+[node name="Panel" type="Panel" parent="States/IsCrouching"]
+z_index = -1
+layout_mode = 0
+offset_right = 128.0
+offset_bottom = 31.0
+
+[node name="IsFalling" type="CheckBox" parent="States"]
+layout_mode = 2
+disabled = true
+text = "IsFalling"
+
+[node name="Panel" type="Panel" parent="States/IsFalling"]
+z_index = -1
+layout_mode = 0
+offset_right = 128.0
+offset_bottom = 31.0
+
+[node name="IsJumping" type="CheckBox" parent="States"]
+layout_mode = 2
+disabled = true
+text = "IsJumping"
+
+[node name="Panel" type="Panel" parent="States/IsJumping"]
+z_index = -1
+layout_mode = 0
+offset_right = 128.0
+offset_bottom = 31.0
+
+[node name="IsNavigating" type="CheckBox" parent="States"]
+layout_mode = 2
+disabled = true
+text = "IsNavigating"
+
+[node name="Panel" type="Panel" parent="States/IsNavigating"]
+z_index = -1
+layout_mode = 0
+offset_right = 128.0
+offset_bottom = 31.0
+
+[node name="IsOnFloor" type="CheckBox" parent="States"]
+layout_mode = 2
+disabled = true
+text = "IsOnFloor"
+
+[node name="Panel" type="Panel" parent="States/IsOnFloor"]
+z_index = -1
+layout_mode = 0
+offset_right = 128.0
+offset_bottom = 31.0
+
+[node name="IsRunning" type="CheckBox" parent="States"]
+layout_mode = 2
+disabled = true
+text = "IsRunning"
+
+[node name="Panel" type="Panel" parent="States/IsRunning"]
+z_index = -1
+layout_mode = 0
+offset_right = 128.0
+offset_bottom = 31.0
+
+[node name="IsSprinting" type="CheckBox" parent="States"]
+layout_mode = 2
+disabled = true
+text = "IsSprinting"
+
+[node name="Panel" type="Panel" parent="States/IsSprinting"]
+z_index = -1
+layout_mode = 0
+offset_right = 128.0
+offset_bottom = 31.0
+
+[node name="IsStanding" type="CheckBox" parent="States"]
+layout_mode = 2
+disabled = true
+text = "IsStanding"
+
+[node name="Panel" type="Panel" parent="States/IsStanding"]
+z_index = -1
+layout_mode = 0
+offset_right = 128.0
+offset_bottom = 31.0
+
+[node name="IsWalking" type="CheckBox" parent="States"]
+layout_mode = 2
+disabled = true
+text = "IsWalking"
+
+[node name="Panel" type="Panel" parent="States/IsWalking"]
+z_index = -1
+layout_mode = 0
+offset_right = 128.0
+offset_bottom = 31.0
+
+[node name="Performance" type="Panel" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -54.0
+offset_right = 54.0
+offset_bottom = 23.0
+grow_horizontal = 2
+
+[node name="FPS" type="Label" parent="Performance"]
+layout_mode = 0
+offset_right = 108.0
+offset_bottom = 23.0
+text = "FPS: 0000"
+horizontal_alignment = 1
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -147.0
+offset_top = -50.0
+offset_right = 147.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Panel" type="Panel" parent="Control"]
+modulate = Color(1, 1, 1, 0.4862745)
+layout_mode = 0
+offset_right = 290.0
+offset_bottom = 50.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -25.0
+offset_right = 94.0
+offset_bottom = 25.0
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Control/VBoxContainer"]
+layout_mode = 2
+text = " Coordinates"
+label_settings = SubResource("LabelSettings_3bd2f")
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="Control/VBoxContainer"]
+layout_mode = 2
+text = "Velocity"
+horizontal_alignment = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -196.0
+offset_top = -25.0
+offset_bottom = 25.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="Coordinates" type="RichTextLabel" parent="Control/VBoxContainer2"]
+layout_mode = 2
+bbcode_enabled = true
+text = "[center][color=red]X:[/color]0.000 [color=green]Y:[/color]0.000 [color=blue]Z:[/color]0.000[/center]"
+fit_content = true
+scroll_active = false
+
+[node name="Velocity" type="RichTextLabel" parent="Control/VBoxContainer2"]
+layout_mode = 2
+bbcode_enabled = true
+text = "[center][color=red]X:[/color]0.000 [color=green]Y:[/color]0.000 [color=blue]Z:[/color]0.000[/center]"
+fit_content = true
+scroll_active = false
+
+[connection signal="toggled" from="Configuration/EnableNavigation" to="." method="_on_enable_navigation_toggled"]

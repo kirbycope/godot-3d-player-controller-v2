@@ -1,0 +1,55 @@
+[gd_scene load_steps=2 format=3 uid="uid://2p8pyabd2bmo"]
+
+[ext_resource type="Script" uid="uid://dc3a38bp7370j" path="res://addons/3d_player_controller_v2/pause.gd" id="1_mnl7l"]
+
+[node name="Pause" type="CanvasLayer"]
+script = ExtResource("1_mnl7l")
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = -81.5
+offset_right = 50.0
+offset_bottom = 90.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -35.0
+offset_right = 35.0
+offset_bottom = 163.0
+grow_horizontal = 2
+
+[node name="PAUSE" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "PAUSE"
+horizontal_alignment = 1
+
+[node name="Resume" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "Resume"
+
+[node name="Settings" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "Settings"
+
+[node name="Title" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "Title"
+
+[node name="Exit" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "Exit"
+
+[connection signal="pressed" from="Panel/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/Title" to="." method="_on_title_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/Exit" to="." method="_on_exit_pressed"]

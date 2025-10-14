@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cxky6pmyip083"]
+
+[ext_resource type="Script" uid="uid://lsm3ddt2fwo7" path="res://addons/3d_player_controller_v2/controls.gd" id="1_bjg8p"]
+
+[node name="Controls" type="CanvasLayer"]
+script = ExtResource("1_bjg8p")
