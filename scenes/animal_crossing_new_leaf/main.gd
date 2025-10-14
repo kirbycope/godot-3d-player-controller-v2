@@ -1,5 +1,6 @@
 extends Node3D
 
+@onready var ground: StaticBody3D = $Ground
 @onready var player = $Player
 
 
@@ -21,4 +22,18 @@ func _ready() -> void:
 	player.enable_swimming = false
 	player.lock_movement_x = false
 	player.lock_movement_y = false
-	player.lock_movement_z = true ## Don't allow the player to move forward and backward (using velocity)
+	player.lock_movement_z = true
+
+
+## Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	# Rotate the world
+	if Input.is_action_pressed(player.controls.move_up):
+		ground.rotate_x(deg_to_rad(10) * delta)
+	elif Input.is_action_pressed(player.controls.move_down):
+		ground.rotate_x(deg_to_rad(-10) * delta)
+
+	# Play running animation
+	if player.animation_player.current_animation != "":
+		player.animation_player.play("")
+	

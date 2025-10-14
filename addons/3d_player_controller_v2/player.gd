@@ -155,5 +155,13 @@ func _physics_process(delta):
 		# Commit the new up direction after applying gravity
 		up_direction = new_up
 
+	# Apply movement locks
+	if lock_movement_x:
+		velocity.x = 0.0
+	if lock_movement_y:
+		velocity.y = 0.0
+	if lock_movement_z:
+		velocity.z = 0.0
+
 	# Move the body based on velocity
 	move_and_slide()

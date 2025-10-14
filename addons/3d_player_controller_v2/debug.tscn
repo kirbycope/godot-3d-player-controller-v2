@@ -232,6 +232,54 @@ offset_bottom = 31.0
 grow_horizontal = 0
 mouse_filter = 1
 
+[node name="LockMovementX" type="CheckButton" parent="Configuration"]
+layout_mode = 2
+text = "LockMovementX"
+
+[node name="Panel" type="Panel" parent="Configuration/LockMovementX"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -222.0
+offset_right = -2.0
+offset_bottom = 31.0
+grow_horizontal = 0
+mouse_filter = 1
+
+[node name="LockMovementY" type="CheckButton" parent="Configuration"]
+layout_mode = 2
+text = "LockMovementY"
+
+[node name="Panel" type="Panel" parent="Configuration/LockMovementY"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -222.0
+offset_right = -2.0
+offset_bottom = 31.0
+grow_horizontal = 0
+mouse_filter = 1
+
+[node name="LockMovementZ" type="CheckButton" parent="Configuration"]
+layout_mode = 2
+text = "LockMovementZ"
+
+[node name="Panel" type="Panel" parent="Configuration/LockMovementZ"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -222.0
+offset_right = -2.0
+offset_bottom = 31.0
+grow_horizontal = 0
+mouse_filter = 1
+
 [node name="States" type="VBoxContainer" parent="."]
 offset_right = 128.0
 offset_bottom = 720.0
@@ -453,3 +501,6 @@ scroll_active = false
 [connection signal="toggled" from="Configuration/EnableSprinting" to="." method="_on_enable_sprinting_toggled"]
 [connection signal="toggled" from="Configuration/EnableSwimming" to="." method="_on_enable_swimming_toggled"]
 [connection signal="toggled" from="Configuration/LockCamera" to="." method="_on_lock_camera_toggled"]
+[connection signal="toggled" from="Configuration/LockMovementX" to="." method="_on_lock_movement_x_toggled"]
+[connection signal="toggled" from="Configuration/LockMovementY" to="." method="_on_lock_movement_y_toggled"]
+[connection signal="toggled" from="Configuration/LockMovementZ" to="." method="_on_lock_movement_z_toggled"]

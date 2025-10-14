@@ -174,3 +174,15 @@ func _on_enable_swimming_toggled(toggled_on):
 
 func _on_lock_camera_toggled(toggled_on):
 	player.camera.lock_camera = toggled_on
+
+
+func _on_lock_movement_x_toggled(toggled_on: bool) -> void:
+	player.lock_movement_x = toggled_on
+
+
+func _on_lock_movement_y_toggled(toggled_on: bool) -> void:
+	player.lock_movement_y = toggled_on
+
+
+func _on_lock_movement_z_toggled(toggled_on: bool) -> void:
+	player.lock_movement_z = toggled_on
