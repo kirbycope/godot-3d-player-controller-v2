@@ -47,6 +47,14 @@ func start() -> void:
 	# Set the player's speed
 	player.speed_current = 0.0
 
+	# Set the player's velocity
+	player.velocity = Vector3.ZERO
+
+	# [First Person] Adjust the camera position
+	if player.camera.perspective == player.camera.Perspective.FIRST_PERSON \
+	and player.camera.enable_head_bobbing == false:
+		player.camera.camera_spring_arm.position.y = -0.35
+
 
 ## Stop "crouching".
 func stop() -> void:
@@ -55,3 +63,6 @@ func stop() -> void:
 
 	# Flag the player as not "crouching"
 	player.is_crouching = false
+
+	# Set the camera position
+	player.camera.camera_spring_arm.position.y = 0.0

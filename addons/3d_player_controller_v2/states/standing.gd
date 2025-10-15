@@ -33,12 +33,16 @@ func play_animation() -> void:
 func start() -> void:
 	# Enable _this_ state node
 	process_mode = PROCESS_MODE_INHERIT
+
 	# Set the player's new state
 	player.current_state = States.State.STANDING
+
 	# Flag the player as "standing"
 	player.is_standing = true
+
 	# Set the player's speed
 	player.speed_current = 0.0
+
 	# Set the player's velocity
 	player.velocity = Vector3.ZERO
 
@@ -47,5 +51,6 @@ func start() -> void:
 func stop() -> void:
 	# Disable _this_ state node
 	process_mode = PROCESS_MODE_DISABLED
+
 	# Flag the player as not "standing"
 	player.is_standing = false

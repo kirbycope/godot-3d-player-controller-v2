@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://cxxdj5na2rtoh"]
+[gd_scene load_steps=47 format=3 uid="uid://cxxdj5na2rtoh"]
 
 [ext_resource type="Script" uid="uid://bh5l4p1dv74om" path="res://scenes/portal/main.gd" id="1_i4qb0"]
 [ext_resource type="PackedScene" uid="uid://f6xpywa7euq2" path="res://addons/3d_player_controller_v2/player.tscn" id="2_r7k4e"]
@@ -103,6 +103,17 @@ emission_energy_multiplier = 1.5
 material = SubResource("StandardMaterial3D_dxoj2")
 radius = 0.1
 height = 0.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ktnmx"]
+transparency = 1
+cull_mode = 2
+albedo_color = Color(0.8039216, 0.75686276, 0.6901961, 0.06666667)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_m85k7"]
+material = SubResource("StandardMaterial3D_ktnmx")
+top_radius = 0.2
+bottom_radius = 1.5
+height = 3.5
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eyc4d"]
 albedo_color = Color(0.5958281, 0.5958281, 0.5958281, 1)
@@ -287,11 +298,16 @@ material = SubResource("StandardMaterial3D_t3s5l")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Spotlight"]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0.1, 0)
+light_color = Color(1, 1, 0.7529412, 1)
 shadow_enabled = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Spotlight"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
 mesh = SubResource("SphereMesh_6sefq")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Spotlight"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.75, 0)
+mesh = SubResource("CylinderMesh_m85k7")
 
 [node name="PedestalButton" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -2)

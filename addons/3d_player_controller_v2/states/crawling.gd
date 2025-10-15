@@ -10,6 +10,12 @@ func _process(delta):
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
 
+	# Check if there is no input (but still crouching) -> Start "crouching"
+	if player.input_direction == Vector2.ZERO \
+	and Input.is_action_pressed(player.controls.button_3):
+		transition_state(NODE_STATE, States.State.CROUCHING)
+		return
+
 	# Ⓨ/[Ctrl] _just_released_ -> Start "standing"
 	if Input.is_action_just_released(player.controls.button_3):
 		transition_state(NODE_STATE, States.State.STANDING)
@@ -47,6 +53,11 @@ func start() -> void:
 	# Set the player's speed
 	player.speed_current = player.speed_crawling
 
+	# [First Person] Adjust the camera position
+	if player.camera.perspective == player.camera.Perspective.FIRST_PERSON \
+	and player.camera.enable_head_bobbing == false:
+		player.camera.camera_spring_arm.position.y = -0.35
+
 
 ## Stop "crawling".
 func stop() -> void:
@@ -55,3 +66,6 @@ func stop() -> void:
 
 	# Flag the player as not "crawling"
 	player.is_crawling = false
+
+	# Set the camera position
+	player.camera.camera_spring_arm.position.y = 0.0

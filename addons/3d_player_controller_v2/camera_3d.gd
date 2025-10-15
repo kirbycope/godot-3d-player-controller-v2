@@ -5,6 +5,9 @@ enum Perspective {
 	FIRST_PERSON
 }
 
+const BONE_PATH: String = "Godette/Rig/GeneralSkeleton/BoneAttachment3D"
+
+@export var enable_head_bobbing: bool = false ## Enable head bobbing effect
 @export var lock_camera: bool = false ## Lock camera position and location
 @export var lock_perspective: bool = false ## Lock camera perspective
 @export var look_sensitivity_mouse: float = 0.2 ## Mouse look sensitivity
@@ -12,10 +15,10 @@ enum Perspective {
 var is_rotating_camera: bool = false
 var perspective: Perspective = Perspective.THIRD_PERSON ## Camera perspective
 
-@onready var spring_arm = get_parent()
+@onready var camera_spring_arm = get_parent()
 @onready var camera_mount: Node3D = get_parent().get_parent()
 @onready var player: CharacterBody3D = get_parent().get_parent().get_parent()
-
+@onready var item_spring_arm = camera_mount.get_node("ItemSpringArm")
 
 
 ## Called when there is an input event.
@@ -87,9 +90,20 @@ func toggle_perspective() -> void:
 	if perspective == Perspective.THIRD_PERSON:
 		perspective = Perspective.FIRST_PERSON
 		player.visuals.rotation.y = 0.0
-		spring_arm.spring_length = 0.0
-		spring_arm.position.y = 0.0
+		if enable_head_bobbing:
+			reparent(player.visuals.get_node(BONE_PATH))
+		else:
+			camera_spring_arm.spring_length = 0.0
+			camera_spring_arm.position.x = 0.0
+			camera_spring_arm.position.y = 0.0
+			camera_spring_arm.position.z = -0.4
+			item_spring_arm.position.y = -0.25
 	else:
 		perspective = Perspective.THIRD_PERSON
-		spring_arm.spring_length = 1.5
-		spring_arm.position.y = 0.7
+		reparent(camera_spring_arm)
+		camera_spring_arm.spring_length = 1.5
+		camera_spring_arm.position.x = 0.0
+		camera_spring_arm.position.y = 0.7
+		camera_spring_arm.position.z = 0.0
+		camera_spring_arm.rotation.y = 0.0
+		item_spring_arm.position.y = 0.0

@@ -55,7 +55,7 @@ var virtual_velocity: Vector3 = Vector3.ZERO ## The player's velocity is movemen
 @onready var animation_player: AnimationPlayer = $Visuals/Godette/AnimationPlayer
 @onready var base_state: BaseState = $States/Base
 @onready var camera_mount = $CameraMount
-@onready var spring_arm = camera_mount.get_node("SpringArm3D")
+@onready var spring_arm = camera_mount.get_node("CameraSpringArm")
 @onready var camera = spring_arm.get_node("Camera3D")
 @onready var controls = $Controls
 @onready var debug = $Debug/Control/Panel
@@ -148,8 +148,9 @@ func _physics_process(delta):
 			# Preserve current vertical speed along the NEW up direction
 			var vertical_speed: float = velocity.dot(new_up)
 			velocity = tangential_velocity + new_up * vertical_speed
-			# Update the visuals to look in the direction based on player input
-			visuals.look_at(position + lateral_dir, new_up)
+			if camera.perspective == camera.Perspective.THIRD_PERSON:
+				# Update the visuals to look in the direction based on player input
+				visuals.look_at(position + lateral_dir, new_up)
 
 		# Apply gravity for this tick
 		velocity += gravity_accel * delta
