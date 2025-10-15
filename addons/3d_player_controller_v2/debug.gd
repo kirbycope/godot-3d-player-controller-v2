@@ -17,6 +17,9 @@ var yellow_sphere: MeshInstance3D
 @onready var enable_sprinting = $Configuration/EnableSprinting
 @onready var enable_swimming = $Configuration/EnableSwimming
 @onready var lock_camera = $Configuration/LockCamera
+@onready var lock_movement_x = $Configuration/LockMovementX
+@onready var lock_movement_y = $Configuration/LockMovementY
+@onready var lock_movement_z = $Configuration/LockMovementZ
 @onready var is_crawling = $States/IsCrawling
 @onready var is_crouching = $States/IsCrouching
 @onready var is_falling = $States/IsFalling
@@ -31,6 +34,7 @@ var yellow_sphere: MeshInstance3D
 @onready var player: CharacterBody3D = get_parent()
 @onready var coordinates = $Control/VBoxContainer2/Coordinates
 @onready var velocity = $Control/VBoxContainer2/Velocity
+@onready var velocity_virtual = $Control/VBoxContainer2/VelocityVirtual
 
 
 ## Called when there is an input event.
@@ -63,6 +67,9 @@ func _process(_delta):
 		enable_sprinting.button_pressed = player.enable_sprinting
 		enable_swimming.button_pressed = player.enable_swimming
 		lock_camera.button_pressed = player.camera.lock_camera
+		lock_movement_x.button_pressed = player.lock_movement_x
+		lock_movement_y.button_pressed = player.lock_movement_y
+		lock_movement_z.button_pressed = player.lock_movement_z
 		is_crawling.button_pressed = player.is_crawling
 		is_crouching.button_pressed = player.is_crouching
 		is_falling.button_pressed = player.is_falling
@@ -75,6 +82,7 @@ func _process(_delta):
 		is_walking.button_pressed = player.is_walking
 		coordinates.text = "[center][color=red]X:[/color]%.1f [color=green]Y:[/color]%.1f [color=blue]Z:[/color]%.1f[/center]" % [player.global_position.x, player.global_position.y, player.global_position.z]
 		velocity.text = "[center][color=red]X:[/color]%.1f [color=green]Y:[/color]%.1f [color=blue]Z:[/color]%.1f[/center]" % [player.velocity.x, player.velocity.y, player.velocity.z]
+		velocity_virtual.text = "[center][color=red]X:[/color]%.1f [color=green]Y:[/color]%.1f [color=blue]Z:[/color]%.1f[/center]" % [player.virtual_velocity.x, player.virtual_velocity.y, player.virtual_velocity.z]
 		fps.text = "FPS: %d" % Engine.get_frames_per_second()
 
 

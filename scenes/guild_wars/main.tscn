@@ -1,15 +1,11 @@
-[gd_scene load_steps=40 format=3 uid="uid://ow6nqynfpmes"]
+[gd_scene load_steps=22 format=3 uid="uid://ow6nqynfpmes"]
 
 [ext_resource type="Script" uid="uid://bprj02u3jovlr" path="res://scenes/guild_wars/main.gd" id="1_fbclb"]
 [ext_resource type="Texture2D" uid="uid://c1ax5lk3860xr" path="res://assets/textures/prototype_textures/Green/texture_09.png" id="2_q5tvl"]
 [ext_resource type="PackedScene" uid="uid://f6xpywa7euq2" path="res://addons/3d_player_controller_v2/player.tscn" id="2_t1hqd"]
-[ext_resource type="Texture2D" uid="uid://c6b8rw2ujf1dh" path="res://assets/textures/prototype_textures/Orange/texture_12.png" id="3_kwllt"]
-[ext_resource type="Texture2D" uid="uid://bby7iv2q22e00" path="res://assets/textures/prototype_textures/Orange/texture_13.png" id="5_sjks4"]
-[ext_resource type="Texture2D" uid="uid://ujug62dald5c" path="res://assets/textures/prototype_textures/Orange/texture_11.png" id="6_cosvu"]
-[ext_resource type="Texture2D" uid="uid://neq3gr8ev0km" path="res://assets/textures/prototype_textures/Orange/texture_01.png" id="7_f0kvr"]
-[ext_resource type="Texture2D" uid="uid://b550hsb281ivj" path="res://assets/textures/prototype_textures/Red/texture_02.png" id="8_3dsqd"]
+[ext_resource type="PackedScene" uid="uid://byfteqoslg6sb" path="res://scenes/guild_wars/house.tscn" id="4_i48ph"]
+[ext_resource type="PackedScene" uid="uid://bcehl7lcpdma7" path="res://scenes/guild_wars/bush.tscn" id="7_i48ph"]
 [ext_resource type="PackedScene" uid="uid://ct4lxo11yu7sv" path="res://scenes/guild_wars/tree.tscn" id="9_f0kvr"]
-[ext_resource type="Texture2D" uid="uid://biofuj8err0ch" path="res://assets/textures/prototype_textures/Green/texture_08.png" id="9_sjks4"]
 [ext_resource type="Texture2D" uid="uid://c3ui4jf402ksm" path="res://assets/textures/prototype_textures/Light/texture_06.png" id="10_cosvu"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_t1hqd"]
@@ -42,48 +38,6 @@ uv1_triplanar = true
 material = SubResource("StandardMaterial3D_cosvu")
 size = Vector3(64, 0.1, 64)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q5tvl"]
-albedo_texture = ExtResource("3_kwllt")
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_kwllt"]
-material = SubResource("StandardMaterial3D_q5tvl")
-size = Vector2(1, 1)
-orientation = 2
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n528h"]
-albedo_texture = ExtResource("5_sjks4")
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_3uwue"]
-material = SubResource("StandardMaterial3D_n528h")
-size = Vector2(1, 1)
-orientation = 2
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_epvb7"]
-albedo_texture = ExtResource("6_cosvu")
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_cear3"]
-material = SubResource("StandardMaterial3D_epvb7")
-size = Vector2(1, 1)
-orientation = 2
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_30hrq"]
-albedo_texture = ExtResource("7_f0kvr")
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_euuvl"]
-material = SubResource("StandardMaterial3D_30hrq")
-size = Vector2(1, 1)
-orientation = 2
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_38pxu"]
-albedo_texture = ExtResource("8_3dsqd")
-uv1_triplanar = true
-
-[sub_resource type="PrismMesh" id="PrismMesh_v8trs"]
-material = SubResource("StandardMaterial3D_38pxu")
-size = Vector3(1, 0.5, 1)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_tqigw"]
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_cosvu"]
 size = Vector3(0.4, 1.2, 0.4)
 
@@ -109,20 +63,6 @@ size = Vector3(5, 1, 0.2)
 material = SubResource("StandardMaterial3D_3dsqd")
 size = Vector3(5, 1, 0.2)
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_cosvu"]
-radius = 0.33
-height = 1.45
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_68w6x"]
-albedo_color = Color(0.49803922, 0.49803922, 0.49803922, 1)
-albedo_texture = ExtResource("9_sjks4")
-uv1_triplanar = true
-
-[sub_resource type="SphereMesh" id="SphereMesh_f0kvr"]
-material = SubResource("StandardMaterial3D_68w6x")
-radius = 0.33
-height = 0.66
-
 [node name="Main" type="Node3D"]
 script = ExtResource("1_fbclb")
 
@@ -147,39 +87,17 @@ shape = SubResource("BoxShape3D_c7t7p")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Ground"]
 mesh = SubResource("BoxMesh_i48ph")
 
-[node name="House" type="StaticBody3D" parent="NavigationRegion3D"]
-transform = Transform3D(-1.3113416e-07, 0, 3, 0, 3, 0, -3, 0, -1.3113416e-07, -5, 1.5, 0)
-
-[node name="DoorPanel" type="MeshInstance3D" parent="NavigationRegion3D/House"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
-mesh = SubResource("PlaneMesh_kwllt")
-
-[node name="WindowPanel" type="MeshInstance3D" parent="NavigationRegion3D/House"]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, -0.5)
-mesh = SubResource("PlaneMesh_3uwue")
-
-[node name="StairsPanel" type="MeshInstance3D" parent="NavigationRegion3D/House"]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -0.5)
-visible = false
-mesh = SubResource("PlaneMesh_cear3")
-
-[node name="WallPanel" type="MeshInstance3D" parent="NavigationRegion3D/House"]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -0.5, 0, 0)
-mesh = SubResource("PlaneMesh_euuvl")
-
-[node name="WallPanel2" type="MeshInstance3D" parent="NavigationRegion3D/House"]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.5, 0, 0)
-mesh = SubResource("PlaneMesh_euuvl")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/House"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
-mesh = SubResource("PrismMesh_v8trs")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/House"]
-shape = SubResource("BoxShape3D_tqigw")
-
 [node name="Tree" parent="NavigationRegion3D" instance=ExtResource("9_f0kvr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -4)
+
+[node name="Bush" parent="NavigationRegion3D" instance=ExtResource("7_i48ph")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -2.35)
+
+[node name="House" parent="NavigationRegion3D" instance=ExtResource("4_i48ph")]
+transform = Transform3D(-1.3113416e-07, 0, 3, 0, 3, 0, -3, 0, -1.3113416e-07, -5, 1.5, 0)
+
+[node name="Bush2" parent="NavigationRegion3D" instance=ExtResource("7_i48ph")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 2.35)
 
 [node name="Tree2" parent="NavigationRegion3D" instance=ExtResource("9_f0kvr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 4)
@@ -282,41 +200,3 @@ shape = SubResource("BoxShape3D_cosvu")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
 mesh = SubResource("BoxMesh_n528h")
 skeleton = NodePath("../../NWCorner")
-
-[node name="Bush" type="StaticBody3D" parent="NavigationRegion3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -2.35)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Bush"]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0.2, 0)
-shape = SubResource("CapsuleShape3D_cosvu")
-
-[node name="Leaves" type="MeshInstance3D" parent="NavigationRegion3D/Bush"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.20000002, 0.4)
-mesh = SubResource("SphereMesh_f0kvr")
-
-[node name="Leaves2" type="MeshInstance3D" parent="NavigationRegion3D/Bush"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.20000002, 0)
-mesh = SubResource("SphereMesh_f0kvr")
-
-[node name="Leaves3" type="MeshInstance3D" parent="NavigationRegion3D/Bush"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.20000002, -0.39999998)
-mesh = SubResource("SphereMesh_f0kvr")
-
-[node name="Bush2" type="StaticBody3D" parent="NavigationRegion3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 2.35)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Bush2"]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0.2, 0)
-shape = SubResource("CapsuleShape3D_cosvu")
-
-[node name="Leaves" type="MeshInstance3D" parent="NavigationRegion3D/Bush2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.20000002, 0.4)
-mesh = SubResource("SphereMesh_f0kvr")
-
-[node name="Leaves2" type="MeshInstance3D" parent="NavigationRegion3D/Bush2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.20000002, 0)
-mesh = SubResource("SphereMesh_f0kvr")
-
-[node name="Leaves3" type="MeshInstance3D" parent="NavigationRegion3D/Bush2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.20000002, -0.39999998)
-mesh = SubResource("SphereMesh_f0kvr")

@@ -428,26 +428,26 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -147.0
-offset_top = -50.0
-offset_right = 147.0
+offset_left = -158.5
+offset_top = -77.0
+offset_right = 158.5
 grow_horizontal = 2
 grow_vertical = 0
 
 [node name="Panel" type="Panel" parent="Control"]
 modulate = Color(1, 1, 1, 0.4862745)
 layout_mode = 0
-offset_right = 290.0
-offset_bottom = 50.0
+offset_right = 317.0
+offset_bottom = 77.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control"]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_top = -25.0
-offset_right = 94.0
-offset_bottom = 25.0
+offset_top = -38.5
+offset_right = 117.0
+offset_bottom = 38.5
 grow_vertical = 2
 
 [node name="Label" type="Label" parent="Control/VBoxContainer"]
@@ -458,7 +458,12 @@ horizontal_alignment = 1
 
 [node name="Label2" type="Label" parent="Control/VBoxContainer"]
 layout_mode = 2
-text = "Velocity"
+text = " Actual Velocity"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="Control/VBoxContainer"]
+layout_mode = 2
+text = " Virtual Velocity"
 horizontal_alignment = 1
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="Control"]
@@ -482,6 +487,13 @@ fit_content = true
 scroll_active = false
 
 [node name="Velocity" type="RichTextLabel" parent="Control/VBoxContainer2"]
+layout_mode = 2
+bbcode_enabled = true
+text = "[center][color=red]X:[/color]0.000 [color=green]Y:[/color]0.000 [color=blue]Z:[/color]0.000[/center]"
+fit_content = true
+scroll_active = false
+
+[node name="VelocityVirtual" type="RichTextLabel" parent="Control/VBoxContainer2"]
 layout_mode = 2
 bbcode_enabled = true
 text = "[center][color=red]X:[/color]0.000 [color=green]Y:[/color]0.000 [color=blue]Z:[/color]0.000[/center]"

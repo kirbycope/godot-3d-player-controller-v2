@@ -15,16 +15,6 @@ func _process(delta):
 		transition_state(NODE_STATE, States.State.STANDING)
 		return
 
-	# Check if the player is not moving -> Start "standing"
-	if abs(player.velocity).length() < 0.2:
-		transition_state(NODE_STATE, States.State.STANDING)
-		return
-
-	# Check if the player speed is slower than "running" -> Start "walking"
-	if player.speed_current < player.speed_running:
-		transition_state(NODE_STATE, States.State.WALKING)
-		return
-
 	# Play the animation
 	play_animation()
 

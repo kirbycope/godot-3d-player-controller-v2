@@ -26,16 +26,19 @@ func _physics_process(delta):
 
 	# Check if the player is not on a floor -> Start "falling"
 	if not player.is_on_floor() \
+	and not player.is_flying \
 	and not player.is_jumping:
 		transition_state(player.current_state, States.State.FALLING)
 		return
 
 	# Change state based on velocity
 	if not player.is_crawling \
-	and not player.is_crouching:
+	and not player.is_crouching \
+	and not player.is_swimming:
 
 		# Check if the player is not moving -> Start "standing"
-		if abs(player.velocity) == Vector3.ZERO \
+		if abs(player.velocity).length() < 0.2 \
+		and abs(player.virtual_velocity).length() < 0.2 \
 		and not player.is_crouching:
 			transition_state(player.current_state, States.State.STANDING)
 			return

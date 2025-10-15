@@ -50,6 +50,7 @@ var is_walking: bool = false ## Is the player walking?
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity") ## Default gravity value
 var gravitating_towards ## The Node the player is being pulled towards (if any)
 var speed_current: float = 0.0 ## Current speed
+var virtual_velocity: Vector3 = Vector3.ZERO ## The player's velocity is movement were unlocked
 
 @onready var animation_player: AnimationPlayer = $Visuals/Godette/AnimationPlayer
 @onready var base_state: BaseState = $States/Base
@@ -154,6 +155,9 @@ func _physics_process(delta):
 		velocity += gravity_accel * delta
 		# Commit the new up direction after applying gravity
 		up_direction = new_up
+
+	# Record the player's "virtual velocity"
+	virtual_velocity = velocity
 
 	# Apply movement locks
 	if lock_movement_x:

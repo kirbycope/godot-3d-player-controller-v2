@@ -12,8 +12,10 @@ enum Perspective {
 var is_rotating_camera: bool = false
 var perspective: Perspective = Perspective.THIRD_PERSON ## Camera perspective
 
+@onready var spring_arm = get_parent()
 @onready var camera_mount: Node3D = get_parent().get_parent()
 @onready var player: CharacterBody3D = get_parent().get_parent().get_parent()
+
 
 
 ## Called when there is an input event.
@@ -23,6 +25,10 @@ func _input(event):
 
 	if lock_camera:
 		return
+
+	# ⧉/[F5] _pressed_ -> Toggle "perspective"
+	if event.is_action_pressed(player.controls.button_8) and not lock_perspective:
+		toggle_perspective()
 
 	# Check for mouse motion
 	if event is InputEventMouseMotion:
@@ -74,3 +80,16 @@ func camera_rotate_by_mouse(event: InputEvent) -> void:
 	# [Third-person] Rotate the visuals with the camera's horizontal rotation
 	if perspective == Perspective.THIRD_PERSON:
 		player.visuals.rotate_y(deg_to_rad(event.relative.x * look_sensitivity_mouse))
+
+
+## Toggle between "first-person" and "third-person" perspectives.
+func toggle_perspective() -> void:
+	if perspective == Perspective.THIRD_PERSON:
+		perspective = Perspective.FIRST_PERSON
+		player.visuals.rotation.y = 0.0
+		spring_arm.spring_length = 0.0
+		spring_arm.position.y = 0.0
+	else:
+		perspective = Perspective.THIRD_PERSON
+		spring_arm.spring_length = 1.5
+		spring_arm.position.y = 0.7

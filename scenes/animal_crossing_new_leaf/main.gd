@@ -1,5 +1,7 @@
 extends Node3D
 
+const ANIMATION_RUNNING := "AnimationLibrary_Godot/Sprint"
+
 @onready var ground: StaticBody3D = $Ground
 @onready var player = $Player
 
@@ -32,8 +34,3 @@ func _process(delta: float) -> void:
 		ground.rotate_x(deg_to_rad(10) * delta)
 	elif Input.is_action_pressed(player.controls.move_down):
 		ground.rotate_x(deg_to_rad(-10) * delta)
-
-	# Play running animation
-	if player.animation_player.current_animation != "":
-		player.animation_player.play("")
-	

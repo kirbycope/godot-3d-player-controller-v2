@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cuv5tyqdnexh7"]
+[gd_scene load_steps=15 format=3 uid="uid://cuv5tyqdnexh7"]
 
 [ext_resource type="Script" uid="uid://bej28j4s4snv4" path="res://scenes/animal_crossing_new_leaf/main.gd" id="1_snl0e"]
 [ext_resource type="Shader" uid="uid://ee3nunu0omht" path="res://scenes/animal_crossing_new_leaf/sky.gdshader" id="2_5orwh"]
@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://rhk6o1flmsl8" path="res://scenes/animal_crossing_new_leaf/tex_cloud.png" id="3_hgwfd"]
 [ext_resource type="Texture2D" uid="uid://dgycy03umala6" path="res://assets/textures/voxel/Tiles/grass_top.png" id="5_hgwfd"]
 [ext_resource type="PackedScene" uid="uid://ct4lxo11yu7sv" path="res://scenes/guild_wars/tree.tscn" id="6_ieuxx"]
+[ext_resource type="PackedScene" uid="uid://byfteqoslg6sb" path="res://scenes/guild_wars/house.tscn" id="7_ed38x"]
+[ext_resource type="PackedScene" uid="uid://bcehl7lcpdma7" path="res://scenes/guild_wars/bush.tscn" id="7_heivl"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hgwfd"]
 shader = ExtResource("2_5orwh")
@@ -66,4 +68,16 @@ transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0
 mesh = SubResource("CylinderMesh_r5aou")
 
 [node name="Tree" parent="Ground" instance=ExtResource("6_ieuxx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 11, 0)
+transform = Transform3D(1, 0, 0, 0, 0.9396926, -0.34202015, 0, 0.34202015, 0.9396926, 4, 10.200001, 4.1)
+
+[node name="Bush" parent="Ground" instance=ExtResource("7_heivl")]
+transform = Transform3D(1, 0, 0, 0, 0.97437006, -0.22495104, 0, 0.22495104, 0.97437006, -4, 10.8, 2.3)
+
+[node name="House" parent="Ground" instance=ExtResource("7_ed38x")]
+transform = Transform3D(-1.3113413e-07, 0, 2.9999993, 0, 2.9999988, 0, -2.999999, 0, -1.3113413e-07, -5, 12.299999, 0)
+
+[node name="Bush2" parent="Ground" instance=ExtResource("7_heivl")]
+transform = Transform3D(1, 0, 0, 0, 0.9743702, 0.22495107, 0, -0.22495107, 0.9743702, -4, 10.8, -2.3)
+
+[node name="Tree2" parent="Ground" instance=ExtResource("6_ieuxx")]
+transform = Transform3D(1, 0, 0, 0, 0.9396926, 0.34202012, 0, -0.34202012, 0.9396926, 4, 10.2, -4.1)
