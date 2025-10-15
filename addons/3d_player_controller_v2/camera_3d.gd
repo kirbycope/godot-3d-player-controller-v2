@@ -17,12 +17,19 @@ var perspective: Perspective = Perspective.THIRD_PERSON ## Camera perspective
 
 @onready var camera_spring_arm = get_parent()
 @onready var camera_mount: Node3D = get_parent().get_parent()
-@onready var player: CharacterBody3D = get_parent().get_parent().get_parent()
+@onready var contextual_controls: Label = $ContextualControls
 @onready var item_spring_arm = camera_mount.get_node("ItemSpringArm")
+@onready var player: CharacterBody3D = get_parent().get_parent().get_parent()
+@onready var ray_cast = $RayCast3D
+
+
+## Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	ray_cast.add_exception(player)
 
 
 ## Called when there is an input event.
-func _input(event):
+func _input(event) -> void:
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
 
@@ -30,7 +37,8 @@ func _input(event):
 		return
 
 	# ⧉/[F5] _pressed_ -> Toggle "perspective"
-	if event.is_action_pressed(player.controls.button_8) and not lock_perspective:
+	if event.is_action_pressed(player.controls.button_8) \
+	and not lock_perspective:
 		toggle_perspective()
 
 	# Check for mouse motion
@@ -52,17 +60,73 @@ func _input(event):
 			camera_rotate_by_mouse(event)
 
 		# Check if the mouse is captured and the camera is rotating
-		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED and is_rotating_camera:
+		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED \
+		and is_rotating_camera:
 			# Rotate camera based on mouse movement
 			camera_rotate_by_mouse(event)
 
 	# Check if the right mouse button is released while rotating the camera
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT \
+	if event is InputEventMouseButton \
+	and event.button_index == MOUSE_BUTTON_RIGHT \
 	and event.is_pressed() == false and is_rotating_camera:
 		# Flag the camera as not rotating
 		is_rotating_camera = false
 		# Show the mouse
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+
+	# Ⓧ/[E] press to pick up an object - Release object
+	if event.is_action_pressed(player.controls.button_2) \
+	and player.enable_holding_objects \
+	and item_spring_arm.get_child_count() != 0:
+		# Get the [first] child node of the item spring arm
+		var child = item_spring_arm.get_child(0)
+		# Change the collision layer from 2 to 1 (to allow collisions again)
+		child.set_collision_layer_value(1, true)
+		child.set_collision_layer_value(2, false)
+		# Unfreeze the rigidbody and give it the player's velocity
+		if child is RigidBody3D:
+			child.freeze = false
+			#child.linear_velocity = player.velocity
+			#child.angular_velocity = Vector3.ZERO
+		# Reparent the child object back to its original parent (assuming that's the Player's parent too)
+		child.reparent(player.get_parent(), true)
+
+	# Ⓧ/[E] press to pick up an object - Pickup object
+	if event.is_action_pressed(player.controls.button_2) \
+	and player.enable_holding_objects \
+	and item_spring_arm.get_child_count() == 0:
+		# Check for a collision with the raycast
+		if ray_cast.is_colliding():
+			# Get the collision object
+			var collider = ray_cast.get_collider()
+			# Check if the collider is a rigidbody3D
+			if collider is RigidBody3D:
+				# Check if the collider is not already a child of the item spring arm
+				if collider.get_parent() != item_spring_arm:
+					# Change the collision layer from 1 to 2 (to avoid further collisions)
+					collider.set_collision_layer_value(1, false)
+					collider.set_collision_layer_value(2, true)
+					# Freeze the rigidbody to prevent physics simulation while holding
+					collider.freeze = true
+					# Reset the rotation
+					collider.rotation = Vector3.ZERO
+					# Reparent the Ridgidbody3D to the item mount
+					collider.reparent(item_spring_arm)
+
+
+## Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta) -> void:
+	if !is_multiplayer_authority(): return
+
+	if contextual_controls:
+		contextual_controls.text = ""
+		if item_spring_arm.get_child_count() == 0:
+			if ray_cast.is_colliding():
+				var collider = ray_cast.get_collider()
+				if collider is RigidBody3D:
+					contextual_controls.text = "Press [E] to pickup"
+		else:
+			contextual_controls.text = "Press [E] to release"
 
 
 ## Rotate camera using the mouse motion.
@@ -97,13 +161,13 @@ func toggle_perspective() -> void:
 			camera_spring_arm.position.x = 0.0
 			camera_spring_arm.position.y = 0.0
 			camera_spring_arm.position.z = -0.4
-			item_spring_arm.position.y = -0.25
+			ray_cast.position.z = 0.0
 	else:
 		perspective = Perspective.THIRD_PERSON
-		reparent(camera_spring_arm)
+		if get_parent() != camera_spring_arm:
+			reparent(camera_spring_arm)
 		camera_spring_arm.spring_length = 1.5
 		camera_spring_arm.position.x = 0.0
 		camera_spring_arm.position.y = 0.7
-		camera_spring_arm.position.z = 0.0
-		camera_spring_arm.rotation.y = 0.0
-		item_spring_arm.position.y = 0.0
+		camera_spring_arm.position.z = 0.0	
+		ray_cast.position.z = -1.5

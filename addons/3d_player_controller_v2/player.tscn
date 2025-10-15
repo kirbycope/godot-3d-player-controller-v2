@@ -3,15 +3,12 @@
 [ext_resource type="Script" uid="uid://b7plmenqhwlu4" path="res://addons/3d_player_controller_v2/player.gd" id="1_ifhah"]
 [ext_resource type="Script" uid="uid://5rlkn1wdmtq0" path="res://addons/3d_player_controller_v2/camera_3d.gd" id="2_ffasv"]
 [ext_resource type="Texture2D" uid="uid://bid7dym4yy68k" path="res://addons/3d_player_controller_v2/assets/characters/godette/textures/Tex_Godette.png" id="2_ifhah"]
+[ext_resource type="Texture2D" uid="uid://djq4xv33k8a6p" path="res://addons/3d_player_controller_v2/assets/textures/game_icons/white/1x/plus.png" id="3_ffasv"]
 [ext_resource type="PackedScene" uid="uid://cxky6pmyip083" path="res://addons/3d_player_controller_v2/controls.tscn" id="3_uu7fq"]
 [ext_resource type="PackedScene" uid="uid://dvpsvwsy5wedp" path="res://addons/3d_player_controller_v2/debug.tscn" id="4_uu7fq"]
 [ext_resource type="AnimationLibrary" uid="uid://cynmuyolx8bkt" path="res://addons/3d_player_controller_v2/assets/animations/universal_animation_library/AnimationLibrary_Godot.glb" id="4_xnki8"]
 [ext_resource type="PackedScene" uid="uid://yxm384w27bq2" path="res://addons/3d_player_controller_v2/states.tscn" id="5_5e1u4"]
 [ext_resource type="PackedScene" uid="uid://2p8pyabd2bmo" path="res://addons/3d_player_controller_v2/pause.tscn" id="5_7fj78"]
-
-[sub_resource type="SphereMesh" id="SphereMesh_7fj78"]
-radius = 0.1
-height = 0.2
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ifhah"]
 radius = 0.3
@@ -18525,19 +18522,48 @@ spring_length = 1.5
 transform = Transform3D(1, 0, 0, 0, 0.9659259, 0.25881907, 0, -0.25881907, 0.9659258, 0, 0, 0)
 script = ExtResource("2_ffasv")
 
-[node name="ItemSpringArm" type="SpringArm3D" parent="CameraMount"]
-transform = Transform3D(-1, 0, -8.742278e-08, -1.7763568e-15, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+[node name="RayCast3D" type="RayCast3D" parent="CameraMount/CameraSpringArm/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.5)
+target_position = Vector3(0, 0, -2)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="CameraMount/ItemSpringArm"]
-visible = false
-mesh = SubResource("SphereMesh_7fj78")
+[node name="ContextualControls" type="Label" parent="CameraMount/CameraSpringArm/Camera3D"]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -640.0
+offset_top = -11.5
+offset_bottom = 11.5
+grow_horizontal = 0
+grow_vertical = 2
+horizontal_alignment = 1
+
+[node name="Retical" type="TextureRect" parent="CameraMount/CameraSpringArm/Camera3D"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.0
+offset_top = -25.0
+offset_right = 25.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.25, 0.25)
+pivot_offset = Vector2(25, 25)
+texture = ExtResource("3_ffasv")
+
+[node name="ItemSpringArm" type="SpringArm3D" parent="CameraMount"]
+transform = Transform3D(-1, 0, -8.742278e-08, -1.7763568e-15, 1, 0, 8.742278e-08, 0, -1, 0, -0.1, 0)
+spring_length = 1.5
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
 shape = SubResource("CapsuleShape3D_ifhah")
 
 [node name="Controls" parent="." instance=ExtResource("3_uu7fq")]
-visible = false
 
 [node name="Debug" parent="." instance=ExtResource("4_uu7fq")]
 
@@ -18549,9 +18575,6 @@ visible = false
 [node name="States" parent="." instance=ExtResource("5_5e1u4")]
 
 [node name="Visuals" type="Node3D" parent="."]
-
-[node name="RayCast3D" type="RayCast3D" parent="Visuals"]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 1.6, 0)
 
 [node name="Godette" type="Node3D" parent="Visuals"]
 

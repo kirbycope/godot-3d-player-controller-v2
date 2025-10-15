@@ -15,6 +15,7 @@ func _ready() -> void:
 	player.enable_crouching = false
 	player.enable_double_jumping = false
 	player.enable_flying = false
+	player.enable_holding_objects = false
 	player.enable_jumping = false
 	player.enable_kicking = false
 	player.enable_navigation = false
@@ -25,6 +26,9 @@ func _ready() -> void:
 	player.lock_movement_x = false
 	player.lock_movement_y = false
 	player.lock_movement_z = true
+	player.camera.enable_head_bobbing = false
+	#player.camera.toggle_perspective() # Run in _ready() to start in 1st person
+
 
 
 ## Called every frame. 'delta' is the elapsed time since the previous frame.

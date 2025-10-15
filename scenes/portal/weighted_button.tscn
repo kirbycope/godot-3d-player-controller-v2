@@ -1,0 +1,163 @@
+[gd_scene load_steps=13 format=3 uid="uid://345q62swkbaf"]
+
+[ext_resource type="Script" uid="uid://baua6temccpt4" path="res://scenes/portal/weighted_button.gd" id="1_rtt8b"]
+[ext_resource type="AudioStream" uid="uid://c6sqglfac04qs" path="res://assets/audio/interface_sounds/switch_006.ogg" id="2_nyivf"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7r4k6"]
+albedo_color = Color(1, 0, 0, 1)
+roughness = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rtt8b"]
+albedo_color = Color(0.5904034, 0.55620146, 0.5080518, 1)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_nyivf"]
+height = 0.05
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jp0xf"]
+albedo_color = Color(0.5958281, 0.5958281, 0.5958281, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wybd5"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_w2t12"]
+height = 0.2
+radius = 0.6
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_j1qhr"]
+height = 0.25
+
+[sub_resource type="Animation" id="Animation_rtt8b"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ButtonTop:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.39999998, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer3D:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_7r4k6"]
+resource_name = "press"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ButtonTop:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0.39999998, 0), Vector3(0, 0.35, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer3D:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nyivf"]
+_data = {
+&"RESET": SubResource("Animation_rtt8b"),
+&"press": SubResource("Animation_7r4k6")
+}
+
+[node name="WeightedButton" type="Node3D"]
+script = ExtResource("1_rtt8b")
+
+[node name="ButtonTop" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.39999998, 0)
+collision_layer = 2
+collision_mask = 2
+height = 0.5
+sides = 16
+cone = true
+material = SubResource("StandardMaterial3D_7r4k6")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="ButtonTop"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.049999952, 0)
+operation = 2
+size = Vector3(1, 0.5, 1)
+material = SubResource("StandardMaterial3D_7r4k6")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="ButtonTop"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
+radius = 0.333
+height = 0.1
+sides = 16
+material = SubResource("StandardMaterial3D_rtt8b")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="ButtonTop"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ButtonTop/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.225, 0)
+shape = SubResource("CylinderShape3D_nyivf")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+radius = 0.667
+height = 1.0
+sides = 16
+cone = true
+material = SubResource("StandardMaterial3D_jp0xf")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCylinder3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.9604645e-08, 0.100000024, -5.9604645e-08)
+operation = 2
+size = Vector3(1.4, 1, 1.4)
+material = SubResource("StandardMaterial3D_jp0xf")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGCylinder3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4244438, 0)
+radius = 0.556
+height = 0.05
+sides = 16
+material = SubResource("StandardMaterial3D_wybd5")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="CSGCylinder3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CSGCylinder3D/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("CylinderShape3D_w2t12")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.225, 0)
+shape = SubResource("CylinderShape3D_j1qhr")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_nyivf")
+}
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_nyivf")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]

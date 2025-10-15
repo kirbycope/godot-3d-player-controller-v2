@@ -6,6 +6,7 @@ extends CharacterBody3D
 @export var enable_crouching: bool = true ## Enable crouching
 @export var enable_double_jumping: bool = false ## Enable double jumping
 @export var enable_flying: bool = false ## Enable flying
+@export var enable_holding_objects: bool = false ## Enable holding objects
 @export var enable_jumping: bool = true ## Enable jumping
 @export var enable_kicking: bool = false ## Enable kicking
 @export var enable_navigation: bool = false ## Enable navigation (pathfinding)
@@ -64,13 +65,13 @@ var virtual_velocity: Vector3 = Vector3.ZERO ## The player's velocity is movemen
 
 
 ## Called when the node is "ready", i.e. when both the node and its children have entered the scene tree.
-func _ready():
+func _ready() -> void:
 	# Start "standing"
 	$States/Standing.start()
 
 
 ## Called when there is an input event.
-func _input(event):
+func _input(event) -> void:
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
 
@@ -96,7 +97,7 @@ func _input(event):
 
 
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(delta) -> void:
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
 
@@ -110,7 +111,7 @@ func _process(delta):
 
 
 ## Called once on each physics tick, and allows Nodes to synchronize their logic with physics ticks.
-func _physics_process(delta):
+func _physics_process(delta) -> void:
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
 
