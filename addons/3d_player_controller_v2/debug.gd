@@ -168,6 +168,10 @@ func _on_enable_punching_toggled(toggled_on):
 	player.enable_punching = toggled_on
 
 
+func _on_enable_retical_toggled(toggled_on: bool) -> void:
+	player.enable_retical = toggled_on
+
+
 func _on_enable_rolling_toggled(toggled_on):
 	player.enable_rolling = toggled_on
 

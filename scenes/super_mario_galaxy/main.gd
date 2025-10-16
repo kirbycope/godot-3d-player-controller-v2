@@ -10,7 +10,7 @@ const MOUSE_CURSOR_ARROW = preload("uid://dmw8j7h0b8bri")
 
 ## Called when the node enters the scene tree for the first time.
 func _ready():
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	player.camera.lock_camera = false
 	player.enable_climbing = false
 	player.enable_crawling = true
@@ -22,6 +22,7 @@ func _ready():
 	player.enable_kicking = false
 	player.enable_navigation = false
 	player.enable_punching = false
+	player.enable_retical = false
 	player.enable_rolling = false
 	player.enable_sprinting = true
 	player.enable_swimming = true
@@ -29,7 +30,7 @@ func _ready():
 	player.lock_movement_y = false
 	player.lock_movement_z = false
 	player.camera.enable_head_bobbing = false
-	player.camera.toggle_perspective() # Run in _ready() to start in 1st person
+	#player.camera.toggle_perspective() # Run in _ready() to start in 1st person
 
 	change_cursor()
 	spawn_collectables()

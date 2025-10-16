@@ -168,6 +168,22 @@ offset_bottom = 31.0
 grow_horizontal = 0
 mouse_filter = 1
 
+[node name="EnableRetical" type="CheckButton" parent="Configuration"]
+layout_mode = 2
+text = "EnableRetical"
+
+[node name="Panel" type="Panel" parent="Configuration/EnableRetical"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -222.0
+offset_right = -2.0
+offset_bottom = 31.0
+grow_horizontal = 0
+mouse_filter = 1
+
 [node name="EnableRolling" type="CheckButton" parent="Configuration"]
 layout_mode = 2
 text = "EnableRolling"
@@ -509,6 +525,7 @@ scroll_active = false
 [connection signal="toggled" from="Configuration/EnableKicking" to="." method="_on_enable_kicking_toggled"]
 [connection signal="toggled" from="Configuration/EnableNavigation" to="." method="_on_enable_navigation_toggled"]
 [connection signal="toggled" from="Configuration/EnablePunching" to="." method="_on_enable_punching_toggled"]
+[connection signal="toggled" from="Configuration/EnableRetical" to="." method="_on_enable_retical_toggled"]
 [connection signal="toggled" from="Configuration/EnableRolling" to="." method="_on_enable_rolling_toggled"]
 [connection signal="toggled" from="Configuration/EnableSprinting" to="." method="_on_enable_sprinting_toggled"]
 [connection signal="toggled" from="Configuration/EnableSwimming" to="." method="_on_enable_swimming_toggled"]

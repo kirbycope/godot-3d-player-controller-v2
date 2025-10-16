@@ -21,6 +21,7 @@ var perspective: Perspective = Perspective.THIRD_PERSON ## Camera perspective
 @onready var item_spring_arm = camera_mount.get_node("ItemSpringArm")
 @onready var player: CharacterBody3D = get_parent().get_parent().get_parent()
 @onready var ray_cast = $RayCast3D
+@onready var retical: TextureRect = $Retical
 
 
 ## Called when the node enters the scene tree for the first time.
@@ -127,6 +128,8 @@ func _process(delta) -> void:
 					contextual_controls.text = "Press [E] to pickup"
 		else:
 			contextual_controls.text = "Press [E] to release"
+
+	retical.visible = player.enable_retical
 
 
 ## Rotate camera using the mouse motion.

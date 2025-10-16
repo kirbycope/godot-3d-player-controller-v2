@@ -11,6 +11,7 @@ extends CharacterBody3D
 @export var enable_kicking: bool = false ## Enable kicking
 @export var enable_navigation: bool = false ## Enable navigation (pathfinding)
 @export var enable_punching: bool = false ## Enable punching
+@export var enable_retical: bool = true ## Enable the rectical
 @export var enable_rolling: bool = false ## Enable rolling
 @export var enable_sprinting: bool = true ## Enable sprinting
 @export var enable_swimming: bool = true ## Enable swimming
