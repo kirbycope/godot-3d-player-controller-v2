@@ -87,8 +87,6 @@ func _input(event) -> void:
 		# Unfreeze the rigidbody and give it the player's velocity
 		if child is RigidBody3D:
 			child.freeze = false
-			#child.linear_velocity = player.velocity
-			#child.angular_velocity = Vector3.ZERO
 		# Reparent the child object back to its original parent (assuming that's the Player's parent too)
 		child.reparent(player.get_parent(), true)
 
@@ -113,6 +111,24 @@ func _input(event) -> void:
 					collider.rotation = Vector3.ZERO
 					# Reparent the Ridgidbody3D to the item mount
 					collider.reparent(item_spring_arm)
+	
+	# 🅁1/[MB1] press to pick up an object - Release object
+	if event.is_action_pressed(player.controls.button_5) \
+	and player.enable_holding_objects \
+	and item_spring_arm.get_child_count() != 0:
+		# Get the [first] child node of the item spring arm
+		var child = item_spring_arm.get_child(0)
+		# Change the collision layer from 2 to 1 (to allow collisions again)
+		child.set_collision_layer_value(1, true)
+		child.set_collision_layer_value(2, false)
+		# Unfreeze the rigidbody and give it the player's velocity
+		if child is RigidBody3D:
+			child.freeze = false
+		# Reparent the child object back to its original parent (assuming that's the Player's parent too)
+		child.reparent(player.get_parent(), true)
+		# Apply an impulse to the object in the direction the camera is facing
+		var force_direction = -global_transform.basis.z.normalized()
+		child.apply_impulse(force_direction * 5.0, Vector3.ZERO)
 
 
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
