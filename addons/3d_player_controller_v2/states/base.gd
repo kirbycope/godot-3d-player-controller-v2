@@ -32,14 +32,6 @@ func _physics_process(delta):
 			transition_state(player.current_state, States.State.HANGING)
 			return
 
-	# Check if the player is looking at a climbable surface -> Start "climbing"
-	if player.enable_climbing:
-		if not player.is_climbing \
-		and player.ray_cast_high.is_colliding():
-			# Start "climbing"
-			transition_state(player.current_state, States.State.CLIMBING)
-			return
-
 	# Check if the player is not on a floor -> Start "falling"
 	if not player.is_on_floor() \
 	and not player.is_climbing \
@@ -47,7 +39,14 @@ func _physics_process(delta):
 	and not player.is_jumping \
 	and not player.is_punching_left \
 	and not player.is_punching_right:
-		transition_state(player.current_state, States.State.FALLING)
+		# Check if the player is looking at a climbable surface -> Start "climbing"
+		if player.enable_climbing:
+			if not player.is_climbing \
+			and player.ray_cast_high.is_colliding():
+				# Start "climbing"
+				transition_state(player.current_state, States.State.CLIMBING)
+		else:
+			transition_state(player.current_state, States.State.FALLING)
 		return
 
 	# Change state based on velocity

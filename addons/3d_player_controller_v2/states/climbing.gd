@@ -2,6 +2,9 @@ extends BaseState
 
 const ANIMATION_CLIMBING_IDLE := "AnimationLibrary_Godot/Climb_Idle"
 const ANIMATION_CLIMBING_UP := "AnimationLibrary_Godot/Climb_Up"
+const ANIMATION_CLIMBING_DOWN := "AnimationLibrary_Godot/Climb_Down"
+const ANIMATION_CLIMBING_LEFT := "AnimationLibrary_Godot/Climb_Left"
+const ANIMATION_CLIMBING_RIGHT := "AnimationLibrary_Godot/Climb_Right"
 const NODE_STATE := States.State.CLIMBING
 
 
@@ -22,9 +25,28 @@ func play_animation() -> void:
 	var is_shimmying = Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right")
 
 	# Check if the animation player is not already playing the appropriate animation
-	if player.animation_player.current_animation != ANIMATION_CLIMBING_UP:
+	if Input.is_action_pressed("move_up") \
+	and player.animation_player.current_animation != ANIMATION_CLIMBING_UP:
 		# Play the "climbing" animation
 		player.animation_player.current_animation = ANIMATION_CLIMBING_UP
+
+	# Check if the animation player is not already playing the appropriate animation
+	if Input.is_action_pressed("move_down") \
+	and player.animation_player.current_animation != ANIMATION_CLIMBING_DOWN:
+		# Play the "climbing" animation
+		player.animation_player.current_animation = ANIMATION_CLIMBING_DOWN
+
+	# Check if the animation player is not already playing the appropriate animation
+	if Input.is_action_pressed("move_left") \
+	and player.animation_player.current_animation != ANIMATION_CLIMBING_LEFT:
+		# Play the "climbing" animation
+		player.animation_player.current_animation = ANIMATION_CLIMBING_LEFT
+
+	# Check if the animation player is not already playing the appropriate animation
+	if Input.is_action_pressed("move_right") \
+	and player.animation_player.current_animation != ANIMATION_CLIMBING_RIGHT:
+		# Play the "climbing" animation
+		player.animation_player.current_animation = ANIMATION_CLIMBING_RIGHT
 
 	# Get if not moving
 	if Input.get_vector("move_left", "move_right", "move_up", "move_down") == Vector2.ZERO:
