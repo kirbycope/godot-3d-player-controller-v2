@@ -20183,4 +20183,20 @@ libraries = {
 }
 playback_default_blend_time = 0.2
 
+[node name="RayCast3D_Shoulder" type="RayCast3D" parent="Visuals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
+target_position = Vector3(0, 0, -1)
+
+[node name="RayCast3D_Chest" type="RayCast3D" parent="Visuals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, 0)
+target_position = Vector3(0, 0, -1)
+
+[node name="RayCast3D_Waist" type="RayCast3D" parent="Visuals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9999999, 0)
+target_position = Vector3(0, 0, -1)
+
+[node name="RayCast3D_Knees" type="RayCast3D" parent="Visuals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.59999996, 0)
+target_position = Vector3(0, 0, -1)
+
 [connection signal="navigation_finished" from="NavigationAgent3D" to="NavigationAgent3D" method="_on_navigation_finished"]
