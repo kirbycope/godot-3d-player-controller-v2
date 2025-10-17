@@ -1,7 +1,6 @@
 class_name BaseState
 extends Node
 
-
 @onready var player: CharacterBody3D = get_parent().get_parent()
 
 
@@ -27,13 +26,17 @@ func _physics_process(delta):
 	# Check if the player is not on a floor -> Start "falling"
 	if not player.is_on_floor() \
 	and not player.is_flying \
-	and not player.is_jumping:
+	and not player.is_jumping \
+	and not player.is_punching_left \
+	and not player.is_punching_right:
 		transition_state(player.current_state, States.State.FALLING)
 		return
 
 	# Change state based on velocity
 	if not player.is_crawling \
 	and not player.is_crouching \
+	and not player.is_punching_left \
+	and not player.is_punching_right \
 	and not player.is_swimming:
 
 		# Check if the player is not moving -> Start "standing"
@@ -59,7 +62,7 @@ func _physics_process(delta):
 ## Returns the string name of a state.
 func get_state_name(state: States.State) -> String:
 	# Return the state name with the first letter capitalized
-	return States.State.keys()[state].capitalize()
+	return States.State.keys()[state].capitalize().replace(" ", "")
 
 
 ## Called when a state needs to transition to another.

@@ -6,7 +6,10 @@ extends Node3D
 ## Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	player.camera.enable_head_bobbing = false
+	#player.camera.toggle_perspective() # Run in _ready() to start in 1st person
 	player.camera.lock_camera = false
+	player.camera.lock_perspective = false
 	player.enable_climbing = false
 	player.enable_crawling = true
 	player.enable_crouching = true
@@ -24,5 +27,3 @@ func _ready() -> void:
 	player.lock_movement_x = false
 	player.lock_movement_y = false
 	player.lock_movement_z = false
-	player.camera.enable_head_bobbing = false
-	player.camera.toggle_perspective() # Run in _ready() to start in 1st person

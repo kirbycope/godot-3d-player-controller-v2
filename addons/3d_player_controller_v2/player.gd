@@ -40,9 +40,11 @@ var is_double_jumping: bool = false ## Is the player double jumping?
 var is_falling: bool = false ## Is the player falling?
 var is_flying: bool = false ## Is the player flying?
 var is_jumping: bool = false ## Is the player jumping?
-var is_kicking: bool = false ## Is the player kicking?
+var is_kicking_left: bool = false ## Is the player kicking with their left foot?
+var is_kicking_right: bool = false ## Is the player kicking with their right foot?
 var is_navigating: bool = false ## Is the player navigating?
-var is_punching: bool = false ## Is the player punching?
+var is_punching_left: bool = false ## Is the player punching with thier left hand?
+var is_punching_right: bool = false ## Is the player punching with their right hand?
 var is_rolling: bool = false ## Is the player rolling?
 var is_running: bool = false ## Is the player running?
 var is_standing: bool = false ## Is the player standing?
@@ -62,6 +64,7 @@ var virtual_velocity: Vector3 = Vector3.ZERO ## The player's velocity is movemen
 @onready var controls = $Controls
 @onready var debug = $Debug/Control/Panel
 @onready var navigation_agent_3d: NavigationAgent3D = $NavigationAgent3D
+@onready var pause: CanvasLayer = $Pause
 @onready var visuals = $Visuals
 
 
@@ -76,25 +79,43 @@ func _input(event) -> void:
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
 
-	# Ⓐ/[Space] _pressed_ and jumping is enabled -> Start "jumping"
-	if enable_jumping:
-		if event.is_action_pressed(controls.button_0) and is_on_floor():
-			base_state.transition_state(current_state, States.State.JUMPING)
+	# Handle inputs if not paused
+	if not pause.visible:
 
-	# [Left Mouse Button] _pressed_ -> Start "navigating"
-	if enable_navigation:
-		if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) \
-		and Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE:
-			# Find out where to click
-			var from = camera.project_ray_origin(event.position)
-			var to = from + camera.project_ray_normal(event.position) * 10000
-			var cursor_position = Plane(up_direction, transform.origin.y).intersects_ray(from, to)
-			if cursor_position:
-				#debug.draw_red_sphere(cursor_position) ## DEBUGGING
-				navigation_agent_3d.target_position = cursor_position
-				if not is_navigating:
-					# Start "navigating"
-					base_state.transition_state(current_state, States.State.NAVIGATING)
+		# 🄻1/[MB1] _pressed_ -> Start "punching left"
+		if enable_punching:
+			if event.is_action_pressed(controls.button_4) \
+			and not is_punching_left \
+			and not is_punching_right:
+				base_state.transition_state(current_state, States.State.PUNCHING_LEFT)
+
+		# 🅁1/[MB2] _pressed_ -> Start "punching right"
+		if enable_punching:
+			if event.is_action_pressed(controls.button_5) \
+			and not is_punching_left \
+			and not is_punching_right:
+				base_state.transition_state(current_state, States.State.PUNCHING_RIGHT)
+
+		# Ⓐ/[Space] _pressed_ and jumping is enabled -> Start "jumping"
+		if enable_jumping:
+			if event.is_action_pressed(controls.button_0) \
+			and is_on_floor():
+				base_state.transition_state(current_state, States.State.JUMPING)
+
+		# [Left Mouse Button] _pressed_ -> Start "navigating"
+		if enable_navigation:
+			if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) \
+			and Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE:
+				# Find out where to click
+				var from = camera.project_ray_origin(event.position)
+				var to = from + camera.project_ray_normal(event.position) * 10000
+				var cursor_position = Plane(up_direction, transform.origin.y).intersects_ray(from, to)
+				if cursor_position:
+					#debug.draw_red_sphere(cursor_position) ## DEBUGGING
+					navigation_agent_3d.target_position = cursor_position
+					if not is_navigating:
+						# Start "navigating"
+						base_state.transition_state(current_state, States.State.NAVIGATING)
 
 
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -133,31 +154,43 @@ func _physics_process(delta) -> void:
 			new_up = Vector3.UP
 			gravity_accel = - Vector3.UP * gravity
 
-		# Get the input vector by specifying four actions for the positive and negative X and Y axes
-		input_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+		# If punching, ignore lateral input and freeze horizontal movement
+		if is_punching_left or is_punching_right:
+			# Preserve current vertical speed along the NEW up direction while zeroing tangential velocity
+			var vertical_speed_only: float = velocity.dot(new_up)
+			velocity = new_up * vertical_speed_only
+			# Keep speed at zero while punching so it doesn't pick up movement immediately after
+			speed_current = 0.0
+		else:
+			# Get the input vector by specifying four actions for the positive and negative X and Y axes
+			input_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 
-		# Set the player's movement speed based on the input magnitude
-		if speed_current == 0.0 and input_direction != Vector2.ZERO:
-			speed_current = input_direction.length() * speed_running
+			# Set the player's movement speed based on the input magnitude
+			if speed_current == 0.0 and input_direction != Vector2.ZERO:
+				speed_current = input_direction.length() * speed_running
 
-		# Convert the 2D input into a 3D world-space direction and project onto the tangent plane (orthogonal to new_up)
-		var raw_dir: Vector3 = transform.basis * Vector3(input_direction.x, 0, input_direction.y)
-		var lateral_dir: Vector3 = raw_dir - new_up * raw_dir.dot(new_up)
-		lateral_dir = lateral_dir.normalized()
-		if lateral_dir:
-			# Compute desired tangential (horizontal) velocity on the surface
-			var tangential_velocity: Vector3 = lateral_dir * speed_current
-			# Preserve current vertical speed along the NEW up direction
-			var vertical_speed: float = velocity.dot(new_up)
-			velocity = tangential_velocity + new_up * vertical_speed
-			if camera.perspective == camera.Perspective.THIRD_PERSON:
-				# Update the visuals to look in the direction based on player input
-				visuals.look_at(position + lateral_dir, new_up)
+			# Convert the 2D input into a 3D world-space direction and project onto the tangent plane (orthogonal to new_up)
+			var raw_dir: Vector3 = transform.basis * Vector3(input_direction.x, 0, input_direction.y)
+			var lateral_dir: Vector3 = raw_dir - new_up * raw_dir.dot(new_up)
+			lateral_dir = lateral_dir.normalized()
+			if lateral_dir:
+				# Compute desired tangential (horizontal) velocity on the surface
+				var tangential_velocity: Vector3 = lateral_dir * speed_current
+				# Preserve current vertical speed along the NEW up direction
+				var vertical_speed: float = velocity.dot(new_up)
+				velocity = tangential_velocity + new_up * vertical_speed
+				if camera.perspective == camera.Perspective.THIRD_PERSON:
+					# Update the visuals to look in the direction based on player input
+					visuals.look_at(position + lateral_dir, new_up)
 
 		# Apply gravity for this tick
 		velocity += gravity_accel * delta
 		# Commit the new up direction after applying gravity
 		up_direction = new_up
+
+		# While punching, clamp velocity to vertical only (no lateral slide)
+		if is_punching_left or is_punching_right:
+			velocity = up_direction * velocity.dot(up_direction)
 
 	# Record the player's "virtual velocity"
 	virtual_velocity = velocity

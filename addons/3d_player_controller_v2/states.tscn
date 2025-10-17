@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://yxm384w27bq2"]
+[gd_scene load_steps=16 format=3 uid="uid://yxm384w27bq2"]
 
 [ext_resource type="Script" uid="uid://bu32m3koxydbf" path="res://addons/3d_player_controller_v2/states/states.gd" id="1_gr8r5"]
 [ext_resource type="Script" uid="uid://5livqgnjxl8w" path="res://addons/3d_player_controller_v2/states/base.gd" id="2_uuywk"]
@@ -6,9 +6,13 @@
 [ext_resource type="Script" uid="uid://egvxkbvrdt6b" path="res://addons/3d_player_controller_v2/states/crouching.gd" id="4_ta1xp"]
 [ext_resource type="Script" uid="uid://b6ajd7mxue7ub" path="res://addons/3d_player_controller_v2/states/falling.gd" id="5_4c2up"]
 [ext_resource type="Script" uid="uid://dquv153nwr5ps" path="res://addons/3d_player_controller_v2/states/jumping.gd" id="6_e4nj5"]
+[ext_resource type="Script" uid="uid://bb6csqeahbm0n" path="res://addons/3d_player_controller_v2/states/kicking_left.gd" id="7_e4nj5"]
 [ext_resource type="Script" uid="uid://cvi6mwjf3t6cu" path="res://addons/3d_player_controller_v2/states/running.gd" id="7_ixqbx"]
 [ext_resource type="Script" uid="uid://c1uvv1dvb1537" path="res://addons/3d_player_controller_v2/states/navigating.gd" id="7_uuywk"]
+[ext_resource type="Script" uid="uid://cr0cgdqy55t28" path="res://addons/3d_player_controller_v2/states/kickng_right.gd" id="8_ixqbx"]
 [ext_resource type="Script" uid="uid://bkt6xfceqexr" path="res://addons/3d_player_controller_v2/states/sprinting.gd" id="8_smmr0"]
+[ext_resource type="Script" uid="uid://b4e2ceaipowt3" path="res://addons/3d_player_controller_v2/states/punching_right.gd" id="8_ta1xp"]
+[ext_resource type="Script" uid="uid://bqr8ahtb4dhqi" path="res://addons/3d_player_controller_v2/states/punching_left.gd" id="8_u0yrf"]
 [ext_resource type="Script" uid="uid://fep426f0srya" path="res://addons/3d_player_controller_v2/states/standing.gd" id="9_qtidm"]
 [ext_resource type="Script" uid="uid://tnxern5p0mas" path="res://addons/3d_player_controller_v2/states/walking.gd" id="10_fl747"]
 
@@ -35,9 +39,25 @@ script = ExtResource("5_4c2up")
 process_mode = 4
 script = ExtResource("6_e4nj5")
 
+[node name="KickingLeft" type="Node" parent="."]
+process_mode = 4
+script = ExtResource("7_e4nj5")
+
+[node name="KickngRight" type="Node" parent="."]
+process_mode = 4
+script = ExtResource("8_ixqbx")
+
 [node name="Navigating" type="Node" parent="."]
 process_mode = 4
 script = ExtResource("7_uuywk")
+
+[node name="PunchingLeft" type="Node" parent="."]
+process_mode = 4
+script = ExtResource("8_u0yrf")
+
+[node name="PunchingRight" type="Node" parent="."]
+process_mode = 4
+script = ExtResource("8_ta1xp")
 
 [node name="Running" type="Node" parent="."]
 process_mode = 4

@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dkot3p2xn8i5q"]
+[gd_scene load_steps=7 format=3 uid="uid://dkot3p2xn8i5q"]
 
 [ext_resource type="Script" uid="uid://b0g4sil827vyu" path="res://scenes/super_mario_galaxy/collectable.gd" id="1_jsdfa"]
 
@@ -13,6 +13,9 @@ size = Vector3(0.1, 0.1, 0.1)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_jsdfa"]
 radius = 0.15
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_n483i"]
+radius = 0.25
 
 [node name="Collectable" type="RigidBody3D"]
 physics_material_override = SubResource("PhysicsMaterial_jsdfa")
@@ -42,4 +45,10 @@ mesh = SubResource("BoxMesh_jsdfa")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 shape = SubResource("SphereShape3D_jsdfa")
 
+[node name="Area3D2" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D2"]
+shape = SubResource("SphereShape3D_n483i")
+
 [connection signal="mouse_entered" from="Area3D" to="." method="_on_area_3d_mouse_entered"]
+[connection signal="body_entered" from="Area3D2" to="." method="_on_area_3d_2_body_entered"]

@@ -9,7 +9,10 @@ const ANIMATION_RUNNING := "AnimationLibrary_Godot/Sprint"
 ## Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	player.camera.enable_head_bobbing = false
+	#player.camera.toggle_perspective() # Run in _ready() to start in 1st person
 	player.camera.lock_camera = true
+	player.camera.lock_perspective = true
 	player.enable_climbing = false
 	player.enable_crawling = false
 	player.enable_crouching = false
@@ -27,9 +30,6 @@ func _ready() -> void:
 	player.lock_movement_x = false
 	player.lock_movement_y = false
 	player.lock_movement_z = true
-	player.camera.enable_head_bobbing = false
-	#player.camera.toggle_perspective() # Run in _ready() to start in 1st person
-
 
 
 ## Called every frame. 'delta' is the elapsed time since the previous frame.

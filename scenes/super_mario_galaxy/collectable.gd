@@ -34,6 +34,16 @@ func _on_area_3d_mouse_entered():
 	play_pickup_sound()
 
 
+func _on_area_3d_2_body_entered(body: Node3D) -> void:
+	if body is CharacterBody3D:
+		if is_being_collected:
+			return
+
+		is_being_collected = true
+		pickup_collectable()
+		play_pickup_sound()
+
+
 func pickup_collectable():
 	# Find the camera in the scene
 	var camera = get_viewport().get_camera_3d()

@@ -9,10 +9,12 @@ var yellow_sphere: MeshInstance3D
 @onready var enable_crouching = $Configuration/EnableCrouching
 @onready var enable_double_jumping = $Configuration/EnableDoubleJumping
 @onready var enable_flying = $Configuration/EnableFlying
+@onready var enable_holding_objects = $Configuration/EnableHoldingObjects
 @onready var enable_jumping = $Configuration/EnableJumping
 @onready var enable_kicking = $Configuration/EnableKicking
 @onready var enable_navigation = $Configuration/EnableNavigation
 @onready var enable_punching = $Configuration/EnablePunching
+@onready var enable_retical = $Configuration/EnableRetical
 @onready var enable_rolling = $Configuration/EnableRolling
 @onready var enable_sprinting = $Configuration/EnableSprinting
 @onready var enable_swimming = $Configuration/EnableSwimming
@@ -24,7 +26,11 @@ var yellow_sphere: MeshInstance3D
 @onready var is_crouching = $States/IsCrouching
 @onready var is_falling = $States/IsFalling
 @onready var is_jumping = $States/IsJumping
+@onready var is_kicking_left = $States/IsKickingLeft
+@onready var is_kicking_right = $States/IsKickingRight
 @onready var is_on_floor = $States/IsOnFloor
+@onready var is_punching_left = $States/IsPunchingLeft
+@onready var is_punching_right = $States/IsPunchingRight
 @onready var is_navigating = $States/IsNavigating
 @onready var is_running = $States/IsRunning
 @onready var is_sprinting = $States/IsSprinting
@@ -63,6 +69,7 @@ func _process(_delta):
 		enable_kicking.button_pressed = player.enable_kicking
 		enable_navigation.button_pressed = player.enable_navigation
 		enable_punching.button_pressed = player.enable_punching
+		enable_retical.button_pressed = player.enable_retical
 		enable_rolling.button_pressed = player.enable_rolling
 		enable_sprinting.button_pressed = player.enable_sprinting
 		enable_swimming.button_pressed = player.enable_swimming
@@ -74,7 +81,11 @@ func _process(_delta):
 		is_crouching.button_pressed = player.is_crouching
 		is_falling.button_pressed = player.is_falling
 		is_jumping.button_pressed = player.is_jumping
+		is_kicking_left.button_pressed = player.is_kicking_left
+		is_kicking_right.button_pressed = player.is_kicking_right
 		is_on_floor.button_pressed = player.is_on_floor()
+		is_punching_left.button_pressed = player.is_punching_left
+		is_punching_right.button_pressed = player.is_punching_right
 		is_navigating.button_pressed = player.is_navigating
 		is_running.button_pressed = player.is_running
 		is_sprinting.button_pressed = player.is_sprinting
