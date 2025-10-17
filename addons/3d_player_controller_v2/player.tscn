@@ -18515,7 +18515,6 @@ script = ExtResource("1_ifhah")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 
 [node name="CameraSpringArm" type="SpringArm3D" parent="CameraMount"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.70000005, 0)
 spring_length = 1.5
 
 [node name="Camera3D" type="Camera3D" parent="CameraMount/CameraSpringArm"]
@@ -18523,7 +18522,6 @@ transform = Transform3D(1, 0, 0, 0, 0.9659259, 0.25881907, 0, -0.25881907, 0.965
 script = ExtResource("2_ffasv")
 
 [node name="RayCast3D" type="RayCast3D" parent="CameraMount/CameraSpringArm/Camera3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.5)
 target_position = Vector3(0, 0, -2)
 
 [node name="ContextualControls" type="Label" parent="CameraMount/CameraSpringArm/Camera3D"]
@@ -20183,19 +20181,19 @@ libraries = {
 }
 playback_default_blend_time = 0.2
 
-[node name="RayCast3D_Shoulder" type="RayCast3D" parent="Visuals"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
+[node name="RayCast3D_Top" type="RayCast3D" parent="Visuals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
 target_position = Vector3(0, 0, -1)
 
-[node name="RayCast3D_Chest" type="RayCast3D" parent="Visuals"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, 0)
+[node name="RayCast3D_High" type="RayCast3D" parent="Visuals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6999999, 0)
 target_position = Vector3(0, 0, -1)
 
-[node name="RayCast3D_Waist" type="RayCast3D" parent="Visuals"]
+[node name="RayCast3D_Middle" type="RayCast3D" parent="Visuals"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9999999, 0)
 target_position = Vector3(0, 0, -1)
 
-[node name="RayCast3D_Knees" type="RayCast3D" parent="Visuals"]
+[node name="RayCast3D_Low" type="RayCast3D" parent="Visuals"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.59999996, 0)
 target_position = Vector3(0, 0, -1)
 

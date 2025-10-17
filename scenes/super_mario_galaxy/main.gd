@@ -12,9 +12,9 @@ const MOUSE_CURSOR_ARROW = preload("uid://dmw8j7h0b8bri")
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	player.camera.enable_head_bobbing = false
-	#player.camera.toggle_perspective() # Run in _ready() to start in 1st person
 	player.camera.lock_camera = false
 	player.camera.lock_perspective = false
+	player.camera.set_camera_perspective(player.camera.Perspective.THIRD_PERSON)
 	player.enable_climbing = false
 	player.enable_crawling = true
 	player.enable_crouching = true

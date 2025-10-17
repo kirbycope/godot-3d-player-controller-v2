@@ -6,6 +6,7 @@ extends CharacterBody3D
 @export var enable_crouching: bool = true ## Enable crouching
 @export var enable_double_jumping: bool = false ## Enable double jumping
 @export var enable_flying: bool = false ## Enable flying
+@export var enable_hanging: bool = false ## Enable hanging
 @export var enable_holding_objects: bool = false ## Enable holding objects
 @export var enable_jumping: bool = true ## Enable jumping
 @export var enable_kicking: bool = false ## Enable kicking
@@ -39,6 +40,7 @@ var is_crouching: bool = false ## Is the player crouching?
 var is_double_jumping: bool = false ## Is the player double jumping?
 var is_falling: bool = false ## Is the player falling?
 var is_flying: bool = false ## Is the player flying?
+var is_hanging: bool = false ## Is the player hanging?
 var is_jumping: bool = false ## Is the player jumping?
 var is_kicking_left: bool = false ## Is the player kicking with their left foot?
 var is_kicking_right: bool = false ## Is the player kicking with their right foot?
@@ -66,6 +68,10 @@ var virtual_velocity: Vector3 = Vector3.ZERO ## The player's velocity is movemen
 @onready var navigation_agent_3d: NavigationAgent3D = $NavigationAgent3D
 @onready var pause: CanvasLayer = $Pause
 @onready var visuals = $Visuals
+@onready var ray_cast_top: RayCast3D = visuals.get_node("RayCast3D_Top")
+@onready var ray_cast_high: RayCast3D = visuals.get_node("RayCast3D_High")
+@onready var ray_cast_middle: RayCast3D = visuals.get_node("RayCast3D_Middle")
+@onready var ray_cast_low: RayCast3D = visuals.get_node("RayCast3D_Low")
 
 
 ## Called when the node is "ready", i.e. when both the node and its children have entered the scene tree.
@@ -183,8 +189,9 @@ func _physics_process(delta) -> void:
 					# Update the visuals to look in the direction based on player input
 					visuals.look_at(position + lateral_dir, new_up)
 
-		# Apply gravity for this tick
-		velocity += gravity_accel * delta
+		# Apply gravity for this tick (unless climbing)
+		if not is_climbing:
+			velocity += gravity_accel * delta
 		# Commit the new up direction after applying gravity
 		up_direction = new_up
 

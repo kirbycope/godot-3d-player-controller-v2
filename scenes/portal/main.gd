@@ -7,9 +7,9 @@ extends Node3D
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	player.camera.enable_head_bobbing = false
-	player.camera.toggle_perspective() # Run in _ready() to start in 1st person
 	player.camera.lock_camera = false
 	player.camera.lock_perspective = true
+	player.camera.set_camera_perspective(player.camera.Perspective.FIRST_PERSON)
 	player.enable_climbing = false
 	player.enable_crawling = true
 	player.enable_crouching = true

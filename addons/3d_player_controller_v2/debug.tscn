@@ -104,6 +104,22 @@ offset_bottom = 31.0
 grow_horizontal = 0
 mouse_filter = 1
 
+[node name="EnableHanging" type="CheckButton" parent="Configuration"]
+layout_mode = 2
+text = "EnableHanging"
+
+[node name="Panel" type="Panel" parent="Configuration/EnableHanging"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -222.0
+offset_right = -2.0
+offset_bottom = 31.0
+grow_horizontal = 0
+mouse_filter = 1
+
 [node name="EnableJumping" type="CheckButton" parent="Configuration"]
 layout_mode = 2
 text = "EnableJumping"
@@ -311,6 +327,17 @@ layout_mode = 0
 offset_right = 153.0
 offset_bottom = 23.0
 
+[node name="IsClimbing" type="CheckBox" parent="States"]
+layout_mode = 2
+disabled = true
+text = "IsClimbing"
+
+[node name="Panel" type="Panel" parent="States/IsClimbing"]
+z_index = -1
+layout_mode = 0
+offset_right = 153.0
+offset_bottom = 31.0
+
 [node name="IsCrawling" type="CheckBox" parent="States"]
 layout_mode = 2
 disabled = true
@@ -339,6 +366,17 @@ disabled = true
 text = "IsFalling"
 
 [node name="Panel" type="Panel" parent="States/IsFalling"]
+z_index = -1
+layout_mode = 0
+offset_right = 153.0
+offset_bottom = 31.0
+
+[node name="IsHanging" type="CheckBox" parent="States"]
+layout_mode = 2
+disabled = true
+text = "IsHanging"
+
+[node name="Panel" type="Panel" parent="States/IsHanging"]
 z_index = -1
 layout_mode = 0
 offset_right = 153.0
@@ -565,6 +603,7 @@ scroll_active = false
 [connection signal="toggled" from="Configuration/EnableCrouching" to="." method="_on_enable_crouching_toggled"]
 [connection signal="toggled" from="Configuration/EnableDoubleJumping" to="." method="_on_enable_double_jumping_toggled"]
 [connection signal="toggled" from="Configuration/EnableFlying" to="." method="_on_enable_flying_toggled"]
+[connection signal="toggled" from="Configuration/EnableHanging" to="." method="_on_enable_hanging_toggled"]
 [connection signal="toggled" from="Configuration/EnableJumping" to="." method="_on_enable_jumping_toggled"]
 [connection signal="toggled" from="Configuration/EnableKicking" to="." method="_on_enable_kicking_toggled"]
 [connection signal="toggled" from="Configuration/EnableNavigation" to="." method="_on_enable_navigation_toggled"]

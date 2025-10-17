@@ -1,8 +1,8 @@
 extends Camera3D
 
 enum Perspective {
-	THIRD_PERSON,
-	FIRST_PERSON
+	THIRD_PERSON, # 0
+	FIRST_PERSON, # 1
 }
 
 const BONE_PATH: String = "Godette/Rig/GeneralSkeleton/BoneAttachment3D"
@@ -13,7 +13,7 @@ const BONE_PATH: String = "Godette/Rig/GeneralSkeleton/BoneAttachment3D"
 @export var look_sensitivity_mouse: float = 0.2 ## Mouse look sensitivity
 
 var is_rotating_camera: bool = false
-var perspective: Perspective = Perspective.THIRD_PERSON ## Camera perspective
+var perspective: Perspective = Perspective.FIRST_PERSON ## Camera perspective
 
 @onready var camera_spring_arm = get_parent()
 @onready var camera_mount: Node3D = get_parent().get_parent()
@@ -168,9 +168,18 @@ func camera_rotate_by_mouse(event: InputEvent) -> void:
 		player.visuals.rotate_y(deg_to_rad(event.relative.x * look_sensitivity_mouse))
 
 
-## Toggle between "first-person" and "third-person" perspectives.
-func toggle_perspective() -> void:
-	if perspective == Perspective.THIRD_PERSON:
+## Set the camera's perspective.
+func set_camera_perspective(mode: Perspective) -> void:
+	if mode == Perspective.THIRD_PERSON:
+		perspective = Perspective.THIRD_PERSON
+		if get_parent() != camera_spring_arm:
+			reparent(camera_spring_arm)
+		camera_spring_arm.spring_length = 1.5
+		camera_spring_arm.position.x = 0.0
+		camera_spring_arm.position.y = 0.7
+		camera_spring_arm.position.z = 0.0	
+		ray_cast.position.z = -1.5
+	else:
 		perspective = Perspective.FIRST_PERSON
 		player.visuals.rotation.y = 0.0
 		if enable_head_bobbing:
@@ -181,12 +190,11 @@ func toggle_perspective() -> void:
 			camera_spring_arm.position.y = 0.0
 			camera_spring_arm.position.z = -0.4
 			ray_cast.position.z = 0.0
+
+
+## Toggle between "first-person" and "third-person" perspectives.
+func toggle_perspective() -> void:
+	if perspective == Perspective.FIRST_PERSON:
+		set_camera_perspective(Perspective.THIRD_PERSON)
 	else:
-		perspective = Perspective.THIRD_PERSON
-		if get_parent() != camera_spring_arm:
-			reparent(camera_spring_arm)
-		camera_spring_arm.spring_length = 1.5
-		camera_spring_arm.position.x = 0.0
-		camera_spring_arm.position.y = 0.7
-		camera_spring_arm.position.z = 0.0	
-		ray_cast.position.z = -1.5
+		set_camera_perspective(Perspective.FIRST_PERSON)
