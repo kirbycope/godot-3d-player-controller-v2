@@ -143,7 +143,7 @@ func _process(delta) -> void:
 				if collider is RigidBody3D:
 					contextual_controls.text = "Press [E] to pickup"
 		else:
-			contextual_controls.text = "Press [E] to release"
+			contextual_controls.text = "Press [E] to release \n Press [RMB] to throw"
 
 	retical.visible = player.enable_retical
 
