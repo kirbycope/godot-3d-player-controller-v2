@@ -1,6 +1,6 @@
 extends BaseState
 
-const ANIMTION_HANGING := "AnimationLibrary_Godot/Hang_Idle"
+const ANIMTION_HANGING := "AnimationLibrary_Godot/Climb_Idle"
 const NODE_NAME := "Hanging"
 const NODE_STATE := States.State.HANGING
 

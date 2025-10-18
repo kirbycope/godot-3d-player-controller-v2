@@ -1,3 +1,4 @@
+class_name Controls
 extends CharacterBody3D
 
 @export_group("CONFIG")
@@ -166,9 +167,11 @@ func _physics_process(delta) -> void:
 			new_up = Vector3.UP
 			gravity_accel = - Vector3.UP * gravity
 
-		# Handle player input for lateral movement
+		# Handle player input for lateral movement (disabled while climbing/hanging)
 		if not is_punching_left \
-		and not is_punching_right:
+		and not is_punching_right \
+		and not is_climbing \
+		and not is_hanging:
 			# Get the input vector by specifying four actions for the positive and negative X and Y axes
 			input_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 			# Set the player's movement speed based on the input magnitude
