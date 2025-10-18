@@ -24,7 +24,7 @@ extends CharacterBody3D
 @export var lock_movement_y: bool = false ## Lock movement along the Y axis
 @export var lock_movement_z: bool = false ## Lock movement along the Z axis
 @export_group("SPEED")
-@export var speed_climbing: float = 0.5 ## Speed while climbing
+@export var speed_climbing: float = 1.0 ## Speed while climbing
 @export var speed_crawling: float = 0.75 ## Speed while crawling
 @export var speed_flying: float = 5.0 ## Speed while flying
 @export var speed_flying_fast: float = 10.0 ## Speed while flying fast

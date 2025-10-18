@@ -39,6 +39,18 @@ func _process(delta):
 			# Start "hanging"
 			transition_state(NODE_STATE, States.State.HANGING)
 			return
+	
+	# # Ⓑ/[shift] _pressed_ -> Move faster while "climbing"
+	if player.enable_sprinting:
+		if Input.is_action_pressed(player.controls.button_1):
+			player.speed_current = player.speed_climbing * 2
+		else:
+			player.speed_current = player.speed_climbing
+
+	# Ⓨ/[Ctrl] _pressed_ -> Start "falling"
+	if Input.is_action_just_pressed(player.controls.button_3):
+		transition_state(NODE_STATE, States.State.FALLING)
+		return
 
 	# Move the player while climbing
 	move_player()
@@ -87,7 +99,7 @@ func move_to_wall() -> void:
 	var player_height = player.get_node("CollisionShape3D").shape.height
 
 	# Get the player's width
-	var player_width = player.get_node("CollisionShape3D").shape.radius * 2
+	var player_width = player.get_node("CollisionShape3D").shape.radius * 1.5
 
 	# Get the collision point
 	var collision_point = player.ray_cast_high.get_collision_point()
@@ -126,6 +138,12 @@ func move_to_wall() -> void:
 
 ## Plays the appropriate animation based on player state.
 func play_animation() -> void:
+	# Adjust playback speed based on climbing speed
+	if player.speed_current > player.speed_climbing:
+		player.animation_player.speed_scale = 1.5
+	else:
+		player.animation_player.speed_scale = 1.0
+
 	# Check if the animation player is not already playing the appropriate animation
 	if Input.is_action_pressed(player.controls.move_left) \
 	and player.animation_player.current_animation != ANIMATION_CLIMBING_LEFT:
@@ -187,3 +205,6 @@ func stop() -> void:
 
 	# Flag the player as not "climbing"
 	player.is_climbing = false
+
+	# Reset animation playback speed
+	player.animation_player.speed_scale = 1.0

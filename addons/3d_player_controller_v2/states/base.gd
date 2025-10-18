@@ -25,9 +25,9 @@ func _input(event):
 					transition_state(player.current_state, States.State.CLIMBING)
 					return
 
-	# Ⓑ/[shift] _pressed_ -> Stop "climbing"/"hanging"
+	# Ⓨ/[Ctrl] _pressed_ -> Stop "climbing"/"hanging"
 	if player.is_climbing or player.is_hanging:
-		if event.is_action_pressed(player.controls.button_1):
+		if event.is_action_pressed(player.controls.button_3):
 			# Start "falling"
 			transition_state(player.current_state, States.State.FALLING)
 			return
@@ -35,7 +35,10 @@ func _input(event):
 	# Ⓑ/[shift] _pressed_ -> Start "sprinting"
 	if player.enable_sprinting:
 		if event.is_action_pressed(player.controls.button_1) \
+		and not player.is_climbing \
+		and not player.is_hanging \
 		and not player.is_sprinting \
+		and not player.is_swimming \
 		and player.is_on_floor():
 			transition_state(player.current_state, States.State.SPRINTING)
 			return
