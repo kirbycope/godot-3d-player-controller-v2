@@ -7,6 +7,7 @@ var yellow_sphere: MeshInstance3D
 @onready var enable_climbing = $Configuration/EnableClimbing
 @onready var enable_crawling = $Configuration/EnableCrawling
 @onready var enable_crouching = $Configuration/EnableCrouching
+@onready var enable_driving = $Configuration/EnableDriving
 @onready var enable_double_jumping = $Configuration/EnableDoubleJumping
 @onready var enable_flying = $Configuration/EnableFlying
 @onready var enable_hanging = $Configuration/EnableHanging
@@ -17,25 +18,31 @@ var yellow_sphere: MeshInstance3D
 @onready var enable_punching = $Configuration/EnablePunching
 @onready var enable_retical = $Configuration/EnableRetical
 @onready var enable_rolling = $Configuration/EnableRolling
+@onready var enable_sliding = $Configuration/EnableSliding
+@onready var enable_skateboarding = $Configuration/EnableSkateboarding
 @onready var enable_sprinting = $Configuration/EnableSprinting
 @onready var enable_swimming = $Configuration/EnableSwimming
-@onready var lock_camera = $Configuration/LockCamera
-@onready var lock_movement_x = $Configuration/LockMovementX
-@onready var lock_movement_y = $Configuration/LockMovementY
-@onready var lock_movement_z = $Configuration/LockMovementZ
+@onready var lock_camera = $Configuration2/LockCamera
+@onready var lock_movement_x = $Configuration2/LockMovementX
+@onready var lock_movement_y = $Configuration2/LockMovementY
+@onready var lock_movement_z = $Configuration2/LockMovementZ
 @onready var is_climbing: CheckBox = $States/IsClimbing
 @onready var is_crawling = $States/IsCrawling
 @onready var is_crouching = $States/IsCrouching
+@onready var is_driving = $States/IsDriving
 @onready var is_falling = $States/IsFalling
 @onready var is_hanging = $States/IsHanging
 @onready var is_jumping = $States/IsJumping
-@onready var is_kicking_left = $States/IsKickingLeft
-@onready var is_kicking_right = $States/IsKickingRight
+@onready var is_kicking_left = $States2/IsKickingLeft
+@onready var is_kicking_right = $States2/IsKickingRight
 @onready var is_on_floor = $States/IsOnFloor
-@onready var is_punching_left = $States/IsPunchingLeft
-@onready var is_punching_right = $States/IsPunchingRight
+@onready var is_punching_left = $States2/IsPunchingLeft
+@onready var is_punching_right = $States2/IsPunchingRight
+@onready var is_rolling = $States/IsRolling
 @onready var is_navigating = $States/IsNavigating
 @onready var is_running = $States/IsRunning
+@onready var is_sliding: CheckBox = $States/IsSliding
+@onready var is_skateboarding: CheckBox = $States/IsSkateboarding
 @onready var is_sprinting = $States/IsSprinting
 @onready var is_standing = $States/IsStanding
 @onready var is_walking = $States/IsWalking
@@ -67,6 +74,7 @@ func _process(_delta):
 		enable_crawling.button_pressed = player.enable_crawling
 		enable_crouching.button_pressed = player.enable_crouching
 		enable_double_jumping.button_pressed = player.enable_double_jumping
+		enable_driving.button_pressed = player.enable_driving
 		enable_flying.button_pressed = player.enable_flying
 		enable_hanging.button_pressed = player.enable_hanging
 		enable_jumping.button_pressed = player.enable_jumping
@@ -75,6 +83,8 @@ func _process(_delta):
 		enable_punching.button_pressed = player.enable_punching
 		enable_retical.button_pressed = player.enable_retical
 		enable_rolling.button_pressed = player.enable_rolling
+		enable_sliding.button_pressed = player.enable_sliding
+		enable_skateboarding.button_pressed = player.enable_skateboarding
 		enable_sprinting.button_pressed = player.enable_sprinting
 		enable_swimming.button_pressed = player.enable_swimming
 		lock_camera.button_pressed = player.camera.lock_camera
@@ -84,6 +94,7 @@ func _process(_delta):
 		is_climbing.button_pressed = player.is_climbing
 		is_crawling.button_pressed = player.is_crawling
 		is_crouching.button_pressed = player.is_crouching
+		is_driving.button_pressed = player.is_driving
 		is_falling.button_pressed = player.is_falling
 		is_hanging.button_pressed = player.is_hanging
 		is_jumping.button_pressed = player.is_jumping
@@ -93,6 +104,7 @@ func _process(_delta):
 		is_punching_left.button_pressed = player.is_punching_left
 		is_punching_right.button_pressed = player.is_punching_right
 		is_navigating.button_pressed = player.is_navigating
+		is_rolling.button_pressed = player.is_rolling
 		is_running.button_pressed = player.is_running
 		is_sprinting.button_pressed = player.is_sprinting
 		is_standing.button_pressed = player.is_standing
@@ -161,8 +173,13 @@ func _on_enable_crouching_toggled(toggled_on):
 	player.enable_crouching = toggled_on
 
 
+
 func _on_enable_double_jumping_toggled(toggled_on):
 	player.enable_double_jumping = toggled_on
+
+
+func _on_enable_driving_toggled(toggled_on: bool) -> void:
+	player.enable_driving = toggled_on
 
 
 func _on_enable_flying_toggled(toggled_on):
@@ -171,6 +188,10 @@ func _on_enable_flying_toggled(toggled_on):
 
 func _on_enable_hanging_toggled(toggled_on: bool) -> void:
 	player.enable_hanging
+
+
+func _on_enable_holding_objects_toggled(toggled_on: bool) -> void:
+	player.enable_holding_objects = toggled_on
 
 
 func _on_enable_jumping_toggled(toggled_on):
@@ -195,6 +216,14 @@ func _on_enable_retical_toggled(toggled_on: bool) -> void:
 
 func _on_enable_rolling_toggled(toggled_on):
 	player.enable_rolling = toggled_on
+
+
+func _on_enable_sliding_toggled(toggled_on: bool) -> void:
+	player.enable_sliding = toggled_on
+
+
+func _on_enable_skateboarding_toggled(toggled_on: bool) -> void:
+	pass # Replace with function body.
 
 
 func _on_enable_sprinting_toggled(toggled_on):

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://yxm384w27bq2"]
+[gd_scene load_steps=21 format=3 uid="uid://yxm384w27bq2"]
 
 [ext_resource type="Script" uid="uid://bu32m3koxydbf" path="res://addons/3d_player_controller_v2/states/states.gd" id="1_gr8r5"]
 [ext_resource type="Script" uid="uid://5livqgnjxl8w" path="res://addons/3d_player_controller_v2/states/base.gd" id="2_uuywk"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://u1m1wsuqbxfb" path="res://addons/3d_player_controller_v2/states/crawling.gd" id="3_u0yrf"]
 [ext_resource type="Script" uid="uid://egvxkbvrdt6b" path="res://addons/3d_player_controller_v2/states/crouching.gd" id="4_ta1xp"]
 [ext_resource type="Script" uid="uid://b6ajd7mxue7ub" path="res://addons/3d_player_controller_v2/states/falling.gd" id="5_4c2up"]
+[ext_resource type="Script" uid="uid://cqnkj8fy6587" path="res://addons/3d_player_controller_v2/states/driving.gd" id="6_80cnw"]
 [ext_resource type="Script" uid="uid://dquv153nwr5ps" path="res://addons/3d_player_controller_v2/states/jumping.gd" id="6_e4nj5"]
 [ext_resource type="Script" uid="uid://bb6csqeahbm0n" path="res://addons/3d_player_controller_v2/states/kicking_left.gd" id="7_e4nj5"]
 [ext_resource type="Script" uid="uid://cvi6mwjf3t6cu" path="res://addons/3d_player_controller_v2/states/running.gd" id="7_ixqbx"]
@@ -17,6 +18,8 @@
 [ext_resource type="Script" uid="uid://bqr8ahtb4dhqi" path="res://addons/3d_player_controller_v2/states/punching_left.gd" id="8_u0yrf"]
 [ext_resource type="Script" uid="uid://fep426f0srya" path="res://addons/3d_player_controller_v2/states/standing.gd" id="9_qtidm"]
 [ext_resource type="Script" uid="uid://tnxern5p0mas" path="res://addons/3d_player_controller_v2/states/walking.gd" id="10_fl747"]
+[ext_resource type="Script" uid="uid://dv7brwoujcdcu" path="res://addons/3d_player_controller_v2/states/rolling.gd" id="15_3qar2"]
+[ext_resource type="Script" uid="uid://djuxs8olgukcn" path="res://addons/3d_player_controller_v2/states/sliding.gd" id="15_qtidm"]
 
 [node name="States" type="Node"]
 script = ExtResource("1_gr8r5")
@@ -36,6 +39,9 @@ script = ExtResource("3_u0yrf")
 [node name="Crouching" type="Node" parent="."]
 process_mode = 4
 script = ExtResource("4_ta1xp")
+
+[node name="Driving" type="Node" parent="."]
+script = ExtResource("6_80cnw")
 
 [node name="Falling" type="Node" parent="."]
 process_mode = 4
@@ -69,9 +75,17 @@ script = ExtResource("8_u0yrf")
 process_mode = 4
 script = ExtResource("8_ta1xp")
 
+[node name="Rolling" type="Node" parent="."]
+process_mode = 4
+script = ExtResource("15_3qar2")
+
 [node name="Running" type="Node" parent="."]
 process_mode = 4
 script = ExtResource("7_ixqbx")
+
+[node name="Sliding" type="Node" parent="."]
+process_mode = 4
+script = ExtResource("15_qtidm")
 
 [node name="Sprinting" type="Node" parent="."]
 process_mode = 4

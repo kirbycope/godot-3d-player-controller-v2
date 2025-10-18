@@ -10,6 +10,11 @@ func _process(delta):
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
 
+	# Check if the player is on the floor
+	if player.is_on_floor():
+		# Reset vertical velocity
+		player.velocity = Vector3.ZERO
+
 	# Play the animation
 	play_animation()
 
@@ -42,12 +47,6 @@ func start() -> void:
 
 	# Flag the player as "punching"
 	player.is_punching_left = true
-
-	# Set the player's speed
-	player.speed_current = 0.0
-
-	# Set the player's velocity
-	player.velocity = Vector3.ZERO
 
 
 ## Stop "punching left".

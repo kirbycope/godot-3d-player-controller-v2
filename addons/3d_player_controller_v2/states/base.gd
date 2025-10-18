@@ -9,6 +9,29 @@ func _input(event):
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
 
+	# Ⓐ/[Space] _pressed_ (while airborne) -> Start "climbing"
+	if player.enable_climbing:
+		if Input.is_action_just_pressed(player.controls.button_0) \
+		and (player.is_falling or player.is_jumping) \
+		and not player.is_climbing:
+			# Check if the player is facing a surface
+			if player.ray_cast_high.is_colliding():
+				# Get the collision object
+				var collision_object = player.ray_cast_high.get_collider()
+				# Check if the collision object is "climbable"
+				if not collision_object is CharacterBody3D \
+				and not collision_object is SoftBody3D:
+					# Start "climbing"
+					transition_state(player.current_state, States.State.CLIMBING)
+					return
+
+	# Ⓑ/[shift] _pressed_ -> Stop "climbing"/"hanging"
+	if player.is_climbing or player.is_hanging:
+		if event.is_action_pressed(player.controls.button_1):
+			# Start "falling"
+			transition_state(player.current_state, States.State.FALLING)
+			return
+
 	# Ⓑ/[shift] _pressed_ -> Start "sprinting"
 	if player.enable_sprinting:
 		if event.is_action_pressed(player.controls.button_1) \
@@ -39,18 +62,12 @@ func _physics_process(delta):
 	and not player.is_jumping \
 	and not player.is_punching_left \
 	and not player.is_punching_right:
-		# Check if the player is looking at a climbable surface -> Start "climbing"
-		if player.enable_climbing:
-			if not player.is_climbing \
-			and player.ray_cast_high.is_colliding():
-				# Start "climbing"
-				transition_state(player.current_state, States.State.CLIMBING)
-		else:
-			transition_state(player.current_state, States.State.FALLING)
+		transition_state(player.current_state, States.State.FALLING)
 		return
 
 	# Change state based on velocity
-	if not player.is_crawling \
+	if not player.is_climbing \
+	and not player.is_crawling \
 	and not player.is_crouching \
 	and not player.is_punching_left \
 	and not player.is_punching_right \

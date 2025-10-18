@@ -88,6 +88,22 @@ offset_bottom = 31.0
 grow_horizontal = 0
 mouse_filter = 1
 
+[node name="EnableDriving" type="CheckButton" parent="Configuration"]
+layout_mode = 2
+text = "EnableDriving"
+
+[node name="Panel" type="Panel" parent="Configuration/EnableDriving"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -222.0
+offset_right = -2.0
+offset_bottom = 31.0
+grow_horizontal = 0
+mouse_filter = 1
+
 [node name="EnableFlying" type="CheckButton" parent="Configuration"]
 layout_mode = 2
 text = "EnableFlying"
@@ -109,6 +125,22 @@ layout_mode = 2
 text = "EnableHanging"
 
 [node name="Panel" type="Panel" parent="Configuration/EnableHanging"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -222.0
+offset_right = -2.0
+offset_bottom = 31.0
+grow_horizontal = 0
+mouse_filter = 1
+
+[node name="EnableHoldingObjects" type="CheckButton" parent="Configuration"]
+layout_mode = 2
+text = "EnableHoldingObjects"
+
+[node name="Panel" type="Panel" parent="Configuration/EnableHoldingObjects"]
 z_index = -1
 layout_mode = 1
 anchors_preset = 1
@@ -216,6 +248,38 @@ offset_bottom = 31.0
 grow_horizontal = 0
 mouse_filter = 1
 
+[node name="EnableSliding" type="CheckButton" parent="Configuration"]
+layout_mode = 2
+text = "EnableSliding"
+
+[node name="Panel" type="Panel" parent="Configuration/EnableSliding"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -222.0
+offset_right = -2.0
+offset_bottom = 31.0
+grow_horizontal = 0
+mouse_filter = 1
+
+[node name="EnableSkateboarding" type="CheckButton" parent="Configuration"]
+layout_mode = 2
+text = "EnableSkateboarding"
+
+[node name="Panel" type="Panel" parent="Configuration/EnableSkateboarding"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -222.0
+offset_right = -2.0
+offset_bottom = 31.0
+grow_horizontal = 0
+mouse_filter = 1
+
 [node name="EnableSprinting" type="CheckButton" parent="Configuration"]
 layout_mode = 2
 text = "EnableSprinting"
@@ -248,11 +312,27 @@ offset_bottom = 31.0
 grow_horizontal = 0
 mouse_filter = 1
 
-[node name="LockCamera" type="CheckButton" parent="Configuration"]
+[node name="Configuration2" type="VBoxContainer" parent="."]
+offset_left = 838.0
+offset_right = 1058.0
+offset_bottom = 720.0
+
+[node name="Label" type="Label" parent="Configuration2"]
+layout_mode = 2
+text = "CONFIG"
+horizontal_alignment = 1
+
+[node name="Panel" type="Panel" parent="Configuration2/Label"]
+z_index = -1
+layout_mode = 0
+offset_right = 218.0
+offset_bottom = 23.0
+
+[node name="LockCamera" type="CheckButton" parent="Configuration2"]
 layout_mode = 2
 text = "LockCamera"
 
-[node name="Panel" type="Panel" parent="Configuration/LockCamera"]
+[node name="Panel" type="Panel" parent="Configuration2/LockCamera"]
 z_index = -1
 layout_mode = 1
 anchors_preset = 1
@@ -264,11 +344,11 @@ offset_bottom = 31.0
 grow_horizontal = 0
 mouse_filter = 1
 
-[node name="LockMovementX" type="CheckButton" parent="Configuration"]
+[node name="LockMovementX" type="CheckButton" parent="Configuration2"]
 layout_mode = 2
 text = "LockMovementX"
 
-[node name="Panel" type="Panel" parent="Configuration/LockMovementX"]
+[node name="Panel" type="Panel" parent="Configuration2/LockMovementX"]
 z_index = -1
 layout_mode = 1
 anchors_preset = 1
@@ -280,11 +360,11 @@ offset_bottom = 31.0
 grow_horizontal = 0
 mouse_filter = 1
 
-[node name="LockMovementY" type="CheckButton" parent="Configuration"]
+[node name="LockMovementY" type="CheckButton" parent="Configuration2"]
 layout_mode = 2
 text = "LockMovementY"
 
-[node name="Panel" type="Panel" parent="Configuration/LockMovementY"]
+[node name="Panel" type="Panel" parent="Configuration2/LockMovementY"]
 z_index = -1
 layout_mode = 1
 anchors_preset = 1
@@ -296,11 +376,11 @@ offset_bottom = 31.0
 grow_horizontal = 0
 mouse_filter = 1
 
-[node name="LockMovementZ" type="CheckButton" parent="Configuration"]
+[node name="LockMovementZ" type="CheckButton" parent="Configuration2"]
 layout_mode = 2
 text = "LockMovementZ"
 
-[node name="Panel" type="Panel" parent="Configuration/LockMovementZ"]
+[node name="Panel" type="Panel" parent="Configuration2/LockMovementZ"]
 z_index = -1
 layout_mode = 1
 anchors_preset = 1
@@ -360,6 +440,28 @@ layout_mode = 0
 offset_right = 153.0
 offset_bottom = 31.0
 
+[node name="IsDoubleJumping" type="CheckBox" parent="States"]
+layout_mode = 2
+disabled = true
+text = "IsDoubleJumping"
+
+[node name="Panel" type="Panel" parent="States/IsDoubleJumping"]
+z_index = -1
+layout_mode = 0
+offset_right = 153.0
+offset_bottom = 31.0
+
+[node name="IsDriving" type="CheckBox" parent="States"]
+layout_mode = 2
+disabled = true
+text = "IsDriving"
+
+[node name="Panel" type="Panel" parent="States/IsDriving"]
+z_index = -1
+layout_mode = 0
+offset_right = 153.0
+offset_bottom = 31.0
+
 [node name="IsFalling" type="CheckBox" parent="States"]
 layout_mode = 2
 disabled = true
@@ -382,34 +484,23 @@ layout_mode = 0
 offset_right = 153.0
 offset_bottom = 31.0
 
+[node name="IsOnFloor" type="CheckBox" parent="States"]
+layout_mode = 2
+disabled = true
+text = "IsOnFloor"
+
+[node name="Panel" type="Panel" parent="States/IsOnFloor"]
+z_index = -1
+layout_mode = 0
+offset_right = 153.0
+offset_bottom = 31.0
+
 [node name="IsJumping" type="CheckBox" parent="States"]
 layout_mode = 2
 disabled = true
 text = "IsJumping"
 
 [node name="Panel" type="Panel" parent="States/IsJumping"]
-z_index = -1
-layout_mode = 0
-offset_right = 153.0
-offset_bottom = 31.0
-
-[node name="IsKickingLeft" type="CheckBox" parent="States"]
-layout_mode = 2
-disabled = true
-text = "IsKickingLeft"
-
-[node name="Panel" type="Panel" parent="States/IsKickingLeft"]
-z_index = -1
-layout_mode = 0
-offset_right = 153.0
-offset_bottom = 31.0
-
-[node name="IsKickingRight" type="CheckBox" parent="States"]
-layout_mode = 2
-disabled = true
-text = "IsKickingRight"
-
-[node name="Panel" type="Panel" parent="States/IsKickingRight"]
 z_index = -1
 layout_mode = 0
 offset_right = 153.0
@@ -426,34 +517,12 @@ layout_mode = 0
 offset_right = 153.0
 offset_bottom = 31.0
 
-[node name="IsOnFloor" type="CheckBox" parent="States"]
+[node name="IsRolling" type="CheckBox" parent="States"]
 layout_mode = 2
 disabled = true
-text = "IsOnFloor"
+text = "IsRolling"
 
-[node name="Panel" type="Panel" parent="States/IsOnFloor"]
-z_index = -1
-layout_mode = 0
-offset_right = 153.0
-offset_bottom = 31.0
-
-[node name="IsPunchingLeft" type="CheckBox" parent="States"]
-layout_mode = 2
-disabled = true
-text = "IsPunchingLeft"
-
-[node name="Panel" type="Panel" parent="States/IsPunchingLeft"]
-z_index = -1
-layout_mode = 0
-offset_right = 153.0
-offset_bottom = 31.0
-
-[node name="IsPunchingRight" type="CheckBox" parent="States"]
-layout_mode = 2
-disabled = true
-text = "IsPunchingRight"
-
-[node name="Panel" type="Panel" parent="States/IsPunchingRight"]
+[node name="Panel" type="Panel" parent="States/IsRolling"]
 z_index = -1
 layout_mode = 0
 offset_right = 153.0
@@ -465,6 +534,28 @@ disabled = true
 text = "IsRunning"
 
 [node name="Panel" type="Panel" parent="States/IsRunning"]
+z_index = -1
+layout_mode = 0
+offset_right = 153.0
+offset_bottom = 31.0
+
+[node name="IsSliding" type="CheckBox" parent="States"]
+layout_mode = 2
+disabled = true
+text = "IsSliding"
+
+[node name="Panel" type="Panel" parent="States/IsSliding"]
+z_index = -1
+layout_mode = 0
+offset_right = 153.0
+offset_bottom = 31.0
+
+[node name="IsSkateboarding" type="CheckBox" parent="States"]
+layout_mode = 2
+disabled = true
+text = "IsSkateboarding"
+
+[node name="Panel" type="Panel" parent="States/IsSkateboarding"]
 z_index = -1
 layout_mode = 0
 offset_right = 153.0
@@ -492,12 +583,83 @@ layout_mode = 0
 offset_right = 153.0
 offset_bottom = 31.0
 
+[node name="IsSwimming" type="CheckBox" parent="States"]
+layout_mode = 2
+disabled = true
+text = "IsSwimming"
+
+[node name="Panel" type="Panel" parent="States/IsSwimming"]
+z_index = -1
+layout_mode = 0
+offset_right = 153.0
+offset_bottom = 31.0
+
 [node name="IsWalking" type="CheckBox" parent="States"]
 layout_mode = 2
 disabled = true
 text = "IsWalking"
 
 [node name="Panel" type="Panel" parent="States/IsWalking"]
+z_index = -1
+layout_mode = 0
+offset_right = 153.0
+offset_bottom = 31.0
+
+[node name="States2" type="VBoxContainer" parent="."]
+offset_left = 160.0
+offset_right = 313.0
+offset_bottom = 720.0
+
+[node name="Label" type="Label" parent="States2"]
+layout_mode = 2
+text = "STATES"
+horizontal_alignment = 1
+
+[node name="Panel" type="Panel" parent="States2/Label"]
+z_index = -1
+layout_mode = 0
+offset_right = 153.0
+offset_bottom = 23.0
+
+[node name="IsKickingLeft" type="CheckBox" parent="States2"]
+layout_mode = 2
+disabled = true
+text = "IsKickingLeft"
+
+[node name="Panel" type="Panel" parent="States2/IsKickingLeft"]
+z_index = -1
+layout_mode = 0
+offset_right = 153.0
+offset_bottom = 31.0
+
+[node name="IsKickingRight" type="CheckBox" parent="States2"]
+layout_mode = 2
+disabled = true
+text = "IsKickingRight"
+
+[node name="Panel" type="Panel" parent="States2/IsKickingRight"]
+z_index = -1
+layout_mode = 0
+offset_right = 153.0
+offset_bottom = 31.0
+
+[node name="IsPunchingLeft" type="CheckBox" parent="States2"]
+layout_mode = 2
+disabled = true
+text = "IsPunchingLeft"
+
+[node name="Panel" type="Panel" parent="States2/IsPunchingLeft"]
+z_index = -1
+layout_mode = 0
+offset_right = 153.0
+offset_bottom = 31.0
+
+[node name="IsPunchingRight" type="CheckBox" parent="States2"]
+layout_mode = 2
+disabled = true
+text = "IsPunchingRight"
+
+[node name="Panel" type="Panel" parent="States2/IsPunchingRight"]
 z_index = -1
 layout_mode = 0
 offset_right = 153.0
@@ -602,17 +764,21 @@ scroll_active = false
 [connection signal="toggled" from="Configuration/EnableCrawling" to="." method="_on_enable_crawling_toggled"]
 [connection signal="toggled" from="Configuration/EnableCrouching" to="." method="_on_enable_crouching_toggled"]
 [connection signal="toggled" from="Configuration/EnableDoubleJumping" to="." method="_on_enable_double_jumping_toggled"]
+[connection signal="toggled" from="Configuration/EnableDriving" to="." method="_on_enable_driving_toggled"]
 [connection signal="toggled" from="Configuration/EnableFlying" to="." method="_on_enable_flying_toggled"]
 [connection signal="toggled" from="Configuration/EnableHanging" to="." method="_on_enable_hanging_toggled"]
+[connection signal="toggled" from="Configuration/EnableHoldingObjects" to="." method="_on_enable_holding_objects_toggled"]
 [connection signal="toggled" from="Configuration/EnableJumping" to="." method="_on_enable_jumping_toggled"]
 [connection signal="toggled" from="Configuration/EnableKicking" to="." method="_on_enable_kicking_toggled"]
 [connection signal="toggled" from="Configuration/EnableNavigation" to="." method="_on_enable_navigation_toggled"]
 [connection signal="toggled" from="Configuration/EnablePunching" to="." method="_on_enable_punching_toggled"]
 [connection signal="toggled" from="Configuration/EnableRetical" to="." method="_on_enable_retical_toggled"]
 [connection signal="toggled" from="Configuration/EnableRolling" to="." method="_on_enable_rolling_toggled"]
+[connection signal="toggled" from="Configuration/EnableSliding" to="." method="_on_enable_sliding_toggled"]
+[connection signal="toggled" from="Configuration/EnableSkateboarding" to="." method="_on_enable_skateboarding_toggled"]
 [connection signal="toggled" from="Configuration/EnableSprinting" to="." method="_on_enable_sprinting_toggled"]
 [connection signal="toggled" from="Configuration/EnableSwimming" to="." method="_on_enable_swimming_toggled"]
-[connection signal="toggled" from="Configuration/LockCamera" to="." method="_on_lock_camera_toggled"]
-[connection signal="toggled" from="Configuration/LockMovementX" to="." method="_on_lock_movement_x_toggled"]
-[connection signal="toggled" from="Configuration/LockMovementY" to="." method="_on_lock_movement_y_toggled"]
-[connection signal="toggled" from="Configuration/LockMovementZ" to="." method="_on_lock_movement_z_toggled"]
+[connection signal="toggled" from="Configuration2/LockCamera" to="." method="_on_lock_camera_toggled"]
+[connection signal="toggled" from="Configuration2/LockMovementX" to="." method="_on_lock_movement_x_toggled"]
+[connection signal="toggled" from="Configuration2/LockMovementY" to="." method="_on_lock_movement_y_toggled"]
+[connection signal="toggled" from="Configuration2/LockMovementZ" to="." method="_on_lock_movement_z_toggled"]

@@ -5,6 +5,7 @@ extends CharacterBody3D
 @export var enable_crawling: bool = true ## Enable crawling
 @export var enable_crouching: bool = true ## Enable crouching
 @export var enable_double_jumping: bool = false ## Enable double jumping
+@export var enable_driving: bool = false ## Enable driving
 @export var enable_flying: bool = false ## Enable flying
 @export var enable_hanging: bool = false ## Enable hanging
 @export var enable_holding_objects: bool = false ## Enable holding objects
@@ -14,6 +15,8 @@ extends CharacterBody3D
 @export var enable_punching: bool = false ## Enable punching
 @export var enable_retical: bool = true ## Enable the rectical
 @export var enable_rolling: bool = false ## Enable rolling
+@export var enable_sliding: bool = true ## Enable sliding
+@export var enable_skateboarding: bool = true ## Enable skateboarding
 @export var enable_sprinting: bool = true ## Enable sprinting
 @export var enable_swimming: bool = true ## Enable swimming
 @export var lock_movement_x: bool = false ## Lock movement along the X axis
@@ -28,6 +31,7 @@ extends CharacterBody3D
 @export var speed_jumping: float = 4.5 ## Speed while jumping
 @export var speed_rolling: float = 2.0 ## Speed while rolling
 @export var speed_running: float = 3.5 ## Speed while running
+@export var speed_sliding: float = 2.5 ## Speed while sliding
 @export var speed_sprinting: float = 5.0 ## Speed while sprinting
 @export var speed_swimming: float = 3.0 ## Speed while swimming
 @export var speed_walking: float = 1.0 ## Speed while walking
@@ -38,6 +42,7 @@ var is_climbing: bool = false ## Is the player climbing?
 var is_crawling: bool = false ## Is the player crawling?
 var is_crouching: bool = false ## Is the player crouching?
 var is_double_jumping: bool = false ## Is the player double jumping?
+var is_driving: bool = false ## Is the player driving?
 var is_falling: bool = false ## Is the player falling?
 var is_flying: bool = false ## Is the player flying?
 var is_hanging: bool = false ## Is the player hanging?
@@ -49,6 +54,7 @@ var is_punching_left: bool = false ## Is the player punching with thier left han
 var is_punching_right: bool = false ## Is the player punching with their right hand?
 var is_rolling: bool = false ## Is the player rolling?
 var is_running: bool = false ## Is the player running?
+var is_sliding: bool = false ## Is the player sliding?
 var is_standing: bool = false ## Is the player standing?
 var is_sprinting: bool = false ## Is the player sprinting?
 var is_swimming: bool = false ## Is the player swimming?
@@ -64,7 +70,7 @@ var virtual_velocity: Vector3 = Vector3.ZERO ## The player's velocity is movemen
 @onready var spring_arm = camera_mount.get_node("CameraSpringArm")
 @onready var camera = spring_arm.get_node("Camera3D")
 @onready var controls = $Controls
-@onready var debug = $Debug/Control/Panel
+@onready var debug = $Debug
 @onready var navigation_agent_3d: NavigationAgent3D = $NavigationAgent3D
 @onready var pause: CanvasLayer = $Pause
 @onready var visuals = $Visuals
@@ -154,27 +160,20 @@ func _physics_process(delta) -> void:
 			gravity_direction = (gravitating_towards.global_position - global_position).normalized()
 			new_up = - gravity_direction
 			gravity_accel = gravity_direction * gravity
-		# Must be using global gravity
+		# Otherwise use global gravity
 		else:
 			gravity_direction = - Vector3.UP
 			new_up = Vector3.UP
 			gravity_accel = - Vector3.UP * gravity
 
-		# If punching, ignore lateral input and freeze horizontal movement
-		if is_punching_left or is_punching_right:
-			# Preserve current vertical speed along the NEW up direction while zeroing tangential velocity
-			var vertical_speed_only: float = velocity.dot(new_up)
-			velocity = new_up * vertical_speed_only
-			# Keep speed at zero while punching so it doesn't pick up movement immediately after
-			speed_current = 0.0
-		else:
+		# Handle player input for lateral movement
+		if not is_punching_left \
+		and not is_punching_right:
 			# Get the input vector by specifying four actions for the positive and negative X and Y axes
 			input_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
-
 			# Set the player's movement speed based on the input magnitude
 			if speed_current == 0.0 and input_direction != Vector2.ZERO:
 				speed_current = input_direction.length() * speed_running
-
 			# Convert the 2D input into a 3D world-space direction and project onto the tangent plane (orthogonal to new_up)
 			var raw_dir: Vector3 = transform.basis * Vector3(input_direction.x, 0, input_direction.y)
 			var lateral_dir: Vector3 = raw_dir - new_up * raw_dir.dot(new_up)
@@ -184,20 +183,20 @@ func _physics_process(delta) -> void:
 				var tangential_velocity: Vector3 = lateral_dir * speed_current
 				# Preserve current vertical speed along the NEW up direction
 				var vertical_speed: float = velocity.dot(new_up)
+				# Combine to form the new velocity
 				velocity = tangential_velocity + new_up * vertical_speed
-				if camera.perspective == camera.Perspective.THIRD_PERSON:
+				# Check for conditions to update the visuals' facing direction
+				if camera.perspective == camera.Perspective.THIRD_PERSON \
+				and not is_climbing \
+				and not is_hanging:
 					# Update the visuals to look in the direction based on player input
 					visuals.look_at(position + lateral_dir, new_up)
 
-		# Apply gravity for this tick (unless climbing)
+		# Apply gravity for this tick
 		if not is_climbing:
 			velocity += gravity_accel * delta
 		# Commit the new up direction after applying gravity
 		up_direction = new_up
-
-		# While punching, clamp velocity to vertical only (no lateral slide)
-		if is_punching_left or is_punching_right:
-			velocity = up_direction * velocity.dot(up_direction)
 
 	# Record the player's "virtual velocity"
 	virtual_velocity = velocity

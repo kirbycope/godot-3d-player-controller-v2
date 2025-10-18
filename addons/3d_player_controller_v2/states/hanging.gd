@@ -53,6 +53,3 @@ func stop() -> void:
 
 	# Flag the player as not "hanging"
 	player.is_hanging = false
-
-	# Set the camera position
-	player.camera.camera_spring_arm.position.y = 0.0

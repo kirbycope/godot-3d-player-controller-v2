@@ -74,6 +74,46 @@ func start() -> void:
 	player.velocity = Vector3.ZERO
 	player.virtual_velocity = Vector3.ZERO
 
+	# Get the player's height
+	var player_height = player.get_node("CollisionShape3D").shape.height
+
+	# Get the player's width
+	var player_width = player.get_node("CollisionShape3D").shape.radius * 2
+
+	# Get the collision point
+	var collision_point = player.ray_cast_high.get_collision_point()
+
+	# [DEBUG] Draw a debug sphere at the collision point
+	player.debug.draw_debug_sphere(collision_point, Color.RED)
+
+	# Get the collision normal
+	var collision_normal = player.ray_cast_high.get_collision_normal()
+
+	# Calculate the wall direction
+	var wall_direction = -collision_normal
+
+	# Calculate the direction from the player to collision point
+	var direction = (collision_point - player.position).normalized()
+
+	# Calculate new point by moving back from point along the direction by the given player radius
+	collision_point = collision_point - direction * player_width
+
+	# [DEBUG] Draw a debug sphere at the collision point
+	player.debug.draw_debug_sphere(collision_point, Color.YELLOW)
+
+	# Adjust the point relative to the player's height
+	collision_point = Vector3(collision_point.x, player.position.y, collision_point.z)
+
+	# Move the player to the collision point
+	player.global_position = collision_point
+
+	# [DEBUG] Draw a debug sphere at the collision point
+	player.debug.draw_debug_sphere(collision_point, Color.GREEN)
+
+	# Make the player face the wall while keeping upright
+	if player.position != player.position + wall_direction:
+		player.visuals.look_at(player.position + wall_direction, player.up_direction)
+
 
 ## Stop "climbing".
 func stop() -> void:
@@ -82,6 +122,3 @@ func stop() -> void:
 
 	# Flag the player as not "climbing"
 	player.is_climbing = false
-
-	# Set the camera position
-	player.camera.camera_spring_arm.position.y = 0.0
