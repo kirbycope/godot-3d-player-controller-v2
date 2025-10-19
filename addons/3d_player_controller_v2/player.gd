@@ -75,6 +75,7 @@ var virtual_velocity: Vector3 = Vector3.ZERO ## The player's velocity is movemen
 @onready var navigation_agent_3d: NavigationAgent3D = $NavigationAgent3D
 @onready var pause: CanvasLayer = $Pause
 @onready var visuals = $Visuals
+@onready var ray_cast_jump_target: RayCast3D = visuals.get_node("RayCast3D_JumpTarget")
 @onready var ray_cast_top: RayCast3D = visuals.get_node("RayCast3D_Top")
 @onready var ray_cast_high: RayCast3D = visuals.get_node("RayCast3D_High")
 @onready var ray_cast_middle: RayCast3D = visuals.get_node("RayCast3D_Middle")

@@ -18581,7 +18581,7 @@ visible = false
 [node name="Visuals" type="Node3D" parent="."]
 
 [node name="RayCast3D_JumpTarget" type="RayCast3D" parent="Visuals"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.6, -1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.6, -0.8)
 
 [node name="Godette" type="Node3D" parent="Visuals"]
 

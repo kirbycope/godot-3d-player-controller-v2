@@ -15,6 +15,12 @@ func _process(delta):
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
 
+	# Ⓐ/[Space] _pressed_ -> Start "mantling"
+	if Input.is_action_just_pressed(player.controls.button_0):
+		if player.ray_cast_jump_target.is_colliding():
+			player.global_position = player.ray_cast_jump_target.get_collision_point()
+			transition_state(NODE_STATE, States.State.STANDING)
+
 	# Play the animation
 	play_animation()
 
