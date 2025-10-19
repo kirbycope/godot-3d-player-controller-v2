@@ -195,8 +195,8 @@ func _physics_process(delta) -> void:
 					# Update the visuals to look in the direction based on player input
 					visuals.look_at(position + lateral_dir, new_up)
 
-		# Apply gravity for this tick
-		if not is_climbing:
+		# Apply gravity for this tick (disabled while climbing or hanging)
+		if not is_climbing and not is_hanging:
 			velocity += gravity_accel * delta
 		# Commit the new up direction after applying gravity
 		up_direction = new_up

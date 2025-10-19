@@ -1,6 +1,11 @@
 extends BaseState
 
-const ANIMTION_HANGING := "AnimationLibrary_Godot/Climb_Idle"
+const ANIMATION_HANGING := "Hanging_Idle/mixamo_com"
+const ANIMATION_HANGING_SHIMMY_LEFT := "Hanging_Shimmy_Left_In_Place/mixamo_com"
+const ANIMATION_HANGING_SHIMMY_RIGHT := "Hanging_Shimmy_Right_In_Place/mixamo_com"
+const ANIMATION_HANGING_BRACED := "Hanging_Braced_Idle/mixamo_com"
+const ANIMATION_HANGING_BRACED_SHIMMY_LEFT := "Hanging_Braced_Shimmy_Left_In_Place/mixamo_com"
+const ANIMATION_HANGING_BRACED_SHIMMY_RIGHT := "Hanging_Braced_Shimmy_Right_In_Place/mixamo_com"
 const NODE_NAME := "Hanging"
 const NODE_STATE := States.State.HANGING
 
@@ -18,13 +23,27 @@ func _process(delta):
 func play_animation() -> void:
 	# Check if the player's hang is braced (the collider has somewhere for the player's footing)
 	var is_braced = player.ray_cast_low.is_colliding()
-	# Check if the player is shimmying
-	var is_shimmying = Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right")
 
-	# Check if the animation player is not already playing the appropriate animation
-	if player.animation_player.current_animation != ANIMTION_HANGING:
-		# Play the "hanging" animation
-		player.animation_player.current_animation = ANIMTION_HANGING
+	# Move left
+	if Input.is_action_pressed(player.controls.move_left):
+		if is_braced:
+			player.animation_player.play(ANIMATION_HANGING_BRACED_SHIMMY_LEFT)
+		else:
+			player.animation_player.play(ANIMATION_HANGING_SHIMMY_LEFT)
+
+	# Move right
+	elif Input.is_action_pressed(player.controls.move_right):
+		if is_braced:
+			player.animation_player.play(ANIMATION_HANGING_BRACED_SHIMMY_RIGHT)
+		else:
+			player.animation_player.play(ANIMATION_HANGING_SHIMMY_RIGHT)
+
+	# Idle
+	else:
+		if is_braced:
+			player.animation_player.play(ANIMATION_HANGING_BRACED)
+		else:
+			player.animation_player.play(ANIMATION_HANGING)
 
 
 ## Start "hanging".

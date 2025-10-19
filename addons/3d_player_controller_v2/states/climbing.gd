@@ -105,7 +105,7 @@ func move_to_wall() -> void:
 	var collision_point = player.ray_cast_high.get_collision_point()
 
 	# [DEBUG] Draw a debug sphere at the collision point
-	player.debug.draw_debug_sphere(collision_point, Color.RED)
+	#player.debug.draw_debug_sphere(collision_point, Color.RED)
 
 	# Calculate the direction from the player to collision point
 	var direction = (collision_point - player.position).normalized()
@@ -114,7 +114,7 @@ func move_to_wall() -> void:
 	collision_point = collision_point - direction * player_width
 
 	# [DEBUG] Draw a debug sphere at the adjusted collision point
-	player.debug.draw_debug_sphere(collision_point, Color.YELLOW)
+	#player.debug.draw_debug_sphere(collision_point, Color.YELLOW)
 
 	# Adjust the point relative to the player's height
 	collision_point = Vector3(collision_point.x, player.position.y, collision_point.z)
@@ -123,7 +123,7 @@ func move_to_wall() -> void:
 	player.global_position = collision_point
 
 	# [DEBUG] Draw a debug sphere at the collision point
-	player.debug.draw_debug_sphere(collision_point, Color.GREEN)
+	#player.debug.draw_debug_sphere(collision_point, Color.GREEN)
 
 	# Get the collision normal
 	var collision_normal = player.ray_cast_high.get_collision_normal()
@@ -144,36 +144,37 @@ func play_animation() -> void:
 	else:
 		player.animation_player.speed_scale = 1.0
 
-	# Check if the animation player is not already playing the appropriate animation
-	if Input.is_action_pressed(player.controls.move_left) \
-	and player.animation_player.current_animation != ANIMATION_CLIMBING_LEFT:
-		# Play the "climbing" animation
-		player.animation_player.current_animation = ANIMATION_CLIMBING_LEFT
+	# Determine intended direction once and prefer vertical over horizontal when both are pressed
+	var input_vector: Vector2 = Input.get_vector(
+		player.controls.move_left,
+		player.controls.move_right,
+		player.controls.move_up,
+		player.controls.move_down
+	)
 
-	# Check if the animation player is not already playing the appropriate animation
-	if Input.is_action_pressed(player.controls.move_right) \
-	and player.animation_player.current_animation != ANIMATION_CLIMBING_RIGHT:
-		# Play the "climbing" animation
-		player.animation_player.current_animation = ANIMATION_CLIMBING_RIGHT
+	# Store the current animation as the target animation
+	var target_animation: String = player.animation_player.current_animation
 
-	# Check if the animation player is not already playing the appropriate animation
-	if Input.is_action_pressed(player.controls.move_up) \
-	and player.animation_player.current_animation != ANIMATION_CLIMBING_UP:
-		# Play the "climbing" animation
-		player.animation_player.current_animation = ANIMATION_CLIMBING_UP
+	# Idle when no input
+	if input_vector == Vector2.ZERO:
+		target_animation = ANIMATION_CLIMBING_IDLE
+	else:
+		# Prefer vertical movement for animation selection
+		if abs(input_vector.y) > 0.0:
+			if input_vector.y < 0.0:
+				target_animation = ANIMATION_CLIMBING_UP
+			else:
+				target_animation = ANIMATION_CLIMBING_DOWN
+		# Fall back to horizontal shimmy when no vertical input
+		elif abs(input_vector.x) > 0.0:
+			if input_vector.x < 0.0:
+				target_animation = ANIMATION_CLIMBING_LEFT
+			else:
+				target_animation = ANIMATION_CLIMBING_RIGHT
 
-	# Check if the animation player is not already playing the appropriate animation
-	if Input.is_action_pressed(player.controls.move_down) \
-	and player.animation_player.current_animation != ANIMATION_CLIMBING_DOWN:
-		# Play the "climbing" animation
-		player.animation_player.current_animation = ANIMATION_CLIMBING_DOWN
-
-	# Get if not moving
-	if Input.get_vector(player.controls.move_left, player.controls.move_right, player.controls.move_up, player.controls.move_down) == Vector2.ZERO:
-		# Check if the animation player is not already playing the appropriate animation
-		if player.animation_player.current_animation != ANIMATION_CLIMBING_IDLE:
-			# Play the "climbing" animation
-			player.animation_player.current_animation = ANIMATION_CLIMBING_IDLE
+	# Apply animation change only if needed to avoid rapid toggling
+	if player.animation_player.current_animation != target_animation:
+		player.animation_player.current_animation = target_animation
 
 
 ## Start "climbing".

@@ -62,6 +62,7 @@ func _physics_process(delta):
 	if not player.is_on_floor() \
 	and not player.is_climbing \
 	and not player.is_flying \
+	and not player.is_hanging \
 	and not player.is_jumping \
 	and not player.is_punching_left \
 	and not player.is_punching_right:
@@ -72,6 +73,7 @@ func _physics_process(delta):
 	if not player.is_climbing \
 	and not player.is_crawling \
 	and not player.is_crouching \
+	and not player.is_hanging \
 	and not player.is_punching_left \
 	and not player.is_punching_right \
 	and not player.is_swimming:
