@@ -69,6 +69,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.8428774e-08, 2)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.40068817, -0.0057737827, 0.07265806)
 mesh = SubResource("BoxMesh_jyhfs")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
@@ -161,3 +162,18 @@ material = SubResource("StandardMaterial3D_tbgi4")
 [node name="Label3D" type="Label3D" parent="Ramp"]
 transform = Transform3D(1.2904784e-08, 0.8660254, 0.5, 2.235174e-08, -0.5, 0.8660254, 1, 0, -4.371139e-08, -2.1185896, 0.11899996, 0)
 text = "30° Ramp"
+
+[node name="HangingBar" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1.9, -6)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="HangingBar"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
+use_collision = true
+radius = 0.1
+material = SubResource("StandardMaterial3D_tbgi4")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="HangingBar"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -0.9, 0)
+use_collision = true
+size = Vector3(0.2, 2, 0.2)
+material = SubResource("StandardMaterial3D_tipki")
