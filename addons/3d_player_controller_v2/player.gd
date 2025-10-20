@@ -13,6 +13,7 @@ extends CharacterBody3D
 @export var enable_jumping: bool = true ## Enable jumping
 @export var enable_kicking: bool = false ## Enable kicking
 @export var enable_navigation: bool = false ## Enable navigation (pathfinding)
+@export var enable_paragliding: bool = false ## Enable paragliding
 @export var enable_punching: bool = false ## Enable punching
 @export var enable_retical: bool = true ## Enable the rectical
 @export var enable_rolling: bool = false ## Enable rolling
@@ -27,9 +28,9 @@ extends CharacterBody3D
 @export var speed_climbing: float = 1.0 ## Speed while climbing
 @export var speed_crawling: float = 0.75 ## Speed while crawling
 @export var speed_flying: float = 5.0 ## Speed while flying
-@export var speed_flying_fast: float = 10.0 ## Speed while flying fast
 @export var speed_hanging: float = 0.25 ## Speed while hanging (shimmying)
 @export var speed_jumping: float = 4.5 ## Speed while jumping
+@export var speed_paragliding: float = 2.0 ## Speed while paragliding
 @export var speed_rolling: float = 2.0 ## Speed while rolling
 @export var speed_running: float = 3.5 ## Speed while running
 @export var speed_sliding: float = 2.5 ## Speed while sliding
@@ -51,6 +52,7 @@ var is_jumping: bool = false ## Is the player jumping?
 var is_kicking_left: bool = false ## Is the player kicking with their left foot?
 var is_kicking_right: bool = false ## Is the player kicking with their right foot?
 var is_navigating: bool = false ## Is the player navigating?
+var is_paragliding: bool = false ## Is the player paragliding?
 var is_punching_left: bool = false ## Is the player punching with thier left hand?
 var is_punching_right: bool = false ## Is the player punching with their right hand?
 var is_rolling: bool = false ## Is the player rolling?
@@ -195,6 +197,12 @@ func _physics_process(delta) -> void:
 				and not is_hanging:
 					# Update the visuals to look in the direction based on player input
 					visuals.look_at(position + lateral_dir, new_up)
+
+			# If flying and no input, stop lateral movement
+			if is_flying and input_direction == Vector2.ZERO:
+				# Zero out lateral velocity, preserve vertical
+				var vertical_speed = velocity.dot(new_up)
+				velocity = new_up * vertical_speed
 
 		# Apply gravity for this tick (disabled while climbing or hanging)
 		if not is_climbing and not is_hanging:

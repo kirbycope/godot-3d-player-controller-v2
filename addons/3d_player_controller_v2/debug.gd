@@ -15,6 +15,7 @@ var yellow_sphere: MeshInstance3D
 @onready var enable_jumping = $Configuration/EnableJumping
 @onready var enable_kicking = $Configuration/EnableKicking
 @onready var enable_navigation = $Configuration/EnableNavigation
+@onready var enable_paragliding = $Configuration/EnableParagliding
 @onready var enable_punching = $Configuration/EnablePunching
 @onready var enable_retical = $Configuration/EnableRetical
 @onready var enable_rolling = $Configuration/EnableRolling
@@ -30,7 +31,9 @@ var yellow_sphere: MeshInstance3D
 @onready var is_crawling = $States/IsCrawling
 @onready var is_crouching = $States/IsCrouching
 @onready var is_driving = $States/IsDriving
+@onready var is_double_jumping = $States/IsDoubleJumping
 @onready var is_falling = $States/IsFalling
+@onready var is_flying = $States/IsFlying
 @onready var is_hanging = $States/IsHanging
 @onready var is_jumping = $States/IsJumping
 @onready var is_kicking_left = $States2/IsKickingLeft
@@ -40,6 +43,7 @@ var yellow_sphere: MeshInstance3D
 @onready var is_punching_right = $States2/IsPunchingRight
 @onready var is_rolling = $States/IsRolling
 @onready var is_navigating = $States/IsNavigating
+@onready var is_paragliding = $States/IsParagliding
 @onready var is_running = $States/IsRunning
 @onready var is_sliding: CheckBox = $States/IsSliding
 @onready var is_skateboarding: CheckBox = $States/IsSkateboarding
@@ -80,6 +84,7 @@ func _process(_delta):
 		enable_jumping.button_pressed = player.enable_jumping
 		enable_kicking.button_pressed = player.enable_kicking
 		enable_navigation.button_pressed = player.enable_navigation
+		enable_paragliding.button_pressed = player.enable_paragliding
 		enable_punching.button_pressed = player.enable_punching
 		enable_retical.button_pressed = player.enable_retical
 		enable_rolling.button_pressed = player.enable_rolling
@@ -95,15 +100,18 @@ func _process(_delta):
 		is_crawling.button_pressed = player.is_crawling
 		is_crouching.button_pressed = player.is_crouching
 		is_driving.button_pressed = player.is_driving
+		is_double_jumping.button_pressed = player.is_double_jumping
 		is_falling.button_pressed = player.is_falling
+		is_flying.button_pressed = player.is_flying
 		is_hanging.button_pressed = player.is_hanging
 		is_jumping.button_pressed = player.is_jumping
 		is_kicking_left.button_pressed = player.is_kicking_left
 		is_kicking_right.button_pressed = player.is_kicking_right
+		is_navigating.button_pressed = player.is_navigating
 		is_on_floor.button_pressed = player.is_on_floor()
+		is_paragliding.button_pressed = player.is_paragliding
 		is_punching_left.button_pressed = player.is_punching_left
 		is_punching_right.button_pressed = player.is_punching_right
-		is_navigating.button_pressed = player.is_navigating
 		is_rolling.button_pressed = player.is_rolling
 		is_running.button_pressed = player.is_running
 		is_sprinting.button_pressed = player.is_sprinting
@@ -204,6 +212,10 @@ func _on_enable_kicking_toggled(toggled_on):
 
 func _on_enable_navigation_toggled(toggled_on):
 	player.enable_navigation = toggled_on
+
+
+func _on_enable_paragliding_toggled(toggled_on: bool) -> void:
+	player.enable_paragliding = toggled_on
 
 
 func _on_enable_punching_toggled(toggled_on):

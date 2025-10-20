@@ -200,6 +200,22 @@ offset_bottom = 31.0
 grow_horizontal = 0
 mouse_filter = 1
 
+[node name="EnableParagliding" type="CheckButton" parent="Configuration"]
+layout_mode = 2
+text = "EnableParagliding"
+
+[node name="Panel" type="Panel" parent="Configuration/EnableParagliding"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -222.0
+offset_right = -2.0
+offset_bottom = 31.0
+grow_horizontal = 0
+mouse_filter = 1
+
 [node name="EnablePunching" type="CheckButton" parent="Configuration"]
 layout_mode = 2
 text = "EnablePunching"
@@ -473,6 +489,17 @@ layout_mode = 0
 offset_right = 153.0
 offset_bottom = 31.0
 
+[node name="IsFlying" type="CheckBox" parent="States"]
+layout_mode = 2
+disabled = true
+text = "IsFlying"
+
+[node name="Panel" type="Panel" parent="States/IsFlying"]
+z_index = -1
+layout_mode = 0
+offset_right = 153.0
+offset_bottom = 31.0
+
 [node name="IsHanging" type="CheckBox" parent="States"]
 layout_mode = 2
 disabled = true
@@ -512,6 +539,17 @@ disabled = true
 text = "IsNavigating"
 
 [node name="Panel" type="Panel" parent="States/IsNavigating"]
+z_index = -1
+layout_mode = 0
+offset_right = 153.0
+offset_bottom = 31.0
+
+[node name="IsParagliding" type="CheckBox" parent="States"]
+layout_mode = 2
+disabled = true
+text = "IsParagliding"
+
+[node name="Panel" type="Panel" parent="States/IsParagliding"]
 z_index = -1
 layout_mode = 0
 offset_right = 153.0
@@ -771,6 +809,7 @@ scroll_active = false
 [connection signal="toggled" from="Configuration/EnableJumping" to="." method="_on_enable_jumping_toggled"]
 [connection signal="toggled" from="Configuration/EnableKicking" to="." method="_on_enable_kicking_toggled"]
 [connection signal="toggled" from="Configuration/EnableNavigation" to="." method="_on_enable_navigation_toggled"]
+[connection signal="toggled" from="Configuration/EnableParagliding" to="." method="_on_enable_paragliding_toggled"]
 [connection signal="toggled" from="Configuration/EnablePunching" to="." method="_on_enable_punching_toggled"]
 [connection signal="toggled" from="Configuration/EnableRetical" to="." method="_on_enable_retical_toggled"]
 [connection signal="toggled" from="Configuration/EnableRolling" to="." method="_on_enable_rolling_toggled"]

@@ -12,10 +12,10 @@ size = Vector3(0.1, 0.1, 0.1)
 size = Vector3(0.1, 0.1, 0.1)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_jsdfa"]
-radius = 0.15
+radius = 0.25
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_n483i"]
-radius = 0.25
+radius = 0.15
 
 [node name="Collectable" type="RigidBody3D"]
 physics_material_override = SubResource("PhysicsMaterial_jsdfa")
