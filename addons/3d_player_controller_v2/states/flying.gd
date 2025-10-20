@@ -74,6 +74,12 @@ func start() -> void:
 	var vertical_speed: float = player.velocity.dot(up)
 	player.velocity -= up * vertical_speed
 
+	# Set the player collision shape's rotation
+	player.collision_shape_3d.rotation.x = deg_to_rad(90)
+
+	# Set the player collision shape's position
+	player.collision_shape_3d.position = player.collision_position / 3
+
 
 ## Stop "flying".
 func stop() -> void:
@@ -85,3 +91,9 @@ func stop() -> void:
 
 	# [Re]set player gravity to normal
 	player.gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+	
+	# [Re]set the player collision shape's rotation
+	player.collision_shape_3d.rotation.x = deg_to_rad(0)
+
+	# [Re]set the player collision shape's position
+	player.collision_shape_3d.position = player.collision_position

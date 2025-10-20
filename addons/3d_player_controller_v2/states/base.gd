@@ -181,12 +181,6 @@ func move_player() -> void:
 
 ## Snaps the player to the wall they are climbing/hanging on.
 func move_to_wall() -> void:
-	# Get the player's height
-	var player_height = player.get_node("CollisionShape3D").shape.height
-
-	# Get the player's width
-	var player_width = player.get_node("CollisionShape3D").shape.radius * 1.5
-
 	# Get the collision point
 	var collision_point = player.ray_cast_high.get_collision_point()
 
@@ -197,7 +191,7 @@ func move_to_wall() -> void:
 	var direction = (collision_point - player.position).normalized()
 
 	# Calculate new point by moving back from point along the direction by the given player radius
-	collision_point = collision_point - direction * player_width
+	collision_point = collision_point - direction * player.collision_width
 
 	# [DEBUG] Draw a debug sphere at the adjusted collision point
 	#player.debug.draw_debug_sphere(collision_point, Color.YELLOW)

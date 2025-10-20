@@ -50,6 +50,12 @@ func start() -> void:
 	# Set the player's velocity
 	player.velocity = Vector3.ZERO
 
+	# Set the player collision shape's height
+	player.collision_shape_3d.shape.height = player.collision_height / 2
+
+	# Set the player collision shape's position
+	player.collision_shape_3d.position = player.collision_position / 2
+
 
 ## Stop "crouching".
 func stop() -> void:
@@ -58,3 +64,9 @@ func stop() -> void:
 
 	# Flag the player as not "crouching"
 	player.is_crouching = false
+
+	# [Re]set the player collision shape's height
+	player.collision_shape_3d.shape.height = player.collision_height
+	
+	# [Re]set the player collision shape's position
+	player.collision_shape_3d.position = player.collision_position

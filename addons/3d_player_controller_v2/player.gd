@@ -69,6 +69,10 @@ var virtual_velocity: Vector3 = Vector3.ZERO ## The player's velocity is movemen
 
 @onready var animation_player: AnimationPlayer = $Visuals/Godette/AnimationPlayer
 @onready var base_state: BaseState = $States/Base
+@onready var collision_shape_3d: CollisionShape3D = $CollisionShape3D
+@onready var collision_height: float  = collision_shape_3d.shape.height
+@onready var collision_width: float  = collision_shape_3d.shape.radius * 2
+@onready var collision_position: Vector3  = collision_shape_3d.position
 @onready var camera_mount = $CameraMount
 @onready var spring_arm = camera_mount.get_node("CameraSpringArm")
 @onready var camera = spring_arm.get_node("Camera3D")
