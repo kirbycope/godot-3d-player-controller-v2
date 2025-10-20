@@ -99,7 +99,8 @@ func _input(event) -> void:
 			# Get the collision object
 			var collider = ray_cast.get_collider()
 			# Check if the collider is a rigidbody3D
-			if collider is RigidBody3D:
+			if collider is RigidBody3D\
+			and not collider is VehicleBody3D:
 				# Check if the collider is not already a child of the item spring arm
 				if collider.get_parent() != item_spring_arm:
 					# Change the collision layer from 1 to 2 (to avoid further collisions)
@@ -140,7 +141,8 @@ func _process(delta) -> void:
 		if item_spring_arm.get_child_count() == 0:
 			if ray_cast.is_colliding():
 				var collider = ray_cast.get_collider()
-				if collider is RigidBody3D:
+				if collider is RigidBody3D \
+				and not collider is VehicleBody3D:
 					contextual_controls.text = "Press [E] to pickup"
 		else:
 			contextual_controls.text = "Press [E] to release \nPress [RMB] to throw"

@@ -26,14 +26,14 @@ func _input(event):
 					return
 
 	# Ⓐ/[Space] _pressed_ (while airborne) -> Start "double-jumping"
-	#if player.enable_double_jumping:
-	#	if Input.is_action_just_pressed(player.controls.button_0) \
-	#	and (player.is_falling or player.is_jumping) \
-	#	and not player.is_double_jumping:
-	#		player.is_double_jumping = true
-	#		# Start "jumping"
-	#		transition_state(player.current_state, States.State.JUMPING)
-	#		return
+	if player.enable_double_jumping:
+		if Input.is_action_just_pressed(player.controls.button_0) \
+		and (player.is_falling or player.is_jumping) \
+		and not player.is_double_jumping:
+			player.is_double_jumping = true
+			# Start "jumping"
+			transition_state(player.current_state, States.State.JUMPING)
+			return
 
 	# Ⓐ/[Space] _pressed_ (while airborne) -> Start "flying"
 	if player.enable_flying:
@@ -113,6 +113,10 @@ func _physics_process(delta):
 	and not player.is_punching_left \
 	and not player.is_punching_right \
 	and not player.is_swimming:
+
+		# Reset double-jump flag when on the ground
+		if player.is_on_floor():
+			player.is_double_jumping = false
 
 		# Check if the player is not moving -> Start "standing"
 		if abs(player.velocity).length() < 0.2 \

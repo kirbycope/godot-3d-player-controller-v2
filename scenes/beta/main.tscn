@@ -1,10 +1,11 @@
-[gd_scene load_steps=18 format=3 uid="uid://dey7ls45vvlck"]
+[gd_scene load_steps=19 format=3 uid="uid://dey7ls45vvlck"]
 
 [ext_resource type="Script" uid="uid://dhm0w0mgw28o6" path="res://scenes/beta/main.gd" id="1_4go8p"]
 [ext_resource type="Texture2D" uid="uid://bpo2vwd0ruriv" path="res://assets/textures/prototype_textures/Dark/texture_08.png" id="2_7kfyu"]
 [ext_resource type="Texture2D" uid="uid://brerfykle8g6t" path="res://icon.svg" id="3_1km6e"]
 [ext_resource type="PackedScene" uid="uid://f6xpywa7euq2" path="res://addons/3d_player_controller_v2/player.tscn" id="4_evn7r"]
 [ext_resource type="Texture2D" uid="uid://c2yhnwwbe08c4" path="res://assets/textures/prototype_textures/Dark/texture_03.png" id="5_ecpwe"]
+[ext_resource type="PackedScene" uid="uid://cb3q1urw62chp" path="res://scenes/beta/car.tscn" id="6_mf6xi"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sugp2"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -177,3 +178,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -0.9, 0)
 use_collision = true
 size = Vector3(0.2, 2, 0.2)
 material = SubResource("StandardMaterial3D_tipki")
+
+[node name="Car" parent="." instance=ExtResource("6_mf6xi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
