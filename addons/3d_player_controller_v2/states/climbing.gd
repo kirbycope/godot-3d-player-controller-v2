@@ -41,7 +41,7 @@ func _process(delta):
 				transition_state(NODE_STATE, States.State.HANGING)
 				return
 	
-	# # Ⓑ/[shift] _pressed_ -> Move faster while "climbing"
+	# Ⓑ/[shift] _pressed_ -> Move faster while "climbing"
 	if player.enable_sprinting:
 		if Input.is_action_pressed(player.controls.button_1):
 			player.speed_current = player.speed_climbing * 2
@@ -68,30 +68,22 @@ func play_animation() -> void:
 	else:
 		player.animation_player.speed_scale = 1.0
 
-	# Determine intended direction once and prefer vertical over horizontal when both are pressed
-	var input_vector: Vector2 = Input.get_vector(
-		player.controls.move_left,
-		player.controls.move_right,
-		player.controls.move_up,
-		player.controls.move_down
-	)
-
 	# Store the current animation as the target animation
 	var target_animation: String = player.animation_player.current_animation
 
 	# Idle when no input
-	if input_vector == Vector2.ZERO:
+	if player.input_direction == Vector2.ZERO:
 		target_animation = ANIMATION_CLIMBING_IDLE
 	else:
 		# Prefer vertical movement for animation selection
-		if abs(input_vector.y) > 0.0:
-			if input_vector.y < 0.0:
+		if abs(player.input_direction.y) > 0.0:
+			if player.input_direction.y < 0.0:
 				target_animation = ANIMATION_CLIMBING_UP
 			else:
 				target_animation = ANIMATION_CLIMBING_DOWN
 		# Fall back to horizontal shimmy when no vertical input
-		elif abs(input_vector.x) > 0.0:
-			if input_vector.x < 0.0:
+		elif abs(player.input_direction.x) > 0.0:
+			if player.input_direction.x < 0.0:
 				target_animation = ANIMATION_CLIMBING_LEFT
 			else:
 				target_animation = ANIMATION_CLIMBING_RIGHT

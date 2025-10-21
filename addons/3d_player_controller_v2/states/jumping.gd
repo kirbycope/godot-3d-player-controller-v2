@@ -44,7 +44,7 @@ func start() -> void:
 	# Flag the player as "jumping"
 	player.is_jumping = true
 
-	# Set the player's velocity in the up direction
+	# Increase the player's velocity in the up direction
 	player.velocity += player.up_direction * player.speed_jumping
 
 

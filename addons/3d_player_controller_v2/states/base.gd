@@ -88,7 +88,8 @@ func _physics_process(delta):
 		if not player.is_flying \
 		and not player.is_hanging \
 		and not player.ray_cast_top.is_colliding() \
-		and player.ray_cast_high.is_colliding():
+		and player.ray_cast_high.is_colliding() \
+		and not player.is_skateboarding:
 			# Start "hanging"
 			transition_state(player.current_state, States.State.HANGING)
 			return

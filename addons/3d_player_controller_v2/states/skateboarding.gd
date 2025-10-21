@@ -1,6 +1,8 @@
 extends BaseState
 
 const ANIMATION_SKATEBOARDING := "Skateboarding_In_Place/mixamo_com"
+const ANIMATION_SKATEBOARDING_FAST := "Skateboarding_Fast_In_Place/mixamo_com"
+const ANIMATION_SKATEBOARDING_SLOW := "Skateboarding_Slow_In_Place/mixamo_com"
 const NODE_NAME := "Skateboarding"
 const NODE_STATE := States.State.SKATEBOARDING
 
@@ -13,12 +15,46 @@ func _process(delta):
 	# Play the animation
 	play_animation()
 
+	# Ⓐ/[Space] _pressed_ (while grounded) -> Perform "ollie"
+	if Input.is_action_just_pressed(player.controls.button_0)\
+	and player.is_on_floor():
+		# Increase the player's velocity in the up direction
+		player.velocity += player.up_direction * player.speed_jumping
+
+	# Ⓑ/[shift] _pressed_ -> Move faster while "skateboarding"
+	if player.enable_sprinting:
+		if Input.is_action_pressed(player.controls.button_1):
+			player.speed_current = player.speed_skateboarding * 1.5
+		else:
+			player.speed_current = player.speed_skateboarding
+
 
 ## Plays the appropriate animation based on player state.
 func play_animation() -> void:
-	# Check if the animation player is not already playing the appropriate animation
-	if player.animation_player.current_animation != ANIMATION_SKATEBOARDING:
-		player.animation_player.play(ANIMATION_SKATEBOARDING)
+	if player.input_direction == Vector2.ZERO:
+		# Check if the animation player is not already playing the appropriate animation
+		if player.animation_player.current_animation != ANIMATION_SKATEBOARDING_SLOW:
+			player.animation_player.play(ANIMATION_SKATEBOARDING_SLOW)
+			# [Re]set the player collision shape's height
+			player.collision_shape_3d.shape.height = player.collision_height
+			# [Re]set the player collision shape's position
+			player.collision_shape_3d.position = player.collision_position
+	elif player.speed_current == player.speed_skateboarding:
+		# Check if the animation player is not already playing the appropriate animation
+		if player.animation_player.current_animation != ANIMATION_SKATEBOARDING:
+			player.animation_player.play(ANIMATION_SKATEBOARDING)
+			# Set the player collision shape's height
+			player.collision_shape_3d.shape.height = player.collision_height * 0.95
+			# Set the player collision shape's position
+			player.collision_shape_3d.position = player.collision_position * 0.95
+	elif player.speed_current > player.speed_skateboarding:
+		# Check if the animation player is not already playing the appropriate animation
+		if player.animation_player.current_animation != ANIMATION_SKATEBOARDING_FAST:
+			player.animation_player.play(ANIMATION_SKATEBOARDING_FAST)
+			# Set the player collision shape's height
+			player.collision_shape_3d.shape.height = player.collision_height * 0.9
+			# Set the player collision shape's position
+			player.collision_shape_3d.position = player.collision_position * 0.9
 
 
 ## Start "skateboarding".
@@ -43,3 +79,9 @@ func stop() -> void:
 
 	# Flag the player as not "skateboarding"
 	player.is_skateboarding = false
+
+	# [Re]set the player collision shape's height
+	player.collision_shape_3d.shape.height = player.collision_height
+
+	# [Re]set the player collision shape's position
+	player.collision_shape_3d.position = player.collision_position

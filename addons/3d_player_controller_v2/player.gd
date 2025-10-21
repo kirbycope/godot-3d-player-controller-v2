@@ -224,6 +224,21 @@ func _physics_process(delta) -> void:
 				var vertical_speed = velocity.dot(new_up)
 				velocity = new_up * vertical_speed
 
+			# If skateboarding and no input, apply friction to slow down
+			if is_skateboarding and input_direction == Vector2.ZERO:
+				# Define friction coefficient (adjust this value to control how quickly the player slows down)
+				var friction_coefficient = 0.95  # Higher value = slower deceleration (0.9-0.98 recommended)
+				# Get the lateral (horizontal) velocity component
+				var vertical_speed = velocity.dot(new_up)
+				var lateral_velocity = velocity - new_up * vertical_speed
+				# Apply friction to lateral velocity
+				lateral_velocity *= friction_coefficient
+				# If velocity is very low, stop completely
+				if lateral_velocity.length() < 0.1:
+					lateral_velocity = Vector3.ZERO
+				# Recombine lateral and vertical components
+				velocity = lateral_velocity + new_up * vertical_speed
+
 		# Apply gravity for this tick (disabled while climbing or hanging)
 		if not is_climbing and not is_hanging:
 			velocity += gravity_accel * delta

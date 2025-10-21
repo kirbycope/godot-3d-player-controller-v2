@@ -1135,7 +1135,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.014007568, 0.6530762, -0.0
 shape = SubResource("BoxShape3D_obmhl")
 
 [node name="DriverSeat" type="Marker3D" parent="."]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0.444, -0.1, -0.3)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0.333, -0.15, -0.3)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="DriverSeat"]
 visible = false
