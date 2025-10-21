@@ -144,6 +144,9 @@ func _process(delta) -> void:
 				if collider is RigidBody3D \
 				and not collider is VehicleBody3D:
 					contextual_controls.text = "Press [E] to pickup"
+				elif collider is VehicleBody3D \
+				and not player.is_driving:
+					contextual_controls.text = "Press [E] to drive"
 		else:
 			contextual_controls.text = "Press [E] to release \nPress [RMB] to throw"
 

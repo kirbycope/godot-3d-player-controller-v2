@@ -99,6 +99,13 @@ func _input(event) -> void:
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
 
+	# Ⓨ/[Ctrl] press to drive vehicle - Exit vehicle
+	if is_driving:
+		if event.is_action_pressed(controls.button_3):
+			base_state.transition_state(current_state, States.State.STANDING)
+		else:
+			return
+
 	# Handle inputs if not paused
 	if not pause.visible:
 
@@ -156,6 +163,9 @@ func _process(delta) -> void:
 func _physics_process(delta) -> void:
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
+
+	# Skip movement processing while "driving"
+	if is_driving: return
 
 	# Calculate movement if not navigating
 	if not is_navigating:

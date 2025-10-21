@@ -1,6 +1,7 @@
-[gd_scene load_steps=79 format=4 uid="uid://cb3q1urw62chp"]
+[gd_scene load_steps=82 format=4 uid="uid://cb3q1urw62chp"]
 
 [ext_resource type="Texture2D" uid="uid://ydly4hfekpao" path="res://assets/models/car/textures/Generic_bodymat_dif.jpg" id="1_obmhl"]
+[ext_resource type="Script" uid="uid://bjfseni6aumq8" path="res://scenes/beta/car.gd" id="1_vcxxo"]
 [ext_resource type="Texture2D" uid="uid://bu18ap2bljha1" path="res://assets/models/car/textures/UCB_BOTTOM_DIF.jpg" id="2_vcxxo"]
 [ext_resource type="Texture2D" uid="uid://drd47hfe3evg8" path="res://assets/models/car/textures/UCB_Lights_and_Glass_Dif.jpg" id="3_i3a4s"]
 [ext_resource type="Texture2D" uid="uid://c67svlk4r5fp2" path="res://assets/models/car/textures/UCB_Interiors_2_Dif.jpg" id="4_wjhmb"]
@@ -10,6 +11,13 @@
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_obmhl"]
 size = Vector3(4.35, 1.3, 1.6)
+
+[sub_resource type="SphereMesh" id="SphereMesh_obmhl"]
+radius = 0.05
+height = 0.1
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_i3a4s"]
+size = Vector3(6, 1.9951172, 3)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ui4l2"]
 resource_name = "kiri86_Bodymat"
@@ -1120,10 +1128,24 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_ynr8y")
 
 [node name="Car" type="VehicleBody3D"]
+script = ExtResource("1_vcxxo")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.014007568, 0.6530762, -0.0018615723)
 shape = SubResource("BoxShape3D_obmhl")
+
+[node name="DriverSeat" type="Marker3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0.444, -0.1, -0.3)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DriverSeat"]
+visible = false
+mesh = SubResource("SphereMesh_obmhl")
+
+[node name="PlayerDetection" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerDetection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9975586, 0)
+shape = SubResource("BoxShape3D_i3a4s")
 
 [node name="kiri86_Body" type="MeshInstance3D" parent="."]
 transform = Transform3D(-0.389638, -9.585227e-15, -5.8833702e-08, -3.3003623e-22, 0.389638, -6.3480094e-08, 5.8833702e-08, -6.3480094e-08, -0.389638, -0.015468359, 0.7998073, -2.8450035e-08)
@@ -1242,23 +1264,43 @@ transform = Transform3D(-0.389638, -9.585227e-15, -5.8833702e-08, -3.3003623e-22
 mesh = SubResource("ArrayMesh_8jpqt")
 skeleton = NodePath("")
 
-[node name="kiri86_WheelStock_FL" type="MeshInstance3D" parent="."]
-transform = Transform3D(-0.76972, -1.8935374e-14, -7.341144e-08, 0, 0.76972, -7.920911e-08, 1.1622449e-07, -1.2540332e-07, -0.486182, 1.3232114, 0.28506443, -0.7023294)
+[node name="VehicleWheel3D" type="VehicleWheel3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 1.3232114, 0.28506443, -0.7023294)
+use_as_steering = true
+wheel_radius = 0.285
+
+[node name="kiri86_WheelStock_FL" type="MeshInstance3D" parent="VehicleWheel3D"]
+transform = Transform3D(-8.2578964e-08, 1.2540332e-07, 0.486182, 0, 0.76972, -7.920911e-08, -0.76972, -1.3453821e-14, -5.2159752e-08, 0, 0, 0)
 mesh = SubResource("ArrayMesh_n74p3")
 skeleton = NodePath("")
+
+[node name="VehicleWheel3D3" type="VehicleWheel3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -1.1356695, 0.28506443, -0.70232916)
+use_as_traction = true
+wheel_radius = 0.285
 
 [node name="kiri86_WheelStock_RL" type="MeshInstance3D" parent="."]
 transform = Transform3D(-0.76972, -1.8935374e-14, -7.341144e-08, 0, 0.76972, -7.920911e-08, 1.1622449e-07, -1.2540332e-07, -0.486182, -1.1356695, 0.28506443, -0.70232916)
 mesh = SubResource("ArrayMesh_nnh62")
 skeleton = NodePath("")
 
-[node name="kiri86_WheelStock_FR" type="MeshInstance3D" parent="."]
-transform = Transform3D(-0.76972, 3.6484785e-14, 7.341144e-08, -1.3039564e-21, -0.76972, 1.5262054e-07, 1.1622449e-07, 2.416278e-07, 0.486182, 1.3232114, 0.2850644, 0.7031987)
+[node name="VehicleWheel3D2" type="VehicleWheel3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 1.3232114, 0.2850644, 0.7031987)
+use_as_steering = true
+wheel_radius = 0.285
+
+[node name="kiri86_WheelStock_FR" type="MeshInstance3D" parent="VehicleWheel3D2"]
+transform = Transform3D(-8.2578964e-08, -2.416278e-07, -0.486182, -1.3039564e-21, -0.76972, 1.5262054e-07, -0.76972, 2.59229e-14, 5.2159752e-08, 0, 0, 0)
 mesh = SubResource("ArrayMesh_261s0")
 skeleton = NodePath("")
 
-[node name="kiri86_WheelStock_RR" type="MeshInstance3D" parent="."]
-transform = Transform3D(-0.76972, 3.6484785e-14, 7.341144e-08, -1.3039564e-21, -0.76972, 1.5262054e-07, 1.1622449e-07, 2.416278e-07, 0.486182, -1.1356695, 0.2850644, 0.7031989)
+[node name="VehicleWheel3D4" type="VehicleWheel3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -1.1356695, 0.2850644, 0.7031989)
+use_as_traction = true
+wheel_radius = 0.285
+
+[node name="kiri86_WheelStock_RR" type="MeshInstance3D" parent="VehicleWheel3D4"]
+transform = Transform3D(-8.2578964e-08, -2.416278e-07, -0.486182, -1.3039564e-21, -0.76972, 1.5262054e-07, -0.76972, 2.59229e-14, 5.2159752e-08, 0, 0, 0)
 mesh = SubResource("ArrayMesh_yrkdf")
 skeleton = NodePath("")
 
@@ -1281,3 +1323,6 @@ skeleton = NodePath("")
 transform = Transform3D(-0.389638, -9.585227e-15, -5.8833702e-08, -3.3003623e-22, 0.389638, -6.3480094e-08, 5.8833702e-08, -6.3480094e-08, -0.389638, 2.0420032, 0.6359016, 0.25420657)
 mesh = SubResource("ArrayMesh_uiqb2")
 skeleton = NodePath("")
+
+[connection signal="body_entered" from="PlayerDetection" to="." method="_on_player_detection_body_entered"]
+[connection signal="body_exited" from="PlayerDetection" to="." method="_on_player_detection_body_exited"]

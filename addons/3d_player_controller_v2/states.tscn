@@ -13,7 +13,7 @@
 [ext_resource type="Script" uid="uid://bkyh00o4i441c" path="res://addons/3d_player_controller_v2/states/hanging.gd" id="7_smmr0"]
 [ext_resource type="Script" uid="uid://c1uvv1dvb1537" path="res://addons/3d_player_controller_v2/states/navigating.gd" id="7_uuywk"]
 [ext_resource type="Script" uid="uid://ccn7s5h0qq54p" path="res://addons/3d_player_controller_v2/states/flying.gd" id="8_8p57p"]
-[ext_resource type="Script" uid="uid://cr0cgdqy55t28" path="res://addons/3d_player_controller_v2/states/kickng_right.gd" id="8_ixqbx"]
+[ext_resource type="Script" uid="uid://cr0cgdqy55t28" path="res://addons/3d_player_controller_v2/states/kicking_right.gd" id="8_ixqbx"]
 [ext_resource type="Script" uid="uid://bkt6xfceqexr" path="res://addons/3d_player_controller_v2/states/sprinting.gd" id="8_smmr0"]
 [ext_resource type="Script" uid="uid://b4e2ceaipowt3" path="res://addons/3d_player_controller_v2/states/punching_right.gd" id="8_ta1xp"]
 [ext_resource type="Script" uid="uid://bqr8ahtb4dhqi" path="res://addons/3d_player_controller_v2/states/punching_left.gd" id="8_u0yrf"]
@@ -67,7 +67,7 @@ script = ExtResource("6_e4nj5")
 process_mode = 4
 script = ExtResource("7_e4nj5")
 
-[node name="KickngRight" type="Node" parent="."]
+[node name="KickingRight" type="Node" parent="."]
 process_mode = 4
 script = ExtResource("8_ixqbx")
 

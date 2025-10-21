@@ -66,6 +66,7 @@ func _input(event):
 	if player.enable_sprinting:
 		if Input.is_action_just_pressed(player.controls.button_1) \
 		and not player.is_climbing \
+		and not player.is_driving \
 		and not player.is_flying \
 		and not player.is_hanging \
 		and not player.is_paragliding \
@@ -107,6 +108,7 @@ func _physics_process(delta):
 	if not player.is_climbing \
 	and not player.is_crawling \
 	and not player.is_crouching \
+	and not player.is_driving \
 	and not player.is_flying \
 	and not player.is_hanging \
 	and not player.is_paragliding \
