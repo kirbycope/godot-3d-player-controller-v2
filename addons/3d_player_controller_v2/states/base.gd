@@ -101,7 +101,8 @@ func _physics_process(delta):
 	and not player.is_jumping \
 	and not player.is_paragliding \
 	and not player.is_punching_left \
-	and not player.is_punching_right:
+	and not player.is_punching_right \
+	and not player.is_skateboarding:
 		transition_state(player.current_state, States.State.FALLING)
 		return
 
@@ -116,6 +117,7 @@ func _physics_process(delta):
 	and not player.is_punching_left \
 	and not player.is_punching_right \
 	and not player.is_rolling \
+	and not player.is_skateboarding \
 	and not player.is_swimming:
 
 		# Reset double-jump flag when on the ground
