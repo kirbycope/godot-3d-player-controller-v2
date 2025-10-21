@@ -81,6 +81,7 @@ func _process(_delta):
 		enable_driving.button_pressed = player.enable_driving
 		enable_flying.button_pressed = player.enable_flying
 		enable_hanging.button_pressed = player.enable_hanging
+		enable_holding_objects.button_pressed = player.enable_holding_objects
 		enable_jumping.button_pressed = player.enable_jumping
 		enable_kicking.button_pressed = player.enable_kicking
 		enable_navigation.button_pressed = player.enable_navigation

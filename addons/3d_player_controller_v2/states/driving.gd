@@ -46,3 +46,8 @@ func stop() -> void:
 
 	# [Re]Enable the player's collision shape
 	player.collision_shape_3d.disabled = false
+
+	# Reset the camera yaw offset so it returns behind the player after exiting the vehicle
+	# (camera free-look while driving may have left an offset on the camera mount)
+	if is_instance_valid(player) and is_instance_valid(player.camera_mount):
+		player.camera_mount.rotation.y = 0.0
