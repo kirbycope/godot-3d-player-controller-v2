@@ -115,6 +115,8 @@ func _process(_delta):
 		is_punching_right.button_pressed = player.is_punching_right
 		is_rolling.button_pressed = player.is_rolling
 		is_running.button_pressed = player.is_running
+		is_skateboarding.button_pressed = player.is_skateboarding
+		is_sliding.button_pressed = player.is_sliding
 		is_sprinting.button_pressed = player.is_sprinting
 		is_standing.button_pressed = player.is_standing
 		is_walking.button_pressed = player.is_walking

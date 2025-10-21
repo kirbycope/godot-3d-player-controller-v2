@@ -15,6 +15,12 @@ func _process(delta):
 	and Input.is_action_pressed(player.controls.button_3):
 		transition_state(NODE_STATE, States.State.CROUCHING)
 		return
+	
+	# Ⓐ/[Space] _pressed_ and rolling is enabled -> Start "rolling"
+	if player.enable_rolling:
+		if Input.is_action_just_pressed(player.controls.button_0):
+			transition_state(NODE_STATE, States.State.ROLLING)
+			return
 
 	# Ⓨ/[Ctrl] _just_released_ -> Start "standing"
 	if Input.is_action_just_released(player.controls.button_3):

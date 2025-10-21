@@ -70,6 +70,7 @@ func _input(event):
 		and not player.is_flying \
 		and not player.is_hanging \
 		and not player.is_paragliding \
+		and not player.is_skateboarding \
 		and not player.is_sprinting \
 		and not player.is_swimming \
 		and player.is_on_floor():
@@ -114,6 +115,7 @@ func _physics_process(delta):
 	and not player.is_paragliding \
 	and not player.is_punching_left \
 	and not player.is_punching_right \
+	and not player.is_rolling \
 	and not player.is_swimming:
 
 		# Reset double-jump flag when on the ground

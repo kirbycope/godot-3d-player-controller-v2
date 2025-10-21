@@ -33,6 +33,7 @@ extends CharacterBody3D
 @export var speed_paragliding: float = 2.0 ## Speed while paragliding
 @export var speed_rolling: float = 2.0 ## Speed while rolling
 @export var speed_running: float = 3.5 ## Speed while running
+@export var speed_skateboarding: float = 4.0 ## Speed while skateboarding
 @export var speed_sliding: float = 2.5 ## Speed while sliding
 @export var speed_sprinting: float = 5.0 ## Speed while sprinting
 @export var speed_swimming: float = 3.0 ## Speed while swimming
@@ -57,6 +58,7 @@ var is_punching_left: bool = false ## Is the player punching with thier left han
 var is_punching_right: bool = false ## Is the player punching with their right hand?
 var is_rolling: bool = false ## Is the player rolling?
 var is_running: bool = false ## Is the player running?
+var is_skateboarding: bool = false ## Is the player skateboarding?
 var is_sliding: bool = false ## Is the player sliding?
 var is_standing: bool = false ## Is the player standing?
 var is_sprinting: bool = false ## Is the player sprinting?
@@ -99,50 +101,53 @@ func _input(event) -> void:
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
 
-	# Ⓨ/[Ctrl] press to drive vehicle - Exit vehicle
-	if is_driving:
-		if event.is_action_pressed(controls.button_3):
-			base_state.transition_state(current_state, States.State.STANDING)
-		else:
-			return
-
-	# Handle inputs if not paused
 	if not pause.visible:
+		# Ⓨ/[Ctrl] press to drive vehicle - Exit vehicle
+		if is_driving:
+			if event.is_action_pressed(controls.button_3):
+				base_state.transition_state(current_state, States.State.STANDING)
+			else:
+				return
 
-		# 🄻1/[MB1] _pressed_ -> Start "punching left"
-		if enable_punching:
-			if event.is_action_pressed(controls.button_4) \
-			and not is_punching_left \
-			and not is_punching_right:
-				base_state.transition_state(current_state, States.State.PUNCHING_LEFT)
+		# Handle inputs if not paused
+		if not pause.visible:
 
-		# 🅁1/[MB2] _pressed_ -> Start "punching right"
-		if enable_punching:
-			if event.is_action_pressed(controls.button_5) \
-			and not is_punching_left \
-			and not is_punching_right:
-				base_state.transition_state(current_state, States.State.PUNCHING_RIGHT)
+			# 🄻1/[MB1] _pressed_ -> Start "punching left"
+			if enable_punching:
+				if event.is_action_pressed(controls.button_4) \
+				and not is_punching_left \
+				and not is_punching_right:
+					base_state.transition_state(current_state, States.State.PUNCHING_LEFT)
 
-		# Ⓐ/[Space] _pressed_ and jumping is enabled -> Start "jumping"
-		if enable_jumping:
-			if event.is_action_pressed(controls.button_0) \
-			and is_on_floor():
-				base_state.transition_state(current_state, States.State.JUMPING)
+			# 🅁1/[MB2] _pressed_ -> Start "punching right"
+			if enable_punching:
+				if event.is_action_pressed(controls.button_5) \
+				and not is_punching_left \
+				and not is_punching_right:
+					base_state.transition_state(current_state, States.State.PUNCHING_RIGHT)
 
-		# [Left Mouse Button] _pressed_ -> Start "navigating"
-		if enable_navigation:
-			if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) \
-			and Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE:
-				# Find out where to click
-				var from = camera.project_ray_origin(event.position)
-				var to = from + camera.project_ray_normal(event.position) * 10000
-				var cursor_position = Plane(up_direction, transform.origin.y).intersects_ray(from, to)
-				if cursor_position:
-					#debug.draw_red_sphere(cursor_position) ## DEBUGGING
-					navigation_agent_3d.target_position = cursor_position
-					if not is_navigating:
-						# Start "navigating"
-						base_state.transition_state(current_state, States.State.NAVIGATING)
+			# Ⓐ/[Space] _pressed_ and jumping is enabled -> Start "jumping"
+			if enable_jumping \
+			and not is_crawling \
+			and not is_skateboarding:
+				if event.is_action_pressed(controls.button_0) \
+				and is_on_floor():
+					base_state.transition_state(current_state, States.State.JUMPING)
+
+			# [Left Mouse Button] _pressed_ -> Start "navigating"
+			if enable_navigation:
+				if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) \
+				and Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE:
+					# Find out where to click
+					var from = camera.project_ray_origin(event.position)
+					var to = from + camera.project_ray_normal(event.position) * 10000
+					var cursor_position = Plane(up_direction, transform.origin.y).intersects_ray(from, to)
+					if cursor_position:
+						#debug.draw_red_sphere(cursor_position) ## DEBUGGING
+						navigation_agent_3d.target_position = cursor_position
+						if not is_navigating:
+							# Start "navigating"
+							base_state.transition_state(current_state, States.State.NAVIGATING)
 
 
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -158,6 +163,7 @@ func _process(delta) -> void:
 	target_basis = target_basis.orthonormalized()
 	transform.basis = target_basis
 
+	#print("Current State: ", base_state.get_state_name(current_state)) ## DEBUGGING
 
 ## Called once on each physics tick, and allows Nodes to synchronize their logic with physics ticks.
 func _physics_process(delta) -> void:

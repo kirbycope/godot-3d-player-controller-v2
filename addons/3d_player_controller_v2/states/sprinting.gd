@@ -10,6 +10,13 @@ func _process(delta):
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
 
+	# Ⓨ/[Ctrl] _pressed_ -> Start "sliding"
+	if player.enable_sliding:
+		if Input.is_action_pressed(player.controls.button_3) \
+		and player.is_on_floor():
+			transition_state(NODE_STATE, States.State.SLIDING)
+			return
+
 	# Ⓑ/[shift] _just_released_ -> Start "standing"
 	if Input.is_action_just_released(player.controls.button_1):
 		transition_state(NODE_STATE, States.State.STANDING)
