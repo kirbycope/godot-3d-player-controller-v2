@@ -117,7 +117,8 @@ func _input(event) -> void:
 			# Ⓐ/[Space] _pressed_ and jumping is enabled -> Start "jumping"
 			if enable_jumping \
 			and not is_crawling \
-			and not is_skateboarding:
+			and not is_skateboarding \
+			and not is_swimming:
 				if event.is_action_pressed(controls.button_0) \
 				and is_on_floor():
 					base_state.transition_state(current_state, States.State.JUMPING)

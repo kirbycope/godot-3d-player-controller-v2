@@ -5,6 +5,9 @@ const ANIMATION_WADING := "AnimationLibrary_Godot/Swim_Idle"
 const NODE_NAME := "Swimming"
 const NODE_STATE := States.State.SWIMMING
 
+# Preserve/override floor snapping while swimming
+var prev_floor_snap_length: float = -1.0
+
 
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -67,6 +70,10 @@ func start() -> void:
 	player.velocity = Vector3.ZERO
 	player.virtual_velocity = Vector3.ZERO
 
+	# Disable floor snapping so water ascent isn't pinned to ground
+	prev_floor_snap_length = player.floor_snap_length
+	player.floor_snap_length = 0.0
+
 
 ## Stop "swimming".
 func stop() -> void:
@@ -78,3 +85,8 @@ func stop() -> void:
 
 	# [Re]set player gravity to normal
 	player.gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+
+	# Restore floor snapping to its previous value
+	if prev_floor_snap_length >= 0.0:
+		player.floor_snap_length = prev_floor_snap_length
+		prev_floor_snap_length = -1.0
