@@ -47,6 +47,7 @@ var is_crouching: bool = false ## Is the player crouching?
 var is_double_jumping: bool = false ## Is the player double jumping?
 var is_driving: bool = false ## Is the player driving?
 var is_falling: bool = false ## Is the player falling?
+var is_fishing: bool = false ## Is the player fishing?
 var is_flying: bool = false ## Is the player flying?
 var is_hanging: bool = false ## Is the player hanging?
 var is_jumping: bool = false ## Is the player jumping?
@@ -112,20 +113,6 @@ func _input(event) -> void:
 		# Handle inputs if not paused
 		if not pause.visible:
 
-			# 🄻1/[MB1] _pressed_ -> Start "punching left"
-			if enable_punching:
-				if event.is_action_pressed(controls.button_4) \
-				and not is_punching_left \
-				and not is_punching_right:
-					base_state.transition_state(current_state, States.State.PUNCHING_LEFT)
-
-			# 🅁1/[MB2] _pressed_ -> Start "punching right"
-			if enable_punching:
-				if event.is_action_pressed(controls.button_5) \
-				and not is_punching_left \
-				and not is_punching_right:
-					base_state.transition_state(current_state, States.State.PUNCHING_RIGHT)
-
 			# Ⓐ/[Space] _pressed_ and jumping is enabled -> Start "jumping"
 			if enable_jumping \
 			and not is_crawling \
@@ -133,6 +120,22 @@ func _input(event) -> void:
 				if event.is_action_pressed(controls.button_0) \
 				and is_on_floor():
 					base_state.transition_state(current_state, States.State.JUMPING)
+
+			# 🄻1/[MB1] _pressed_ -> Start "punching left"
+			if enable_punching:
+				if event.is_action_pressed(controls.button_4) \
+				and not is_fishing \
+				and not is_punching_left \
+				and not is_punching_right:
+					base_state.transition_state(current_state, States.State.PUNCHING_LEFT)
+
+			# 🅁1/[MB2] _pressed_ -> Start "punching right"
+			if enable_punching:
+				if event.is_action_pressed(controls.button_5) \
+				and not is_fishing \
+				and not is_punching_left \
+				and not is_punching_right:
+					base_state.transition_state(current_state, States.State.PUNCHING_RIGHT)
 
 			# [Left Mouse Button] _pressed_ -> Start "navigating"
 			if enable_navigation:

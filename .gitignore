@@ -1,4 +1,4 @@
 # Godot 4+ specific ignores
+.DS_Store
 .godot/
 /android/
-addons/3d_player_controller_v2/.DS_Store

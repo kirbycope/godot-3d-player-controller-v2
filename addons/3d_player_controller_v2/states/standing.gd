@@ -1,5 +1,8 @@
 extends BaseState
 
+const ANIMATION_CASTING := "Fishing_Cast/mixamo_com"
+const ANIMATION_FISHING := "Fishing_Idle/mixamo_com"
+const ANIMATION_REELING := "Fishing_Reel/mixamo_com"
 const ANIMATION_STANDING := "AnimationLibrary_Godot/Idle"
 const NODE_NAME := "Standing"
 const NODE_STATE := States.State.STANDING
@@ -23,10 +26,35 @@ func _process(delta):
 
 ## Plays the appropriate animation based on player state.
 func play_animation() -> void:
-	# Check if the animation player is not already playing the appropriate animation
-	if player.animation_player.current_animation != ANIMATION_STANDING:
-		# Play the "standing idle" animation
-		player.animation_player.play(ANIMATION_STANDING)
+	if player.is_fishing:
+		# 🄻1/[MB0] _pressed_ -> Start "casting"
+		if Input.is_action_pressed(player.controls.button_4):
+			# Check if the animation player is not already playing the appropriate animation
+			if player.animation_player.current_animation != ANIMATION_CASTING:
+				# Play the "casting" animation
+				player.animation_player.play(ANIMATION_CASTING)
+
+		# 🅁1/[MB1] _pressed_ -> Start "reeling"
+		elif Input.is_action_pressed(player.controls.button_5):
+			# Check if the animation player is not already playing the appropriate animation
+			if player.animation_player.current_animation != ANIMATION_REELING:
+				# Play the "reeling" animation
+				player.animation_player.play(ANIMATION_REELING)
+
+		# Must be fishing (but not casting or reeling) -> Play "fishing" animation
+		else:
+			# Check if the animation player is not already playing the appropriate animation
+			if player.animation_player.current_animation != ANIMATION_FISHING:
+				# Play the "fishing" animation
+				player.animation_player.play(ANIMATION_FISHING)
+
+	# Must not be fishing -> Play "standing" animation
+	else:
+		# Check if the animation player is not already playing the appropriate animation
+		if player.animation_player.current_animation != ANIMATION_STANDING:
+			# Play the "standing" animation
+			player.animation_player.play(ANIMATION_STANDING)
+
 
 
 ## Start "standing".

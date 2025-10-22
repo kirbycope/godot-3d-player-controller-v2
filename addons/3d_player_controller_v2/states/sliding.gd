@@ -61,3 +61,9 @@ func stop() -> void:
 
 	# Flag the player as not "sliding"
 	player.is_sliding = false
+
+	# [Re]set the player collision shape's height
+	player.collision_shape_3d.shape.height = player.collision_height
+
+	# [Re]set the player collision shape's position
+	player.collision_shape_3d.position = player.collision_position

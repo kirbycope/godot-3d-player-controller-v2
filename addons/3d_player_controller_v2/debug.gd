@@ -184,7 +184,6 @@ func _on_enable_crouching_toggled(toggled_on):
 	player.enable_crouching = toggled_on
 
 
-
 func _on_enable_double_jumping_toggled(toggled_on):
 	player.enable_double_jumping = toggled_on
 

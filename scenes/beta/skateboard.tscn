@@ -113,7 +113,7 @@ shadow_mesh = SubResource("ArrayMesh_lbyeb")
 [sub_resource type="BoxShape3D" id="BoxShape3D_ghrya"]
 size = Vector3(2, 0.4, 1)
 
-[node name="skateboard" type="Node3D"]
+[node name="Skateboard" type="Node3D"]
 script = ExtResource("1_joihg")
 
 [node name="1_low_001" type="MeshInstance3D" parent="."]

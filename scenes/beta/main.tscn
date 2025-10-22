@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://dey7ls45vvlck"]
+[gd_scene load_steps=21 format=3 uid="uid://dey7ls45vvlck"]
 
 [ext_resource type="Script" uid="uid://dhm0w0mgw28o6" path="res://scenes/beta/main.gd" id="1_4go8p"]
 [ext_resource type="Texture2D" uid="uid://bpo2vwd0ruriv" path="res://assets/textures/prototype_textures/Dark/texture_08.png" id="2_7kfyu"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://c2yhnwwbe08c4" path="res://assets/textures/prototype_textures/Dark/texture_03.png" id="5_ecpwe"]
 [ext_resource type="PackedScene" uid="uid://cb3q1urw62chp" path="res://scenes/beta/car.tscn" id="6_mf6xi"]
 [ext_resource type="PackedScene" uid="uid://q0w20gsraiem" path="res://scenes/beta/skateboard.tscn" id="7_88y00"]
+[ext_resource type="PackedScene" uid="uid://bkajjhn7o5h28" path="res://scenes/beta/fishing_rod.tscn" id="8_a8mrn"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sugp2"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -71,7 +72,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.8428774e-08, 2)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.40068817, -0.0057737827, 0.07265806)
 mesh = SubResource("BoxMesh_jyhfs")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
@@ -175,6 +175,19 @@ material = SubResource("StandardMaterial3D_tbgi4")
 transform = Transform3D(1.2904771e-08, 0.8660253, 0.49999985, 2.2351733e-08, -0.49999982, 0.86602527, 1, 1.4210855e-14, -4.371138e-08, -3.0669193, 0.14491129, -2.9802322e-08)
 text = "20° Ramp"
 
+[node name="Tunnel" type="CSGCylinder3D" parent="."]
+transform = Transform3D(-4.371139e-08, 1, -4.371139e-08, 0, -4.371139e-08, -1, -1, -4.371139e-08, 1.9106855e-15, 0, 0.5, -8)
+use_collision = true
+radius = 1.0
+sides = 16
+material = SubResource("StandardMaterial3D_tipki")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Tunnel"]
+operation = 2
+radius = 0.75
+sides = 16
+material = SubResource("StandardMaterial3D_tipki")
+
 [node name="HangingBar" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1.9, -6)
 
@@ -193,18 +206,8 @@ material = SubResource("StandardMaterial3D_tipki")
 [node name="Car" parent="." instance=ExtResource("6_mf6xi")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 5, 0, 0)
 
-[node name="skateboard" parent="." instance=ExtResource("7_88y00")]
+[node name="Skateboard" parent="." instance=ExtResource("7_88y00")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
 
-[node name="Tunnel" type="CSGCylinder3D" parent="."]
-transform = Transform3D(-4.371139e-08, 1, -4.371139e-08, 0, -4.371139e-08, -1, -1, -4.371139e-08, 1.9106855e-15, 0, 0.5, -8)
-use_collision = true
-radius = 1.0
-sides = 16
-material = SubResource("StandardMaterial3D_tipki")
-
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Tunnel"]
-operation = 2
-radius = 0.75
-sides = 16
-material = SubResource("StandardMaterial3D_tipki")
+[node name="FishingRod" parent="." instance=ExtResource("8_a8mrn")]
+transform = Transform3D(0.09767043, 0.28365555, 4.5298737e-08, 0.26654902, -0.0917802, 0.102606036, -0.097015925, 0.033405215, 0.28190777, -1.9999999, 0.5, 2)
