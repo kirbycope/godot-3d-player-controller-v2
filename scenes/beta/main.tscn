@@ -1,9 +1,10 @@
-[gd_scene load_steps=21 format=3 uid="uid://dey7ls45vvlck"]
+[gd_scene load_steps=20 format=3 uid="uid://dey7ls45vvlck"]
 
 [ext_resource type="Script" uid="uid://dhm0w0mgw28o6" path="res://scenes/beta/main.gd" id="1_4go8p"]
 [ext_resource type="Texture2D" uid="uid://bpo2vwd0ruriv" path="res://assets/textures/prototype_textures/Dark/texture_08.png" id="2_7kfyu"]
 [ext_resource type="Texture2D" uid="uid://brerfykle8g6t" path="res://icon.svg" id="3_1km6e"]
 [ext_resource type="PackedScene" uid="uid://f6xpywa7euq2" path="res://addons/3d_player_controller_v2/player.tscn" id="4_evn7r"]
+[ext_resource type="PackedScene" uid="uid://brc6v1pepmek3" path="res://scenes/beta/pool.tscn" id="4_i50xe"]
 [ext_resource type="Texture2D" uid="uid://c2yhnwwbe08c4" path="res://assets/textures/prototype_textures/Dark/texture_03.png" id="5_ecpwe"]
 [ext_resource type="PackedScene" uid="uid://cb3q1urw62chp" path="res://scenes/beta/car.tscn" id="6_mf6xi"]
 [ext_resource type="PackedScene" uid="uid://q0w20gsraiem" path="res://scenes/beta/skateboard.tscn" id="7_88y00"]
@@ -25,13 +26,6 @@ glow_enabled = true
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sugp2"]
 albedo_texture = ExtResource("2_7kfyu")
 uv1_triplanar = true
-
-[sub_resource type="BoxMesh" id="BoxMesh_jyhfs"]
-material = SubResource("StandardMaterial3D_sugp2")
-size = Vector3(64, 0.1, 64)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_tbgi4"]
-size = Vector3(64, 0.1, 64)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_tefeu"]
 
@@ -68,14 +62,19 @@ shadow_enabled = true
 [node name="Player" parent="." instance=ExtResource("4_evn7r")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.8428774e-08, 2)
 
-[node name="Ground" type="StaticBody3D" parent="."]
+[node name="Ground" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
+use_collision = true
+size = Vector3(64, 0.1, 64)
+material = SubResource("StandardMaterial3D_sugp2")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
-mesh = SubResource("BoxMesh_jyhfs")
+[node name="Hole" type="CSGBox3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9.5)
+operation = 2
+size = Vector3(5, 0.1, 10)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
-shape = SubResource("BoxShape3D_tbgi4")
+[node name="Pool" parent="Ground" instance=ExtResource("4_i50xe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.45, 9.5)
 
 [node name="FriendlyFreight" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.5, -2)

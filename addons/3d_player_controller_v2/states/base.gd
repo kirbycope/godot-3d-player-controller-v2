@@ -103,7 +103,8 @@ func _physics_process(delta):
 	and not player.is_paragliding \
 	and not player.is_punching_left \
 	and not player.is_punching_right \
-	and not player.is_skateboarding:
+	and not player.is_skateboarding \
+	and not player.is_swimming:
 		transition_state(player.current_state, States.State.FALLING)
 		return
 

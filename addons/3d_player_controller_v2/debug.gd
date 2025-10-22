@@ -49,6 +49,7 @@ var yellow_sphere: MeshInstance3D
 @onready var is_skateboarding: CheckBox = $States/IsSkateboarding
 @onready var is_sprinting = $States/IsSprinting
 @onready var is_standing = $States/IsStanding
+@onready var is_swimming = $States/IsSwimming
 @onready var is_walking = $States/IsWalking
 @onready var fps = $Performance/FPS
 @onready var player: CharacterBody3D = get_parent()
@@ -119,6 +120,7 @@ func _process(_delta):
 		is_sliding.button_pressed = player.is_sliding
 		is_sprinting.button_pressed = player.is_sprinting
 		is_standing.button_pressed = player.is_standing
+		is_swimming.button_pressed = player.is_swimming
 		is_walking.button_pressed = player.is_walking
 		coordinates.text = "[center][color=red]X:[/color]%.1f [color=green]Y:[/color]%.1f [color=blue]Z:[/color]%.1f[/center]" % [player.global_position.x, player.global_position.y, player.global_position.z]
 		velocity.text = "[center][color=red]X:[/color]%.1f [color=green]Y:[/color]%.1f [color=blue]Z:[/color]%.1f[/center]" % [player.velocity.x, player.velocity.y, player.velocity.z]

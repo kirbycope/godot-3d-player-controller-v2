@@ -12,9 +12,6 @@ func _process(delta):
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
 
-	# Play the animation
-	play_animation()
-
 	# Ⓐ/[Space] _pressed_ (while grounded) -> Perform "ollie"
 	if Input.is_action_just_pressed(player.controls.button_0)\
 	and player.is_on_floor():
@@ -27,6 +24,9 @@ func _process(delta):
 			player.speed_current = player.speed_skateboarding * 1.5
 		else:
 			player.speed_current = player.speed_skateboarding
+
+	# Play the animation
+	play_animation()
 
 
 ## Plays the appropriate animation based on player state.

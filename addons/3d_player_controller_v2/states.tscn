@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://yxm384w27bq2"]
+[gd_scene load_steps=26 format=3 uid="uid://yxm384w27bq2"]
 
 [ext_resource type="Script" uid="uid://bu32m3koxydbf" path="res://addons/3d_player_controller_v2/states/states.gd" id="1_gr8r5"]
 [ext_resource type="Script" uid="uid://5livqgnjxl8w" path="res://addons/3d_player_controller_v2/states/base.gd" id="2_uuywk"]
@@ -24,6 +24,7 @@
 [ext_resource type="Script" uid="uid://djuxs8olgukcn" path="res://addons/3d_player_controller_v2/states/sliding.gd" id="15_qtidm"]
 [ext_resource type="Script" uid="uid://beiuekwn2aoy8" path="res://addons/3d_player_controller_v2/states/skateboarding.gd" id="20_nohs4"]
 [ext_resource type="Script" uid="uid://db70cyli03pn2" path="res://addons/3d_player_controller_v2/states/paragliding.gd" id="21_3qar2"]
+[ext_resource type="Script" uid="uid://d26mvtc01de4g" path="res://addons/3d_player_controller_v2/states/swimming.gd" id="23_0t5q5"]
 
 [node name="States" type="Node"]
 script = ExtResource("1_gr8r5")
@@ -80,6 +81,10 @@ script = ExtResource("13_npvs6")
 process_mode = 4
 script = ExtResource("7_uuywk")
 
+[node name="Paragliding" type="Node" parent="."]
+process_mode = 4
+script = ExtResource("21_3qar2")
+
 [node name="PunchingLeft" type="Node" parent="."]
 process_mode = 4
 script = ExtResource("8_u0yrf")
@@ -108,6 +113,10 @@ script = ExtResource("20_nohs4")
 process_mode = 4
 script = ExtResource("8_smmr0")
 
+[node name="Swimming" type="Node" parent="."]
+process_mode = 4
+script = ExtResource("23_0t5q5")
+
 [node name="Standing" type="Node" parent="."]
 process_mode = 4
 script = ExtResource("9_qtidm")
@@ -115,7 +124,3 @@ script = ExtResource("9_qtidm")
 [node name="Walking" type="Node" parent="."]
 process_mode = 4
 script = ExtResource("10_fl747")
-
-[node name="Paragliding" type="Node" parent="."]
-process_mode = 4
-script = ExtResource("21_3qar2")

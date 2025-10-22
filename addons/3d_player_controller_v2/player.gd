@@ -64,6 +64,7 @@ var is_sliding: bool = false ## Is the player sliding?
 var is_standing: bool = false ## Is the player standing?
 var is_sprinting: bool = false ## Is the player sprinting?
 var is_swimming: bool = false ## Is the player swimming?
+var is_swimming_in ## The water body the player is swimming in (if any)
 var is_walking: bool = false ## Is the player walking?
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity") ## Default gravity value
 var gravitating_towards ## The Node the player is being pulled towards (if any)
@@ -221,14 +222,20 @@ func _physics_process(delta) -> void:
 					# Update the visuals to look in the direction based on player input
 					visuals.look_at(position + lateral_dir, new_up)
 
-			# If flying and no input, stop lateral movement
-			if is_flying and input_direction == Vector2.ZERO:
-				# Zero out lateral velocity, preserve vertical
-				var vertical_speed = velocity.dot(new_up)
-				velocity = new_up * vertical_speed
+		# If flying and no input, stop lateral movement
+		if is_flying and input_direction == Vector2.ZERO:
+			# Zero out lateral velocity, preserve vertical
+			var vertical_speed = velocity.dot(new_up)
+			velocity = new_up * vertical_speed
 
-			# If skateboarding and no input, apply friction to slow down
-			if is_skateboarding and input_direction == Vector2.ZERO:
+		# If swimming and no input, stop lateral movement
+		if is_swimming and input_direction == Vector2.ZERO:
+			# Zero out lateral velocity, preserve vertical
+			var vertical_speed = velocity.dot(new_up)
+			velocity = new_up * vertical_speed
+
+		# If skateboarding and no input, apply friction to slow down
+		if is_skateboarding and input_direction == Vector2.ZERO:
 				# Define friction coefficient (adjust this value to control how quickly the player slows down)
 				var friction_coefficient = 0.95  # Higher value = slower deceleration (0.9-0.98 recommended)
 				# Get the lateral (horizontal) velocity component
