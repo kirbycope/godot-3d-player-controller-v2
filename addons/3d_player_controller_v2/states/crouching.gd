@@ -10,6 +10,12 @@ func _input(event):
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
 
+	# Ⓐ/[Space] _pressed_ -> Start "jumping"
+	if event.is_action_pressed(player.controls.button_0):
+		if player.enable_jumping \
+		and player.is_on_floor():
+			player.base_state.transition_state(player.current_state, States.State.JUMPING)
+
 	# Ⓨ/[Ctrl] _released_ -> Start "standing"
 	if event.is_action_released(player.controls.button_3):
 		transition_state(NODE_STATE, States.State.STANDING)

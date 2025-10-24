@@ -45,6 +45,7 @@ func _physics_process(delta):
 	and not player.is_punching_left \
 	and not player.is_punching_right \
 	and not player.is_rolling \
+	and not player.is_sliding \
 	and not player.is_skateboarding \
 	and not player.is_swimming:
 
@@ -57,6 +58,13 @@ func _physics_process(delta):
 		and abs(player.virtual_velocity).length() < 0.2 \
 		and not player.is_crouching:
 			transition_state(player.current_state, States.State.STANDING)
+			return
+
+		elif Input.is_action_pressed(player.controls.button_1) \
+		and player.enable_sprinting \
+		and not player.is_sprinting:
+			# Start "sprinting"
+			transition_state(player.current_state, States.State.SPRINTING)
 			return
 
 		# Check if the player's current speed is slower than or equal to "walking" speed -> Start "walking"

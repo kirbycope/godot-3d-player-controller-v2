@@ -25,6 +25,12 @@ func _input(event):
 	# Do nothing if the "pause" menu is visible
 	if player.pause.visible: return
 
+	# Ⓐ/[Space] _pressed_ -> Start "jumping"
+	if event.is_action_pressed(player.controls.button_0):
+		if player.enable_jumping \
+		and player.is_on_floor():
+			player.base_state.transition_state(player.current_state, States.State.JUMPING)
+
 	# Ⓑ/[shift] _pressed_ -> Start "sprinting"
 	if event.is_action_pressed(player.controls.button_1):
 		if player.enable_sprinting \
@@ -32,13 +38,6 @@ func _input(event):
 		and player.input_direction != Vector2.ZERO \
 		and player.is_on_floor():
 			transition_state(NODE_STATE, States.State.SPRINTING)
-			return
-
-	# Ⓨ/[Ctrl] _pressed_ -> Start "crouching"
-	if event.is_action_pressed(player.controls.button_3):
-		if player.enable_crouching \
-		and player.is_on_floor():
-			transition_state(NODE_STATE, States.State.CROUCHING)
 			return
 
 	# 🄻1/[MB0] _pressed_
@@ -101,6 +100,14 @@ func _input(event):
 func _process(delta):
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
+
+	# Ⓨ/[Ctrl] _pressed_ -> Start "crouching"
+	# Not in _input() to allow holding down the button while in other states and trasitioning to "standing"
+	if Input.is_action_pressed(player.controls.button_3):
+		if player.enable_crouching \
+		and player.is_on_floor():
+			transition_state(NODE_STATE, States.State.CROUCHING)
+			return
 
 	# Play the animation
 	play_animation()

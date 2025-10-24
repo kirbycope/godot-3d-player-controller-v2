@@ -5,22 +5,37 @@ const NODE_NAME := "Sprtinting"
 const NODE_STATE := States.State.SPRINTING
 
 
-## Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+## Called when there is an input event.
+func _input(event):
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
 
+	# Do nothing if the "pause" menu is visible
+	if player.pause.visible: return
+
+	# Ⓐ/[Space] _pressed_ -> Start "jumping"
+	if event.is_action_pressed(player.controls.button_0):
+		if player.enable_jumping \
+		and player.is_on_floor():
+			player.base_state.transition_state(player.current_state, States.State.JUMPING)
+
+	# Ⓑ/[shift] _released_ -> Start "standing"
+	if event.is_action_released(player.controls.button_1):
+		transition_state(NODE_STATE, States.State.STANDING)
+		return
+
 	# Ⓨ/[Ctrl] _pressed_ -> Start "sliding"
 	if player.enable_sliding:
-		if Input.is_action_pressed(player.controls.button_3) \
+		if event.is_action_pressed(player.controls.button_3) \
 		and player.is_on_floor():
 			transition_state(NODE_STATE, States.State.SLIDING)
 			return
 
-	# Ⓑ/[shift] _just_released_ -> Start "standing"
-	if Input.is_action_just_released(player.controls.button_1):
-		transition_state(NODE_STATE, States.State.STANDING)
-		return
+
+## Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	# Do nothing if not the authority
+	if !is_multiplayer_authority(): return
 
 	# Play the animation
 	play_animation()

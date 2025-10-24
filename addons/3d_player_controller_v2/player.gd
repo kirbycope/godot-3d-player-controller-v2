@@ -125,32 +125,20 @@ func _input(event) -> void:
 			else:
 				return
 
-		# Handle inputs if not paused
-		if not pause.visible:
-
-			# Ⓐ/[Space] _pressed_ and jumping is enabled -> Start "jumping"
-			if enable_jumping \
-			and not is_crawling \
-			and not is_skateboarding \
-			and not is_swimming:
-				if event.is_action_pressed(controls.button_0) \
-				and is_on_floor():
-					base_state.transition_state(current_state, States.State.JUMPING)
-
-			# [Left Mouse Button] _pressed_ -> Start "navigating"
-			if enable_navigation:
-				if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) \
-				and Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE:
-					# Find out where to click
-					var from = camera.project_ray_origin(event.position)
-					var to = from + camera.project_ray_normal(event.position) * 10000
-					var cursor_position = Plane(up_direction, transform.origin.y).intersects_ray(from, to)
-					if cursor_position:
-						#debug.draw_red_sphere(cursor_position) ## DEBUGGING
-						navigation_agent.target_position = cursor_position
-						if not is_navigating:
-							# Start "navigating"
-							base_state.transition_state(current_state, States.State.NAVIGATING)
+		# [Left Mouse Button] _pressed_ -> Start "navigating"
+		if enable_navigation:
+			if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) \
+			and Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE:
+				# Find out where to click
+				var from = camera.project_ray_origin(event.position)
+				var to = from + camera.project_ray_normal(event.position) * 10000
+				var cursor_position = Plane(up_direction, transform.origin.y).intersects_ray(from, to)
+				if cursor_position:
+					#debug.draw_red_sphere(cursor_position) ## DEBUGGING
+					navigation_agent.target_position = cursor_position
+					if not is_navigating:
+						# Start "navigating"
+						base_state.transition_state(current_state, States.State.NAVIGATING)
 
 
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -166,7 +154,8 @@ func _process(delta) -> void:
 	target_basis = target_basis.orthonormalized()
 	transform.basis = target_basis
 
-	print("Current State: ", base_state.get_state_name(current_state)) ## DEBUGGING
+	#print("Current State: ", base_state.get_state_name(current_state)) ## DEBUGGING
+
 
 ## Called once on each physics tick, and allows Nodes to synchronize their logic with physics ticks.
 func _physics_process(delta) -> void:
