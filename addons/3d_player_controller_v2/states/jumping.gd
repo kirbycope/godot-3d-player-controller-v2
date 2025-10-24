@@ -5,6 +5,52 @@ const NODE_NAME := "Jumping"
 const NODE_STATE := States.State.JUMPING
 
 
+## Called when there is an input event.
+func _input(event):
+	# Do nothing if not the authority
+	if !is_multiplayer_authority(): return
+
+	# Do nothing if the "pause" menu is visible
+	if player.pause.visible: return
+
+	# Ⓐ/[Space] _pressed_ -> Start "climbing"
+	if event.is_action_pressed(player.controls.button_0):
+		if player.enable_climbing:
+			# Check if the player is facing a surface
+			if player.ray_cast_high.is_colliding():
+				# Get the collision object
+				var collision_object = player.ray_cast_high.get_collider()
+				# Check if the collision object is "climbable"
+				if not collision_object is CharacterBody3D \
+				and not collision_object is SoftBody3D:
+					# Start "climbing"
+					transition_state(player.current_state, States.State.CLIMBING)
+					return
+
+	# Ⓐ/[Space] _pressed_ -> Start "double-jumping"
+	if event.is_action_pressed(player.controls.button_0):
+		if player.enable_double_jumping \
+		and not player.is_double_jumping:
+			player.is_double_jumping = true
+			# Increase the player's velocity in the up direction
+			player.velocity += player.up_direction * player.speed_jumping
+			return
+
+	# Ⓐ/[Space] _pressed_ -> Start "flying"
+	if event.is_action_pressed(player.controls.button_0):
+		if player.enable_flying:
+			# Start "flying"
+			transition_state(player.current_state, States.State.FLYING)
+			return
+
+	# Ⓐ/[Space] _pressed_ -> Start "paragliding"
+	if event.is_action_pressed(player.controls.button_0):
+		if player.enable_paragliding:
+			# Start "paragliding"
+			transition_state(player.current_state, States.State.PARAGLIDING)
+			return
+
+
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	# Do nothing if not the authority

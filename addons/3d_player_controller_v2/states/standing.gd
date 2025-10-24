@@ -26,7 +26,7 @@ func _input(event):
 	if player.pause.visible: return
 
 	# Ⓑ/[shift] _pressed_ -> Start "sprinting"
-	if Input.is_action_pressed(player.controls.button_1):
+	if event.is_action_pressed(player.controls.button_1):
 		if player.enable_sprinting \
 		and not player.is_sprinting \
 		and player.input_direction != Vector2.ZERO \
@@ -35,7 +35,7 @@ func _input(event):
 			return
 
 	# Ⓨ/[Ctrl] _pressed_ -> Start "crouching"
-	if Input.is_action_pressed(player.controls.button_3):
+	if event.is_action_pressed(player.controls.button_3):
 		if player.enable_crouching \
 		and player.is_on_floor():
 			transition_state(NODE_STATE, States.State.CROUCHING)
@@ -90,7 +90,7 @@ func _input(event):
 		and player.is_aiming_rifle:
 			player.is_aiming_rifle = false
 
-	# 🅁2/[MB4] _pressed_ -> Start "kicking right"
+	# 🅁2/[MB4] _pressed_
 	if event.is_action_pressed(player.controls.button_7):
 		# Right "kicking"
 		if player.enable_kicking:

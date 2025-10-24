@@ -5,6 +5,24 @@ const NODE_NAME := "Running"
 const NODE_STATE := States.State.RUNNING
 
 
+## Called when there is an input event.
+func _input(event):
+	# Do nothing if not the authority
+	if !is_multiplayer_authority(): return
+
+	# Do nothing if the "pause" menu is visible
+	if player.pause.visible: return
+
+	# Ⓑ/[shift] _pressed_ -> Start "sprinting"
+	if event.is_action_pressed(player.controls.button_1):
+		if player.enable_sprinting \
+		and not player.is_sprinting \
+		and player.input_direction != Vector2.ZERO \
+		and player.is_on_floor():
+			transition_state(NODE_STATE, States.State.SPRINTING)
+			return
+
+
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	# Do nothing if not the authority

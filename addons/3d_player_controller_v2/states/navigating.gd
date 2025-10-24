@@ -18,6 +18,9 @@ func _input(event):
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
 
+	# Do nothing if the "pause" menu is visible
+	if player.pause.visible: return
+
 	# Check for player input
 	if event.is_action_pressed("move_up") \
 	or event.is_action_pressed("move_down") \
@@ -60,7 +63,7 @@ func navigate_to_next_position() -> void:
 	var new_velocity = (next_point - player.global_position).normalized() * player.speed_running
 	player.velocity.x = new_velocity.x
 	player.velocity.z = new_velocity.z
-	#virtual_velocity = Vector3(player.velocity.x, 0, player.velocity.z)
+	player.virtual_velocity = Vector3(player.velocity.x, 0, player.velocity.z)
 	# Face the direction of movement
 	player.visuals.look_at(player.position + Vector3(player.velocity.x, 0, player.velocity.z), player.up_direction)
 

@@ -166,7 +166,7 @@ func _process(delta) -> void:
 	target_basis = target_basis.orthonormalized()
 	transform.basis = target_basis
 
-	#print("Current State: ", base_state.get_state_name(current_state)) ## DEBUGGING
+	print("Current State: ", base_state.get_state_name(current_state)) ## DEBUGGING
 
 ## Called once on each physics tick, and allows Nodes to synchronize their logic with physics ticks.
 func _physics_process(delta) -> void:

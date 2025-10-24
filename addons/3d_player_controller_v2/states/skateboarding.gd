@@ -7,16 +7,26 @@ const NODE_NAME := "Skateboarding"
 const NODE_STATE := States.State.SKATEBOARDING
 
 
+## Called when there is an input event.
+func _input(event):
+	# Do nothing if not the authority
+	if !is_multiplayer_authority(): return
+
+	# Do nothing if the "pause" menu is visible
+	if player.pause.visible: return
+
+	# Ⓐ/[Space] _pressed_ (while grounded) -> Perform "ollie"
+	if event.is_action_pressed(player.controls.button_0)\
+	and player.is_on_floor():
+		# Increase the player's velocity in the up direction
+		player.velocity += player.up_direction * player.speed_jumping
+
+
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
 
-	# Ⓐ/[Space] _pressed_ (while grounded) -> Perform "ollie"
-	if Input.is_action_just_pressed(player.controls.button_0)\
-	and player.is_on_floor():
-		# Increase the player's velocity in the up direction
-		player.velocity += player.up_direction * player.speed_jumping
 
 	# Ⓑ/[shift] _pressed_ -> Move faster while "skateboarding"
 	if player.enable_sprinting:

@@ -6,6 +6,15 @@ const NODE_NAME := "Flying"
 const NODE_STATE := States.State.FLYING
 
 
+## Called when there is an input event.
+func _input(event):
+	# Do nothing if not the authority
+	if !is_multiplayer_authority(): return
+
+	# Do nothing if the "pause" menu is visible
+	if player.pause.visible: return
+
+
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	# Do nothing if not the authority

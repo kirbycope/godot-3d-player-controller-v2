@@ -5,15 +5,24 @@ const NODE_NAME := "Crouching"
 const NODE_STATE := States.State.CROUCHING
 
 
+## Called when there is an input event.
+func _input(event):
+	# Do nothing if not the authority
+	if !is_multiplayer_authority(): return
+
+	# Ⓨ/[Ctrl] _released_ -> Start "standing"
+	if event.is_action_released(player.controls.button_3):
+		transition_state(NODE_STATE, States.State.STANDING)
+		return
+
+	# Do nothing if the "pause" menu is visible
+	if player.pause.visible: return
+
+
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
-
-	# Ⓨ/[Ctrl] _just_released_ -> Start "standing"
-	if Input.is_action_just_released(player.controls.button_3):
-		transition_state(NODE_STATE, States.State.STANDING)
-		return
 
 	# Check if the player is moving -> Start "crawling"
 	if player.enable_crawling:

@@ -9,17 +9,26 @@ const NODE_STATE := States.State.SWIMMING
 var prev_floor_snap_length: float = -1.0
 
 
-## Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+## Called when there is an input event.
+func _input(event):
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
 
+	# Do nothing if the "pause" menu is visible
+	if player.pause.visible: return
+
 	# Ⓐ/[Space] _pressed_ -> Start "mantling"
-	if Input.is_action_just_pressed(player.controls.button_0):
+	if event.is_action_pressed(player.controls.button_0):
 		if player.ray_cast_jump_target.is_colliding():
 			player.global_position = player.ray_cast_jump_target.get_collision_point()
 			transition_state(NODE_STATE, States.State.STANDING) # TODO: Create a mantling state
 			return
+
+
+## Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	# Do nothing if not the authority
+	if !is_multiplayer_authority(): return
 
 	# Ⓐ/[Space] button currently _pressed_ -> Increase player's vertical position
 	if Input.is_action_pressed(player.controls.button_0):

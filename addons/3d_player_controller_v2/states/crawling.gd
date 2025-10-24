@@ -5,6 +5,26 @@ const NODE_NAME := "Crawling"
 const NODE_STATE := States.State.CRAWLING
 
 
+## Called when there is an input event.
+func _input(event):
+	# Do nothing if not the authority
+	if !is_multiplayer_authority(): return
+
+	# Ⓐ/[Space] _pressed_ -> Start "rolling"
+	if player.enable_rolling:
+		if event.is_action_pressed(player.controls.button_0):
+			transition_state(NODE_STATE, States.State.ROLLING)
+			return
+
+	# Ⓨ/[Ctrl] _released_ -> Start "standing"
+	if event.is_action_released(player.controls.button_3):
+		transition_state(NODE_STATE, States.State.STANDING)
+		return
+
+	# Do nothing if the "pause" menu is visible
+	if player.pause.visible: return
+
+
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	# Do nothing if not the authority
@@ -16,17 +36,6 @@ func _process(delta):
 		transition_state(NODE_STATE, States.State.CROUCHING)
 		return
 	
-	# Ⓐ/[Space] _pressed_ and rolling is enabled -> Start "rolling"
-	if player.enable_rolling:
-		if Input.is_action_just_pressed(player.controls.button_0):
-			transition_state(NODE_STATE, States.State.ROLLING)
-			return
-
-	# Ⓨ/[Ctrl] _just_released_ -> Start "standing"
-	if Input.is_action_just_released(player.controls.button_3):
-		transition_state(NODE_STATE, States.State.STANDING)
-		return
-
 	# Play the animation
 	play_animation()
 

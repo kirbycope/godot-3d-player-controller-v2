@@ -10,6 +10,27 @@ const NODE_NAME := "Hanging"
 const NODE_STATE := States.State.HANGING
 
 
+## Called when there is an input event.
+func _input(event):
+	# Do nothing if not the authority
+	if !is_multiplayer_authority(): return
+
+	# Do nothing if the "pause" menu is visible
+	if player.pause.visible: return
+
+	# Ⓐ/[Space] _pressed_ -> Start "mantling"
+	if event.is_action_pressed(player.controls.button_0):
+		if player.ray_cast_jump_target.is_colliding():
+			player.global_position = player.ray_cast_jump_target.get_collision_point()
+			transition_state(NODE_STATE, States.State.STANDING) # TODO: Create a mantling state
+			return
+
+	# Ⓨ/[Ctrl] _pressed_ -> Start "falling"
+	if event.is_action_pressed(player.controls.button_3):
+		transition_state(NODE_STATE, States.State.FALLING)
+		return
+
+
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	# Do nothing if not the authority
@@ -28,13 +49,6 @@ func _process(delta):
 		# Start "standing"
 		transition_state(NODE_STATE, States.State.STANDING)
 		return
-
-	# Ⓐ/[Space] _pressed_ -> Start "mantling"
-	if Input.is_action_just_pressed(player.controls.button_0):
-		if player.ray_cast_jump_target.is_colliding():
-			player.global_position = player.ray_cast_jump_target.get_collision_point()
-			transition_state(NODE_STATE, States.State.STANDING) # TODO: Create a mantling state
-			return
 
 	# Ⓑ/[shift] _pressed_ -> Move faster while "hanging"
 	if player.enable_sprinting:

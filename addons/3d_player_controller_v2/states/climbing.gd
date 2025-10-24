@@ -9,6 +9,27 @@ const NODE_NAME := "Climbing"
 const NODE_STATE := States.State.CLIMBING
 
 
+## Called when there is an input event.
+func _input(event):
+	# Do nothing if not the authority
+	if !is_multiplayer_authority(): return
+
+	# Do nothing if the "pause" menu is visible
+	if player.pause.visible: return
+
+	# Ⓑ/[shift] _pressed_ -> Move faster while "climbing"
+	if player.enable_sprinting:
+		if event.is_action_pressed(player.controls.button_1):
+			player.speed_current = player.speed_climbing * 2
+		else:
+			player.speed_current = player.speed_climbing
+
+	# Ⓨ/[Ctrl] _pressed_ -> Start "falling"
+	if event.is_action_pressed(player.controls.button_3):
+		transition_state(NODE_STATE, States.State.FALLING)
+		return
+
+
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	# Do nothing if not the authority
@@ -40,18 +61,6 @@ func _process(delta):
 				# Start "hanging"
 				transition_state(NODE_STATE, States.State.HANGING)
 				return
-	
-	# Ⓑ/[shift] _pressed_ -> Move faster while "climbing"
-	if player.enable_sprinting:
-		if Input.is_action_pressed(player.controls.button_1):
-			player.speed_current = player.speed_climbing * 2
-		else:
-			player.speed_current = player.speed_climbing
-
-	# Ⓨ/[Ctrl] _pressed_ -> Start "falling"
-	if Input.is_action_just_pressed(player.controls.button_3):
-		transition_state(NODE_STATE, States.State.FALLING)
-		return
 
 	# Move the player while climbing
 	move_player()
