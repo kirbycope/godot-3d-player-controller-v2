@@ -33,7 +33,7 @@ func start() -> void:
 	player.is_driving = true
 
 	# Disable the player's collision shape to prevent clipping with the vehicle
-	player.collision_shape_3d.disabled = true
+	player.collision_shape.disabled = true
 
 
 ## Stop "driving".
@@ -45,7 +45,7 @@ func stop() -> void:
 	player.is_driving = false
 
 	# [Re]Enable the player's collision shape
-	player.collision_shape_3d.disabled = false
+	player.collision_shape.disabled = false
 
 	# Reset the camera yaw offset so it returns behind the player after exiting the vehicle
 	# (camera free-look while driving may have left an offset on the camera mount)

@@ -280,22 +280,6 @@ offset_bottom = 31.0
 grow_horizontal = 0
 mouse_filter = 1
 
-[node name="EnableSkateboarding" type="CheckButton" parent="Configuration"]
-layout_mode = 2
-text = "EnableSkateboarding"
-
-[node name="Panel" type="Panel" parent="Configuration/EnableSkateboarding"]
-z_index = -1
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -222.0
-offset_right = -2.0
-offset_bottom = 31.0
-grow_horizontal = 0
-mouse_filter = 1
-
 [node name="EnableSprinting" type="CheckButton" parent="Configuration"]
 layout_mode = 2
 text = "EnableSprinting"
@@ -681,6 +665,28 @@ layout_mode = 0
 offset_right = 153.0
 offset_bottom = 31.0
 
+[node name="IsCastingFishing" type="CheckBox" parent="States2"]
+layout_mode = 2
+disabled = true
+text = "IsCastingFishing"
+
+[node name="Panel" type="Panel" parent="States2/IsCastingFishing"]
+z_index = -1
+layout_mode = 0
+offset_right = 153.0
+offset_bottom = 31.0
+
+[node name="IsReelingFishing" type="CheckBox" parent="States2"]
+layout_mode = 2
+disabled = true
+text = "IsReelingFishing"
+
+[node name="Panel" type="Panel" parent="States2/IsReelingFishing"]
+z_index = -1
+layout_mode = 0
+offset_right = 153.0
+offset_bottom = 31.0
+
 [node name="IsPunchingLeft" type="CheckBox" parent="States2"]
 layout_mode = 2
 disabled = true
@@ -698,6 +704,50 @@ disabled = true
 text = "IsPunchingRight"
 
 [node name="Panel" type="Panel" parent="States2/IsPunchingRight"]
+z_index = -1
+layout_mode = 0
+offset_right = 153.0
+offset_bottom = 31.0
+
+[node name="IsAimingRifle" type="CheckBox" parent="States2"]
+layout_mode = 2
+disabled = true
+text = "IsAimingRifle"
+
+[node name="Panel" type="Panel" parent="States2/IsAimingRifle"]
+z_index = -1
+layout_mode = 0
+offset_right = 153.0
+offset_bottom = 31.0
+
+[node name="IsFiringRifle" type="CheckBox" parent="States2"]
+layout_mode = 2
+disabled = true
+text = "IsFiringRifle"
+
+[node name="Panel" type="Panel" parent="States2/IsFiringRifle"]
+z_index = -1
+layout_mode = 0
+offset_right = 153.0
+offset_bottom = 31.0
+
+[node name="IsSwinging1HLeft" type="CheckBox" parent="States2"]
+layout_mode = 2
+disabled = true
+text = "IsSwinging1HL"
+
+[node name="Panel" type="Panel" parent="States2/IsSwinging1HLeft"]
+z_index = -1
+layout_mode = 0
+offset_right = 153.0
+offset_bottom = 31.0
+
+[node name="IsSwinging1HRight" type="CheckBox" parent="States2"]
+layout_mode = 2
+disabled = true
+text = "IsSwinging1HR"
+
+[node name="Panel" type="Panel" parent="States2/IsSwinging1HRight"]
 z_index = -1
 layout_mode = 0
 offset_right = 153.0
@@ -814,7 +864,6 @@ scroll_active = false
 [connection signal="toggled" from="Configuration/EnableRetical" to="." method="_on_enable_retical_toggled"]
 [connection signal="toggled" from="Configuration/EnableRolling" to="." method="_on_enable_rolling_toggled"]
 [connection signal="toggled" from="Configuration/EnableSliding" to="." method="_on_enable_sliding_toggled"]
-[connection signal="toggled" from="Configuration/EnableSkateboarding" to="." method="_on_enable_skateboarding_toggled"]
 [connection signal="toggled" from="Configuration/EnableSprinting" to="." method="_on_enable_sprinting_toggled"]
 [connection signal="toggled" from="Configuration/EnableSwimming" to="." method="_on_enable_swimming_toggled"]
 [connection signal="toggled" from="Configuration2/LockCamera" to="." method="_on_lock_camera_toggled"]

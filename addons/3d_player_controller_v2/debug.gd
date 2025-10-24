@@ -4,58 +4,63 @@ var green_sphere: MeshInstance3D
 var red_sphere: MeshInstance3D
 var yellow_sphere: MeshInstance3D
 
-@onready var enable_climbing = $Configuration/EnableClimbing
-@onready var enable_crawling = $Configuration/EnableCrawling
-@onready var enable_crouching = $Configuration/EnableCrouching
-@onready var enable_driving = $Configuration/EnableDriving
-@onready var enable_double_jumping = $Configuration/EnableDoubleJumping
-@onready var enable_flying = $Configuration/EnableFlying
-@onready var enable_hanging = $Configuration/EnableHanging
-@onready var enable_holding_objects = $Configuration/EnableHoldingObjects
-@onready var enable_jumping = $Configuration/EnableJumping
-@onready var enable_kicking = $Configuration/EnableKicking
-@onready var enable_navigation = $Configuration/EnableNavigation
-@onready var enable_paragliding = $Configuration/EnableParagliding
-@onready var enable_punching = $Configuration/EnablePunching
-@onready var enable_retical = $Configuration/EnableRetical
-@onready var enable_rolling = $Configuration/EnableRolling
-@onready var enable_sliding = $Configuration/EnableSliding
-@onready var enable_skateboarding = $Configuration/EnableSkateboarding
-@onready var enable_sprinting = $Configuration/EnableSprinting
-@onready var enable_swimming = $Configuration/EnableSwimming
-@onready var lock_camera = $Configuration2/LockCamera
-@onready var lock_movement_x = $Configuration2/LockMovementX
-@onready var lock_movement_y = $Configuration2/LockMovementY
-@onready var lock_movement_z = $Configuration2/LockMovementZ
+@onready var enable_climbing: CheckButton = $Configuration/EnableClimbing
+@onready var enable_crawling: CheckButton = $Configuration/EnableCrawling
+@onready var enable_crouching: CheckButton = $Configuration/EnableCrouching
+@onready var enable_driving: CheckButton = $Configuration/EnableDriving
+@onready var enable_double_jumping: CheckButton = $Configuration/EnableDoubleJumping
+@onready var enable_flying: CheckButton = $Configuration/EnableFlying
+@onready var enable_hanging: CheckButton = $Configuration/EnableHanging
+@onready var enable_holding_objects: CheckButton = $Configuration/EnableHoldingObjects
+@onready var enable_jumping: CheckButton = $Configuration/EnableJumping
+@onready var enable_kicking: CheckButton = $Configuration/EnableKicking
+@onready var enable_navigation: CheckButton = $Configuration/EnableNavigation
+@onready var enable_paragliding: CheckButton = $Configuration/EnableParagliding
+@onready var enable_punching: CheckButton = $Configuration/EnablePunching
+@onready var enable_retical: CheckButton = $Configuration/EnableRetical
+@onready var enable_rolling: CheckButton = $Configuration/EnableRolling
+@onready var enable_sliding: CheckButton = $Configuration/EnableSliding
+@onready var enable_sprinting: CheckButton = $Configuration/EnableSprinting
+@onready var enable_swimming: CheckButton = $Configuration/EnableSwimming
+@onready var lock_camera: CheckButton = $Configuration2/LockCamera
+@onready var lock_movement_x: CheckButton = $Configuration2/LockMovementX
+@onready var lock_movement_y: CheckButton = $Configuration2/LockMovementY
+@onready var lock_movement_z: CheckButton = $Configuration2/LockMovementZ
+@onready var is_aiming_rifle: CheckBox = $States2/IsAimingRifle
+@onready var is_casting_fishing: CheckBox = $States2/IsCastingFishing
 @onready var is_climbing: CheckBox = $States/IsClimbing
-@onready var is_crawling = $States/IsCrawling
-@onready var is_crouching = $States/IsCrouching
-@onready var is_driving = $States/IsDriving
-@onready var is_double_jumping = $States/IsDoubleJumping
-@onready var is_falling = $States/IsFalling
-@onready var is_flying = $States/IsFlying
-@onready var is_hanging = $States/IsHanging
-@onready var is_jumping = $States/IsJumping
-@onready var is_kicking_left = $States2/IsKickingLeft
-@onready var is_kicking_right = $States2/IsKickingRight
-@onready var is_on_floor = $States/IsOnFloor
-@onready var is_punching_left = $States2/IsPunchingLeft
-@onready var is_punching_right = $States2/IsPunchingRight
-@onready var is_rolling = $States/IsRolling
-@onready var is_navigating = $States/IsNavigating
-@onready var is_paragliding = $States/IsParagliding
-@onready var is_running = $States/IsRunning
+@onready var is_crawling: CheckBox = $States/IsCrawling
+@onready var is_crouching: CheckBox = $States/IsCrouching
+@onready var is_driving: CheckBox = $States/IsDriving
+@onready var is_double_jumping: CheckBox = $States/IsDoubleJumping
+@onready var is_falling: CheckBox = $States/IsFalling
+@onready var is_firing_rifle: CheckBox = $States2/IsFiringRifle
+@onready var is_flying: CheckBox = $States/IsFlying
+@onready var is_hanging: CheckBox = $States/IsHanging
+@onready var is_jumping: CheckBox = $States/IsJumping
+@onready var is_kicking_left: CheckBox = $States2/IsKickingLeft
+@onready var is_kicking_right: CheckBox = $States2/IsKickingRight
+@onready var is_on_floor: CheckBox = $States/IsOnFloor
+@onready var is_punching_left: CheckBox = $States2/IsPunchingLeft
+@onready var is_punching_right: CheckBox = $States2/IsPunchingRight
+@onready var is_reeling_fishing: CheckBox = $States2/IsReelingFishing
+@onready var is_rolling: CheckBox = $States/IsRolling
+@onready var is_navigating: CheckBox = $States/IsNavigating
+@onready var is_paragliding: CheckBox = $States/IsParagliding
+@onready var is_running: CheckBox = $States/IsRunning
 @onready var is_sliding: CheckBox = $States/IsSliding
 @onready var is_skateboarding: CheckBox = $States/IsSkateboarding
-@onready var is_sprinting = $States/IsSprinting
-@onready var is_standing = $States/IsStanding
-@onready var is_swimming = $States/IsSwimming
-@onready var is_walking = $States/IsWalking
-@onready var fps = $Performance/FPS
+@onready var is_sprinting: CheckBox = $States/IsSprinting
+@onready var is_standing: CheckBox = $States/IsStanding
+@onready var is_swimming: CheckBox = $States/IsSwimming
+@onready var is_swinging_1h_left: CheckBox = $States2/IsSwinging1HLeft
+@onready var is_swinging_1h_right: CheckBox = $States2/IsSwinging1HRight
+@onready var is_walking: CheckBox = $States/IsWalking
+@onready var fps: Label = $Performance/FPS
 @onready var player: CharacterBody3D = get_parent()
-@onready var coordinates = $Control/VBoxContainer2/Coordinates
-@onready var velocity = $Control/VBoxContainer2/Velocity
-@onready var velocity_virtual = $Control/VBoxContainer2/VelocityVirtual
+@onready var coordinates: RichTextLabel = $Control/VBoxContainer2/Coordinates
+@onready var velocity: RichTextLabel = $Control/VBoxContainer2/Velocity
+@onready var velocity_virtual: RichTextLabel = $Control/VBoxContainer2/VelocityVirtual
 
 
 ## Called when there is an input event.
@@ -91,19 +96,21 @@ func _process(_delta):
 		enable_retical.button_pressed = player.enable_retical
 		enable_rolling.button_pressed = player.enable_rolling
 		enable_sliding.button_pressed = player.enable_sliding
-		enable_skateboarding.button_pressed = player.enable_skateboarding
 		enable_sprinting.button_pressed = player.enable_sprinting
 		enable_swimming.button_pressed = player.enable_swimming
 		lock_camera.button_pressed = player.camera.lock_camera
 		lock_movement_x.button_pressed = player.lock_movement_x
 		lock_movement_y.button_pressed = player.lock_movement_y
 		lock_movement_z.button_pressed = player.lock_movement_z
+		is_aiming_rifle.button_pressed = player.is_aiming_rifle
+		is_casting_fishing.button_pressed = player.is_casting_fishing
 		is_climbing.button_pressed = player.is_climbing
 		is_crawling.button_pressed = player.is_crawling
 		is_crouching.button_pressed = player.is_crouching
 		is_driving.button_pressed = player.is_driving
 		is_double_jumping.button_pressed = player.is_double_jumping
 		is_falling.button_pressed = player.is_falling
+		is_firing_rifle.button_pressed = player.is_firing_rifle
 		is_flying.button_pressed = player.is_flying
 		is_hanging.button_pressed = player.is_hanging
 		is_jumping.button_pressed = player.is_jumping
@@ -114,6 +121,7 @@ func _process(_delta):
 		is_paragliding.button_pressed = player.is_paragliding
 		is_punching_left.button_pressed = player.is_punching_left
 		is_punching_right.button_pressed = player.is_punching_right
+		is_reeling_fishing.button_pressed = player.is_reeling_fishing
 		is_rolling.button_pressed = player.is_rolling
 		is_running.button_pressed = player.is_running
 		is_skateboarding.button_pressed = player.is_skateboarding
@@ -121,6 +129,8 @@ func _process(_delta):
 		is_sprinting.button_pressed = player.is_sprinting
 		is_standing.button_pressed = player.is_standing
 		is_swimming.button_pressed = player.is_swimming
+		is_swinging_1h_left.button_pressed = player.is_swinging_1h_left
+		is_swinging_1h_right.button_pressed = player.is_swinging_1h_right
 		is_walking.button_pressed = player.is_walking
 		coordinates.text = "[center][color=red]X:[/color]%.1f [color=green]Y:[/color]%.1f [color=blue]Z:[/color]%.1f[/center]" % [player.global_position.x, player.global_position.y, player.global_position.z]
 		velocity.text = "[center][color=red]X:[/color]%.1f [color=green]Y:[/color]%.1f [color=blue]Z:[/color]%.1f[/center]" % [player.velocity.x, player.velocity.y, player.velocity.z]
@@ -192,6 +202,10 @@ func _on_enable_double_jumping_toggled(toggled_on):
 
 func _on_enable_driving_toggled(toggled_on: bool) -> void:
 	player.enable_driving = toggled_on
+
+
+func _on_enable_fishing_toggled(toggled_on: bool) -> void:
+	player.enable_fishing = toggled_on
 
 
 func _on_enable_flying_toggled(toggled_on):

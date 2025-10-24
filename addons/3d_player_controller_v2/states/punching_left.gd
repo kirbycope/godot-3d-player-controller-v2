@@ -2,7 +2,7 @@ extends BaseState
 
 const ANIMATION_PUNCHING_LEFT := "AnimationLibrary_Godot/Punch_Jab"
 const NODE_NAME := "Punching_Left"
-const NODE_STATE := States.State.PUNCHING_LEFT
+#const NODE_STATE := States.State.PUNCHING_LEFT
 
 
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -34,7 +34,7 @@ func _on_animation_finished(anim_name: String) -> void:
 		# Disconnect the signal to avoid multiple connections
 		player.animation_player.disconnect("animation_finished", _on_animation_finished)
 		# Transition back to the idle state
-		transition_state(NODE_STATE, States.State.STANDING)
+		#transition_state(NODE_STATE, States.State.STANDING)
 
 
 ## Start "punching left".
@@ -43,7 +43,7 @@ func start() -> void:
 	process_mode = PROCESS_MODE_INHERIT
 
 	# Set the player's new state
-	player.current_state = States.State.PUNCHING_LEFT
+	#player.current_state = States.State.PUNCHING_LEFT
 
 	# Flag the player as "punching"
 	player.is_punching_left = true

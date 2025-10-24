@@ -5,7 +5,7 @@ extends Node
 
 
 ## Called when there is an input event.
-func _input(event):
+func _input_bak(event):
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
 

@@ -48,10 +48,10 @@ func start() -> void:
 	player.is_sliding = true
 
 	# Set the player collision shape's height
-	player.collision_shape_3d.shape.height = player.collision_height / 2
+	player.collision_shape.shape.height = player.collision_height / 2
 
 	# Set the player collision shape's position
-	player.collision_shape_3d.position = player.collision_position / 2
+	player.collision_shape.position = player.collision_position / 2
 
 
 ## Stop "sliding".
@@ -63,7 +63,7 @@ func stop() -> void:
 	player.is_sliding = false
 
 	# [Re]set the player collision shape's height
-	player.collision_shape_3d.shape.height = player.collision_height
+	player.collision_shape.shape.height = player.collision_height
 
 	# [Re]set the player collision shape's position
-	player.collision_shape_3d.position = player.collision_position
+	player.collision_shape.position = player.collision_position

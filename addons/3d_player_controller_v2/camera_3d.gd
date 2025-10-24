@@ -3,9 +3,7 @@ extends Camera3D
 enum Perspective {
 	THIRD_PERSON, # 0
 	FIRST_PERSON, # 1
-}
-
-const BONE_PATH: String = "Godette/Rig/GeneralSkeleton/BoneAttachment3D"
+} ## TODO: Replace with procedurly generated one instaed so the model can be swapped easier??
 
 @export var enable_head_bobbing: bool = false ## Enable head bobbing effect
 @export var lock_camera: bool = false ## Lock camera position and location
@@ -188,6 +186,7 @@ func set_camera_perspective(mode: Perspective) -> void:
 		perspective = Perspective.FIRST_PERSON
 		player.visuals.rotation.y = 0.0
 		if enable_head_bobbing:
+			var BONE_PATH: String = player.skeleton.get_node("BoneAttachment3D")
 			reparent(player.visuals.get_node(BONE_PATH))
 		else:
 			camera_spring_arm.spring_length = 0.0

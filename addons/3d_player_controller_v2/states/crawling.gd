@@ -60,14 +60,14 @@ func start() -> void:
 	player.speed_current = player.speed_crawling
 
 	# Set the player collision shape's height
-	#player.collision_shape_3d.shape.height = player.collision_height / 2
+	#player.collision_shape.shape.height = player.collision_height / 2
 
 	# Set the player collision shape's rotation
-	player.collision_shape_3d.rotation.x = deg_to_rad(90)
+	player.collision_shape.rotation.x = deg_to_rad(90)
 
 	# Set the player collision shape's position
-	player.collision_shape_3d.position = player.collision_position / 3
-	player.collision_shape_3d.position.z += player.collision_height / 3
+	player.collision_shape.position = player.collision_position / 3
+	player.collision_shape.position.z += player.collision_height / 3
 
 
 ## Stop "crawling".
@@ -79,10 +79,10 @@ func stop() -> void:
 	player.is_crawling = false
 
 	# [Re]set the player collision shape's height
-	#player.collision_shape_3d.shape.height = player.collision_height
+	#player.collision_shape.shape.height = player.collision_height
 
 	# [Re]set the player collision shape's rotation
-	player.collision_shape_3d.rotation.x = deg_to_rad(0)
+	player.collision_shape.rotation.x = deg_to_rad(0)
 
 	# [Re]set the player collision shape's position
-	player.collision_shape_3d.position = player.collision_position
+	player.collision_shape.position = player.collision_position

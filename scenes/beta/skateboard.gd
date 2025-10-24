@@ -9,9 +9,10 @@ var player: CharacterBody3D
 
 func _input(_event: InputEvent) -> void:
 	if player:
-		# Ⓧ /[X] _just_pressed_ -> Start "standing"
-		if Input.is_action_just_pressed(player.controls.button_2):
+		# (D-Pad Down) /[Q] _just_pressed_ -> Drop _this_node
+		if Input.is_action_just_pressed(player.controls.button_13):
 			_on_player_detection_body_exited(player)
+			return
 
 
 func _on_player_detection_body_entered(body: Node3D) -> void:

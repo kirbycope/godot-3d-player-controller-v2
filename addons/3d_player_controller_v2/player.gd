@@ -18,12 +18,14 @@ extends CharacterBody3D
 @export var enable_retical: bool = true ## Enable the rectical
 @export var enable_rolling: bool = false ## Enable rolling
 @export var enable_sliding: bool = true ## Enable sliding
-@export var enable_skateboarding: bool = true ## Enable skateboarding
 @export var enable_sprinting: bool = true ## Enable sprinting
 @export var enable_swimming: bool = true ## Enable swimming
 @export var lock_movement_x: bool = false ## Lock movement along the X axis
 @export var lock_movement_y: bool = false ## Lock movement along the Y axis
 @export var lock_movement_z: bool = false ## Lock movement along the Z axis
+@export_group("SKELETON")
+@export var bone_name_left_hand: String = "LeftHand" ## Name of the left hand bone in the skeleton
+@export var bone_name_right_hand: String = "RightHand" ## Name of the right hand bone in the skeleton
 @export_group("SPEED")
 @export var speed_climbing: float = 1.0 ## Speed while climbing
 @export var speed_crawling: float = 0.75 ## Speed while crawling
@@ -47,9 +49,19 @@ var is_crouching: bool = false ## Is the player crouching?
 var is_double_jumping: bool = false ## Is the player double jumping?
 var is_driving: bool = false ## Is the player driving?
 var is_falling: bool = false ## Is the player falling?
-var is_fishing: bool = false ## Is the player fishing?
 var is_flying: bool = false ## Is the player flying?
 var is_hanging: bool = false ## Is the player hanging?
+
+var is_holding_1h_left: bool = false ## Is the player holding a 1-handed tool or weapon with their left hand?
+var is_swinging_1h_left: bool = false ## Is the player swinging a 1-handed tool or weapon with their left hand?
+var is_holding_1h_right: bool = false ## Is the player holding a 1-handed tool or weapon with their right hand?
+var is_swinging_1h_right: bool = false ## Is the player swinging a 1-handed tool or weapon with their right hand?
+var is_holding_fishing_rod: bool = false ## Is the player wielding a fishing rod?
+var is_casting_fishing: bool = false ## Is the player casting a fishing line?
+var is_reeling_fishing: bool = false ## Is the player reeling in a fishing line?
+var is_holding_rifle: bool = false ## Is the player wielding a rifle?
+var is_aiming_rifle: bool = false ## Is the player aiming a rifle?
+var is_firing_rifle: bool = false ## Is the player firing a rifle?
 var is_jumping: bool = false ## Is the player jumping?
 var is_kicking_left: bool = false ## Is the player kicking with their left foot?
 var is_kicking_right: bool = false ## Is the player kicking with their right foot?
@@ -65,6 +77,7 @@ var is_standing: bool = false ## Is the player standing?
 var is_sprinting: bool = false ## Is the player sprinting?
 var is_swimming: bool = false ## Is the player swimming?
 var is_swimming_in ## The water body the player is swimming in (if any)
+var is_swinging_1h: bool = false ## Is the player swinging a 1-handed tool or weapon?
 var is_walking: bool = false ## Is the player walking?
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity") ## Default gravity value
 var gravitating_towards ## The Node the player is being pulled towards (if any)
@@ -73,16 +86,16 @@ var virtual_velocity: Vector3 = Vector3.ZERO ## The player's velocity is movemen
 
 @onready var animation_player: AnimationPlayer = $Visuals/Godette/AnimationPlayer
 @onready var base_state: BaseState = $States/Base
-@onready var collision_shape_3d: CollisionShape3D = $CollisionShape3D
-@onready var collision_height: float  = collision_shape_3d.shape.height
-@onready var collision_width: float  = collision_shape_3d.shape.radius * 2
-@onready var collision_position: Vector3  = collision_shape_3d.position
+@onready var collision_shape: CollisionShape3D = $CollisionShape3D
+@onready var collision_height: float  = collision_shape.shape.height
+@onready var collision_width: float  = collision_shape.shape.radius * 2
+@onready var collision_position: Vector3  = collision_shape.position
 @onready var camera_mount = $CameraMount
 @onready var spring_arm = camera_mount.get_node("CameraSpringArm")
 @onready var camera = spring_arm.get_node("Camera3D")
 @onready var controls = $Controls
 @onready var debug = $Debug
-@onready var navigation_agent_3d: NavigationAgent3D = $NavigationAgent3D
+@onready var navigation_agent: NavigationAgent3D = $NavigationAgent3D
 @onready var pause: CanvasLayer = $Pause
 @onready var visuals = $Visuals
 @onready var ray_cast_jump_target: RayCast3D = visuals.get_node("RayCast3D_JumpTarget")
@@ -90,6 +103,7 @@ var virtual_velocity: Vector3 = Vector3.ZERO ## The player's velocity is movemen
 @onready var ray_cast_high: RayCast3D = visuals.get_node("RayCast3D_High")
 @onready var ray_cast_middle: RayCast3D = visuals.get_node("RayCast3D_Middle")
 @onready var ray_cast_low: RayCast3D = visuals.get_node("RayCast3D_Low")
+@onready var skeleton: Skeleton3D = %GeneralSkeleton
 
 
 ## Called when the node is "ready", i.e. when both the node and its children have entered the scene tree.
@@ -123,22 +137,6 @@ func _input(event) -> void:
 				and is_on_floor():
 					base_state.transition_state(current_state, States.State.JUMPING)
 
-			# 🄻1/[MB1] _pressed_ -> Start "punching left"
-			if enable_punching:
-				if event.is_action_pressed(controls.button_4) \
-				and not is_fishing \
-				and not is_punching_left \
-				and not is_punching_right:
-					base_state.transition_state(current_state, States.State.PUNCHING_LEFT)
-
-			# 🅁1/[MB2] _pressed_ -> Start "punching right"
-			if enable_punching:
-				if event.is_action_pressed(controls.button_5) \
-				and not is_fishing \
-				and not is_punching_left \
-				and not is_punching_right:
-					base_state.transition_state(current_state, States.State.PUNCHING_RIGHT)
-
 			# [Left Mouse Button] _pressed_ -> Start "navigating"
 			if enable_navigation:
 				if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) \
@@ -149,7 +147,7 @@ func _input(event) -> void:
 					var cursor_position = Plane(up_direction, transform.origin.y).intersects_ray(from, to)
 					if cursor_position:
 						#debug.draw_red_sphere(cursor_position) ## DEBUGGING
-						navigation_agent_3d.target_position = cursor_position
+						navigation_agent.target_position = cursor_position
 						if not is_navigating:
 							# Start "navigating"
 							base_state.transition_state(current_state, States.State.NAVIGATING)
@@ -196,9 +194,7 @@ func _physics_process(delta) -> void:
 			gravity_accel = - Vector3.UP * gravity
 
 		# Handle player input for lateral movement (disabled while climbing/hanging)
-		if not is_punching_left \
-		and not is_punching_right \
-		and not is_climbing \
+		if not is_climbing \
 		and not is_hanging:
 			# Get the input vector by specifying four actions for the positive and negative X and Y axes
 			input_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")

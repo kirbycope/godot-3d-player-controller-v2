@@ -4,13 +4,13 @@ const ANIMATION_RUNNING := "AnimationLibrary_Godot/Sprint"
 const NODE_NAME := "Navigating"
 const NODE_STATE := States.State.NAVIGATING
 
-@onready var navigation_agent_3d = player.get_node("NavigationAgent3D")
+@onready var navigation_agent = player.get_node("NavigationAgent3D")
 
 
 ## Called when the node enters the scene tree for the first time.
 func _ready():
 	# Connect the "navigation_finished" signal
-	navigation_agent_3d.navigation_finished.connect(_on_navigation_finished)
+	navigation_agent.navigation_finished.connect(_on_navigation_finished)
 
 
 ## Called when there is an input event.
@@ -24,7 +24,7 @@ func _input(event):
 	or event.is_action_pressed("move_left") \
 	or event.is_action_pressed("move_right"):
 		# Set target position to the player's current position (ending navigation)
-		navigation_agent_3d.target_position = player.global_position
+		navigation_agent.target_position = player.global_position
 
 
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -42,7 +42,7 @@ func _physics_process(delta):
 	if !is_multiplayer_authority(): return
 
 	# Navigate to the next position
-	if not navigation_agent_3d.is_navigation_finished():
+	if not navigation_agent.is_navigation_finished():
 		navigate_to_next_position()
 
 
@@ -56,7 +56,7 @@ func play_animation() -> void:
 
 ## Navigate to the next position in the path. Called during physics process if navigating.
 func navigate_to_next_position() -> void:
-	var next_point = navigation_agent_3d.get_next_path_position()
+	var next_point = navigation_agent.get_next_path_position()
 	var new_velocity = (next_point - player.global_position).normalized() * player.speed_running
 	player.velocity.x = new_velocity.x
 	player.velocity.z = new_velocity.z

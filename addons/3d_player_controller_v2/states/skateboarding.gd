@@ -36,25 +36,25 @@ func play_animation() -> void:
 		if player.animation_player.current_animation != ANIMATION_SKATEBOARDING_SLOW:
 			player.animation_player.play(ANIMATION_SKATEBOARDING_SLOW)
 			# [Re]set the player collision shape's height
-			player.collision_shape_3d.shape.height = player.collision_height
+			player.collision_shape.shape.height = player.collision_height
 			# [Re]set the player collision shape's position
-			player.collision_shape_3d.position = player.collision_position
+			player.collision_shape.position = player.collision_position
 	elif player.speed_current == player.speed_skateboarding:
 		# Check if the animation player is not already playing the appropriate animation
 		if player.animation_player.current_animation != ANIMATION_SKATEBOARDING:
 			player.animation_player.play(ANIMATION_SKATEBOARDING)
 			# Set the player collision shape's height
-			player.collision_shape_3d.shape.height = player.collision_height * 0.95
+			player.collision_shape.shape.height = player.collision_height * 0.95
 			# Set the player collision shape's position
-			player.collision_shape_3d.position = player.collision_position * 0.95
+			player.collision_shape.position = player.collision_position * 0.95
 	elif player.speed_current > player.speed_skateboarding:
 		# Check if the animation player is not already playing the appropriate animation
 		if player.animation_player.current_animation != ANIMATION_SKATEBOARDING_FAST:
 			player.animation_player.play(ANIMATION_SKATEBOARDING_FAST)
 			# Set the player collision shape's height
-			player.collision_shape_3d.shape.height = player.collision_height * 0.9
+			player.collision_shape.shape.height = player.collision_height * 0.9
 			# Set the player collision shape's position
-			player.collision_shape_3d.position = player.collision_position * 0.9
+			player.collision_shape.position = player.collision_position * 0.9
 
 
 ## Start "skateboarding".
@@ -81,7 +81,7 @@ func stop() -> void:
 	player.is_skateboarding = false
 
 	# [Re]set the player collision shape's height
-	player.collision_shape_3d.shape.height = player.collision_height
+	player.collision_shape.shape.height = player.collision_height
 
 	# [Re]set the player collision shape's position
-	player.collision_shape_3d.position = player.collision_position
+	player.collision_shape.position = player.collision_position

@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://dey7ls45vvlck"]
+[gd_scene load_steps=22 format=3 uid="uid://dey7ls45vvlck"]
 
 [ext_resource type="Script" uid="uid://dhm0w0mgw28o6" path="res://scenes/beta/main.gd" id="1_4go8p"]
 [ext_resource type="Texture2D" uid="uid://bpo2vwd0ruriv" path="res://assets/textures/prototype_textures/Dark/texture_08.png" id="2_7kfyu"]
@@ -8,7 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://c2yhnwwbe08c4" path="res://assets/textures/prototype_textures/Dark/texture_03.png" id="5_ecpwe"]
 [ext_resource type="PackedScene" uid="uid://cb3q1urw62chp" path="res://scenes/beta/car.tscn" id="6_mf6xi"]
 [ext_resource type="PackedScene" uid="uid://q0w20gsraiem" path="res://scenes/beta/skateboard.tscn" id="7_88y00"]
+[ext_resource type="PackedScene" uid="uid://cp5rutkubcej" path="res://scenes/beta/axe.tscn" id="7_up5x4"]
 [ext_resource type="PackedScene" uid="uid://bkajjhn7o5h28" path="res://scenes/beta/fishing_rod.tscn" id="8_a8mrn"]
+[ext_resource type="PackedScene" uid="uid://cg7c5p0uk7mjf" path="res://scenes/beta/gun.tscn" id="9_4s88f"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sugp2"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -202,8 +204,14 @@ use_collision = true
 size = Vector3(0.2, 2, 0.2)
 material = SubResource("StandardMaterial3D_tipki")
 
+[node name="Axe" parent="." instance=ExtResource("7_up5x4")]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, -2.1000001, 0.4, 3.5)
+
 [node name="Car" parent="." instance=ExtResource("6_mf6xi")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 5, 0, 0)
+
+[node name="Gun" parent="." instance=ExtResource("9_4s88f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.2, 2)
 
 [node name="Skateboard" parent="." instance=ExtResource("7_88y00")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
