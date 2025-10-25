@@ -2,6 +2,9 @@ extends BaseState
 
 #const ANIMATION_CROUCHING := "AnimationLibrary_Godot/Crouch_Idle"
 const ANIMATION_CROUCHING := "Crouching_Idle/mixamo_com"
+const ANIMATION_CROUCHING_HOLDING_RIFLE := "Rifle_Kneel_Idle/mixamo_com"
+const ANIMATION_CROUCHING_AIMING := "Idle_Crouching_Aiming/mixamo_com"
+const ANIMATION_CROUCHING_FIRING := "Idle_Crouching_Aiming/mixamo_com" # "Idle_Crouching_Firing/mixamo_com" <-- Placeholder until proper animation is added
 const NODE_NAME := "Crouching"
 const NODE_STATE := States.State.CROUCHING
 
@@ -10,6 +13,9 @@ const NODE_STATE := States.State.CROUCHING
 func _input(event):
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
+
+	# Do nothing if the "pause" menu is visible
+	if player.pause.visible: return
 
 	# Ⓐ/[Space] _pressed_ -> Start "jumping"
 	if event.is_action_pressed(player.controls.button_0):
@@ -22,8 +28,17 @@ func _input(event):
 		transition_state(NODE_STATE, States.State.STANDING)
 		return
 
-	# Do nothing if the "pause" menu is visible
-	if player.pause.visible: return
+	# 🄻1/[MB0] _pressed_
+	if event.is_action_pressed(player.controls.button_4):
+		# Rifle "firing"
+		if player.is_holding_rifle:
+			pass
+
+	# 🅁1/[MB1] _pressed_ 
+	if event.is_action_pressed(player.controls.button_5):
+		# Rifle "aiming"
+		if player.is_holding_rifle:
+			pass
 
 
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -43,10 +58,18 @@ func _process(delta):
 
 ## Plays the appropriate animation based on player state.
 func play_animation() -> void:
-	# Check if the animation player is not already playing the appropriate animation
-	if player.animation_player.current_animation != ANIMATION_CROUCHING:
-		# Play the "crouching" animation
-		player.animation_player.play(ANIMATION_CROUCHING)
+	if player.is_firing_rifle:
+		if player.animation_player.current_animation != ANIMATION_CROUCHING_FIRING:
+			player.animation_player.play(ANIMATION_CROUCHING_FIRING)
+	elif player.is_aiming_rifle:
+		if player.animation_player.current_animation != ANIMATION_CROUCHING_AIMING:
+			player.animation_player.play(ANIMATION_CROUCHING_AIMING)
+	elif player.is_holding_rifle:
+		if player.animation_player.current_animation != ANIMATION_CROUCHING_HOLDING_RIFLE:
+			player.animation_player.play(ANIMATION_CROUCHING_HOLDING_RIFLE)
+	else:
+		if player.animation_player.current_animation != ANIMATION_CROUCHING:
+			player.animation_player.play(ANIMATION_CROUCHING)
 
 
 ## Start "crouching".

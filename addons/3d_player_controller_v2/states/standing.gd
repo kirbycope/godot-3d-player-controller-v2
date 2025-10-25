@@ -39,7 +39,6 @@ func _input(event):
 	# Ⓑ/[shift] _pressed_ -> Start "sprinting"
 	if event.is_action_pressed(player.controls.button_1):
 		if player.enable_sprinting \
-		and not player.is_sprinting \
 		and player.input_direction != Vector2.ZERO \
 		and player.is_on_floor():
 			transition_state(NODE_STATE, States.State.SPRINTING)

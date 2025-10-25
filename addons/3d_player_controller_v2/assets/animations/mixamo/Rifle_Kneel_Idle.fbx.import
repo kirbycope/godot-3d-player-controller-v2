@@ -3,13 +3,13 @@
 importer="animation_library"
 importer_version=1
 type="AnimationLibrary"
-uid="uid://wmhj8lvk646v"
-path="res://.godot/imported/Idle.fbx-880b21304ff1ef4adf23d50e06eda1a2.res"
+uid="uid://dmk2jx5ebagoe"
+path="res://.godot/imported/Rifle_Kneel_Idle.fbx-3bbb09dcd7dd965bc986698958cbc824.res"
 
 [deps]
 
-source_file="res://addons/3d_player_controller_v2/assets/animations/mixamo/Idle.fbx"
-dest_files=["res://.godot/imported/Idle.fbx-880b21304ff1ef4adf23d50e06eda1a2.res"]
+source_file="res://addons/3d_player_controller_v2/assets/animations/mixamo/Rifle_Kneel_Idle.fbx"
+dest_files=["res://.godot/imported/Rifle_Kneel_Idle.fbx-3bbb09dcd7dd965bc986698958cbc824.res"]
 
 [params]
 

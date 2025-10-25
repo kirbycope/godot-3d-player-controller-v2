@@ -3,13 +3,13 @@
 importer="animation_library"
 importer_version=1
 type="AnimationLibrary"
-uid="uid://wmhj8lvk646v"
-path="res://.godot/imported/Idle.fbx-880b21304ff1ef4adf23d50e06eda1a2.res"
+uid="uid://biexvo2bga6ql"
+path="res://.godot/imported/Idle_Crouching_Aiming.fbx-01dd056d78e15750615c4e9d3b2c637b.res"
 
 [deps]
 
-source_file="res://addons/3d_player_controller_v2/assets/animations/mixamo/Idle.fbx"
-dest_files=["res://.godot/imported/Idle.fbx-880b21304ff1ef4adf23d50e06eda1a2.res"]
+source_file="res://addons/3d_player_controller_v2/assets/animations/mixamo/Idle_Crouching_Aiming.fbx"
+dest_files=["res://.godot/imported/Idle_Crouching_Aiming.fbx-01dd056d78e15750615c4e9d3b2c637b.res"]
 
 [params]
 
