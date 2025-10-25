@@ -3,13 +3,13 @@
 importer="animation_library"
 importer_version=1
 type="AnimationLibrary"
-uid="uid://ddwm7eyg2tkxc"
-path="res://.godot/imported/Rifle_Run_In_Place.fbx-d87f7fb8acc309d13ce091a34761afcb.res"
+uid="uid://cvd6goh2fw56t"
+path="res://.godot/imported/Jump_Loop.fbx-9571b3873a5ffa792084ab63a7a1ee77.res"
 
 [deps]
 
-source_file="res://addons/3d_player_controller_v2/assets/animations/mixamo/Rifle_Run_In_Place.fbx"
-dest_files=["res://.godot/imported/Rifle_Run_In_Place.fbx-d87f7fb8acc309d13ce091a34761afcb.res"]
+source_file="res://addons/3d_player_controller_v2/assets/animations/mixamo/Jump_Loop.fbx"
+dest_files=["res://.godot/imported/Jump_Loop.fbx-9571b3873a5ffa792084ab63a7a1ee77.res"]
 
 [params]
 

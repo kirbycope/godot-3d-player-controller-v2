@@ -2,6 +2,7 @@ extends BaseState
 
 #const ANIMATION_FALLING := "AnimationLibrary_Godot/Jump"
 const ANIMATION_FALLING := "Falling_Idle/mixamo_com"
+const ANIMATION_FALLING_HOLDING_RIFLE := "Jump_Loop/mixamo_com"
 const NODE_NAME := "Falling"
 const NODE_STATE := States.State.FALLING
 
@@ -68,15 +69,14 @@ func _process(delta):
 
 ## Plays the appropriate animation based on player state.
 func play_animation() -> void:
-	# Check if in first person and moving backwards
-	var play_backwards = (player.camera.perspective == player.camera.Perspective.FIRST_PERSON) and Input.is_action_pressed(player.controls.move_down)
+	# -- Rifle animations --
+	if player.is_holding_rifle:
+		if player.animation_player.current_animation != ANIMATION_FALLING_HOLDING_RIFLE:
+			player.animation_player.play(ANIMATION_FALLING_HOLDING_RIFLE)
 
-	# Check if the animation player is not already playing the appropriate animation
-	if player.animation_player.current_animation != ANIMATION_FALLING:
-		# Play the "falling" animation
-		if play_backwards:
-			player.animation_player.play_backwards(ANIMATION_FALLING)
-		else:
+	# -- Unarmed animations --
+	else:
+		if player.animation_player.current_animation != ANIMATION_FALLING:
 			player.animation_player.play(ANIMATION_FALLING)
 
 

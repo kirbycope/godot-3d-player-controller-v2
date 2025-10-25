@@ -2,6 +2,7 @@ extends BaseState
 
 #const ANIMATION_WALKING := "AnimationLibrary_Godot/Walk"
 const ANIMATION_WALKING := "Walking_In_Place/mixamo_com"
+const ANIMATION_WALKING_HOLDING_RIFLE := "Walk_Forward/mixamo_com"
 const NODE_NAME := "Walking"
 const NODE_STATE := States.State.WALKING
 
@@ -23,7 +24,6 @@ func _input(event):
 	# Ⓑ/[shift] _pressed_ -> Start "sprinting"
 	if event.is_action_pressed(player.controls.button_1):
 		if player.enable_sprinting \
-		and not player.is_sprinting \
 		and player.input_direction != Vector2.ZERO \
 		and player.is_on_floor():
 			transition_state(NODE_STATE, States.State.SPRINTING)
@@ -49,13 +49,21 @@ func play_animation() -> void:
 	# Check if in first person and moving backwards
 	var play_backwards = (player.camera.perspective == player.camera.Perspective.FIRST_PERSON) and Input.is_action_pressed(player.controls.move_down)
 
-	# Check if the animation player is not already playing the appropriate animation
-	if player.animation_player.current_animation != ANIMATION_WALKING:
-		# Play the "walking" animation
-		if play_backwards:
-			player.animation_player.play_backwards(ANIMATION_WALKING)
-		else:
-			player.animation_player.play(ANIMATION_WALKING)
+	# -- Rifle animations --
+	if player.is_holding_rifle:
+		if player.animation_player.current_animation != ANIMATION_WALKING_HOLDING_RIFLE:
+			if play_backwards:
+				player.animation_player.play_backwards(ANIMATION_WALKING_HOLDING_RIFLE)
+			else:
+				player.animation_player.play(ANIMATION_WALKING_HOLDING_RIFLE)
+
+	# -- Unarmed animations --
+	else:
+		if player.animation_player.current_animation != ANIMATION_WALKING:
+			if play_backwards:
+				player.animation_player.play_backwards(ANIMATION_WALKING)
+			else:
+				player.animation_player.play(ANIMATION_WALKING)
 
 
 ## Start "walking".

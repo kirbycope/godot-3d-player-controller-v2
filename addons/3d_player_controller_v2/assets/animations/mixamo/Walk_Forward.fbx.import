@@ -3,13 +3,13 @@
 importer="animation_library"
 importer_version=1
 type="AnimationLibrary"
-uid="uid://ddwm7eyg2tkxc"
-path="res://.godot/imported/Rifle_Run_In_Place.fbx-d87f7fb8acc309d13ce091a34761afcb.res"
+uid="uid://gappv6q1w67e"
+path="res://.godot/imported/Walk_Forward.fbx-fc97d1ed00f3977e2af7e4e674fe7ed9.res"
 
 [deps]
 
-source_file="res://addons/3d_player_controller_v2/assets/animations/mixamo/Rifle_Run_In_Place.fbx"
-dest_files=["res://.godot/imported/Rifle_Run_In_Place.fbx-d87f7fb8acc309d13ce091a34761afcb.res"]
+source_file="res://addons/3d_player_controller_v2/assets/animations/mixamo/Walk_Forward.fbx"
+dest_files=["res://.godot/imported/Walk_Forward.fbx-fc97d1ed00f3977e2af7e4e674fe7ed9.res"]
 
 [params]
 

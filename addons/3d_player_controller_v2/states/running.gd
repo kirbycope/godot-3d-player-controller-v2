@@ -2,6 +2,7 @@ extends BaseState
 
 #const ANIMATION_RUNNING := "AnimationLibrary_Godot/Sprint"
 const ANIMATION_RUNNING := "Running_In_Place/mixamo_com"
+const ANIMATION_RUNNING_HOLDING_RIFLE := "Rifle_Run_In_Place/mixamo_com"
 const NODE_NAME := "Running"
 const NODE_STATE := States.State.RUNNING
 
@@ -48,13 +49,21 @@ func play_animation() -> void:
 	# Check if in first person and moving backwards
 	var play_backwards = (player.camera.perspective == player.camera.Perspective.FIRST_PERSON) and Input.is_action_pressed(player.controls.move_down)
 
-	# Check if the animation player is not already playing the appropriate animation
-	if player.animation_player.current_animation != ANIMATION_RUNNING:
-		# Play the "running" animation
-		if play_backwards:
-			player.animation_player.play_backwards(ANIMATION_RUNNING)
-		else:
-			player.animation_player.play(ANIMATION_RUNNING)
+	# -- Rifle animations --
+	if player.is_holding_rifle:
+		if player.animation_player.current_animation != ANIMATION_RUNNING_HOLDING_RIFLE:
+			if play_backwards:
+				player.animation_player.play_backwards(ANIMATION_RUNNING_HOLDING_RIFLE)
+			else:
+				player.animation_player.play(ANIMATION_RUNNING_HOLDING_RIFLE)
+
+	# -- Unarmed animations --
+	else:
+		if player.animation_player.current_animation != ANIMATION_RUNNING:
+			if play_backwards:
+				player.animation_player.play_backwards(ANIMATION_RUNNING)
+			else:
+				player.animation_player.play(ANIMATION_RUNNING)
 
 
 ## Start "running".

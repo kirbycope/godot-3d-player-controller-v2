@@ -132,8 +132,8 @@ func play_animation() -> void:
 		else:
 			if player.animation_player.current_animation != ANIMATION_FISHING_IDLE:
 				player.animation_player.play(ANIMATION_FISHING_IDLE)
-	
-	# -- Rifling animations --
+
+	# -- Rifle animations --
 	elif player.is_holding_rifle:
 		if player.is_firing_rifle:
 			if player.animation_player.current_animation != ANIMATION_RIFLE_FIRING:
@@ -142,7 +142,6 @@ func play_animation() -> void:
 		elif player.is_aiming_rifle:
 			if player.animation_player.current_animation != ANIMATION_RIFLE_AIMING:
 				player.animation_player.play(ANIMATION_RIFLE_AIMING)
-				player.animation_player.connect("animation_finished", _on_animation_finished)
 		else:
 			if player.animation_player.current_animation != ANIMATION_RIFLE_IDLE:
 				player.animation_player.play(ANIMATION_RIFLE_IDLE)
@@ -198,7 +197,7 @@ func _on_animation_finished(animation_name: String) -> void:
 		player.is_reeling_fishing = false
 	elif animation_name == ANIMATION_KICKING_LEFT:
 		player.is_kicking_left = false
-	#elif animation_name == ANIMATION_KICKING_RIGHT:
+	elif animation_name == ANIMATION_KICKING_RIGHT:
 		player.is_kicking_right = false
 	elif animation_name == ANIMATION_RIFLE_AIMING:
 		player.is_aiming_rifle = false

@@ -1,10 +1,10 @@
 extends BaseState
 
 #const ANIMATION_CROUCHING := "AnimationLibrary_Godot/Crouch_Idle"
-const ANIMATION_CROUCHING := "Crouching_Idle/mixamo_com"
+const ANIMATION_CROUCHING_IDLE := "Crouching_Idle/mixamo_com"
 const ANIMATION_CROUCHING_HOLDING_RIFLE := "Rifle_Kneel_Idle/mixamo_com"
 const ANIMATION_CROUCHING_AIMING := "Idle_Crouching_Aiming/mixamo_com"
-const ANIMATION_CROUCHING_FIRING := "Idle_Crouching_Aiming/mixamo_com" # "Idle_Crouching_Firing/mixamo_com" <-- Placeholder until proper animation is added
+const ANIMATION_CROUCHING_FIRING := "Fire_Rifle/mixamo_com"
 const NODE_NAME := "Crouching"
 const NODE_STATE := States.State.CROUCHING
 
@@ -32,13 +32,20 @@ func _input(event):
 	if event.is_action_pressed(player.controls.button_4):
 		# Rifle "firing"
 		if player.is_holding_rifle:
-			pass
+			player.is_firing_rifle = true
 
 	# 🅁1/[MB1] _pressed_ 
 	if event.is_action_pressed(player.controls.button_5):
 		# Rifle "aiming"
 		if player.is_holding_rifle:
-			pass
+			player.is_aiming_rifle = true
+
+	# 🅁1/[MB1] _released_
+	if event.is_action_released(player.controls.button_5):
+		# Stop "aiming rifle"
+		if player.is_holding_rifle \
+		and player.is_aiming_rifle:
+			player.is_aiming_rifle = false
 
 
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -58,18 +65,29 @@ func _process(delta):
 
 ## Plays the appropriate animation based on player state.
 func play_animation() -> void:
+	# -- Rifle animations --
 	if player.is_firing_rifle:
 		if player.animation_player.current_animation != ANIMATION_CROUCHING_FIRING:
 			player.animation_player.play(ANIMATION_CROUCHING_FIRING)
+			player.animation_player.connect("animation_finished", _on_animation_finished)
 	elif player.is_aiming_rifle:
 		if player.animation_player.current_animation != ANIMATION_CROUCHING_AIMING:
 			player.animation_player.play(ANIMATION_CROUCHING_AIMING)
 	elif player.is_holding_rifle:
 		if player.animation_player.current_animation != ANIMATION_CROUCHING_HOLDING_RIFLE:
 			player.animation_player.play(ANIMATION_CROUCHING_HOLDING_RIFLE)
+
+	# -- Idle animation --
 	else:
-		if player.animation_player.current_animation != ANIMATION_CROUCHING:
-			player.animation_player.play(ANIMATION_CROUCHING)
+		if player.animation_player.current_animation != ANIMATION_CROUCHING_IDLE:
+			player.animation_player.play(ANIMATION_CROUCHING_IDLE)
+
+
+func _on_animation_finished(animation_name: String) -> void:
+	# Disconnect the signal to avoid multiple connections
+	player.animation_player.disconnect("animation_finished", _on_animation_finished)
+	if animation_name == ANIMATION_CROUCHING_FIRING:
+		player.is_firing_rifle = false
 
 
 ## Start "crouching".

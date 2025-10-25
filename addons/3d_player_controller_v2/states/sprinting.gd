@@ -2,7 +2,8 @@ extends BaseState
 
 #const ANIMATION_SPRINTING := "AnimationLibrary_Godot/Jog_Fwd"
 const ANIMATION_SPRINTING := "Sprinting_In_Place/mixamo_com"
-const NODE_NAME := "Sprtinting"
+const ANIMATION_SPRINTING_HOLDING_RIFLE := "Sprint_Forward_In_Place/mixamo_com"
+const NODE_NAME := "Sprinting"
 const NODE_STATE := States.State.SPRINTING
 
 
@@ -47,13 +48,21 @@ func play_animation() -> void:
 	# Check if in first person and moving backwards
 	var play_backwards = (player.camera.perspective == player.camera.Perspective.FIRST_PERSON) and Input.is_action_pressed(player.controls.move_down)
 
-	# Check if the animation player is not already playing the appropriate animation
-	if player.animation_player.current_animation != ANIMATION_SPRINTING:
-		# Play the "sprinting" animation
-		if play_backwards:
-			player.animation_player.play_backwards(ANIMATION_SPRINTING)
-		else:
-			player.animation_player.play(ANIMATION_SPRINTING)
+	# -- Rifle animations --
+	if player.is_holding_rifle:
+		if player.animation_player.current_animation != ANIMATION_SPRINTING_HOLDING_RIFLE:
+			if play_backwards:
+				player.animation_player.play_backwards(ANIMATION_SPRINTING_HOLDING_RIFLE)
+			else:
+				player.animation_player.play(ANIMATION_SPRINTING_HOLDING_RIFLE)
+
+	# -- Unarmed animations --
+	else:
+		if player.animation_player.current_animation != ANIMATION_SPRINTING:
+			if play_backwards:
+				player.animation_player.play_backwards(ANIMATION_SPRINTING)
+			else:
+				player.animation_player.play(ANIMATION_SPRINTING)
 
 
 ## Start "sprinting".

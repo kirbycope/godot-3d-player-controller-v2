@@ -3,13 +3,13 @@
 importer="animation_library"
 importer_version=1
 type="AnimationLibrary"
-uid="uid://ddwm7eyg2tkxc"
-path="res://.godot/imported/Rifle_Run_In_Place.fbx-d87f7fb8acc309d13ce091a34761afcb.res"
+uid="uid://b1d1epi5ps4su"
+path="res://.godot/imported/Firing_Rifle_In_Place.fbx-306a9d51405b7abfed6f9b46e224e8fc.res"
 
 [deps]
 
-source_file="res://addons/3d_player_controller_v2/assets/animations/mixamo/Rifle_Run_In_Place.fbx"
-dest_files=["res://.godot/imported/Rifle_Run_In_Place.fbx-d87f7fb8acc309d13ce091a34761afcb.res"]
+source_file="res://addons/3d_player_controller_v2/assets/animations/mixamo/Firing_Rifle_In_Place.fbx"
+dest_files=["res://.godot/imported/Firing_Rifle_In_Place.fbx-306a9d51405b7abfed6f9b46e224e8fc.res"]
 
 [params]
 
