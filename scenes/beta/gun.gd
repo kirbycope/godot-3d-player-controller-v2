@@ -10,6 +10,9 @@ var player: CharacterBody3D
 
 func _input(_event: InputEvent) -> void:
 	if player:
+		# Do nothing if the "pause" menu is visible
+		if player.pause.visible: return
+
 		# (D-Pad Down) /[Q] _just_pressed_ -> Drop _this_node
 		if Input.is_action_just_pressed(player.controls.button_13):
 			_on_player_detection_body_exited(player)

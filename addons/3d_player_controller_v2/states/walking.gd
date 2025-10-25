@@ -3,6 +3,7 @@ extends BaseState
 #const ANIMATION_WALKING := "AnimationLibrary_Godot/Walk"
 const ANIMATION_WALKING := "Walking_In_Place/mixamo_com"
 const ANIMATION_WALKING_HOLDING_RIFLE := "Walk_Forward/mixamo_com"
+const ANIMATION_WALKING_FIRING_RIFLE := "Firing_Rifle_In_Place/mixamo_com"
 const NODE_NAME := "Walking"
 const NODE_STATE := States.State.WALKING
 
@@ -29,6 +30,25 @@ func _input(event):
 			transition_state(NODE_STATE, States.State.SPRINTING)
 			return
 
+	# 🄻1/[MB0] _pressed_
+	if event.is_action_pressed(player.controls.button_4):
+		# Rifle "firing"
+		if player.is_holding_rifle:
+			player.is_firing_rifle = true
+
+	# 🅁1/[MB1] _pressed_ 
+	if event.is_action_pressed(player.controls.button_5):
+		# Rifle "aiming"
+		if player.is_holding_rifle:
+			player.is_aiming_rifle = true
+
+	# 🅁1/[MB1] _released_
+	if event.is_action_released(player.controls.button_5):
+		# Stop "aiming rifle"
+		if player.is_holding_rifle \
+		and player.is_aiming_rifle:
+			player.is_aiming_rifle = false
+
 
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -51,11 +71,18 @@ func play_animation() -> void:
 
 	# -- Rifle animations --
 	if player.is_holding_rifle:
-		if player.animation_player.current_animation != ANIMATION_WALKING_HOLDING_RIFLE:
-			if play_backwards:
-				player.animation_player.play_backwards(ANIMATION_WALKING_HOLDING_RIFLE)
-			else:
-				player.animation_player.play(ANIMATION_WALKING_HOLDING_RIFLE)
+		if player.is_firing_rifle:
+			if player.animation_player.current_animation != ANIMATION_WALKING_FIRING_RIFLE:
+				if play_backwards:
+					player.animation_player.play_backwards(ANIMATION_WALKING_FIRING_RIFLE)
+				else:
+					player.animation_player.play(ANIMATION_WALKING_FIRING_RIFLE)
+		else:
+			if player.animation_player.current_animation != ANIMATION_WALKING_HOLDING_RIFLE:
+				if play_backwards:
+					player.animation_player.play_backwards(ANIMATION_WALKING_HOLDING_RIFLE)
+				else:
+					player.animation_player.play(ANIMATION_WALKING_HOLDING_RIFLE)
 
 	# -- Unarmed animations --
 	else:

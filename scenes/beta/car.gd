@@ -14,10 +14,9 @@ var _time_since_yaw_input: float = 0.0
 
 ## Called when there is an input event.
 func _input(event) -> void:
-	# Do nothing if not the authority
-	if !is_multiplayer_authority(): return
-
 	if player:
+		# Do nothing if the "pause" menu is visible
+		if player.pause.visible: return
 		# Ⓧ/[E] press to drive vehicle - Enter vehicle
 		if event.is_action_pressed(player.controls.button_2) \
 		and not player.is_driving:

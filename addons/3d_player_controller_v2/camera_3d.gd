@@ -32,6 +32,9 @@ func _input(event) -> void:
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
 
+	# Do nothing if the "pause" menu is visible
+	if player.pause.visible: return
+
 	if lock_camera:
 		return
 

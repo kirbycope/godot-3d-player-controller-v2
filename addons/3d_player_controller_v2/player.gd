@@ -117,28 +117,30 @@ func _input(event) -> void:
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
 
-	if not pause.visible:
-		# Ⓨ/[Ctrl] press to drive vehicle - Exit vehicle
-		if is_driving:
-			if event.is_action_pressed(controls.button_3):
-				base_state.transition_state(current_state, States.State.STANDING)
-			else:
-				return
+	# Do nothing if the "pause" menu is visible
+	if pause.visible: return
 
-		# [Left Mouse Button] _pressed_ -> Start "navigating"
-		if enable_navigation:
-			if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) \
-			and Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE:
-				# Find out where to click
-				var from = camera.project_ray_origin(event.position)
-				var to = from + camera.project_ray_normal(event.position) * 10000
-				var cursor_position = Plane(up_direction, transform.origin.y).intersects_ray(from, to)
-				if cursor_position:
-					#debug.draw_red_sphere(cursor_position) ## DEBUGGING
-					navigation_agent.target_position = cursor_position
-					if not is_navigating:
-						# Start "navigating"
-						base_state.transition_state(current_state, States.State.NAVIGATING)
+	# Ⓨ/[Ctrl] press to drive vehicle - Exit vehicle
+	if is_driving:
+		if event.is_action_pressed(controls.button_3):
+			base_state.transition_state(current_state, States.State.STANDING)
+		else:
+			return
+
+	# [Left Mouse Button] _pressed_ -> Start "navigating"
+	if enable_navigation:
+		if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) \
+		and Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE:
+			# Find out where to click
+			var from = camera.project_ray_origin(event.position)
+			var to = from + camera.project_ray_normal(event.position) * 10000
+			var cursor_position = Plane(up_direction, transform.origin.y).intersects_ray(from, to)
+			if cursor_position:
+				#debug.draw_red_sphere(cursor_position) ## DEBUGGING
+				navigation_agent.target_position = cursor_position
+				if not is_navigating:
+					# Start "navigating"
+					base_state.transition_state(current_state, States.State.NAVIGATING)
 
 
 ## Called every frame. 'delta' is the elapsed time since the previous frame.

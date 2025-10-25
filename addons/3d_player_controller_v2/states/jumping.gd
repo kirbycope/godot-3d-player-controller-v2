@@ -53,6 +53,25 @@ func _input(event):
 			transition_state(player.current_state, States.State.PARAGLIDING)
 			return
 
+	# 🄻1/[MB0] _pressed_
+	if event.is_action_pressed(player.controls.button_4):
+		# Rifle "firing"
+		if player.is_holding_rifle:
+			player.is_firing_rifle = true
+
+	# 🅁1/[MB1] _pressed_ 
+	if event.is_action_pressed(player.controls.button_5):
+		# Rifle "aiming"
+		if player.is_holding_rifle:
+			player.is_aiming_rifle = true
+
+	# 🅁1/[MB1] _released_
+	if event.is_action_released(player.controls.button_5):
+		# Stop "aiming rifle"
+		if player.is_holding_rifle \
+		and player.is_aiming_rifle:
+			player.is_aiming_rifle = false
+
 
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

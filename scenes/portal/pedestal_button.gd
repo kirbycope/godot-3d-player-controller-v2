@@ -8,6 +8,9 @@ var player: CharacterBody3D
 ## Called when there is an input event.
 func _input(event) -> void:
 	if player:
+		# Do nothing if the "pause" menu is visible
+		if player.pause.visible: return
+
 		if event.is_action_pressed(player.controls.button_2):
 			if player.camera.ray_cast.is_colliding():
 				var collider = player.camera.ray_cast.get_collider()

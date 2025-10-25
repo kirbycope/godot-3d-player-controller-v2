@@ -15,13 +15,6 @@ func _input(event):
 	# Do nothing if the "pause" menu is visible
 	if player.pause.visible: return
 
-	# Ⓐ/[Space] _pressed_ -> Start "mantling"
-	#if event.is_action_pressed(player.controls.button_0):
-	#	if player.ray_cast_jump_target.is_colliding():
-	#		player.global_position = player.ray_cast_jump_target.get_collision_point()
-	#		transition_state(NODE_STATE, States.State.STANDING) # TODO: Create a mantling state
-	#		return
-
 	# Ⓨ/[Ctrl] _pressed_ -> Start "falling"
 	if event.is_action_pressed(player.controls.button_3):
 		transition_state(NODE_STATE, States.State.FALLING)
