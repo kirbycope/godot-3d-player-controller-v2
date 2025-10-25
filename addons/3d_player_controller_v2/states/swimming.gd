@@ -1,7 +1,9 @@
 extends BaseState
 
-const ANIMATION_SWIMMING := "AnimationLibrary_Godot/Swim_Fwd"
-const ANIMATION_WADING := "AnimationLibrary_Godot/Swim_Idle"
+#const ANIMATION_SWIMMING := "AnimationLibrary_Godot/Swim_Fwd"
+const ANIMATION_SWIMMING := "Swimming_In_Place/mixamo_com"
+#const ANIMATION_WADING := "AnimationLibrary_Godot/Swim_Idle"
+const ANIMATION_WADING := "Treading_Water/mixamo_com"
 const NODE_NAME := "Swimming"
 const NODE_STATE := States.State.SWIMMING
 

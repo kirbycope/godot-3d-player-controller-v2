@@ -1,6 +1,7 @@
 extends BaseState
 
-const ANIMATION_SPRINTING := "AnimationLibrary_Godot/Jog_Fwd"
+#const ANIMATION_SPRINTING := "AnimationLibrary_Godot/Jog_Fwd"
+const ANIMATION_SPRINTING := "Sprinting_In_Place/mixamo_com"
 const NODE_NAME := "Sprtinting"
 const NODE_STATE := States.State.SPRINTING
 

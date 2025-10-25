@@ -1,6 +1,7 @@
 extends BaseState
 
-const ANIMATION_CROUCHING := "AnimationLibrary_Godot/Crouch_Idle"
+#const ANIMATION_CROUCHING := "AnimationLibrary_Godot/Crouch_Idle"
+const ANIMATION_CROUCHING := "Crouching_Idle/mixamo_com"
 const NODE_NAME := "Crouching"
 const NODE_STATE := States.State.CROUCHING
 

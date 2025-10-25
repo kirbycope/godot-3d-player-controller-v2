@@ -1,6 +1,7 @@
 extends BaseState
 
-const ANIMATION_CRAWLING := "AnimationLibrary_Godot/Crawl_Fwd"
+#const ANIMATION_CRAWLING := "AnimationLibrary_Godot/Crawl_Fwd"
+const ANIMATION_CRAWLING := "Crawling_In_Place/mixamo_com"
 const NODE_NAME := "Crawling"
 const NODE_STATE := States.State.CRAWLING
 

@@ -1,6 +1,7 @@
 extends Node3D
 
-const ANIMATION_RUNNING := "AnimationLibrary_Godot/Sprint"
+#const ANIMATION_RUNNING := "AnimationLibrary_Godot/Sprint"
+const ANIMATION_RUNNING := "Running_In_Place/mixamo_com"
 
 @onready var ground: StaticBody3D = $Ground
 @onready var player = $Player

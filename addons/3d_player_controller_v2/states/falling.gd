@@ -1,6 +1,7 @@
 extends BaseState
 
-const ANIMATION_FALLING := "AnimationLibrary_Godot/Jump"
+#const ANIMATION_FALLING := "AnimationLibrary_Godot/Jump"
+const ANIMATION_FALLING := "Falling_Idle/mixamo_com"
 const NODE_NAME := "Falling"
 const NODE_STATE := States.State.FALLING
 

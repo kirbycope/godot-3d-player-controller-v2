@@ -1,6 +1,7 @@
 extends BaseState
 
-const ANIMATION_WALKING := "AnimationLibrary_Godot/Walk"
+#const ANIMATION_WALKING := "AnimationLibrary_Godot/Walk"
+const ANIMATION_WALKING := "Walking_In_Place/mixamo_com"
 const NODE_NAME := "Walking"
 const NODE_STATE := States.State.WALKING
 

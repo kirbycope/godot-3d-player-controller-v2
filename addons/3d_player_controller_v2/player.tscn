@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=4 uid="uid://f6xpywa7euq2"]
+[gd_scene load_steps=99 format=4 uid="uid://f6xpywa7euq2"]
 
 [ext_resource type="Script" uid="uid://b7plmenqhwlu4" path="res://addons/3d_player_controller_v2/player.gd" id="1_ifhah"]
 [ext_resource type="Script" uid="uid://5rlkn1wdmtq0" path="res://addons/3d_player_controller_v2/camera_3d.gd" id="2_ffasv"]
@@ -10,16 +10,27 @@
 [ext_resource type="PackedScene" uid="uid://yxm384w27bq2" path="res://addons/3d_player_controller_v2/states.tscn" id="5_5e1u4"]
 [ext_resource type="PackedScene" uid="uid://2p8pyabd2bmo" path="res://addons/3d_player_controller_v2/pause.tscn" id="5_7fj78"]
 [ext_resource type="AnimationLibrary" uid="uid://bexm07tt1w4u8" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Fishing_Cast.fbx" id="10_6lgqk"]
+[ext_resource type="AnimationLibrary" uid="uid://c2d6emy334qwi" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Bored.fbx" id="10_7luni"]
 [ext_resource type="AnimationLibrary" uid="uid://caoivoe5bfjcu" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Hanging_Braced_Idle.fbx" id="10_twkb2"]
 [ext_resource type="AnimationLibrary" uid="uid://ss8vk5pwbrpk" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Flying_Fast_In_Place.fbx" id="10_y7toy"]
+[ext_resource type="AnimationLibrary" uid="uid://dbtx7306vre2c" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Button_Pushing.fbx" id="11_0foik"]
 [ext_resource type="AnimationLibrary" uid="uid://ylml7xsl8pd2" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Fishing_Idle.fbx" id="11_1o8v8"]
 [ext_resource type="AnimationLibrary" uid="uid://ct7b72wtokjx6" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Flying_In_Place.fbx" id="11_jh3p3"]
+[ext_resource type="AnimationLibrary" uid="uid://dvqn4ygbsaqk7" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Braced_Hang_To_Crouch.fbx" id="11_qrdwm"]
 [ext_resource type="AnimationLibrary" uid="uid://cg2irtid1oxfc" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Hanging_Braced_Shimmy_Left_In_Place.fbx" id="11_uu7fq"]
+[ext_resource type="AnimationLibrary" uid="uid://r73yt4sbmra5" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Climbing_Down_Wall_In_Place.fbx" id="12_3tnoc"]
 [ext_resource type="AnimationLibrary" uid="uid://ucexmwbk6xk8" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Fishing_Reel.fbx" id="12_ei82t"]
+[ext_resource type="AnimationLibrary" uid="uid://c87o8nv26jn5c" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Crawling_In_Place.fbx" id="12_r1dgs"]
 [ext_resource type="AnimationLibrary" uid="uid://rlm6o0royfiv" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Hanging_Braced_Shimmy_Right_In_Place.fbx" id="12_y7toy"]
+[ext_resource type="AnimationLibrary" uid="uid://cep5ekg121pxo" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Crouching_Idle.fbx" id="13_3tnoc"]
 [ext_resource type="AnimationLibrary" uid="uid://c0f7rsx8iqmll" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Hanging_Idle.fbx" id="13_jh3p3"]
+[ext_resource type="AnimationLibrary" uid="uid://i875cotumcjc" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Climbing_Ladder_In_Place.fbx" id="13_srsky"]
 [ext_resource type="AnimationLibrary" uid="uid://701jsc2gi0c5" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Hanging_Shimmy_Left_In_Place.fbx" id="14_j17wn"]
+[ext_resource type="AnimationLibrary" uid="uid://bb1d0wq6qak5i" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Crying.fbx" id="14_srsky"]
+[ext_resource type="AnimationLibrary" uid="uid://c1caoujjt6ap7" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Climbing_Up_Wall_In_Place.fbx" id="14_w2wlq"]
 [ext_resource type="AnimationLibrary" uid="uid://xm5ffbmesaj" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Hanging_Shimmy_Right_In_Place.fbx" id="15_hfe17"]
+[ext_resource type="AnimationLibrary" uid="uid://bd5t37fa0705p" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Driving.fbx" id="15_w2wlq"]
+[ext_resource type="AnimationLibrary" uid="uid://b0nb4ta0e5i8o" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Falling_Idle.fbx" id="16_6ja46"]
 [ext_resource type="AnimationLibrary" uid="uid://vadhoewxbtay" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Roll_In_Place.fbx" id="18_j17wn"]
 [ext_resource type="AnimationLibrary" uid="uid://c6i1quebxxpvj" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Running_Slide.fbx" id="19_hfe17"]
 [ext_resource type="AnimationLibrary" uid="uid://bjff77hajwxxq" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Skateboarding_Fast_In_Place.fbx" id="20_1osn0"]
@@ -28,8 +39,26 @@
 [ext_resource type="AnimationLibrary" uid="uid://86g6vweafw1i" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Skateboarding_Slow_In_Place.fbx" id="22_svrdt"]
 [ext_resource type="AnimationLibrary" uid="uid://nkyysffh3g6e" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Rifle_Firing.fbx" id="22_uaqa8"]
 [ext_resource type="AnimationLibrary" uid="uid://w1wshpcvkp8h" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Rifle_Idle.fbx" id="23_404ih"]
+[ext_resource type="AnimationLibrary" uid="uid://c7273puf4ktic" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Idle.fbx" id="28_qrdwm"]
+[ext_resource type="AnimationLibrary" uid="uid://bq8u1n2v6a1p1" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Jumping_Up.fbx" id="29_71e0g"]
 [ext_resource type="AnimationLibrary" uid="uid://cf5bi3tqdi0ji" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Standing_Melee_Attack_Downward_Left.fbx" id="29_404ih"]
 [ext_resource type="AnimationLibrary" uid="uid://ni1h0cyd1wuv" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Standing_Melee_Attack_Downward_Right.fbx" id="30_bc2wp"]
+[ext_resource type="AnimationLibrary" uid="uid://g365y1q4jysf" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Kicking_Left.fbx" id="30_rmti1"]
+[ext_resource type="AnimationLibrary" uid="uid://b4h6jhrqwg8t" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Kicking_Right.fbx" id="31_0kwme"]
+[ext_resource type="AnimationLibrary" uid="uid://c0avvsri1wpfx" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Laughing.fbx" id="32_f1xd6"]
+[ext_resource type="AnimationLibrary" uid="uid://bkdyhqe47ks5f" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Mantling.fbx" id="33_drd4j"]
+[ext_resource type="AnimationLibrary" uid="uid://cn5tba8gvsfce" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Punching_Left.fbx" id="34_7ht0o"]
+[ext_resource type="AnimationLibrary" uid="uid://cr00a6y4j7b8g" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Punching_Right.fbx" id="35_mj70k"]
+[ext_resource type="AnimationLibrary" uid="uid://bc55nji810mrb" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Push_In_Place.fbx" id="36_rdbq8"]
+[ext_resource type="AnimationLibrary" uid="uid://cfosxle134rvb" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Quick_Informal_Bow.fbx" id="37_b62ft"]
+[ext_resource type="AnimationLibrary" uid="uid://bfej11540kh7k" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Running_In_Place.fbx" id="42_6pr1k"]
+[ext_resource type="AnimationLibrary" uid="uid://xrrbb6c4erii" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Sitting Idle.fbx" id="44_na1ry"]
+[ext_resource type="AnimationLibrary" uid="uid://b5pgbfjueliau" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Sprinting_In_Place.fbx" id="48_u4wnn"]
+[ext_resource type="AnimationLibrary" uid="uid://u33ur2ydvqjy" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Walking_In_Place.fbx" id="51_eudj6"]
+[ext_resource type="AnimationLibrary" uid="uid://cmosi0v885744" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Waving.fbx" id="52_rdvif"]
+[ext_resource type="AnimationLibrary" uid="uid://dobs4v18akkb5" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Swimming_In_Place.fbx" id="55_71e0g"]
+[ext_resource type="AnimationLibrary" uid="uid://clm5nu56n735j" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Swimming_To_Edge.fbx" id="56_rmti1"]
+[ext_resource type="AnimationLibrary" uid="uid://ck5a3ius2vpbp" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Treading_Water.fbx" id="57_0kwme"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ifhah"]
 radius = 0.3
@@ -19714,8 +19743,8 @@ bones/158/parent = 157
 bones/158/rest = Transform3D(1, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, -0.011601858, 0.023796309, -0.00042866202)
 bones/158/enabled = true
 bones/158/position = Vector3(-0.011601858, 0.023796309, -0.00042866202)
-bones/158/rotation = Quaternion(1.4901161e-08, 7.4505806e-08, 2.9802322e-08, 1)
-bones/158/scale = Vector3(1, 1.0000001, 1.0000001)
+bones/158/rotation = Quaternion(0, 0, 0, 1)
+bones/158/scale = Vector3(1.0000244, 0.99999577, 0.9999798)
 bones/159/name = "FingerControl_2.L"
 bones/159/parent = 143
 bones/159/rest = Transform3D(-0.9558879, -0.29373133, 0.00075483695, -0.29373226, 0.95588434, -0.002440583, -4.659989e-06, -0.002554626, -0.99999666, -0.026140334, 0.08244671, 0.012177941)
@@ -19924,8 +19953,8 @@ bones/188/parent = 187
 bones/188/rest = Transform3D(1, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, 0.011601876, 0.023796123, -0.00042878432)
 bones/188/enabled = true
 bones/188/position = Vector3(0.011601876, 0.023796123, -0.00042878432)
-bones/188/rotation = Quaternion(5.9604638e-08, -2.9802319e-08, -2.9802319e-08, 1)
-bones/188/scale = Vector3(1, 1.0000001, 1.0000001)
+bones/188/rotation = Quaternion(0, 0, 0, 1)
+bones/188/scale = Vector3(1.0000244, 0.9999957, 0.9999799)
 bones/189/name = "FingerControl_2.R"
 bones/189/parent = 173
 bones/189/rest = Transform3D(-0.95588773, 0.29373124, -0.00075477606, 0.29373208, 0.9558842, -0.0024404037, 4.646252e-06, -0.0025544795, -0.99999654, 0.02614034, 0.08244672, 0.012177836)
@@ -20029,7 +20058,7 @@ bones/203/parent = 202
 bones/203/rest = Transform3D(-1, 0, 0, 0, -1, 0, 0, 0, 1, 0.09087972, -0.12143222, -0.040201124)
 bones/203/enabled = true
 bones/203/position = Vector3(0.09087972, -0.12143222, -0.040201124)
-bones/203/rotation = Quaternion(0, 2.115965e-06, 1, 0)
+bones/203/rotation = Quaternion(1.9163335e-10, -1.08114425e-16, 1, -5.311271e-10)
 bones/203/scale = Vector3(1, 1, 1)
 bones/204/name = "Leg_Upper_2.L"
 bones/204/parent = 203
@@ -20085,7 +20114,7 @@ bones/211/parent = 210
 bones/211/rest = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -0.0035506561, 0.15520227, 0.018480377)
 bones/211/enabled = true
 bones/211/position = Vector3(-0.0035506561, 0.15520227, 0.018480377)
-bones/211/rotation = Quaternion(5.2846154e-09, 1, -3.8300645e-06, 2.7046976e-10)
+bones/211/rotation = Quaternion(0, 1, -3.352761e-08, 1.2805684e-09)
 bones/211/scale = Vector3(1, 1, 1)
 bones/212/name = "Leg_Lower.R"
 bones/212/parent = 211
@@ -20199,6 +20228,17 @@ skin = SubResource("Skin_yipfl")
 libraries = {
 &"": SubResource("AnimationLibrary_p7iwx"),
 &"AnimationLibrary_Godot": ExtResource("4_xnki8"),
+&"Bored": ExtResource("10_7luni"),
+&"Braced_Hang_To_Crouch": ExtResource("11_qrdwm"),
+&"Button_Pushing": ExtResource("11_0foik"),
+&"Climbing_Down_Wall_In_Place": ExtResource("12_3tnoc"),
+&"Climbing_Ladder_In_Place": ExtResource("13_srsky"),
+&"Climbing_Up_Wall_In_Place": ExtResource("14_w2wlq"),
+&"Crawling_In_Place": ExtResource("12_r1dgs"),
+&"Crouching_Idle": ExtResource("13_3tnoc"),
+&"Crying": ExtResource("14_srsky"),
+&"Driving": ExtResource("15_w2wlq"),
+&"Falling_Idle": ExtResource("16_6ja46"),
 &"Fishing_Cast": ExtResource("10_6lgqk"),
 &"Fishing_Idle": ExtResource("11_1o8v8"),
 &"Fishing_Reel": ExtResource("12_ei82t"),
@@ -20210,16 +20250,34 @@ libraries = {
 &"Hanging_Idle": ExtResource("13_jh3p3"),
 &"Hanging_Shimmy_Left_In_Place": ExtResource("14_j17wn"),
 &"Hanging_Shimmy_Right_In_Place": ExtResource("15_hfe17"),
+&"Idle": ExtResource("28_qrdwm"),
+&"Jumping_Up": ExtResource("29_71e0g"),
+&"Kicking_Left": ExtResource("30_rmti1"),
+&"Kicking_Right": ExtResource("31_0kwme"),
+&"Laughing": ExtResource("32_f1xd6"),
+&"Mantling": ExtResource("33_drd4j"),
+&"Punching_Left": ExtResource("34_7ht0o"),
+&"Punching_Right": ExtResource("35_mj70k"),
+&"Push_In_Place": ExtResource("36_rdbq8"),
+&"Quick_Informal_Bow": ExtResource("37_b62ft"),
 &"Rifle_Aiming_Idle": ExtResource("21_enu7q"),
 &"Rifle_Firing": ExtResource("22_uaqa8"),
 &"Rifle_Idle": ExtResource("23_404ih"),
 &"Roll_In_Place": ExtResource("18_j17wn"),
+&"Running_In_Place": ExtResource("42_6pr1k"),
 &"Running_Slide": ExtResource("19_hfe17"),
+&"Sitting Idle": ExtResource("44_na1ry"),
 &"Skateboarding_Fast_In_Place": ExtResource("20_1osn0"),
 &"Skateboarding_In_Place": ExtResource("21_m7a4g"),
 &"Skateboarding_Slow_In_Place": ExtResource("22_svrdt"),
+&"Sprinting_In_Place": ExtResource("48_u4wnn"),
 &"Standing_Melee_Attack_Downward_Left": ExtResource("29_404ih"),
-&"Standing_Melee_Attack_Downward_Right": ExtResource("30_bc2wp")
+&"Standing_Melee_Attack_Downward_Right": ExtResource("30_bc2wp"),
+&"Swimming_In_Place": ExtResource("55_71e0g"),
+&"Swimming_To_Edge": ExtResource("56_rmti1"),
+&"Treading_Water": ExtResource("57_0kwme"),
+&"Walking_In_Place": ExtResource("51_eudj6"),
+&"Waving": ExtResource("52_rdvif")
 }
 playback_default_blend_time = 0.2
 
