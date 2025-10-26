@@ -182,7 +182,7 @@ func play_animation() -> void:
 			player.animation_player.play(ANIMATION_PUNCHING_RIGHT)
 			player.animation_player.connect("animation_finished", _on_animation_finished)
 
-	# -- Idle animation --
+	# -- Unarmed animation --
 	else:
 		if player.animation_player.current_animation != ANIMATION_STANDING_IDLE:
 			player.animation_player.play(ANIMATION_STANDING_IDLE)

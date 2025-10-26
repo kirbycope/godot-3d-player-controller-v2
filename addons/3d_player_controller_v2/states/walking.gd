@@ -77,6 +77,7 @@ func play_animation() -> void:
 					player.animation_player.play_backwards(ANIMATION_WALKING_FIRING_RIFLE)
 				else:
 					player.animation_player.play(ANIMATION_WALKING_FIRING_RIFLE)
+			player.animation_player.connect("animation_finished", _on_animation_finished)
 		else:
 			if player.animation_player.current_animation != ANIMATION_WALKING_HOLDING_RIFLE:
 				if play_backwards:
@@ -91,6 +92,13 @@ func play_animation() -> void:
 				player.animation_player.play_backwards(ANIMATION_WALKING)
 			else:
 				player.animation_player.play(ANIMATION_WALKING)
+
+
+func _on_animation_finished(animation_name: String) -> void:
+	# Disconnect the signal to avoid multiple connections
+	player.animation_player.disconnect("animation_finished", _on_animation_finished)
+	if animation_name == ANIMATION_WALKING_FIRING_RIFLE:
+		player.is_firing_rifle = false
 
 
 ## Start "walking".

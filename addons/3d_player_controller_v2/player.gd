@@ -156,6 +156,11 @@ func _process(delta) -> void:
 	target_basis = target_basis.orthonormalized()
 	transform.basis = target_basis
 
+	# Reset player aiming state if not the aim button
+	if is_aiming_rifle:
+		if not Input.is_action_pressed(controls.button_5):
+			is_aiming_rifle = false
+
 	#print("Current State: ", base_state.get_state_name(current_state)) ## DEBUGGING
 
 

@@ -66,18 +66,19 @@ func _process(delta):
 ## Plays the appropriate animation based on player state.
 func play_animation() -> void:
 	# -- Rifle animations --
-	if player.is_firing_rifle:
-		if player.animation_player.current_animation != ANIMATION_CROUCHING_FIRING:
-			player.animation_player.play(ANIMATION_CROUCHING_FIRING)
-			player.animation_player.connect("animation_finished", _on_animation_finished)
-	elif player.is_aiming_rifle:
-		if player.animation_player.current_animation != ANIMATION_CROUCHING_AIMING:
-			player.animation_player.play(ANIMATION_CROUCHING_AIMING)
-	elif player.is_holding_rifle:
-		if player.animation_player.current_animation != ANIMATION_CROUCHING_HOLDING_RIFLE:
-			player.animation_player.play(ANIMATION_CROUCHING_HOLDING_RIFLE)
+	if player.is_holding_rifle:
+		if player.is_firing_rifle:
+			if player.animation_player.current_animation != ANIMATION_CROUCHING_FIRING:
+				player.animation_player.play(ANIMATION_CROUCHING_FIRING)
+				player.animation_player.connect("animation_finished", _on_animation_finished)
+		elif player.is_aiming_rifle:
+			if player.animation_player.current_animation != ANIMATION_CROUCHING_AIMING:
+				player.animation_player.play(ANIMATION_CROUCHING_AIMING)
+		else:
+			if player.animation_player.current_animation != ANIMATION_CROUCHING_HOLDING_RIFLE:
+				player.animation_player.play(ANIMATION_CROUCHING_HOLDING_RIFLE)
 
-	# -- Idle animation --
+	# -- Unarmed animation --
 	else:
 		if player.animation_player.current_animation != ANIMATION_CROUCHING_IDLE:
 			player.animation_player.play(ANIMATION_CROUCHING_IDLE)

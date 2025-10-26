@@ -2,6 +2,8 @@ extends BaseState
 
 #const ANIMATION_CRAWLING := "AnimationLibrary_Godot/Crawl_Fwd"
 const ANIMATION_CRAWLING := "Crawling_In_Place/mixamo_com"
+const ANIMATION_CRAWLING_HOLDING_RIFLE := "Rifle_Crouch_Walk_In_Place/mixamo_com"
+const ANIMATION_CRAWLING_FIRING_RIFLE := "Firing_Rifle_In_Place_Crawling/mixamo_com"
 const NODE_NAME := "Crawling"
 const NODE_STATE := States.State.CRAWLING
 
@@ -44,6 +46,7 @@ func _input(event):
 		and player.is_aiming_rifle:
 			player.is_aiming_rifle = false
 
+
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	# Do nothing if not the authority
@@ -64,13 +67,36 @@ func play_animation() -> void:
 	# Check if in first person and moving backwards
 	var play_backwards = (player.camera.perspective == player.camera.Perspective.FIRST_PERSON) and Input.is_action_pressed(player.controls.move_down)
 
-	# Check if the animation player is not already playing the appropriate animation
-	if player.animation_player.current_animation != ANIMATION_CRAWLING:
-		# Play the "crawling" animation
-		if play_backwards:
-			player.animation_player.play_backwards(ANIMATION_CRAWLING)
+	# -- Rifle animations --
+	if player.is_holding_rifle:
+		if player.is_firing_rifle:
+			if player.animation_player.current_animation != ANIMATION_CRAWLING_FIRING_RIFLE:
+				if play_backwards:
+					player.animation_player.play_backwards(ANIMATION_CRAWLING_FIRING_RIFLE)
+				else:
+					player.animation_player.play(ANIMATION_CRAWLING_FIRING_RIFLE)
+				player.animation_player.connect("animation_finished", _on_animation_finished)
 		else:
-			player.animation_player.play(ANIMATION_CRAWLING)
+			if player.animation_player.current_animation != ANIMATION_CRAWLING_HOLDING_RIFLE:
+				if play_backwards:
+					player.animation_player.play_backwards(ANIMATION_CRAWLING_HOLDING_RIFLE)
+				else:
+					player.animation_player.play(ANIMATION_CRAWLING_HOLDING_RIFLE)
+
+	# -- Unarmed animation --
+	else:
+		if player.animation_player.current_animation != ANIMATION_CRAWLING:
+			if play_backwards:
+				player.animation_player.play_backwards(ANIMATION_CRAWLING)
+			else:
+				player.animation_player.play(ANIMATION_CRAWLING)
+
+
+func _on_animation_finished(animation_name: String) -> void:
+	# Disconnect the signal to avoid multiple connections
+	player.animation_player.disconnect("animation_finished", _on_animation_finished)
+	if animation_name == ANIMATION_CRAWLING_FIRING_RIFLE:
+		player.is_firing_rifle = false
 
 
 ## Start "crawling".

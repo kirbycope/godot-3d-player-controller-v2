@@ -4,6 +4,7 @@ extends BaseState
 const ANIMATION_RUNNING := "Running_In_Place/mixamo_com"
 const ANIMATION_RUNNING_HOLDING_RIFLE := "Rifle_Run_In_Place/mixamo_com"
 const ANIMATION_RUNNING_AIMING_RIFLE := "Rifle_Run_In_Place_Running/mixamo_com"
+const ANIMATION_RUNNING_FIRING_RIFLE := "Firing_Rifle_In_Place_Running/mixamo_com"
 const NODE_NAME := "Running"
 const NODE_STATE := States.State.RUNNING
 
@@ -71,7 +72,14 @@ func play_animation() -> void:
 
 	# -- Rifle animations --
 	if player.is_holding_rifle:
-		if player.is_aiming_rifle:
+		if player.is_firing_rifle:
+			if player.animation_player.current_animation != ANIMATION_RUNNING_FIRING_RIFLE:
+				if play_backwards:
+					player.animation_player.play_backwards(ANIMATION_RUNNING_FIRING_RIFLE)
+				else:
+					player.animation_player.play(ANIMATION_RUNNING_FIRING_RIFLE)
+				player.animation_player.connect("animation_finished", _on_animation_finished)
+		elif player.is_aiming_rifle:
 			if player.animation_player.current_animation != ANIMATION_RUNNING_AIMING_RIFLE:
 				if play_backwards:
 					player.animation_player.play_backwards(ANIMATION_RUNNING_AIMING_RIFLE)
@@ -91,6 +99,13 @@ func play_animation() -> void:
 				player.animation_player.play_backwards(ANIMATION_RUNNING)
 			else:
 				player.animation_player.play(ANIMATION_RUNNING)
+
+
+func _on_animation_finished(animation_name: String) -> void:
+	# Disconnect the signal to avoid multiple connections
+	player.animation_player.disconnect("animation_finished", _on_animation_finished)
+	if animation_name == ANIMATION_RUNNING_FIRING_RIFLE:
+		player.is_firing_rifle = false
 
 
 ## Start "running".
