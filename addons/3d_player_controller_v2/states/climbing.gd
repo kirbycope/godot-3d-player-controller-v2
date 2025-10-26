@@ -1,10 +1,10 @@
 extends BaseState
 
-const ANIMATION_CLIMBING_IDLE := "AnimationLibrary_Godot/Climb_Idle"
-const ANIMATION_CLIMBING_UP := "AnimationLibrary_Godot/Climb_Up"
-const ANIMATION_CLIMBING_DOWN := "AnimationLibrary_Godot/Climb_Down"
-const ANIMATION_CLIMBING_LEFT := "AnimationLibrary_Godot/Climb_Left"
-const ANIMATION_CLIMBING_RIGHT := "AnimationLibrary_Godot/Climb_Right"
+#const ANIMATION_CLIMBING_IDLE := "AnimationLibrary_Godot/Climb_Idle"
+const ANIMATION_CLIMBING_UP := "Climb_Up/mixamo_com"
+const ANIMATION_CLIMBING_DOWN := "Climb_Down/mixamo_com"
+const ANIMATION_CLIMBING_LEFT := "Hanging_Braced_Shimmy_Left_In_Place/mixamo_com"
+const ANIMATION_CLIMBING_RIGHT := "Hanging_Braced_Shimmy_Right_In_Place/mixamo_com"
 const NODE_NAME := "Climbing"
 const NODE_STATE := States.State.CLIMBING
 
@@ -82,7 +82,7 @@ func play_animation() -> void:
 
 	# Idle when no input
 	if player.input_direction == Vector2.ZERO:
-		target_animation = ANIMATION_CLIMBING_IDLE
+		target_animation = ANIMATION_CLIMBING_UP
 	else:
 		# Prefer vertical movement for animation selection
 		if abs(player.input_direction.y) > 0.0:

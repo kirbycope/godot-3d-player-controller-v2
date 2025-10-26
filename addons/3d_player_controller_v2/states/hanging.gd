@@ -1,6 +1,6 @@
 extends BaseState
 
-const ANIMATION_HANGING := "Hanging_Idle/mixamo_com"
+const ANIMATION_HANGING := "Hanging/mixamo_com"
 const ANIMATION_HANGING_SHIMMY_LEFT := "Hanging_Shimmy_Left_In_Place/mixamo_com"
 const ANIMATION_HANGING_SHIMMY_RIGHT := "Hanging_Shimmy_Right_In_Place/mixamo_com"
 const ANIMATION_HANGING_BRACED := "Hanging_Braced_Idle/mixamo_com"

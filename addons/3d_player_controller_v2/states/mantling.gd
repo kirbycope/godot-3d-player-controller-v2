@@ -1,6 +1,6 @@
 extends BaseState
 
-const ANIMATION_MANTLING := "Mantling/mixamo_com"
+const ANIMATION_MANTLING := "Hanging_Braced_To_Crouch/mixamo_com"
 const NODE_NAME := "Mantling"
 const NODE_STATE := States.State.MANTLING
 

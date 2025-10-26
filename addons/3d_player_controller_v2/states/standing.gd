@@ -1,16 +1,16 @@
 extends BaseState
 
-const ANIMATION_FISHING_CASTING := "Fishing_Cast/mixamo_com"
-const ANIMATION_FISHING_IDLE := "Fishing_Idle/mixamo_com"
-const ANIMATION_FISHING_REELING := "Fishing_Reel/mixamo_com"
-const ANIMATION_KICKING_LEFT := "Kicking_Left/mixamo_com"
-const ANIMATION_KICKING_RIGHT := "Kicking_Right/mixamo_com"
-const ANIMATION_PUNCHING_LEFT := "Punching_Left/mixamo_com"
-const ANIMATION_PUNCHING_RIGHT := "Punching_Right/mixamo_com"
-const ANIMATION_RIFLE_AIMING := "Rifle_Aiming_Idle/mixamo_com"
-const ANIMATION_RIFLE_FIRING := "Rifle_Firing/mixamo_com"
-const ANIMATION_RIFLE_IDLE := "Rifle_Idle/mixamo_com"
-const ANIMATION_STANDING_IDLE := "Idle/mixamo_com"
+const ANIMATION_FISHING_CASTING := "Standing_Fishing_Cast/mixamo_com"
+const ANIMATION_FISHING_IDLE := "Standing_Fishing_Idle/mixamo_com"
+const ANIMATION_FISHING_REELING := "Standing_Fishing_Reel/mixamo_com"
+const ANIMATION_KICKING_LEFT := "Standing_Kicking_Left/mixamo_com"
+const ANIMATION_KICKING_RIGHT := "Standing_Kicking_Right/mixamo_com"
+const ANIMATION_PUNCHING_LEFT := "Standing_Punching_Left/mixamo_com"
+const ANIMATION_PUNCHING_RIGHT := "Standing_Punching_Right/mixamo_com"
+const ANIMATION_HOLDING_RIFLE := "Standing_Holding_Rifle/mixamo_com"
+const ANIMATION_RIFLE_AIMING := "Standing_Aiming_Rifle/mixamo_com"
+const ANIMATION_RIFLE_FIRING := "Standing_Firing_Rifle/mixamo_com"
+const ANIMATION_STANDING_IDLE := "Standing/mixamo_com"
 const ANIMATION_SWINGING_1H_LEFT := "Standing_Melee_Attack_Downward_Left/mixamo_com"
 const ANIMATION_SWINGING_1H_RIGHT := "Standing_Melee_Attack_Downward_Right/mixamo_com"
 const NODE_NAME := "Standing"
@@ -41,7 +41,6 @@ func _input(event):
 
 	# 🄻1/[MB0] _pressed_
 	if event.is_action_pressed(player.controls.button_4):
-		print(" 🄻1/[MB0] _pressed_") # DEBUGGING
 		# Fishing "casting"
 		if player.is_holding_fishing_rod \
 		and not player.is_reeling_fishing:
@@ -139,8 +138,8 @@ func play_animation() -> void:
 			if player.animation_player.current_animation != ANIMATION_RIFLE_AIMING:
 				player.animation_player.play(ANIMATION_RIFLE_AIMING)
 		else:
-			if player.animation_player.current_animation != ANIMATION_RIFLE_IDLE:
-				player.animation_player.play(ANIMATION_RIFLE_IDLE)
+			if player.animation_player.current_animation != ANIMATION_HOLDING_RIFLE:
+				player.animation_player.play(ANIMATION_HOLDING_RIFLE)
 
 	# -- Kicking animations --
 	elif player.enable_kicking \

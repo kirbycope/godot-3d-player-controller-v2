@@ -1,7 +1,7 @@
 extends BaseState
 
-const ANIMATION_FLYING := "Flying_In_Place/mixamo_com"
-const ANIMATION_FLYING_FAST := "Flying_Fast_In_Place/mixamo_com"
+const ANIMATION_FLYING := "Flying/mixamo_com"
+const ANIMATION_FLYING_FAST := "Flying_Fast/mixamo_com"
 const NODE_NAME := "Flying"
 const NODE_STATE := States.State.FLYING
 

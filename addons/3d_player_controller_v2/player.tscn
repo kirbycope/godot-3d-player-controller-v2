@@ -8,72 +8,72 @@
 [ext_resource type="PackedScene" uid="uid://dvpsvwsy5wedp" path="res://addons/3d_player_controller_v2/debug.tscn" id="4_uu7fq"]
 [ext_resource type="PackedScene" uid="uid://yxm384w27bq2" path="res://addons/3d_player_controller_v2/states.tscn" id="5_5e1u4"]
 [ext_resource type="PackedScene" uid="uid://2p8pyabd2bmo" path="res://addons/3d_player_controller_v2/pause.tscn" id="5_7fj78"]
-[ext_resource type="AnimationLibrary" uid="uid://bexm07tt1w4u8" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Fishing_Cast.fbx" id="10_6lgqk"]
-[ext_resource type="AnimationLibrary" uid="uid://c2d6emy334qwi" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Bored.fbx" id="10_7luni"]
-[ext_resource type="AnimationLibrary" uid="uid://caoivoe5bfjcu" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Hanging_Braced_Idle.fbx" id="10_twkb2"]
-[ext_resource type="AnimationLibrary" uid="uid://ss8vk5pwbrpk" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Flying_Fast_In_Place.fbx" id="10_y7toy"]
-[ext_resource type="AnimationLibrary" uid="uid://dbtx7306vre2c" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Button_Pushing.fbx" id="11_0foik"]
-[ext_resource type="AnimationLibrary" uid="uid://ylml7xsl8pd2" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Fishing_Idle.fbx" id="11_1o8v8"]
-[ext_resource type="AnimationLibrary" uid="uid://ct7b72wtokjx6" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Flying_In_Place.fbx" id="11_jh3p3"]
-[ext_resource type="AnimationLibrary" uid="uid://dvqn4ygbsaqk7" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Braced_Hang_To_Crouch.fbx" id="11_qrdwm"]
-[ext_resource type="AnimationLibrary" uid="uid://cg2irtid1oxfc" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Hanging_Braced_Shimmy_Left_In_Place.fbx" id="11_uu7fq"]
-[ext_resource type="AnimationLibrary" uid="uid://r73yt4sbmra5" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Climbing_Down_Wall_In_Place.fbx" id="12_3tnoc"]
-[ext_resource type="AnimationLibrary" uid="uid://ucexmwbk6xk8" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Fishing_Reel.fbx" id="12_ei82t"]
-[ext_resource type="AnimationLibrary" uid="uid://c87o8nv26jn5c" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Crawling_In_Place.fbx" id="12_r1dgs"]
-[ext_resource type="AnimationLibrary" uid="uid://rlm6o0royfiv" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Hanging_Braced_Shimmy_Right_In_Place.fbx" id="12_y7toy"]
-[ext_resource type="AnimationLibrary" uid="uid://cep5ekg121pxo" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Crouching_Idle.fbx" id="13_3tnoc"]
-[ext_resource type="AnimationLibrary" uid="uid://c0f7rsx8iqmll" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Hanging_Idle.fbx" id="13_jh3p3"]
-[ext_resource type="AnimationLibrary" uid="uid://i875cotumcjc" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Climbing_Ladder_In_Place.fbx" id="13_srsky"]
-[ext_resource type="AnimationLibrary" uid="uid://701jsc2gi0c5" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Hanging_Shimmy_Left_In_Place.fbx" id="14_j17wn"]
-[ext_resource type="AnimationLibrary" uid="uid://bb1d0wq6qak5i" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Crying.fbx" id="14_srsky"]
-[ext_resource type="AnimationLibrary" uid="uid://c1caoujjt6ap7" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Climbing_Up_Wall_In_Place.fbx" id="14_w2wlq"]
-[ext_resource type="AnimationLibrary" uid="uid://xm5ffbmesaj" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Hanging_Shimmy_Right_In_Place.fbx" id="15_hfe17"]
-[ext_resource type="AnimationLibrary" uid="uid://bd5t37fa0705p" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Driving.fbx" id="15_w2wlq"]
-[ext_resource type="AnimationLibrary" uid="uid://b0nb4ta0e5i8o" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Falling_Idle.fbx" id="16_6ja46"]
-[ext_resource type="AnimationLibrary" uid="uid://c38k3br2ldd2n" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Crouched_Walking.fbx" id="17_eudj6"]
-[ext_resource type="AnimationLibrary" uid="uid://vadhoewxbtay" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Roll_In_Place.fbx" id="18_j17wn"]
-[ext_resource type="AnimationLibrary" uid="uid://c6i1quebxxpvj" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Running_Slide.fbx" id="19_hfe17"]
-[ext_resource type="AnimationLibrary" uid="uid://bjff77hajwxxq" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Skateboarding_Fast_In_Place.fbx" id="20_1osn0"]
-[ext_resource type="AnimationLibrary" uid="uid://g501cmamsy06" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Rifle_Aiming_Idle.fbx" id="21_enu7q"]
-[ext_resource type="AnimationLibrary" uid="uid://bfo7emx1w6h8m" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Fire_Rifle.fbx" id="21_f1xd6"]
-[ext_resource type="AnimationLibrary" uid="uid://c1i4rpr5hgjqn" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Skateboarding_In_Place.fbx" id="21_m7a4g"]
-[ext_resource type="AnimationLibrary" uid="uid://b1d1epi5ps4su" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Firing_Rifle_In_Place.fbx" id="22_rdbq8"]
-[ext_resource type="AnimationLibrary" uid="uid://86g6vweafw1i" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Skateboarding_Slow_In_Place.fbx" id="22_svrdt"]
-[ext_resource type="AnimationLibrary" uid="uid://nkyysffh3g6e" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Rifle_Firing.fbx" id="22_uaqa8"]
-[ext_resource type="AnimationLibrary" uid="uid://w1wshpcvkp8h" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Rifle_Idle.fbx" id="23_404ih"]
-[ext_resource type="AnimationLibrary" uid="uid://c28lyqmkyrnk3" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Firing_Rifle_In_Place_Crawling.fbx" id="23_u4wnn"]
-[ext_resource type="AnimationLibrary" uid="uid://b8lrej3li8uia" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Firing_Rifle_In_Place_Running.fbx" id="24_eudj6"]
-[ext_resource type="AnimationLibrary" uid="uid://wmhj8lvk646v" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Idle.fbx" id="28_qrdwm"]
-[ext_resource type="AnimationLibrary" uid="uid://cf5bi3tqdi0ji" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Standing_Melee_Attack_Downward_Left.fbx" id="29_404ih"]
-[ext_resource type="AnimationLibrary" uid="uid://ni1h0cyd1wuv" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Standing_Melee_Attack_Downward_Right.fbx" id="30_bc2wp"]
-[ext_resource type="AnimationLibrary" uid="uid://g365y1q4jysf" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Kicking_Left.fbx" id="30_rmti1"]
-[ext_resource type="AnimationLibrary" uid="uid://b4h6jhrqwg8t" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Kicking_Right.fbx" id="31_0kwme"]
-[ext_resource type="AnimationLibrary" uid="uid://c0avvsri1wpfx" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Laughing.fbx" id="32_f1xd6"]
-[ext_resource type="AnimationLibrary" uid="uid://biexvo2bga6ql" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Idle_Crouching_Aiming.fbx" id="33_0kwme"]
-[ext_resource type="AnimationLibrary" uid="uid://cn5tba8gvsfce" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Punching_Left.fbx" id="34_7ht0o"]
-[ext_resource type="AnimationLibrary" uid="uid://cr00a6y4j7b8g" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Punching_Right.fbx" id="35_mj70k"]
-[ext_resource type="AnimationLibrary" uid="uid://cvd6goh2fw56t" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Jump_Loop.fbx" id="36_b62ft"]
-[ext_resource type="AnimationLibrary" uid="uid://bc55nji810mrb" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Push_In_Place.fbx" id="36_rdbq8"]
-[ext_resource type="AnimationLibrary" uid="uid://cfosxle134rvb" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Quick_Informal_Bow.fbx" id="37_b62ft"]
-[ext_resource type="AnimationLibrary" uid="uid://bfej11540kh7k" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Running_In_Place.fbx" id="42_6pr1k"]
-[ext_resource type="AnimationLibrary" uid="uid://brjg1lff52lai" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Prone_Firing_Rifle.fbx" id="42_meou5"]
-[ext_resource type="AnimationLibrary" uid="uid://o8osj10jtbfs" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Prone_Forward_In_Place.fbx" id="43_2enep"]
-[ext_resource type="AnimationLibrary" uid="uid://bj18pilxem8d2" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Prone_Idle.fbx" id="44_4h8gy"]
-[ext_resource type="AnimationLibrary" uid="uid://xrrbb6c4erii" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Sitting Idle.fbx" id="44_na1ry"]
-[ext_resource type="AnimationLibrary" uid="uid://dmk2jx5ebagoe" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Rifle_Kneel_Idle.fbx" id="46_f1xd6"]
-[ext_resource type="AnimationLibrary" uid="uid://ddwm7eyg2tkxc" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Rifle_Run_In_Place.fbx" id="47_drd4j"]
-[ext_resource type="AnimationLibrary" uid="uid://b5pgbfjueliau" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Sprinting_In_Place.fbx" id="48_u4wnn"]
-[ext_resource type="AnimationLibrary" uid="uid://dsujpvgjt2vm2" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Rifle_Crouch_Walk_In_Place.fbx" id="49_rdvif"]
-[ext_resource type="AnimationLibrary" uid="uid://u33ur2ydvqjy" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Walking_In_Place.fbx" id="51_eudj6"]
-[ext_resource type="AnimationLibrary" uid="uid://cmosi0v885744" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Waving.fbx" id="52_rdvif"]
-[ext_resource type="AnimationLibrary" uid="uid://cvadnkwuq03jl" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Rifle_Run_In_Place_Running.fbx" id="54_meou5"]
-[ext_resource type="AnimationLibrary" uid="uid://dobs4v18akkb5" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Swimming_In_Place.fbx" id="55_71e0g"]
-[ext_resource type="AnimationLibrary" uid="uid://clm5nu56n735j" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Swimming_To_Edge.fbx" id="56_rmti1"]
-[ext_resource type="AnimationLibrary" uid="uid://ck5a3ius2vpbp" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Treading_Water.fbx" id="57_0kwme"]
-[ext_resource type="AnimationLibrary" uid="uid://bruoshod48csp" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Sprint_Forward_In_Place.fbx" id="58_6pr1k"]
-[ext_resource type="AnimationLibrary" uid="uid://gappv6q1w67e" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Walk_Forward.fbx" id="65_na1ry"]
-[ext_resource type="AnimationLibrary" uid="uid://bib4vask4clop" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/T_Pose.fbx" id="69_ae0e0"]
-[ext_resource type="AnimationLibrary" uid="uid://p2y3v7bv7jtc" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/Walking_In_Place_Aiming.fbx" id="72_rdvif"]
+[ext_resource type="AnimationLibrary" uid="uid://bi0k3a7oxrgfd" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/climbing/Climbing_Down.fbx" id="10_2enep"]
+[ext_resource type="AnimationLibrary" uid="uid://cvff3p1u71v73" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/climbing/Climbing_Ladder.fbx" id="11_4h8gy"]
+[ext_resource type="AnimationLibrary" uid="uid://cnjephacakr4h" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/climbing/Climbing_Up.fbx" id="12_ae0e0"]
+[ext_resource type="AnimationLibrary" uid="uid://t5mr2lr0xg2j" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/crawling/Crawling.fbx" id="13_8412t"]
+[ext_resource type="AnimationLibrary" uid="uid://5a63wqtbf3n7" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/crouching/Crouching.fbx" id="14_e1d05"]
+[ext_resource type="AnimationLibrary" uid="uid://ersgkp2tgmt3" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/crouching/Crouching_Aiming_Rifle.fbx" id="15_a6ahb"]
+[ext_resource type="AnimationLibrary" uid="uid://ck4jqoe7kg8d4" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/crouching/Crouching_Firing_Rifle.fbx" id="16_secpm"]
+[ext_resource type="AnimationLibrary" uid="uid://bnklibuyphqxt" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/crouching/Crouching_Holding_Rifle.fbx" id="17_54rnv"]
+[ext_resource type="AnimationLibrary" uid="uid://dqin701xqgop3" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/crouching/Crouching_Walking_Aiming_Rifle.fbx" id="18_o57k2"]
+[ext_resource type="AnimationLibrary" uid="uid://c5gm0gcbwtvd" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/crouching/Crouching_Walking_Firing_Rifle.fbx" id="19_umum0"]
+[ext_resource type="AnimationLibrary" uid="uid://bqv4f25obwclk" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/crouching/Crouching_Walking_Holding_Rifle.fbx" id="20_f84sc"]
+[ext_resource type="AnimationLibrary" uid="uid://cqnnug3gqxrc8" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/driving/Driving.fbx" id="21_pdwja"]
+[ext_resource type="AnimationLibrary" uid="uid://c6sg7tdqitbir" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/falling/Falling.fbx" id="22_ba60i"]
+[ext_resource type="AnimationLibrary" uid="uid://bu7bexxpixu05" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/falling/Falling_Holding_Rifle.fbx" id="23_uyass"]
+[ext_resource type="AnimationLibrary" uid="uid://b0rau48af1u88" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/flying/Flying.fbx" id="24_mt8ux"]
+[ext_resource type="AnimationLibrary" uid="uid://8h1c48e0h7o7" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/flying/Flying_Fast.fbx" id="25_nlsti"]
+[ext_resource type="AnimationLibrary" uid="uid://f3dab1jr6c7d" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/hanging/Hanging.fbx" id="26_7nn76"]
+[ext_resource type="AnimationLibrary" uid="uid://05bx1you1kxh" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/hanging/Hanging_Braced_Idle.fbx" id="27_ok7gw"]
+[ext_resource type="AnimationLibrary" uid="uid://d33efmknmu8j2" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/hanging/Hanging_Braced_Shimmy_Left_In_Place.fbx" id="28_pyrav"]
+[ext_resource type="AnimationLibrary" uid="uid://dbvb3uvfowmb3" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/hanging/Hanging_Braced_Shimmy_Right_In_Place.fbx" id="29_k3k34"]
+[ext_resource type="AnimationLibrary" uid="uid://dvouag2ysrfib" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/hanging/Hanging_Braced_To_Crouch.fbx" id="29_meou5"]
+[ext_resource type="AnimationLibrary" uid="uid://t6yr6vjj6t7d" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/hanging/Hanging_Shimmy_Left_In_Place.fbx" id="30_8o733"]
+[ext_resource type="AnimationLibrary" uid="uid://byw5ooaora1lx" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/hanging/Hanging_Shimmy_Right_In_Place.fbx" id="31_ccxll"]
+[ext_resource type="AnimationLibrary" uid="uid://bm2f5thv10046" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/prone/Prone.fbx" id="32_mpser"]
+[ext_resource type="AnimationLibrary" uid="uid://c7e3dfn3c2b4c" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/prone/Prone_Crawling.fbx" id="33_kq64t"]
+[ext_resource type="AnimationLibrary" uid="uid://cwh2x1f0sxoya" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/prone/Prone_Firing_Rifle.fbx" id="34_0sxk2"]
+[ext_resource type="AnimationLibrary" uid="uid://cy2sem20g1phu" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/rolling/Rolling.fbx" id="36_e114w"]
+[ext_resource type="AnimationLibrary" uid="uid://dsk7dpls16fi4" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/running/Running_Aiming_Rifle.fbx" id="37_2enep"]
+[ext_resource type="AnimationLibrary" uid="uid://cd8die1os71pi" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/running/Running.fbx" id="37_8q815"]
+[ext_resource type="AnimationLibrary" uid="uid://dw6qmysqke7hc" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/running/Running_Firing_Rifle.fbx" id="38_x0kn1"]
+[ext_resource type="AnimationLibrary" uid="uid://bgq3q05l6ifnb" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/running/Running_Holding_Rifle.fbx" id="39_2xju1"]
+[ext_resource type="AnimationLibrary" uid="uid://cl8rhfojh2gkp" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/running/Running_Slide.fbx" id="40_rvv6a"]
+[ext_resource type="AnimationLibrary" uid="uid://bvkov5bliixre" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/sitting/Sitting.fbx" id="41_nhyug"]
+[ext_resource type="AnimationLibrary" uid="uid://dlchfgfobrr30" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/skateboarding/Skateboarding.fbx" id="42_web3j"]
+[ext_resource type="AnimationLibrary" uid="uid://ncu87tg7iet5" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/skateboarding/Skateboarding_Fast.fbx" id="43_j032s"]
+[ext_resource type="AnimationLibrary" uid="uid://boulcsv6qcaab" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/skateboarding/Skateboarding_Slow.fbx" id="44_fxd23"]
+[ext_resource type="AnimationLibrary" uid="uid://bflflarart5ad" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/sprinting/Sprinting.fbx" id="45_2nujd"]
+[ext_resource type="AnimationLibrary" uid="uid://ec8ihuds1joe" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/sprinting/Sprinting_Holding_Rifle.fbx" id="46_d43gm"]
+[ext_resource type="AnimationLibrary" uid="uid://buvkjk2qr6u71" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/standing/Standing.fbx" id="47_0nye5"]
+[ext_resource type="AnimationLibrary" uid="uid://degw58lglsmgv" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/standing/Standing_Aiming_Rifle.fbx" id="48_mdon0"]
+[ext_resource type="AnimationLibrary" uid="uid://gv2fcvewnlfv" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/standing/Standing_Bored.fbx" id="49_y430j"]
+[ext_resource type="AnimationLibrary" uid="uid://cgse5qdk6ncyr" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/standing/Standing_Button_Pushing.fbx" id="50_yivuq"]
+[ext_resource type="AnimationLibrary" uid="uid://bbeygrxvqfamw" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/standing/Standing_Crying.fbx" id="51_mwado"]
+[ext_resource type="AnimationLibrary" uid="uid://cflqf1fbpxgdj" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/standing/Standing_Firing_Rifle.fbx" id="52_dqsxl"]
+[ext_resource type="AnimationLibrary" uid="uid://dvukee87ir0g7" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/standing/Standing_Fishing_Cast.fbx" id="53_yjhio"]
+[ext_resource type="AnimationLibrary" uid="uid://bmpikd86dpr3g" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/standing/Standing_Fishing_Idle.fbx" id="54_7rv2n"]
+[ext_resource type="AnimationLibrary" uid="uid://jtrobmbtbryl" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/standing/Standing_Fishing_Reel.fbx" id="55_x0tvg"]
+[ext_resource type="AnimationLibrary" uid="uid://4y71m07rujn7" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/standing/Standing_Holding_Rifle.fbx" id="56_sjsfu"]
+[ext_resource type="AnimationLibrary" uid="uid://ptfrvx62ebf0" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/standing/Standing_Kicking_Left.fbx" id="57_1wue1"]
+[ext_resource type="AnimationLibrary" uid="uid://cqat1wvt7w1md" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/standing/Standing_Kicking_Right.fbx" id="58_5ku87"]
+[ext_resource type="AnimationLibrary" uid="uid://btl2tqbf8kox6" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/standing/Standing_Laughing.fbx" id="59_frpjo"]
+[ext_resource type="AnimationLibrary" uid="uid://wmsqyuie5lmf" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/standing/Standing_Melee_Attack_Downward_Left.fbx" id="60_6klc6"]
+[ext_resource type="AnimationLibrary" uid="uid://slcohhns0ggs" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/standing/Standing_Melee_Attack_Downward_Right.fbx" id="61_bapra"]
+[ext_resource type="AnimationLibrary" uid="uid://cnnrosymlvfrt" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/standing/Standing_Punching_Left.fbx" id="62_xn1kj"]
+[ext_resource type="AnimationLibrary" uid="uid://c1vrl2f7nsww3" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/standing/Standing_Punching_Right.fbx" id="63_6sh1t"]
+[ext_resource type="AnimationLibrary" uid="uid://dnsqq473hdq4b" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/standing/Standing_Pushing.fbx" id="64_lgpwt"]
+[ext_resource type="AnimationLibrary" uid="uid://dhod0ic7bqdhh" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/standing/Standing_Quick_Informal_Bow.fbx" id="65_juu7y"]
+[ext_resource type="AnimationLibrary" uid="uid://dakiwwfbtyfp" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/standing/Standing_Waving.fbx" id="66_udl7e"]
+[ext_resource type="AnimationLibrary" uid="uid://d8ggmmk1jsma" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/swimming/Swimming.fbx" id="67_3v1ko"]
+[ext_resource type="AnimationLibrary" uid="uid://bgm4uuy3sualy" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/swimming/Swimming_To_Edge.fbx" id="68_xc8ct"]
+[ext_resource type="AnimationLibrary" uid="uid://cy5y8713mkvro" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/T_Pose.fbx" id="69_ae0e0"]
+[ext_resource type="AnimationLibrary" uid="uid://dce57uqhgtujl" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/swimming/Swimming_Treading_Water.fbx" id="69_apuok"]
+[ext_resource type="AnimationLibrary" uid="uid://bu7g5s81bdbwn" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/walking/Walking.fbx" id="71_tljd4"]
+[ext_resource type="AnimationLibrary" uid="uid://bfnxbrl7pdl51" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/walking/Walking_Aiming_Rifle.fbx" id="72_j56ua"]
+[ext_resource type="AnimationLibrary" uid="uid://bike1bd15pb4f" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/walking/Walking_Firing_Rifle.fbx" id="73_e6n57"]
+[ext_resource type="AnimationLibrary" uid="uid://pkmyy6nm7wcl" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/walking/Walking_Holding_Rifle.fbx" id="74_4vx0v"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ifhah"]
 radius = 0.3
@@ -20242,72 +20242,72 @@ skin = SubResource("Skin_yipfl")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Visuals/Godette"]
 libraries = {
 &"": SubResource("AnimationLibrary_p7iwx"),
-&"Bored": ExtResource("10_7luni"),
-&"Braced_Hang_To_Crouch": ExtResource("11_qrdwm"),
-&"Button_Pushing": ExtResource("11_0foik"),
-&"Climbing_Down_Wall_In_Place": ExtResource("12_3tnoc"),
-&"Climbing_Ladder_In_Place": ExtResource("13_srsky"),
-&"Climbing_Up_Wall_In_Place": ExtResource("14_w2wlq"),
-&"Crawling_In_Place": ExtResource("12_r1dgs"),
-&"Crouched_Walking": ExtResource("17_eudj6"),
-&"Crouching_Idle": ExtResource("13_3tnoc"),
-&"Crying": ExtResource("14_srsky"),
-&"Driving": ExtResource("15_w2wlq"),
-&"Falling_Idle": ExtResource("16_6ja46"),
-&"Fire_Rifle": ExtResource("21_f1xd6"),
-&"Firing_Rifle_In_Place": ExtResource("22_rdbq8"),
-&"Firing_Rifle_In_Place_Crawling": ExtResource("23_u4wnn"),
-&"Firing_Rifle_In_Place_Running": ExtResource("24_eudj6"),
-&"Fishing_Cast": ExtResource("10_6lgqk"),
-&"Fishing_Idle": ExtResource("11_1o8v8"),
-&"Fishing_Reel": ExtResource("12_ei82t"),
-&"Flying_Fast_In_Place": ExtResource("10_y7toy"),
-&"Flying_In_Place": ExtResource("11_jh3p3"),
-&"Hanging_Braced_Idle": ExtResource("10_twkb2"),
-&"Hanging_Braced_Shimmy_Left_In_Place": ExtResource("11_uu7fq"),
-&"Hanging_Braced_Shimmy_Right_In_Place": ExtResource("12_y7toy"),
-&"Hanging_Idle": ExtResource("13_jh3p3"),
-&"Hanging_Shimmy_Left_In_Place": ExtResource("14_j17wn"),
-&"Hanging_Shimmy_Right_In_Place": ExtResource("15_hfe17"),
-&"Idle": ExtResource("28_qrdwm"),
-&"Idle_Crouching_Aiming": ExtResource("33_0kwme"),
-&"Jump_Loop": ExtResource("36_b62ft"),
-&"Kicking_Left": ExtResource("30_rmti1"),
-&"Kicking_Right": ExtResource("31_0kwme"),
-&"Laughing": ExtResource("32_f1xd6"),
-&"Prone_Firing_Rifle": ExtResource("42_meou5"),
-&"Prone_Forward_In_Place": ExtResource("43_2enep"),
-&"Prone_Idle": ExtResource("44_4h8gy"),
-&"Punching_Left": ExtResource("34_7ht0o"),
-&"Punching_Right": ExtResource("35_mj70k"),
-&"Push_In_Place": ExtResource("36_rdbq8"),
-&"Quick_Informal_Bow": ExtResource("37_b62ft"),
-&"Rifle_Aiming_Idle": ExtResource("21_enu7q"),
-&"Rifle_Crouch_Walk_In_Place": ExtResource("49_rdvif"),
-&"Rifle_Firing": ExtResource("22_uaqa8"),
-&"Rifle_Idle": ExtResource("23_404ih"),
-&"Rifle_Kneel_Idle": ExtResource("46_f1xd6"),
-&"Rifle_Run_In_Place": ExtResource("47_drd4j"),
-&"Rifle_Run_In_Place_Running": ExtResource("54_meou5"),
-&"Roll_In_Place": ExtResource("18_j17wn"),
-&"Running_In_Place": ExtResource("42_6pr1k"),
-&"Running_Slide": ExtResource("19_hfe17"),
-&"Sitting Idle": ExtResource("44_na1ry"),
-&"Skateboarding_Fast_In_Place": ExtResource("20_1osn0"),
-&"Skateboarding_In_Place": ExtResource("21_m7a4g"),
-&"Skateboarding_Slow_In_Place": ExtResource("22_svrdt"),
-&"Sprint_Forward_In_Place": ExtResource("58_6pr1k"),
-&"Sprinting_In_Place": ExtResource("48_u4wnn"),
-&"Standing_Melee_Attack_Downward_Left": ExtResource("29_404ih"),
-&"Standing_Melee_Attack_Downward_Right": ExtResource("30_bc2wp"),
-&"Swimming_In_Place": ExtResource("55_71e0g"),
-&"Swimming_To_Edge": ExtResource("56_rmti1"),
+&"Climbing_Down": ExtResource("10_2enep"),
+&"Climbing_Ladder": ExtResource("11_4h8gy"),
+&"Climbing_Up": ExtResource("12_ae0e0"),
+&"Crawling": ExtResource("13_8412t"),
+&"Crouching": ExtResource("14_e1d05"),
+&"Crouching_Aiming_Rifle": ExtResource("15_a6ahb"),
+&"Crouching_Firing_Rifle": ExtResource("16_secpm"),
+&"Crouching_Holding_Rifle": ExtResource("17_54rnv"),
+&"Crouching_Walking_Aiming_Rifle": ExtResource("18_o57k2"),
+&"Crouching_Walking_Firing_Rifle": ExtResource("19_umum0"),
+&"Crouching_Walking_Holding_Rifle": ExtResource("20_f84sc"),
+&"Driving": ExtResource("21_pdwja"),
+&"Falling": ExtResource("22_ba60i"),
+&"Falling_Holding_Rifle": ExtResource("23_uyass"),
+&"Flying": ExtResource("24_mt8ux"),
+&"Flying_Fast": ExtResource("25_nlsti"),
+&"Hanging": ExtResource("26_7nn76"),
+&"Hanging_Braced_Idle": ExtResource("27_ok7gw"),
+&"Hanging_Braced_Shimmy_Left_In_Place": ExtResource("28_pyrav"),
+&"Hanging_Braced_Shimmy_Right_In_Place": ExtResource("29_k3k34"),
+&"Hanging_Braced_To_Crouch": ExtResource("29_meou5"),
+&"Hanging_Shimmy_Left_In_Place": ExtResource("30_8o733"),
+&"Hanging_Shimmy_Right_In_Place": ExtResource("31_ccxll"),
+&"Prone": ExtResource("32_mpser"),
+&"Prone_Crawling": ExtResource("33_kq64t"),
+&"Prone_Firing_Rifle": ExtResource("34_0sxk2"),
+&"Rolling": ExtResource("36_e114w"),
+&"Running": ExtResource("37_8q815"),
+&"Running_Aiming_Rifle": ExtResource("37_2enep"),
+&"Running_Firing_Rifle": ExtResource("38_x0kn1"),
+&"Running_Holding_Rifle": ExtResource("39_2xju1"),
+&"Running_Slide": ExtResource("40_rvv6a"),
+&"Sitting": ExtResource("41_nhyug"),
+&"Skateboarding": ExtResource("42_web3j"),
+&"Skateboarding_Fast": ExtResource("43_j032s"),
+&"Skateboarding_Slow": ExtResource("44_fxd23"),
+&"Sprinting": ExtResource("45_2nujd"),
+&"Sprinting_Holding_Rifle": ExtResource("46_d43gm"),
+&"Standing": ExtResource("47_0nye5"),
+&"Standing_Aiming_Rifle": ExtResource("48_mdon0"),
+&"Standing_Bored": ExtResource("49_y430j"),
+&"Standing_Button_Pushing": ExtResource("50_yivuq"),
+&"Standing_Crying": ExtResource("51_mwado"),
+&"Standing_Firing_Rifle": ExtResource("52_dqsxl"),
+&"Standing_Fishing_Cast": ExtResource("53_yjhio"),
+&"Standing_Fishing_Idle": ExtResource("54_7rv2n"),
+&"Standing_Fishing_Reel": ExtResource("55_x0tvg"),
+&"Standing_Holding_Rifle": ExtResource("56_sjsfu"),
+&"Standing_Kicking_Left": ExtResource("57_1wue1"),
+&"Standing_Kicking_Right": ExtResource("58_5ku87"),
+&"Standing_Laughing": ExtResource("59_frpjo"),
+&"Standing_Melee_Attack_Downward_Left": ExtResource("60_6klc6"),
+&"Standing_Melee_Attack_Downward_Right": ExtResource("61_bapra"),
+&"Standing_Punching_Left": ExtResource("62_xn1kj"),
+&"Standing_Punching_Right": ExtResource("63_6sh1t"),
+&"Standing_Pushing": ExtResource("64_lgpwt"),
+&"Standing_Quick_Informal_Bow": ExtResource("65_juu7y"),
+&"Standing_Waving": ExtResource("66_udl7e"),
+&"Swimming": ExtResource("67_3v1ko"),
+&"Swimming_To_Edge": ExtResource("68_xc8ct"),
+&"Swimming_Treading_Water": ExtResource("69_apuok"),
 &"T_Pose": ExtResource("69_ae0e0"),
-&"Treading_Water": ExtResource("57_0kwme"),
-&"Walk_Forward": ExtResource("65_na1ry"),
-&"Walking_In_Place": ExtResource("51_eudj6"),
-&"Walking_In_Place_Aiming": ExtResource("72_rdvif"),
-&"Waving": ExtResource("52_rdvif")
+&"Walking": ExtResource("71_tljd4"),
+&"Walking_Aiming_Rifle": ExtResource("72_j56ua"),
+&"Walking_Firing_Rifle": ExtResource("73_e6n57"),
+&"Walking_Holding_Rifle": ExtResource("74_4vx0v")
 }
 autoplay = "T_Pose/mixamo_com"
 playback_default_blend_time = 0.2

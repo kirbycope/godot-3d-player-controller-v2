@@ -1,7 +1,7 @@
 extends BaseState
 
-const ANIMATION_SWIMMING := "Swimming_In_Place/mixamo_com"
-const ANIMATION_WADING := "Treading_Water/mixamo_com"
+const ANIMATION_SWIMMING := "Swimming/mixamo_com"
+const ANIMATION_WADING := "Swimming_Treading_Water/mixamo_com"
 const NODE_NAME := "Swimming"
 const NODE_STATE := States.State.SWIMMING
 

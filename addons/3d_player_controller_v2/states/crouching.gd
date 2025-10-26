@@ -1,9 +1,9 @@
 extends BaseState
 
-const ANIMATION_CROUCHING_IDLE := "Crouching_Idle/mixamo_com"
-const ANIMATION_CROUCHING_HOLDING_RIFLE := "Rifle_Kneel_Idle/mixamo_com"
-const ANIMATION_CROUCHING_AIMING := "Idle_Crouching_Aiming/mixamo_com"
-const ANIMATION_CROUCHING_FIRING := "Fire_Rifle/mixamo_com"
+const ANIMATION_CROUCHING_IDLE := "Crouching/mixamo_com"
+const ANIMATION_CROUCHING_HOLDING_RIFLE := "Crouching_Holding_Rifle/mixamo_com"
+const ANIMATION_CROUCHING_AIMING := "Crouching_Aiming_Rifle/mixamo_com"
+const ANIMATION_CROUCHING_FIRING := "Crouching_Firing_Rifle/mixamo_com"
 const NODE_NAME := "Crouching"
 const NODE_STATE := States.State.CROUCHING
 
@@ -29,7 +29,6 @@ func _input(event):
 
 	# 🄻1/[MB0] _pressed_ -> Fire rifle
 	if event.is_action_pressed(player.controls.button_4):
-		print(" 🄻1/[MB0] _pressed_") # DEBUGGING
 		# Rifle "firing"
 		if player.is_holding_rifle:
 			player.is_firing_rifle = true

@@ -1,8 +1,8 @@
 extends BaseState
 
-const ANIMATION_SKATEBOARDING := "Skateboarding_In_Place/mixamo_com"
-const ANIMATION_SKATEBOARDING_FAST := "Skateboarding_Fast_In_Place/mixamo_com"
-const ANIMATION_SKATEBOARDING_SLOW := "Skateboarding_Slow_In_Place/mixamo_com"
+const ANIMATION_SKATEBOARDING := "Skateboarding/mixamo_com"
+const ANIMATION_SKATEBOARDING_FAST := "Skateboarding_Fast/mixamo_com"
+const ANIMATION_SKATEBOARDING_SLOW := "Skateboarding_Slow/mixamo_com"
 const NODE_NAME := "Skateboarding"
 const NODE_STATE := States.State.SKATEBOARDING
 

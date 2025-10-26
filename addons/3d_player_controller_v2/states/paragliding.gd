@@ -1,6 +1,6 @@
 extends BaseState
 
-const ANIMATION_PARAGLIDING := "Hanging_Idle/mixamo_com"
+const ANIMATION_PARAGLIDING := "Hanging/mixamo_com"
 const NODE_NAME := "Paragliding"
 const NODE_STATE := States.State.PARAGLIDING
 

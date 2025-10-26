@@ -1,9 +1,9 @@
 extends BaseState
 
-const ANIMATION_RUNNING := "Running_In_Place/mixamo_com"
-const ANIMATION_RUNNING_HOLDING_RIFLE := "Rifle_Run_In_Place/mixamo_com"
-const ANIMATION_RUNNING_AIMING_RIFLE := "Rifle_Run_In_Place_Running/mixamo_com"
-const ANIMATION_RUNNING_FIRING_RIFLE := "Firing_Rifle_In_Place_Running/mixamo_com"
+const ANIMATION_RUNNING := "Running/mixamo_com"
+const ANIMATION_RUNNING_HOLDING_RIFLE := "Running_Holding_Rifle/mixamo_com"
+const ANIMATION_RUNNING_AIMING_RIFLE := "Running_Aiming_Rifle/mixamo_com"
+const ANIMATION_RUNNING_FIRING_RIFLE := "Running_Firing_Rifle/mixamo_com"
 const NODE_NAME := "Running"
 const NODE_STATE := States.State.RUNNING
 

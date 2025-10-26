@@ -1,9 +1,9 @@
 extends BaseState
 
-const ANIMATION_CRAWLING := "Crawling_In_Place/mixamo_com"
-const ANIMATION_CRAWLING_HOLDING_RIFLE := "Rifle_Crouch_Walk_In_Place/mixamo_com"
-const ANIMATION_CRAWLING_AIMING_RIFLE := "Crouched_Walking/mixamo_com"
-const ANIMATION_CRAWLING_FIRING_RIFLE := "Firing_Rifle_In_Place_Crawling/mixamo_com"
+const ANIMATION_CRAWLING := "Crawling/mixamo_com"
+const ANIMATION_CRAWLING_HOLDING_RIFLE := "Crouching_Walking_Holding_Rifle/mixamo_com"
+const ANIMATION_CRAWLING_AIMING_RIFLE := "Crouching_Walking_Aiming_Rifle/mixamo_com"
+const ANIMATION_CRAWLING_FIRING_RIFLE := "Crouching_Firing_Rifle/mixamo_com"
 const NODE_NAME := "Crawling"
 const NODE_STATE := States.State.CRAWLING
 

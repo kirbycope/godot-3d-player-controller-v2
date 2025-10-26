@@ -1,7 +1,7 @@
 extends BaseState
 
-const ANIMATION_JUMPING := "Falling_Idle/mixamo_com"
-const ANIMATION_JUMPING_HOLDING_RIFLE := "Jump_Loop/mixamo_com"
+const ANIMATION_JUMPING := "Falling/mixamo_com"
+const ANIMATION_JUMPING_HOLDING_RIFLE := "Falling_Holding_Rifle/mixamo_com"
 const NODE_NAME := "Jumping"
 const NODE_STATE := States.State.JUMPING
 

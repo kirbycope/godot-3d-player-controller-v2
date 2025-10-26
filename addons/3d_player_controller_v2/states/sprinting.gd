@@ -1,7 +1,7 @@
 extends BaseState
 
-const ANIMATION_SPRINTING := "Sprinting_In_Place/mixamo_com"
-const ANIMATION_SPRINTING_HOLDING_RIFLE := "Sprint_Forward_In_Place/mixamo_com"
+const ANIMATION_SPRINTING := "Sprinting/mixamo_com"
+const ANIMATION_SPRINTING_HOLDING_RIFLE := "Sprinting_Holding_Rifle/mixamo_com"
 const NODE_NAME := "Sprinting"
 const NODE_STATE := States.State.SPRINTING
 

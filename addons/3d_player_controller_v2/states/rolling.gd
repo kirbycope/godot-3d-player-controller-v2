@@ -1,6 +1,6 @@
 extends BaseState
 
-const ANIMATION_ROLLING := "Roll_In_Place/mixamo_com"
+const ANIMATION_ROLLING := "Rolling/mixamo_com"
 const NODE_NAME := "Rolling"
 const NODE_STATE := States.State.ROLLING
 
