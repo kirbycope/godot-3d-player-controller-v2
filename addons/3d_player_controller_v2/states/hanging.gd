@@ -3,9 +3,9 @@ extends BaseState
 const ANIMATION_HANGING := "Hanging/mixamo_com"
 const ANIMATION_HANGING_SHIMMY_LEFT := "Hanging_Shimmy_Left/mixamo_com"
 const ANIMATION_HANGING_SHIMMY_RIGHT := "Hanging_Shimmy_Right/mixamo_com"
-const ANIMATION_HANGING_BRACED := "Hanging_Braced_Idle/mixamo_com"
-const ANIMATION_HANGING_BRACED_SHIMMY_LEFT := "Hanging_Braced_Shimmy_Left_In_Place/mixamo_com"
-const ANIMATION_HANGING_BRACED_SHIMMY_RIGHT := "Hanging_Braced_Shimmy_Right_In_Place/mixamo_com"
+const ANIMATION_HANGING_BRACED := "Hanging_Braced/mixamo_com"
+const ANIMATION_HANGING_BRACED_SHIMMY_LEFT := "Hanging_Braced_Shimmy_Left/mixamo_com"
+const ANIMATION_HANGING_BRACED_SHIMMY_RIGHT := "Hanging_Braced_Shimmy_Right/mixamo_com"
 const NODE_NAME := "Hanging"
 const NODE_STATE := States.State.HANGING
 

@@ -2,8 +2,8 @@ extends BaseState
 
 const ANIMATION_CLIMBING_UP := "Climbing_Up/mixamo_com"
 const ANIMATION_CLIMBING_DOWN := "Climbing_Down/mixamo_com"
-const ANIMATION_CLIMBING_LEFT := "Hanging_Braced_Shimmy_Left_In_Place/mixamo_com"
-const ANIMATION_CLIMBING_RIGHT := "Hanging_Braced_Shimmy_Right_In_Place/mixamo_com"
+const ANIMATION_CLIMBING_LEFT := "Hanging_Braced_Shimmy_Left/mixamo_com"
+const ANIMATION_CLIMBING_RIGHT := "Hanging_Braced_Shimmy_Right/mixamo_com"
 const NODE_NAME := "Climbing"
 const NODE_STATE := States.State.CLIMBING
 
