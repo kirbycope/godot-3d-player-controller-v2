@@ -3,13 +3,13 @@
 importer="animation_library"
 importer_version=1
 type="AnimationLibrary"
-uid="uid://dvouag2ysrfib"
-path="res://.godot/imported/Hanging_Braced_To_Crouch.fbx-27ff6e41a31a7b2e047f5ffdc403b9af.res"
+uid="uid://d33efmknmu8j2"
+path="res://.godot/imported/Hanging_Braced_Shimmy_Left.fbx-c12fc87bbad31a8934b1d21f48583905.res"
 
 [deps]
 
-source_file="res://addons/3d_player_controller_v2/assets/animations/mixamo/hanging/Hanging_Braced_To_Crouch.fbx"
-dest_files=["res://.godot/imported/Hanging_Braced_To_Crouch.fbx-27ff6e41a31a7b2e047f5ffdc403b9af.res"]
+source_file="res://addons/3d_player_controller_v2/assets/animations/mixamo/hanging/Hanging_Braced_Shimmy_Left.fbx"
+dest_files=["res://.godot/imported/Hanging_Braced_Shimmy_Left.fbx-c12fc87bbad31a8934b1d21f48583905.res"]
 
 [params]
 
@@ -41,9 +41,9 @@ _subresources={
 "animations": {
 "mixamo_com": {
 "save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://addons/3d_player_controller_v2/assets/animations/mixamo/hanging/Hanging_Braced_To_Crouch_Custom.res",
+"save_to_file/fallback_path": "res://addons/3d_player_controller_v2/assets/animations/mixamo/hanging/Hanging_Braced_Shimmy_Left_Custom.res",
 "save_to_file/keep_custom_tracks": "",
-"save_to_file/path": "uid://vulpntj3ptri",
+"save_to_file/path": "uid://q6n6ecapovpj",
 "settings/loop_mode": 0,
 "slice_1/end_frame": 0,
 "slice_1/loop_mode": 0,
