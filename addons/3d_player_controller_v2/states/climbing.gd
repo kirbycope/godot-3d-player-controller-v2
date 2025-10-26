@@ -1,8 +1,7 @@
 extends BaseState
 
-#const ANIMATION_CLIMBING_IDLE := "AnimationLibrary_Godot/Climb_Idle"
-const ANIMATION_CLIMBING_UP := "Climb_Up/mixamo_com"
-const ANIMATION_CLIMBING_DOWN := "Climb_Down/mixamo_com"
+const ANIMATION_CLIMBING_UP := "Climbing_Up/mixamo_com"
+const ANIMATION_CLIMBING_DOWN := "Climbing_Down/mixamo_com"
 const ANIMATION_CLIMBING_LEFT := "Hanging_Braced_Shimmy_Left_In_Place/mixamo_com"
 const ANIMATION_CLIMBING_RIGHT := "Hanging_Braced_Shimmy_Right_In_Place/mixamo_com"
 const NODE_NAME := "Climbing"
@@ -43,11 +42,11 @@ func _process(delta):
 		return
 
 	# Check if the player is on the ground -> Start "standing"
-	if player.is_on_floor() \
-	and abs(player.velocity).length() < 0.2:
-		# Start "standing"
-		transition_state(NODE_STATE, States.State.STANDING)
-		return
+	#if player.is_on_floor() \
+	#and abs(player.velocity).length() < 0.2:
+	#	# Start "standing"
+	#	transition_state(NODE_STATE, States.State.STANDING)
+	#	return
 
 	# Check the eyeline for a ledge to grab -> Start "hanging"
 	if player.enable_hanging:
@@ -71,35 +70,25 @@ func _process(delta):
 
 ## Plays the appropriate animation based on player state.
 func play_animation() -> void:
-	# Adjust playback speed based on climbing speed
 	if player.speed_current > player.speed_climbing:
 		player.animation_player.speed_scale = 1.5
 	else:
 		player.animation_player.speed_scale = 1.0
-
-	# Store the current animation as the target animation
-	var target_animation: String = player.animation_player.current_animation
-
-	# Idle when no input
-	if player.input_direction == Vector2.ZERO:
-		target_animation = ANIMATION_CLIMBING_UP
+	if player.input_direction.x < 0:
+		if player.animation_player.current_animation != ANIMATION_CLIMBING_LEFT:
+			player.animation_player.play(ANIMATION_CLIMBING_LEFT)
+	elif player.input_direction.x > 0:
+		if player.animation_player.current_animation != ANIMATION_CLIMBING_RIGHT:
+			player.animation_player.play(ANIMATION_CLIMBING_RIGHT)
 	else:
-		# Prefer vertical movement for animation selection
-		if abs(player.input_direction.y) > 0.0:
-			if player.input_direction.y < 0.0:
-				target_animation = ANIMATION_CLIMBING_UP
-			else:
-				target_animation = ANIMATION_CLIMBING_DOWN
-		# Fall back to horizontal shimmy when no vertical input
-		elif abs(player.input_direction.x) > 0.0:
-			if player.input_direction.x < 0.0:
-				target_animation = ANIMATION_CLIMBING_LEFT
-			else:
-				target_animation = ANIMATION_CLIMBING_RIGHT
-
-	# Apply animation change only if needed to avoid rapid toggling
-	if player.animation_player.current_animation != target_animation:
-		player.animation_player.current_animation = target_animation
+		if player.input_direction.y < 0:
+			if player.animation_player.current_animation != ANIMATION_CLIMBING_UP:
+				player.animation_player.play(ANIMATION_CLIMBING_UP)
+		elif player.input_direction.y > 0:
+			if player.animation_player.current_animation != ANIMATION_CLIMBING_DOWN:
+				player.animation_player.play(ANIMATION_CLIMBING_DOWN)
+		else:
+			player.animation_player.pause()
 
 
 ## Start "climbing".

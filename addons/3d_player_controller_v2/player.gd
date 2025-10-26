@@ -189,11 +189,12 @@ func _physics_process(delta) -> void:
 			new_up = Vector3.UP
 			gravity_accel = - Vector3.UP * gravity
 
+		# Get the input vector by specifying four actions for the positive and negative X and Y axes
+		input_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+
 		# Handle player input for lateral movement (disabled while climbing/hanging)
 		if not is_climbing \
 		and not is_hanging:
-			# Get the input vector by specifying four actions for the positive and negative X and Y axes
-			input_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 			# Set the player's movement speed based on the input magnitude
 			if speed_current == 0.0 and input_direction != Vector2.ZERO:
 				speed_current = input_direction.length() * speed_running

@@ -40,8 +40,8 @@ materials/extract_path=""
 _subresources={
 "animations": {
 "mixamo_com": {
-"save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://addons/3d_player_controller_v2/assets/animations/mixamo/driving/Driving_Custom.res",
+"save_to_file/enabled": false,
+"save_to_file/fallback_path": "",
 "save_to_file/keep_custom_tracks": "",
 "save_to_file/path": "uid://baydul0n38apd",
 "settings/loop_mode": 0,
