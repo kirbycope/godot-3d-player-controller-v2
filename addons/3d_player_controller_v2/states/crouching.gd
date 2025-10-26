@@ -1,6 +1,5 @@
 extends BaseState
 
-#const ANIMATION_CROUCHING := "AnimationLibrary_Godot/Crouch_Idle"
 const ANIMATION_CROUCHING_IDLE := "Crouching_Idle/mixamo_com"
 const ANIMATION_CROUCHING_HOLDING_RIFLE := "Rifle_Kneel_Idle/mixamo_com"
 const ANIMATION_CROUCHING_AIMING := "Idle_Crouching_Aiming/mixamo_com"
@@ -28,19 +27,20 @@ func _input(event):
 		transition_state(NODE_STATE, States.State.STANDING)
 		return
 
-	# 🄻1/[MB0] _pressed_
+	# 🄻1/[MB0] _pressed_ -> Fire rifle
 	if event.is_action_pressed(player.controls.button_4):
+		print(" 🄻1/[MB0] _pressed_") # DEBUGGING
 		# Rifle "firing"
 		if player.is_holding_rifle:
 			player.is_firing_rifle = true
 
-	# 🅁1/[MB1] _pressed_ 
+	# 🅁1/[MB1] _pressed_ -> Aim rifle
 	if event.is_action_pressed(player.controls.button_5):
 		# Rifle "aiming"
 		if player.is_holding_rifle:
 			player.is_aiming_rifle = true
 
-	# 🅁1/[MB1] _released_
+	# 🅁1/[MB1] _released_ -> Lower rifle
 	if event.is_action_released(player.controls.button_5):
 		# Stop "aiming rifle"
 		if player.is_holding_rifle \

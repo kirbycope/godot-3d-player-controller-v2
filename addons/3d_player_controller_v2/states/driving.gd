@@ -1,6 +1,5 @@
 extends BaseState
 
-#const ANIMATION_DRIVING := "AnimationLibrary_Godot/Driving"
 const ANIMATION_DRIVING := "Driving/mixamo_com"
 const NODE_NAME := "Driving"
 const NODE_STATE := States.State.DRIVING

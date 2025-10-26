@@ -1,6 +1,5 @@
 extends BaseState
 
-#const ANIMATION_FALLING := "AnimationLibrary_Godot/Jump"
 const ANIMATION_FALLING := "Falling_Idle/mixamo_com"
 const ANIMATION_FALLING_HOLDING_RIFLE := "Jump_Loop/mixamo_com"
 const NODE_NAME := "Falling"

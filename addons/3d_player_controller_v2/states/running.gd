@@ -1,6 +1,5 @@
 extends BaseState
 
-#const ANIMATION_RUNNING := "AnimationLibrary_Godot/Sprint"
 const ANIMATION_RUNNING := "Running_In_Place/mixamo_com"
 const ANIMATION_RUNNING_HOLDING_RIFLE := "Rifle_Run_In_Place/mixamo_com"
 const ANIMATION_RUNNING_AIMING_RIFLE := "Rifle_Run_In_Place_Running/mixamo_com"

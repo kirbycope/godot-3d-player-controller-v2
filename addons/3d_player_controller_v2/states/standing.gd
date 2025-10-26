@@ -3,18 +3,13 @@ extends BaseState
 const ANIMATION_FISHING_CASTING := "Fishing_Cast/mixamo_com"
 const ANIMATION_FISHING_IDLE := "Fishing_Idle/mixamo_com"
 const ANIMATION_FISHING_REELING := "Fishing_Reel/mixamo_com"
-#const ANIMATION_KICKING_LEFT := "AnimationLibrary_Godot/Kick"
 const ANIMATION_KICKING_LEFT := "Kicking_Left/mixamo_com"
-#const ANIMATION_KICKING_RIGHT := "AnimationLibrary_Godot/Kick"
 const ANIMATION_KICKING_RIGHT := "Kicking_Right/mixamo_com"
-#const ANIMATION_PUNCHING_LEFT := "AnimationLibrary_Godot/Punch_Jab"
 const ANIMATION_PUNCHING_LEFT := "Punching_Left/mixamo_com"
-#const ANIMATION_PUNCHING_RIGHT := "AnimationLibrary_Godot/Punch_Cross"
 const ANIMATION_PUNCHING_RIGHT := "Punching_Right/mixamo_com"
 const ANIMATION_RIFLE_AIMING := "Rifle_Aiming_Idle/mixamo_com"
 const ANIMATION_RIFLE_FIRING := "Rifle_Firing/mixamo_com"
 const ANIMATION_RIFLE_IDLE := "Rifle_Idle/mixamo_com"
-#const ANIMATION_STANDING_IDLE := "AnimationLibrary_Godot/Idle"
 const ANIMATION_STANDING_IDLE := "Idle/mixamo_com"
 const ANIMATION_SWINGING_1H_LEFT := "Standing_Melee_Attack_Downward_Left/mixamo_com"
 const ANIMATION_SWINGING_1H_RIGHT := "Standing_Melee_Attack_Downward_Right/mixamo_com"
@@ -46,6 +41,7 @@ func _input(event):
 
 	# 🄻1/[MB0] _pressed_
 	if event.is_action_pressed(player.controls.button_4):
+		print(" 🄻1/[MB0] _pressed_") # DEBUGGING
 		# Fishing "casting"
 		if player.is_holding_fishing_rod \
 		and not player.is_reeling_fishing:
@@ -199,8 +195,6 @@ func _on_animation_finished(animation_name: String) -> void:
 		player.is_kicking_left = false
 	elif animation_name == ANIMATION_KICKING_RIGHT:
 		player.is_kicking_right = false
-	elif animation_name == ANIMATION_RIFLE_AIMING:
-		player.is_aiming_rifle = false
 	elif animation_name == ANIMATION_RIFLE_FIRING:
 		player.is_firing_rifle = false
 	elif animation_name == ANIMATION_PUNCHING_LEFT:

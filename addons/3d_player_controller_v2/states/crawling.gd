@@ -1,8 +1,8 @@
 extends BaseState
 
-#const ANIMATION_CRAWLING := "AnimationLibrary_Godot/Crawl_Fwd"
 const ANIMATION_CRAWLING := "Crawling_In_Place/mixamo_com"
 const ANIMATION_CRAWLING_HOLDING_RIFLE := "Rifle_Crouch_Walk_In_Place/mixamo_com"
+const ANIMATION_CRAWLING_AIMING_RIFLE := "Crouched_Walking/mixamo_com"
 const ANIMATION_CRAWLING_FIRING_RIFLE := "Firing_Rifle_In_Place_Crawling/mixamo_com"
 const NODE_NAME := "Crawling"
 const NODE_STATE := States.State.CRAWLING
@@ -27,19 +27,19 @@ func _input(event):
 		transition_state(NODE_STATE, States.State.STANDING)
 		return
 
-	# 🄻1/[MB0] _pressed_
+	# 🄻1/[MB0] _pressed_ -> Fire rifle
 	if event.is_action_pressed(player.controls.button_4):
 		# Rifle "firing"
 		if player.is_holding_rifle:
 			player.is_firing_rifle = true
 
-	# 🅁1/[MB1] _pressed_ 
+	# 🅁1/[MB1] _pressed_ -> Aim rifle
 	if event.is_action_pressed(player.controls.button_5):
 		# Rifle "aiming"
 		if player.is_holding_rifle:
 			player.is_aiming_rifle = true
 
-	# 🅁1/[MB1] _released_
+	# 🅁1/[MB1] _released_ -> Lower rifle
 	if event.is_action_released(player.controls.button_5):
 		# Stop "aiming rifle"
 		if player.is_holding_rifle \
@@ -76,6 +76,12 @@ func play_animation() -> void:
 				else:
 					player.animation_player.play(ANIMATION_CRAWLING_FIRING_RIFLE)
 				player.animation_player.connect("animation_finished", _on_animation_finished)
+		elif player.is_aiming_rifle:
+			if player.animation_player.current_animation != ANIMATION_CRAWLING_AIMING_RIFLE:
+				if play_backwards:
+					player.animation_player.play_backwards(ANIMATION_CRAWLING_AIMING_RIFLE)
+				else:
+					player.animation_player.play(ANIMATION_CRAWLING_AIMING_RIFLE)
 		else:
 			if player.animation_player.current_animation != ANIMATION_CRAWLING_HOLDING_RIFLE:
 				if play_backwards:
