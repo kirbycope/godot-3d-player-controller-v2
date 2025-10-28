@@ -23,7 +23,6 @@ func _process(delta):
 	# Check if the player is on the ground -> Start "standing"
 	if player.is_on_floor() \
 	and abs(player.velocity).length() < 0.2:
-		# Start "standing"
 		transition_state(NODE_STATE, States.State.STANDING)
 		return
 

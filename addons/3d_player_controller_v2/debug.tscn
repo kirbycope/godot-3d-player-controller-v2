@@ -312,6 +312,22 @@ offset_bottom = 31.0
 grow_horizontal = 0
 mouse_filter = 1
 
+[node name="EnableThrowing" type="CheckButton" parent="Configuration"]
+layout_mode = 2
+text = "Enable Throwing"
+
+[node name="Panel" type="Panel" parent="Configuration/EnableThrowing"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -222.0
+offset_right = -2.0
+offset_bottom = 31.0
+grow_horizontal = 0
+mouse_filter = 1
+
 [node name="Configuration2" type="VBoxContainer" parent="."]
 offset_left = 838.0
 offset_right = 1058.0
@@ -393,8 +409,8 @@ grow_horizontal = 0
 mouse_filter = 1
 
 [node name="States" type="VBoxContainer" parent="."]
-offset_right = 128.0
-offset_bottom = 720.0
+offset_right = 164.0
+offset_bottom = 758.0
 
 [node name="Label" type="Label" parent="States"]
 layout_mode = 2
@@ -404,7 +420,7 @@ horizontal_alignment = 1
 [node name="Panel" type="Panel" parent="States/Label"]
 z_index = -1
 layout_mode = 0
-offset_right = 153.0
+offset_right = 164.0
 offset_bottom = 23.0
 
 [node name="IsClimbing" type="CheckBox" parent="States"]
@@ -415,7 +431,18 @@ text = "IsClimbing"
 [node name="Panel" type="Panel" parent="States/IsClimbing"]
 z_index = -1
 layout_mode = 0
-offset_right = 153.0
+offset_right = 164.0
+offset_bottom = 31.0
+
+[node name="IsClimbingLadder" type="CheckBox" parent="States"]
+layout_mode = 2
+disabled = true
+text = "IsClimbingLadder"
+
+[node name="Panel" type="Panel" parent="States/IsClimbingLadder"]
+z_index = -1
+layout_mode = 0
+offset_right = 164.0
 offset_bottom = 31.0
 
 [node name="IsCrawling" type="CheckBox" parent="States"]
@@ -426,7 +453,7 @@ text = "IsCrawling"
 [node name="Panel" type="Panel" parent="States/IsCrawling"]
 z_index = -1
 layout_mode = 0
-offset_right = 153.0
+offset_right = 164.0
 offset_bottom = 31.0
 
 [node name="IsCrouching" type="CheckBox" parent="States"]
@@ -437,7 +464,7 @@ text = "IsCrouching"
 [node name="Panel" type="Panel" parent="States/IsCrouching"]
 z_index = -1
 layout_mode = 0
-offset_right = 153.0
+offset_right = 164.0
 offset_bottom = 31.0
 
 [node name="IsDoubleJumping" type="CheckBox" parent="States"]
@@ -448,7 +475,7 @@ text = "IsDoubleJumping"
 [node name="Panel" type="Panel" parent="States/IsDoubleJumping"]
 z_index = -1
 layout_mode = 0
-offset_right = 153.0
+offset_right = 164.0
 offset_bottom = 31.0
 
 [node name="IsDriving" type="CheckBox" parent="States"]
@@ -459,7 +486,7 @@ text = "IsDriving"
 [node name="Panel" type="Panel" parent="States/IsDriving"]
 z_index = -1
 layout_mode = 0
-offset_right = 153.0
+offset_right = 164.0
 offset_bottom = 31.0
 
 [node name="IsFalling" type="CheckBox" parent="States"]
@@ -470,7 +497,7 @@ text = "IsFalling"
 [node name="Panel" type="Panel" parent="States/IsFalling"]
 z_index = -1
 layout_mode = 0
-offset_right = 153.0
+offset_right = 164.0
 offset_bottom = 31.0
 
 [node name="IsFlying" type="CheckBox" parent="States"]
@@ -481,7 +508,7 @@ text = "IsFlying"
 [node name="Panel" type="Panel" parent="States/IsFlying"]
 z_index = -1
 layout_mode = 0
-offset_right = 153.0
+offset_right = 164.0
 offset_bottom = 31.0
 
 [node name="IsHanging" type="CheckBox" parent="States"]
@@ -492,18 +519,7 @@ text = "IsHanging"
 [node name="Panel" type="Panel" parent="States/IsHanging"]
 z_index = -1
 layout_mode = 0
-offset_right = 153.0
-offset_bottom = 31.0
-
-[node name="IsOnFloor" type="CheckBox" parent="States"]
-layout_mode = 2
-disabled = true
-text = "IsOnFloor"
-
-[node name="Panel" type="Panel" parent="States/IsOnFloor"]
-z_index = -1
-layout_mode = 0
-offset_right = 153.0
+offset_right = 164.0
 offset_bottom = 31.0
 
 [node name="IsJumping" type="CheckBox" parent="States"]
@@ -514,7 +530,7 @@ text = "IsJumping"
 [node name="Panel" type="Panel" parent="States/IsJumping"]
 z_index = -1
 layout_mode = 0
-offset_right = 153.0
+offset_right = 164.0
 offset_bottom = 31.0
 
 [node name="IsNavigating" type="CheckBox" parent="States"]
@@ -525,7 +541,7 @@ text = "IsNavigating"
 [node name="Panel" type="Panel" parent="States/IsNavigating"]
 z_index = -1
 layout_mode = 0
-offset_right = 153.0
+offset_right = 164.0
 offset_bottom = 31.0
 
 [node name="IsParagliding" type="CheckBox" parent="States"]
@@ -536,7 +552,7 @@ text = "IsParagliding"
 [node name="Panel" type="Panel" parent="States/IsParagliding"]
 z_index = -1
 layout_mode = 0
-offset_right = 153.0
+offset_right = 164.0
 offset_bottom = 31.0
 
 [node name="IsRolling" type="CheckBox" parent="States"]
@@ -547,7 +563,7 @@ text = "IsRolling"
 [node name="Panel" type="Panel" parent="States/IsRolling"]
 z_index = -1
 layout_mode = 0
-offset_right = 153.0
+offset_right = 164.0
 offset_bottom = 31.0
 
 [node name="IsRunning" type="CheckBox" parent="States"]
@@ -558,7 +574,7 @@ text = "IsRunning"
 [node name="Panel" type="Panel" parent="States/IsRunning"]
 z_index = -1
 layout_mode = 0
-offset_right = 153.0
+offset_right = 164.0
 offset_bottom = 31.0
 
 [node name="IsSliding" type="CheckBox" parent="States"]
@@ -569,7 +585,7 @@ text = "IsSliding"
 [node name="Panel" type="Panel" parent="States/IsSliding"]
 z_index = -1
 layout_mode = 0
-offset_right = 153.0
+offset_right = 164.0
 offset_bottom = 31.0
 
 [node name="IsSkateboarding" type="CheckBox" parent="States"]
@@ -580,7 +596,7 @@ text = "IsSkateboarding"
 [node name="Panel" type="Panel" parent="States/IsSkateboarding"]
 z_index = -1
 layout_mode = 0
-offset_right = 153.0
+offset_right = 164.0
 offset_bottom = 31.0
 
 [node name="IsSprinting" type="CheckBox" parent="States"]
@@ -591,7 +607,7 @@ text = "IsSprinting"
 [node name="Panel" type="Panel" parent="States/IsSprinting"]
 z_index = -1
 layout_mode = 0
-offset_right = 153.0
+offset_right = 164.0
 offset_bottom = 31.0
 
 [node name="IsStanding" type="CheckBox" parent="States"]
@@ -602,7 +618,7 @@ text = "IsStanding"
 [node name="Panel" type="Panel" parent="States/IsStanding"]
 z_index = -1
 layout_mode = 0
-offset_right = 153.0
+offset_right = 164.0
 offset_bottom = 31.0
 
 [node name="IsSwimming" type="CheckBox" parent="States"]
@@ -613,7 +629,7 @@ text = "IsSwimming"
 [node name="Panel" type="Panel" parent="States/IsSwimming"]
 z_index = -1
 layout_mode = 0
-offset_right = 153.0
+offset_right = 164.0
 offset_bottom = 31.0
 
 [node name="IsWalking" type="CheckBox" parent="States"]
@@ -624,12 +640,12 @@ text = "IsWalking"
 [node name="Panel" type="Panel" parent="States/IsWalking"]
 z_index = -1
 layout_mode = 0
-offset_right = 153.0
+offset_right = 164.0
 offset_bottom = 31.0
 
 [node name="States2" type="VBoxContainer" parent="."]
-offset_left = 160.0
-offset_right = 313.0
+offset_left = 167.0
+offset_right = 331.0
 offset_bottom = 720.0
 
 [node name="Label" type="Label" parent="States2"]
@@ -640,8 +656,19 @@ horizontal_alignment = 1
 [node name="Panel" type="Panel" parent="States2/Label"]
 z_index = -1
 layout_mode = 0
-offset_right = 153.0
+offset_right = 164.0
 offset_bottom = 23.0
+
+[node name="IsOnFloor" type="CheckBox" parent="States2"]
+layout_mode = 2
+disabled = true
+text = "IsOnFloor"
+
+[node name="Panel" type="Panel" parent="States2/IsOnFloor"]
+z_index = -1
+layout_mode = 0
+offset_right = 164.0
+offset_bottom = 31.0
 
 [node name="IsKickingLeft" type="CheckBox" parent="States2"]
 layout_mode = 2
@@ -651,7 +678,7 @@ text = "IsKickingLeft"
 [node name="Panel" type="Panel" parent="States2/IsKickingLeft"]
 z_index = -1
 layout_mode = 0
-offset_right = 153.0
+offset_right = 164.0
 offset_bottom = 31.0
 
 [node name="IsKickingRight" type="CheckBox" parent="States2"]
@@ -662,7 +689,7 @@ text = "IsKickingRight"
 [node name="Panel" type="Panel" parent="States2/IsKickingRight"]
 z_index = -1
 layout_mode = 0
-offset_right = 153.0
+offset_right = 164.0
 offset_bottom = 31.0
 
 [node name="IsCastingFishing" type="CheckBox" parent="States2"]
@@ -673,7 +700,7 @@ text = "IsCastingFishing"
 [node name="Panel" type="Panel" parent="States2/IsCastingFishing"]
 z_index = -1
 layout_mode = 0
-offset_right = 153.0
+offset_right = 164.0
 offset_bottom = 31.0
 
 [node name="IsReelingFishing" type="CheckBox" parent="States2"]
@@ -684,7 +711,7 @@ text = "IsReelingFishing"
 [node name="Panel" type="Panel" parent="States2/IsReelingFishing"]
 z_index = -1
 layout_mode = 0
-offset_right = 153.0
+offset_right = 164.0
 offset_bottom = 31.0
 
 [node name="IsPunchingLeft" type="CheckBox" parent="States2"]
@@ -695,7 +722,7 @@ text = "IsPunchingLeft"
 [node name="Panel" type="Panel" parent="States2/IsPunchingLeft"]
 z_index = -1
 layout_mode = 0
-offset_right = 153.0
+offset_right = 164.0
 offset_bottom = 31.0
 
 [node name="IsPunchingRight" type="CheckBox" parent="States2"]
@@ -706,7 +733,7 @@ text = "IsPunchingRight"
 [node name="Panel" type="Panel" parent="States2/IsPunchingRight"]
 z_index = -1
 layout_mode = 0
-offset_right = 153.0
+offset_right = 164.0
 offset_bottom = 31.0
 
 [node name="IsAimingRifle" type="CheckBox" parent="States2"]
@@ -717,7 +744,7 @@ text = "IsAimingRifle"
 [node name="Panel" type="Panel" parent="States2/IsAimingRifle"]
 z_index = -1
 layout_mode = 0
-offset_right = 153.0
+offset_right = 164.0
 offset_bottom = 31.0
 
 [node name="IsFiringRifle" type="CheckBox" parent="States2"]
@@ -728,7 +755,7 @@ text = "IsFiringRifle"
 [node name="Panel" type="Panel" parent="States2/IsFiringRifle"]
 z_index = -1
 layout_mode = 0
-offset_right = 153.0
+offset_right = 164.0
 offset_bottom = 31.0
 
 [node name="IsSwinging1HLeft" type="CheckBox" parent="States2"]
@@ -739,7 +766,7 @@ text = "IsSwinging1HL"
 [node name="Panel" type="Panel" parent="States2/IsSwinging1HLeft"]
 z_index = -1
 layout_mode = 0
-offset_right = 153.0
+offset_right = 164.0
 offset_bottom = 31.0
 
 [node name="IsSwinging1HRight" type="CheckBox" parent="States2"]
@@ -750,7 +777,18 @@ text = "IsSwinging1HR"
 [node name="Panel" type="Panel" parent="States2/IsSwinging1HRight"]
 z_index = -1
 layout_mode = 0
-offset_right = 153.0
+offset_right = 164.0
+offset_bottom = 31.0
+
+[node name="IsThrowing" type="CheckBox" parent="States2"]
+layout_mode = 2
+disabled = true
+text = "IsThrowing"
+
+[node name="Panel" type="Panel" parent="States2/IsThrowing"]
+z_index = -1
+layout_mode = 0
+offset_right = 164.0
 offset_bottom = 31.0
 
 [node name="Performance" type="Panel" parent="."]
@@ -866,6 +904,7 @@ scroll_active = false
 [connection signal="toggled" from="Configuration/EnableSliding" to="." method="_on_enable_sliding_toggled"]
 [connection signal="toggled" from="Configuration/EnableSprinting" to="." method="_on_enable_sprinting_toggled"]
 [connection signal="toggled" from="Configuration/EnableSwimming" to="." method="_on_enable_swimming_toggled"]
+[connection signal="toggled" from="Configuration/EnableThrowing" to="." method="_on_enable_throwing_toggled"]
 [connection signal="toggled" from="Configuration2/LockCamera" to="." method="_on_lock_camera_toggled"]
 [connection signal="toggled" from="Configuration2/LockMovementX" to="." method="_on_lock_movement_x_toggled"]
 [connection signal="toggled" from="Configuration2/LockMovementY" to="." method="_on_lock_movement_y_toggled"]

@@ -13,8 +13,8 @@ func _ready() -> void:
 	player.enable_climbing = true
 	player.enable_crawling = true
 	player.enable_crouching = true
-	player.enable_driving = true
 	player.enable_double_jumping = false
+	player.enable_driving = true
 	player.enable_flying = false
 	player.enable_hanging = true
 	player.enable_holding_objects = true
@@ -28,6 +28,7 @@ func _ready() -> void:
 	player.enable_sliding = true
 	player.enable_sprinting = true
 	player.enable_swimming = true
+	player.enable_throwing = true
 	player.lock_movement_x = false
 	player.lock_movement_y = false
 	player.lock_movement_z = false

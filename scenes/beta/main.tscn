@@ -1,8 +1,7 @@
-[gd_scene load_steps=24 format=3 uid="uid://dey7ls45vvlck"]
+[gd_scene load_steps=21 format=3 uid="uid://dey7ls45vvlck"]
 
 [ext_resource type="Script" uid="uid://dhm0w0mgw28o6" path="res://scenes/beta/main.gd" id="1_4go8p"]
 [ext_resource type="Texture2D" uid="uid://bpo2vwd0ruriv" path="res://assets/textures/prototype_textures/Dark/texture_08.png" id="2_7kfyu"]
-[ext_resource type="Texture2D" uid="uid://brerfykle8g6t" path="res://icon.svg" id="3_1km6e"]
 [ext_resource type="PackedScene" uid="uid://f6xpywa7euq2" path="res://addons/3d_player_controller_v2/player.tscn" id="4_evn7r"]
 [ext_resource type="PackedScene" uid="uid://brc6v1pepmek3" path="res://scenes/beta/pool.tscn" id="4_i50xe"]
 [ext_resource type="Texture2D" uid="uid://c2yhnwwbe08c4" path="res://assets/textures/prototype_textures/Dark/texture_03.png" id="5_ecpwe"]
@@ -10,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://q0w20gsraiem" path="res://scenes/beta/skateboard.tscn" id="7_88y00"]
 [ext_resource type="PackedScene" uid="uid://cp5rutkubcej" path="res://scenes/beta/axe.tscn" id="7_up5x4"]
 [ext_resource type="PackedScene" uid="uid://bkajjhn7o5h28" path="res://scenes/beta/fishing_rod.tscn" id="8_a8mrn"]
+[ext_resource type="PackedScene" uid="uid://crbkch87dbiqi" path="res://scenes/portal/friendly_freight.tscn" id="8_q7lbx"]
 [ext_resource type="PackedScene" uid="uid://cg7c5p0uk7mjf" path="res://scenes/beta/gun.tscn" id="9_4s88f"]
 [ext_resource type="Texture2D" uid="uid://c3ui4jf402ksm" path="res://assets/textures/prototype_textures/Light/texture_06.png" id="12_q7lbx"]
 
@@ -29,16 +29,6 @@ glow_enabled = true
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sugp2"]
 albedo_texture = ExtResource("2_7kfyu")
 uv1_triplanar = true
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_tefeu"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o6xl0"]
-albedo_texture = ExtResource("3_1km6e")
-uv1_offset = Vector3(0.5, 0.5, 0.5)
-uv1_triplanar = true
-
-[sub_resource type="BoxMesh" id="BoxMesh_tipki"]
-material = SubResource("StandardMaterial3D_o6xl0")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tipki"]
 albedo_texture = ExtResource("5_ecpwe")
@@ -81,15 +71,6 @@ size = Vector3(5, 0.1, 10)
 
 [node name="Pool" parent="Ground" instance=ExtResource("4_i50xe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.45, 9.5)
-
-[node name="FriendlyFreight" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.5, -2)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="FriendlyFreight"]
-shape = SubResource("BoxShape3D_tefeu")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="FriendlyFreight"]
-mesh = SubResource("BoxMesh_tipki")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -6)
@@ -214,8 +195,11 @@ transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 1.89
 [node name="Car" parent="." instance=ExtResource("6_mf6xi")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 5, 0, 0)
 
+[node name="FriendlyFreight" parent="." instance=ExtResource("8_q7lbx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.5, -2)
+
 [node name="Gun" parent="." instance=ExtResource("9_4s88f")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.2, 2)
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 2.3999999, 0.2, 2)
 
 [node name="Skateboard" parent="." instance=ExtResource("7_88y00")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 1.9)

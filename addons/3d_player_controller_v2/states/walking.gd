@@ -30,21 +30,18 @@ func _input(event):
 			transition_state(NODE_STATE, States.State.SPRINTING)
 			return
 
-	# 🄻1/[MB0] _pressed_
+	# 🄻1/[MB0] _pressed_ -> Fire rifle
 	if event.is_action_pressed(player.controls.button_4):
-		# Rifle "firing"
 		if player.is_holding_rifle:
 			player.is_firing_rifle = true
 
-	# 🅁1/[MB1] _pressed_ 
+	# 🅁1/[MB1] _pressed_ -> Aim rifle
 	if event.is_action_pressed(player.controls.button_5):
-		# Rifle "aiming"
 		if player.is_holding_rifle:
 			player.is_aiming_rifle = true
 
-	# 🅁1/[MB1] _released_
+	# 🅁1/[MB1] _released_ -> Lower rifle
 	if event.is_action_released(player.controls.button_5):
-		# Stop "aiming rifle"
 		if player.is_holding_rifle \
 		and player.is_aiming_rifle:
 			player.is_aiming_rifle = false
@@ -95,7 +92,6 @@ func play_animation() -> void:
 
 
 func _on_animation_finished(animation_name: String) -> void:
-	# Disconnect the signal to avoid multiple connections
 	player.animation_player.disconnect("animation_finished", _on_animation_finished)
 	if animation_name == ANIMATION_WALKING_FIRING_RIFLE:
 		player.is_firing_rifle = false

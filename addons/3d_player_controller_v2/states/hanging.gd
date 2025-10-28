@@ -58,7 +58,7 @@ func _process(delta):
 			player.speed_current = player.speed_hanging
 
 	# Move the player while hanging
-	move_player()
+	player.move_player()
 
 	# Play the animation
 	play_animation()
@@ -116,7 +116,7 @@ func start() -> void:
 	player.virtual_velocity = Vector3.ZERO
 
 	# Move the player to the wall
-	move_to_wall()
+	player.move_to_wall()
 
 
 ## Stop "hanging".

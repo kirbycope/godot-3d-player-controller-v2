@@ -26,7 +26,6 @@ func _ready() -> void:
 	player.enable_retical = false
 	player.enable_rolling = false
 	player.enable_sliding = false
-	player.enable_skateboarding = false
 	player.enable_sprinting = false
 	player.enable_swimming = false
 	player.lock_movement_x = false

@@ -17,16 +17,13 @@ func _input(event) -> void:
 	if player:
 		# Do nothing if the "pause" menu is visible
 		if player.pause.visible: return
+
 		# Ⓧ/[E] press to drive vehicle - Enter vehicle
 		if event.is_action_pressed(player.controls.button_2) \
 		and not player.is_driving:
-			# Check for a collision with the raycast
 			if player.camera.ray_cast.is_colliding():
-				# Get the collision object
 				var collider = player.camera.ray_cast.get_collider()
-				# Check if the collider is a VehicleBody3D
 				if collider is VehicleBody3D:
-					# Start "driving"
 					player.base_state.transition_state(player.current_state, States.State.DRIVING)
 					return
 
@@ -55,7 +52,6 @@ func _physics_process(_delta: float) -> void:
 				throttle_input -= 1.0
 			steering = steer_input * max_steer
 			engine_force = throttle_input * engine_power
-			# Move the player to the vehicle's driver seat position
 			player.global_position = driver_seat.global_position
 			player.visuals.global_rotation = driver_seat.global_rotation
 

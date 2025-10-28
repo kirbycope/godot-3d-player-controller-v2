@@ -37,32 +37,21 @@ func _process(delta):
 	# Check if the player has no raycast collision -> Start "falling"
 	if not player.ray_cast_top.is_colliding() \
 	and not player.ray_cast_high.is_colliding():
-		# Start falling
 		transition_state(NODE_STATE, States.State.FALLING)
 		return
-
-	# Check if the player is on the ground -> Start "standing"
-	#if player.is_on_floor() \
-	#and abs(player.velocity).length() < 0.2:
-	#	# Start "standing"
-	#	transition_state(NODE_STATE, States.State.STANDING)
-	#	return
 
 	# Check the eyeline for a ledge to grab -> Start "hanging"
 	if player.enable_hanging:
 		if not player.ray_cast_top.is_colliding() \
 		and player.ray_cast_high.is_colliding():
-			# Get the collision object
 			var collision_object = player.ray_cast_high.get_collider()
-			# Check if the collision object is "hangable"
 			if not collision_object is CharacterBody3D \
 			and not collision_object is SoftBody3D:
-				# Start "hanging"
 				transition_state(NODE_STATE, States.State.HANGING)
 				return
 
 	# Move the player while climbing
-	move_player()
+	player.move_player()
 
 	# Play the animation
 	play_animation()
@@ -110,7 +99,7 @@ func start() -> void:
 	player.virtual_velocity = Vector3.ZERO
 
 	# Move the player to the wall
-	move_to_wall()
+	player.move_to_wall()
 
 
 ## Stop "climbing".

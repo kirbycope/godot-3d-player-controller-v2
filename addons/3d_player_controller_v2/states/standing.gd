@@ -76,6 +76,11 @@ func _input(event):
 		elif player.is_holding_1h_right \
 		and not player.is_swinging_1h_left:
 			player.is_swinging_1h_right = true
+		# Held object "throwing"
+		elif player.enable_throwing \
+		and player.camera.item_spring_arm.get_child_count() != 0:
+				pass # For now, this prevents the player from "punching" when trying to throw
+				#player.base_state.transition_state(player.current_state, States.State.THROWING) # TODO: Animation is too slow
 		# Right "punching"
 		elif player.enable_punching \
 		and not player.is_punching_left:
@@ -184,7 +189,6 @@ func play_animation() -> void:
 
 
 func _on_animation_finished(animation_name: String) -> void:
-	# Disconnect the signal to avoid multiple connections
 	player.animation_player.disconnect("animation_finished", _on_animation_finished)
 	if animation_name == ANIMATION_FISHING_CASTING:
 		player.is_casting_fishing = false

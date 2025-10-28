@@ -20,6 +20,7 @@ extends CharacterBody3D
 @export var enable_sliding: bool = true ## Enable sliding
 @export var enable_sprinting: bool = true ## Enable sprinting
 @export var enable_swimming: bool = true ## Enable swimming
+@export var enable_throwing: bool = false ## Enable throwing objects
 @export var lock_movement_x: bool = false ## Lock movement along the X axis
 @export var lock_movement_y: bool = false ## Lock movement along the Y axis
 @export var lock_movement_z: bool = false ## Lock movement along the Z axis
@@ -41,9 +42,12 @@ extends CharacterBody3D
 @export var speed_swimming: float = 3.0 ## Speed while swimming
 @export var speed_walking: float = 1.0 ## Speed while walking
 
-var current_state: States.State ## The current state of the player.
+var current_state: States.State ## The current state of the 
+var previous_state: States.State ## The previous state of the 
 var input_direction: Vector2 = Vector2.ZERO ## The direction of the player input (UP/DOWN, LEFT/RIGHT).
-var is_climbing: bool = false ## Is the player climbing?
+var is_animation_locked: bool = false ## Is the player's animation locked?
+var is_climbing: bool = false ## Is the player climbing a surface?
+var is_climbing_ladder: bool = false ## Is the player climbing a ladder?
 var is_crawling: bool = false ## Is the player crawling?
 var is_crouching: bool = false ## Is the player crouching?
 var is_double_jumping: bool = false ## Is the player double jumping?
@@ -51,7 +55,6 @@ var is_driving: bool = false ## Is the player driving?
 var is_falling: bool = false ## Is the player falling?
 var is_flying: bool = false ## Is the player flying?
 var is_hanging: bool = false ## Is the player hanging?
-
 var is_holding_1h_left: bool = false ## Is the player holding a 1-handed tool or weapon with their left hand?
 var is_swinging_1h_left: bool = false ## Is the player swinging a 1-handed tool or weapon with their left hand?
 var is_holding_1h_right: bool = false ## Is the player holding a 1-handed tool or weapon with their right hand?
@@ -69,6 +72,10 @@ var is_navigating: bool = false ## Is the player navigating?
 var is_paragliding: bool = false ## Is the player paragliding?
 var is_punching_left: bool = false ## Is the player punching with thier left hand?
 var is_punching_right: bool = false ## Is the player punching with their right hand?
+var is_reacting_low_left: bool = false ## Is the player reacting to being hit from the low left?
+var is_reacting_low_right: bool = false ## Is the player reacting to being hit from the low right?
+var is_reacting_high_left: bool = false ## Is the player reacting to being hit from the high left?
+var is_reacting_high_right: bool = false ## Is the player reacting to being hit from the high right?
 var is_rolling: bool = false ## Is the player rolling?
 var is_running: bool = false ## Is the player running?
 var is_skateboarding: bool = false ## Is the player skateboarding?
@@ -78,6 +85,7 @@ var is_sprinting: bool = false ## Is the player sprinting?
 var is_swimming: bool = false ## Is the player swimming?
 var is_swimming_in ## The water body the player is swimming in (if any)
 var is_swinging_1h: bool = false ## Is the player swinging a 1-handed tool or weapon?
+var is_throwing: bool = false ## Is the player throwing an object?
 var is_walking: bool = false ## Is the player walking?
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity") ## Default gravity value
 var gravitating_towards ## The Node the player is being pulled towards (if any)
@@ -108,7 +116,6 @@ var virtual_velocity: Vector3 = Vector3.ZERO ## The player's velocity is movemen
 
 ## Called when the node is "ready", i.e. when both the node and its children have entered the scene tree.
 func _ready() -> void:
-	# Start "standing"
 	$States/Standing.start()
 
 
@@ -139,7 +146,6 @@ func _input(event) -> void:
 				#debug.draw_red_sphere(cursor_position) ## DEBUGGING
 				navigation_agent.target_position = cursor_position
 				if not is_navigating:
-					# Start "navigating"
 					base_state.transition_state(current_state, States.State.NAVIGATING)
 
 
@@ -161,13 +167,14 @@ func _process(delta) -> void:
 		if not Input.is_action_pressed(controls.button_5):
 			is_aiming_rifle = false
 
-	#print("Current State: ", base_state.get_state_name(current_state)) ## DEBUGGING
-
 
 ## Called once on each physics tick, and allows Nodes to synchronize their logic with physics ticks.
 func _physics_process(delta) -> void:
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
+
+	# Do nothing if the player's animation is locked
+	if is_animation_locked: return
 
 	# Skip movement processing while "driving"
 	if is_driving: return
@@ -194,6 +201,7 @@ func _physics_process(delta) -> void:
 
 		# Handle player input for lateral movement (disabled while climbing/hanging)
 		if not is_climbing \
+		and not is_climbing_ladder \
 		and not is_hanging:
 			# Set the player's movement speed based on the input magnitude
 			if speed_current == 0.0 and input_direction != Vector2.ZERO:
@@ -212,6 +220,7 @@ func _physics_process(delta) -> void:
 				# Check for conditions to update the visuals' facing direction
 				if camera.perspective == camera.Perspective.THIRD_PERSON \
 				and not is_climbing \
+				and not is_climbing_ladder \
 				and not is_hanging:
 					# Update the visuals to look in the direction based on player input
 					visuals.look_at(position + lateral_dir, new_up)
@@ -244,7 +253,9 @@ func _physics_process(delta) -> void:
 				velocity = lateral_velocity + new_up * vertical_speed
 
 		# Apply gravity for this tick (disabled while climbing or hanging)
-		if not is_climbing and not is_hanging:
+		if not is_climbing \
+		and not is_climbing_ladder \
+		and not is_hanging:
 			velocity += gravity_accel * delta
 		# Commit the new up direction after applying gravity
 		up_direction = new_up
@@ -262,3 +273,164 @@ func _physics_process(delta) -> void:
 
 	# Move the body based on velocity
 	move_and_slide()
+
+
+@rpc("any_peer", "call_local")
+func animate_hit_low_left() -> void:
+	is_reacting_low_left = true
+	base_state.transition_state(current_state, States.State.REACTING)
+
+
+@rpc("any_peer", "call_local")
+func animate_hit_low_right() -> void:
+	is_reacting_low_right = true
+	base_state.transition_state(current_state, States.State.REACTING)
+
+
+@rpc("any_peer", "call_local")
+func animate_hit_high_left() -> void:
+	is_reacting_high_left = true
+	base_state.transition_state(current_state, States.State.REACTING)
+
+
+@rpc("any_peer", "call_local")
+func animate_hit_high_right() -> void:
+	is_reacting_high_right = true
+	base_state.transition_state(current_state, States.State.REACTING)
+
+
+## Provides movement logic for climbing and hanging states; which are mostly skipped in _physics_process().
+func move_player() -> void:
+	# Get the collision normal (wall outward direction)
+	var collision_normal_normalized: Vector3 = ray_cast_high.get_collision_normal().normalized()
+
+	# Build an orthonormal basis for the wall plane using player's up and wall normal
+	# Remove any component of up along the normal to get the wall-up (shimmy) axis
+	var wall_up: Vector3 = (up_direction - collision_normal_normalized * up_direction.dot(collision_normal_normalized)).normalized()
+	# Right axis along the wall (perpendicular to wall_up and normal)
+	var wall_right: Vector3 = wall_up.cross(collision_normal_normalized).normalized()
+
+	# Gather inputs mapped onto wall axies
+	var move_direction: Vector3 = Vector3.ZERO
+	# Only apply horizontal movement if not climbing a ladder
+	if not is_climbing_ladder:
+		if Input.is_action_pressed(controls.move_left):
+			move_direction -= wall_right
+		if Input.is_action_pressed(controls.move_right):
+			move_direction += wall_right
+	# Only apply vertical movement if climbing (a surface or ladder)
+	if is_climbing \
+	or is_climbing_ladder:
+		if Input.is_action_pressed(controls.move_up):
+			move_direction += wall_up
+		if Input.is_action_pressed(controls.move_down):
+			move_direction -= wall_up
+
+	# Normalize to keep diagonal speed consistent
+	if move_direction.length() > 0.0:
+		move_direction = move_direction.normalized()
+
+	# Constrain velocity strictly to the wall plane, no motion into or away from the wall
+	velocity = move_direction * speed_current
+
+	# Ensure the visuals face the wall (optional subtle alignment)
+	var wall_forward = -collision_normal_normalized
+	# Project the forward onto the plane perpendicular to up to avoid pitching toward ground/ceiling
+	wall_forward = (wall_forward - up_direction * wall_forward.dot(up_direction)).normalized()
+	if wall_forward.length() > 0.0 and position != position + wall_forward:
+		visuals.look_at(position + wall_forward, up_direction)
+
+
+func move_to_ladder() -> void:
+	# Get the collision point
+	var collision_point = ray_cast_high.get_collision_point()
+
+	# [DEBUG] Draw a debug sphere at the collision point
+	#debug.draw_debug_sphere(collision_point, Color.RED)
+
+	# Calculate the direction from the player to collision point
+	var direction = (collision_point - position).normalized()
+
+	# Calculate new point by moving back from point along the direction by the given player radius
+	collision_point = collision_point - direction * collision_width
+
+	# [DEBUG] Draw a debug sphere at the adjusted collision point
+	#debug.draw_debug_sphere(collision_point, Color.YELLOW)
+
+	# Find the center of the surface of the ladder
+	var ladder_surface_center = camera.ray_cast.get_collider().global_transform.origin
+
+	# Find out the direction the ladder is facing
+	var ladder_forward = -camera.ray_cast.get_collider().global_transform.basis.z
+
+	# Adjust the collision point to be centered on the ladder surface
+	collision_point = ladder_surface_center - ladder_forward/3
+
+	# Adjust the point relative to the player's height
+	collision_point = Vector3(collision_point.x, position.y, collision_point.z)
+
+	# Move the player to the collision point
+	global_position = collision_point
+
+	# [DEBUG] Draw a debug sphere at the collision point
+	#debug.draw_debug_sphere(collision_point, Color.GREEN)
+
+	# Make the player face the ladder while keeping upright (flatten onto plane perpendicular to up)
+	if ladder_forward.length() > 0.0 and position != position + ladder_forward:
+		visuals.look_at(position + ladder_forward, up_direction)
+
+
+## Snaps the player to the wall they are climbing/hanging on.
+func move_to_wall() -> void:
+	# Get the collision point
+	var collision_point = ray_cast_high.get_collision_point()
+
+	# [DEBUG] Draw a debug sphere at the collision point
+	#debug.draw_debug_sphere(collision_point, Color.RED)
+
+	# Calculate the direction from the player to collision point
+	var direction = (collision_point - position).normalized()
+
+	# Calculate new point by moving back from point along the direction by the given player radius
+	collision_point = collision_point - direction * collision_width
+
+	# [DEBUG] Draw a debug sphere at the adjusted collision point
+	#debug.draw_debug_sphere(collision_point, Color.YELLOW)
+
+	# Adjust the point relative to the player's height
+	collision_point = Vector3(collision_point.x, position.y, collision_point.z)
+
+	# Move the player to the collision point
+	global_position = collision_point
+
+	# [DEBUG] Draw a debug sphere at the collision point
+	#debug.draw_debug_sphere(collision_point, Color.GREEN)
+
+	# Get the collision normal
+	var collision_normal = ray_cast_high.get_collision_normal()
+
+	# Calculate the wall direction
+	var wall_direction = -collision_normal
+
+	# Make the player face the wall while keeping upright (flatten onto plane perpendicular to up)
+	wall_direction = (wall_direction - up_direction * wall_direction.dot(up_direction)).normalized()
+	if wall_direction.length() > 0.0 and position != position + wall_direction:
+		visuals.look_at(position + wall_direction, up_direction)
+
+
+func play_locked_animation(animation_name: String) -> float:
+	var current_state_name = base_state.get_state_name(current_state)
+	var current_state_scene = get_parent().find_child(current_state_name)
+	current_state_scene.process_mode = Node.PROCESS_MODE_DISABLED
+	animation_player.play(animation_name)
+	animation_player.connect("animation_finished", _on_locked_animation_finished)
+	is_animation_locked = true
+	return animation_player.current_animation_length
+
+
+func _on_locked_animation_finished(animation_name: String) -> void:
+	animation_player.disconnect("animation_finished", _on_locked_animation_finished)
+	var current_state_name = base_state.get_state_name(current_state)
+	var current_state_scene = get_parent().find_child(current_state_name)
+	current_state_scene.process_mode = Node.PROCESS_MODE_INHERIT
+	is_animation_locked = false

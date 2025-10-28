@@ -9,6 +9,9 @@ func _physics_process(delta):
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
 
+	# Do nothing if the player's animation is locked
+	if player.is_animation_locked: return
+
 	# Check if the player is looking at a grabable ledge -> Start "hanging"
 	if player.enable_hanging:
 		if not player.is_flying \
@@ -16,13 +19,13 @@ func _physics_process(delta):
 		and not player.ray_cast_top.is_colliding() \
 		and player.ray_cast_high.is_colliding() \
 		and not player.is_skateboarding:
-			# Start "hanging"
 			transition_state(player.current_state, States.State.HANGING)
 			return
 
 	# Check if the player is not on a floor -> Start "falling"
 	if not player.is_on_floor() \
 	and not player.is_climbing \
+	and not player.is_climbing_ladder \
 	and not player.is_flying \
 	and not player.is_hanging \
 	and not player.is_jumping \
@@ -36,6 +39,7 @@ func _physics_process(delta):
 
 	# Change state based on velocity
 	if not player.is_climbing \
+	and not player.is_climbing_ladder \
 	and not player.is_crawling \
 	and not player.is_crouching \
 	and not player.is_driving \
@@ -63,7 +67,6 @@ func _physics_process(delta):
 		elif Input.is_action_pressed(player.controls.button_1) \
 		and player.enable_sprinting \
 		and not player.is_sprinting:
-			# Start "sprinting"
 			transition_state(player.current_state, States.State.SPRINTING)
 			return
 
@@ -84,83 +87,6 @@ func _physics_process(delta):
 func get_state_name(state: States.State) -> String:
 	# Return the state name with the first letter capitalized
 	return States.State.keys()[state].capitalize().replace(" ", "")
-
-
-## Provides movement logic for climbing and hanging states; which are mostly skipped in player._physics_process().
-func move_player() -> void:
-	# Get the collision normal (wall outward direction)
-	var collision_normal_normalized: Vector3 = player.ray_cast_high.get_collision_normal().normalized()
-
-	# Build an orthonormal basis for the wall plane using player's up and wall normal
-	# Remove any component of up along the normal to get the wall-up (shimmy) axis
-	var wall_up: Vector3 = (player.up_direction - collision_normal_normalized * player.up_direction.dot(collision_normal_normalized)).normalized()
-	# Right axis along the wall (perpendicular to wall_up and normal)
-	var wall_right: Vector3 = wall_up.cross(collision_normal_normalized).normalized()
-
-	# Gather inputs mapped onto wall axies
-	var move_direction: Vector3 = Vector3.ZERO
-	if Input.is_action_pressed(player.controls.move_left):
-		move_direction -= wall_right
-	if Input.is_action_pressed(player.controls.move_right):
-		move_direction += wall_right
-	# only apply vertical movement if climbing
-	if player.is_climbing:
-		if Input.is_action_pressed(player.controls.move_up):
-			move_direction += wall_up
-		if Input.is_action_pressed(player.controls.move_down):
-			move_direction -= wall_up
-
-	# Normalize to keep diagonal speed consistent
-	if move_direction.length() > 0.0:
-		move_direction = move_direction.normalized()
-
-	# Constrain velocity strictly to the wall plane, no motion into or away from the wall
-	player.velocity = move_direction * player.speed_current
-
-	# Ensure the visuals face the wall (optional subtle alignment)
-	var wall_forward = -collision_normal_normalized
-	# Project the forward onto the plane perpendicular to up to avoid pitching toward ground/ceiling
-	wall_forward = (wall_forward - player.up_direction * wall_forward.dot(player.up_direction)).normalized()
-	if wall_forward.length() > 0.0 and player.position != player.position + wall_forward:
-		player.visuals.look_at(player.position + wall_forward, player.up_direction)
-
-
-## Snaps the player to the wall they are climbing/hanging on.
-func move_to_wall() -> void:
-	# Get the collision point
-	var collision_point = player.ray_cast_high.get_collision_point()
-
-	# [DEBUG] Draw a debug sphere at the collision point
-	#player.debug.draw_debug_sphere(collision_point, Color.RED)
-
-	# Calculate the direction from the player to collision point
-	var direction = (collision_point - player.position).normalized()
-
-	# Calculate new point by moving back from point along the direction by the given player radius
-	collision_point = collision_point - direction * player.collision_width
-
-	# [DEBUG] Draw a debug sphere at the adjusted collision point
-	#player.debug.draw_debug_sphere(collision_point, Color.YELLOW)
-
-	# Adjust the point relative to the player's height
-	collision_point = Vector3(collision_point.x, player.position.y, collision_point.z)
-
-	# Move the player to the collision point
-	player.global_position = collision_point
-
-	# [DEBUG] Draw a debug sphere at the collision point
-	#player.debug.draw_debug_sphere(collision_point, Color.GREEN)
-
-	# Get the collision normal
-	var collision_normal = player.ray_cast_high.get_collision_normal()
-
-	# Calculate the wall direction
-	var wall_direction = -collision_normal
-
-	# Make the player face the wall while keeping upright (flatten onto plane perpendicular to up)
-	wall_direction = (wall_direction - player.up_direction * wall_direction.dot(player.up_direction)).normalized()
-	if wall_direction.length() > 0.0 and player.position != player.position + wall_direction:
-		player.visuals.look_at(player.position + wall_direction, player.up_direction)
 
 
 ## Called when a state needs to transition to another.
@@ -190,3 +116,5 @@ func transition_state(from_state: States.State, to_state: States.State):
 		from_scene.stop()
 		# Start processing the "to" scene
 		to_scene.start()
+		# Update the player's previous state
+		player.previous_state = from_state

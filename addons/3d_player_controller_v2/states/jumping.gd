@@ -17,14 +17,10 @@ func _input(event):
 	# Ⓐ/[Space] _pressed_ -> Start "climbing"
 	if event.is_action_pressed(player.controls.button_0):
 		if player.enable_climbing:
-			# Check if the player is facing a surface
 			if player.ray_cast_high.is_colliding():
-				# Get the collision object
 				var collision_object = player.ray_cast_high.get_collider()
-				# Check if the collision object is "climbable"
 				if not collision_object is CharacterBody3D \
 				and not collision_object is SoftBody3D:
-					# Start "climbing"
 					transition_state(player.current_state, States.State.CLIMBING)
 					return
 
@@ -33,39 +29,33 @@ func _input(event):
 		if player.enable_double_jumping \
 		and not player.is_double_jumping:
 			player.is_double_jumping = true
-			# Increase the player's velocity in the up direction
 			player.velocity += player.up_direction * player.speed_jumping
 			return
 
 	# Ⓐ/[Space] _pressed_ -> Start "flying"
 	if event.is_action_pressed(player.controls.button_0):
 		if player.enable_flying:
-			# Start "flying"
 			transition_state(player.current_state, States.State.FLYING)
 			return
 
 	# Ⓐ/[Space] _pressed_ -> Start "paragliding"
 	if event.is_action_pressed(player.controls.button_0):
 		if player.enable_paragliding:
-			# Start "paragliding"
 			transition_state(player.current_state, States.State.PARAGLIDING)
 			return
 
-	# 🄻1/[MB0] _pressed_
+	# 🄻1/[MB0] _pressed_ -> Fire rifle
 	if event.is_action_pressed(player.controls.button_4):
-		# Rifle "firing"
 		if player.is_holding_rifle:
 			player.is_firing_rifle = true
 
-	# 🅁1/[MB1] _pressed_ 
+	# 🅁1/[MB1] _pressed_ -> Aim rifle
 	if event.is_action_pressed(player.controls.button_5):
-		# Rifle "aiming"
 		if player.is_holding_rifle:
 			player.is_aiming_rifle = true
 
-	# 🅁1/[MB1] _released_
+	# 🅁1/[MB1] _released_ -> Lower rifle
 	if event.is_action_released(player.controls.button_5):
-		# Stop "aiming rifle"
 		if player.is_holding_rifle \
 		and player.is_aiming_rifle:
 			player.is_aiming_rifle = false

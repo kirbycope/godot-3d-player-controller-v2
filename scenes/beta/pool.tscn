@@ -30,7 +30,7 @@ material = SubResource("StandardMaterial3D_772hs")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
 mesh = SubResource("PlaneMesh_f4nu8")
 
-[node name="PlayerDetection" type="Area3D" parent="."]
+[node name="PlayerDetection" type="Area3D" parent="." groups=["water"]]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerDetection"]
 shape = SubResource("BoxShape3D_po7k7")

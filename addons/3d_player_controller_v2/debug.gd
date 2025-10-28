@@ -22,6 +22,7 @@ var yellow_sphere: MeshInstance3D
 @onready var enable_sliding: CheckButton = $Configuration/EnableSliding
 @onready var enable_sprinting: CheckButton = $Configuration/EnableSprinting
 @onready var enable_swimming: CheckButton = $Configuration/EnableSwimming
+@onready var enable_throwing: CheckButton = $Configuration/EnableThrowing
 @onready var lock_camera: CheckButton = $Configuration2/LockCamera
 @onready var lock_movement_x: CheckButton = $Configuration2/LockMovementX
 @onready var lock_movement_y: CheckButton = $Configuration2/LockMovementY
@@ -29,6 +30,7 @@ var yellow_sphere: MeshInstance3D
 @onready var is_aiming_rifle: CheckBox = $States2/IsAimingRifle
 @onready var is_casting_fishing: CheckBox = $States2/IsCastingFishing
 @onready var is_climbing: CheckBox = $States/IsClimbing
+@onready var is_climbing_ladder: CheckBox = $States/IsClimbingLadder
 @onready var is_crawling: CheckBox = $States/IsCrawling
 @onready var is_crouching: CheckBox = $States/IsCrouching
 @onready var is_driving: CheckBox = $States/IsDriving
@@ -40,7 +42,7 @@ var yellow_sphere: MeshInstance3D
 @onready var is_jumping: CheckBox = $States/IsJumping
 @onready var is_kicking_left: CheckBox = $States2/IsKickingLeft
 @onready var is_kicking_right: CheckBox = $States2/IsKickingRight
-@onready var is_on_floor: CheckBox = $States/IsOnFloor
+@onready var is_on_floor: CheckBox = $States2/IsOnFloor
 @onready var is_punching_left: CheckBox = $States2/IsPunchingLeft
 @onready var is_punching_right: CheckBox = $States2/IsPunchingRight
 @onready var is_reeling_fishing: CheckBox = $States2/IsReelingFishing
@@ -55,6 +57,7 @@ var yellow_sphere: MeshInstance3D
 @onready var is_swimming: CheckBox = $States/IsSwimming
 @onready var is_swinging_1h_left: CheckBox = $States2/IsSwinging1HLeft
 @onready var is_swinging_1h_right: CheckBox = $States2/IsSwinging1HRight
+@onready var is_throwing: CheckBox = $States2/IsThrowing
 @onready var is_walking: CheckBox = $States/IsWalking
 @onready var fps: Label = $Performance/FPS
 @onready var player: CharacterBody3D = get_parent()
@@ -98,6 +101,7 @@ func _process(_delta):
 		enable_sliding.button_pressed = player.enable_sliding
 		enable_sprinting.button_pressed = player.enable_sprinting
 		enable_swimming.button_pressed = player.enable_swimming
+		enable_throwing.button_pressed = player.enable_throwing
 		lock_camera.button_pressed = player.camera.lock_camera
 		lock_movement_x.button_pressed = player.lock_movement_x
 		lock_movement_y.button_pressed = player.lock_movement_y
@@ -105,6 +109,7 @@ func _process(_delta):
 		is_aiming_rifle.button_pressed = player.is_aiming_rifle
 		is_casting_fishing.button_pressed = player.is_casting_fishing
 		is_climbing.button_pressed = player.is_climbing
+		is_climbing_ladder.button_pressed = player.is_climbing_ladder
 		is_crawling.button_pressed = player.is_crawling
 		is_crouching.button_pressed = player.is_crouching
 		is_driving.button_pressed = player.is_driving
@@ -131,6 +136,7 @@ func _process(_delta):
 		is_swimming.button_pressed = player.is_swimming
 		is_swinging_1h_left.button_pressed = player.is_swinging_1h_left
 		is_swinging_1h_right.button_pressed = player.is_swinging_1h_right
+		is_throwing.button_pressed = player.is_throwing
 		is_walking.button_pressed = player.is_walking
 		coordinates.text = "[center][color=red]X:[/color]%.1f [color=green]Y:[/color]%.1f [color=blue]Z:[/color]%.1f[/center]" % [player.global_position.x, player.global_position.y, player.global_position.z]
 		velocity.text = "[center][color=red]X:[/color]%.1f [color=green]Y:[/color]%.1f [color=blue]Z:[/color]%.1f[/center]" % [player.velocity.x, player.velocity.y, player.velocity.z]
@@ -213,7 +219,7 @@ func _on_enable_flying_toggled(toggled_on):
 
 
 func _on_enable_hanging_toggled(toggled_on: bool) -> void:
-	player.enable_hanging
+	player.enable_hanging = toggled_on
 
 
 func _on_enable_holding_objects_toggled(toggled_on: bool) -> void:
@@ -252,16 +258,16 @@ func _on_enable_sliding_toggled(toggled_on: bool) -> void:
 	player.enable_sliding = toggled_on
 
 
-func _on_enable_skateboarding_toggled(toggled_on: bool) -> void:
-	pass # Replace with function body.
-
-
 func _on_enable_sprinting_toggled(toggled_on):
 	player.enable_sprinting = toggled_on
 
 
 func _on_enable_swimming_toggled(toggled_on):
 	player.enable_swimming = toggled_on
+
+
+func _on_enable_throwing_toggled(toggled_on: bool) -> void:
+	player.enable_throwing = toggled_on
 
 
 func _on_lock_camera_toggled(toggled_on):

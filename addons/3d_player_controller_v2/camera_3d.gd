@@ -3,7 +3,7 @@ extends Camera3D
 enum Perspective {
 	THIRD_PERSON, # 0
 	FIRST_PERSON, # 1
-} ## TODO: Replace with procedurly generated one instaed so the model can be swapped easier??
+}
 
 @export var enable_head_bobbing: bool = false ## Enable head bobbing effect
 @export var lock_camera: bool = false ## Lock camera position and location
@@ -35,8 +35,8 @@ func _input(event) -> void:
 	# Do nothing if the "pause" menu is visible
 	if player.pause.visible: return
 
-	if lock_camera:
-		return
+	# Do nothing if the camera is locked
+	if lock_camera: return
 
 	# ⧉/[F5] _pressed_ -> Toggle "perspective"
 	if event.is_action_pressed(player.controls.button_8) \
@@ -45,38 +45,39 @@ func _input(event) -> void:
 
 	# Check for mouse motion
 	if event is InputEventMouseMotion:
-		# Check if the mouse is captured
 		if Input.get_mouse_mode() in [Input.MOUSE_MODE_CAPTURED, Input.MOUSE_MODE_HIDDEN] \
 		and not is_rotating_camera:
-			# Rotate camera based on mouse movement
 			camera_rotate_by_mouse(event)
 
-		# Check if the mouse is visible and the right mouse button is pressed
+		# Check if the mouse is visible and the right mouse button is pressed -> Start rotating camera
 		if Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE \
 		and Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
-			# Flag the camera as rotating
 			is_rotating_camera = true
-			# Hide the mouse
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-			# Rotate camera based on mouse movement
 			camera_rotate_by_mouse(event)
 
-		# Check if the mouse is captured and the camera is rotating
+		# Check if the mouse is captured and the camera is rotating -> Activley rotating camera
 		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED \
 		and is_rotating_camera:
-			# Rotate camera based on mouse movement
 			camera_rotate_by_mouse(event)
 
-	# Check if the right mouse button is released while rotating the camera
+	# Check if the right mouse button is released while rotating the camera -> Stop rotating camera
 	if event is InputEventMouseButton \
 	and event.button_index == MOUSE_BUTTON_RIGHT \
 	and event.is_pressed() == false and is_rotating_camera:
-		# Flag the camera as not rotating
 		is_rotating_camera = false
-		# Show the mouse
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
-	# Ⓧ/[E] press to pick up an object - Release object
+	#  Ⓧ/[E] _pressed_ -> Climb ladder
+	if event.is_action_pressed(player.controls.button_2) \
+	and ray_cast.is_colliding() \
+	and not player.is_climbing_ladder:
+		var collider = ray_cast.get_collider()
+		if collider.is_in_group("Ladder"):
+			player.base_state.transition_state(player.current_state, States.State.CLIMBING_LADDER)
+			return
+
+	# Ⓧ/[E] _pressed_ -> Release object
 	if event.is_action_pressed(player.controls.button_2) \
 	and player.enable_holding_objects \
 	and item_spring_arm.get_child_count() != 0:
@@ -91,7 +92,7 @@ func _input(event) -> void:
 		# Reparent the child object back to its original parent (assuming that's the Player's parent too)
 		child.reparent(player.get_parent(), true)
 
-	# Ⓧ/[E] press to pick up an object - Pickup object
+	# Ⓧ/[E] _pressed_ -> Pickup object
 	if event.is_action_pressed(player.controls.button_2) \
 	and player.enable_holding_objects \
 	and item_spring_arm.get_child_count() == 0:
@@ -114,9 +115,9 @@ func _input(event) -> void:
 					# Reparent the Ridgidbody3D to the item mount
 					collider.reparent(item_spring_arm)
 	
-	# 🅁1/[MB1] press to pick up an object - Release object
+	# 🅁1/[MB1] press to pick up an object - Throw object
 	if event.is_action_pressed(player.controls.button_5) \
-	and player.enable_holding_objects \
+	and player.enable_throwing \
 	and item_spring_arm.get_child_count() != 0:
 		# Get the [first] child node of the item spring arm
 		var child = item_spring_arm.get_child(0)
@@ -131,6 +132,7 @@ func _input(event) -> void:
 		# Apply an impulse to the object in the direction the camera is facing
 		var force_direction = -global_transform.basis.z.normalized()
 		child.apply_impulse(force_direction * 5.0, Vector3.ZERO)
+		#player.base_state.transition_state(player.current_state, States.State.THROWING)
 
 
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -148,8 +150,16 @@ func _process(delta) -> void:
 				elif collider is VehicleBody3D \
 				and not player.is_driving:
 					contextual_controls.text = "Press [E] to drive"
+				elif collider.is_in_group("Ladder"):
+					if player.is_climbing_ladder:
+						contextual_controls.text = "Press [Ctrl] to release"
+					else:
+						contextual_controls.text = "Press [E] to climb"
 		else:
-			contextual_controls.text = "Press [E] to release \nPress [RMB] to throw"
+			if player.enable_throwing:
+				contextual_controls.text = "Press [E] to release \nPress [RMB] to throw"
+			else:
+				contextual_controls.text = "Press [E] to release"
 
 	retical.visible = player.enable_retical
 

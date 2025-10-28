@@ -27,23 +27,17 @@ func _process(delta):
 
 ## Plays the appropriate animation based on player state.
 func play_animation() -> void:
-	# Check if the animation player is not already playing the appropriate animation
 	if player.animation_player.current_animation != ANIMATION_ROLLING:
-		# Play the "rolling" animation
 		player.animation_player.play(ANIMATION_ROLLING)
-		# Set a callback for when the animation finishes
 		player.animation_player.connect("animation_finished", _on_animation_finished)
 
 
 func _on_animation_finished(anim_name: String) -> void:
 	if anim_name == ANIMATION_ROLLING:
-		# Disconnect the signal to avoid multiple connections
 		player.animation_player.disconnect("animation_finished", _on_animation_finished)
 		if Input.is_action_pressed(player.controls.button_3):
-			# Transition to the "crouching" state
 			transition_state(NODE_STATE, States.State.CROUCHING)
 		else:
-			# Transition back to the idle state
 			transition_state(NODE_STATE, States.State.STANDING)
 
 

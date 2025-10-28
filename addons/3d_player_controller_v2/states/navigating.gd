@@ -1,6 +1,6 @@
 extends BaseState
 
-const ANIMATION_RUNNING := "Running_In_Place/mixamo_com"
+const ANIMATION_RUNNING := "Running/mixamo_com"
 const NODE_NAME := "Navigating"
 const NODE_STATE := States.State.NAVIGATING
 

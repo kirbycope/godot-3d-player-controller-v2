@@ -7,6 +7,7 @@ var current_index = -1
 @onready var animal_crossing_new_leaf = button_container.get_node("AnimalCrossingNewLeaf")
 @onready var guild_wars = button_container.get_node("GuildWars")
 @onready var minecraft = button_container.get_node("Minecraft")
+@onready var pokemon = button_container.get_node("PokemonLegendsZA")
 @onready var portal = button_container.get_node("Portal")
 @onready var super_mario_galaxy = button_container.get_node("SuperMarioGalaxy")
 @onready var super_mario_odyssey = button_container.get_node("SuperMarioOdyssey")
@@ -17,6 +18,7 @@ var current_index = -1
 @onready var animal_crossing_new_leaf_preview = preview_container.get_node("AnimalCrossingNewLeaf")
 @onready var guild_wars_preview = preview_container.get_node("GuildWars")
 @onready var minecraft_preview = preview_container.get_node("Minecraft")
+@onready var pokemon_preview = preview_container.get_node("PokemonLegendsZA")
 @onready var portal_preview = preview_container.get_node("Portal")
 @onready var super_mario_galaxy_preview = preview_container.get_node("SuperMarioGalaxy")
 @onready var super_mario_odyssey_preview = preview_container.get_node("SuperMarioOdyssey")
@@ -28,7 +30,6 @@ var current_index = -1
 
 func _ready():
 	_on_beta_pressed()
-
 
 
 func get_level_index() -> int:
@@ -84,6 +85,15 @@ func _on_minecraft_pressed():
 	minecraft_preview.visible = true
 	reset_buttons()
 	minecraft.button_pressed = true
+	current_index = get_level_index()
+
+
+func _on_pokemon_legends_za_pressed() -> void:
+	description.text = "Third-person perspective. 3D platforming."
+	hide_previews()
+	pokemon_preview.visible = true
+	reset_buttons()
+	pokemon.button_pressed = true
 	current_index = get_level_index()
 
 
@@ -151,18 +161,21 @@ func _on_enter_level_pressed():
 			var mc_scene = load("res://scenes/minecraft/main.tscn").instantiate()
 			get_tree().root.add_child(mc_scene)
 		elif current_index == 4:
+			var pokemon_scene = load("res://scenes/pokemon_legends_za/main.tscn").instantiate()
+			get_tree().root.add_child(pokemon_scene)
+		elif current_index == 5:
 			var portal_scene = load("res://scenes/portal/main.tscn").instantiate()
 			get_tree().root.add_child(portal_scene)
-		elif current_index == 5:
+		elif current_index == 6:
 			var smg_scene = load("res://scenes/super_mario_galaxy/main.tscn").instantiate()
 			get_tree().root.add_child(smg_scene)
-		elif current_index == 6:
+		elif current_index == 7:
 			var smo_scene = load("res://scenes/super_mario_odyssey/main.tscn").instantiate()
 			get_tree().root.add_child(smo_scene)
-		elif current_index == 7:
+		elif current_index == 8:
 			var zbotw_scene = load("res://scenes/zelda_breath_of_the_wild/main.tscn").instantiate()
 			get_tree().root.add_child(zbotw_scene)
-		elif current_index == 8:
+		elif current_index == 9:
 			var zla_scene = load("res://scenes/zelda_links_awakening/main.tscn").instantiate()
 			get_tree().root.add_child(zla_scene)
 		queue_free()
