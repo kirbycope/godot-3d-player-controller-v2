@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://yxm384w27bq2" path="res://addons/3d_player_controller_v2/states.tscn" id="5_5e1u4"]
 [ext_resource type="PackedScene" uid="uid://2p8pyabd2bmo" path="res://addons/3d_player_controller_v2/pause.tscn" id="5_7fj78"]
 [ext_resource type="AnimationLibrary" uid="uid://bi0k3a7oxrgfd" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/climbing/Climbing_Down.fbx" id="10_2enep"]
+[ext_resource type="AnimationLibrary" uid="uid://b5s66wqjyrlql" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/climbing/Climbing_Incline_Steep.fbx" id="10_a6ahb"]
 [ext_resource type="AnimationLibrary" uid="uid://cvff3p1u71v73" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/climbing/Climbing_Ladder.fbx" id="11_4h8gy"]
 [ext_resource type="AnimationLibrary" uid="uid://cnjephacakr4h" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/climbing/Climbing_Up.fbx" id="12_ae0e0"]
 [ext_resource type="AnimationLibrary" uid="uid://t5mr2lr0xg2j" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/crawling/Crawling.fbx" id="13_8412t"]
