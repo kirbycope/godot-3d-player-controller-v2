@@ -780,12 +780,23 @@ layout_mode = 0
 offset_right = 164.0
 offset_bottom = 31.0
 
-[node name="IsThrowing" type="CheckBox" parent="States2"]
+[node name="IsThrowingLeft" type="CheckBox" parent="States2"]
 layout_mode = 2
 disabled = true
-text = "IsThrowing"
+text = "IsThrowingLeft"
 
-[node name="Panel" type="Panel" parent="States2/IsThrowing"]
+[node name="Panel" type="Panel" parent="States2/IsThrowingLeft"]
+z_index = -1
+layout_mode = 0
+offset_right = 164.0
+offset_bottom = 31.0
+
+[node name="IsThrowingRight" type="CheckBox" parent="States2"]
+layout_mode = 2
+disabled = true
+text = "IsThrowingRight"
+
+[node name="Panel" type="Panel" parent="States2/IsThrowingRight"]
 z_index = -1
 layout_mode = 0
 offset_right = 164.0

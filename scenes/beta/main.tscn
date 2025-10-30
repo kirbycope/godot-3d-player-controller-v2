@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dey7ls45vvlck"]
+[gd_scene load_steps=22 format=3 uid="uid://dey7ls45vvlck"]
 
 [ext_resource type="Script" uid="uid://dhm0w0mgw28o6" path="res://scenes/beta/main.gd" id="1_4go8p"]
 [ext_resource type="Texture2D" uid="uid://bpo2vwd0ruriv" path="res://assets/textures/prototype_textures/Dark/texture_08.png" id="2_7kfyu"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://crbkch87dbiqi" path="res://scenes/portal/friendly_freight.tscn" id="8_q7lbx"]
 [ext_resource type="PackedScene" uid="uid://cg7c5p0uk7mjf" path="res://scenes/beta/gun.tscn" id="9_4s88f"]
 [ext_resource type="Texture2D" uid="uid://c3ui4jf402ksm" path="res://assets/textures/prototype_textures/Light/texture_06.png" id="12_q7lbx"]
+[ext_resource type="PackedScene" uid="uid://bga8sxeufkcky" path="res://scenes/beta/tennis_ball.tscn" id="12_r3gsl"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sugp2"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -206,6 +207,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 1.9)
 
 [node name="FishingRod" parent="." instance=ExtResource("8_a8mrn")]
 transform = Transform3D(0.09767043, 0.28365555, 4.5298737e-08, 0.26654902, -0.0917802, 0.102606036, -0.097015925, 0.033405215, 0.28190777, -1.9999999, 0.5, 3.5)
+
+[node name="TennisBall" parent="." instance=ExtResource("12_r3gsl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 5, 0)

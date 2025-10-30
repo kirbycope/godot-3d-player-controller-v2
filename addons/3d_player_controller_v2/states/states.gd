@@ -26,6 +26,5 @@ enum State {
 	SPRINTING,       # 20
 	STANDING,        # 21
 	SWIMMING,        # 22
-	THROWING,        # 23
-	WALKING,         # 24
+	WALKING,         # 23
 }

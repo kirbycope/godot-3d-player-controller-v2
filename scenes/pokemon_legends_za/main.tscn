@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://ciovvk3slq8lc"]
+[gd_scene load_steps=28 format=3 uid="uid://ciovvk3slq8lc"]
 
 [ext_resource type="Script" uid="uid://dnnatqu7iska0" path="res://scenes/pokemon_legends_za/main.gd" id="1_m2d4j"]
 [ext_resource type="PackedScene" uid="uid://f6xpywa7euq2" path="res://addons/3d_player_controller_v2/player.tscn" id="2_sp3de"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://7ci0m8gjrhjv" path="res://assets/textures/prototype_textures/Red/texture_08.png" id="6_ox8er"]
 [ext_resource type="Texture2D" uid="uid://8kccffo58ufc" path="res://assets/textures/prototype_textures/Dark/texture_04.png" id="7_xckoa"]
 [ext_resource type="Texture2D" uid="uid://c3ui4jf402ksm" path="res://assets/textures/prototype_textures/Light/texture_06.png" id="9_m2d4j"]
+[ext_resource type="PackedScene" uid="uid://bga8sxeufkcky" path="res://scenes/beta/tennis_ball.tscn" id="10_bpj45"]
 [ext_resource type="Script" uid="uid://c8puflx8oiii0" path="res://scenes/pokemon_legends_za/climbing_slab.gd" id="11_a4srh"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8ey56"]
@@ -258,6 +259,9 @@ shape = SubResource("BoxShape3D_m2d4j")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Ladder_0_5x2_0x0_1"]
 mesh = SubResource("BoxMesh_xckoa")
+
+[node name="TennisBall" parent="." instance=ExtResource("10_bpj45")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0.5, 6.5, -5)
 
 [connection signal="body_entered" from="Slab_2_0x0_1x2_25/PlayerDetection" to="Slab_2_0x0_1x2_25" method="_on_player_detection_body_entered"]
 [connection signal="body_exited" from="Slab_2_0x0_1x2_25/PlayerDetection" to="Slab_2_0x0_1x2_25" method="_on_player_detection_body_exited"]

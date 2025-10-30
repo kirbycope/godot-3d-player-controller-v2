@@ -3,13 +3,13 @@
 importer="animation_library"
 importer_version=1
 type="AnimationLibrary"
-uid="uid://cefy2ymb1yik6"
-path="res://.godot/imported/Standing_Throw.fbx-7d0bf6f6e039032228637c68e418dd60.res"
+uid="uid://cqaguu06qx1lq"
+path="res://.godot/imported/Standing_Throwing_Right.fbx-53e54a89dab134a1dca19a9e7b12da67.res"
 
 [deps]
 
-source_file="res://addons/3d_player_controller_v2/assets/animations/mixamo/standing/Standing_Throw.fbx"
-dest_files=["res://.godot/imported/Standing_Throw.fbx-7d0bf6f6e039032228637c68e418dd60.res"]
+source_file="res://addons/3d_player_controller_v2/assets/animations/mixamo/standing/Standing_Throwing_Right.fbx"
+dest_files=["res://.godot/imported/Standing_Throwing_Right.fbx-53e54a89dab134a1dca19a9e7b12da67.res"]
 
 [params]
 

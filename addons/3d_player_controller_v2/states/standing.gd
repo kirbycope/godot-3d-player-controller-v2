@@ -13,6 +13,8 @@ const ANIMATION_RIFLE_FIRING := "Standing_Firing_Rifle/mixamo_com"
 const ANIMATION_STANDING_IDLE := "Standing/mixamo_com"
 const ANIMATION_SWINGING_1H_LEFT := "Standing_Melee_Attack_Downward_Left/mixamo_com"
 const ANIMATION_SWINGING_1H_RIGHT := "Standing_Melee_Attack_Downward_Right/mixamo_com"
+const ANIMATION_THROWING_LEFT := "Standing_Throwing_Left/mixamo_com"
+const ANIMATION_THROWING_RIGHT := "Standing_Throwing_Right/mixamo_com"
 const NODE_NAME := "Standing"
 const NODE_STATE := States.State.STANDING
 
@@ -52,6 +54,10 @@ func _input(event):
 		elif player.is_holding_1h_left \
 		and not player.is_swinging_1h_right:
 			player.is_swinging_1h_left = true
+		# Left hand "throwing" 
+		elif player.is_holding_left \
+		and not player.is_throwing_left:
+			player.is_throwing_left = true
 		# Left "punching"
 		elif player.enable_punching \
 		and not player.is_punching_right:
@@ -76,6 +82,10 @@ func _input(event):
 		elif player.is_holding_1h_right \
 		and not player.is_swinging_1h_left:
 			player.is_swinging_1h_right = true
+		# Right hand "throwing" 
+		elif player.is_holding_right \
+		and not player.is_throwing_right:
+			player.is_throwing_right = true
 		# Held object "throwing"
 		elif player.enable_throwing \
 		and player.camera.item_spring_arm.get_child_count() != 0:
@@ -170,6 +180,18 @@ func play_animation() -> void:
 			player.animation_player.play(ANIMATION_SWINGING_1H_RIGHT)
 			player.animation_player.connect("animation_finished", _on_animation_finished)
 
+	# -- Throwing animations --
+	elif player.is_holding_left \
+	and player.is_throwing_left:
+		if player.animation_player.current_animation != ANIMATION_THROWING_LEFT:
+			player.animation_player.play(ANIMATION_THROWING_LEFT)
+			player.animation_player.connect("animation_finished", _on_animation_finished)
+	elif player.is_holding_right \
+	and player.is_throwing_right:
+		if player.animation_player.current_animation != ANIMATION_THROWING_RIGHT:
+			player.animation_player.play(ANIMATION_THROWING_RIGHT)
+			player.animation_player.connect("animation_finished", _on_animation_finished)
+
 	# -- Punching animations --
 	elif player.enable_punching \
 	and player.is_punching_left:
@@ -208,6 +230,10 @@ func _on_animation_finished(animation_name: String) -> void:
 		player.is_swinging_1h_left = false
 	elif animation_name == ANIMATION_SWINGING_1H_RIGHT:
 		player.is_swinging_1h_right = false
+	elif animation_name == ANIMATION_THROWING_LEFT:
+		player.is_throwing_left = false
+	elif animation_name == ANIMATION_THROWING_RIGHT:
+		player.is_throwing_right = false
 
 
 ## Start "standing".

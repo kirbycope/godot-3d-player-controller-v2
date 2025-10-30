@@ -1,4 +1,4 @@
-[gd_scene load_steps=121 format=4 uid="uid://f6xpywa7euq2"]
+[gd_scene load_steps=122 format=4 uid="uid://f6xpywa7euq2"]
 
 [ext_resource type="Script" uid="uid://b7plmenqhwlu4" path="res://addons/3d_player_controller_v2/player.gd" id="1_ifhah"]
 [ext_resource type="Script" uid="uid://5rlkn1wdmtq0" path="res://addons/3d_player_controller_v2/camera_3d.gd" id="2_ffasv"]
@@ -76,10 +76,11 @@
 [ext_resource type="AnimationLibrary" uid="uid://cy5y8713mkvro" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/T_Pose.fbx" id="69_ae0e0"]
 [ext_resource type="AnimationLibrary" uid="uid://dce57uqhgtujl" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/swimming/Swimming_Treading_Water.fbx" id="69_apuok"]
 [ext_resource type="AnimationLibrary" uid="uid://co66savqkglfg" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/standing/Standing_Reaction_Low_Right.fbx" id="69_secpm"]
-[ext_resource type="AnimationLibrary" uid="uid://cefy2ymb1yik6" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/standing/Standing_Throw.fbx" id="70_e1d05"]
 [ext_resource type="AnimationLibrary" uid="uid://bu7g5s81bdbwn" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/walking/Walking.fbx" id="71_tljd4"]
+[ext_resource type="AnimationLibrary" uid="uid://bucv46oxo0iqc" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/standing/Standing_Throwing_Left.fbx" id="72_54rnv"]
 [ext_resource type="AnimationLibrary" uid="uid://bfnxbrl7pdl51" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/walking/Walking_Aiming_Rifle.fbx" id="72_j56ua"]
 [ext_resource type="AnimationLibrary" uid="uid://bike1bd15pb4f" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/walking/Walking_Firing_Rifle.fbx" id="73_e6n57"]
+[ext_resource type="AnimationLibrary" uid="uid://cqaguu06qx1lq" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/standing/Standing_Throwing_Right.fbx" id="73_o57k2"]
 [ext_resource type="AnimationLibrary" uid="uid://pkmyy6nm7wcl" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/walking/Walking_Holding_Rifle.fbx" id="74_4vx0v"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ifhah"]
@@ -20312,7 +20313,8 @@ libraries = {
 &"Standing_Reaction_High_Right": ExtResource("67_e1d05"),
 &"Standing_Reaction_Low_Left": ExtResource("68_a6ahb"),
 &"Standing_Reaction_Low_Right": ExtResource("69_secpm"),
-&"Standing_Throw": ExtResource("70_e1d05"),
+&"Standing_Throwing_Left": ExtResource("72_54rnv"),
+&"Standing_Throwing_Right": ExtResource("73_o57k2"),
 &"Standing_Waving": ExtResource("66_udl7e"),
 &"Swimming": ExtResource("67_3v1ko"),
 &"Swimming_To_Edge": ExtResource("68_xc8ct"),

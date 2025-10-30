@@ -20,7 +20,7 @@ func _input(event):
 	if player.enable_sprinting:
 		if event.is_action_pressed(player.controls.button_1):
 			player.speed_current = player.speed_climbing * 2
-		else:
+		elif event.is_action_released(player.controls.button_1):
 			player.speed_current = player.speed_climbing
 
 	# Ⓨ/[Ctrl] _pressed_ -> Start "falling"

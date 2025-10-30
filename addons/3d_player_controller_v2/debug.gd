@@ -57,7 +57,8 @@ var yellow_sphere: MeshInstance3D
 @onready var is_swimming: CheckBox = $States/IsSwimming
 @onready var is_swinging_1h_left: CheckBox = $States2/IsSwinging1HLeft
 @onready var is_swinging_1h_right: CheckBox = $States2/IsSwinging1HRight
-@onready var is_throwing: CheckBox = $States2/IsThrowing
+@onready var is_throwing_left: CheckBox = $States2/IsThrowingLeft
+@onready var is_throwing_right: CheckBox = $States2/IsThrowingRight
 @onready var is_walking: CheckBox = $States/IsWalking
 @onready var fps: Label = $Performance/FPS
 @onready var player: CharacterBody3D = get_parent()
@@ -136,7 +137,8 @@ func _process(_delta):
 		is_swimming.button_pressed = player.is_swimming
 		is_swinging_1h_left.button_pressed = player.is_swinging_1h_left
 		is_swinging_1h_right.button_pressed = player.is_swinging_1h_right
-		is_throwing.button_pressed = player.is_throwing
+		is_throwing_left.button_pressed = player.is_throwing_left
+		is_throwing_right.button_pressed = player.is_throwing_right
 		is_walking.button_pressed = player.is_walking
 		coordinates.text = "[center][color=red]X:[/color]%.1f [color=green]Y:[/color]%.1f [color=blue]Z:[/color]%.1f[/center]" % [player.global_position.x, player.global_position.y, player.global_position.z]
 		velocity.text = "[center][color=red]X:[/color]%.1f [color=green]Y:[/color]%.1f [color=blue]Z:[/color]%.1f[/center]" % [player.velocity.x, player.velocity.y, player.velocity.z]
