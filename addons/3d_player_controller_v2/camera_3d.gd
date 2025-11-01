@@ -5,7 +5,6 @@ enum Perspective {
 	FIRST_PERSON, # 1
 }
 
-@export var enable_head_bobbing: bool = false ## Enable head bobbing effect
 @export var lock_camera: bool = false ## Lock camera position and location
 @export var lock_perspective: bool = false ## Lock camera perspective
 @export var look_sensitivity_controller: float = 50.0 ## Mouse look sensitivity
@@ -70,7 +69,17 @@ func _input(event) -> void:
 		is_rotating_camera = false
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
-	#  Ⓧ/[E] _pressed_ -> Climb ladder
+	# Ⓨ/[Ctrl] _pressed_ -> Lower camera
+	if event.is_action_pressed(player.controls.button_3):
+		if perspective == Perspective.FIRST_PERSON:
+			camera_spring_arm.position.y = -0.8
+
+	# Ⓨ/[Ctrl] _pressed_ -> Lower camera
+	if event.is_action_released(player.controls.button_3):
+		if perspective == Perspective.FIRST_PERSON:
+			camera_spring_arm.position.y = 0.0
+
+	# Ⓧ/[E] _pressed_ -> Climb ladder
 	if event.is_action_pressed(player.controls.button_2) \
 	and ray_cast.is_colliding() \
 	and not player.is_climbing_ladder:
@@ -141,6 +150,9 @@ func _input(event) -> void:
 func _process(delta) -> void:
 	if !is_multiplayer_authority(): return
 
+ 	# Do nothing if the "pause" menu is visible
+	if player.pause.visible: return
+
 	var look_actions = [player.controls.look_up, player.controls.look_down, player.controls.look_left, player.controls.look_right]
 	for action in look_actions:
 		# Check if the action is pressed and the camera is not locked -> Rotate camera
@@ -206,25 +218,21 @@ func camera_rotate_by_mouse(event: InputEvent) -> void:
 func set_camera_perspective(mode: Perspective) -> void:
 	if mode == Perspective.THIRD_PERSON:
 		perspective = Perspective.THIRD_PERSON
-		if get_parent() != camera_spring_arm:
-			reparent(camera_spring_arm)
 		camera_spring_arm.spring_length = 1.5
 		camera_spring_arm.position.x = 0.0
 		camera_spring_arm.position.y = 0.7
-		camera_spring_arm.position.z = 0.0	
+		camera_spring_arm.position.z = 0.0
 		ray_cast.position.z = -1.5
+		set_cull_mask_value(2, true)
 	else:
 		perspective = Perspective.FIRST_PERSON
 		player.visuals.rotation.y = 0.0
-		if enable_head_bobbing:
-			var BONE_PATH: String = player.skeleton.get_node("BoneAttachment3D")
-			reparent(player.visuals.get_node(BONE_PATH))
-		else:
-			camera_spring_arm.spring_length = 0.0
-			camera_spring_arm.position.x = 0.0
-			camera_spring_arm.position.y = 0.0
-			camera_spring_arm.position.z = -0.4
-			ray_cast.position.z = 0.0
+		camera_spring_arm.spring_length = 0.0
+		camera_spring_arm.position.x = 0.0
+		camera_spring_arm.position.y = 0.0
+		camera_spring_arm.position.z = 0.0
+		ray_cast.position.z = 0.0
+		set_cull_mask_value(2, false)
 
 
 ## Toggle between "first-person" and "third-person" perspectives.

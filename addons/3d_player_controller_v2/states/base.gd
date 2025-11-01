@@ -45,6 +45,7 @@ func _physics_process(delta):
 	and not player.is_driving \
 	and not player.is_flying \
 	and not player.is_hanging \
+	and not player.is_jumping \
 	and not player.is_paragliding \
 	and not player.is_punching_left \
 	and not player.is_punching_right \
@@ -57,28 +58,33 @@ func _physics_process(delta):
 		if player.is_on_floor():
 			player.is_double_jumping = false
 
-		# Check if the player is not moving -> Start "standing"
-		if abs(player.velocity).length() < 0.2 \
-		and abs(player.virtual_velocity).length() < 0.2 \
+		# Check if the player is not moving and has no input -> Start "standing"
+		if player.input_direction == Vector2.ZERO \
+		and not player.is_standing \
 		and not player.is_crouching:
 			transition_state(player.current_state, States.State.STANDING)
 			return
 
-		elif Input.is_action_pressed(player.controls.button_1) \
+		# Check if the sprint button is pressed -> Start "sprinting"
+		elif player.input_direction != Vector2.ZERO \
+		and Input.is_action_pressed(player.controls.button_1) \
 		and player.enable_sprinting \
 		and not player.is_sprinting:
 			transition_state(player.current_state, States.State.SPRINTING)
 			return
 
 		# Check if the player's current speed is slower than or equal to "walking" speed -> Start "walking"
-		elif 0.0 < player.speed_current \
-		and player.speed_current <= player.speed_walking:
+		elif Vector2.ZERO < player.input_direction \
+		and abs(player.input_direction.length()) <= 0.5 \
+		and not player.is_walking \
+		and not player.is_sprinting:
 			transition_state(player.current_state, States.State.WALKING)
 			return
 
 		# Check if the player speed is faster than "walking" but slower than or equal to "running" -> Start "running"
-		elif (player.speed_walking < player.speed_current) \
-		and (player.speed_current <= player.speed_running):
+		elif abs(player.input_direction.length()) > 0.5 \
+		and not player.is_running \
+		and not player.is_sprinting:
 			transition_state(player.current_state, States.State.RUNNING)
 			return
 

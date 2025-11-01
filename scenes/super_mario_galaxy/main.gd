@@ -11,7 +11,6 @@ const MOUSE_CURSOR_ARROW = preload("uid://dmw8j7h0b8bri")
 ## Called when the node enters the scene tree for the first time.
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	player.camera.enable_head_bobbing = false
 	player.camera.lock_camera = false
 	player.camera.lock_perspective = false
 	player.camera.set_camera_perspective(player.camera.Perspective.THIRD_PERSON)
