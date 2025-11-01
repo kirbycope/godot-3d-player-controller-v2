@@ -200,16 +200,31 @@ func _physics_process(delta) -> void:
 			new_up = Vector3.UP
 			gravity_accel = - Vector3.UP * gravity
 
-		# Get the input vector by specifying four actions for the positive and negative X and Y axes
-		input_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+		if pause.visible:
+			input_direction = Vector2.ZERO
+		else:
+			# Get the input vector by specifying four actions for the positive and negative X and Y axes
+			input_direction = Input.get_vector(
+				controls.move_left,
+				controls.move_right,
+				controls.move_up,
+				controls.move_down,
+			)
 
 		# Handle player input for lateral movement (disabled while climbing/hanging)
-		if not is_climbing \
+		if not pause.visible \
+		and not is_climbing \
 		and not is_climbing_ladder \
 		and not is_hanging:
 			# Set the player's movement speed based on the input magnitude
 			if speed_current == 0.0 and input_direction != Vector2.ZERO:
-				speed_current = input_direction.length() * speed_running
+				# Use threshold-based speed selection for analog input
+				# This ensures controller analog input triggers proper state transitions
+				var input_magnitude = input_direction.length()
+				if input_magnitude >= 0.5:  # Analog stick pushed more than halfway = run speed
+					speed_current = speed_running
+				else:  # Light analog stick movement = walk speed
+					speed_current = speed_walking
 			# Convert the 2D input into a 3D world-space direction and project onto the tangent plane (orthogonal to new_up)
 			var raw_dir: Vector3 = transform.basis * Vector3(input_direction.x, 0, input_direction.y)
 			var lateral_dir: Vector3 = raw_dir - new_up * raw_dir.dot(new_up)
