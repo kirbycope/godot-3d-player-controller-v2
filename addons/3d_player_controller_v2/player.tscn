@@ -18592,7 +18592,6 @@ spring_length = 1.5
 
 [node name="Camera3D" type="Camera3D" parent="CameraMount/CameraSpringArm"]
 transform = Transform3D(1, 0, 0, 0, 0.9659259, 0.25881907, 0, -0.25881907, 0.9659258, 0, 0, 0)
-cull_mask = 1048573
 script = ExtResource("2_ffasv")
 
 [node name="RayCast3D" type="RayCast3D" parent="CameraMount/CameraSpringArm/Camera3D"]
