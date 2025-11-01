@@ -8,6 +8,7 @@ enum Perspective {
 @export var enable_head_bobbing: bool = false ## Enable head bobbing effect
 @export var lock_camera: bool = false ## Lock camera position and location
 @export var lock_perspective: bool = false ## Lock camera perspective
+@export var look_sensitivity_controller: float = 50.0 ## Mouse look sensitivity
 @export var look_sensitivity_mouse: float = 0.2 ## Mouse look sensitivity
 
 var is_rotating_camera: bool = false
@@ -45,6 +46,7 @@ func _input(event) -> void:
 
 	# Check for mouse motion
 	if event is InputEventMouseMotion:
+		# Check if the mouse is captured/hidden and the camera is not rotating -> Rotate camera
 		if Input.get_mouse_mode() in [Input.MOUSE_MODE_CAPTURED, Input.MOUSE_MODE_HIDDEN] \
 		and not is_rotating_camera:
 			camera_rotate_by_mouse(event)
@@ -139,6 +141,17 @@ func _input(event) -> void:
 func _process(delta) -> void:
 	if !is_multiplayer_authority(): return
 
+	var look_actions = [player.controls.look_up, player.controls.look_down, player.controls.look_left, player.controls.look_right]
+	for action in look_actions:
+		# Check if the action is pressed and the camera is not locked -> Rotate camera
+		if Input.is_action_pressed(action) \
+		and not lock_camera:
+			camera_rotate_by_controller(delta)
+		# Check if the mouse is captured/hidden and the camera is not rotating -> Rotate camera
+		if Input.get_mouse_mode() in [Input.MOUSE_MODE_CAPTURED, Input.MOUSE_MODE_HIDDEN] \
+		and not is_rotating_camera:
+			camera_rotate_by_controller(delta)
+
 	if contextual_controls:
 		contextual_controls.text = ""
 		if item_spring_arm.get_child_count() == 0:
@@ -164,22 +177,27 @@ func _process(delta) -> void:
 	retical.visible = player.enable_retical
 
 
+## Rotate camera using the controller.
+func camera_rotate_by_controller(delta: float) -> void:
+	var input_x = Input.get_action_strength(player.controls.look_right) - Input.get_action_strength(player.controls.look_left)
+	var input_y = Input.get_action_strength(player.controls.look_up) - Input.get_action_strength(player.controls.look_down)
+
+	var new_rotation_x = camera_mount.rotation_degrees.x + input_y * look_sensitivity_controller * delta
+	new_rotation_x = clamp(new_rotation_x, -80, 90)
+	camera_mount.rotation_degrees.x = new_rotation_x
+	var new_rotation_y = -input_x * look_sensitivity_controller * delta
+	player.rotate(player.basis.y, deg_to_rad(new_rotation_y))
+	if perspective == Perspective.THIRD_PERSON:
+		player.visuals.rotate_y(deg_to_rad(input_x * look_sensitivity_controller * delta))
+
+
 ## Rotate camera using the mouse motion.
 func camera_rotate_by_mouse(event: InputEvent) -> void:
-	# Determine the new X-rotation based on the mouse Y-movement
 	var new_rotation_x = camera_mount.rotation_degrees.x - event.relative.y * look_sensitivity_mouse
-
-	# Limit how far the camera can rotate
 	new_rotation_x = clamp(new_rotation_x, -80, 90)
-
-	# Rotate the camera mount along the x-axis (up/down, "pitch")
 	camera_mount.rotation_degrees.x = new_rotation_x
-
-	# Rotate the player along the y-axis (left/right, "yaw")
 	var new_rotation_y = -event.relative.x * look_sensitivity_mouse
 	player.rotate(player.basis.y, deg_to_rad(new_rotation_y))
-
-	# [Third-person] Rotate the visuals with the camera's horizontal rotation
 	if perspective == Perspective.THIRD_PERSON:
 		player.visuals.rotate_y(deg_to_rad(event.relative.x * look_sensitivity_mouse))
 

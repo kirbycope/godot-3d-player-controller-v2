@@ -28,6 +28,7 @@ func _ready() -> void:
 	player.enable_sliding = false
 	player.enable_sprinting = false
 	player.enable_swimming = false
+	player.enable_throwing = true
 	player.lock_movement_x = false
 	player.lock_movement_y = false
 	player.lock_movement_z = false

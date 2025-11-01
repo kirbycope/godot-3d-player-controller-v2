@@ -24,7 +24,7 @@ func _ready() -> void:
 	player.enable_paragliding = false
 	player.enable_punching = false
 	player.enable_retical = false
-	player.enable_rolling = false
+	player.enable_rolling = true
 	player.enable_sliding = false
 	player.enable_sprinting = true
 	player.enable_swimming = true
