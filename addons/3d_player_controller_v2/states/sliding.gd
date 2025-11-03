@@ -26,6 +26,8 @@ func _on_animation_finished(anim_name: String) -> void:
 		player.animation_player.disconnect("animation_finished", _on_animation_finished)
 		if Input.is_action_pressed(player.controls.button_1):
 			transition_state(NODE_STATE, States.State.SPRINTING)
+		elif player.input_direction != Vector2.ZERO:
+			transition_state(NODE_STATE, States.State.RUNNING)
 		else:
 			transition_state(NODE_STATE, States.State.STANDING)
 

@@ -57,17 +57,19 @@ func start() -> void:
 
 	# Set the player's speed
 	player.speed_current = player.speed_paragliding
+
 	# Stop positive vertical velocity (according to player.up_direction)
 	var vertical_speed = player.velocity.dot(player.up_direction)
 	if vertical_speed > 0:
 		player.velocity -= player.up_direction * vertical_speed
+
 	# Set the player's gravity
-	player.gravity = 1.0
+	player.gravity = 3.0
 
 	# Spawn the paraglider
 	paraglider = load("uid://crkvmowfmaa1r").instantiate()
 	player.visuals.add_child(paraglider)
-	paraglider.position = Vector3(0, 2.1, 0)  # Adjust position as needed
+	paraglider.position = Vector3(0, 1.8, 0)  # Adjust position as needed
 	paraglider.rotation = Vector3(0, deg_to_rad(180), 0)  # Adjust rotation as needed
 
 

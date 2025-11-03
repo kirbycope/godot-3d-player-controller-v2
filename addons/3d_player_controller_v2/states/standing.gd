@@ -211,7 +211,9 @@ func play_animation() -> void:
 
 
 func _on_animation_finished(animation_name: String) -> void:
-	player.animation_player.disconnect("animation_finished", _on_animation_finished)
+	# Only disconnect if the signal is actually connected
+	if player.animation_player.is_connected("animation_finished", _on_animation_finished):
+		player.animation_player.disconnect("animation_finished", _on_animation_finished)
 	if animation_name == ANIMATION_FISHING_CASTING:
 		player.is_casting_fishing = false
 	elif animation_name == ANIMATION_FISHING_REELING:
@@ -262,3 +264,6 @@ func stop() -> void:
 
 	# Flag the player as not "standing"
 	player.is_standing = false
+
+	# Stop any "while standing" actions
+	_on_animation_finished(player.animation_player.current_animation)

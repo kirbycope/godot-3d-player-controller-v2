@@ -39,7 +39,8 @@ func _input(event):
 			return
 
 	# Ⓐ/[Space] _pressed_ -> Start "paragliding"
-	if event.is_action_pressed(player.controls.button_0):
+	if event.is_action_pressed(player.controls.button_0) \
+	and not player.is_on_floor():
 		if player.enable_paragliding:
 			transition_state(player.current_state, States.State.PARAGLIDING)
 			return

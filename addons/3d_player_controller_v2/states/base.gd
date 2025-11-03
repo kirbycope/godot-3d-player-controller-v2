@@ -26,11 +26,12 @@ func _physics_process(delta):
 	if not player.is_on_floor() \
 	and not player.is_climbing \
 	and not player.is_climbing_ladder \
+	and not player.is_falling \
 	and not player.is_flying \
 	and not player.is_hanging \
 	and not player.is_jumping \
 	and not player.is_paragliding \
-	and not player.is_punching_left \
+	#and not player.is_punching_left \
 	and not player.is_punching_right \
 	and not player.is_skateboarding \
 	and not player.is_swimming:
@@ -43,11 +44,12 @@ func _physics_process(delta):
 	and not player.is_crawling \
 	and not player.is_crouching \
 	and not player.is_driving \
+	and not player.is_falling \
 	and not player.is_flying \
 	and not player.is_hanging \
 	and not player.is_jumping \
 	and not player.is_paragliding \
-	and not player.is_punching_left \
+	#and not player.is_punching_left \
 	and not player.is_punching_right \
 	and not player.is_rolling \
 	and not player.is_sliding \
@@ -118,6 +120,7 @@ func transition_state(from_state: States.State, to_state: States.State):
 	var to_scene = get_parent().find_child(to_name)
 	# Check if the scenes exist
 	if from_scene and to_scene:
+		print(from_name, " -> ", to_name) # DEBUGGING
 		# Stop processing the "from" scene
 		from_scene.stop()
 		# Start processing the "to" scene
