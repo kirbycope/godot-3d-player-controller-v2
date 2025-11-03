@@ -79,5 +79,5 @@ func _process(_delta: float) -> void:
 				show()
 
 
-func _on_hide_timer_timeout() -> void:
+func _on_timer_hide_timeout() -> void:
 	hide()

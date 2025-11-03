@@ -20,6 +20,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Stamina" type="TextureProgressBar" parent="Center"]
+visible = false
 layout_mode = 0
 offset_left = -64.0
 offset_top = -24.0
@@ -35,3 +36,5 @@ script = ExtResource("2_sn2q5")
 [node name="TimerHide" type="Timer" parent="Center/Stamina"]
 wait_time = 3.0
 one_shot = true
+
+[connection signal="timeout" from="Center/Stamina/TimerHide" to="Center/Stamina" method="_on_timer_hide_timeout"]
