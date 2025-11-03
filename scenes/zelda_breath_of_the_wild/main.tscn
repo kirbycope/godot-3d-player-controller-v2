@@ -1,9 +1,10 @@
-[gd_scene load_steps=17 format=3 uid="uid://blvtbcmgwjrqv"]
+[gd_scene load_steps=18 format=3 uid="uid://blvtbcmgwjrqv"]
 
 [ext_resource type="Script" uid="uid://dqy82fkbjuexv" path="res://scenes/zelda_breath_of_the_wild/main.gd" id="1_2puyk"]
 [ext_resource type="PackedScene" uid="uid://f6xpywa7euq2" path="res://addons/3d_player_controller_v2/player.tscn" id="2_mho6g"]
 [ext_resource type="PackedScene" uid="uid://ct4lxo11yu7sv" path="res://scenes/guild_wars/tree.tscn" id="3_3lfau"]
 [ext_resource type="Texture2D" uid="uid://c1ax5lk3860xr" path="res://assets/textures/prototype_textures/Green/texture_09.png" id="3_ddrrl"]
+[ext_resource type="PackedScene" uid="uid://de8sit3wy3pkv" path="res://scenes/zelda_breath_of_the_wild/hud.tscn" id="3_papcc"]
 [ext_resource type="PackedScene" uid="uid://bcehl7lcpdma7" path="res://scenes/guild_wars/bush.tscn" id="4_2infd"]
 [ext_resource type="PackedScene" uid="uid://byfteqoslg6sb" path="res://scenes/guild_wars/house.tscn" id="5_ehmat"]
 [ext_resource type="Texture2D" uid="uid://neq3gr8ev0km" path="res://assets/textures/prototype_textures/Orange/texture_01.png" id="7_2infd"]
@@ -52,6 +53,8 @@ transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545
 shadow_enabled = true
 
 [node name="Player" parent="." instance=ExtResource("2_mho6g")]
+
+[node name="HUD" parent="." instance=ExtResource("3_papcc")]
 
 [node name="Tree" parent="." instance=ExtResource("3_3lfau")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -0.05, 4)

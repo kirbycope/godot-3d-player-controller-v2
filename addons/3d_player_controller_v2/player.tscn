@@ -1,4 +1,4 @@
-[gd_scene load_steps=122 format=4 uid="uid://f6xpywa7euq2"]
+[gd_scene load_steps=123 format=4 uid="uid://f6xpywa7euq2"]
 
 [ext_resource type="Script" uid="uid://b7plmenqhwlu4" path="res://addons/3d_player_controller_v2/player.gd" id="1_ifhah"]
 [ext_resource type="Script" uid="uid://5rlkn1wdmtq0" path="res://addons/3d_player_controller_v2/camera_3d.gd" id="2_ffasv"]
@@ -54,6 +54,7 @@
 [ext_resource type="AnimationLibrary" uid="uid://cgse5qdk6ncyr" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/standing/Standing_Button_Pushing.fbx" id="50_yivuq"]
 [ext_resource type="AnimationLibrary" uid="uid://bbeygrxvqfamw" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/standing/Standing_Crying.fbx" id="51_mwado"]
 [ext_resource type="AnimationLibrary" uid="uid://cflqf1fbpxgdj" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/standing/Standing_Firing_Rifle.fbx" id="52_dqsxl"]
+[ext_resource type="AnimationLibrary" uid="uid://4cgn4x3md7hl" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/standing/Standing_Breathing_Heavy.fbx" id="52_o57k2"]
 [ext_resource type="AnimationLibrary" uid="uid://dvukee87ir0g7" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/standing/Standing_Fishing_Cast.fbx" id="53_yjhio"]
 [ext_resource type="AnimationLibrary" uid="uid://bmpikd86dpr3g" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/standing/Standing_Fishing_Idle.fbx" id="54_7rv2n"]
 [ext_resource type="AnimationLibrary" uid="uid://jtrobmbtbryl" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/standing/Standing_Fishing_Reel.fbx" id="55_x0tvg"]
@@ -20294,6 +20295,7 @@ libraries = {
 &"Standing": ExtResource("47_0nye5"),
 &"Standing_Aiming_Rifle": ExtResource("48_mdon0"),
 &"Standing_Bored": ExtResource("49_y430j"),
+&"Standing_Breathing_Heavy": ExtResource("52_o57k2"),
 &"Standing_Button_Pushing": ExtResource("50_yivuq"),
 &"Standing_Crying": ExtResource("51_mwado"),
 &"Standing_Firing_Rifle": ExtResource("52_dqsxl"),
