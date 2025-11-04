@@ -184,7 +184,8 @@ func _process(delta) -> void:
 			if ray_cast.is_colliding():
 				var collider = ray_cast.get_collider()
 				if collider is RigidBody3D \
-				and not collider is VehicleBody3D:
+				and not collider is VehicleBody3D \
+				and player.enable_holding_objects:
 					contextual_controls.text = "Press [E] to pickup"
 				elif collider is VehicleBody3D \
 				and not player.is_driving:
@@ -197,7 +198,7 @@ func _process(delta) -> void:
 		else:
 			if player.enable_throwing:
 				contextual_controls.text = "Press [E] to release \nPress [RMB] to throw"
-			else:
+			elif player.enable_holding_objects:
 				contextual_controls.text = "Press [E] to release"
 
 	retical.visible = player.enable_retical

@@ -19,8 +19,11 @@ func _physics_process(delta):
 		and not player.ray_cast_top.is_colliding() \
 		and player.ray_cast_high.is_colliding() \
 		and not player.is_skateboarding:
-			transition_state(player.current_state, States.State.HANGING)
-			return
+			if not player.ray_cast_high.get_collider() is CharacterBody3D \
+			and not player.ray_cast_high.get_collider() is RigidBody3D \
+			and not player.ray_cast_high.get_collider() is SoftBody3D:
+				transition_state(player.current_state, States.State.HANGING)
+				return
 
 	# Check if the player is not on a floor -> Start "falling"
 	if not player.is_on_floor() \
