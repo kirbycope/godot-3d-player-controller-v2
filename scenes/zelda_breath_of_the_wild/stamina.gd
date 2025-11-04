@@ -11,7 +11,6 @@ var stamina_regen_rate := 15.0
 
 # Called every frame. '_delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-
 	# Check if the player is" exhausted"
 	if is_exhausted:
 		# Check if the player has had time to recover

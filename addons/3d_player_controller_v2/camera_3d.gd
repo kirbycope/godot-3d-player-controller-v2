@@ -9,9 +9,13 @@ enum Perspective {
 @export var lock_perspective: bool = false ## Lock camera perspective
 @export var look_sensitivity_controller: float = 50.0 ## Mouse look sensitivity
 @export var look_sensitivity_mouse: float = 0.2 ## Mouse look sensitivity
+@export var zoom_max: float = 1.0 ## Maximum camera zoom distance
+@export var zoom_min: float = 1.0 ## Minimum camera zoom distance
+@export var zoom_speed: float = 0.2 ## Camera zoom speed
 
-var is_rotating_camera: bool = false
+var is_rotating_camera: bool = false ## Is the player holding the right mouse button to rotate the camera?
 var perspective: Perspective = Perspective.FIRST_PERSON ## Camera perspective
+var zoom_offset: float = 0.0 ## Camera zoom offset
 
 @onready var camera_spring_arm = get_parent()
 @onready var camera_mount: Node3D = get_parent().get_parent()
@@ -74,7 +78,7 @@ func _input(event) -> void:
 		if perspective == Perspective.FIRST_PERSON:
 			camera_spring_arm.position.y = -0.8
 
-	# Ⓨ/[Ctrl] _pressed_ -> Lower camera
+	# Ⓨ/[Ctrl] _released_ -> Raise camera
 	if event.is_action_released(player.controls.button_3):
 		if perspective == Perspective.FIRST_PERSON:
 			camera_spring_arm.position.y = 0.0
@@ -126,7 +130,7 @@ func _input(event) -> void:
 					# Reparent the Ridgidbody3D to the item mount
 					collider.reparent(item_spring_arm)
 	
-	# 🅁1/[MB1] press to pick up an object - Throw object
+	# 🅁1/[MB1] press to pick up an object -> Throw object
 	if event.is_action_pressed(player.controls.button_5) \
 	and player.enable_throwing \
 	and item_spring_arm.get_child_count() != 0:
@@ -144,6 +148,16 @@ func _input(event) -> void:
 		var force_direction = -global_transform.basis.z.normalized()
 		child.apply_impulse(force_direction * 5.0, Vector3.ZERO)
 		#player.base_state.transition_state(player.current_state, States.State.THROWING)
+
+	# Ⓛ3/[M-Scroll-Up] _pressed_ -> Zoom in (third-person only)
+	if event.is_action_pressed(player.controls.button_10) \
+	and perspective == Perspective.THIRD_PERSON:
+		zoom_offset = clamp(zoom_offset + zoom_speed, -zoom_max, zoom_max)
+
+	# Ⓡ3/[M-Scroll-Down] _pressed_ -> Zoom out (third-person only)
+	if event.is_action_pressed(player.controls.button_11) \
+	and perspective == Perspective.THIRD_PERSON:
+		zoom_offset = clamp(zoom_offset - zoom_speed, -zoom_max, zoom_max)
 
 
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
