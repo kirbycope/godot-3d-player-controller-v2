@@ -1,4 +1,4 @@
-[gd_scene load_steps=123 format=4 uid="uid://f6xpywa7euq2"]
+[gd_scene load_steps=129 format=4 uid="uid://f6xpywa7euq2"]
 
 [ext_resource type="Script" uid="uid://b7plmenqhwlu4" path="res://addons/3d_player_controller_v2/player.gd" id="1_ifhah"]
 [ext_resource type="Script" uid="uid://5rlkn1wdmtq0" path="res://addons/3d_player_controller_v2/camera_3d.gd" id="2_ffasv"]
@@ -13,6 +13,7 @@
 [ext_resource type="AnimationLibrary" uid="uid://cvff3p1u71v73" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/climbing/Climbing_Ladder.fbx" id="11_4h8gy"]
 [ext_resource type="AnimationLibrary" uid="uid://cnjephacakr4h" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/climbing/Climbing_Up.fbx" id="12_ae0e0"]
 [ext_resource type="AnimationLibrary" uid="uid://t5mr2lr0xg2j" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/crawling/Crawling.fbx" id="13_8412t"]
+[ext_resource type="AnimationLibrary" uid="uid://cgbm32jgoib60" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/climbing/Climbing_Wall.fbx" id="13_mt8ux"]
 [ext_resource type="AnimationLibrary" uid="uid://5a63wqtbf3n7" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/crouching/Crouching.fbx" id="14_e1d05"]
 [ext_resource type="AnimationLibrary" uid="uid://ersgkp2tgmt3" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/crouching/Crouching_Aiming_Rifle.fbx" id="15_a6ahb"]
 [ext_resource type="AnimationLibrary" uid="uid://ck4jqoe7kg8d4" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/crouching/Crouching_Firing_Rifle.fbx" id="16_secpm"]
@@ -30,15 +31,20 @@
 [ext_resource type="AnimationLibrary" uid="uid://d33efmknmu8j2" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/hanging/Hanging_Braced_Shimmy_Left.fbx" id="27_2enep"]
 [ext_resource type="AnimationLibrary" uid="uid://dbvb3uvfowmb3" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/hanging/Hanging_Braced_Shimmy_Right.fbx" id="28_4h8gy"]
 [ext_resource type="AnimationLibrary" uid="uid://dvouag2ysrfib" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/hanging/Hanging_Braced_To_Crouch.fbx" id="29_meou5"]
+[ext_resource type="AnimationLibrary" uid="uid://qof4ys7c4vhk" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/hanging/Hanging_Braced_Hop_Left.fbx" id="29_nlsti"]
 [ext_resource type="AnimationLibrary" uid="uid://bd1e12oaj5c5l" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/hanging/Hanging_Climb_To_Standing.fbx" id="30_2enep"]
+[ext_resource type="AnimationLibrary" uid="uid://bortaclhqn4o8" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/hanging/Hanging_Braced_Hop_Right.fbx" id="30_7nn76"]
 [ext_resource type="AnimationLibrary" uid="uid://t6yr6vjj6t7d" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/hanging/Hanging_Shimmy_Left.fbx" id="30_8o733"]
 [ext_resource type="AnimationLibrary" uid="uid://byw5ooaora1lx" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/hanging/Hanging_Shimmy_Right.fbx" id="31_ccxll"]
+[ext_resource type="AnimationLibrary" uid="uid://dmnvdivy464yw" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/hanging/Hanging_Braced_Hop_Up.fbx" id="31_ok7gw"]
 [ext_resource type="AnimationLibrary" uid="uid://bm2f5thv10046" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/prone/Prone.fbx" id="32_mpser"]
 [ext_resource type="AnimationLibrary" uid="uid://c7e3dfn3c2b4c" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/prone/Prone_Crawling.fbx" id="33_kq64t"]
 [ext_resource type="AnimationLibrary" uid="uid://cwh2x1f0sxoya" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/prone/Prone_Firing_Rifle.fbx" id="34_0sxk2"]
 [ext_resource type="AnimationLibrary" uid="uid://cy2sem20g1phu" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/rolling/Rolling.fbx" id="36_e114w"]
+[ext_resource type="AnimationLibrary" uid="uid://dtalarlo5x028" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/hanging/Hanging_Hop_Left.fbx" id="36_pyrav"]
 [ext_resource type="AnimationLibrary" uid="uid://dsk7dpls16fi4" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/running/Running_Aiming_Rifle.fbx" id="37_2enep"]
 [ext_resource type="AnimationLibrary" uid="uid://cd8die1os71pi" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/running/Running.fbx" id="37_8q815"]
+[ext_resource type="AnimationLibrary" uid="uid://dgeymldr2pakq" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/hanging/Hanging_Hop_Right.fbx" id="37_k3k34"]
 [ext_resource type="AnimationLibrary" uid="uid://dw6qmysqke7hc" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/running/Running_Firing_Rifle.fbx" id="38_x0kn1"]
 [ext_resource type="AnimationLibrary" uid="uid://bgq3q05l6ifnb" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/running/Running_Holding_Rifle.fbx" id="39_2xju1"]
 [ext_resource type="AnimationLibrary" uid="uid://cl8rhfojh2gkp" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/running/Running_Slide.fbx" id="40_rvv6a"]
@@ -20256,6 +20262,7 @@ libraries = {
 &"Climbing_Incline_Steep": ExtResource("10_a6ahb"),
 &"Climbing_Ladder": ExtResource("11_4h8gy"),
 &"Climbing_Up": ExtResource("12_ae0e0"),
+&"Climbing_Wall": ExtResource("13_mt8ux"),
 &"Crawling": ExtResource("13_8412t"),
 &"Crouching": ExtResource("14_e1d05"),
 &"Crouching_Aiming_Rifle": ExtResource("15_a6ahb"),
@@ -20271,10 +20278,15 @@ libraries = {
 &"Flying_Fast": ExtResource("25_nlsti"),
 &"Hanging": ExtResource("26_7nn76"),
 &"Hanging_Braced": ExtResource("26_meou5"),
+&"Hanging_Braced_Hop_Left": ExtResource("29_nlsti"),
+&"Hanging_Braced_Hop_Right": ExtResource("30_7nn76"),
+&"Hanging_Braced_Hop_Up": ExtResource("31_ok7gw"),
 &"Hanging_Braced_Shimmy_Left": ExtResource("27_2enep"),
 &"Hanging_Braced_Shimmy_Right": ExtResource("28_4h8gy"),
 &"Hanging_Braced_To_Crouch": ExtResource("29_meou5"),
 &"Hanging_Climb_To_Standing": ExtResource("30_2enep"),
+&"Hanging_Hop_Left": ExtResource("36_pyrav"),
+&"Hanging_Hop_Right": ExtResource("37_k3k34"),
 &"Hanging_Shimmy_Left": ExtResource("30_8o733"),
 &"Hanging_Shimmy_Right": ExtResource("31_ccxll"),
 &"Prone": ExtResource("32_mpser"),
