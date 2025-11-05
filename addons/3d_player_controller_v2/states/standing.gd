@@ -47,9 +47,16 @@ func _input(event):
 		if player.is_holding_fishing_rod \
 		and not player.is_reeling_fishing:
 			player.is_casting_fishing = true
-		# Rifle "firing"
-		elif player.is_holding_rifle:
+		# Rifle "aiming" 🄻1 (joypad)
+		elif player.is_holding_rifle \
+		and event is InputEventJoypadButton:
+			player.is_aiming_rifle = true
+			print("Aiming rifle 🄻1") ## DEBUGGING
+		# Rifle "firing" [MB0]
+		elif player.is_holding_rifle \
+		and event is InputEventMouseButton:
 			player.is_firing_rifle = true
+			print("Firing rifle [MB0]") ## DEBUGGING
 		# Left 1H "swinging"
 		elif player.is_holding_1h_left \
 		and not player.is_swinging_1h_right:
@@ -63,6 +70,14 @@ func _input(event):
 		and not player.is_punching_left:
 			_on_animation_finished(player.animation_player.current_animation)
 			player.is_punching_left = true
+
+	# 🄻1/[MB0] _released_ -> Lower rifle
+	if event.is_action_released(player.controls.button_4) \
+	and event is InputEventJoypadButton:
+		# Rifle "aiming" 🄻1 (joypad)
+		if player.is_holding_rifle:
+			player.is_aiming_rifle = false
+			print("Lowering rifle 🄻1") ## DEBUGGING
 
 	# 🄻2/[MB3] _pressed_
 	if event.is_action_pressed(player.controls.button_6):
@@ -78,9 +93,16 @@ func _input(event):
 		if player.is_holding_fishing_rod \
 		and not player.is_casting_fishing:
 			player.is_reeling_fishing = true
-		# Rifle "aiming"
-		elif player.is_holding_rifle:
+		# Rifle "aiming" [MB1]
+		elif player.is_holding_rifle \
+		and event is InputEventMouseButton:
 			player.is_aiming_rifle = true
+			print("Aiming rifle [MB1]")
+		# Rifle "firing" 🅁1 (joypad)
+		elif player.is_holding_rifle \
+		and event is InputEventJoypadButton:
+			player.is_firing_rifle = true
+			print("Firing rifle 🅁1")
 		# Right 1H "swinging"
 		elif player.is_holding_1h_right \
 		and not player.is_swinging_1h_left:
@@ -99,11 +121,12 @@ func _input(event):
 			_on_animation_finished(player.animation_player.current_animation)
 			player.is_punching_right = true
 
-	# 🅁1/[MB1] _released_
-	if event.is_action_released(player.controls.button_5):
-		# Stop "aiming rifle"
+	# [MB1] _released_ -> Lower rifle
+	if event.is_action_released(player.controls.button_5) \
+	and event is InputEventMouseButton:
 		if player.is_holding_rifle:
 			player.is_aiming_rifle = false
+			print("Lowering rifle [MB1]") ## DEBUGGING
 
 	# 🅁2/[MB4] _pressed_
 	if event.is_action_pressed(player.controls.button_7):
