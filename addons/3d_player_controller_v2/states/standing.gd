@@ -60,13 +60,16 @@ func _input(event):
 			player.is_throwing_left = true
 		# Left "punching"
 		elif player.enable_punching \
-		and not player.is_punching_right:
+		and not player.is_punching_left:
+			_on_animation_finished(player.animation_player.current_animation)
 			player.is_punching_left = true
 
 	# 🄻2/[MB3] _pressed_
 	if event.is_action_pressed(player.controls.button_6):
 		# Left "kicking"
-		if player.enable_kicking:
+		if player.enable_kicking \
+		and not player.is_kicking_left:
+			_on_animation_finished(player.animation_player.current_animation)
 			player.is_kicking_left = true
 
 	# 🅁1/[MB1] _pressed_ 
@@ -90,23 +93,24 @@ func _input(event):
 		elif player.enable_throwing \
 		and player.camera.item_spring_arm.get_child_count() != 0:
 				pass # For now, this prevents the player from "punching" when trying to throw
-				#player.base_state.transition_state(player.current_state, States.State.THROWING) # TODO: Animation is too slow
 		# Right "punching"
 		elif player.enable_punching \
-		and not player.is_punching_left:
+		and not player.is_punching_right:
+			_on_animation_finished(player.animation_player.current_animation)
 			player.is_punching_right = true
 
 	# 🅁1/[MB1] _released_
 	if event.is_action_released(player.controls.button_5):
 		# Stop "aiming rifle"
-		if player.is_holding_rifle \
-		and player.is_aiming_rifle:
+		if player.is_holding_rifle:
 			player.is_aiming_rifle = false
 
 	# 🅁2/[MB4] _pressed_
 	if event.is_action_pressed(player.controls.button_7):
 		# Right "kicking"
-		if player.enable_kicking:
+		if player.enable_kicking \
+		and not player.is_kicking_right:
+			_on_animation_finished(player.animation_player.current_animation)
 			player.is_kicking_right = true
 
 
@@ -143,6 +147,18 @@ func play_animation() -> void:
 			if player.animation_player.current_animation != ANIMATION_FISHING_IDLE:
 				player.animation_player.play(ANIMATION_FISHING_IDLE)
 
+	# -- Kicking animations --
+	elif player.enable_kicking \
+	and player.is_kicking_left:
+		if player.animation_player.current_animation != ANIMATION_KICKING_LEFT:
+			player.animation_player.play(ANIMATION_KICKING_LEFT)
+			player.animation_player.connect("animation_finished", _on_animation_finished)
+	elif player.enable_kicking \
+	and player.is_kicking_right:
+		if player.animation_player.current_animation != ANIMATION_KICKING_RIGHT:
+			player.animation_player.play(ANIMATION_KICKING_RIGHT)
+			player.animation_player.connect("animation_finished", _on_animation_finished)
+
 	# -- Rifle animations --
 	elif player.is_holding_rifle:
 		if player.is_firing_rifle:
@@ -155,18 +171,6 @@ func play_animation() -> void:
 		else:
 			if player.animation_player.current_animation != ANIMATION_HOLDING_RIFLE:
 				player.animation_player.play(ANIMATION_HOLDING_RIFLE)
-
-	# -- Kicking animations --
-	elif player.enable_kicking \
-	and player.is_kicking_left:
-		if player.animation_player.current_animation != ANIMATION_KICKING_LEFT:
-			player.animation_player.play(ANIMATION_KICKING_LEFT)
-			player.animation_player.connect("animation_finished", _on_animation_finished)
-	elif player.enable_kicking \
-	and player.is_kicking_right:
-		if player.animation_player.current_animation != ANIMATION_KICKING_RIGHT:
-			player.animation_player.play(ANIMATION_KICKING_RIGHT)
-			player.animation_player.connect("animation_finished", _on_animation_finished)
 
 	# -- 1H Swinging animations --
 	elif player.is_holding_1h_left \
