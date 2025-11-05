@@ -18652,6 +18652,20 @@ visible = false
 
 [node name="States" parent="." instance=ExtResource("5_5e1u4")]
 
+[node name="Timers" type="Node" parent="."]
+
+[node name="KickLeft" type="Timer" parent="Timers"]
+one_shot = true
+
+[node name="KickRight" type="Timer" parent="Timers"]
+one_shot = true
+
+[node name="PunchLeft" type="Timer" parent="Timers"]
+one_shot = true
+
+[node name="PunchRight" type="Timer" parent="Timers"]
+one_shot = true
+
 [node name="Visuals" type="Node3D" parent="."]
 
 [node name="Godette" type="Node3D" parent="Visuals"]

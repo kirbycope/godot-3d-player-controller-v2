@@ -30,20 +30,39 @@ func _input(event):
 			transition_state(NODE_STATE, States.State.SPRINTING)
 			return
 
-	# 🄻1/[MB0] _pressed_ -> Fire rifle
+	# 🄻1/[MB0] _pressed_
 	if event.is_action_pressed(player.controls.button_4):
-		if player.is_holding_rifle:
+		# Rifle "aiming" 🄻1
+		if player.is_holding_rifle \
+		and event is InputEventJoypadButton:
+			player.is_aiming_rifle = true
+		# Rifle "firing" [MB0]
+		elif player.is_holding_rifle \
+		and event is InputEventMouseButton:
 			player.is_firing_rifle = true
+
+	# 🄻1 _released_ -> Lower rifle
+	if event.is_action_released(player.controls.button_4) \
+	and event is InputEventJoypadButton:
+		# Rifle "aiming" 🄻1
+		if player.is_holding_rifle:
+			player.is_aiming_rifle = false
 
 	# 🅁1/[MB1] _pressed_ -> Aim rifle
 	if event.is_action_pressed(player.controls.button_5):
-		if player.is_holding_rifle:
-			player.is_aiming_rifle = true
-
-	# 🅁1/[MB1] _released_ -> Lower rifle
-	if event.is_action_released(player.controls.button_5):
+		# Rifle "aiming" [MB1]
 		if player.is_holding_rifle \
-		and player.is_aiming_rifle:
+		and event is InputEventMouseButton:
+			player.is_aiming_rifle = true
+		# Rifle "firing" 🅁1 (joypad)
+		elif player.is_holding_rifle \
+		and event is InputEventJoypadButton:
+			player.is_firing_rifle = true
+
+	# [MB1] _released_ -> Lower rifle
+	if event.is_action_released(player.controls.button_5) \
+	and event is InputEventMouseButton:
+		if player.is_holding_rifle:
 			player.is_aiming_rifle = false
 
 

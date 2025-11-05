@@ -166,11 +166,6 @@ func _process(delta) -> void:
 	target_basis = target_basis.orthonormalized()
 	transform.basis = target_basis
 
-	# Reset player aiming state if not the aim button
-	if is_aiming_rifle:
-		if not Input.is_action_pressed(controls.button_5):
-			is_aiming_rifle = false
-
 
 ## Called once on each physics tick, and allows Nodes to synchronize their logic with physics ticks.
 func _physics_process(delta) -> void:
