@@ -9,13 +9,15 @@ enum Perspective {
 @export var lock_perspective: bool = false ## Lock camera perspective
 @export var look_sensitivity_controller: float = 50.0 ## Mouse look sensitivity
 @export var look_sensitivity_mouse: float = 0.2 ## Mouse look sensitivity
-@export var zoom_max: float = 1.0 ## Maximum camera zoom distance
-@export var zoom_min: float = 1.0 ## Minimum camera zoom distance
+@export var zoom_max: float = 4.0 ## Maximum camera zoom distance (third-person spring length upper bound)
+@export var zoom_min: float = 0.5 ## Minimum camera zoom distance (third-person spring length lower bound)
 @export var zoom_speed: float = 0.2 ## Camera zoom speed
+@export var raycast_anchor_on_player: bool = true ## Keep RayCast3D origin anchored to the player in third person
+@export var raycast_player_offset: Vector3 = Vector3(0, 1.4, 0) ## Offset from player origin for raycast start
 
 var is_rotating_camera: bool = false ## Is the player holding the right mouse button to rotate the camera?
 var perspective: Perspective = Perspective.FIRST_PERSON ## Camera perspective
-var zoom_offset: float = 0.0 ## Camera zoom offset
+var zoom_y_ratio: float = 0.0 ## Keeps camera_spring_arm.position.y proportional to spring_length in third-person
 
 @onready var camera_spring_arm = get_parent()
 @onready var camera_mount: Node3D = get_parent().get_parent()
@@ -149,15 +151,31 @@ func _input(event) -> void:
 		child.apply_impulse(force_direction * 5.0, Vector3.ZERO)
 		#player.base_state.transition_state(player.current_state, States.State.THROWING)
 
-	# Ⓛ3/[M-Scroll-Up] _pressed_ -> Zoom in (third-person only)
+	# Ⓛ3/[M-Scroll-Up] _pressed_ -> Zoom out (third-person only)
 	if event.is_action_pressed(player.controls.button_10) \
 	and perspective == Perspective.THIRD_PERSON:
-		zoom_offset = clamp(zoom_offset + zoom_speed, -zoom_max, zoom_max)
+		# Scroll up -> move camera closer (shorter spring arm)
+		camera_spring_arm.spring_length = clamp(
+			camera_spring_arm.spring_length - zoom_speed,
+			zoom_min,
+			zoom_max
+		)
+		# Maintain vertical offset proportional to arm length
+		camera_spring_arm.position.y = zoom_y_ratio * camera_spring_arm.spring_length
+		# RayCast3D origin is anchored to the player in _process()
 
-	# Ⓡ3/[M-Scroll-Down] _pressed_ -> Zoom out (third-person only)
+	# Ⓡ3/[M-Scroll-Down] _pressed_ -> Zoom in (third-person only)
 	if event.is_action_pressed(player.controls.button_11) \
 	and perspective == Perspective.THIRD_PERSON:
-		zoom_offset = clamp(zoom_offset - zoom_speed, -zoom_max, zoom_max)
+		# Scroll down -> move camera farther (longer spring arm)
+		camera_spring_arm.spring_length = clamp(
+			camera_spring_arm.spring_length + zoom_speed,
+			zoom_min,
+			zoom_max
+		)
+		# Maintain vertical offset proportional to arm length
+		camera_spring_arm.position.y = zoom_y_ratio * camera_spring_arm.spring_length
+		# RayCast3D origin is anchored to the player in _process()
 
 
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -203,6 +221,12 @@ func _process(delta) -> void:
 
 	retical.visible = player.enable_retical
 
+	# Anchor the RayCast3D to the player so zooming the camera doesn't move the ray origin.
+	# Keep its orientation from the camera for aiming.
+	if raycast_anchor_on_player:
+		if perspective == Perspective.THIRD_PERSON:
+			ray_cast.global_position = player.global_position + raycast_player_offset
+
 
 ## Rotate camera using the controller.
 func camera_rotate_by_controller(delta: float) -> void:
@@ -237,7 +261,9 @@ func set_camera_perspective(mode: Perspective) -> void:
 		camera_spring_arm.position.x = 0.0
 		camera_spring_arm.position.y = 0.7
 		camera_spring_arm.position.z = 0.0
-		ray_cast.position.z = -1.5
+		# Set ratio so y scales with length on zoom (preserves viewing angle)
+		zoom_y_ratio = 0.0 if camera_spring_arm.spring_length == 0.0 else camera_spring_arm.position.y / camera_spring_arm.spring_length
+		# RayCast3D origin is anchored to the player in _process()
 		set_cull_mask_value(2, true)
 	else:
 		perspective = Perspective.FIRST_PERSON
