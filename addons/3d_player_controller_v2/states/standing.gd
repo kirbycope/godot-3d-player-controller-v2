@@ -68,6 +68,7 @@ func _input(event):
 		and not player.is_punching_left:
 			_on_animation_finished(player.animation_player.current_animation)
 			player.is_punching_left = true
+			player.timer_punch_left.start()
 
 	# 🄻1 _released_ -> Lower rifle
 	if event.is_action_released(player.controls.button_4) \
@@ -83,6 +84,7 @@ func _input(event):
 		and not player.is_kicking_left:
 			_on_animation_finished(player.animation_player.current_animation)
 			player.is_kicking_left = true
+			player.timer_kick_left.start()
 
 	# 🅁1/[MB1] _pressed_ 
 	if event.is_action_pressed(player.controls.button_5):
@@ -115,6 +117,7 @@ func _input(event):
 		and not player.is_punching_right:
 			_on_animation_finished(player.animation_player.current_animation)
 			player.is_punching_right = true
+			player.timer_punch_right.start()
 
 	# [MB1] _released_ -> Lower rifle
 	if event.is_action_released(player.controls.button_5) \
@@ -129,6 +132,7 @@ func _input(event):
 		and not player.is_kicking_right:
 			_on_animation_finished(player.animation_player.current_animation)
 			player.is_kicking_right = true
+			player.timer_kick_right.start()
 
 
 ## Called every frame. 'delta' is the elapsed time since the previous frame.

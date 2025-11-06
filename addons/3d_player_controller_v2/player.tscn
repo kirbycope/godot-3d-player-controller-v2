@@ -18655,15 +18655,19 @@ visible = false
 [node name="Timers" type="Node" parent="."]
 
 [node name="KickLeft" type="Timer" parent="Timers"]
+wait_time = 0.7
 one_shot = true
 
 [node name="KickRight" type="Timer" parent="Timers"]
+wait_time = 0.7
 one_shot = true
 
 [node name="PunchLeft" type="Timer" parent="Timers"]
+wait_time = 0.4
 one_shot = true
 
 [node name="PunchRight" type="Timer" parent="Timers"]
+wait_time = 0.4
 one_shot = true
 
 [node name="Visuals" type="Node3D" parent="."]
@@ -20377,3 +20381,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.59999996, 0)
 target_position = Vector3(0, 0, -1)
 
 [connection signal="navigation_finished" from="NavigationAgent3D" to="NavigationAgent3D" method="_on_navigation_finished"]
+[connection signal="timeout" from="Timers/KickLeft" to="." method="_on_kick_left_timeout"]
+[connection signal="timeout" from="Timers/KickRight" to="." method="_on_kick_right_timeout"]
+[connection signal="timeout" from="Timers/PunchLeft" to="." method="_on_punch_left_timeout"]
+[connection signal="timeout" from="Timers/PunchRight" to="." method="_on_punch_right_timeout"]

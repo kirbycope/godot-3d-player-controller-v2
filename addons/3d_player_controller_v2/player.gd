@@ -25,6 +25,8 @@ extends CharacterBody3D
 @export var lock_movement_y: bool = false ## Lock movement along the Y axis
 @export var lock_movement_z: bool = false ## Lock movement along the Z axis
 @export_group("SKELETON")
+@export var bone_name_left_foot: String = "LeftFoot" ## Name of the left foot bone in the skeleton
+@export var bone_name_right_foot: String = "RightFoot" ## Name of the right foot bone in the skeleton
 @export var bone_name_left_hand: String = "LeftHand" ## Name of the left hand bone in the skeleton
 @export var bone_name_right_hand: String = "RightHand" ## Name of the right hand bone in the skeleton
 @export_group("SPEED")
@@ -109,6 +111,11 @@ var virtual_velocity: Vector3 = Vector3.ZERO ## The player's velocity is movemen
 @onready var debug = $Debug
 @onready var navigation_agent: NavigationAgent3D = $NavigationAgent3D
 @onready var pause: CanvasLayer = $Pause
+@onready var timers: Node = $Timers
+@onready var timer_kick_left = timers.get_node("KickLeft")
+@onready var timer_kick_right = timers.get_node("KickRight")
+@onready var timer_punch_left = timers.get_node("PunchLeft")
+@onready var timer_punch_right = timers.get_node("PunchRight")
 @onready var visuals = $Visuals
 @onready var ray_cast_jump_target: RayCast3D = visuals.get_node("RayCast3D_JumpTarget")
 @onready var ray_cast_top: RayCast3D = visuals.get_node("RayCast3D_Top")
@@ -313,6 +320,30 @@ func animate_hit_high_right() -> void:
 	base_state.transition_state(current_state, States.State.REACTING)
 
 
+## Applies an impact impulse to a collider at the specified bone's position.
+func apply_impact(collider, bone_name, force_multiplier = 1.0) -> void:
+	# Get the bone's global position
+	var bone_position = global_position
+	var bone_idx = skeleton.find_bone(bone_name)
+	if bone_idx != -1:
+		# Get the current global position of the bone
+		bone_position = skeleton.to_global(skeleton.get_bone_global_pose(bone_idx).origin)
+
+	# Calculate the direction from the bone to the collider's position
+	var collider_position = collider.global_position
+	collider_position = Vector3(
+		collider_position.x,
+		bone_position.y,
+		collider_position.z,
+	)
+	var direction = (collider_position - bone_position).normalized()
+
+	# Apply the impulse
+	var impulse = direction * force_multiplier
+	#collider.apply_impulse(impulse, collider_position)
+	collider.apply_central_impulse(impulse)
+
+
 ## Provides movement logic for climbing and hanging states; which are mostly skipped in _physics_process().
 func move_player() -> void:
 	# Get the collision normal (wall outward direction)
@@ -448,3 +479,43 @@ func _on_locked_animation_finished(animation_name: String) -> void:
 	var current_state_scene = get_parent().find_child(current_state_name)
 	current_state_scene.process_mode = Node.PROCESS_MODE_INHERIT
 	is_animation_locked = false
+
+
+func _on_kick_left_timeout():
+	# Do nothing if not still kicking left
+	if not is_kicking_left: return
+
+	# Apply impact at bone position if colliding
+	if ray_cast_low.is_colliding():
+		var collider = ray_cast_low.get_collider()
+		apply_impact(collider, bone_name_left_foot, 2.0)
+
+
+func _on_kick_right_timeout():
+	# Do nothing if not still kicking right
+	if not is_kicking_right: return
+
+	# Apply impact at bone position if colliding
+	if ray_cast_low.is_colliding():
+		var collider = ray_cast_low.get_collider()
+		apply_impact(collider, bone_name_right_foot, 2.0)
+
+
+func _on_punch_left_timeout():
+	# Do nothing if not still punching left
+	if not is_punching_left: return
+
+	# Apply impact at bone position if colliding
+	if ray_cast_middle.is_colliding():
+		var collider = ray_cast_middle.get_collider()
+		apply_impact(collider, bone_name_left_hand, 1.0)
+
+
+func _on_punch_right_timeout():
+	# Do nothing if not still punching right
+	if not is_punching_right: return
+
+	# Apply impact at bone position if colliding
+	if ray_cast_middle.is_colliding():
+		var collider = ray_cast_middle.get_collider()
+		apply_impact(collider, bone_name_right_hand, 1.0)
