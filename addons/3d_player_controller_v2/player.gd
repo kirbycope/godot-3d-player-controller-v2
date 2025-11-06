@@ -21,6 +21,7 @@ extends CharacterBody3D
 @export var enable_sprinting: bool = true ## Enable sprinting
 @export var enable_swimming: bool = true ## Enable swimming
 @export var enable_throwing: bool = false ## Enable throwing objects
+@export var enable_vibration: bool = true ## Enable controller vibration
 @export var lock_movement_x: bool = false ## Lock movement along the X axis
 @export var lock_movement_y: bool = false ## Lock movement along the Y axis
 @export var lock_movement_z: bool = false ## Lock movement along the Z axis
@@ -342,6 +343,13 @@ func apply_impact(collider, bone_name, force_multiplier = 1.0) -> void:
 	var impulse = direction * force_multiplier
 	#collider.apply_impulse(impulse, collider_position)
 	collider.apply_central_impulse(impulse)
+
+	# Vibrate the controller, if enabled
+	if enable_vibration:
+		if force_multiplier <= 1.0:
+			Input.start_joy_vibration(0, 1.0, 1.0, 0.1)
+		else:
+			Input.start_joy_vibration(0, 0.0, 1.0, 0.2)
 
 
 ## Provides movement logic for climbing and hanging states; which are mostly skipped in _physics_process().

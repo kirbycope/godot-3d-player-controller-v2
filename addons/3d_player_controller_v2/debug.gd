@@ -23,6 +23,7 @@ var yellow_sphere: MeshInstance3D
 @onready var enable_sprinting: CheckButton = $Configuration/EnableSprinting
 @onready var enable_swimming: CheckButton = $Configuration/EnableSwimming
 @onready var enable_throwing: CheckButton = $Configuration/EnableThrowing
+@onready var enable_vibration: CheckButton = $Configuration/EnableVibration
 @onready var lock_camera: CheckButton = $Configuration2/LockCamera
 @onready var lock_movement_x: CheckButton = $Configuration2/LockMovementX
 @onready var lock_movement_y: CheckButton = $Configuration2/LockMovementY
@@ -103,6 +104,7 @@ func _process(_delta):
 		enable_sprinting.button_pressed = player.enable_sprinting
 		enable_swimming.button_pressed = player.enable_swimming
 		enable_throwing.button_pressed = player.enable_throwing
+		enable_vibration.button_pressed = player.enable_vibration
 		lock_camera.button_pressed = player.camera.lock_camera
 		lock_movement_x.button_pressed = player.lock_movement_x
 		lock_movement_y.button_pressed = player.lock_movement_y
@@ -270,6 +272,10 @@ func _on_enable_swimming_toggled(toggled_on):
 
 func _on_enable_throwing_toggled(toggled_on: bool) -> void:
 	player.enable_throwing = toggled_on
+
+
+func _on_enable_vibration_toggled(toggled_on):
+	player.enable_vibration = toggled_on
 
 
 func _on_lock_camera_toggled(toggled_on):

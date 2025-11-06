@@ -328,6 +328,22 @@ offset_bottom = 31.0
 grow_horizontal = 0
 mouse_filter = 1
 
+[node name="EnableVibration" type="CheckButton" parent="Configuration"]
+layout_mode = 2
+text = "Enable Vibration"
+
+[node name="Panel" type="Panel" parent="Configuration/EnableVibration"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -222.0
+offset_right = -2.0
+offset_bottom = 31.0
+grow_horizontal = 0
+mouse_filter = 1
+
 [node name="Configuration2" type="VBoxContainer" parent="."]
 offset_left = 838.0
 offset_right = 1058.0
@@ -916,6 +932,7 @@ scroll_active = false
 [connection signal="toggled" from="Configuration/EnableSprinting" to="." method="_on_enable_sprinting_toggled"]
 [connection signal="toggled" from="Configuration/EnableSwimming" to="." method="_on_enable_swimming_toggled"]
 [connection signal="toggled" from="Configuration/EnableThrowing" to="." method="_on_enable_throwing_toggled"]
+[connection signal="toggled" from="Configuration/EnableVibration" to="." method="_on_enable_vibration_toggled"]
 [connection signal="toggled" from="Configuration2/LockCamera" to="." method="_on_lock_camera_toggled"]
 [connection signal="toggled" from="Configuration2/LockMovementX" to="." method="_on_lock_movement_x_toggled"]
 [connection signal="toggled" from="Configuration2/LockMovementY" to="." method="_on_lock_movement_y_toggled"]
