@@ -1,4 +1,4 @@
-[gd_scene load_steps=129 format=4 uid="uid://f6xpywa7euq2"]
+[gd_scene load_steps=130 format=4 uid="uid://f6xpywa7euq2"]
 
 [ext_resource type="Script" uid="uid://b7plmenqhwlu4" path="res://addons/3d_player_controller_v2/player.gd" id="1_ifhah"]
 [ext_resource type="Script" uid="uid://5rlkn1wdmtq0" path="res://addons/3d_player_controller_v2/camera_3d.gd" id="2_ffasv"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dvpsvwsy5wedp" path="res://addons/3d_player_controller_v2/debug.tscn" id="4_uu7fq"]
 [ext_resource type="PackedScene" uid="uid://yxm384w27bq2" path="res://addons/3d_player_controller_v2/states.tscn" id="5_5e1u4"]
 [ext_resource type="PackedScene" uid="uid://2p8pyabd2bmo" path="res://addons/3d_player_controller_v2/pause.tscn" id="5_7fj78"]
+[ext_resource type="PackedScene" uid="uid://ccpvpqrn2tdys" path="res://addons/3d_player_controller_v2/emotes.tscn" id="6_nlsti"]
 [ext_resource type="AnimationLibrary" uid="uid://bi0k3a7oxrgfd" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/climbing/Climbing_Down.fbx" id="10_2enep"]
 [ext_resource type="AnimationLibrary" uid="uid://b5s66wqjyrlql" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/climbing/Climbing_Incline_Steep.fbx" id="10_a6ahb"]
 [ext_resource type="AnimationLibrary" uid="uid://cvff3p1u71v73" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/climbing/Climbing_Ladder.fbx" id="11_4h8gy"]
@@ -67,9 +68,9 @@
 [ext_resource type="AnimationLibrary" uid="uid://4y71m07rujn7" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/standing/Standing_Holding_Rifle.fbx" id="56_sjsfu"]
 [ext_resource type="AnimationLibrary" uid="uid://ptfrvx62ebf0" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/standing/Standing_Kicking_Left.fbx" id="57_1wue1"]
 [ext_resource type="AnimationLibrary" uid="uid://cqat1wvt7w1md" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/standing/Standing_Kicking_Right.fbx" id="58_5ku87"]
-[ext_resource type="AnimationLibrary" uid="uid://btl2tqbf8kox6" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/standing/Standing_Laughing.fbx" id="59_frpjo"]
 [ext_resource type="AnimationLibrary" uid="uid://wmsqyuie5lmf" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/standing/Standing_Melee_Attack_Downward_Left.fbx" id="60_6klc6"]
 [ext_resource type="AnimationLibrary" uid="uid://slcohhns0ggs" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/standing/Standing_Melee_Attack_Downward_Right.fbx" id="61_bapra"]
+[ext_resource type="AnimationLibrary" uid="uid://beqk5c6gv4360" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/standing/Standing_Clapping.fbx" id="61_nlsti"]
 [ext_resource type="AnimationLibrary" uid="uid://cnnrosymlvfrt" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/standing/Standing_Punching_Left.fbx" id="62_xn1kj"]
 [ext_resource type="AnimationLibrary" uid="uid://c1vrl2f7nsww3" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/standing/Standing_Punching_Right.fbx" id="63_6sh1t"]
 [ext_resource type="AnimationLibrary" uid="uid://dnsqq473hdq4b" path="res://addons/3d_player_controller_v2/assets/animations/mixamo/standing/Standing_Pushing.fbx" id="64_lgpwt"]
@@ -18645,6 +18646,9 @@ shape = SubResource("CapsuleShape3D_ifhah")
 
 [node name="Debug" parent="." instance=ExtResource("4_uu7fq")]
 
+[node name="Emotes" parent="." instance=ExtResource("6_nlsti")]
+visible = false
+
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 
 [node name="Pause" parent="." instance=ExtResource("5_7fj78")]
@@ -20327,6 +20331,7 @@ libraries = {
 &"Standing_Bored": ExtResource("49_y430j"),
 &"Standing_Breathing_Heavy": ExtResource("52_o57k2"),
 &"Standing_Button_Pushing": ExtResource("50_yivuq"),
+&"Standing_Clapping": ExtResource("61_nlsti"),
 &"Standing_Crying": ExtResource("51_mwado"),
 &"Standing_Firing_Rifle": ExtResource("52_dqsxl"),
 &"Standing_Fishing_Cast": ExtResource("53_yjhio"),
@@ -20335,7 +20340,6 @@ libraries = {
 &"Standing_Holding_Rifle": ExtResource("56_sjsfu"),
 &"Standing_Kicking_Left": ExtResource("57_1wue1"),
 &"Standing_Kicking_Right": ExtResource("58_5ku87"),
-&"Standing_Laughing": ExtResource("59_frpjo"),
 &"Standing_Melee_Attack_Downward_Left": ExtResource("60_6klc6"),
 &"Standing_Melee_Attack_Downward_Right": ExtResource("61_bapra"),
 &"Standing_Punching_Left": ExtResource("62_xn1kj"),

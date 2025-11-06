@@ -345,7 +345,8 @@ func apply_impact(collider, bone_name, force_multiplier = 1.0) -> void:
 	collider.apply_central_impulse(impulse)
 
 	# Vibrate the controller, if enabled
-	if enable_vibration:
+	if enable_vibration \
+	and controls.last_input_type == controls.InputType.CONTROLLER:
 		if force_multiplier <= 1.0:
 			Input.start_joy_vibration(0, 1.0, 1.0, 0.1)
 		else:

@@ -1,5 +1,13 @@
 extends CanvasLayer
 
+enum InputType {
+	CONTROLLER,
+	KEYBOARD_MOUSE,
+	TOUCH,
+}
+
+var last_input_type: InputType
+
 @export var button_0 = "button_0" 		## Key: Space, Controller: Ⓐ (Microsoft), Ⓑ (Nintendo), ⮾ (Sony)
 @export var button_1 = "button_1" 		## Key: Shift, Controller: Ⓑ (Microsoft), Ⓐ (Nintendo), 🄋 (Sony)
 @export var button_2 = "button_2" 		## Key: E, Controller: Ⓧ (Microsoft), Ⓨ (Nintendo), 🟗 (Sony)
@@ -342,3 +350,16 @@ func _ready() -> void:
 		var key_event = InputEventKey.new()
 		key_event.physical_keycode = KEY_T
 		InputMap.action_add_event(button_15, key_event)
+
+
+func _input(event) -> void:
+	if event is InputEventJoypadButton \
+	or event is InputEventJoypadMotion:
+		last_input_type = InputType.CONTROLLER
+	if event is InputEventKey \
+	or event is InputEventMouseButton \
+	or event is InputEventMouseMotion:
+		last_input_type = InputType.KEYBOARD_MOUSE
+	if event is InputEventScreenDrag \
+	or event is InputEventScreenTouch:
+		last_input_type = InputType.TOUCH

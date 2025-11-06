@@ -3,13 +3,13 @@
 importer="animation_library"
 importer_version=1
 type="AnimationLibrary"
-uid="uid://btl2tqbf8kox6"
-path="res://.godot/imported/Standing_Laughing.fbx-bf596a48ce2151a875f139b5d02eece5.res"
+uid="uid://beqk5c6gv4360"
+path="res://.godot/imported/Standing_Clapping.fbx-c33f29f4b3fd161c894baf77ea16f5bd.res"
 
 [deps]
 
-source_file="res://addons/3d_player_controller_v2/assets/animations/mixamo/standing/Standing_Laughing.fbx"
-dest_files=["res://.godot/imported/Standing_Laughing.fbx-bf596a48ce2151a875f139b5d02eece5.res"]
+source_file="res://addons/3d_player_controller_v2/assets/animations/mixamo/standing/Standing_Clapping.fbx"
+dest_files=["res://.godot/imported/Standing_Clapping.fbx-c33f29f4b3fd161c894baf77ea16f5bd.res"]
 
 [params]
 
