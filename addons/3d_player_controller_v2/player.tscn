@@ -18643,8 +18643,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
 shape = SubResource("CapsuleShape3D_ifhah")
 
 [node name="Controls" parent="." instance=ExtResource("3_uu7fq")]
+visible = false
 
 [node name="Debug" parent="." instance=ExtResource("4_uu7fq")]
+visible = false
 
 [node name="Emotes" parent="." instance=ExtResource("6_nlsti")]
 visible = false
