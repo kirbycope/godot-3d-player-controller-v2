@@ -16,7 +16,7 @@ enum State {
 	NAVIGATING,      # 10
 	PARAGLIDING,     # 11
 	PUSHING,         # 12
-	RAGDOLL,         # 13
+	RAGDOLLING,      # 13
 	REACTING,        # 14
 	ROLLING,         # 15
 	RUNNING,         # 16

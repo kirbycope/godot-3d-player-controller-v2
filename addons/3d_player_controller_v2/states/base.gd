@@ -16,6 +16,7 @@ func _physics_process(delta):
 	if player.enable_hanging:
 		if not player.is_flying \
 		and not player.is_hanging \
+		and not player.is_ragdolling \
 		and not player.ray_cast_top.is_colliding() \
 		and player.ray_cast_high.is_colliding() \
 		and not player.is_skateboarding:
@@ -34,8 +35,7 @@ func _physics_process(delta):
 	and not player.is_hanging \
 	and not player.is_jumping \
 	and not player.is_paragliding \
-	#and not player.is_punching_left \
-	and not player.is_punching_right \
+	and not player.is_ragdolling \
 	and not player.is_skateboarding \
 	and not player.is_swimming:
 		transition_state(player.current_state, States.State.FALLING)
@@ -52,8 +52,7 @@ func _physics_process(delta):
 	and not player.is_hanging \
 	and not player.is_jumping \
 	and not player.is_paragliding \
-	#and not player.is_punching_left \
-	and not player.is_punching_right \
+	and not player.is_ragdolling \
 	and not player.is_rolling \
 	and not player.is_sliding \
 	and not player.is_skateboarding \

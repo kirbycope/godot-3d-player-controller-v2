@@ -18,6 +18,7 @@ var yellow_sphere: MeshInstance3D
 @onready var enable_navigation: CheckButton = $Configuration/EnableNavigation
 @onready var enable_paragliding: CheckButton = $Configuration/EnableParagliding
 @onready var enable_punching: CheckButton = $Configuration/EnablePunching
+@onready var enable_ragdoll: CheckButton = $Configuration/EnableRagdoll
 @onready var enable_retical: CheckButton = $Configuration2/EnableRetical
 @onready var enable_rolling: CheckButton = $Configuration/EnableRolling
 @onready var enable_sliding: CheckButton = $Configuration/EnableSliding
@@ -47,6 +48,7 @@ var yellow_sphere: MeshInstance3D
 @onready var is_on_floor: CheckBox = $States2/IsOnFloor
 @onready var is_punching_left: CheckBox = $States2/IsPunchingLeft
 @onready var is_punching_right: CheckBox = $States2/IsPunchingRight
+@onready var is_ragdolling: CheckBox = $States/IsRagdolling
 @onready var is_reeling_fishing: CheckBox = $States2/IsReelingFishing
 @onready var is_rolling: CheckBox = $States/IsRolling
 @onready var is_navigating: CheckBox = $States/IsNavigating
@@ -75,8 +77,19 @@ func _input(event):
 	if !is_multiplayer_authority(): return
 
 	# Toggle debug visibility
-	if event is InputEventKey and event.pressed and event.keycode == KEY_F3:
+	if event is InputEventKey \
+	and event.pressed \
+	and event.keycode == KEY_F3:
 		visible = !visible
+
+	# [R] _pressed -> Start ragdolling
+	if visible \
+	and player.enable_ragdoll \
+	and not player.is_ragdolling \
+	and event is InputEventKey \
+	and event.pressed \
+	and event.keycode == KEY_R:
+		player.base_state.transition_state(player.current_state, States.State.RAGDOLLING)
 
 
 ## Called every frame. '_delta' is the elapsed time since the previous frame.
@@ -100,6 +113,7 @@ func _process(_delta):
 		enable_navigation.button_pressed = player.enable_navigation
 		enable_paragliding.button_pressed = player.enable_paragliding
 		enable_punching.button_pressed = player.enable_punching
+		enable_ragdoll.button_pressed = player.enable_ragdoll
 		enable_retical.button_pressed = player.enable_retical
 		enable_rolling.button_pressed = player.enable_rolling
 		enable_sliding.button_pressed = player.enable_sliding
@@ -128,6 +142,7 @@ func _process(_delta):
 		is_kicking_right.button_pressed = player.is_kicking_right
 		is_navigating.button_pressed = player.is_navigating
 		is_on_floor.button_pressed = player.is_on_floor()
+		is_ragdolling.button_pressed = player.is_ragdolling
 		is_paragliding.button_pressed = player.is_paragliding
 		is_punching_left.button_pressed = player.is_punching_left
 		is_punching_right.button_pressed = player.is_punching_right
@@ -196,19 +211,19 @@ func draw_yellow_sphere(pos: Vector3) -> void:
 	yellow_sphere = draw_debug_sphere(pos, Color.YELLOW)
 
 
-func _on_enable_climbing_toggled(toggled_on):
+func _on_enable_climbing_toggled(toggled_on: bool) -> void:
 	player.enable_climbing = toggled_on
 
 
-func _on_enable_crawling_toggled(toggled_on):
+func _on_enable_crawling_toggled(toggled_on: bool) -> void:
 	player.enable_crawling = toggled_on
 
 
-func _on_enable_crouching_toggled(toggled_on):
+func _on_enable_crouching_toggled(toggled_on: bool) -> void:
 	player.enable_crouching = toggled_on
 
 
-func _on_enable_double_jumping_toggled(toggled_on):
+func _on_enable_double_jumping_toggled(toggled_on: bool) -> void:
 	player.enable_double_jumping = toggled_on
 
 
@@ -216,7 +231,7 @@ func _on_enable_driving_toggled(toggled_on: bool) -> void:
 	player.enable_driving = toggled_on
 
 
-func _on_enable_emotes_toggled(toggled_on):
+func _on_enable_emotes_toggled(toggled_on: bool) -> void:
 	player.enable_emotes = toggled_on
 
 
@@ -224,7 +239,7 @@ func _on_enable_fishing_toggled(toggled_on: bool) -> void:
 	player.enable_fishing = toggled_on
 
 
-func _on_enable_flying_toggled(toggled_on):
+func _on_enable_flying_toggled(toggled_on: bool) -> void:
 	player.enable_flying = toggled_on
 
 
@@ -236,15 +251,15 @@ func _on_enable_holding_objects_toggled(toggled_on: bool) -> void:
 	player.enable_holding_objects = toggled_on
 
 
-func _on_enable_jumping_toggled(toggled_on):
+func _on_enable_jumping_toggled(toggled_on: bool) -> void:
 	player.enable_jumping = toggled_on
 
 
-func _on_enable_kicking_toggled(toggled_on):
+func _on_enable_kicking_toggled(toggled_on: bool) -> void:
 	player.enable_kicking = toggled_on
 
 
-func _on_enable_navigation_toggled(toggled_on):
+func _on_enable_navigation_toggled(toggled_on: bool) -> void:
 	player.enable_navigation = toggled_on
 
 
@@ -252,15 +267,19 @@ func _on_enable_paragliding_toggled(toggled_on: bool) -> void:
 	player.enable_paragliding = toggled_on
 
 
-func _on_enable_punching_toggled(toggled_on):
+func _on_enable_punching_toggled(toggled_on: bool) -> void:
 	player.enable_punching = toggled_on
+
+
+func _on_enable_ragdoll_toggled(toggled_on: bool) -> void:
+	player.enable_ragdoll = toggled_on
 
 
 func _on_enable_retical_toggled(toggled_on: bool) -> void:
 	player.enable_retical = toggled_on
 
 
-func _on_enable_rolling_toggled(toggled_on):
+func _on_enable_rolling_toggled(toggled_on: bool) -> void:
 	player.enable_rolling = toggled_on
 
 
@@ -268,11 +287,11 @@ func _on_enable_sliding_toggled(toggled_on: bool) -> void:
 	player.enable_sliding = toggled_on
 
 
-func _on_enable_sprinting_toggled(toggled_on):
+func _on_enable_sprinting_toggled(toggled_on: bool) -> void:
 	player.enable_sprinting = toggled_on
 
 
-func _on_enable_swimming_toggled(toggled_on):
+func _on_enable_swimming_toggled(toggled_on: bool) -> void:
 	player.enable_swimming = toggled_on
 
 
@@ -280,11 +299,11 @@ func _on_enable_throwing_toggled(toggled_on: bool) -> void:
 	player.enable_throwing = toggled_on
 
 
-func _on_enable_vibration_toggled(toggled_on):
+func _on_enable_vibration_toggled(toggled_on: bool) -> void:
 	player.enable_vibration = toggled_on
 
 
-func _on_lock_camera_toggled(toggled_on):
+func _on_lock_camera_toggled(toggled_on: bool) -> void:
 	player.camera.lock_camera = toggled_on
 
 

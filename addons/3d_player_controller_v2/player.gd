@@ -16,6 +16,7 @@ extends CharacterBody3D
 @export var enable_navigation: bool = false ## Enable navigation (pathfinding)
 @export var enable_paragliding: bool = false ## Enable paragliding
 @export var enable_punching: bool = false ## Enable punching
+@export var enable_ragdoll: bool = true ## Enable ragdoll physics
 @export var enable_retical: bool = true ## Enable the rectical
 @export var enable_rolling: bool = false ## Enable rolling
 @export var enable_sliding: bool = true ## Enable sliding
@@ -80,6 +81,7 @@ var is_navigating: bool = false ## Is the player navigating?
 var is_paragliding: bool = false ## Is the player paragliding?
 var is_punching_left: bool = false ## Is the player punching with thier left hand?
 var is_punching_right: bool = false ## Is the player punching with their right hand?
+var is_ragdolling: bool = false ## Is the player ragdolling?
 var is_reacting_low_left: bool = false ## Is the player reacting to being hit from the low left?
 var is_reacting_low_right: bool = false ## Is the player reacting to being hit from the low right?
 var is_reacting_high_left: bool = false ## Is the player reacting to being hit from the high left?
@@ -125,6 +127,7 @@ var virtual_velocity: Vector3 = Vector3.ZERO ## The player's velocity is movemen
 @onready var ray_cast_middle: RayCast3D = visuals.get_node("RayCast3D_Middle")
 @onready var ray_cast_low: RayCast3D = visuals.get_node("RayCast3D_Low")
 @onready var skeleton: Skeleton3D = %GeneralSkeleton
+@onready var physical_bone_simulator: PhysicalBoneSimulator3D = skeleton.get_node_or_null("PhysicalBoneSimulator3D") ## Setting up a ragdoll is optional so null is allowed
 
 
 ## Called when the node is "ready", i.e. when both the node and its children have entered the scene tree.
@@ -186,6 +189,9 @@ func _physics_process(delta) -> void:
 
 	# Skip movement processing while "driving"
 	if is_driving: return
+
+	# Skip movement processing while "ragdolling"
+	if is_ragdolling: return
 
 	# Calculate movement if not navigating
 	if not is_navigating:

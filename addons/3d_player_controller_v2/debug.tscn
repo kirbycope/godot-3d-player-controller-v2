@@ -12,6 +12,7 @@ script = ExtResource("1_k3k7b")
 offset_left = 1062.0
 offset_right = 1282.0
 offset_bottom = 720.0
+theme_override_constants/separation = 2
 
 [node name="Label" type="Label" parent="Configuration"]
 layout_mode = 2
@@ -248,6 +249,22 @@ offset_bottom = 31.0
 grow_horizontal = 0
 mouse_filter = 1
 
+[node name="EnableRagdoll" type="CheckButton" parent="Configuration"]
+layout_mode = 2
+text = "EnableRagdoll"
+
+[node name="Panel" type="Panel" parent="Configuration/EnableRagdoll"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -222.0
+offset_right = -2.0
+offset_bottom = 31.0
+grow_horizontal = 0
+mouse_filter = 1
+
 [node name="EnableRolling" type="CheckButton" parent="Configuration"]
 layout_mode = 2
 text = "EnableRolling"
@@ -332,6 +349,7 @@ mouse_filter = 1
 offset_left = 838.0
 offset_right = 1058.0
 offset_bottom = 720.0
+theme_override_constants/separation = 2
 
 [node name="Label" type="Label" parent="Configuration2"]
 layout_mode = 2
@@ -443,6 +461,7 @@ mouse_filter = 1
 [node name="States" type="VBoxContainer" parent="."]
 offset_right = 164.0
 offset_bottom = 758.0
+theme_override_constants/separation = 2
 
 [node name="Label" type="Label" parent="States"]
 layout_mode = 2
@@ -587,6 +606,17 @@ layout_mode = 0
 offset_right = 164.0
 offset_bottom = 31.0
 
+[node name="IsRagdolling" type="CheckBox" parent="States"]
+layout_mode = 2
+disabled = true
+text = "IsRagdolling"
+
+[node name="Panel" type="Panel" parent="States/IsRagdolling"]
+z_index = -1
+layout_mode = 0
+offset_right = 164.0
+offset_bottom = 31.0
+
 [node name="IsRolling" type="CheckBox" parent="States"]
 layout_mode = 2
 disabled = true
@@ -679,6 +709,7 @@ offset_bottom = 31.0
 offset_left = 167.0
 offset_right = 331.0
 offset_bottom = 720.0
+theme_override_constants/separation = 2
 
 [node name="Label" type="Label" parent="States2"]
 layout_mode = 2
@@ -858,7 +889,7 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -158.5
-offset_top = -77.0
+offset_top = -73.0
 offset_right = 158.5
 grow_horizontal = 2
 grow_vertical = 0
@@ -867,7 +898,7 @@ grow_vertical = 0
 modulate = Color(1, 1, 1, 0.4862745)
 layout_mode = 0
 offset_right = 317.0
-offset_bottom = 77.0
+offset_bottom = 73.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control"]
 layout_mode = 1
@@ -878,6 +909,7 @@ offset_top = -38.5
 offset_right = 117.0
 offset_bottom = 38.5
 grow_vertical = 2
+theme_override_constants/separation = 2
 
 [node name="Label" type="Label" parent="Control/VBoxContainer"]
 layout_mode = 2
@@ -907,6 +939,7 @@ offset_top = -25.0
 offset_bottom = 25.0
 grow_horizontal = 0
 grow_vertical = 2
+theme_override_constants/separation = 2
 
 [node name="Coordinates" type="RichTextLabel" parent="Control/VBoxContainer2"]
 layout_mode = 2
@@ -943,6 +976,7 @@ scroll_active = false
 [connection signal="toggled" from="Configuration/EnableNavigation" to="." method="_on_enable_navigation_toggled"]
 [connection signal="toggled" from="Configuration/EnableParagliding" to="." method="_on_enable_paragliding_toggled"]
 [connection signal="toggled" from="Configuration/EnablePunching" to="." method="_on_enable_punching_toggled"]
+[connection signal="toggled" from="Configuration/EnableRagdoll" to="." method="_on_enable_ragdoll_toggled"]
 [connection signal="toggled" from="Configuration/EnableRolling" to="." method="_on_enable_rolling_toggled"]
 [connection signal="toggled" from="Configuration/EnableSliding" to="." method="_on_enable_sliding_toggled"]
 [connection signal="toggled" from="Configuration/EnableSprinting" to="." method="_on_enable_sprinting_toggled"]
