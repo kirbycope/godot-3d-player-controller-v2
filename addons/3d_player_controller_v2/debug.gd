@@ -18,7 +18,7 @@ var yellow_sphere: MeshInstance3D
 @onready var enable_navigation: CheckButton = $Configuration/EnableNavigation
 @onready var enable_paragliding: CheckButton = $Configuration/EnableParagliding
 @onready var enable_punching: CheckButton = $Configuration/EnablePunching
-@onready var enable_retical: CheckButton = $Configuration/EnableRetical
+@onready var enable_retical: CheckButton = $Configuration2/EnableRetical
 @onready var enable_rolling: CheckButton = $Configuration/EnableRolling
 @onready var enable_sliding: CheckButton = $Configuration/EnableSliding
 @onready var enable_sprinting: CheckButton = $Configuration/EnableSprinting
