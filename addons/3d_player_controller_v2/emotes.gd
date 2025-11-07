@@ -6,6 +6,9 @@ extends CanvasLayer
 
 
 func _process(delta):
+	# Do nothing if emotes are not enabled
+	if not player.enable_emotes: return
+
 	# Do nothing if paused
 	if player.pause.visible:
 		hide()

@@ -104,6 +104,22 @@ offset_bottom = 31.0
 grow_horizontal = 0
 mouse_filter = 1
 
+[node name="EnableEmotes" type="CheckButton" parent="Configuration"]
+layout_mode = 2
+text = "EnableEmotes"
+
+[node name="Panel" type="Panel" parent="Configuration/EnableEmotes"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -222.0
+offset_right = -2.0
+offset_bottom = 31.0
+grow_horizontal = 0
+mouse_filter = 1
+
 [node name="EnableFlying" type="CheckButton" parent="Configuration"]
 layout_mode = 2
 text = "EnableFlying"
@@ -328,22 +344,6 @@ offset_bottom = 31.0
 grow_horizontal = 0
 mouse_filter = 1
 
-[node name="EnableVibration" type="CheckButton" parent="Configuration"]
-layout_mode = 2
-text = "Enable Vibration"
-
-[node name="Panel" type="Panel" parent="Configuration/EnableVibration"]
-z_index = -1
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -222.0
-offset_right = -2.0
-offset_bottom = 31.0
-grow_horizontal = 0
-mouse_filter = 1
-
 [node name="Configuration2" type="VBoxContainer" parent="."]
 offset_left = 838.0
 offset_right = 1058.0
@@ -413,6 +413,22 @@ layout_mode = 2
 text = "LockMovementZ"
 
 [node name="Panel" type="Panel" parent="Configuration2/LockMovementZ"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -222.0
+offset_right = -2.0
+offset_bottom = 31.0
+grow_horizontal = 0
+mouse_filter = 1
+
+[node name="EnableVibration" type="CheckButton" parent="Configuration2"]
+layout_mode = 2
+text = "Enable Vibration"
+
+[node name="Panel" type="Panel" parent="Configuration2/EnableVibration"]
 z_index = -1
 layout_mode = 1
 anchors_preset = 1
@@ -918,6 +934,7 @@ scroll_active = false
 [connection signal="toggled" from="Configuration/EnableCrouching" to="." method="_on_enable_crouching_toggled"]
 [connection signal="toggled" from="Configuration/EnableDoubleJumping" to="." method="_on_enable_double_jumping_toggled"]
 [connection signal="toggled" from="Configuration/EnableDriving" to="." method="_on_enable_driving_toggled"]
+[connection signal="toggled" from="Configuration/EnableEmotes" to="." method="_on_enable_emotes_toggled"]
 [connection signal="toggled" from="Configuration/EnableFlying" to="." method="_on_enable_flying_toggled"]
 [connection signal="toggled" from="Configuration/EnableHanging" to="." method="_on_enable_hanging_toggled"]
 [connection signal="toggled" from="Configuration/EnableHoldingObjects" to="." method="_on_enable_holding_objects_toggled"]
@@ -932,8 +949,8 @@ scroll_active = false
 [connection signal="toggled" from="Configuration/EnableSprinting" to="." method="_on_enable_sprinting_toggled"]
 [connection signal="toggled" from="Configuration/EnableSwimming" to="." method="_on_enable_swimming_toggled"]
 [connection signal="toggled" from="Configuration/EnableThrowing" to="." method="_on_enable_throwing_toggled"]
-[connection signal="toggled" from="Configuration/EnableVibration" to="." method="_on_enable_vibration_toggled"]
 [connection signal="toggled" from="Configuration2/LockCamera" to="." method="_on_lock_camera_toggled"]
 [connection signal="toggled" from="Configuration2/LockMovementX" to="." method="_on_lock_movement_x_toggled"]
 [connection signal="toggled" from="Configuration2/LockMovementY" to="." method="_on_lock_movement_y_toggled"]
 [connection signal="toggled" from="Configuration2/LockMovementZ" to="." method="_on_lock_movement_z_toggled"]
+[connection signal="toggled" from="Configuration2/EnableVibration" to="." method="_on_enable_vibration_toggled"]

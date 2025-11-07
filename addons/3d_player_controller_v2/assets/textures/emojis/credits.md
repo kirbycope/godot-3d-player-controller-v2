@@ -1,0 +1,2 @@
+- Find+Copy Emojis - https://emojipedia.org/
+- Convert Emoji to Image - https://emojitosvg.com/

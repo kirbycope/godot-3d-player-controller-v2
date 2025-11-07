@@ -7,6 +7,7 @@ extends CharacterBody3D
 @export var enable_crouching: bool = true ## Enable crouching
 @export var enable_double_jumping: bool = false ## Enable double jumping
 @export var enable_driving: bool = false ## Enable driving
+@export var enable_emotes: bool = true ## Enable emotes
 @export var enable_flying: bool = false ## Enable flying
 @export var enable_hanging: bool = false ## Enable hanging
 @export var enable_holding_objects: bool = false ## Enable holding objects

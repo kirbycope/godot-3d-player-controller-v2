@@ -9,6 +9,7 @@ var yellow_sphere: MeshInstance3D
 @onready var enable_crouching: CheckButton = $Configuration/EnableCrouching
 @onready var enable_driving: CheckButton = $Configuration/EnableDriving
 @onready var enable_double_jumping: CheckButton = $Configuration/EnableDoubleJumping
+@onready var enable_emotes: CheckButton = $Configuration/EnableEmotes
 @onready var enable_flying: CheckButton = $Configuration/EnableFlying
 @onready var enable_hanging: CheckButton = $Configuration/EnableHanging
 @onready var enable_holding_objects: CheckButton = $Configuration/EnableHoldingObjects
@@ -23,7 +24,7 @@ var yellow_sphere: MeshInstance3D
 @onready var enable_sprinting: CheckButton = $Configuration/EnableSprinting
 @onready var enable_swimming: CheckButton = $Configuration/EnableSwimming
 @onready var enable_throwing: CheckButton = $Configuration/EnableThrowing
-@onready var enable_vibration: CheckButton = $Configuration/EnableVibration
+@onready var enable_vibration: CheckButton = $Configuration2/EnableVibration
 @onready var lock_camera: CheckButton = $Configuration2/LockCamera
 @onready var lock_movement_x: CheckButton = $Configuration2/LockMovementX
 @onready var lock_movement_y: CheckButton = $Configuration2/LockMovementY
@@ -90,6 +91,7 @@ func _process(_delta):
 		enable_crouching.button_pressed = player.enable_crouching
 		enable_double_jumping.button_pressed = player.enable_double_jumping
 		enable_driving.button_pressed = player.enable_driving
+		enable_emotes.button_pressed = player.enable_emotes
 		enable_flying.button_pressed = player.enable_flying
 		enable_hanging.button_pressed = player.enable_hanging
 		enable_holding_objects.button_pressed = player.enable_holding_objects
@@ -212,6 +214,10 @@ func _on_enable_double_jumping_toggled(toggled_on):
 
 func _on_enable_driving_toggled(toggled_on: bool) -> void:
 	player.enable_driving = toggled_on
+
+
+func _on_enable_emotes_toggled(toggled_on):
+	player.enable_emotes = toggled_on
 
 
 func _on_enable_fishing_toggled(toggled_on: bool) -> void:

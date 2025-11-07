@@ -1,7 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://ccpvpqrn2tdys"]
+[gd_scene load_steps=11 format=3 uid="uid://ccpvpqrn2tdys"]
 
 [ext_resource type="Script" uid="uid://dr2ty23n17arc" path="res://addons/3d_player_controller_v2/emotes.gd" id="1_ocdtj"]
 [ext_resource type="Texture2D" uid="uid://qjfyjqwrlrcr" path="res://addons/3d_player_controller_v2/assets/textures/game_icons_expansion/white/2x/DPAD_all.png" id="2_37bdu"]
+[ext_resource type="Texture2D" uid="uid://dfxiu6p62ux63" path="res://addons/3d_player_controller_v2/assets/textures/emojis/clapping_hands_flat.svg" id="3_37gq7"]
+[ext_resource type="Texture2D" uid="uid://bnyyiar46cy8e" path="res://addons/3d_player_controller_v2/assets/textures/emojis/crying_face_flat.svg" id="4_icpna"]
+[ext_resource type="Texture2D" uid="uid://ce622rqs0hgpc" path="res://addons/3d_player_controller_v2/assets/textures/emojis/waving_hand_flat.svg" id="5_e8145"]
+[ext_resource type="Texture2D" uid="uid://dderojt6ve4e" path="res://addons/3d_player_controller_v2/assets/textures/emojis/person_bowing_flat.svg" id="6_yesg6"]
 
 [sub_resource type="Gradient" id="Gradient_37bdu"]
 offsets = PackedFloat32Array(0.51, 0.54)
@@ -18,13 +22,9 @@ fill_from = Vector2(0.5, 0.5)
 
 [sub_resource type="LabelSettings" id="LabelSettings_ocdtj"]
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_37bdu"]
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_72hkm"]
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_tffsj"]
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_cn42b"]
+[sub_resource type="LabelSettings" id="LabelSettings_wbw5b"]
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
 
 [node name="Emotes" type="CanvasLayer"]
 script = ExtResource("1_ocdtj")
@@ -114,22 +114,19 @@ offset_right = 32.0
 offset_bottom = -38.25
 grow_horizontal = 2
 grow_vertical = 2
-texture = SubResource("PlaceholderTexture2D_37bdu")
+texture = ExtResource("3_37gq7")
 
 [node name="Label" type="Label" parent="Emote1"]
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = 5
 anchor_left = 0.5
-anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.5
 offset_left = -21.5
-offset_top = -13.25
 offset_right = 21.5
-offset_bottom = 13.25
+offset_bottom = 26.5
 grow_horizontal = 2
-grow_vertical = 2
 text = "Clap"
+label_settings = SubResource("LabelSettings_wbw5b")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -145,22 +142,22 @@ offset_right = 32.0
 offset_bottom = 105.75
 grow_horizontal = 2
 grow_vertical = 2
-texture = SubResource("PlaceholderTexture2D_72hkm")
+texture = ExtResource("4_icpna")
 
 [node name="Label" type="Label" parent="Emote2"]
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = 7
 anchor_left = 0.5
-anchor_top = 0.5
+anchor_top = 1.0
 anchor_right = 0.5
-anchor_bottom = 0.5
+anchor_bottom = 1.0
 offset_left = -21.5
-offset_top = -13.25
+offset_top = -26.5
 offset_right = 21.5
-offset_bottom = 13.25
 grow_horizontal = 2
-grow_vertical = 2
+grow_vertical = 0
 text = "Cry"
+label_settings = SubResource("LabelSettings_wbw5b")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -176,22 +173,19 @@ offset_right = -40.0
 offset_bottom = 33.75
 grow_horizontal = 2
 grow_vertical = 2
-texture = SubResource("PlaceholderTexture2D_tffsj")
+texture = ExtResource("5_e8145")
 
 [node name="Label" type="Label" parent="Emote3"]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
+anchors_preset = 4
 anchor_top = 0.5
-anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -21.5
 offset_top = -13.25
-offset_right = 21.5
+offset_right = 43.0
 offset_bottom = 13.25
-grow_horizontal = 2
 grow_vertical = 2
 text = "Wave"
+label_settings = SubResource("LabelSettings_wbw5b")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -207,21 +201,21 @@ offset_right = 104.0
 offset_bottom = 33.75
 grow_horizontal = 2
 grow_vertical = 2
-texture = SubResource("PlaceholderTexture2D_cn42b")
+texture = ExtResource("6_yesg6")
 
 [node name="Label" type="Label" parent="Emote4"]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
+anchors_preset = 6
+anchor_left = 1.0
 anchor_top = 0.5
-anchor_right = 0.5
+anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -21.5
+offset_left = -43.0
 offset_top = -13.25
-offset_right = 21.5
 offset_bottom = 13.25
-grow_horizontal = 2
+grow_horizontal = 0
 grow_vertical = 2
 text = "Bow"
+label_settings = SubResource("LabelSettings_wbw5b")
 horizontal_alignment = 1
 vertical_alignment = 1
