@@ -50,10 +50,16 @@ func _process(delta):
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
 
-	# Check if the player is on a floor -> Start "standing"
+	# Check if the player is on a floor
 	if player.is_on_floor():
-		transition_state(NODE_STATE, States.State.STANDING)
-		return
+		# Fell too fast -> Start "ragdolling"
+		if player.virtual_velocity.y < -player.gravity:
+			transition_state(NODE_STATE, States.State.RAGDOLLING)
+			return
+		# Fell safely -> Start "standing"
+		else:
+			transition_state(NODE_STATE, States.State.STANDING)
+			return
 
 	# Play the animation
 	play_animation()
