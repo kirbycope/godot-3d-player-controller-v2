@@ -13,7 +13,7 @@ func _input(event: InputEvent) -> void:
 
 	# (A)/[Space] _pressed_ (after 3 seconds or ragdolling) -> Start "standing"
 	if event.is_action_pressed(player.controls.button_0) and time_ragdolling > 3.0:
-		transition_state(player.current_state, States.State.JUMPING)
+		transition_state(player.current_state, States.State.STANDING)
 
 
 ## Called every frame. 'delta' is the elapsed time since the previous frame.

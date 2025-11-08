@@ -101,6 +101,10 @@ func start() -> void:
 	# Move the player to the wall
 	player.move_to_wall()
 
+	# Play the appropriate animation
+	await get_tree().process_frame
+	player.play_locked_animation(ANIMATION_CLIMBING_UP, 0.2)
+
 
 ## Stop "climbing".
 func stop() -> void:

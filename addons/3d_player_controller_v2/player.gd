@@ -143,13 +143,6 @@ func _input(event) -> void:
 	# Do nothing if the "pause" menu is visible
 	if pause.visible: return
 
-	# Ⓨ/[Ctrl] press to drive vehicle - Exit vehicle
-	if is_driving:
-		if event.is_action_pressed(controls.button_3):
-			base_state.transition_state(current_state, States.State.STANDING)
-		else:
-			return
-
 	# [Left Mouse Button] _pressed_ -> Start "navigating"
 	if enable_navigation:
 		if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) \
@@ -479,11 +472,14 @@ func move_to_wall() -> void:
 		visuals.look_at(position + wall_direction, up_direction)
 
 
-func play_locked_animation(animation_name: String) -> float:
+func play_locked_animation(animation_name: String, duration: float = -1.0) -> float:
 	var current_state_name = base_state.get_state_name(current_state)
 	var current_state_scene = get_parent().find_child(current_state_name)
 	current_state_scene.process_mode = Node.PROCESS_MODE_DISABLED
-	animation_player.play(animation_name)
+	if duration == -1.0:
+		animation_player.play(animation_name)
+	else:
+		animation_player.play_section(animation_name, 0.0, duration)
 	animation_player.connect("animation_finished", _on_locked_animation_finished)
 	is_animation_locked = true
 	return animation_player.current_animation_length

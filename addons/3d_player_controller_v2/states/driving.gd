@@ -5,6 +5,22 @@ const NODE_NAME := "Driving"
 const NODE_STATE := States.State.DRIVING
 
 
+## Called when there is an input event.
+func _input(event) -> void:
+	# Do nothing if not the authority
+	if !is_multiplayer_authority(): return
+
+	# Do nothing if the "pause" menu is visible
+	if player.pause.visible: return
+
+	# Ⓨ/[Ctrl] _pressed_ -> Exit vehicle
+	if player.is_driving:
+		if event.is_action_pressed(player.controls.button_3):
+			player.base_state.transition_state(player.current_state, States.State.STANDING)
+		else:
+			return
+
+
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	# Do nothing if not the authority
