@@ -115,6 +115,7 @@ var virtual_velocity: Vector3 = Vector3.ZERO ## The player's velocity is movemen
 @onready var debug = $Debug
 @onready var navigation_agent: NavigationAgent3D = $NavigationAgent3D
 @onready var pause: CanvasLayer = $Pause
+@onready var shape_cast: ShapeCast3D = $ShapeCast3D
 @onready var timers: Node = $Timers
 @onready var timer_kick_left = timers.get_node("KickLeft")
 @onready var timer_kick_right = timers.get_node("KickRight")
@@ -294,7 +295,8 @@ func _physics_process(delta) -> void:
 		velocity.z = 0.0
 
 	# Move the body based on velocity
-	move_and_slide()
+	#move_and_slide()
+	move(delta)
 
 
 @rpc("any_peer", "call_local")
@@ -351,6 +353,33 @@ func apply_impact(collider, bone_name, force_multiplier = 1.0) -> void:
 			Input.start_joy_vibration(0, 1.0, 1.0, 0.1)
 		else:
 			Input.start_joy_vibration(0, 0.0, 1.0, 0.2)
+
+
+## https://youtu.be/38BN96kQANc?si=UglGjZ14CfsBq7vL&t=534
+func move(delta) -> void:
+	if velocity != Vector3.ZERO:
+		shape_cast.global_position.x = global_position.x + velocity.x * delta
+		shape_cast.global_position.z = global_position.z + velocity.z * delta
+
+		if is_on_floor():
+			shape_cast.target_position.y = -0.5
+		else:
+			shape_cast.target_position.y = 0.0
+
+		var query = PhysicsShapeQueryParameters3D.new()
+		query.exclude = [self]
+		query.shape = shape_cast.shape
+		query.transform = shape_cast.global_transform
+		var result = get_world_3d().direct_space_state.intersect_shape(query, 1)
+
+		if !result:
+			shape_cast.force_shapecast_update()
+
+		if shape_cast.is_colliding() and velocity.y <= 0.0 and !result and shape_cast.get_collision_normal(0).angle_to(up_direction) < floor_max_angle:
+			global_position.y = shape_cast.get_collision_point(0).y
+			velocity.y = 0.0
+
+	move_and_slide()
 
 
 ## Provides movement logic for climbing and hanging states; which are mostly skipped in _physics_process().
