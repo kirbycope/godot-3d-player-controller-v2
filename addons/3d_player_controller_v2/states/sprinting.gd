@@ -38,6 +38,12 @@ func _process(delta):
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
 
+	# Not on floor -> Start "falling"
+	if not player.is_on_floor() \
+	and not player.ray_cast_below.is_colliding():
+		transition_state(player.current_state, States.State.FALLING)
+		return
+
 	# Play the animation
 	play_animation()
 

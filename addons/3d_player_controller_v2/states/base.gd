@@ -26,21 +26,6 @@ func _physics_process(delta):
 				transition_state(player.current_state, States.State.HANGING)
 				return
 
-	# Check if the player is not on a floor -> Start "falling"
-	if not player.is_on_floor() \
-	and not player.is_climbing \
-	and not player.is_climbing_ladder \
-	and not player.is_falling \
-	and not player.is_flying \
-	and not player.is_hanging \
-	and not player.is_jumping \
-	and not player.is_paragliding \
-	and not player.is_ragdolling \
-	and not player.is_skateboarding \
-	and not player.is_swimming:
-		transition_state(player.current_state, States.State.FALLING)
-		return
-
 	# Change state based on velocity
 	if not player.is_climbing \
 	and not player.is_climbing_ladder \

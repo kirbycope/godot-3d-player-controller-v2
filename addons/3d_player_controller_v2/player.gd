@@ -127,6 +127,7 @@ var virtual_velocity: Vector3 = Vector3.ZERO ## The player's velocity is movemen
 @onready var ray_cast_high: RayCast3D = visuals.get_node("RayCast3D_High")
 @onready var ray_cast_middle: RayCast3D = visuals.get_node("RayCast3D_Middle")
 @onready var ray_cast_low: RayCast3D = visuals.get_node("RayCast3D_Low")
+@onready var ray_cast_below: RayCast3D = visuals.get_node("RayCast3D_Below")
 @onready var skeleton: Skeleton3D = %GeneralSkeleton
 @onready var physical_bone_simulator: PhysicalBoneSimulator3D = skeleton.get_node_or_null("PhysicalBoneSimulator3D") ## Setting up a ragdoll is optional so null is allowed
 
@@ -361,9 +362,6 @@ func move(delta) -> void:
 		shape_cast.global_position.x = global_position.x + velocity.x * delta
 		shape_cast.global_position.z = global_position.z + velocity.z * delta
 
-		if is_on_floor():
-			shape_cast.target_position.y = -0.5
-
 		var query = PhysicsShapeQueryParameters3D.new()
 		query.exclude = [self]
 		query.shape = shape_cast.shape
@@ -376,9 +374,6 @@ func move(delta) -> void:
 		if shape_cast.is_colliding() and velocity.y <= 0.0 and !result and shape_cast.get_collision_normal(0).angle_to(up_direction) < floor_max_angle:
 			global_position.y = shape_cast.get_collision_point(0).y
 			velocity.y = 0.0
-
-	else:
-		shape_cast.target_position.y = 0.0
 
 	move_and_slide()
 

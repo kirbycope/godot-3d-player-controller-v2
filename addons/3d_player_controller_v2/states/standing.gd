@@ -140,6 +140,12 @@ func _process(delta):
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
 
+	# Not on floor -> Start "falling"
+	if not player.is_on_floor() \
+	and not player.ray_cast_below.is_colliding():
+		transition_state(player.current_state, States.State.FALLING)
+		return
+
 	# Ⓨ/[Ctrl] _pressed_ -> Start "crouching"
 	# Not in _input() to allow holding down the button while in other states and trasitioning to "standing"
 	if Input.is_action_pressed(player.controls.button_3):
