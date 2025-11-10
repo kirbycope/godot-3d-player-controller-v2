@@ -357,14 +357,12 @@ func apply_impact(collider, bone_name, force_multiplier = 1.0) -> void:
 
 ## https://youtu.be/38BN96kQANc?si=UglGjZ14CfsBq7vL&t=534
 func move(delta) -> void:
-	if velocity != Vector3.ZERO:
+	if input_direction != Vector2.ZERO:
 		shape_cast.global_position.x = global_position.x + velocity.x * delta
 		shape_cast.global_position.z = global_position.z + velocity.z * delta
 
 		if is_on_floor():
 			shape_cast.target_position.y = -0.5
-		else:
-			shape_cast.target_position.y = 0.0
 
 		var query = PhysicsShapeQueryParameters3D.new()
 		query.exclude = [self]
@@ -378,6 +376,9 @@ func move(delta) -> void:
 		if shape_cast.is_colliding() and velocity.y <= 0.0 and !result and shape_cast.get_collision_normal(0).angle_to(up_direction) < floor_max_angle:
 			global_position.y = shape_cast.get_collision_point(0).y
 			velocity.y = 0.0
+
+	else:
+		shape_cast.target_position.y = 0.0
 
 	move_and_slide()
 
