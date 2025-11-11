@@ -1,0 +1,188 @@
+[gd_scene load_steps=2 format=3 uid="uid://ddphjodki6dkl"]
+
+[ext_resource type="Script" uid="uid://c7um6pc42hdiw" path="res://addons/3d_player_controller_v2/settings.gd" id="1_p63df"]
+
+[node name="Settings" type="CanvasLayer"]
+script = ExtResource("1_p63df")
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.5
+offset_top = -123.5
+offset_right = 96.5
+offset_bottom = 123.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.5
+offset_top = -106.0
+offset_right = 96.5
+offset_bottom = 106.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SETTINGS" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "SETTINGS"
+horizontal_alignment = 1
+
+[node name="VSYNC" type="CheckButton" parent="Panel/VBoxContainer"]
+layout_mode = 2
+button_pressed = true
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer/VSYNC"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.5
+offset_top = -11.5
+offset_right = 96.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = " VSYNC"
+vertical_alignment = 1
+
+[node name="MSAA" type="OptionButton" parent="Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+selected = 0
+item_count = 4
+popup/item_0/text = "Disabled"
+popup/item_0/id = 0
+popup/item_1/text = "2× MSAA"
+popup/item_1/id = 1
+popup/item_2/text = "4× MSAA"
+popup/item_2/id = 2
+popup/item_3/text = "8× MSAA"
+popup/item_3/id = 3
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer/MSAA"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -142.5
+offset_top = -11.5
+offset_right = 50.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = " MSAA"
+vertical_alignment = 1
+
+[node name="SSAA" type="OptionButton" parent="Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+selected = 0
+item_count = 3
+popup/item_0/text = "Off"
+popup/item_0/id = 0
+popup/item_1/text = "2.25× SSAA"
+popup/item_1/id = 1
+popup/item_2/text = "4× SSAA"
+popup/item_2/id = 2
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer/SSAA"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -77.0
+offset_top = -11.5
+offset_right = 116.0
+offset_bottom = 11.5
+grow_vertical = 2
+text = " SSAA"
+vertical_alignment = 1
+
+[node name="FXAA" type="CheckButton" parent="Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer/FXAA"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.5
+offset_top = -11.5
+offset_right = 96.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = " FXAA"
+vertical_alignment = 1
+
+[node name="TAA" type="CheckButton" parent="Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer/TAA"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.5
+offset_top = -11.5
+offset_right = 96.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = " TAA"
+vertical_alignment = 1
+
+[node name="FSR" type="OptionButton" parent="Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+selected = 0
+item_count = 3
+popup/item_0/text = "Off"
+popup/item_0/id = 0
+popup/item_1/text = "1.0"
+popup/item_1/id = 1
+popup/item_2/text = "2.2"
+popup/item_2/id = 2
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer/FSR"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -136.0
+offset_top = -11.5
+offset_right = 57.0
+offset_bottom = 11.5
+grow_vertical = 2
+text = " FSR"
+vertical_alignment = 1
+
+[node name="BACK" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "BACK"
+
+[connection signal="toggled" from="Panel/VBoxContainer/VSYNC" to="." method="_on_vsync_toggled"]
+[connection signal="item_selected" from="Panel/VBoxContainer/MSAA" to="." method="_on_msaa_item_selected"]
+[connection signal="item_selected" from="Panel/VBoxContainer/SSAA" to="." method="_on_ssaa_item_selected"]
+[connection signal="toggled" from="Panel/VBoxContainer/FXAA" to="." method="_on_fxaa_toggled"]
+[connection signal="toggled" from="Panel/VBoxContainer/TAA" to="." method="_on_taa_toggled"]
+[connection signal="item_selected" from="Panel/VBoxContainer/FSR" to="." method="_on_fsr_item_selected"]
+[connection signal="pressed" from="Panel/VBoxContainer/BACK" to="." method="_on_back_pressed"]

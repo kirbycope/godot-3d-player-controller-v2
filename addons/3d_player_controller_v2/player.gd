@@ -128,6 +128,7 @@ var virtual_velocity: Vector3 = Vector3.ZERO ## The player's velocity is movemen
 @onready var ray_cast_middle: RayCast3D = visuals.get_node("RayCast3D_Middle")
 @onready var ray_cast_low: RayCast3D = visuals.get_node("RayCast3D_Low")
 @onready var ray_cast_below: RayCast3D = visuals.get_node("RayCast3D_Below")
+@onready var settings: CanvasLayer = $Settings
 @onready var skeleton: Skeleton3D = %GeneralSkeleton
 @onready var physical_bone_simulator: PhysicalBoneSimulator3D = skeleton.get_node_or_null("PhysicalBoneSimulator3D") ## Setting up a ragdoll is optional so null is allowed
 
@@ -356,11 +357,13 @@ func apply_impact(collider, bone_name, force_multiplier = 1.0) -> void:
 			Input.start_joy_vibration(0, 0.0, 1.0, 0.2)
 
 
-## https://youtu.be/38BN96kQANc?si=UglGjZ14CfsBq7vL&t=534
+## Moves the player while adhering to the current surface orientation.
 func move(delta) -> void:
+
 	if input_direction != Vector2.ZERO:
-		# Decompose velocity relative to current up_direction
+		# Extract the vertical component of velocity along the current up direction
 		var vertical_speed: float = velocity.dot(up_direction)
+		# Decompose velocity relative to current up_direction
 		var lateral_velocity: Vector3 = velocity - up_direction * vertical_speed
 
 		# Predict lateral displacement over this tick (tangent to surface)

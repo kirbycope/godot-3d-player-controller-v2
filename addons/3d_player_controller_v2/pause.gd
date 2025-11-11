@@ -2,7 +2,9 @@ extends CanvasLayer
 
 var initial_mouse_mode = -1
 
+@onready var panel: Panel = $Panel
 @onready var player: CharacterBody3D = get_parent()
+@onready var settings: CanvasLayer = player.settings
 
 
 ## Called when there is an input event.
@@ -22,6 +24,10 @@ func toggle_menu():
 
 	# Toggle visibility
 	visible = !visible
+	panel.visible = visible
+
+	# Handle Sub-menu(s)
+	if not visible: player.settings.visible = false
 
 	# Show the mouse if the pause menu is visible
 	if visible:
@@ -41,7 +47,8 @@ func _on_resume_pressed():
 
 
 func _on_settings_pressed():
-	pass # Replace with function body.
+	player.settings.visible = !player.settings.visible
+	panel.visible = !player.settings.visible
 
 
 func _on_title_pressed():
