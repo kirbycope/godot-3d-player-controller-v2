@@ -111,6 +111,7 @@ var virtual_velocity: Vector3 = Vector3.ZERO ## The player's velocity is movemen
 @onready var camera_mount = $CameraMount
 @onready var spring_arm = camera_mount.get_node("CameraSpringArm")
 @onready var camera = spring_arm.get_node("Camera3D")
+@onready var chat = $Chat
 @onready var controls = $Controls
 @onready var debug = $Debug
 @onready var navigation_agent: NavigationAgent3D = $NavigationAgent3D
@@ -206,10 +207,12 @@ func _physics_process(delta) -> void:
 			new_up = Vector3.UP
 			gravity_accel = - Vector3.UP * gravity
 
-		if pause.visible:
+		# Zero out input direction if pause menu or chat input is visible
+		if pause.visible \
+		or chat.line_edit.visible:
 			input_direction = Vector2.ZERO
+		# Get the input vector by specifying four actions for the positive and negative X and Y axes
 		else:
-			# Get the input vector by specifying four actions for the positive and negative X and Y axes
 			input_direction = Input.get_vector(
 				controls.move_left,
 				controls.move_right,

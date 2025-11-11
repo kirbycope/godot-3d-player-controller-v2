@@ -23,13 +23,15 @@ var current_index = -1
 @onready var super_mario_galaxy_preview = preview_container.get_node("SuperMarioGalaxy")
 @onready var super_mario_odyssey_preview = preview_container.get_node("SuperMarioOdyssey")
 @onready var zelda_breath_of_the_wild_preview = preview_container.get_node("ZeldaBreathOfTheWild")
-@onready var description = $Center/Description
 @onready var zelda_links_awakening_preview = preview_container.get_node("ZeldaLinksAwakening")
+@onready var description = $Center/Description
+@onready var enter_level = $Center/EnterLevel
 @onready var loading = $Loading
 
 
 func _ready():
 	_on_beta_pressed()
+	enter_level.grab_focus()
 
 
 func get_level_index() -> int:

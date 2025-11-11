@@ -16,10 +16,11 @@ func _physics_process(delta):
 	if player.enable_hanging:
 		if not player.is_flying \
 		and not player.is_hanging \
+		and not player.is_on_floor() \
 		and not player.is_ragdolling \
+		and not player.is_skateboarding \
 		and not player.ray_cast_top.is_colliding() \
-		and player.ray_cast_high.is_colliding() \
-		and not player.is_skateboarding:
+		and player.ray_cast_high.is_colliding():
 			if not player.ray_cast_high.get_collider() is CharacterBody3D \
 			and not player.ray_cast_high.get_collider() is RigidBody3D \
 			and not player.ray_cast_high.get_collider() is SoftBody3D:

@@ -2,9 +2,14 @@ extends CanvasLayer
 
 var initial_mouse_mode = -1
 
-@onready var panel: Panel = $Panel
 @onready var player: CharacterBody3D = get_parent()
 @onready var settings: CanvasLayer = player.settings
+@onready var panel: Panel = $Panel
+@onready var pause_button = panel.get_node("VBoxContainer/PAUSE")
+@onready var resume_button = panel.get_node("VBoxContainer/Resume")
+@onready var settings_button = panel.get_node("VBoxContainer/Settings")
+@onready var title_button = panel.get_node("VBoxContainer/Title")
+@onready var exit_button = panel.get_node("VBoxContainer/Exit")
 
 
 ## Called when there is an input event.
@@ -13,7 +18,8 @@ func _input(event):
 	if !is_multiplayer_authority(): return
 
 	# Toggle pause menu visibility
-	if event.is_action_pressed(player.controls.button_9):
+	if event.is_action_pressed(player.controls.button_9) \
+	and not player.chat.line_edit.visible:
 		toggle_menu()
 
 
@@ -26,8 +32,13 @@ func toggle_menu():
 	visible = !visible
 	panel.visible = visible
 
+	# Set initial focus
+	if visible:
+		resume_button.grab_focus()
+
 	# Handle Sub-menu(s)
-	if not visible: player.settings.visible = false
+	if not visible:
+		player.settings.visible = false
 
 	# Show the mouse if the pause menu is visible
 	if visible:
@@ -48,6 +59,7 @@ func _on_resume_pressed():
 
 func _on_settings_pressed():
 	player.settings.visible = !player.settings.visible
+	player.settings.back.grab_focus()
 	panel.visible = !player.settings.visible
 
 

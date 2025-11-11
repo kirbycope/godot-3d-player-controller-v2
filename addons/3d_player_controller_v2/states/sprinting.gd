@@ -17,7 +17,8 @@ func _input(event):
 	# Ⓐ/[Space] _pressed_ -> Start "jumping"
 	if event.is_action_pressed(player.controls.button_0):
 		if player.enable_jumping \
-		and player.is_on_floor():
+		and player.is_on_floor() \
+		and not player.chat.line_edit.visible:
 			player.base_state.transition_state(player.current_state, States.State.JUMPING)
 
 	# Ⓑ/[shift] _released_ -> Start "standing"

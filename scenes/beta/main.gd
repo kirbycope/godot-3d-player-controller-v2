@@ -9,7 +9,7 @@ func _ready() -> void:
 	player.camera.lock_camera = false
 	player.camera.lock_perspective = false
 	player.camera.set_camera_perspective(player.camera.Perspective.THIRD_PERSON)
-	player.debug.show()
+	#player.debug.show()
 	player.enable_climbing = true
 	player.enable_crawling = true
 	player.enable_crouching = true

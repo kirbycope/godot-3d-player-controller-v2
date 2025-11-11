@@ -1,6 +1,14 @@
 extends CanvasLayer
 
 @onready var player: CharacterBody3D = get_parent()
+@onready var panel: Panel = $Panel
+@onready var vsync_button: CheckButton = panel.get_node("VBoxContainer/VSYNC")
+@onready var msaa_button: OptionButton = panel.get_node("VBoxContainer/MSAA")
+@onready var ssaa_button: OptionButton = panel.get_node("VBoxContainer/SSAA")
+@onready var fxaa_button: CheckButton = panel.get_node("VBoxContainer/FXAA")
+@onready var taa_button: CheckButton = panel.get_node("VBoxContainer/TAA")
+@onready var fsr_button: OptionButton = panel.get_node("VBoxContainer/FSR")
+@onready var back: Button = panel.get_node("VBoxContainer/BACK")
 
 
 ## Change the VSYNC value.
@@ -83,3 +91,4 @@ func _on_fsr_item_selected(index: int) -> void:
 ## Return to the pause menu.
 func _on_back_pressed():
 	player.pause._on_settings_pressed()
+	player.pause.resume_button.grab_focus()
