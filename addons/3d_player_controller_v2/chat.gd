@@ -1,12 +1,17 @@
 extends CanvasLayer
 
 @onready var player: CharacterBody3D = get_parent()
-@onready var messages_container: VBoxContainer = $VBoxContainer
+@onready var scroll_container: ScrollContainer = $ScrollContainer
+@onready var messages_container: VBoxContainer = scroll_container.get_node("VBoxContainer")
 @onready var line_edit: LineEdit = $LineEdit
-@onready var send_button = $SEND
+@onready var send_button: Button = $SEND
 
 
-func _input(event):
+func _ready() -> void:
+	clear_and_hide_input()
+
+
+func _input(event) -> void:
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
 
@@ -21,21 +26,32 @@ func _input(event):
 		clear_and_show_input()
 
 
-func clear_and_hide_input():
+func clear_and_hide_input() -> void:
 	line_edit.clear()
 	line_edit.hide()
 	send_button.hide()
 
 
-func clear_and_show_input():
+func clear_and_show_input() -> void:
 	line_edit.clear()
 	line_edit.show()
 	line_edit.grab_focus()
 	send_button.show()
 
 
+func get_username() -> String:
+	var username := player.get("steam_id")
+	if username == null:
+		username = ""
+	if username.is_empty():
+		username = OS.get_environment("USERNAME")
+	if username.is_empty():
+		username = OS.get_environment("USER")
+	return username
+
+
 @rpc("any_peer", "call_local")
-func send_message(text: String) -> void:
+func send_message(sender: String, message: String) -> void:
 	# Wrap each message in a panel so we can give it a background
 	var message_panel := PanelContainer.new()
 	var bg := StyleBoxFlat.new()
@@ -53,7 +69,8 @@ func send_message(text: String) -> void:
 
 	# Add the actual text message
 	var rtl = RichTextLabel.new()
-	rtl.text = text
+	rtl.bbcode_enabled = true
+	rtl.bbcode_text = sender + ": " + message
 	rtl.custom_minimum_size = Vector2(480, 26)
 	message_panel.add_child(rtl)
 
@@ -64,6 +81,12 @@ func send_message(text: String) -> void:
 			message_panel.hide()
 	)
 
+	# Wait a frame
+	await get_tree().process_frame
+
+	# Scroll to bottom
+	scroll_container.scroll_vertical = scroll_container.get_v_scroll_bar().max_value
+
 
 func submit_message(text: String) -> void:
 	# Do nothing if the message is empty
@@ -72,15 +95,18 @@ func submit_message(text: String) -> void:
 	# Handle commands (starting with "/")
 	if text.begins_with("/"): pass # TODO: Implement commands here
 
+	# Get the username
+	var username: String = get_username()
+
 	# Send the message to all peers
-	send_message(text)
+	send_message(username, "[i]" + text)
 
 
-func _on_line_edit_text_submitted(new_text):
+func _on_line_edit_text_submitted(new_text) -> void:
 	submit_message(new_text)
 	clear_and_hide_input()
 
 
-func _on_send_pressed():
+func _on_send_pressed() -> void:
 	submit_message(line_edit.text)
 	clear_and_hide_input()
