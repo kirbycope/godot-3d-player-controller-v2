@@ -46,6 +46,9 @@ extends CharacterBody3D
 @export var speed_sprinting: float = 5.0 ## Speed while sprinting
 @export var speed_swimming: float = 3.0 ## Speed while swimming
 @export var speed_walking: float = 1.0 ## Speed while walking
+@export_group("PHYSICS")
+@export var force_pushing: float = 0.2 ## Force applied when pushing
+@export var force_pushing_sprinting: float = 0.4 ## Force applied when pushing while sprinting
 
 var current_state: States.State ## The current state of the 
 var previous_state: States.State ## The previous state of the 
@@ -405,6 +408,9 @@ func move(delta) -> void:
 
 	move_and_slide()
 
+	# Handle collisions
+	handle_collisions()
+
 
 ## Provides movement logic for climbing and hanging states; which are mostly skipped in _physics_process().
 func move_player() -> void:
@@ -446,6 +452,29 @@ func move_player() -> void:
 	wall_forward = (wall_forward - up_direction * wall_forward.dot(up_direction)).normalized()
 	if wall_forward.length() > 0.0 and position != position + wall_forward:
 		visuals.look_at(position + wall_forward, up_direction)
+
+
+func handle_collisions() -> void:
+	# Iterate through all slide collisions
+	for i in get_slide_collision_count():
+		var collision = get_slide_collision(i)
+		var collider = collision.get_collider()
+
+		# Handle RigidBody3D collisions
+		if collider is RigidBody3D:
+			var push_force = force_pushing_sprinting if is_sprinting else force_pushing
+			var push_direction = collision.get_normal() * -1.0
+			var velocity_factor = min(velocity.length(), 5.0)
+			var impulse = push_direction * push_force * velocity_factor
+			collider.apply_central_impulse(impulse)
+
+		# Handle SoftBody3D collisions
+		elif collider is SoftBody3D:
+			var push_force = force_pushing_sprinting if is_sprinting else force_pushing
+			var push_direction = collision.get_normal() * -1.0
+			var velocity_factor = min(velocity.length(), 5.0)
+			var impulse = push_direction * push_force * velocity_factor
+			collider.apply_central_impulse(impulse)
 
 
 func move_to_ladder() -> void:

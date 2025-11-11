@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://dey7ls45vvlck"]
+[gd_scene load_steps=22 format=3 uid="uid://dey7ls45vvlck"]
 
 [ext_resource type="Script" uid="uid://dhm0w0mgw28o6" path="res://scenes/beta/main.gd" id="1_4go8p"]
 [ext_resource type="Texture2D" uid="uid://bpo2vwd0ruriv" path="res://assets/textures/prototype_textures/Dark/texture_08.png" id="2_7kfyu"]
@@ -46,16 +46,6 @@ uv1_triplanar = true
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r3gsl"]
 albedo_texture = ExtResource("12_q7lbx")
 uv1_triplanar = true
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_r3gsl"]
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_tvgdf"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_r3gsl"]
-size = Vector3(1, 2, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_tvgdf"]
-size = Vector3(1, 2, 1)
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_4go8p")
@@ -226,23 +216,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 5, 0)
 use_collision = true
 size = Vector3(1, 10, 3)
 material = SubResource("StandardMaterial3D_r3gsl")
-
-[node name="RigidBody3D" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1, -2)
-center_of_mass_mode = 1
-center_of_mass = Vector3(0, -1, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
-shape = SubResource("CapsuleShape3D_r3gsl")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
-mesh = SubResource("CapsuleMesh_tvgdf")
-
-[node name="RigidBody3D2" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 2)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D2"]
-shape = SubResource("BoxShape3D_r3gsl")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D2"]
-mesh = SubResource("BoxMesh_tvgdf")
