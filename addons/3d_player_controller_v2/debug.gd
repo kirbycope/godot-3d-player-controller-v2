@@ -53,6 +53,7 @@ var yellow_sphere: MeshInstance3D
 @onready var is_rolling: CheckBox = $States/IsRolling
 @onready var is_navigating: CheckBox = $States/IsNavigating
 @onready var is_paragliding: CheckBox = $States/IsParagliding
+@onready var is_pushing: CheckBox = $States/IsPushing
 @onready var is_running: CheckBox = $States/IsRunning
 @onready var is_sliding: CheckBox = $States/IsSliding
 @onready var is_skateboarding: CheckBox = $States/IsSkateboarding
@@ -146,6 +147,7 @@ func _process(_delta):
 		is_paragliding.button_pressed = player.is_paragliding
 		is_punching_left.button_pressed = player.is_punching_left
 		is_punching_right.button_pressed = player.is_punching_right
+		is_pushing.button_pressed = player.is_pushing
 		is_reeling_fishing.button_pressed = player.is_reeling_fishing
 		is_rolling.button_pressed = player.is_rolling
 		is_running.button_pressed = player.is_running

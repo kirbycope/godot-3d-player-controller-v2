@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://yxm384w27bq2"]
+[gd_scene load_steps=26 format=3 uid="uid://yxm384w27bq2"]
 
 [ext_resource type="Script" uid="uid://bu32m3koxydbf" path="res://addons/3d_player_controller_v2/states/states.gd" id="1_gr8r5"]
 [ext_resource type="Script" uid="uid://5livqgnjxl8w" path="res://addons/3d_player_controller_v2/states/base.gd" id="2_uuywk"]
@@ -18,6 +18,7 @@
 [ext_resource type="Script" uid="uid://tnxern5p0mas" path="res://addons/3d_player_controller_v2/states/walking.gd" id="10_fl747"]
 [ext_resource type="Script" uid="uid://dcf32lcicph2l" path="res://addons/3d_player_controller_v2/states/mantling.gd" id="13_npvs6"]
 [ext_resource type="Script" uid="uid://c6buw3vevvq0o" path="res://addons/3d_player_controller_v2/states/reacting.gd" id="14_8p57p"]
+[ext_resource type="Script" uid="uid://bq70kvtaakibj" path="res://addons/3d_player_controller_v2/states/pushing.gd" id="15_0t5q5"]
 [ext_resource type="Script" uid="uid://dv7brwoujcdcu" path="res://addons/3d_player_controller_v2/states/rolling.gd" id="15_3qar2"]
 [ext_resource type="Script" uid="uid://c26yt186k4qv3" path="res://addons/3d_player_controller_v2/states/ragdolling.gd" id="15_nohs4"]
 [ext_resource type="Script" uid="uid://djuxs8olgukcn" path="res://addons/3d_player_controller_v2/states/sliding.gd" id="15_qtidm"]
@@ -79,6 +80,10 @@ script = ExtResource("7_uuywk")
 [node name="Paragliding" type="Node" parent="."]
 process_mode = 4
 script = ExtResource("21_3qar2")
+
+[node name="Pushing" type="Node" parent="."]
+process_mode = 4
+script = ExtResource("15_0t5q5")
 
 [node name="Ragdolling" type="Node" parent="."]
 process_mode = 4

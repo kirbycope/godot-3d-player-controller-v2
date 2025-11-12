@@ -38,6 +38,7 @@ func _physics_process(delta):
 	and not player.is_hanging \
 	and not player.is_jumping \
 	and not player.is_paragliding \
+	and not player.is_pushing \
 	and not player.is_ragdolling \
 	and not player.is_rolling \
 	and not player.is_sliding \
@@ -53,6 +54,14 @@ func _physics_process(delta):
 		and not player.is_standing \
 		and not player.is_crouching:
 			transition_state(player.current_state, States.State.STANDING)
+			return
+		
+		# Check if there is something in front of the player and the player is moving -> Start "pushing"
+		elif player.input_direction != Vector2.ZERO \
+		and (player.ray_cast_middle.is_colliding() or player.ray_cast_high.is_colliding()) \
+		and player.enable_pushing \
+		and not player.is_pushing:
+			transition_state(player.current_state, States.State.PUSHING)
 			return
 
 		# Check if the sprint button is pressed -> Start "sprinting"

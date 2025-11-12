@@ -16,6 +16,7 @@ extends CharacterBody3D
 @export var enable_navigation: bool = false ## Enable navigation (pathfinding)
 @export var enable_paragliding: bool = false ## Enable paragliding
 @export var enable_punching: bool = false ## Enable punching
+@export var enable_pushing: bool = true ## Enable pushing
 @export var enable_ragdoll: bool = true ## Enable ragdoll physics
 @export var enable_retical: bool = true ## Enable the rectical
 @export var enable_rolling: bool = false ## Enable rolling
@@ -84,6 +85,7 @@ var is_navigating: bool = false ## Is the player navigating?
 var is_paragliding: bool = false ## Is the player paragliding?
 var is_punching_left: bool = false ## Is the player punching with thier left hand?
 var is_punching_right: bool = false ## Is the player punching with their right hand?
+var is_pushing: bool = false ## Is the player pushing?
 var is_ragdolling: bool = false ## Is the player ragdolling?
 var is_reacting_low_left: bool = false ## Is the player reacting to being hit from the low left?
 var is_reacting_low_right: bool = false ## Is the player reacting to being hit from the low right?

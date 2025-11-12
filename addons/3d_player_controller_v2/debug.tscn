@@ -606,6 +606,17 @@ layout_mode = 0
 offset_right = 164.0
 offset_bottom = 31.0
 
+[node name="IsPushing" type="CheckBox" parent="States"]
+layout_mode = 2
+disabled = true
+text = "IsPushing"
+
+[node name="Panel" type="Panel" parent="States/IsPushing"]
+z_index = -1
+layout_mode = 0
+offset_right = 164.0
+offset_bottom = 31.0
+
 [node name="IsRagdolling" type="CheckBox" parent="States"]
 layout_mode = 2
 disabled = true
