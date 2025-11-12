@@ -119,6 +119,7 @@ var virtual_velocity: Vector3 = Vector3.ZERO ## The player's velocity is movemen
 @onready var chat = $Chat
 @onready var controls = $Controls
 @onready var debug = $Debug
+@onready var emotes = $Emotes
 @onready var navigation_agent: NavigationAgent3D = $NavigationAgent3D
 @onready var pause: CanvasLayer = $Pause
 @onready var shape_cast: ShapeCast3D = $ShapeCast3D

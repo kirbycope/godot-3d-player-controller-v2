@@ -661,17 +661,6 @@ layout_mode = 0
 offset_right = 164.0
 offset_bottom = 31.0
 
-[node name="IsSkateboarding" type="CheckBox" parent="States"]
-layout_mode = 2
-disabled = true
-text = "IsSkateboarding"
-
-[node name="Panel" type="Panel" parent="States/IsSkateboarding"]
-z_index = -1
-layout_mode = 0
-offset_right = 164.0
-offset_bottom = 31.0
-
 [node name="IsSprinting" type="CheckBox" parent="States"]
 layout_mode = 2
 disabled = true
@@ -827,6 +816,17 @@ disabled = true
 text = "IsFiringRifle"
 
 [node name="Panel" type="Panel" parent="States2/IsFiringRifle"]
+z_index = -1
+layout_mode = 0
+offset_right = 164.0
+offset_bottom = 31.0
+
+[node name="IsSkateboarding" type="CheckBox" parent="States2"]
+layout_mode = 2
+disabled = true
+text = "IsSkateboarding"
+
+[node name="Panel" type="Panel" parent="States2/IsSkateboarding"]
 z_index = -1
 layout_mode = 0
 offset_right = 164.0

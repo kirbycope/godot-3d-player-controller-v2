@@ -22,7 +22,8 @@ func _input(event) -> void:
 
 	# (D-Pad Right)/[T] _released_ -> Show chat input
 	if event.is_action_released(player.controls.button_15) \
-	and not line_edit.visible:
+	and not line_edit.visible \
+	and not player.emotes.visible:
 		clear_and_show_input()
 
 

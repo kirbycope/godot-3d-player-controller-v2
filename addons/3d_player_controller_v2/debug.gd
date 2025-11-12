@@ -18,6 +18,7 @@ var yellow_sphere: MeshInstance3D
 @onready var enable_navigation: CheckButton = $Configuration/EnableNavigation
 @onready var enable_paragliding: CheckButton = $Configuration/EnableParagliding
 @onready var enable_punching: CheckButton = $Configuration/EnablePunching
+@onready var enable_pushing: CheckButton = $Configuration/EnablePushing
 @onready var enable_ragdoll: CheckButton = $Configuration/EnableRagdoll
 @onready var enable_retical: CheckButton = $Configuration2/EnableRetical
 @onready var enable_rolling: CheckButton = $Configuration/EnableRolling
@@ -56,7 +57,7 @@ var yellow_sphere: MeshInstance3D
 @onready var is_pushing: CheckBox = $States/IsPushing
 @onready var is_running: CheckBox = $States/IsRunning
 @onready var is_sliding: CheckBox = $States/IsSliding
-@onready var is_skateboarding: CheckBox = $States/IsSkateboarding
+@onready var is_skateboarding: CheckBox = $States2/IsSkateboarding
 @onready var is_sprinting: CheckBox = $States/IsSprinting
 @onready var is_standing: CheckBox = $States/IsStanding
 @onready var is_swimming: CheckBox = $States/IsSwimming
@@ -271,6 +272,10 @@ func _on_enable_paragliding_toggled(toggled_on: bool) -> void:
 
 func _on_enable_punching_toggled(toggled_on: bool) -> void:
 	player.enable_punching = toggled_on
+
+
+func _on_enable_pushing_toggled(toggled_on):
+	player.enable_pushing = toggled_on
 
 
 func _on_enable_ragdoll_toggled(toggled_on: bool) -> void:
