@@ -115,6 +115,7 @@ func _process(_delta):
 		enable_navigation.button_pressed = player.enable_navigation
 		enable_paragliding.button_pressed = player.enable_paragliding
 		enable_punching.button_pressed = player.enable_punching
+		enable_pushing.button_pressed = player.enable_pushing
 		enable_ragdoll.button_pressed = player.enable_ragdoll
 		enable_retical.button_pressed = player.enable_retical
 		enable_rolling.button_pressed = player.enable_rolling
