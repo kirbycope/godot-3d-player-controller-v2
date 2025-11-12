@@ -368,8 +368,8 @@ func apply_impact(collider, bone_name, force_multiplier = 1.0) -> void:
 
 ## Moves the player while adhering to the current surface orientation.
 func move(delta) -> void:
-
-	if input_direction != Vector2.ZERO:
+	if input_direction != Vector2.ZERO \
+	and not is_skateboarding:
 		# Extract the vertical component of velocity along the current up direction
 		var vertical_speed: float = velocity.dot(up_direction)
 		# Decompose velocity relative to current up_direction
