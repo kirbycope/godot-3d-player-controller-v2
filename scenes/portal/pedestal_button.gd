@@ -11,6 +11,7 @@ func _input(event) -> void:
 		# Do nothing if the "pause" menu is visible
 		if player.pause.visible: return
 
+		# Ⓧ/[E] _pressed_ -> Start "pressing" animation
 		if event.is_action_pressed(player.controls.button_2):
 			if player.camera.ray_cast.is_colliding():
 				var collider = player.camera.ray_cast.get_collider()

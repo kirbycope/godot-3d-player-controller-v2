@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dey7ls45vvlck"]
+[gd_scene load_steps=32 format=3 uid="uid://dey7ls45vvlck"]
 
 [ext_resource type="Script" uid="uid://dhm0w0mgw28o6" path="res://scenes/beta/main.gd" id="1_4go8p"]
 [ext_resource type="Texture2D" uid="uid://bpo2vwd0ruriv" path="res://assets/textures/prototype_textures/Dark/texture_08.png" id="2_7kfyu"]
@@ -13,6 +13,9 @@
 [ext_resource type="PackedScene" uid="uid://cg7c5p0uk7mjf" path="res://scenes/beta/gun.tscn" id="9_4s88f"]
 [ext_resource type="Texture2D" uid="uid://c3ui4jf402ksm" path="res://assets/textures/prototype_textures/Light/texture_06.png" id="12_q7lbx"]
 [ext_resource type="PackedScene" uid="uid://bga8sxeufkcky" path="res://scenes/beta/tennis_ball.tscn" id="12_r3gsl"]
+[ext_resource type="PackedScene" uid="uid://dhkotoaker1cn" path="res://scenes/beta/cat.tscn" id="14_tvgdf"]
+[ext_resource type="Texture2D" uid="uid://b1itpgfbfsopo" path="res://assets/textures/prototype_textures/Orange/texture_08.png" id="15_pjumf"]
+[ext_resource type="Texture2D" uid="uid://cpjlls7li4sdq" path="res://assets/textures/prototype_textures/Orange/texture_05.png" id="16_tdw8c"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sugp2"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -46,6 +49,40 @@ uv1_triplanar = true
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r3gsl"]
 albedo_texture = ExtResource("12_q7lbx")
 uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1jnxa"]
+albedo_texture = ExtResource("15_pjumf")
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_07c6r"]
+material = SubResource("StandardMaterial3D_1jnxa")
+size = Vector3(0.5, 0.05, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tl1uk"]
+albedo_texture = ExtResource("16_tdw8c")
+uv1_triplanar = true
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_sdrxb"]
+material = SubResource("StandardMaterial3D_tl1uk")
+top_radius = 0.05
+bottom_radius = 0.05
+height = 0.5
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_y4i6o"]
+material = SubResource("StandardMaterial3D_1jnxa")
+top_radius = 0.25
+bottom_radius = 0.25
+height = 0.1
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_x7swm"]
+material = SubResource("StandardMaterial3D_tl1uk")
+top_radius = 0.05
+bottom_radius = 0.05
+height = 1.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_pjumf"]
+height = 0.6
+radius = 0.3
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_4go8p")
@@ -197,7 +234,7 @@ transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 1.89
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 5, 0, 0)
 
 [node name="FriendlyFreight" parent="." instance=ExtResource("8_q7lbx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.5, -2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.5, -2)
 
 [node name="Gun" parent="." instance=ExtResource("9_4s88f")]
 transform = Transform3D(-4.222196e-08, -0.9659258, 0.25881904, 1, -4.371139e-08, 0, 1.131334e-08, 0.25881904, 0.9659258, 2.3999999, 0.2, 1.9346552)
@@ -216,3 +253,32 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 5, 0)
 use_collision = true
 size = Vector3(1, 10, 3)
 material = SubResource("StandardMaterial3D_r3gsl")
+
+[node name="Cat" parent="." instance=ExtResource("14_tvgdf")]
+transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, -1.3509828, 1.13, -4.061725)
+
+[node name="CatTower" type="StaticBody3D" parent="."]
+transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, -1.5255672, 0.024999976, -4.0617247)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CatTower"]
+mesh = SubResource("BoxMesh_07c6r")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="CatTower"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.12589246, 0.25, 0.12479341)
+mesh = SubResource("CylinderMesh_sdrxb")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="CatTower"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1258924, 0.52076495, 0.12479341)
+mesh = SubResource("CylinderMesh_y4i6o")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="CatTower"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.125, 0.525, -0.12299991)
+mesh = SubResource("CylinderMesh_x7swm")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="CatTower"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.124981284, 1.05, -0.12323642)
+mesh = SubResource("CylinderMesh_y4i6o")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CatTower"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+shape = SubResource("CylinderShape3D_pjumf")
