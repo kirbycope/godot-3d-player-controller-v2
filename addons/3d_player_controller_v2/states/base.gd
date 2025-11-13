@@ -41,6 +41,7 @@ func _physics_process(delta):
 	and not player.is_pushing \
 	and not player.is_ragdolling \
 	and not player.is_rolling \
+	and not player.is_sitting \
 	and not player.is_sliding \
 	and not player.is_skateboarding \
 	and not player.is_swimming:

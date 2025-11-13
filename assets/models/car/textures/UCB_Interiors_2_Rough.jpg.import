@@ -15,7 +15,7 @@ dest_files=["res://.godot/imported/UCB_Interiors_2_Rough.jpg-b27d358cb66cc03daa9
 
 [params]
 
-compress/mode=0
+compress/mode=1
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

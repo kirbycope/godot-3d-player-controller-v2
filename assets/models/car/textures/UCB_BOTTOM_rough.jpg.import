@@ -15,7 +15,7 @@ dest_files=["res://.godot/imported/UCB_BOTTOM_rough.jpg-702e2843b40f55bb76c90682
 
 [params]
 
-compress/mode=0
+compress/mode=1
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

@@ -32,7 +32,7 @@ func _input(event):
 		if player.enable_jumping \
 		and player.is_on_floor() \
 		and not player.chat.line_edit.visible:
-			player.base_state.transition_state(player.current_state, States.State.JUMPING)
+			transition_state(player.current_state, States.State.JUMPING)
 
 	# Ⓑ/[shift] _pressed_ -> Start "sprinting"
 	if event.is_action_pressed(player.controls.button_1):

@@ -3,20 +3,19 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://nvfk1cqsw7qp"
-path.s3tc="res://.godot/imported/Carbadges_misc_U_dif.png-d1c966586d9b26ed78cf8989ef72b305.s3tc.ctex"
+path="res://.godot/imported/Carbadges_misc_U_dif.png-d1c966586d9b26ed78cf8989ef72b305.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://assets/models/car/textures/Carbadges_misc_U_dif.png"
-dest_files=["res://.godot/imported/Carbadges_misc_U_dif.png-d1c966586d9b26ed78cf8989ef72b305.s3tc.ctex"]
+dest_files=["res://.godot/imported/Carbadges_misc_U_dif.png-d1c966586d9b26ed78cf8989ef72b305.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=1
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

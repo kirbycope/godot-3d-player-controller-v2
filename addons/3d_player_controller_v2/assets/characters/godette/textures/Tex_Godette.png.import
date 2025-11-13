@@ -3,20 +3,19 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bid7dym4yy68k"
-path.s3tc="res://.godot/imported/Tex_Godette.png-00f686d758c7e60387d32783c348759e.s3tc.ctex"
+path="res://.godot/imported/Tex_Godette.png-00f686d758c7e60387d32783c348759e.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://addons/3d_player_controller_v2/assets/characters/godette/textures/Tex_Godette.png"
-dest_files=["res://.godot/imported/Tex_Godette.png-00f686d758c7e60387d32783c348759e.s3tc.ctex"]
+dest_files=["res://.godot/imported/Tex_Godette.png-00f686d758c7e60387d32783c348759e.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=1
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

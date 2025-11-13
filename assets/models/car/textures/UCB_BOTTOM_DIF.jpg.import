@@ -3,20 +3,19 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bu18ap2bljha1"
-path.s3tc="res://.godot/imported/UCB_BOTTOM_DIF.jpg-e6d366a436d6832bde6a6d95f82d4241.s3tc.ctex"
+path="res://.godot/imported/UCB_BOTTOM_DIF.jpg-e6d366a436d6832bde6a6d95f82d4241.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://assets/models/car/textures/UCB_BOTTOM_DIF.jpg"
-dest_files=["res://.godot/imported/UCB_BOTTOM_DIF.jpg-e6d366a436d6832bde6a6d95f82d4241.s3tc.ctex"]
+dest_files=["res://.godot/imported/UCB_BOTTOM_DIF.jpg-e6d366a436d6832bde6a6d95f82d4241.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=1
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

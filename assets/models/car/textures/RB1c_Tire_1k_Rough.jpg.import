@@ -15,7 +15,7 @@ dest_files=["res://.godot/imported/RB1c_Tire_1k_Rough.jpg-a812ff979ee83b52729a8e
 
 [params]
 
-compress/mode=0
+compress/mode=1
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

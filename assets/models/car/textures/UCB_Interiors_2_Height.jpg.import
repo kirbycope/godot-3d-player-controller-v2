@@ -15,7 +15,7 @@ dest_files=["res://.godot/imported/UCB_Interiors_2_Height.jpg-a86604e8b3de56aad9
 
 [params]
 
-compress/mode=0
+compress/mode=1
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

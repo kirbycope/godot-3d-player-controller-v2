@@ -3,10 +3,9 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bgpp2kpyvvhfj"
-path.s3tc="res://.godot/imported/tennis_ball_0.png-e55314a4ce7edf99453b93b583e363d6.s3tc.ctex"
+path="res://.godot/imported/tennis_ball_0.png-e55314a4ce7edf99453b93b583e363d6.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 generator_parameters={
 "md5": "69f86573e9476704855c9e2bb0ffa0e5"
@@ -15,11 +14,11 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/models/tennis_ball/tennis_ball_0.png"
-dest_files=["res://.godot/imported/tennis_ball_0.png-e55314a4ce7edf99453b93b583e363d6.s3tc.ctex"]
+dest_files=["res://.godot/imported/tennis_ball_0.png-e55314a4ce7edf99453b93b583e363d6.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=1
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

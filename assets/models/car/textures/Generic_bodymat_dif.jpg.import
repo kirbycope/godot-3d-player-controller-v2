@@ -3,20 +3,19 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ydly4hfekpao"
-path.s3tc="res://.godot/imported/Generic_bodymat_dif.jpg-6eb08b933bd45f967e01b0e6109a927a.s3tc.ctex"
+path="res://.godot/imported/Generic_bodymat_dif.jpg-6eb08b933bd45f967e01b0e6109a927a.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://assets/models/car/textures/Generic_bodymat_dif.jpg"
-dest_files=["res://.godot/imported/Generic_bodymat_dif.jpg-6eb08b933bd45f967e01b0e6109a927a.s3tc.ctex"]
+dest_files=["res://.godot/imported/Generic_bodymat_dif.jpg-6eb08b933bd45f967e01b0e6109a927a.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=1
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

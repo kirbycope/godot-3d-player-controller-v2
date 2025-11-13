@@ -15,7 +15,7 @@ dest_files=["res://.godot/imported/rod06_Roughness.png-0e0de5054e91708c8d1417462
 
 [params]
 
-compress/mode=0
+compress/mode=1
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

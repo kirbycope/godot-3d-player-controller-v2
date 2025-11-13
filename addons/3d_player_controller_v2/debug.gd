@@ -9,7 +9,7 @@ var yellow_sphere: MeshInstance3D
 @onready var enable_crouching: CheckButton = $Configuration/EnableCrouching
 @onready var enable_driving: CheckButton = $Configuration/EnableDriving
 @onready var enable_double_jumping: CheckButton = $Configuration/EnableDoubleJumping
-@onready var enable_emotes: CheckButton = $Configuration/EnableEmotes
+@onready var enable_emotes: CheckButton = $Configuration2/EnableEmotes
 @onready var enable_flying: CheckButton = $Configuration/EnableFlying
 @onready var enable_hanging: CheckButton = $Configuration/EnableHanging
 @onready var enable_holding_objects: CheckButton = $Configuration/EnableHoldingObjects
@@ -19,9 +19,10 @@ var yellow_sphere: MeshInstance3D
 @onready var enable_paragliding: CheckButton = $Configuration/EnableParagliding
 @onready var enable_punching: CheckButton = $Configuration/EnablePunching
 @onready var enable_pushing: CheckButton = $Configuration/EnablePushing
-@onready var enable_ragdoll: CheckButton = $Configuration/EnableRagdoll
+@onready var enable_ragdolling: CheckButton = $Configuration/EnableRagdolling
 @onready var enable_retical: CheckButton = $Configuration2/EnableRetical
 @onready var enable_rolling: CheckButton = $Configuration/EnableRolling
+@onready var enable_sitting: CheckButton = $Configuration/EnableSitting
 @onready var enable_sliding: CheckButton = $Configuration/EnableSliding
 @onready var enable_sprinting: CheckButton = $Configuration/EnableSprinting
 @onready var enable_swimming: CheckButton = $Configuration/EnableSwimming
@@ -49,13 +50,14 @@ var yellow_sphere: MeshInstance3D
 @onready var is_on_floor: CheckBox = $States2/IsOnFloor
 @onready var is_punching_left: CheckBox = $States2/IsPunchingLeft
 @onready var is_punching_right: CheckBox = $States2/IsPunchingRight
-@onready var is_ragdolling: CheckBox = $States/IsRagdolling
+@onready var is_ragdolling: CheckBox = $States2/IsRagdolling
 @onready var is_reeling_fishing: CheckBox = $States2/IsReelingFishing
 @onready var is_rolling: CheckBox = $States/IsRolling
 @onready var is_navigating: CheckBox = $States/IsNavigating
 @onready var is_paragliding: CheckBox = $States/IsParagliding
 @onready var is_pushing: CheckBox = $States/IsPushing
 @onready var is_running: CheckBox = $States/IsRunning
+@onready var is_sitting: CheckBox = $States/IsSitting
 @onready var is_sliding: CheckBox = $States/IsSliding
 @onready var is_skateboarding: CheckBox = $States2/IsSkateboarding
 @onready var is_sprinting: CheckBox = $States/IsSprinting
@@ -86,7 +88,7 @@ func _input(event):
 
 	# [R] _pressed -> Start ragdolling
 	if visible \
-	and player.enable_ragdoll \
+	and player.enable_ragdolling \
 	and not player.is_ragdolling \
 	and event is InputEventKey \
 	and event.pressed \
@@ -116,9 +118,10 @@ func _process(_delta):
 		enable_paragliding.button_pressed = player.enable_paragliding
 		enable_punching.button_pressed = player.enable_punching
 		enable_pushing.button_pressed = player.enable_pushing
-		enable_ragdoll.button_pressed = player.enable_ragdoll
+		enable_ragdolling.button_pressed = player.enable_ragdolling
 		enable_retical.button_pressed = player.enable_retical
 		enable_rolling.button_pressed = player.enable_rolling
+		enable_sitting.button_pressed = player.enable_sitting
 		enable_sliding.button_pressed = player.enable_sliding
 		enable_sprinting.button_pressed = player.enable_sprinting
 		enable_swimming.button_pressed = player.enable_swimming
@@ -154,6 +157,7 @@ func _process(_delta):
 		is_rolling.button_pressed = player.is_rolling
 		is_running.button_pressed = player.is_running
 		is_skateboarding.button_pressed = player.is_skateboarding
+		is_sitting.button_pressed = player.is_sitting
 		is_sliding.button_pressed = player.is_sliding
 		is_sprinting.button_pressed = player.is_sprinting
 		is_standing.button_pressed = player.is_standing
@@ -279,8 +283,8 @@ func _on_enable_pushing_toggled(toggled_on):
 	player.enable_pushing = toggled_on
 
 
-func _on_enable_ragdoll_toggled(toggled_on: bool) -> void:
-	player.enable_ragdoll = toggled_on
+func _on_enable_ragdolling_toggled(toggled_on: bool) -> void:
+	player.enable_ragdolling = toggled_on
 
 
 func _on_enable_retical_toggled(toggled_on: bool) -> void:
@@ -289,6 +293,10 @@ func _on_enable_retical_toggled(toggled_on: bool) -> void:
 
 func _on_enable_rolling_toggled(toggled_on: bool) -> void:
 	player.enable_rolling = toggled_on
+
+
+func _on_enable_sitting_toggled(toggled_on):
+	player.enable_sitting = toggled_on
 
 
 func _on_enable_sliding_toggled(toggled_on: bool) -> void:

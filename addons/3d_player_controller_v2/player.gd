@@ -17,9 +17,10 @@ extends CharacterBody3D
 @export var enable_paragliding: bool = false ## Enable paragliding
 @export var enable_punching: bool = false ## Enable punching
 @export var enable_pushing: bool = true ## Enable pushing
-@export var enable_ragdoll: bool = true ## Enable ragdoll physics
+@export var enable_ragdolling: bool = true ## Enable ragdoll physics
 @export var enable_retical: bool = true ## Enable the rectical
 @export var enable_rolling: bool = false ## Enable rolling
+@export var enable_sitting: bool = true ## Enable sitting
 @export var enable_sliding: bool = true ## Enable sliding
 @export var enable_sprinting: bool = true ## Enable sprinting
 @export var enable_swimming: bool = true ## Enable swimming
@@ -87,12 +88,14 @@ var is_punching_left: bool = false ## Is the player punching with thier left han
 var is_punching_right: bool = false ## Is the player punching with their right hand?
 var is_pushing: bool = false ## Is the player pushing?
 var is_ragdolling: bool = false ## Is the player ragdolling?
+var is_reacting: bool = false ## Is the player reacting to being hit?
 var is_reacting_low_left: bool = false ## Is the player reacting to being hit from the low left?
 var is_reacting_low_right: bool = false ## Is the player reacting to being hit from the low right?
 var is_reacting_high_left: bool = false ## Is the player reacting to being hit from the high left?
 var is_reacting_high_right: bool = false ## Is the player reacting to being hit from the high right?
 var is_rolling: bool = false ## Is the player rolling?
 var is_running: bool = false ## Is the player running?
+var is_sitting: bool = false ## Is the player sitting on a seat?
 var is_skateboarding: bool = false ## Is the player skateboarding?
 var is_sliding: bool = false ## Is the player sliding?
 var is_standing: bool = false ## Is the player standing?
@@ -142,6 +145,7 @@ var virtual_velocity: Vector3 = Vector3.ZERO ## The player's velocity is movemen
 
 ## Called when the node is "ready", i.e. when both the node and its children have entered the scene tree.
 func _ready() -> void:
+	# Initialize the state machine
 	$States/Standing.start()
 
 
@@ -196,6 +200,9 @@ func _physics_process(delta) -> void:
 	# Skip movement processing while "ragdolling"
 	if is_ragdolling: return
 
+	# Skip movement processing while "sitting"
+	if is_sitting: return
+
 	# Calculate movement if not navigating
 	if not is_navigating:
 		# Determine the gravity direction and the new up_direction
@@ -236,9 +243,9 @@ func _physics_process(delta) -> void:
 				# Use threshold-based speed selection for analog input
 				# This ensures controller analog input triggers proper state transitions
 				var input_magnitude = input_direction.length()
-				if input_magnitude >= 0.5:  # Analog stick pushed more than halfway = run speed
+				if input_magnitude >= 0.5: # Analog stick pushed more than halfway = run speed
 					speed_current = speed_running
-				else:  # Light analog stick movement = walk speed
+				else: # Light analog stick movement = walk speed
 					speed_current = speed_walking
 			# Convert the 2D input into a 3D world-space direction and project onto the tangent plane (orthogonal to new_up)
 			var raw_dir: Vector3 = transform.basis * Vector3(input_direction.x, 0, input_direction.y)
@@ -273,18 +280,18 @@ func _physics_process(delta) -> void:
 
 		# If skateboarding and no input, apply friction to slow down
 		if is_skateboarding and input_direction == Vector2.ZERO:
-				# Define friction coefficient (adjust this value to control how quickly the player slows down)
-				var friction_coefficient = 0.95  # Higher value = slower deceleration (0.9-0.98 recommended)
-				# Get the lateral (horizontal) velocity component
-				var vertical_speed = velocity.dot(new_up)
-				var lateral_velocity = velocity - new_up * vertical_speed
-				# Apply friction to lateral velocity
-				lateral_velocity *= friction_coefficient
-				# If velocity is very low, stop completely
-				if lateral_velocity.length() < 0.1:
-					lateral_velocity = Vector3.ZERO
-				# Recombine lateral and vertical components
-				velocity = lateral_velocity + new_up * vertical_speed
+			# Define friction coefficient (adjust this value to control how quickly the player slows down)
+			var friction_coefficient = 0.95  # Higher value = slower deceleration (0.9-0.98 recommended)
+			# Get the lateral (horizontal) velocity component
+			var vertical_speed = velocity.dot(new_up)
+			var lateral_velocity = velocity - new_up * vertical_speed
+			# Apply friction to lateral velocity
+			lateral_velocity *= friction_coefficient
+			# If velocity is very low, stop completely
+			if lateral_velocity.length() < 0.1:
+				lateral_velocity = Vector3.ZERO
+			# Recombine lateral and vertical components
+			velocity = lateral_velocity + new_up * vertical_speed
 
 		# Apply gravity for this tick (disabled while climbing or hanging)
 		if not is_climbing \
@@ -306,32 +313,7 @@ func _physics_process(delta) -> void:
 		velocity.z = 0.0
 
 	# Move the body based on velocity
-	#move_and_slide()
 	move(delta)
-
-
-@rpc("any_peer", "call_local")
-func animate_hit_low_left() -> void:
-	is_reacting_low_left = true
-	base_state.transition_state(current_state, States.State.REACTING)
-
-
-@rpc("any_peer", "call_local")
-func animate_hit_low_right() -> void:
-	is_reacting_low_right = true
-	base_state.transition_state(current_state, States.State.REACTING)
-
-
-@rpc("any_peer", "call_local")
-func animate_hit_high_left() -> void:
-	is_reacting_high_left = true
-	base_state.transition_state(current_state, States.State.REACTING)
-
-
-@rpc("any_peer", "call_local")
-func animate_hit_high_right() -> void:
-	is_reacting_high_right = true
-	base_state.transition_state(current_state, States.State.REACTING)
 
 
 ## Applies an impact impulse to a collider at the specified bone's position.
@@ -457,8 +439,9 @@ func move_player() -> void:
 		visuals.look_at(position + wall_forward, up_direction)
 
 
+## Applies impulse to colliders when sliding against them.
 func handle_collisions() -> void:
-	# Iterate through all slide collisions
+	# Iterate through all slide collisions; from move_and_slide()
 	for i in get_slide_collision_count():
 		var collision = get_slide_collision(i)
 		var collider = collision.get_collider()
@@ -480,6 +463,7 @@ func handle_collisions() -> void:
 			collider.apply_central_impulse(impulse)
 
 
+## Snaps the player to the middle of the ladder they are climbing.
 func move_to_ladder() -> void:
 	# Get the collision point
 	var collision_point = ray_cast_high.get_collision_point()
@@ -519,7 +503,7 @@ func move_to_ladder() -> void:
 		visuals.look_at(position + ladder_forward, up_direction)
 
 
-## Snaps the player to the wall they are climbing/hanging on.
+## Snaps the player to the wall they are climbing on or hanging from.
 func move_to_wall() -> void:
 	# Get the collision point
 	var collision_point = ray_cast_high.get_collision_point()
@@ -557,6 +541,7 @@ func move_to_wall() -> void:
 		visuals.look_at(position + wall_direction, up_direction)
 
 
+## Plays a locked animation that disables state processing until it finishes.
 func play_locked_animation(animation_name: String, duration: float = -1.0) -> float:
 	var current_state_name = base_state.get_state_name(current_state)
 	var current_state_scene = get_parent().find_child(current_state_name)
@@ -570,12 +555,37 @@ func play_locked_animation(animation_name: String, duration: float = -1.0) -> fl
 	return animation_player.current_animation_length
 
 
+## Callback for when a locked animation finishes playing.
 func _on_locked_animation_finished(animation_name: String) -> void:
 	animation_player.disconnect("animation_finished", _on_locked_animation_finished)
 	var current_state_name = base_state.get_state_name(current_state)
 	var current_state_scene = get_parent().find_child(current_state_name)
 	current_state_scene.process_mode = Node.PROCESS_MODE_INHERIT
 	is_animation_locked = false
+
+
+@rpc("any_peer", "call_local")
+func animate_hit_low_left() -> void:
+	is_reacting_low_left = true
+	base_state.transition_state(current_state, States.State.REACTING)
+
+
+@rpc("any_peer", "call_local")
+func animate_hit_low_right() -> void:
+	is_reacting_low_right = true
+	base_state.transition_state(current_state, States.State.REACTING)
+
+
+@rpc("any_peer", "call_local")
+func animate_hit_high_left() -> void:
+	is_reacting_high_left = true
+	base_state.transition_state(current_state, States.State.REACTING)
+
+
+@rpc("any_peer", "call_local")
+func animate_hit_high_right() -> void:
+	is_reacting_high_right = true
+	base_state.transition_state(current_state, States.State.REACTING)
 
 
 func _on_kick_left_timeout():
@@ -587,6 +597,9 @@ func _on_kick_left_timeout():
 		var collider = ray_cast_low.get_collider()
 		apply_impact(collider, bone_name_left_foot, 2.0)
 
+		# Player Kicking Low Left -> Enemy Reacting Low Right
+		collider.rpc("animate_hit_low_right")
+
 
 func _on_kick_right_timeout():
 	# Do nothing if not still kicking right
@@ -596,6 +609,9 @@ func _on_kick_right_timeout():
 	if ray_cast_low.is_colliding():
 		var collider = ray_cast_low.get_collider()
 		apply_impact(collider, bone_name_right_foot, 2.0)
+
+		# Player Kicking Low Right -> Enemy Reacting Low Left
+		collider.rpc("animate_hit_low_left")
 
 
 func _on_punch_left_timeout():
@@ -607,6 +623,9 @@ func _on_punch_left_timeout():
 		var collider = ray_cast_middle.get_collider()
 		apply_impact(collider, bone_name_left_hand, 1.0)
 
+		# Player Punching Left -> Enemy Reacting Right
+		collider.rpc("animate_hit_high_right")
+
 
 func _on_punch_right_timeout():
 	# Do nothing if not still punching right
@@ -616,3 +635,6 @@ func _on_punch_right_timeout():
 	if ray_cast_middle.is_colliding():
 		var collider = ray_cast_middle.get_collider()
 		apply_impact(collider, bone_name_right_hand, 1.0)
+
+		# Player Punching Right -> Enemy Reacting Left
+		collider.rpc("animate_hit_high_left")

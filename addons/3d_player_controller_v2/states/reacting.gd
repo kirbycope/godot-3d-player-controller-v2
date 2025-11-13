@@ -1,9 +1,9 @@
 extends BaseState
 
-const ANIMATION_REACTING_LOW_LEFT := "Standing_Reaction_Low_Left" + "/mixamo_com"
-const ANIMATION_REACTING_LOW_RIGHT := "Standing_Reaction_Low_Right" + "/mixamo_com"
-const ANIMATION_REACTING_HIGH_LEFT := "Standing_Reaction_High_Left" + "/mixamo_com"
-const ANIMATION_REACTING_HIGH_RIGHT := "Standing_Reaction_High_Right" + "/mixamo_com"
+const ANIMATION_REACTING_LOW_LEFT := "Standing_Reaction_Low_Left/mixamo_com"
+const ANIMATION_REACTING_LOW_RIGHT := "Standing_Reaction_Low_Right/mixamo_com"
+const ANIMATION_REACTING_HIGH_LEFT := "Standing_Reaction_High_Left/mixamo_com"
+const ANIMATION_REACTING_HIGH_RIGHT := "Standing_Reaction_High_Right/mixamo_com"
 const NODE_NAME := "Reacting"
 const NODE_STATE := States.State.REACTING
 

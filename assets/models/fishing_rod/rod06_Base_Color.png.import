@@ -3,20 +3,19 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ccwya2vquwc4m"
-path.s3tc="res://.godot/imported/rod06_Base_Color.png-ac4d1210f66fb572c5dd121cee4d7405.s3tc.ctex"
+path="res://.godot/imported/rod06_Base_Color.png-ac4d1210f66fb572c5dd121cee4d7405.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://assets/models/fishing_rod/rod06_Base_Color.png"
-dest_files=["res://.godot/imported/rod06_Base_Color.png-ac4d1210f66fb572c5dd121cee4d7405.s3tc.ctex"]
+dest_files=["res://.godot/imported/rod06_Base_Color.png-ac4d1210f66fb572c5dd121cee4d7405.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=1
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

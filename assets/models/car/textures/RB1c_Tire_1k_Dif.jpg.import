@@ -3,20 +3,19 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bagh8xq6u8776"
-path.s3tc="res://.godot/imported/RB1c_Tire_1k_Dif.jpg-a82f956fa9dc995cc6bbd3baa1d9b12e.s3tc.ctex"
+path="res://.godot/imported/RB1c_Tire_1k_Dif.jpg-a82f956fa9dc995cc6bbd3baa1d9b12e.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://assets/models/car/textures/RB1c_Tire_1k_Dif.jpg"
-dest_files=["res://.godot/imported/RB1c_Tire_1k_Dif.jpg-a82f956fa9dc995cc6bbd3baa1d9b12e.s3tc.ctex"]
+dest_files=["res://.godot/imported/RB1c_Tire_1k_Dif.jpg-a82f956fa9dc995cc6bbd3baa1d9b12e.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=1
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

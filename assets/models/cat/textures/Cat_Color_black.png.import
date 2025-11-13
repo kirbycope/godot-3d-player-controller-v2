@@ -3,20 +3,19 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dlag80fhfhygp"
-path.s3tc="res://.godot/imported/Cat_Color_black.png-787129f1282b83cd0c9c4f039aeafb4c.s3tc.ctex"
+path="res://.godot/imported/Cat_Color_black.png-787129f1282b83cd0c9c4f039aeafb4c.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://assets/models/cat/textures/Cat_Color_black.png"
-dest_files=["res://.godot/imported/Cat_Color_black.png-787129f1282b83cd0c9c4f039aeafb4c.s3tc.ctex"]
+dest_files=["res://.godot/imported/Cat_Color_black.png-787129f1282b83cd0c9c4f039aeafb4c.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=1
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
