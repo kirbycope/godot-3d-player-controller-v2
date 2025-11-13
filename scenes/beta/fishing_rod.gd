@@ -16,7 +16,19 @@ func _input(event: InputEvent) -> void:
 
 		# (D-Pad Down) /[Q] _just_pressed_ -> Drop _this_node
 		if Input.is_action_just_pressed(player.controls.button_13):
-			_on_player_detection_body_exited(player)
+			player.is_holding_fishing_rod = false
+			player.is_casting_fishing = false
+			player.is_reeling_fishing = false
+			player = null
+			reparent(initial_parent)
+			global_position = initial_position
+			global_rotation = Vector3(
+				deg_to_rad(20.0),
+				deg_to_rad(-180.0),
+				deg_to_rad(-71.0),
+			)
+			bone_attachment.queue_free()
+			bone_attachment = null
 			return
 
 		# 🅁1/[MB1] _pressed_ -> Start "reeling"
@@ -43,16 +55,4 @@ func _on_player_detection_body_entered(body: Node3D) -> void:
 ## Detach _this_ node from the player when they exit the detection area.
 func _on_player_detection_body_exited(body: Node3D) -> void:
 	if body == player:
-		player.is_holding_fishing_rod = false
-		player.is_casting_fishing = false
-		player.is_reeling_fishing = false
-		player = null
-		reparent(initial_parent)
-		global_position = initial_position
-		global_rotation = Vector3(
-			deg_to_rad(20.0),
-			deg_to_rad(-180.0),
-			deg_to_rad(-71.0),
-		)
-		bone_attachment.queue_free()
-		bone_attachment = null
+		pass

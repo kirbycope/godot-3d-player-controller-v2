@@ -14,7 +14,11 @@ func _input(_event: InputEvent) -> void:
 
 		# (D-Pad Down) /[Q] _just_pressed_ -> Drop _this_node
 		if Input.is_action_just_pressed(player.controls.button_13):
-			_on_player_detection_body_exited(player)
+			player.base_state.transition_state(player.current_state, States.State.STANDING)
+			player = null
+			reparent(initial_parent)
+			global_position = initial_position
+			global_rotation = initial_rotation
 			return
 
 
@@ -32,8 +36,4 @@ func _on_player_detection_body_entered(body: Node3D) -> void:
 
 func _on_player_detection_body_exited(body: Node3D) -> void:
 	if body == player:
-		player.base_state.transition_state(player.current_state, States.State.STANDING)
-		player = null
-		reparent(initial_parent)
-		global_position = initial_position
-		global_rotation = initial_rotation
+		pass

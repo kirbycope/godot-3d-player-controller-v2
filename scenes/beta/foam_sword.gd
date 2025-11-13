@@ -15,7 +15,14 @@ func _input(_event: InputEvent) -> void:
 
 		# (D-Pad Down) /[Q] _just_pressed_ -> Drop _this_node
 		if Input.is_action_just_pressed(player.controls.button_13):
-			_on_player_detection_body_exited(player)
+			player.is_holding_1h_right = false
+			player.is_swinging_1h_right = false
+			player = null
+			reparent(initial_parent)
+			global_position = initial_position
+			global_rotation = initial_rotation
+			bone_attachment.queue_free()
+			bone_attachment = null
 			return
 
 
@@ -35,11 +42,4 @@ func _on_player_detection_body_entered(body: Node3D) -> void:
 ## Detach _this_ node from the player when they exit the detection area.
 func _on_player_detection_body_exited(body: Node3D) -> void:
 	if body == player:
-		player.is_holding_1h_right = false
-		player.is_swinging_1h_right = false
-		player = null
-		reparent(initial_parent)
-		global_position = initial_position
-		global_rotation = initial_rotation
-		bone_attachment.queue_free()
-		bone_attachment = null
+		pass
