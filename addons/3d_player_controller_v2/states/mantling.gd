@@ -1,12 +1,14 @@
 extends BaseState
 
+## Handles mantling state: climbing up from a ledge hang to standing position.
+
 const ANIMATION_MANTLING := "Hanging_Braced_To_Crouch/mixamo_com"
 const NODE_NAME := "Mantling"
 const NODE_STATE := States.State.MANTLING
 
 
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(delta: float) -> void:
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
 

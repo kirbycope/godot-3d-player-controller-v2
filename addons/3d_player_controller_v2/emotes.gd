@@ -1,11 +1,13 @@
 extends CanvasLayer
+## Manages emote selection UI with controller and keyboard input for triggering player animations
+
 
 @onready var d_pad = $DPad
 @onready var keyboard = $Keyboard
 @onready var player = get_parent()
 
 
-func _process(delta):
+func _process(delta: float) -> void:
 	# Do nothing if emotes are not enabled
 	if not player.enable_emotes: return
 

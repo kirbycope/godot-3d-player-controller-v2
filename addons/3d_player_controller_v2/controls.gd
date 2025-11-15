@@ -1,4 +1,6 @@
 extends CanvasLayer
+## Manages input mapping for controller, keyboard/mouse, and touch controls with dynamic InputMap setup
+
 
 enum InputType {
 	CONTROLLER,
@@ -352,7 +354,7 @@ func _ready() -> void:
 		InputMap.action_add_event(button_15, key_event)
 
 
-func _input(event) -> void:
+func _input(event: InputEvent) -> void:
 	if event is InputEventJoypadButton \
 	or event is InputEventJoypadMotion:
 		last_input_type = InputType.CONTROLLER

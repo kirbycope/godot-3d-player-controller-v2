@@ -1,5 +1,7 @@
 extends BaseState
 
+## Handles skateboarding movement with ollie jump, speed variations (slow/normal/fast), sprint boost, and dynamic collision shape adjustments.
+
 const ANIMATION_SKATEBOARDING := "Skateboarding/mixamo_com"
 const ANIMATION_SKATEBOARDING_FAST := "Skateboarding_Fast/mixamo_com"
 const ANIMATION_SKATEBOARDING_SLOW := "Skateboarding_Slow/mixamo_com"
@@ -8,7 +10,7 @@ const NODE_STATE := States.State.SKATEBOARDING
 
 
 ## Called when there is an input event.
-func _input(event):
+func _input(event: InputEvent) -> void:
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
 
@@ -23,13 +25,14 @@ func _input(event):
 
 
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(delta: float) -> void:
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
 
 
 	# Ⓑ/[shift] _pressed_ -> Move faster while "skateboarding"
-	if player.enable_sprinting:
+	if player.enable_sprinting \
+	and not player.pause.visible:
 		if Input.is_action_pressed(player.controls.button_1):
 			player.speed_current = player.speed_skateboarding * 1.5
 		else:

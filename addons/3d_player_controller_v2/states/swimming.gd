@@ -1,4 +1,6 @@
 extends BaseState
+## Handles swimming and treading water with vertical movement control and floor snapping override
+
 
 const ANIMATION_SWIMMING := "Swimming/mixamo_com"
 const ANIMATION_WADING := "Swimming_Treading_Water/mixamo_com"
@@ -10,7 +12,7 @@ var prev_floor_snap_length: float = -1.0
 
 
 ## Called when there is an input event.
-func _input(event):
+func _input(event: InputEvent) -> void:
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
 
@@ -26,12 +28,13 @@ func _input(event):
 
 
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(delta: float) -> void:
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
 
 	# Ⓐ/[Space] button currently _pressed_ -> Increase player's vertical position
-	if Input.is_action_pressed(player.controls.button_0):
+	if Input.is_action_pressed(player.controls.button_0) \
+	and not player.pause.visible:
 		var current_water_level = player.is_swimming_in.global_position.y + player.is_swimming_in.size.y/2 # The origin of the shape is at its center
 		var new_player_position_y = player.position.y + 5 * delta
 		var player_shoulder_height = new_player_position_y + (player.collision_height * 0.75)
@@ -39,7 +42,8 @@ func _process(delta):
 			player.position.y += 5 * delta
 
 	# Ⓨ/[Ctrl] currently _pressed_ -> Decrease player's vertical position
-	if Input.is_action_pressed(player.controls.button_3):
+	if Input.is_action_pressed(player.controls.button_3) \
+	and not player.pause.visible:
 		player.position.y -= 5 * delta
 
 	# Play the animation

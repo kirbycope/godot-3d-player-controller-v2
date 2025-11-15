@@ -1,5 +1,7 @@
 extends BaseState
 
+## Handles AI/pathfinding navigation using NavigationAgent3D to move player along calculated paths.
+
 const ANIMATION_RUNNING := "Running/mixamo_com"
 const NODE_NAME := "Navigating"
 const NODE_STATE := States.State.NAVIGATING
@@ -8,13 +10,13 @@ const NODE_STATE := States.State.NAVIGATING
 
 
 ## Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready() -> void:
 	# Connect the "navigation_finished" signal
 	navigation_agent.navigation_finished.connect(_on_navigation_finished)
 
 
 ## Called when there is an input event.
-func _input(event):
+func _input(event: InputEvent) -> void:
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
 
@@ -31,7 +33,7 @@ func _input(event):
 
 
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(delta: float) -> void:
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
 
@@ -40,7 +42,7 @@ func _process(delta):
 
 
 ## Called once on each physics tick, and allows Nodes to synchronize their logic with physics ticks.
-func _physics_process(delta):
+func _physics_process(delta: float) -> void:
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
 
@@ -70,7 +72,7 @@ func navigate_to_next_position() -> void:
 
 
 ## Called when the NavigationAgent3D has finished.
-func _on_navigation_finished():
+func _on_navigation_finished() -> void:
 	player.is_navigating = false
 	# Stop the player's movement
 	player.velocity = Vector3.ZERO
@@ -79,7 +81,7 @@ func _on_navigation_finished():
 
 
 ## Start "navigating".
-func start():
+func start() -> void:
 	# Enable _this_ state node
 	process_mode = PROCESS_MODE_INHERIT
 
@@ -94,7 +96,7 @@ func start():
 
 
 ## Stop "navigating".
-func stop():
+func stop() -> void:
 	# Disable _this_ state node
 	process_mode = PROCESS_MODE_DISABLED
 

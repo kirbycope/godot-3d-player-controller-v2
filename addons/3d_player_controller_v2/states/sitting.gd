@@ -1,12 +1,14 @@
 extends BaseState
 
+## Handles sitting state with idle animation and transition to standing on jump button press.
+
 const ANIMATION_SITTING := "Sitting/mixamo_com"
 const NODE_NAME := "Sitting"
 const NODE_STATE := States.State.SITTING
 
 
 ## Called when there is an input event.
-func _input(event):
+func _input(event: InputEvent) -> void:
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
 
@@ -20,7 +22,7 @@ func _input(event):
 
 
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(delta: float) -> void:
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
 

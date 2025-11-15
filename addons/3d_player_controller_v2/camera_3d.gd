@@ -1,4 +1,6 @@
 extends Camera3D
+## Manages camera perspectives, rotation, zoom, and object interaction with first/third-person modes
+
 
 enum Perspective {
 	THIRD_PERSON, # 0
@@ -31,7 +33,7 @@ func _ready() -> void:
 
 
 ## Called when there is an input event.
-func _input(event) -> void:
+func _input(event: InputEvent) -> void:
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
 
@@ -170,17 +172,15 @@ func _input(event) -> void:
 
 
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta) -> void:
+func _process(delta: float) -> void:
 	if !is_multiplayer_authority(): return
-
- 	# Do nothing if the "pause" menu is visible
-	if player.pause.visible: return
 
 	var look_actions = [player.controls.look_up, player.controls.look_down, player.controls.look_left, player.controls.look_right]
 	for action in look_actions:
 		# Check if the action is pressed and the camera is not locked -> Rotate camera
 		if Input.is_action_pressed(action) \
-		and not lock_camera:
+		and not lock_camera \
+		and not player.pause.visible:
 			camera_rotate_by_controller(delta)
 		# Check if the mouse is captured/hidden and the camera is not rotating -> Rotate camera
 		if Input.get_mouse_mode() in [Input.MOUSE_MODE_CAPTURED, Input.MOUSE_MODE_HIDDEN] \

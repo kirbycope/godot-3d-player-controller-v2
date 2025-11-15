@@ -1,12 +1,14 @@
 extends BaseState
 
+## Handles rolling/dodge movement with collision shape adjustment, speed boost, and automatic transition to crouching or standing on completion.
+
 const ANIMATION_ROLLING := "Rolling/mixamo_com"
 const NODE_NAME := "Rolling"
 const NODE_STATE := States.State.ROLLING
 
 
 ## Called when there is an input event.
-func _input(event):
+func _input(event: InputEvent) -> void:
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
 
@@ -17,7 +19,7 @@ func _input(event):
 
 
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(delta: float) -> void:
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
 

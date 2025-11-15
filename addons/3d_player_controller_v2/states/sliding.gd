@@ -1,12 +1,14 @@
 extends BaseState
 
+## Handles sliding state with collision shape adjustment, plays slide animation, and transitions to sprint/run/stand on completion.
+
 const ANIMATION_SLIDING := "Running_Slide/mixamo_com"
 const NODE_NAME := "Sliding"
 const NODE_STATE := States.State.SLIDING
 
 
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(delta: float) -> void:
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
 

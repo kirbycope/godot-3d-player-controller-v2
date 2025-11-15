@@ -1,5 +1,7 @@
 extends BaseState
 
+## Handles running movement with rifle aiming/firing support, jump/sprint transitions, and directional animations (including backwards in first-person).
+
 const ANIMATION_RUNNING := "Running/mixamo_com"
 const ANIMATION_RUNNING_HOLDING_RIFLE := "Running_Holding_Rifle/mixamo_com"
 const ANIMATION_RUNNING_AIMING_RIFLE := "Running_Aiming_Rifle/mixamo_com"
@@ -9,7 +11,7 @@ const NODE_STATE := States.State.RUNNING
 
 
 ## Called when there is an input event.
-func _input(event):
+func _input(event: InputEvent) -> void:
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
 
@@ -22,6 +24,7 @@ func _input(event):
 		and player.is_on_floor() \
 		and not player.chat.line_edit.visible:
 			transition_state(player.current_state, States.State.JUMPING)
+			return
 
 	# Ⓑ/[shift] _pressed_ -> Start "sprinting"
 	if event.is_action_pressed(player.controls.button_1):
@@ -68,7 +71,7 @@ func _input(event):
 
 
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(delta: float) -> void:
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
 

@@ -1,5 +1,7 @@
 extends BaseState
 
+## Handles wall climbing movement, sprint speed scaling, hanging transition checks, and climb animations.
+
 const ANIMATION_CLIMBING_UP := "Climbing_Up/mixamo_com"
 const ANIMATION_CLIMBING_DOWN := "Climbing_Down/mixamo_com"
 const ANIMATION_CLIMBING_LEFT := "Hanging_Braced_Shimmy_Left/mixamo_com"
@@ -9,7 +11,7 @@ const NODE_STATE := States.State.CLIMBING
 
 
 ## Called when there is an input event.
-func _input(event):
+func _input(event: InputEvent) -> void:
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
 
@@ -30,7 +32,7 @@ func _input(event):
 
 
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(delta: float) -> void:
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
 

@@ -1,4 +1,6 @@
 extends CanvasLayer
+## Manages graphics settings UI including VSYNC, MSAA, SSAA, FXAA, TAA, and FSR options
+
 
 @onready var player: CharacterBody3D = get_parent()
 @onready var panel: Panel = $Panel
@@ -89,6 +91,6 @@ func _on_fsr_item_selected(index: int) -> void:
 
 
 ## Return to the pause menu.
-func _on_back_pressed():
+func _on_back_pressed() -> void:
 	player.pause._on_settings_pressed()
 	player.pause.resume_button.grab_focus()

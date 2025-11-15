@@ -1,12 +1,14 @@
 extends BaseState
 
+## Handles vehicle driving: input to exit, animation playback, and collision shape toggling while in a vehicle.
+
 const ANIMATION_DRIVING := "Driving/mixamo_com"
 const NODE_NAME := "Driving"
 const NODE_STATE := States.State.DRIVING
 
 
 ## Called when there is an input event.
-func _input(event) -> void:
+func _input(event: InputEvent) -> void:
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
 
@@ -22,7 +24,7 @@ func _input(event) -> void:
 
 
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(delta: float) -> void:
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
 

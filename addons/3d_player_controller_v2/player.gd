@@ -1,5 +1,7 @@
 class_name Controls
 extends CharacterBody3D
+## 3D player controller with state machine supporting climbing, combat, driving, swimming, and various movement modes
+
 
 @export_group("CONFIG")
 @export var enable_climbing: bool = false ## Enable climbing
@@ -54,61 +56,61 @@ extends CharacterBody3D
 
 var current_state: States.State ## The current state of the 
 var previous_state: States.State ## The previous state of the 
-var input_direction: Vector2 = Vector2.ZERO ## The direction of the player input (UP/DOWN, LEFT/RIGHT).
-var is_animation_locked: bool = false ## Is the player's animation locked?
-var is_climbing: bool = false ## Is the player climbing a surface?
-var is_climbing_ladder: bool = false ## Is the player climbing a ladder?
-var is_crawling: bool = false ## Is the player crawling?
-var is_crouching: bool = false ## Is the player crouching?
-var is_double_jumping: bool = false ## Is the player double jumping?
-var is_driving: bool = false ## Is the player driving?
-var is_falling: bool = false ## Is the player falling?
-var is_flying: bool = false ## Is the player flying?
-var is_hanging: bool = false ## Is the player hanging?
-var is_holding_1h_left: bool = false ## Is the player holding a 1-handed tool or weapon with their left hand?
-var is_swinging_1h_left: bool = false ## Is the player swinging a 1-handed tool or weapon with their left hand?
-var is_holding_1h_right: bool = false ## Is the player holding a 1-handed tool or weapon with their right hand?
-var is_swinging_1h_right: bool = false ## Is the player swinging a 1-handed tool or weapon with their right hand?
-var is_holding_left: bool = false ## Is the player holding a ball with their left hand?
-var is_throwing_left: bool = false ## Is the player throwing a ball with their left hand?
-var is_holding_right: bool = false ## Is the player holding a ball with their right hand?
-var is_throwing_right: bool = false ## Is the player throwing a ball with their right hand?
-var is_holding_fishing_rod: bool = false ## Is the player wielding a fishing rod?
-var is_casting_fishing: bool = false ## Is the player casting a fishing line?
-var is_reeling_fishing: bool = false ## Is the player reeling in a fishing line?
-var is_holding_rifle: bool = false ## Is the player wielding a rifle?
-var is_aiming_rifle: bool = false ## Is the player aiming a rifle?
-var is_firing_rifle: bool = false ## Is the player firing a rifle?
-var is_jumping: bool = false ## Is the player jumping?
-var is_kicking_left: bool = false ## Is the player kicking with their left foot?
-var is_kicking_right: bool = false ## Is the player kicking with their right foot?
-var is_navigating: bool = false ## Is the player navigating?
-var is_paragliding: bool = false ## Is the player paragliding?
-var is_punching_left: bool = false ## Is the player punching with thier left hand?
-var is_punching_right: bool = false ## Is the player punching with their right hand?
-var is_pushing: bool = false ## Is the player pushing?
-var is_ragdolling: bool = false ## Is the player ragdolling?
-var is_reacting: bool = false ## Is the player reacting to being hit?
-var is_reacting_low_left: bool = false ## Is the player reacting to being hit from the low left?
-var is_reacting_low_right: bool = false ## Is the player reacting to being hit from the low right?
-var is_reacting_high_left: bool = false ## Is the player reacting to being hit from the high left?
-var is_reacting_high_right: bool = false ## Is the player reacting to being hit from the high right?
-var is_rolling: bool = false ## Is the player rolling?
-var is_running: bool = false ## Is the player running?
-var is_sitting: bool = false ## Is the player sitting on a seat?
-var is_skateboarding: bool = false ## Is the player skateboarding?
-var is_sliding: bool = false ## Is the player sliding?
-var is_standing: bool = false ## Is the player standing?
-var is_sprinting: bool = false ## Is the player sprinting?
-var is_swimming: bool = false ## Is the player swimming?
+var input_direction := Vector2.ZERO ## The direction of the player input (UP/DOWN, LEFT/RIGHT).
+var is_animation_locked := false ## Is the player's animation locked?
+var is_climbing := false ## Is the player climbing a surface?
+var is_climbing_ladder := false ## Is the player climbing a ladder?
+var is_crawling := false ## Is the player crawling?
+var is_crouching := false ## Is the player crouching?
+var is_double_jumping := false ## Is the player double jumping?
+var is_driving := false ## Is the player driving?
+var is_falling := false ## Is the player falling?
+var is_flying := false ## Is the player flying?
+var is_hanging := false ## Is the player hanging?
+var is_holding_1h_left := false ## Is the player holding a 1-handed tool or weapon with their left hand?
+var is_swinging_1h_left := false ## Is the player swinging a 1-handed tool or weapon with their left hand?
+var is_holding_1h_right := false ## Is the player holding a 1-handed tool or weapon with their right hand?
+var is_swinging_1h_right := false ## Is the player swinging a 1-handed tool or weapon with their right hand?
+var is_holding_left := false ## Is the player holding a ball with their left hand?
+var is_throwing_left := false ## Is the player throwing a ball with their left hand?
+var is_holding_right := false ## Is the player holding a ball with their right hand?
+var is_throwing_right := false ## Is the player throwing a ball with their right hand?
+var is_holding_fishing_rod := false ## Is the player wielding a fishing rod?
+var is_casting_fishing := false ## Is the player casting a fishing line?
+var is_reeling_fishing := false ## Is the player reeling in a fishing line?
+var is_holding_rifle := false ## Is the player wielding a rifle?
+var is_aiming_rifle := false ## Is the player aiming a rifle?
+var is_firing_rifle := false ## Is the player firing a rifle?
+var is_jumping := false ## Is the player jumping?
+var is_kicking_left := false ## Is the player kicking with their left foot?
+var is_kicking_right := false ## Is the player kicking with their right foot?
+var is_navigating := false ## Is the player navigating?
+var is_paragliding := false ## Is the player paragliding?
+var is_punching_left := false ## Is the player punching with thier left hand?
+var is_punching_right := false ## Is the player punching with their right hand?
+var is_pushing := false ## Is the player pushing?
+var is_ragdolling := false ## Is the player ragdolling?
+var is_reacting := false ## Is the player reacting to being hit?
+var is_reacting_low_left := false ## Is the player reacting to being hit from the low left?
+var is_reacting_low_right := false ## Is the player reacting to being hit from the low right?
+var is_reacting_high_left := false ## Is the player reacting to being hit from the high left?
+var is_reacting_high_right := false ## Is the player reacting to being hit from the high right?
+var is_rolling := false ## Is the player rolling?
+var is_running := false ## Is the player running?
+var is_sitting := false ## Is the player sitting on a seat?
+var is_skateboarding := false ## Is the player skateboarding?
+var is_sliding := false ## Is the player sliding?
+var is_standing := false ## Is the player standing?
+var is_sprinting := false ## Is the player sprinting?
+var is_swimming := false ## Is the player swimming?
 var is_swimming_in ## The water body the player is swimming in (if any)
-var is_swinging_1h: bool = false ## Is the player swinging a 1-handed tool or weapon?
-var is_throwing: bool = false ## Is the player throwing an object?
-var is_walking: bool = false ## Is the player walking?
+var is_swinging_1h := false ## Is the player swinging a 1-handed tool or weapon?
+var is_throwing := false ## Is the player throwing an object?
+var is_walking := false ## Is the player walking?
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity") ## Default gravity value
 var gravitating_towards ## The Node the player is being pulled towards (if any)
-var speed_current: float = 0.0 ## Current speed
-var virtual_velocity: Vector3 = Vector3.ZERO ## The player's velocity is movement were unlocked
+var speed_current := 0.0 ## Current speed
+var virtual_velocity := Vector3.ZERO ## The player's velocity is movement were unlocked
 
 @onready var animation_player: AnimationPlayer = $Visuals/Godette/AnimationPlayer
 @onready var base_state: BaseState = $States/Base
@@ -150,7 +152,7 @@ func _ready() -> void:
 
 
 ## Called when there is an input event.
-func _input(event) -> void:
+func _input(event: InputEvent) -> void:
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
 
@@ -173,7 +175,7 @@ func _input(event) -> void:
 
 
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta) -> void:
+func _process(delta: float) -> void:
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
 
@@ -187,7 +189,7 @@ func _process(delta) -> void:
 
 
 ## Called once on each physics tick, and allows Nodes to synchronize their logic with physics ticks.
-func _physics_process(delta) -> void:
+func _physics_process(delta: float) -> void:
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
 
@@ -590,7 +592,7 @@ func animate_hit_high_right() -> void:
 	base_state.transition_state(current_state, States.State.REACTING)
 
 
-func _on_kick_left_timeout():
+func _on_kick_left_timeout() -> void:
 	# Do nothing if not still kicking left
 	if not is_kicking_left: return
 
@@ -605,7 +607,7 @@ func _on_kick_left_timeout():
 			collider.rpc("animate_hit_low_right")
 
 
-func _on_kick_right_timeout():
+func _on_kick_right_timeout() -> void:
 	# Do nothing if not still kicking right
 	if not is_kicking_right: return
 
@@ -620,7 +622,7 @@ func _on_kick_right_timeout():
 			collider.rpc("animate_hit_low_left")
 
 
-func _on_punch_left_timeout():
+func _on_punch_left_timeout() -> void:
 	# Do nothing if not still punching left
 	if not is_punching_left: return
 
@@ -635,7 +637,7 @@ func _on_punch_left_timeout():
 			collider.rpc("animate_hit_high_right")
 
 
-func _on_punch_right_timeout():
+func _on_punch_right_timeout() -> void:
 	# Do nothing if not still punching right
 	if not is_punching_right: return
 

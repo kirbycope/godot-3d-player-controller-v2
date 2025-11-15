@@ -1,5 +1,7 @@
 extends BaseState
 
+## Handles pushing state: plays push animation while player moves against obstacles and transitions to standing when input stops.
+
 const ANIMATION_PUSHING := "Standing_Pushing/mixamo_com"
 const NODE_NAME := "Pushing"
 const NODE_STATE := States.State.PUSHING
@@ -32,6 +34,9 @@ func play_animation() -> void:
 func start() -> void:
 	# Enable _this_ state node
 	process_mode = PROCESS_MODE_INHERIT
+
+	# Set the player's new state
+	player.current_state = States.State.PUSHING
 
 	# Flag the player as "pushing"
 	player.is_pushing = true

@@ -1,12 +1,14 @@
 extends BaseState
 
+## Handles ladder climbing movement, animation speed scaling, and transitions off the ladder.
+
 const ANIMATION_CLIMBING_LADDER := "Climbing_Ladder/mixamo_com"
 const NODE_NAME := "ClimbingLadder"
 const NODE_STATE := States.State.CLIMBING_LADDER
 
 
 ## Called when there is an input event.
-func _input(event):
+func _input(event: InputEvent) -> void:
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
 
@@ -27,7 +29,7 @@ func _input(event):
 
 
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(delta: float) -> void:
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
 

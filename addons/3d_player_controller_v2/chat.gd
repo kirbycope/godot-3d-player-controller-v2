@@ -1,4 +1,6 @@
 extends CanvasLayer
+## Manages multiplayer chat interface with message display, input handling, and RPC communication
+
 
 @onready var player: CharacterBody3D = get_parent()
 @onready var scroll_container: ScrollContainer = $ScrollContainer
@@ -11,7 +13,7 @@ func _ready() -> void:
 	clear_and_hide_input()
 
 
-func _input(event) -> void:
+func _input(event: InputEvent) -> void:
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
 
@@ -103,7 +105,7 @@ func submit_message(text: String) -> void:
 	send_message(username, "[i]" + text)
 
 
-func _on_line_edit_text_submitted(new_text) -> void:
+func _on_line_edit_text_submitted(new_text: String) -> void:
 	submit_message(new_text)
 	clear_and_hide_input()
 

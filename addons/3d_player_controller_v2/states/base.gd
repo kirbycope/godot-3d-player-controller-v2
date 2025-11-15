@@ -1,11 +1,15 @@
 class_name BaseState
 extends Node
 
+## Base state handling common player state transitions and shared checks.
+
+@export var walk_run_threshold := 0.5 ## Input magnitude threshold separating walk vs run
+
 @onready var player: CharacterBody3D = get_parent().get_parent()
 
 
 ## Called once on each physics tick, and allows Nodes to synchronize their logic with physics ticks.
-func _physics_process(delta):
+func _physics_process(delta: float) -> void:
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
 
@@ -75,14 +79,14 @@ func _physics_process(delta):
 
 		# Check if the player's current speed is slower than or equal to "walking" speed -> Start "walking"
 		elif Vector2.ZERO < player.input_direction \
-		and abs(player.input_direction.length()) <= 0.5 \
+		and abs(player.input_direction.length()) <= walk_run_threshold \
 		and not player.is_walking \
 		and not player.is_sprinting:
 			transition_state(player.current_state, States.State.WALKING)
 			return
 
 		# Check if the player speed is faster than "walking" but slower than or equal to "running" -> Start "running"
-		elif abs(player.input_direction.length()) > 0.5 \
+		elif abs(player.input_direction.length()) > walk_run_threshold \
 		and not player.is_running \
 		and not player.is_sprinting:
 			transition_state(player.current_state, States.State.RUNNING)
@@ -96,7 +100,7 @@ func get_state_name(state: States.State) -> String:
 
 
 ## Called when a state needs to transition to another.
-func transition(from_state: String, to_state: String):
+func transition(from_state: String, to_state: String) -> void:
 	# Get the "from" scene
 	var from_scene = get_parent().find_child(from_state)
 	# Get the "to" scene
@@ -109,7 +113,7 @@ func transition(from_state: String, to_state: String):
 		to_scene.start()
 
 
-func transition_state(from_state: States.State, to_state: States.State):
+func transition_state(from_state: States.State, to_state: States.State) -> void:
 	# Get the "from" scene
 	var from_name = get_state_name(from_state)
 	var from_scene = get_parent().find_child(from_name)

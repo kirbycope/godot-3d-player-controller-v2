@@ -1,5 +1,7 @@
 extends BaseState
 
+## Handles ledge hanging: shimmy movement, sprint speed scaling, braced vs unbraced animations, and transitions (mantle, fall, stand).
+
 const ANIMATION_HANGING := "Hanging/mixamo_com"
 const ANIMATION_HANGING_SHIMMY_LEFT := "Hanging_Shimmy_Left/mixamo_com"
 const ANIMATION_HANGING_SHIMMY_RIGHT := "Hanging_Shimmy_Right/mixamo_com"
@@ -11,7 +13,7 @@ const NODE_STATE := States.State.HANGING
 
 
 ## Called when there is an input event.
-func _input(event):
+func _input(event: InputEvent) -> void:
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
 
@@ -32,7 +34,7 @@ func _input(event):
 
 
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(delta: float) -> void:
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
 

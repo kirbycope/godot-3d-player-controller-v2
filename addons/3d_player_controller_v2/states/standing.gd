@@ -1,4 +1,6 @@
 extends BaseState
+## Handles standing idle state with support for fishing, punching, kicking, rifle aiming/firing, melee swinging, and throwing animations
+
 
 const ANIMATION_FISHING_CASTING := "Standing_Fishing_Cast/mixamo_com"
 const ANIMATION_FISHING_IDLE := "Standing_Fishing_Idle/mixamo_com"
@@ -20,7 +22,7 @@ const NODE_STATE := States.State.STANDING
 
 
 ## Called when there is an input event.
-func _input(event):
+func _input(event: InputEvent) -> void:
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
 
@@ -149,7 +151,7 @@ func _input(event):
 
 
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(delta: float) -> void:
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
 
@@ -161,7 +163,8 @@ func _process(delta):
 
 	# Ⓨ/[Ctrl] _pressed_ -> Start "crouching"
 	# Not in _input() to allow holding down the button while in other states and trasitioning to "standing"
-	if Input.is_action_pressed(player.controls.button_3):
+	if Input.is_action_pressed(player.controls.button_3) \
+	and not player.pause.visible:
 		if player.enable_crouching \
 		and player.is_on_floor():
 			transition_state(NODE_STATE, States.State.CROUCHING)

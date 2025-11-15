@@ -1,4 +1,6 @@
 extends BaseState
+## Handles walking movement with jump/sprint transitions, rifle animations, and directional playback
+
 
 const ANIMATION_WALKING := "Walking/mixamo_com"
 const ANIMATION_WALKING_HOLDING_RIFLE := "Walking_Holding_Rifle/mixamo_com"
@@ -9,7 +11,7 @@ const NODE_STATE := States.State.WALKING
 
 
 ## Called when there is an input event.
-func _input(event):
+func _input(event: InputEvent) -> void:
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
 
@@ -68,7 +70,7 @@ func _input(event):
 
 
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(delta: float) -> void:
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
 

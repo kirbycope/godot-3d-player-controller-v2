@@ -1,5 +1,7 @@
 extends BaseState
 
+## Handles sprinting movement with jump/slide transitions, rifle animations, and directional playback (backwards in first-person).
+
 const ANIMATION_SPRINTING := "Sprinting/mixamo_com"
 const ANIMATION_SPRINTING_HOLDING_RIFLE := "Sprinting_Holding_Rifle/mixamo_com"
 const NODE_NAME := "Sprinting"
@@ -7,7 +9,7 @@ const NODE_STATE := States.State.SPRINTING
 
 
 ## Called when there is an input event.
-func _input(event):
+func _input(event: InputEvent) -> void:
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
 
@@ -35,7 +37,7 @@ func _input(event):
 
 
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(delta: float) -> void:
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
 

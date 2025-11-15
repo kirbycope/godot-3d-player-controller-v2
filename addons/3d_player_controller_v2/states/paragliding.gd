@@ -1,14 +1,18 @@
 extends BaseState
 
+## Handles paragliding: reduced gravity falling with directional control, spawns/removes paraglider mesh, and landing transition.
+
 const ANIMATION_PARAGLIDING := "Hanging/mixamo_com"
 const NODE_NAME := "Paragliding"
 const NODE_STATE := States.State.PARAGLIDING
+
+@export var paraglider_gravity := 3.0 ## Reduced gravity value while paragliding.
 
 var paraglider
 
 
 ## Called when there is an input event.
-func _input(event):
+func _input(event: InputEvent) -> void:
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
 
@@ -22,7 +26,7 @@ func _input(event):
 
 
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(delta: float) -> void:
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
 
@@ -64,7 +68,7 @@ func start() -> void:
 		player.velocity -= player.up_direction * vertical_speed
 
 	# Set the player's gravity
-	player.gravity = 3.0
+	player.gravity = paraglider_gravity
 
 	# Spawn the paraglider
 	paraglider = load("uid://crkvmowfmaa1r").instantiate()

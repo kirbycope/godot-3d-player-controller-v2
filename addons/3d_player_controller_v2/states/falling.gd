@@ -1,5 +1,7 @@
 extends BaseState
 
+## Handles airborne falling logic: multi-action space key transitions (climb, double-jump, fly, paraglide), landing outcomes (ragdoll vs stand), and fall animations.
+
 const ANIMATION_FALLING := "Falling/mixamo_com"
 const ANIMATION_FALLING_HOLDING_RIFLE := "Falling_Holding_Rifle/mixamo_com"
 const NODE_NAME := "Falling"
@@ -7,7 +9,7 @@ const NODE_STATE := States.State.FALLING
 
 
 ## Called when there is an input event.
-func _input(event):
+func _input(event: InputEvent) -> void:
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
 
@@ -46,7 +48,7 @@ func _input(event):
 
 
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(delta: float) -> void:
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
 

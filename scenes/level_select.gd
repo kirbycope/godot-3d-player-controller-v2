@@ -91,7 +91,7 @@ func _on_minecraft_pressed():
 
 
 func _on_pokemon_legends_za_pressed() -> void:
-	description.text = "Third-person perspective. 3D platforming."
+	description.text = "Third-person perspective. Rolling."
 	hide_previews()
 	pokemon_preview.visible = true
 	reset_buttons()

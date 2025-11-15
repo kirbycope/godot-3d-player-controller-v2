@@ -1,5 +1,7 @@
 extends BaseState
 
+## Handles jumping upward movement, mid-air transitions (climb, double-jump, fly, paraglide), rifle aiming/firing flags, and jump animations.
+
 const ANIMATION_JUMPING := "Falling/mixamo_com"
 const ANIMATION_JUMPING_HOLDING_RIFLE := "Falling_Holding_Rifle/mixamo_com"
 const NODE_NAME := "Jumping"
@@ -7,7 +9,7 @@ const NODE_STATE := States.State.JUMPING
 
 
 ## Called when there is an input event.
-func _input(event):
+func _input(event: InputEvent) -> void:
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
 
@@ -82,7 +84,7 @@ func _input(event):
 
 
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(delta: float) -> void:
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
 

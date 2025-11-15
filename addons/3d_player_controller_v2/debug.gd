@@ -1,4 +1,6 @@
 extends CanvasLayer
+## Debug overlay displaying player state, performance metrics, and configuration toggles with visual debug spheres
+
 
 var green_sphere: MeshInstance3D
 var red_sphere: MeshInstance3D
@@ -76,7 +78,7 @@ var yellow_sphere: MeshInstance3D
 
 
 ## Called when there is an input event.
-func _input(event):
+func _input(event: InputEvent) -> void:
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
 
@@ -97,7 +99,7 @@ func _input(event):
 
 
 ## Called every frame. '_delta' is the elapsed time since the previous frame.
-func _process(_delta):
+func _process(_delta: float) -> void:
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
 
@@ -279,7 +281,7 @@ func _on_enable_punching_toggled(toggled_on: bool) -> void:
 	player.enable_punching = toggled_on
 
 
-func _on_enable_pushing_toggled(toggled_on):
+func _on_enable_pushing_toggled(toggled_on: bool) -> void:
 	player.enable_pushing = toggled_on
 
 
@@ -295,7 +297,7 @@ func _on_enable_rolling_toggled(toggled_on: bool) -> void:
 	player.enable_rolling = toggled_on
 
 
-func _on_enable_sitting_toggled(toggled_on):
+func _on_enable_sitting_toggled(toggled_on: bool) -> void:
 	player.enable_sitting = toggled_on
 
 

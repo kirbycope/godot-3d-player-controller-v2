@@ -1,5 +1,7 @@
 extends BaseState
 
+## Handles flight movement (ascend/descend, sprint speed), landing transition, and flying animations; also zeroes gravity and vertical velocity on start.
+
 const ANIMATION_FLYING := "Flying/mixamo_com"
 const ANIMATION_FLYING_FAST := "Flying_Fast/mixamo_com"
 const NODE_NAME := "Flying"
@@ -7,7 +9,7 @@ const NODE_STATE := States.State.FLYING
 
 
 ## Called when there is an input event.
-func _input(event):
+func _input(event: InputEvent) -> void:
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
 
@@ -16,7 +18,7 @@ func _input(event):
 
 
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(delta: float) -> void:
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
 
@@ -27,7 +29,8 @@ func _process(delta):
 		return
 
 	# Ⓐ/[Space] button currently _pressed_
-	if Input.is_action_pressed(player.controls.button_0):
+	if Input.is_action_pressed(player.controls.button_0) \
+	and not player.pause.visible:
 		# Increase the player's vertical position
 		player.position.y += 5 * delta
 

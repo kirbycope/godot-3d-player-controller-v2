@@ -1,5 +1,7 @@
 extends BaseState
 
+## Handles hit reactions in four directions (low/high, left/right), plays corresponding animations, and returns to previous state when finished.
+
 const ANIMATION_REACTING_LOW_LEFT := "Standing_Reaction_Low_Left/mixamo_com"
 const ANIMATION_REACTING_LOW_RIGHT := "Standing_Reaction_Low_Right/mixamo_com"
 const ANIMATION_REACTING_HIGH_LEFT := "Standing_Reaction_High_Left/mixamo_com"
@@ -9,7 +11,7 @@ const NODE_STATE := States.State.REACTING
 
 
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(delta: float) -> void:
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
 
@@ -55,7 +57,7 @@ func start() -> void:
 	process_mode = PROCESS_MODE_INHERIT
 
 	# Set the player's new state
-	player.current_state = States.State.SLIDING
+	player.current_state = States.State.REACTING
 
 	# Flag the player as "reacting"
 	player.is_reacting = true

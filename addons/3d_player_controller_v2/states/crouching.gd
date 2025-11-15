@@ -1,5 +1,7 @@
 extends BaseState
 
+## Handles crouching movement restrictions, rifle aiming/firing flags, transitions (standing, crawling, jumping), and collision shape adjustments.
+
 const ANIMATION_CROUCHING_IDLE := "Crouching/mixamo_com"
 const ANIMATION_CROUCHING_HOLDING_RIFLE := "Crouching_Holding_Rifle/mixamo_com"
 const ANIMATION_CROUCHING_AIMING := "Crouching_Aiming_Rifle/mixamo_com"
@@ -9,7 +11,7 @@ const NODE_STATE := States.State.CROUCHING
 
 
 ## Called when there is an input event.
-func _input(event):
+func _input(event: InputEvent) -> void:
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
 
@@ -65,7 +67,7 @@ func _input(event):
 
 
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(delta: float) -> void:
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
 
