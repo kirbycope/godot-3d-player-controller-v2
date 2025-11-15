@@ -8,6 +8,9 @@ func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	player.camera.lock_camera = true
 	player.camera.lock_perspective = true
+	player.camera.rotation.x = deg_to_rad(-45.0)
+	player.camera_mount.position.y = 4.0
+	player.camera_mount.position.z = 1.5
 	player.camera.set_camera_perspective(player.camera.Perspective.THIRD_PERSON)
 	player.enable_climbing = false
 	player.enable_crawling = true
