@@ -41,7 +41,8 @@ func _input(event: InputEvent) -> void:
 
 ## Attach _this_ node to the player's left hand when they enter the detection area.
 func _on_player_detection_body_entered(body: Node3D) -> void:
-	if body is CharacterBody3D:
+	if body is CharacterBody3D \
+	and player == null:
 		player = body
 		player.is_holding_fishing_rod = true
 		bone_attachment = BoneAttachment3D.new()

@@ -8,14 +8,16 @@ var player: CharacterBody3D
 func _input(event: InputEvent) -> void:
 	if player:
 		if  not player.pause.visible:
-			if event.is_action_pressed(player.controls.button_1):
+			if event.is_action_pressed(player.controls.button_1) \
+			and not player.is_sitting:
 				player.global_position = $Seat.global_position
 				player.global_position -= Vector3(0, 0.4, 0) # [Hack] Adjust player visuals
 				player.base_state.transition_state(player.current_state, States.State.SITTING)
 
 
 func _on_area_3d_body_entered(body):
-	if body is CharacterBody3D:
+	if body is CharacterBody3D \
+	and player == null:
 		player = body
 
 

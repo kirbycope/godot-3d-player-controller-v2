@@ -337,7 +337,9 @@ func apply_impact(collider, bone_name, force_multiplier = 1.0) -> void:
 	# Apply the impulse
 	var impulse = direction * force_multiplier
 	#collider.apply_impulse(impulse, collider_position)
-	collider.apply_central_impulse(impulse)
+	if collider is SoftBody3D \
+	or collider is RigidBody3D:
+		collider.apply_central_impulse(impulse)
 
 	# Vibrate the controller, if enabled
 	if enable_vibration \
@@ -598,7 +600,9 @@ func _on_kick_left_timeout():
 		apply_impact(collider, bone_name_left_foot, 2.0)
 
 		# Player Kicking Low Left -> Enemy Reacting Low Right
-		collider.rpc("animate_hit_low_right")
+		if collider is SoftBody3D \
+		or collider is RigidBody3D:
+			collider.rpc("animate_hit_low_right")
 
 
 func _on_kick_right_timeout():
@@ -611,7 +615,9 @@ func _on_kick_right_timeout():
 		apply_impact(collider, bone_name_right_foot, 2.0)
 
 		# Player Kicking Low Right -> Enemy Reacting Low Left
-		collider.rpc("animate_hit_low_left")
+		if collider is SoftBody3D \
+		or collider is RigidBody3D:
+			collider.rpc("animate_hit_low_left")
 
 
 func _on_punch_left_timeout():
@@ -624,7 +630,9 @@ func _on_punch_left_timeout():
 		apply_impact(collider, bone_name_left_hand, 1.0)
 
 		# Player Punching Left -> Enemy Reacting Right
-		collider.rpc("animate_hit_high_right")
+		if collider is SoftBody3D \
+		or collider is RigidBody3D:
+			collider.rpc("animate_hit_high_right")
 
 
 func _on_punch_right_timeout():
@@ -637,4 +645,6 @@ func _on_punch_right_timeout():
 		apply_impact(collider, bone_name_right_hand, 1.0)
 
 		# Player Punching Right -> Enemy Reacting Left
-		collider.rpc("animate_hit_high_left")
+		if collider is SoftBody3D \
+		or collider is RigidBody3D:
+			collider.rpc("animate_hit_high_left")

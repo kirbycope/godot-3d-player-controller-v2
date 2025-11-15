@@ -23,7 +23,8 @@ func _input(_event: InputEvent) -> void:
 
 
 func _on_player_detection_body_entered(body: Node3D) -> void:
-	if body is CharacterBody3D:
+	if body is CharacterBody3D \
+	and player == null:
 		player = body
 		if not player.is_skateboarding:
 			reparent(player.visuals, true)

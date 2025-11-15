@@ -4,7 +4,8 @@ var player: CharacterBody3D
 
 
 func _on_player_detection_body_entered(body: Node3D) -> void:
-	if body is CharacterBody3D:
+	if body is CharacterBody3D \
+	and player == null:
 		player = body
 		player.is_swimming_in = self
 		# Move player to surface of the pool
