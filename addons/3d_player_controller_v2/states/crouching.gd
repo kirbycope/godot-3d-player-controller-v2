@@ -85,23 +85,25 @@ func play_animation() -> void:
 	if player.is_holding_rifle:
 		if player.is_firing_rifle:
 			if player.animation_player.current_animation != ANIMATION_CROUCHING_FIRING:
+				_on_animation_finished(player.animation_player.current_animation)
 				player.animation_player.play(ANIMATION_CROUCHING_FIRING)
-				player.animation_player.connect("animation_finished", _on_animation_finished)
 		elif player.is_aiming_rifle:
 			if player.animation_player.current_animation != ANIMATION_CROUCHING_AIMING:
+				_on_animation_finished(player.animation_player.current_animation)
 				player.animation_player.play(ANIMATION_CROUCHING_AIMING)
 		else:
 			if player.animation_player.current_animation != ANIMATION_CROUCHING_HOLDING_RIFLE:
+				_on_animation_finished(player.animation_player.current_animation)
 				player.animation_player.play(ANIMATION_CROUCHING_HOLDING_RIFLE)
 
 	# -- Unarmed animation --
 	else:
 		if player.animation_player.current_animation != ANIMATION_CROUCHING_IDLE:
+			_on_animation_finished(player.animation_player.current_animation)
 			player.animation_player.play(ANIMATION_CROUCHING_IDLE)
 
 
 func _on_animation_finished(animation_name: String) -> void:
-	player.animation_player.disconnect("animation_finished", _on_animation_finished)
 	if animation_name == ANIMATION_CROUCHING_FIRING:
 		player.is_firing_rifle = false
 
@@ -129,6 +131,9 @@ func start() -> void:
 	# Set the player collision shape's position
 	player.collision_shape.position = player.collision_position / 2
 
+	# Connect animation finished signal
+	player.animation_player.connect("animation_finished", _on_animation_finished)
+
 
 ## Stop "crouching".
 func stop() -> void:
@@ -143,3 +148,10 @@ func stop() -> void:
 	
 	# [Re]set the player collision shape's position
 	player.collision_shape.position = player.collision_position
+
+	# Clear state specific flags
+	_on_animation_finished(player.animation_player.current_animation)
+
+	# Disconnect animation finished signal
+	if player.animation_player.is_connected("animation_finished", _on_animation_finished):
+		player.animation_player.disconnect("animation_finished", _on_animation_finished)

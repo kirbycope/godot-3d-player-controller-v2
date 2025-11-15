@@ -37,15 +37,14 @@ func play_animation() -> void:
 			player.animation_player.connect("animation_finished", _on_animation_finished)
 
 
-func _on_animation_finished(anim_name: String) -> void:
-	player.animation_player.disconnect("animation_finished", _on_animation_finished)
-	if anim_name == ANIMATION_REACTING_LOW_LEFT:
+func _on_animation_finished(animation_name: String) -> void:
+	if animation_name == ANIMATION_REACTING_LOW_LEFT:
 		player.is_reacting_left = false
-	elif anim_name == ANIMATION_REACTING_LOW_RIGHT:
+	elif animation_name == ANIMATION_REACTING_LOW_RIGHT:
 		player.is_reacting_right = false
-	elif anim_name == ANIMATION_REACTING_HIGH_LEFT:
+	elif animation_name == ANIMATION_REACTING_HIGH_LEFT:
 		player.is_reacting_left = false
-	elif anim_name == ANIMATION_REACTING_HIGH_RIGHT:
+	elif animation_name == ANIMATION_REACTING_HIGH_RIGHT:
 		player.is_reacting_right = false
 	transition_state(NODE_STATE, player.previous_state)
 
@@ -61,6 +60,9 @@ func start() -> void:
 	# Flag the player as "reacting"
 	player.is_reacting = true
 
+	# Connect animation finished signal
+	player.animation_player.connect("animation_finished", _on_animation_finished)
+
 
 ## Stop "reacting".
 func stop() -> void:
@@ -69,3 +71,10 @@ func stop() -> void:
 
 	# Flag the player as not "reacting"
 	player.is_reacting = false
+
+	# Clear state specific flags
+	_on_animation_finished(player.animation_player.current_animation)
+
+	# Disconnect animation finished signal
+	if player.animation_player.is_connected("animation_finished", _on_animation_finished):
+		player.animation_player.disconnect("animation_finished", _on_animation_finished)

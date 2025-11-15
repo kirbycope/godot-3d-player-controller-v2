@@ -97,34 +97,40 @@ func play_animation() -> void:
 		if player.is_firing_rifle:
 			if player.animation_player.current_animation != ANIMATION_RUNNING_FIRING_RIFLE:
 				if play_backwards:
+					_on_animation_finished(player.animation_player.current_animation)
 					player.animation_player.play_backwards(ANIMATION_RUNNING_FIRING_RIFLE)
 				else:
+					_on_animation_finished(player.animation_player.current_animation)
 					player.animation_player.play(ANIMATION_RUNNING_FIRING_RIFLE)
-				player.animation_player.connect("animation_finished", _on_animation_finished)
 		elif player.is_aiming_rifle:
 			if player.animation_player.current_animation != ANIMATION_RUNNING_AIMING_RIFLE:
 				if play_backwards:
+					_on_animation_finished(player.animation_player.current_animation)
 					player.animation_player.play_backwards(ANIMATION_RUNNING_AIMING_RIFLE)
 				else:
+					_on_animation_finished(player.animation_player.current_animation)
 					player.animation_player.play(ANIMATION_RUNNING_AIMING_RIFLE)
 		else:	
 			if player.animation_player.current_animation != ANIMATION_RUNNING_HOLDING_RIFLE:
 				if play_backwards:
+					_on_animation_finished(player.animation_player.current_animation)
 					player.animation_player.play_backwards(ANIMATION_RUNNING_HOLDING_RIFLE)
 				else:
+					_on_animation_finished(player.animation_player.current_animation)
 					player.animation_player.play(ANIMATION_RUNNING_HOLDING_RIFLE)
 
 	# -- Unarmed animations --
 	else:
 		if player.animation_player.current_animation != ANIMATION_RUNNING:
 			if play_backwards:
+				_on_animation_finished(player.animation_player.current_animation)
 				player.animation_player.play_backwards(ANIMATION_RUNNING)
 			else:
+				_on_animation_finished(player.animation_player.current_animation)
 				player.animation_player.play(ANIMATION_RUNNING)
 
 
 func _on_animation_finished(animation_name: String) -> void:
-	player.animation_player.disconnect("animation_finished", _on_animation_finished)
 	if animation_name == ANIMATION_RUNNING_FIRING_RIFLE:
 		player.is_firing_rifle = false
 
@@ -143,6 +149,9 @@ func start() -> void:
 	# Set the player's speed
 	player.speed_current = player.speed_running
 
+	# Connect animation finished signal
+	player.animation_player.connect("animation_finished", _on_animation_finished)
+
 
 ## Stop "running".
 func stop() -> void:
@@ -151,3 +160,10 @@ func stop() -> void:
 
 	# Flag the player as not "running"
 	player.is_running = false
+
+	# Clear state specific flags
+	_on_animation_finished(player.animation_player.current_animation)
+
+	# Disconnect animation finished signal
+	if player.animation_player.is_connected("animation_finished", _on_animation_finished):
+		player.animation_player.disconnect("animation_finished", _on_animation_finished)

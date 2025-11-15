@@ -90,19 +90,21 @@ func play_animation() -> void:
 				if play_backwards:
 					player.animation_player.play_backwards(ANIMATION_CRAWLING_FIRING_RIFLE)
 				else:
+					_on_animation_finished(player.animation_player.current_animation)
 					player.animation_player.play(ANIMATION_CRAWLING_FIRING_RIFLE)
-				player.animation_player.connect("animation_finished", _on_animation_finished)
 		elif player.is_aiming_rifle:
 			if player.animation_player.current_animation != ANIMATION_CRAWLING_AIMING_RIFLE:
 				if play_backwards:
 					player.animation_player.play_backwards(ANIMATION_CRAWLING_AIMING_RIFLE)
 				else:
+					_on_animation_finished(player.animation_player.current_animation)
 					player.animation_player.play(ANIMATION_CRAWLING_AIMING_RIFLE)
 		else:
 			if player.animation_player.current_animation != ANIMATION_CRAWLING_HOLDING_RIFLE:
 				if play_backwards:
 					player.animation_player.play_backwards(ANIMATION_CRAWLING_HOLDING_RIFLE)
 				else:
+					_on_animation_finished(player.animation_player.current_animation)
 					player.animation_player.play(ANIMATION_CRAWLING_HOLDING_RIFLE)
 
 	# -- Unarmed animation --
@@ -111,11 +113,11 @@ func play_animation() -> void:
 			if play_backwards:
 				player.animation_player.play_backwards(ANIMATION_CRAWLING)
 			else:
+				_on_animation_finished(player.animation_player.current_animation)
 				player.animation_player.play(ANIMATION_CRAWLING)
 
 
 func _on_animation_finished(animation_name: String) -> void:
-	player.animation_player.disconnect("animation_finished", _on_animation_finished)
 	if animation_name == ANIMATION_CRAWLING_FIRING_RIFLE:
 		player.is_firing_rifle = false
 
@@ -144,6 +146,9 @@ func start() -> void:
 	player.collision_shape.position = player.collision_position / 3
 	player.collision_shape.position.z += player.collision_height / 3
 
+	# Connect animation finished signal
+	player.animation_player.connect("animation_finished", _on_animation_finished)
+
 
 ## Stop "crawling".
 func stop() -> void:
@@ -161,3 +166,10 @@ func stop() -> void:
 
 	# [Re]set the player collision shape's position
 	player.collision_shape.position = player.collision_position
+
+	# Clear state specific flags
+	_on_animation_finished(player.animation_player.current_animation)
+
+	# Disconnect animation finished signal
+	if player.animation_player.is_connected("animation_finished", _on_animation_finished):
+		player.animation_player.disconnect("animation_finished", _on_animation_finished)

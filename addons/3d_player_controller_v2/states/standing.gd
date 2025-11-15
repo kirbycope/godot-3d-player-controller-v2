@@ -45,31 +45,37 @@ func _input(event):
 	# 🄻1/[MB0] _pressed_
 	if event.is_action_pressed(player.controls.button_4):
 		# Fishing "casting"
-		if player.is_holding_fishing_rod \
-		and not player.is_reeling_fishing:
-			player.is_casting_fishing = true
+		if player.is_holding_fishing_rod:
+			if not player.is_reeling_fishing:
+				player.is_casting_fishing = true
+			return
 		# Rifle "aiming" 🄻1
-		elif player.is_holding_rifle \
-		and event is InputEventJoypadButton:
-			player.is_aiming_rifle = true
+		if player.is_holding_rifle:
+			if event is InputEventJoypadButton:
+				player.is_aiming_rifle = true
+			return
 		# Rifle "firing" [MB0]
-		elif player.is_holding_rifle \
-		and event is InputEventMouseButton:
-			player.is_firing_rifle = true
+		if player.is_holding_rifle:
+			if event is InputEventMouseButton:
+				player.is_firing_rifle = true
+			return
 		# Left 1H "swinging"
-		elif player.is_holding_1h_left \
-		and not player.is_swinging_1h_right:
-			player.is_swinging_1h_left = true
+		if player.is_holding_1h_left:
+			if not player.is_swinging_1h_right:
+				player.is_swinging_1h_left = true
+			return
 		# Left hand "throwing" 
-		elif player.is_holding_left \
-		and not player.is_throwing_left:
-			player.is_throwing_left = true
+		if player.is_holding_left:
+			if not player.is_throwing_left:
+				player.is_throwing_left = true
+			return
 		# Left "punching"
-		elif player.enable_punching \
-		and not player.is_punching_left:
-			_on_animation_finished(player.animation_player.current_animation)
-			player.is_punching_left = true
-			player.timer_punch_left.start()
+		if player.enable_punching:
+			if not player.is_punching_left:
+				_on_animation_finished(player.animation_player.current_animation)
+				player.is_punching_left = true
+				player.timer_punch_left.start()
+			return
 
 	# 🄻1 _released_ -> Lower rifle
 	if event.is_action_released(player.controls.button_4) \
@@ -89,36 +95,42 @@ func _input(event):
 
 	# 🅁1/[MB1] _pressed_ 
 	if event.is_action_pressed(player.controls.button_5):
-		# Fishing "reeling"
-		if player.is_holding_fishing_rod \
-		and not player.is_casting_fishing:
-			player.is_reeling_fishing = true
-		# Rifle "aiming" [MB1]
-		elif player.is_holding_rifle \
-		and event is InputEventMouseButton:
-			player.is_aiming_rifle = true
-		# Rifle "firing" 🅁1 (joypad)
-		elif player.is_holding_rifle \
-		and event is InputEventJoypadButton:
-			player.is_firing_rifle = true
-		# Right 1H "swinging"
-		elif player.is_holding_1h_right \
-		and not player.is_swinging_1h_left:
-			player.is_swinging_1h_right = true
-		# Right hand "throwing" 
-		elif player.is_holding_right \
-		and not player.is_throwing_right:
-			player.is_throwing_right = true
 		# Held object "throwing"
-		elif player.enable_throwing \
+		if player.enable_throwing \
 		and player.camera.item_spring_arm.get_child_count() != 0:
-				pass # For now, this prevents the player from "punching" when trying to throw
+			pass # For now, this prevents the player from "punching" when trying to throw
+		# Fishing "reeling"
+		if player.is_holding_fishing_rod:
+			if not player.is_casting_fishing:
+				player.is_reeling_fishing = true
+			return
+		# Rifle "aiming" [MB1]
+		if player.is_holding_rifle:
+			if event is InputEventMouseButton:
+				player.is_aiming_rifle = true
+			return
+		# Rifle "firing" 🅁1 (joypad)
+		if player.is_holding_rifle:
+			if event is InputEventJoypadButton:
+				player.is_firing_rifle = true
+			return
+		# Right 1H "swinging"
+		if player.is_holding_1h_right:
+			if not player.is_swinging_1h_left:
+				player.is_swinging_1h_right = true
+			return
+		# Right hand "throwing" 
+		if player.is_holding_right:
+			if not player.is_throwing_right:
+				player.is_throwing_right = true
+			return
 		# Right "punching"
-		elif player.enable_punching \
-		and not player.is_punching_right:
-			_on_animation_finished(player.animation_player.current_animation)
-			player.is_punching_right = true
-			player.timer_punch_right.start()
+		elif player.enable_punching:
+			if not player.is_punching_right:
+				_on_animation_finished(player.animation_player.current_animation)
+				player.is_punching_right = true
+				player.timer_punch_right.start()
+			return
 
 	# [MB1] _released_ -> Lower rifle
 	if event.is_action_released(player.controls.button_5) \
@@ -165,87 +177,88 @@ func play_animation() -> void:
 	if player.is_holding_fishing_rod:
 		if player.is_casting_fishing:
 			if player.animation_player.current_animation != ANIMATION_FISHING_CASTING:
+				_on_animation_finished(player.animation_player.current_animation)
 				player.animation_player.play(ANIMATION_FISHING_CASTING)
-				player.animation_player.connect("animation_finished", _on_animation_finished)
 		elif player.is_reeling_fishing:
 			if player.animation_player.current_animation != ANIMATION_FISHING_REELING:
+				_on_animation_finished(player.animation_player.current_animation)
 				player.animation_player.play(ANIMATION_FISHING_REELING)
-				player.animation_player.connect("animation_finished", _on_animation_finished)
 		else:
 			if player.animation_player.current_animation != ANIMATION_FISHING_IDLE:
+				_on_animation_finished(player.animation_player.current_animation)
 				player.animation_player.play(ANIMATION_FISHING_IDLE)
 
 	# -- Kicking animations --
 	elif player.enable_kicking \
 	and player.is_kicking_left:
 		if player.animation_player.current_animation != ANIMATION_KICKING_LEFT:
+			_on_animation_finished(player.animation_player.current_animation)
 			player.animation_player.play(ANIMATION_KICKING_LEFT)
-			player.animation_player.connect("animation_finished", _on_animation_finished)
 	elif player.enable_kicking \
 	and player.is_kicking_right:
 		if player.animation_player.current_animation != ANIMATION_KICKING_RIGHT:
+			_on_animation_finished(player.animation_player.current_animation)
 			player.animation_player.play(ANIMATION_KICKING_RIGHT)
-			player.animation_player.connect("animation_finished", _on_animation_finished)
 
 	# -- Rifle animations --
 	elif player.is_holding_rifle:
 		if player.is_firing_rifle:
 			if player.animation_player.current_animation != ANIMATION_RIFLE_FIRING:
+				_on_animation_finished(player.animation_player.current_animation)
 				player.animation_player.play(ANIMATION_RIFLE_FIRING)
-				player.animation_player.connect("animation_finished", _on_animation_finished)
 		elif player.is_aiming_rifle:
 			if player.animation_player.current_animation != ANIMATION_RIFLE_AIMING:
+				_on_animation_finished(player.animation_player.current_animation)
 				player.animation_player.play(ANIMATION_RIFLE_AIMING)
 		else:
 			if player.animation_player.current_animation != ANIMATION_HOLDING_RIFLE:
+				_on_animation_finished(player.animation_player.current_animation)
 				player.animation_player.play(ANIMATION_HOLDING_RIFLE)
 
 	# -- 1H Swinging animations --
 	elif player.is_holding_1h_left \
 	and player.is_swinging_1h_left:
 		if player.animation_player.current_animation != ANIMATION_SWINGING_1H_LEFT:
+			_on_animation_finished(player.animation_player.current_animation)
 			player.animation_player.play(ANIMATION_SWINGING_1H_LEFT)
-			player.animation_player.connect("animation_finished", _on_animation_finished)
 	elif player.is_holding_1h_right \
 	and player.is_swinging_1h_right:
 		if player.animation_player.current_animation != ANIMATION_SWINGING_1H_RIGHT:
+			_on_animation_finished(player.animation_player.current_animation)
 			player.animation_player.play(ANIMATION_SWINGING_1H_RIGHT)
-			player.animation_player.connect("animation_finished", _on_animation_finished)
 
 	# -- Throwing animations --
 	elif player.is_holding_left \
 	and player.is_throwing_left:
 		if player.animation_player.current_animation != ANIMATION_THROWING_LEFT:
+			_on_animation_finished(player.animation_player.current_animation)
 			player.animation_player.play(ANIMATION_THROWING_LEFT)
-			player.animation_player.connect("animation_finished", _on_animation_finished)
 	elif player.is_holding_right \
 	and player.is_throwing_right:
 		if player.animation_player.current_animation != ANIMATION_THROWING_RIGHT:
+			_on_animation_finished(player.animation_player.current_animation)
 			player.animation_player.play(ANIMATION_THROWING_RIGHT)
-			player.animation_player.connect("animation_finished", _on_animation_finished)
 
 	# -- Punching animations --
 	elif player.enable_punching \
 	and player.is_punching_left:
 		if player.animation_player.current_animation != ANIMATION_PUNCHING_LEFT:
+			_on_animation_finished(player.animation_player.current_animation)
 			player.animation_player.play(ANIMATION_PUNCHING_LEFT)
-			player.animation_player.connect("animation_finished", _on_animation_finished)
 	elif player.enable_punching \
 	and player.is_punching_right:
 		if player.animation_player.current_animation != ANIMATION_PUNCHING_RIGHT:
+			_on_animation_finished(player.animation_player.current_animation)
 			player.animation_player.play(ANIMATION_PUNCHING_RIGHT)
-			player.animation_player.connect("animation_finished", _on_animation_finished)
 
 	# -- Unarmed animation --
 	else:
 		if player.animation_player.current_animation != ANIMATION_STANDING_IDLE:
+			_on_animation_finished(player.animation_player.current_animation)
 			player.animation_player.play(ANIMATION_STANDING_IDLE)
 
 
 func _on_animation_finished(animation_name: String) -> void:
-	# Only disconnect if the signal is actually connected
-	if player.animation_player.is_connected("animation_finished", _on_animation_finished):
-		player.animation_player.disconnect("animation_finished", _on_animation_finished)
 	if animation_name == ANIMATION_FISHING_CASTING:
 		player.is_casting_fishing = false
 	elif animation_name == ANIMATION_FISHING_REELING:
@@ -288,6 +301,9 @@ func start() -> void:
 	player.velocity = Vector3.ZERO
 	player.virtual_velocity = Vector3.ZERO
 
+	# Connect animation finished signal
+	player.animation_player.connect("animation_finished", _on_animation_finished)
+
 
 ## Stop "standing".
 func stop() -> void:
@@ -297,5 +313,9 @@ func stop() -> void:
 	# Flag the player as not "standing"
 	player.is_standing = false
 
-	# Stop any "while standing" actions
+	# Clear state specific flags
 	_on_animation_finished(player.animation_player.current_animation)
+
+	# Disconnect animation finished signal
+	if player.animation_player.is_connected("animation_finished", _on_animation_finished):
+		player.animation_player.disconnect("animation_finished", _on_animation_finished)
