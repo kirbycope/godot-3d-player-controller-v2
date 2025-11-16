@@ -7,15 +7,15 @@ enum Perspective {
 	FIRST_PERSON, # 1
 }
 
-@export var lock_camera: bool = false ## Lock camera position and location
-@export var lock_perspective: bool = false ## Lock camera perspective
-@export var look_sensitivity_controller: float = 50.0 ## Mouse look sensitivity
-@export var look_sensitivity_mouse: float = 0.2 ## Mouse look sensitivity
-@export var zoom_max: float = 4.0 ## Maximum camera zoom distance (third-person spring length upper bound)
-@export var zoom_min: float = 0.5 ## Minimum camera zoom distance (third-person spring length lower bound)
-@export var zoom_speed: float = 0.2 ## Camera zoom speed
+@export var lock_camera := false ## Lock camera position and location
+@export var lock_perspective := false ## Lock camera perspective
+@export var look_sensitivity_controller := 50.0 ## Mouse look sensitivity
+@export var look_sensitivity_mouse := 0.2 ## Mouse look sensitivity
+@export var zoom_max := 4.0 ## Maximum camera zoom distance (third-person spring length upper bound)
+@export var zoom_min := 0.5 ## Minimum camera zoom distance (third-person spring length lower bound)
+@export var zoom_speed := 0.2 ## Camera zoom speed
 
-var is_rotating_camera: bool = false ## Is the player holding the right mouse button to rotate the camera?
+var is_rotating_camera := false ## Is the player holding the right mouse button to rotate the camera?
 var perspective: Perspective = Perspective.FIRST_PERSON ## Camera perspective
 
 @onready var camera_spring_arm = get_parent()

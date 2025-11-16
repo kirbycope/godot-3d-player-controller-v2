@@ -1,12 +1,13 @@
 extends Node3D
+## Pedestal button that triggers when the player interacts.
 
 var player: CharacterBody3D
 
-@onready var animation_player = $AnimationPlayer
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 
 ## Called when there is an input event.
-func _input(event) -> void:
+func _input(event: InputEvent) -> void:
 	if player:
 		# Do nothing if the "pause" menu is visible
 		if player.pause.visible: return
@@ -20,11 +21,11 @@ func _input(event) -> void:
 						animation_player.play("press")
 
 
-func _on_area_3d_body_entered(body):
+func _on_area_3d_body_entered(body: Node3D) -> void:
 	if body is CharacterBody3D:
 		player = body
 
 
-func _on_area_3d_body_exited(body):
+func _on_area_3d_body_exited(body: Node3D) -> void:
 	if body is CharacterBody3D:
 		player = null

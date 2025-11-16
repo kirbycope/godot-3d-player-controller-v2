@@ -1,4 +1,5 @@
 extends CSGBox3D
+## Climbing slab that moves the player along an incline and aligns facing.
 
 const CLIMBING_ANIMATION = "Climbing_Incline_Steep/mixamo_com"
 const CLIMBING_CROUCHING = "Crouching/mixamo_com"

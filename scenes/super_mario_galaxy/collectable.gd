@@ -1,15 +1,16 @@
 extends RigidBody3D
+## Collectable that flies to the camera when picked.
 
-const OPEN_001 = preload("uid://5eewm7hxkjq")
-const OPEN_002 = preload("uid://dpmvor2ujenmj")
-const OPEN_003 = preload("uid://8spro6ern7km")
-const OPEN_004 = preload("uid://pm62v6e87r8l")
+const OPEN_001: AudioStream = preload("uid://5eewm7hxkjq")
+const OPEN_002: AudioStream = preload("uid://dpmvor2ujenmj")
+const OPEN_003: AudioStream = preload("uid://8spro6ern7km")
+const OPEN_004: AudioStream = preload("uid://pm62v6e87r8l")
 
-@onready var audio_stream_player_3d = $AudioStreamPlayer3D
-@onready var mesh_instance_3d = $MeshInstance3D
-@onready var mesh_instance_3d_2 = $MeshInstance3D2
+@onready var audio_stream_player_3d: AudioStreamPlayer3D = $AudioStreamPlayer3D
+@onready var mesh_instance_3d: MeshInstance3D = $MeshInstance3D
+@onready var mesh_instance_3d_2: MeshInstance3D = $MeshInstance3D2
 
-var is_being_collected = false
+var is_being_collected := false
 var pickup_tween: Tween
 var pickup_start_position: Vector3
 var pickup_duration := 0.8
@@ -17,7 +18,7 @@ var pickup_progress := 0.0
 
 
 ## Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready() -> void:
 	var random_color = Color(randf(), randf(), randf(), 1.0)
 	var material = StandardMaterial3D.new()
 	material.albedo_color = random_color
@@ -25,7 +26,7 @@ func _ready():
 	mesh_instance_3d_2.material_override = material.duplicate()
 
 
-func _on_area_3d_mouse_entered():
+func _on_area_3d_mouse_entered() -> void:
 	if is_being_collected:
 		return
 
@@ -44,7 +45,7 @@ func _on_area_3d_2_body_entered(body: Node3D) -> void:
 		play_pickup_sound()
 
 
-func pickup_collectable():
+func pickup_collectable() -> void:
 	# Find the camera in the scene
 	var camera = get_viewport().get_camera_3d()
 	if not camera:
@@ -68,7 +69,7 @@ func pickup_collectable():
 	pickup_tween.finished.connect(queue_free)
 
 
-func _update_pickup_motion(progress: float):
+func _update_pickup_motion(progress: float) -> void:
 	pickup_progress = progress
 	var camera = get_viewport().get_camera_3d()
 	if not camera:
@@ -79,13 +80,13 @@ func _update_pickup_motion(progress: float):
 	global_position = pickup_start_position.lerp(target_position, progress)
 
 
-func _rotate_while_moving(degrees: float):
+func _rotate_while_moving(degrees: float) -> void:
 	# Rotate the object while it's flying towards the camera
 	rotation_degrees = Vector3(degrees, degrees * 0.7, degrees * 1.3)
 
 
-func play_pickup_sound():
-	var sound_options = [OPEN_001, OPEN_002, OPEN_003, OPEN_004]
+func play_pickup_sound() -> void:
+	var sound_options := [OPEN_001, OPEN_002, OPEN_003, OPEN_004]
 	var chosen_sound = sound_options[randi() % sound_options.size()]
 	audio_stream_player_3d.stream = chosen_sound
 	audio_stream_player_3d.play()

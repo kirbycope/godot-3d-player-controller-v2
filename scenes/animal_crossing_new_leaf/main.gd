@@ -1,9 +1,10 @@
 extends Node3D
+## Animal Crossing: New Leaf scene configuration.
 
 const ANIMATION_RUNNING := "Running_In_Place/mixamo_com"
 
 @onready var ground: StaticBody3D = $Ground
-@onready var player = $Player
+@onready var player: CharacterBody3D = $Player
 
 
 ## Called when the node enters the scene tree for the first time.

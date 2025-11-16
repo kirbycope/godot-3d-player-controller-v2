@@ -1,11 +1,12 @@
 extends Node3D
+## Rifle pickup that attaches to player's right hand.
 
 var bone_attachment: BoneAttachment3D
 var player: CharacterBody3D
 
-@onready var initial_parent = get_parent()
-@onready var initial_rotation = global_rotation
-@onready var initial_position = global_position
+@onready var initial_parent: Node = get_parent()
+@onready var initial_rotation: Vector3 = global_rotation
+@onready var initial_position: Vector3 = global_position
 
 
 func _input(_event: InputEvent) -> void:

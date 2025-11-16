@@ -8,7 +8,7 @@ const NODE_NAME := "Swimming"
 const NODE_STATE := States.State.SWIMMING
 
 # Preserve/override floor snapping while swimming
-var prev_floor_snap_length: float = -1.0
+var prev_floor_snap_length := -1.0
 
 
 ## Called when there is an input event.

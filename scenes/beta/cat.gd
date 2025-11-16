@@ -1,13 +1,14 @@
 extends Node3D
+## Pettable cat that triggers player pet animation.
 
 
 var player: CharacterBody3D
 
-@onready var animation_player = $Visuals/AnimationPlayer
+@onready var animation_player: AnimationPlayer = $Visuals/AnimationPlayer
 
 
 ## Called when there is an input event.
-func _input(event) -> void:
+func _input(event: InputEvent) -> void:
 	if player:
 		# Do nothing if the "pause" menu is visible
 		if player.pause.visible: return
@@ -26,13 +27,13 @@ func _input(event) -> void:
 			player.play_locked_animation("Standing_Petting_Animal_High/mixamo_com")
 
 
-func _on_area_3d_body_entered(body):
+func _on_area_3d_body_entered(body: Node3D) -> void:
 	if body is CharacterBody3D \
 	and player == null:
 		player = body
 
 
-func _on_area_3d_body_exited(body):
+func _on_area_3d_body_exited(body: Node3D) -> void:
 	if body is CharacterBody3D:
 		player = null
 

@@ -1,19 +1,20 @@
 extends VehicleBody3D
+## Driveable car with simple input and camera auto-follow.
 
-@export var max_steer = 0.9
-@export var engine_power = 300
-@export var camera_auto_follow_enabled: bool = true
-@export var camera_auto_follow_speed: float = 8.0
-@export var camera_auto_follow_delay: float = 0.5
+@export var max_steer := 0.9 ## Maximum steering angle multiplier
+@export var engine_power := 300 ## Engine power factor
+@export var camera_auto_follow_enabled := true ## Enable auto camera recentre
+@export var camera_auto_follow_speed := 8.0 ## Speed of camera recentre
+@export var camera_auto_follow_delay := 0.5 ## Delay before recentre starts
 
 var player: CharacterBody3D
-var _time_since_yaw_input: float = 0.0
+var _time_since_yaw_input := 0.0
 
 @onready var driver_seat: Marker3D = $DriverSeat
 
 
 ## Called when there is an input event.
-func _input(event) -> void:
+func _input(event: InputEvent) -> void:
 	if player:
 		# Do nothing if the "pause" menu is visible
 		if player.pause.visible: return

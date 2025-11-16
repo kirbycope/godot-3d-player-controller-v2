@@ -1,15 +1,16 @@
 extends Node3D
+## Super Mario Galaxy scene script configuration.
 
-const COLLECTABLE = preload("uid://dkot3p2xn8i5q")
-#const MOUSE_CURSOR_ARROW = preload("uid://dqs8cxh3k2t0a")
-const MOUSE_CURSOR_ARROW = preload("uid://dmw8j7h0b8bri")
+const COLLECTABLE: PackedScene = preload("uid://dkot3p2xn8i5q")
+#const MOUSE_CURSOR_ARROW: Texture2D = preload("uid://dqs8cxh3k2t0a")
+const MOUSE_CURSOR_ARROW: Texture2D = preload("uid://dmw8j7h0b8bri")
 
-@onready var collectable = $Collectable
-@onready var player = $Player
+@onready var collectable: Node3D = $Collectable
+@onready var player: CharacterBody3D = $Player
 
 
 ## Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	player.camera.lock_camera = false
 	player.camera.lock_perspective = false
@@ -41,12 +42,12 @@ func _ready():
 
 
 ## Called when the node is about to leave the SceneTree.
-func _exit_tree():
+func _exit_tree() -> void:
 	Input.set_custom_mouse_cursor(null, Input.CURSOR_ARROW)
 
 
 ## Set the cursor to a custom texture.
-func change_cursor():
+func change_cursor() -> void:
 	var resized_texture = ImageTexture.new()
 	var image = MOUSE_CURSOR_ARROW.get_image()
 	image.resize(64, 64, Image.INTERPOLATE_LANCZOS)
@@ -56,9 +57,9 @@ func change_cursor():
 
 
 ## Spawn more collectables at the initial collectable location.
-func spawn_collectables():
-	var location = collectable.global_position
+func spawn_collectables() -> void:
+	var location := collectable.global_position
 	for i in range(5):
-		var new_collectable = COLLECTABLE.instantiate()
+		var new_collectable := COLLECTABLE.instantiate()
 		add_child(new_collectable)
 		new_collectable.global_position = location + Vector3(randf_range(-1.0, 1.0), randf_range(-1.0, 1.0), randf_range(-1.0, 1.0))

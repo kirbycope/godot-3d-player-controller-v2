@@ -1,6 +1,7 @@
 extends Node3D
+## Guild Wars scene configuration (click-to-move, mouse visible).
 
-@onready var player = $Player
+@onready var player: CharacterBody3D = $Player
 
 
 ## Called when the node enters the scene tree for the first time.

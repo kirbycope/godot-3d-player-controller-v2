@@ -1,6 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://crkvmowfmaa1r"]
-
-[ext_resource type="Script" uid="uid://btik1etdqal0j" path="res://scenes/zelda_breath_of_the_wild/paraglider.gd" id="1_hfpwt"]
+[gd_scene load_steps=3 format=3 uid="uid://crkvmowfmaa1r"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fps0l"]
 
@@ -12,7 +10,6 @@ albedo_color = Color(0.6431373, 0.45490196, 0.28627452, 1)
 roughness = 0.5
 
 [node name="Paraglider" type="Node3D"]
-script = ExtResource("1_hfpwt")
 
 [node name="Area3D" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)

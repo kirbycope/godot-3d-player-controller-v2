@@ -1,4 +1,5 @@
 extends CSGBox3D
+## Swimming pool volume that switches player state to swimming.
 
 var player: CharacterBody3D
 

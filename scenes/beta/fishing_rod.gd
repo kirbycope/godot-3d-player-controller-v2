@@ -1,12 +1,13 @@
 extends Node3D
+## Fishing rod pickup that plays a reel animation.
 
 var bone_attachment: BoneAttachment3D
 var player: CharacterBody3D
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
-@onready var initial_parent = get_parent()
-@onready var initial_rotation = global_rotation
-@onready var initial_position = global_position
+@onready var initial_parent: Node = get_parent()
+@onready var initial_rotation: Vector3 = global_rotation
+@onready var initial_position: Vector3 = global_position
 
 
 func _input(event: InputEvent) -> void:

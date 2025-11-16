@@ -1,10 +1,11 @@
 extends Node3D
+## Skateboard pickup that transitions player to skateboarding state.
 
 var player: CharacterBody3D
 
-@onready var initial_parent = get_parent()
-@onready var initial_rotation = global_rotation
-@onready var initial_position = global_position
+@onready var initial_parent: Node = get_parent()
+@onready var initial_rotation: Vector3 = global_rotation
+@onready var initial_position: Vector3 = global_position
 
 
 func _input(_event: InputEvent) -> void:

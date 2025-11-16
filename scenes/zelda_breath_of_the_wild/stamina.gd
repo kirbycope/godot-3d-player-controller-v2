@@ -1,4 +1,5 @@
 extends TextureProgressBar
+## Stamina UI logic for climbing and sprinting.
 
 var is_exhausted := false
 var stamina_current := 100.0
@@ -6,7 +7,7 @@ var stamina_drain_rate := 20.0
 var stamina_regen_rate := 15.0
 
 @onready var timer_hide: Timer = $TimerHide
-@onready var player = $"../../../Player"
+@onready var player: CharacterBody3D = $"../../../Player"
 
 
 # Called every frame. '_delta' is the elapsed time since the previous frame.

@@ -1,4 +1,5 @@
 extends Node3D
+## Simple stool seat that lets the player sit.
 
 var is_in_use := false
 var player: CharacterBody3D
@@ -15,12 +16,12 @@ func _input(event: InputEvent) -> void:
 				player.base_state.transition_state(player.current_state, States.State.SITTING)
 
 
-func _on_area_3d_body_entered(body):
+func _on_area_3d_body_entered(body: Node3D) -> void:
 	if body is CharacterBody3D \
 	and player == null:
 		player = body
 
 
-func _on_area_3d_body_exited(body):
+func _on_area_3d_body_exited(body: Node3D) -> void:
 	if body is CharacterBody3D:
 		player = null

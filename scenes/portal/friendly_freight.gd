@@ -1,29 +1,29 @@
 extends RigidBody3D
+## A buoyant crate that floats and drags in water.
 
-@export var buoyancy_force: float = 20.0  # Upward force when submerged
-@export var water_drag: float = 0.5  # Resistance in water
-@export var water_angular_drag: float = 0.5  # Rotational resistance
+@export var buoyancy_force := 20.0 ## Upward force when submerged
+@export var water_drag := 0.5 ## Linear resistance in water
+@export var water_angular_drag := 0.5 ## Rotational resistance in water
 
-var in_water: bool = false
+var in_water := false
 var height: float
 var water_area: Area3D = null
-var water_level: float = 0.0
+var water_level := 0.0
 
 func _ready() -> void:
 	height = get_node("CollisionShape3D").shape.size.y
 
 
-func _physics_process(delta):
+func _physics_process(delta: float) -> void:
 	if in_water:
 		apply_buoyancy(delta)
 
 
-func apply_buoyancy(delta):
-	var y_pos = global_position.y
+func apply_buoyancy(delta: float) -> void:
+	var y_pos := global_position.y
 	if water_level < (y_pos + height):
-
 		# Apply upward buoyancy force
-		var buoyancy = Vector3.UP * buoyancy_force
+		var buoyancy := Vector3.UP * buoyancy_force
 		apply_central_force(buoyancy)
 
 		# Apply water drag to slow down movement

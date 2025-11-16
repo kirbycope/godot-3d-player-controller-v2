@@ -4,55 +4,55 @@ extends CharacterBody3D
 
 
 @export_group("CONFIG")
-@export var enable_climbing: bool = false ## Enable climbing
-@export var enable_crawling: bool = true ## Enable crawling
-@export var enable_crouching: bool = true ## Enable crouching
-@export var enable_double_jumping: bool = false ## Enable double jumping
-@export var enable_driving: bool = false ## Enable driving
-@export var enable_emotes: bool = true ## Enable emotes
-@export var enable_flying: bool = false ## Enable flying
-@export var enable_hanging: bool = false ## Enable hanging
-@export var enable_holding_objects: bool = false ## Enable holding objects
-@export var enable_jumping: bool = true ## Enable jumping
-@export var enable_kicking: bool = false ## Enable kicking
-@export var enable_navigation: bool = false ## Enable navigation (pathfinding)
-@export var enable_paragliding: bool = false ## Enable paragliding
-@export var enable_punching: bool = false ## Enable punching
-@export var enable_pushing: bool = true ## Enable pushing
-@export var enable_ragdolling: bool = true ## Enable ragdoll physics
-@export var enable_retical: bool = true ## Enable the rectical
-@export var enable_rolling: bool = false ## Enable rolling
-@export var enable_sitting: bool = true ## Enable sitting
-@export var enable_sliding: bool = true ## Enable sliding
-@export var enable_sprinting: bool = true ## Enable sprinting
-@export var enable_swimming: bool = true ## Enable swimming
-@export var enable_throwing: bool = false ## Enable throwing objects
-@export var enable_vibration: bool = true ## Enable controller vibration
-@export var lock_movement_x: bool = false ## Lock movement along the X axis
-@export var lock_movement_y: bool = false ## Lock movement along the Y axis
-@export var lock_movement_z: bool = false ## Lock movement along the Z axis
+@export var enable_climbing := false ## Enable climbing
+@export var enable_crawling := true ## Enable crawling
+@export var enable_crouching := true ## Enable crouching
+@export var enable_double_jumping := false ## Enable double jumping
+@export var enable_driving := false ## Enable driving
+@export var enable_emotes := true ## Enable emotes
+@export var enable_flying := false ## Enable flying
+@export var enable_hanging := false ## Enable hanging
+@export var enable_holding_objects := false ## Enable holding objects
+@export var enable_jumping := true ## Enable jumping
+@export var enable_kicking := false ## Enable kicking
+@export var enable_navigation := false ## Enable navigation (pathfinding)
+@export var enable_paragliding := false ## Enable paragliding
+@export var enable_punching := false ## Enable punching
+@export var enable_pushing := true ## Enable pushing
+@export var enable_ragdolling := true ## Enable ragdoll physics
+@export var enable_retical := true ## Enable the rectical
+@export var enable_rolling := false ## Enable rolling
+@export var enable_sitting := true ## Enable sitting
+@export var enable_sliding := true ## Enable sliding
+@export var enable_sprinting := true ## Enable sprinting
+@export var enable_swimming := true ## Enable swimming
+@export var enable_throwing := false ## Enable throwing objects
+@export var enable_vibration := true ## Enable controller vibration
+@export var lock_movement_x := false ## Lock movement along the X axis
+@export var lock_movement_y := false ## Lock movement along the Y axis
+@export var lock_movement_z := false ## Lock movement along the Z axis
 @export_group("SKELETON")
-@export var bone_name_left_foot: String = "LeftFoot" ## Name of the left foot bone in the skeleton
-@export var bone_name_right_foot: String = "RightFoot" ## Name of the right foot bone in the skeleton
-@export var bone_name_left_hand: String = "LeftHand" ## Name of the left hand bone in the skeleton
-@export var bone_name_right_hand: String = "RightHand" ## Name of the right hand bone in the skeleton
+@export var bone_name_left_foot := "LeftFoot" ## Name of the left foot bone in the skeleton
+@export var bone_name_right_foot := "RightFoot" ## Name of the right foot bone in the skeleton
+@export var bone_name_left_hand := "LeftHand" ## Name of the left hand bone in the skeleton
+@export var bone_name_right_hand := "RightHand" ## Name of the right hand bone in the skeleton
 @export_group("SPEED")
-@export var speed_climbing: float = 1.0 ## Speed while climbing
-@export var speed_crawling: float = 0.75 ## Speed while crawling
-@export var speed_flying: float = 5.0 ## Speed while flying
-@export var speed_hanging: float = 0.25 ## Speed while hanging (shimmying)
-@export var speed_jumping: float = 4.5 ## Speed while jumping
-@export var speed_paragliding: float = 2.0 ## Speed while paragliding
-@export var speed_rolling: float = 2.0 ## Speed while rolling
-@export var speed_running: float = 3.5 ## Speed while running
-@export var speed_skateboarding: float = 4.0 ## Speed while skateboarding
-@export var speed_sliding: float = 2.5 ## Speed while sliding
-@export var speed_sprinting: float = 5.0 ## Speed while sprinting
-@export var speed_swimming: float = 3.0 ## Speed while swimming
-@export var speed_walking: float = 1.0 ## Speed while walking
+@export var speed_climbing := 1.0 ## Speed while climbing
+@export var speed_crawling := 0.75 ## Speed while crawling
+@export var speed_flying := 5.0 ## Speed while flying
+@export var speed_hanging := 0.25 ## Speed while hanging (shimmying)
+@export var speed_jumping := 4.5 ## Speed while jumping
+@export var speed_paragliding := 2.0 ## Speed while paragliding
+@export var speed_rolling := 2.0 ## Speed while rolling
+@export var speed_running := 3.5 ## Speed while running
+@export var speed_skateboarding := 4.0 ## Speed while skateboarding
+@export var speed_sliding := 2.5 ## Speed while sliding
+@export var speed_sprinting := 5.0 ## Speed while sprinting
+@export var speed_swimming := 3.0 ## Speed while swimming
+@export var speed_walking := 1.0 ## Speed while walking
 @export_group("PHYSICS")
-@export var force_pushing: float = 0.2 ## Force applied when pushing
-@export var force_pushing_sprinting: float = 0.4 ## Force applied when pushing while sprinting
+@export var force_pushing := 0.2 ## Force applied when pushing
+@export var force_pushing_sprinting := 0.4 ## Force applied when pushing while sprinting
 
 var current_state: States.State ## The current state of the 
 var previous_state: States.State ## The previous state of the 
