@@ -90,6 +90,10 @@ func start() -> void:
 	# Move the player to the ladder
 	player.move_to_ladder()
 
+	# Play the appropriate animation
+	await get_tree().process_frame
+	player.play_locked_animation(ANIMATION_CLIMBING_LADDER, 0.2)
+
 
 ## Stop "climbing ladder".
 func stop() -> void:

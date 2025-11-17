@@ -1,8 +1,6 @@
 extends Node3D
 ## Animal Crossing: New Leaf scene configuration.
 
-const ANIMATION_RUNNING := "Running_In_Place/mixamo_com"
-
 @onready var ground: StaticBody3D = $Ground
 @onready var player: CharacterBody3D = $Player
 
@@ -16,26 +14,6 @@ func _ready() -> void:
 	player.camera_mount.position.y = 2.0
 	player.camera_mount.position.z = 1.5
 	player.camera.set_camera_perspective(player.camera.Perspective.THIRD_PERSON)
-	player.enable_climbing = false
-	player.enable_crawling = false
-	player.enable_crouching = false
-	player.enable_double_jumping = false
-	player.enable_driving = false
-	player.enable_flying = false
-	player.enable_hanging = false
-	player.enable_holding_objects = false
-	player.enable_jumping = false
-	player.enable_kicking = false
-	player.enable_navigation = false
-	player.enable_paragliding = false
-	player.enable_punching = false
-	player.enable_retical = false
-	player.enable_rolling = false
-	player.enable_sliding = false
-	player.enable_sprinting = false
-	player.enable_swimming = false
-	player.lock_movement_x = false
-	player.lock_movement_y = false
 	player.lock_movement_z = true
 
 
