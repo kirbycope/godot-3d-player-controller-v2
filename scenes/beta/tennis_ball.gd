@@ -34,6 +34,7 @@ func _input(_event: InputEvent) -> void:
 
 func _on_player_detection_body_entered(body: Node3D) -> void:
 	if body is CharacterBody3D \
+	and body.is_in_group("Player") \
 	and player == null:
 		player = body
 		player.is_holding_right = true

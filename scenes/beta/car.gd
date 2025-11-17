@@ -75,11 +75,13 @@ func _process(delta: float) -> void:
 
 func _on_player_detection_body_entered(body: Node3D) -> void:
 	if body is CharacterBody3D \
+	and body.is_in_group("Player") \
 	and player == null:
 		player = body
 
 
 func _on_player_detection_body_exited(body: Node3D) -> void:
-	if body is CharacterBody3D:
+	if body is CharacterBody3D \
+	and body.is_in_group("Player"):
 		if not body.is_driving:
 			player = null

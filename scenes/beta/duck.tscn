@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=4 uid="uid://b43k2gvwqcup4"]
+[gd_scene load_steps=10 format=4 uid="uid://b43k2gvwqcup4"]
 
 [ext_resource type="Script" uid="uid://b4op688x37fuc" path="res://scenes/beta/duck.gd" id="1_d74gf"]
 [ext_resource type="Texture2D" uid="uid://beyhpmflg6hpb" path="res://assets/models/duck/textures/goose_Diffuse-goose_Opacity.png" id="1_y857a"]
@@ -835,6 +835,9 @@ _data = {
 &"Armature|White Duck_TempMotion|White Duck_TempMotion": SubResource("Animation_t4t17")
 }
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_d74gf"]
+radius = 1.0
+
 [node name="Duck" type="CharacterBody3D"]
 script = ExtResource("1_d74gf")
 
@@ -1196,3 +1199,11 @@ libraries = {
 }
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
+[node name="PlayerDetection" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerDetection"]
+shape = SubResource("SphereShape3D_d74gf")
+
+[connection signal="body_entered" from="PlayerDetection" to="." method="_on_player_detection_body_entered"]
+[connection signal="body_exited" from="PlayerDetection" to="." method="_on_player_detection_body_exited"]

@@ -6,6 +6,7 @@ var player: CharacterBody3D
 
 func _on_player_detection_body_entered(body: Node3D) -> void:
 	if body is CharacterBody3D \
+	and body.is_in_group("Player") \
 	and player == null:
 		player = body
 		player.is_swimming_in = self
@@ -17,7 +18,8 @@ func _on_player_detection_body_entered(body: Node3D) -> void:
 
 
 func _on_player_detection_body_exited(body: Node3D) -> void:
-	if body is CharacterBody3D:
+	if body is CharacterBody3D \
+	and body.is_in_group("Player"):
 		player.base_state.transition_state(player.current_state, States.State.STANDING)
 		player.is_swimming_in = null
 		player = null

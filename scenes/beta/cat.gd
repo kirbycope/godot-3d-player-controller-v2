@@ -29,12 +29,14 @@ func _input(event: InputEvent) -> void:
 
 func _on_area_3d_body_entered(body: Node3D) -> void:
 	if body is CharacterBody3D \
+	and body.is_in_group("Player") \
 	and player == null:
 		player = body
 
 
 func _on_area_3d_body_exited(body: Node3D) -> void:
-	if body is CharacterBody3D:
+	if body is CharacterBody3D \
+	and body.is_in_group("Player"):
 		player = null
 
 

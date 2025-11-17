@@ -36,7 +36,8 @@ func _on_area_3d_mouse_entered() -> void:
 
 
 func _on_area_3d_2_body_entered(body: Node3D) -> void:
-	if body is CharacterBody3D:
+	if body is CharacterBody3D \
+	and body.is_in_group("Player"):
 		if is_being_collected:
 			return
 
