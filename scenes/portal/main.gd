@@ -15,3 +15,5 @@ func _ready() -> void:
 	player.enable_jumping = true
 	player.enable_retical = true
 	player.enable_throwing = true
+	$BluePortal/Portal3D.deactivate()
+	$RedPortal/Portal3D.deactivate()

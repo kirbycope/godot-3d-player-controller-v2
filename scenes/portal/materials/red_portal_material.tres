@@ -1,0 +1,13 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://cjkd8y3n1h5p2"]
+
+[ext_resource type="Shader" uid="uid://bhdb2skdxehes" path="res://addons/portals/materials/portal_shader.gdshader" id="1_3s7kw"]
+[ext_resource type="Texture2D" uid="uid://bk5n8x2yc7h4w" path="res://scenes/props/portal/materials/portal_noise.tres" id="2_4k7jw"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_3s7kw")
+shader_parameter/size = 0.45
+shader_parameter/size_inner = 0.2
+shader_parameter/noise = ExtResource("2_4k7jw")
+shader_parameter/portalFrameColor = Color(0.8, 0.2, 0, 1)
+shader_parameter/portalHighlightColor = Color(1, 0.6, 0.3, 1)

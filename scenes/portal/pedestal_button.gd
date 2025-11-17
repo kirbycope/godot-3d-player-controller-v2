@@ -5,6 +5,8 @@ var player: CharacterBody3D
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
+var pressed := false
+
 
 ## Called when there is an input event.
 func _input(event: InputEvent) -> void:
@@ -19,6 +21,9 @@ func _input(event: InputEvent) -> void:
 				if collider.get_parent() == self:
 					if animation_player.current_animation != "press":
 						animation_player.play("press")
+					if $"../WeightedButton".pressed:
+						$"../BluePortal/Portal3D".activate()
+						$"../RedPortal/Portal3D".activate()
 
 
 func _on_area_3d_body_entered(body: Node3D) -> void:

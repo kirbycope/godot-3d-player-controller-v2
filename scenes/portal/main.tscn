@@ -1,14 +1,15 @@
-[gd_scene load_steps=37 format=3 uid="uid://cxxdj5na2rtoh"]
+[gd_scene load_steps=32 format=3 uid="uid://cxxdj5na2rtoh"]
 
 [ext_resource type="Script" uid="uid://bh5l4p1dv74om" path="res://scenes/portal/main.gd" id="1_i4qb0"]
 [ext_resource type="PackedScene" uid="uid://f6xpywa7euq2" path="res://addons/3d_player_controller_v2/player.tscn" id="2_r7k4e"]
 [ext_resource type="Texture2D" uid="uid://brerfykle8g6t" path="res://icon.svg" id="3_fjfy8"]
 [ext_resource type="Texture2D" uid="uid://258brku1pp5s" path="res://assets/textures/prototype_textures/Dark/texture_07.png" id="4_t3s5l"]
 [ext_resource type="Texture2D" uid="uid://c2yhnwwbe08c4" path="res://assets/textures/prototype_textures/Dark/texture_03.png" id="5_8bgvx"]
-[ext_resource type="Texture2D" uid="uid://kwa6121503yy" path="res://assets/textures/prototype_textures/Light/texture_03.png" id="5_r7k4e"]
 [ext_resource type="Texture2D" uid="uid://bocqf01bvvcub" path="res://assets/textures/prototype_textures/Dark/texture_05.png" id="7_t3s5l"]
 [ext_resource type="PackedScene" uid="uid://345q62swkbaf" path="res://scenes/portal/weighted_button.tscn" id="8_8bgvx"]
 [ext_resource type="PackedScene" uid="uid://cvloef0x0u28f" path="res://scenes/portal/pedestal_button.tscn" id="8_60hin"]
+[ext_resource type="PackedScene" uid="uid://cl4axnu1cjm68" path="res://scenes/portal/blue_portal.tscn" id="10_uwnby"]
+[ext_resource type="PackedScene" uid="uid://bkeu4rutcdbqu" path="res://scenes/portal/red_portal.tscn" id="11_dxoj2"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_r7k4e"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -45,28 +46,6 @@ uv1_triplanar = true
 [sub_resource type="BoxMesh" id="BoxMesh_uwnby"]
 material = SubResource("StandardMaterial3D_14dpn")
 size = Vector3(0.76, 0.76, 0.76)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_8bgvx"]
-size = Vector3(1, 2, 0.11)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_60hin"]
-albedo_texture = ExtResource("5_r7k4e")
-uv1_triplanar = true
-
-[sub_resource type="BoxMesh" id="BoxMesh_14dpn"]
-material = SubResource("StandardMaterial3D_60hin")
-size = Vector3(1, 2, 0.11)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_r7k4e"]
-size = Vector3(1, 2, 0.1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uwnby"]
-albedo_texture = ExtResource("5_8bgvx")
-uv1_triplanar = true
-
-[sub_resource type="BoxMesh" id="BoxMesh_sr353"]
-material = SubResource("StandardMaterial3D_uwnby")
-size = Vector3(1, 2, 0.1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6sefq"]
 size = Vector3(8, 4, 0.1)
@@ -137,45 +116,13 @@ mesh = SubResource("BoxMesh_wco57")
 
 [node name="FriendlyFreight" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.38, 0)
+collision_layer = 32769
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="FriendlyFreight"]
 shape = SubResource("BoxShape3D_60hin")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="FriendlyFreight"]
 mesh = SubResource("BoxMesh_uwnby")
-
-[node name="PortalPanel1x2h" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PortalPanel1x2h"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("BoxShape3D_8bgvx")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="PortalPanel1x2h"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-mesh = SubResource("BoxMesh_14dpn")
-
-[node name="PortalPanel1x2h2" type="StaticBody3D" parent="."]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 4, 0, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PortalPanel1x2h2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("BoxShape3D_8bgvx")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="PortalPanel1x2h2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-mesh = SubResource("BoxMesh_14dpn")
-
-[node name="WallPanel1w2h" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.1)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="WallPanel1w2h"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("BoxShape3D_r7k4e")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="WallPanel1w2h"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-mesh = SubResource("BoxMesh_sr353")
 
 [node name="Wall" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
@@ -272,3 +219,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -2)
 
 [node name="WeightedButton" parent="." instance=ExtResource("8_8bgvx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -2)
+
+[node name="BluePortal" parent="." instance=ExtResource("10_uwnby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -3.8501685)
+
+[node name="RedPortal" parent="." instance=ExtResource("11_dxoj2")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 3.85, 1, 0)
