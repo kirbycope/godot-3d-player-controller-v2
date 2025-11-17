@@ -1,7 +1,6 @@
 extends Camera3D
 ## Manages camera perspectives, rotation, zoom, and object interaction with first/third-person modes
 
-
 enum Perspective {
 	THIRD_PERSON, # 0
 	FIRST_PERSON, # 1
@@ -18,12 +17,12 @@ enum Perspective {
 var is_rotating_camera := false ## Is the player holding the right mouse button to rotate the camera?
 var perspective: Perspective = Perspective.FIRST_PERSON ## Camera perspective
 
-@onready var camera_spring_arm = get_parent()
+@onready var camera_spring_arm: SpringArm3D = get_parent()
 @onready var camera_mount: Node3D = get_parent().get_parent()
 @onready var contextual_controls: Label = $ContextualControls
-@onready var item_spring_arm = camera_mount.get_node("ItemSpringArm")
+@onready var item_spring_arm: SpringArm3D = camera_mount.get_node("ItemSpringArm")
 @onready var player: CharacterBody3D = get_parent().get_parent().get_parent()
-@onready var ray_cast = $RayCast3D
+@onready var ray_cast: RayCast3D = $RayCast3D
 @onready var retical: TextureRect = $Retical
 
 
@@ -118,7 +117,8 @@ func _input(event: InputEvent) -> void:
 			var collider = ray_cast.get_collider()
 			# Check if the collider is a rigidbody3D
 			if collider is RigidBody3D\
-			and not collider is VehicleBody3D:
+			and not collider is VehicleBody3D \
+			and not collider.is_in_group("NoPickUp"):
 				# Check if the collider is not already a child of the item spring arm
 				if collider.get_parent() != item_spring_arm:
 					# Change the collision layer from 1 to 2 (to avoid further collisions)
@@ -194,6 +194,7 @@ func _process(delta: float) -> void:
 				var collider = ray_cast.get_collider()
 				if collider is RigidBody3D \
 				and not collider is VehicleBody3D \
+				and not collider.is_in_group("NoPickUp") \
 				and player.enable_holding_objects:
 					contextual_controls.text = "Press [E] to pickup"
 				elif collider is VehicleBody3D \

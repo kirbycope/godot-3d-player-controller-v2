@@ -55,7 +55,6 @@ func _input(event: InputEvent) -> void:
 		if player.is_holding_rifle:
 			if event is InputEventJoypadButton:
 				player.is_aiming_rifle = true
-			return
 		# Rifle "firing" [MB0]
 		if player.is_holding_rifle:
 			if event is InputEventMouseButton:
@@ -110,7 +109,6 @@ func _input(event: InputEvent) -> void:
 		if player.is_holding_rifle:
 			if event is InputEventMouseButton:
 				player.is_aiming_rifle = true
-			return
 		# Rifle "firing" 🅁1 (joypad)
 		if player.is_holding_rifle:
 			if event is InputEventJoypadButton:
