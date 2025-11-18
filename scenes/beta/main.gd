@@ -7,8 +7,8 @@ extends Node3D
 ## Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	player.camera.lock_camera = false
-	player.camera.lock_perspective = false
+	#player.camera.lock_camera = false
+	#player.camera.lock_perspective = false
 	player.camera.set_camera_perspective(player.camera.Perspective.THIRD_PERSON)
 	player.debug.show()
 	player.enable_climbing = true

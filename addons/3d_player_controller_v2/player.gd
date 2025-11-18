@@ -32,6 +32,7 @@ extends CharacterBody3D
 @export var lock_movement_y := false ## Lock movement along the Y axis
 @export var lock_movement_z := false ## Lock movement along the Z axis
 @export_group("SKELETON")
+@export var bone_name_head := "Head" ## Name of the head bone in the skeleton
 @export var bone_name_left_foot := "LeftFoot" ## Name of the left foot bone in the skeleton
 @export var bone_name_right_foot := "RightFoot" ## Name of the right foot bone in the skeleton
 @export var bone_name_left_hand := "LeftHand" ## Name of the left hand bone in the skeleton
