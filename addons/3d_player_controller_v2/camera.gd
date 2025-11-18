@@ -29,6 +29,8 @@ var perspective: Perspective = Perspective.FIRST_PERSON ## Camera perspective
 ## Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	ray_cast.add_exception(player)
+	# Remove any baked local tilt from the Camera3D node
+	rotation_degrees = Vector3.ZERO
 
 
 ## Called when there is an input event.
@@ -76,12 +78,12 @@ func _input(event: InputEvent) -> void:
 	# Ⓨ/[Ctrl] _pressed_ -> Lower camera
 	if event.is_action_pressed(player.controls.button_3):
 		if perspective == Perspective.FIRST_PERSON:
-			camera_spring_arm.position.y = -0.8
+			camera_mount.position.y = 0.6 # Adjust as needed
 
 	# Ⓨ/[Ctrl] _released_ -> Raise camera
 	if event.is_action_released(player.controls.button_3):
 		if perspective == Perspective.FIRST_PERSON:
-			camera_spring_arm.position.y = 0.0
+			camera_mount.position.y = 1.6 # Adjust as needed
 
 	# Ⓧ/[E] _pressed_ -> Climb ladder
 	if event.is_action_pressed(player.controls.button_2) \
@@ -175,6 +177,9 @@ func _input(event: InputEvent) -> void:
 func _process(delta: float) -> void:
 	if !is_multiplayer_authority(): return
 
+	if perspective == Perspective.FIRST_PERSON:
+		move_camera_to_player_head()
+
 	var look_actions = [player.controls.look_up, player.controls.look_down, player.controls.look_left, player.controls.look_right]
 	for action in look_actions:
 		# Check if the action is pressed and the camera is not locked -> Rotate camera
@@ -239,25 +244,28 @@ func camera_rotate_by_mouse(event: InputEvent) -> void:
 		player.visuals.rotate_y(deg_to_rad(event.relative.x * look_sensitivity_mouse))
 
 
+## Update the camera to follow the character head's position (while in "first person").
+func move_camera_to_player_head() -> void:
+	var bone_index = player.skeleton.find_bone(player.bone_name_head)
+	var bone_pose = player.skeleton.get_bone_global_pose(bone_index)
+	var bone_world_pos = player.skeleton.global_transform * bone_pose.origin
+	global_position = bone_world_pos
+	global_rotation = camera_mount.global_rotation
+	global_position += global_transform.basis.z * -0.15 # Adjust as needed
+
+
 ## Set the camera's perspective.
 func set_camera_perspective(mode: Perspective) -> void:
 	if mode == Perspective.THIRD_PERSON:
 		perspective = Perspective.THIRD_PERSON
-		camera_spring_arm.spring_length = 1.5
-		camera_spring_arm.position.x = 0.0
-		camera_spring_arm.position.y = 0.7
-		camera_spring_arm.position.z = 0.0
+		player.visuals.rotation = Vector3.ZERO
 		ray_cast.position.z = -camera_spring_arm.spring_length
-		set_cull_mask_value(2, true)
+		camera_mount.rotation_degrees.x = 0.0
+		camera_mount.rotation_degrees.z = 0.0
 	else:
 		perspective = Perspective.FIRST_PERSON
-		player.visuals.rotation.y = 0.0
-		camera_spring_arm.spring_length = 0.0
-		camera_spring_arm.position.x = 0.0
-		camera_spring_arm.position.y = 0.0
-		camera_spring_arm.position.z = 0.0
+		player.visuals.rotation = Vector3(0.0, 0.0, camera_mount.rotation.z)
 		ray_cast.position.z = 0.0
-		set_cull_mask_value(2, false)
 
 
 ## Toggle between "first-person" and "third-person" perspectives.
