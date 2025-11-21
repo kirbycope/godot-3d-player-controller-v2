@@ -19,6 +19,7 @@ var perspective: Perspective = Perspective.FIRST_PERSON ## Camera perspective
 
 @onready var camera_spring_arm: SpringArm3D = get_parent()
 @onready var camera_mount: Node3D = get_parent().get_parent()
+@onready var camera_mount_initial_position: Vector3 = camera_mount.position
 @onready var contextual_controls: Label = $ContextualControls
 @onready var item_spring_arm: SpringArm3D = camera_mount.get_node("ItemSpringArm")
 @onready var player: CharacterBody3D = get_parent().get_parent().get_parent()
@@ -177,9 +178,6 @@ func _input(event: InputEvent) -> void:
 func _process(delta: float) -> void:
 	if !is_multiplayer_authority(): return
 
-	if perspective == Perspective.FIRST_PERSON:
-		move_camera_to_player_head()
-
 	var look_actions = [player.controls.look_up, player.controls.look_down, player.controls.look_left, player.controls.look_right]
 	for action in look_actions:
 		# Check if the action is pressed and the camera is not locked -> Rotate camera
@@ -219,6 +217,17 @@ func _process(delta: float) -> void:
 	retical.visible = player.enable_retical
 
 
+## Called once on each physics tick, and allows Nodes to synchronize their logic with physics ticks.
+func _physics_process(delta: float) -> void:
+	if !is_multiplayer_authority(): return
+
+	if perspective == Perspective.FIRST_PERSON:
+		move_camera_to_player_head()
+
+	if camera_mount.top_level:
+		move_camera_mount_to_player()
+
+
 ## Rotate camera using the controller.
 func camera_rotate_by_controller(delta: float) -> void:
 	var input_x = Input.get_action_strength(player.controls.look_right) - Input.get_action_strength(player.controls.look_left)
@@ -242,6 +251,25 @@ func camera_rotate_by_mouse(event: InputEvent) -> void:
 	player.rotate(player.basis.y, deg_to_rad(new_rotation_y))
 	if perspective == Perspective.THIRD_PERSON:
 		player.visuals.rotate_y(deg_to_rad(event.relative.x * look_sensitivity_mouse))
+
+
+## Update the camera mount to follow the player's position.
+func move_camera_mount_to_player() -> void:
+	# Get the target position (player position + initial offset)
+	var target_position = player.global_position + camera_mount_initial_position
+
+	# Directly match x and z
+	camera_mount.global_position.x = target_position.x
+	camera_mount.global_position.z = target_position.z
+
+	# Lerp y-position with max difference of 0.5
+	var y_diff = target_position.y - camera_mount.global_position.y
+	if abs(y_diff) > 0.5:
+		# If difference is greater than 0.5, move directly to maintain max distance of 0.5
+		camera_mount.global_position.y = target_position.y - sign(y_diff) * 0.5
+	else:
+		# Otherwise lerp smoothly
+		camera_mount.global_position.y = lerp(camera_mount.global_position.y, target_position.y, 0.1)
 
 
 ## Update the camera to follow the character head's position (while in "first person").
