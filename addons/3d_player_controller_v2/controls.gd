@@ -26,6 +26,7 @@ var last_input_type: InputType
 @export var button_13 = "button_13"		## Key: Q, Controller: D-Pad Down
 @export var button_14 = "button_14"		## Key: B,Controller: D-Pad Left
 @export var button_15 = "button_15"		## Key: T, Controller: D-Pad Right
+@export var screenshot = "screenshot"	## Key: F2, Controller: N/A
 @export var debug = "debug"				## Key: F3, Controller: N/A
 @export var look_down = "look_down"		## Key: Down Arrow, Controller: Right Stick Down
 @export var look_left = "look_left"		## Key: Left Arrow, Controller: Right Stick Left
@@ -47,6 +48,14 @@ func _ready() -> void:
 		var key_event = InputEventKey.new()
 		key_event.physical_keycode = KEY_F3
 		InputMap.action_add_event(debug, key_event)
+	# Check if [screenshot] action is not in the Input Map
+	if not InputMap.has_action(screenshot):
+		# Add the [screenshot] action to the Input Map
+		InputMap.add_action(screenshot)
+		# Keyboard [F2]
+		var key_event = InputEventKey.new()
+		key_event.physical_keycode = KEY_F2
+		InputMap.action_add_event(screenshot, key_event)
 	# Check if [move_down] action is not in the Input Map
 	if not InputMap.has_action(move_down):
 		# Add the [move_down] action to the Input Map

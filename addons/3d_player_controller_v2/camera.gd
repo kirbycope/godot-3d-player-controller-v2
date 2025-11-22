@@ -42,6 +42,16 @@ func _input(event: InputEvent) -> void:
 	# Do nothing if the "pause" menu is visible
 	if player.pause.visible: return
 
+	# [F2] _pressed_ -> Take screenshot
+	if event.is_action_pressed(player.controls.screenshot):
+		var screenshot_image = get_viewport().get_texture().get_image()
+		var timestamp = Time.get_unix_time_from_system()
+		var file_path = "user://screenshot_%d.png" % timestamp
+		#screenshot_image.flip_y() # Flip the image vertically
+		var err = screenshot_image.save_png(file_path)
+		if err == OK:
+			print("Screenshot saved to: ", file_path)
+
 	# Do nothing if the camera is locked
 	if lock_camera: return
 
