@@ -36,6 +36,9 @@ func _process(delta: float) -> void:
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
 
+	# Do nothing if the "pause" menu is visible
+	if player.pause.visible: return
+
 	# Check if the player has no raycast collision -> Start "falling"
 	if not player.ray_cast_top.is_colliding() \
 	and not player.ray_cast_high.is_colliding():
