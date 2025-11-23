@@ -3,20 +3,19 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bnwkx63qfvtci"
-path.s3tc="res://.godot/imported/survivalprops_col_tex.png-8e9075b815c24c4faed9aa0d5c9a6703.s3tc.ctex"
+path="res://.godot/imported/survivalprops_col_tex.png-8e9075b815c24c4faed9aa0d5c9a6703.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://assets/models/survival/textures/survivalprops_col_tex.png"
-dest_files=["res://.godot/imported/survivalprops_col_tex.png-8e9075b815c24c4faed9aa0d5c9a6703.s3tc.ctex"]
+dest_files=["res://.godot/imported/survivalprops_col_tex.png-8e9075b815c24c4faed9aa0d5c9a6703.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=1
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

@@ -15,7 +15,7 @@ dest_files=["res://.godot/imported/cursor.png-2300ec499bd77721ceac5cec5c77832d.c
 
 [params]
 
-compress/mode=0
+compress/mode=1
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
