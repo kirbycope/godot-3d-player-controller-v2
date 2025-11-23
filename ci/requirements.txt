@@ -1,4 +1,0 @@
-# Godot Addon Requirements
-# Format: <addon_directory_name> <repository_url> [branch]
-# Lines starting with # are comments
-virtual_controller https://github.com/kirbycope/godot-virtual-controller.git main
