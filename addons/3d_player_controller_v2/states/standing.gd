@@ -5,6 +5,10 @@ extends BaseState
 const ANIMATION_FISHING_CASTING := "Standing_Fishing_Cast/mixamo_com"
 const ANIMATION_FISHING_IDLE := "Standing_Fishing_Idle/mixamo_com"
 const ANIMATION_FISHING_REELING := "Standing_Fishing_Reel/mixamo_com"
+const ANIMATION_BLOCKING_1H_LEFT := "Standing_Blocking_1H_Left/mixamo_com"
+const ANIMATION_BLOCKING_1H_RIGHT := "Standing_Blocking_1H_Right/mixamo_com"
+const ANIMATION_HOLDING_1H_LEFT := "Standing_Holding_1H_Left/mixamo_com"
+const ANIMATION_HOLDING_1H_RIGHT := "Standing_Holding_1H_Right/mixamo_com"
 const ANIMATION_KICKING_LEFT := "Standing_Kicking_Left/mixamo_com"
 const ANIMATION_KICKING_RIGHT := "Standing_Kicking_Right/mixamo_com"
 const ANIMATION_PUNCHING_LEFT := "Standing_Punching_Left/mixamo_com"
@@ -62,8 +66,15 @@ func _input(event: InputEvent) -> void:
 			return
 		# Left 1H "swinging"
 		if player.is_holding_1h_left:
-			if not player.is_swinging_1h_right:
+			if not player.is_swinging_1h_right \
+			and not player.is_blocking_1h_left:
 				player.is_swinging_1h_left = true
+			return
+		# Right 1H "blocking"
+		if player.is_holding_1h_right:
+			if not player.is_blocking_1h_right:
+				player.is_blocking_1h_right = true
+				player.is_swinging_1h_right = false
 			return
 		# Left hand "throwing" 
 		if player.is_holding_left:
@@ -78,12 +89,15 @@ func _input(event: InputEvent) -> void:
 				player.timer_punch_left.start()
 			return
 
-	# 🄻1 _released_ -> Lower rifle
-	if event.is_action_released(player.controls.button_4) \
-	and event is InputEventJoypadButton:
-		# Rifle "aiming" 🄻1
-		if player.is_holding_rifle:
-			player.is_aiming_rifle = false
+	# 🄻1/[MB0] _released_
+	if event.is_action_released(player.controls.button_4):
+		# Rifle "aiming" 🄻1 release
+		if event is InputEventJoypadButton:
+			if player.is_holding_rifle:
+				player.is_aiming_rifle = false
+		# Right 1H "blocking" release
+		if player.is_blocking_1h_right:
+			player.is_blocking_1h_right = false
 
 	# 🄻2/[MB3] _pressed_
 	if event.is_action_pressed(player.controls.button_6):
@@ -116,8 +130,15 @@ func _input(event: InputEvent) -> void:
 			return
 		# Right 1H "swinging"
 		if player.is_holding_1h_right:
-			if not player.is_swinging_1h_left:
+			if not player.is_swinging_1h_left \
+			and not player.is_blocking_1h_right:
 				player.is_swinging_1h_right = true
+			return
+		# Left 1H "blocking"
+		if player.is_holding_1h_left:
+			if not player.is_blocking_1h_left:
+				player.is_blocking_1h_left = true
+				player.is_swinging_1h_left = false
 			return
 		# Right hand "throwing" 
 		if player.is_holding_right:
@@ -132,11 +153,15 @@ func _input(event: InputEvent) -> void:
 				player.timer_punch_right.start()
 			return
 
-	# [MB1] _released_ -> Lower rifle
-	if event.is_action_released(player.controls.button_5) \
-	and event is InputEventMouseButton:
-		if player.is_holding_rifle:
-			player.is_aiming_rifle = false
+	#  🄻1/[MB1] _released_
+	if event.is_action_released(player.controls.button_5):
+		# Rifle "aiming" [MB0] release
+		if event is InputEventMouseButton:
+			if player.is_holding_rifle:
+				player.is_aiming_rifle = false
+		# Left 1H "blocking" release
+		if player.is_blocking_1h_left:
+			player.is_blocking_1h_left = false
 
 	# 🅁2/[MB4] _pressed_
 	if event.is_action_pressed(player.controls.button_7):
@@ -216,17 +241,27 @@ func play_animation() -> void:
 				_on_animation_finished(player.animation_player.current_animation)
 				player.animation_player.play(ANIMATION_HOLDING_RIFLE)
 
-	# -- 1H Swinging animations --
-	elif player.is_holding_1h_left \
-	and player.is_swinging_1h_left:
-		if player.animation_player.current_animation != ANIMATION_SWINGING_1H_LEFT:
-			_on_animation_finished(player.animation_player.current_animation)
-			player.animation_player.play(ANIMATION_SWINGING_1H_LEFT)
-	elif player.is_holding_1h_right \
-	and player.is_swinging_1h_right:
-		if player.animation_player.current_animation != ANIMATION_SWINGING_1H_RIGHT:
-			_on_animation_finished(player.animation_player.current_animation)
-			player.animation_player.play(ANIMATION_SWINGING_1H_RIGHT)
+	# -- 1H animations --
+	elif player.is_holding_1h_left:
+		if player.is_blocking_1h_left:
+			if player.animation_player.current_animation != ANIMATION_BLOCKING_1H_LEFT:
+				player.animation_player.play(ANIMATION_BLOCKING_1H_LEFT)
+		elif player.is_swinging_1h_left:
+			if player.animation_player.current_animation != ANIMATION_SWINGING_1H_LEFT:
+				_on_animation_finished(player.animation_player.current_animation)
+				player.animation_player.play(ANIMATION_SWINGING_1H_LEFT)
+		elif player.animation_player.current_animation != ANIMATION_HOLDING_1H_LEFT:
+			player.animation_player.play(ANIMATION_HOLDING_1H_LEFT)
+	elif player.is_holding_1h_right:
+		if player.is_blocking_1h_right:
+			if player.animation_player.current_animation != ANIMATION_BLOCKING_1H_RIGHT:
+				player.animation_player.play(ANIMATION_BLOCKING_1H_RIGHT)
+		elif player.is_swinging_1h_right:
+			if player.animation_player.current_animation != ANIMATION_SWINGING_1H_RIGHT:
+				_on_animation_finished(player.animation_player.current_animation)
+				player.animation_player.play(ANIMATION_SWINGING_1H_RIGHT)
+		elif player.animation_player.current_animation != ANIMATION_HOLDING_1H_RIGHT:
+			player.animation_player.play(ANIMATION_HOLDING_1H_RIGHT)
 
 	# -- Throwing animations --
 	elif player.is_holding_left \

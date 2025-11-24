@@ -875,6 +875,28 @@ layout_mode = 0
 offset_right = 164.0
 offset_bottom = 31.0
 
+[node name="IsBlocking1HL" type="CheckBox" parent="States2"]
+layout_mode = 2
+disabled = true
+text = "IsBlocking1HL"
+
+[node name="Panel" type="Panel" parent="States2/IsBlocking1HL"]
+z_index = -1
+layout_mode = 0
+offset_right = 164.0
+offset_bottom = 31.0
+
+[node name="IsBlocking1HR" type="CheckBox" parent="States2"]
+layout_mode = 2
+disabled = true
+text = "IsBlocking1HR"
+
+[node name="Panel" type="Panel" parent="States2/IsBlocking1HR"]
+z_index = -1
+layout_mode = 0
+offset_right = 164.0
+offset_bottom = 31.0
+
 [node name="IsSwinging1HLeft" type="CheckBox" parent="States2"]
 layout_mode = 2
 disabled = true

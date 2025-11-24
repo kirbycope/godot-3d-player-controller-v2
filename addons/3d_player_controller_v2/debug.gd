@@ -35,6 +35,8 @@ var yellow_sphere: MeshInstance3D
 @onready var lock_movement_y: CheckButton = $Configuration2/LockMovementY
 @onready var lock_movement_z: CheckButton = $Configuration2/LockMovementZ
 @onready var is_aiming_rifle: CheckBox = $States2/IsAimingRifle
+@onready var is_blocking_1hl: CheckBox = $States2/IsBlocking1HL
+@onready var is_blocking_1hr: CheckBox = $States2/IsBlocking1HR
 @onready var is_casting_fishing: CheckBox = $States2/IsCastingFishing
 @onready var is_climbing: CheckBox = $States/IsClimbing
 @onready var is_climbing_ladder: CheckBox = $States/IsClimbingLadder
@@ -134,6 +136,8 @@ func _process(_delta: float) -> void:
 		lock_movement_y.button_pressed = player.lock_movement_y
 		lock_movement_z.button_pressed = player.lock_movement_z
 		is_aiming_rifle.button_pressed = player.is_aiming_rifle
+		is_blocking_1hl.button_pressed = player.is_blocking_1h_left
+		is_blocking_1hr.button_pressed = player.is_blocking_1h_right
 		is_casting_fishing.button_pressed = player.is_casting_fishing
 		is_climbing.button_pressed = player.is_climbing
 		is_climbing_ladder.button_pressed = player.is_climbing_ladder

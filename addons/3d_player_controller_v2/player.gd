@@ -59,6 +59,8 @@ var current_state: States.State ## The current state of the
 var previous_state: States.State ## The previous state of the 
 var input_direction := Vector2.ZERO ## The direction of the player input (UP/DOWN, LEFT/RIGHT).
 var is_animation_locked := false ## Is the player's animation locked?
+var is_blocking_1h_left := false ## Is the player blocking with a 1-handed tool or weapon with their left hand?
+var is_blocking_1h_right := false ## Is the player blocking with a 1-handed tool or weapon with their right hand?
 var is_climbing := false ## Is the player climbing a surface?
 var is_climbing_ladder := false ## Is the player climbing a ladder?
 var is_crawling := false ## Is the player crawling?
@@ -142,7 +144,7 @@ var virtual_velocity := Vector3.ZERO ## The player's velocity is movement were u
 @onready var ray_cast_low: RayCast3D = visuals.get_node("RayCast3D_Low")
 @onready var ray_cast_below: RayCast3D = visuals.get_node("RayCast3D_Below")
 @onready var settings: CanvasLayer = $Settings
-@onready var skeleton: Skeleton3D = %GeneralSkeleton
+@onready var skeleton: Skeleton3D = visuals.find_child("GeneralSkeleton")
 @onready var physical_bone_simulator: PhysicalBoneSimulator3D = skeleton.get_node_or_null("PhysicalBoneSimulator3D") ## Setting up a ragdoll is optional so null is allowed
 
 
