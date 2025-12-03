@@ -1,0 +1,88 @@
+[gd_scene load_steps=18 format=3 uid="uid://byfteqoslg6sb"]
+
+[ext_resource type="Texture2D" uid="uid://c6b8rw2ujf1dh" path="res://assets/textures/prototype_textures/Orange/texture_12.png" id="1_q7jey"]
+[ext_resource type="Texture2D" uid="uid://bby7iv2q22e00" path="res://assets/textures/prototype_textures/Orange/texture_13.png" id="2_gvrjm"]
+[ext_resource type="Texture2D" uid="uid://ujug62dald5c" path="res://assets/textures/prototype_textures/Orange/texture_11.png" id="3_uydgq"]
+[ext_resource type="Texture2D" uid="uid://neq3gr8ev0km" path="res://assets/textures/prototype_textures/Orange/texture_01.png" id="4_ngjqe"]
+[ext_resource type="Texture2D" uid="uid://b550hsb281ivj" path="res://assets/textures/prototype_textures/Red/texture_02.png" id="5_7qwt0"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q5tvl"]
+albedo_texture = ExtResource("1_q7jey")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_bpjpj"]
+material = SubResource("StandardMaterial3D_q5tvl")
+size = Vector2(1, 1)
+orientation = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n528h"]
+albedo_texture = ExtResource("2_gvrjm")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_pm7ci"]
+material = SubResource("StandardMaterial3D_n528h")
+size = Vector2(1, 1)
+orientation = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_epvb7"]
+albedo_texture = ExtResource("3_uydgq")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_afvmq"]
+material = SubResource("StandardMaterial3D_epvb7")
+size = Vector2(1, 1)
+orientation = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_30hrq"]
+albedo_texture = ExtResource("4_ngjqe")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_24t20"]
+material = SubResource("StandardMaterial3D_30hrq")
+size = Vector2(1, 1)
+orientation = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_38pxu"]
+albedo_texture = ExtResource("5_7qwt0")
+uv1_triplanar = true
+
+[sub_resource type="PrismMesh" id="PrismMesh_cpw3i"]
+material = SubResource("StandardMaterial3D_38pxu")
+size = Vector3(1, 0.5, 1)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_q7jey"]
+data = PackedVector3Array(0, 0.25, 0.5, 0.5, -0.25, 0.5, -0.5, -0.25, 0.5, 0, 0.25, -0.5, -0.5, -0.25, -0.5, 0.5, -0.25, -0.5, 0, 0.25, 0.5, 0, 0.25, -0.5, 0.5, -0.25, 0.5, 0, 0.25, -0.5, 0.5, -0.25, -0.5, 0.5, -0.25, 0.5, 0, 0.25, -0.5, 0, 0.25, 0.5, -0.5, -0.25, -0.5, 0, 0.25, 0.5, -0.5, -0.25, 0.5, -0.5, -0.25, -0.5, -0.5, -0.25, 0.5, 0.5, -0.25, 0.5, -0.5, -0.25, -0.5, 0.5, -0.25, 0.5, 0.5, -0.25, -0.5, -0.5, -0.25, -0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fy3ok"]
+
+[node name="House" type="StaticBody3D"]
+transform = Transform3D(-1.3113416e-07, 0, 3, 0, 3, 0, -3, 0, -1.3113416e-07, 0, 0, 0)
+
+[node name="DoorPanel" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
+mesh = SubResource("PlaneMesh_bpjpj")
+
+[node name="WindowPanel" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, -0.5)
+mesh = SubResource("PlaneMesh_pm7ci")
+
+[node name="StairsPanel" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -0.5)
+visible = false
+mesh = SubResource("PlaneMesh_afvmq")
+
+[node name="WallPanel" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -0.5, 0, 0)
+mesh = SubResource("PlaneMesh_24t20")
+
+[node name="WallPanel2" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.5, 0, 0)
+mesh = SubResource("PlaneMesh_24t20")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+mesh = SubResource("PrismMesh_cpw3i")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_q7jey")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_fy3ok")

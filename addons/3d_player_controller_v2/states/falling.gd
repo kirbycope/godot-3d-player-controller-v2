@@ -55,7 +55,8 @@ func _process(delta: float) -> void:
 	# Check if the player is on a floor
 	if player.is_on_floor():
 		# Fell too fast -> Start "ragdolling"
-		if player.virtual_velocity.y < -player.gravity:
+		if player.virtual_velocity.y < -player.gravity \
+		and player.enable_ragdolling:
 			transition_state(NODE_STATE, States.State.RAGDOLLING)
 			return
 		# Fell safely -> Start "standing"

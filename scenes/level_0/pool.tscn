@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://brc6v1pepmek3"]
+
+[ext_resource type="Script" uid="uid://dxohuegqp48c" path="res://scenes/level_0/pool.gd" id="1_po7k7"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_772hs"]
+albedo_color = Color(0, 0.5686275, 0.72156864, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a8mrn"]
+transparency = 1
+albedo_color = Color(0.45882353, 0.76862746, 1, 0.78431374)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_f4nu8"]
+material = SubResource("StandardMaterial3D_a8mrn")
+size = Vector2(4.9, 9.8)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_po7k7"]
+size = Vector3(5, 5, 10)
+
+[node name="Pool" type="CSGBox3D"]
+size = Vector3(5, 5, 10)
+script = ExtResource("1_po7k7")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.099999905, 0)
+operation = 2
+size = Vector3(4.9, 4.9, 9.8)
+material = SubResource("StandardMaterial3D_772hs")
+
+[node name="WaterSurface" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+mesh = SubResource("PlaneMesh_f4nu8")
+
+[node name="PlayerDetection" type="Area3D" parent="." groups=["water"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerDetection"]
+shape = SubResource("BoxShape3D_po7k7")
+
+[connection signal="body_entered" from="PlayerDetection" to="." method="_on_player_detection_body_entered"]
+[connection signal="body_exited" from="PlayerDetection" to="." method="_on_player_detection_body_exited"]

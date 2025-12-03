@@ -200,30 +200,6 @@ func _process(delta: float) -> void:
 		and not is_rotating_camera:
 			camera_rotate_by_controller(delta)
 
-	if contextual_controls:
-		contextual_controls.text = ""
-		if item_spring_arm.get_child_count() == 0:
-			if ray_cast.is_colliding():
-				var collider = ray_cast.get_collider()
-				if collider is RigidBody3D \
-				and not collider is VehicleBody3D \
-				and not collider.is_in_group("NoPickUp") \
-				and player.enable_holding_objects:
-					contextual_controls.text = "Press [E] to pickup"
-				elif collider is VehicleBody3D \
-				and not player.is_driving:
-					contextual_controls.text = "Press [E] to drive"
-				elif collider.is_in_group("Ladder"):
-					if player.is_climbing_ladder:
-						contextual_controls.text = "Press [Ctrl] to release"
-					else:
-						contextual_controls.text = "Press [E] to climb"
-		else:
-			if player.enable_throwing:
-				contextual_controls.text = "Press [E] to release \nPress [RMB] to throw"
-			elif player.enable_holding_objects:
-				contextual_controls.text = "Press [E] to release"
-
 	retical.visible = player.enable_retical
 
 

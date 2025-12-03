@@ -1,0 +1,36 @@
+[gd_scene load_steps=8 format=3 uid="uid://crbkch87dbiqi"]
+
+[ext_resource type="Script" uid="uid://cdicp67tgagkw" path="res://scenes/level_5/friendly_freight.gd" id="1_f115o"]
+[ext_resource type="Texture2D" uid="uid://brerfykle8g6t" path="res://icon.svg" id="1_oyno3"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_f115o"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_28tan"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o6xl0"]
+albedo_texture = ExtResource("1_oyno3")
+uv1_offset = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_xucii"]
+material = SubResource("StandardMaterial3D_o6xl0")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xucii"]
+
+[node name="FriendlyFreight" type="RigidBody3D"]
+physics_material_override = SubResource("PhysicsMaterial_f115o")
+script = ExtResource("1_f115o")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_28tan")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_xucii")
+
+[node name="WaterDetection" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WaterDetection"]
+shape = SubResource("BoxShape3D_xucii")
+
+[connection signal="area_entered" from="WaterDetection" to="." method="_on_water_detection_area_entered"]
+[connection signal="area_exited" from="WaterDetection" to="." method="_on_water_detection_area_exited"]

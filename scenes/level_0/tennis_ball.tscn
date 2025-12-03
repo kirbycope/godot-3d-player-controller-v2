@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://bga8sxeufkcky"]
+
+[ext_resource type="Script" uid="uid://n6txxg78gx00" path="res://scenes/level_0/tennis_ball.gd" id="1_at8e8"]
+[ext_resource type="PackedScene" uid="uid://bsmwmrameibh7" path="res://assets/models/tennis_ball/tennis_ball.glb" id="1_d8mp3"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_at8e8"]
+radius = 0.056
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_iwbpt"]
+
+[node name="TennisBall" type="RigidBody3D"]
+script = ExtResource("1_at8e8")
+
+[node name="Visuals" parent="." instance=ExtResource("1_d8mp3")]
+transform = Transform3D(0.66, 0, 0, 0, 0.66, 0, 0, 0, 0.66, 0, -0.042287916, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.012712084, 0)
+shape = SubResource("SphereShape3D_at8e8")
+
+[node name="PlayerDetection" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.032712087, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerDetection"]
+shape = SubResource("BoxShape3D_iwbpt")
+
+[connection signal="body_entered" from="PlayerDetection" to="." method="_on_player_detection_body_entered"]
+[connection signal="body_exited" from="PlayerDetection" to="." method="_on_player_detection_body_exited"]

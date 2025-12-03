@@ -1,16 +1,15 @@
-[gd_scene load_steps=15 format=3 uid="uid://7bmrbudeq40y"]
+[gd_scene load_steps=14 format=3 uid="uid://7bmrbudeq40y"]
 
 [ext_resource type="Script" uid="uid://cw48aw6pubuwl" path="res://scenes/level_select.gd" id="1_p0wlc"]
-[ext_resource type="Texture2D" uid="uid://7fjc1etvog52" path="res://scenes/beta/sample.png" id="2_2epne"]
-[ext_resource type="Texture2D" uid="uid://cr2mxxoiwbrta" path="res://scenes/super_mario_galaxy/preview.png" id="3_2epne"]
-[ext_resource type="Texture2D" uid="uid://b2aj55v7b6d6g" path="res://scenes/animal_crossing_new_leaf/preview.png" id="3_o2xx4"]
-[ext_resource type="Texture2D" uid="uid://t5iy8syqok2g" path="res://scenes/guild_wars/preview.png" id="3_rif6e"]
-[ext_resource type="Texture2D" uid="uid://dgr47oep1n57i" path="res://scenes/minecraft/preview.png" id="5_htctk"]
-[ext_resource type="Texture2D" uid="uid://bplgsd6p75top" path="res://scenes/pokemon_legends_za/preview.png" id="6_htctk"]
-[ext_resource type="Texture2D" uid="uid://m8twggk6t78x" path="res://scenes/portal/preview.png" id="6_s6tf7"]
-[ext_resource type="Texture2D" uid="uid://csbdn3rxc1rxt" path="res://scenes/super_mario_odyssey/preview.png" id="8_u4mbh"]
-[ext_resource type="Texture2D" uid="uid://cwekv3qhsrb64" path="res://scenes/zelda_breath_of_the_wild/preview.png" id="9_rovvv"]
-[ext_resource type="Texture2D" uid="uid://djy2ysommtucl" path="res://scenes/zelda_links_awakening/preview.png" id="10_0wyvj"]
+[ext_resource type="Texture2D" uid="uid://7fjc1etvog52" path="res://scenes/level_0/sample.png" id="2_2epne"]
+[ext_resource type="Texture2D" uid="uid://cr2mxxoiwbrta" path="res://scenes/level_6/preview.png" id="3_2epne"]
+[ext_resource type="Texture2D" uid="uid://b2aj55v7b6d6g" path="res://scenes/level_1/preview.png" id="3_o2xx4"]
+[ext_resource type="Texture2D" uid="uid://t5iy8syqok2g" path="res://scenes/level_2/preview.png" id="3_rif6e"]
+[ext_resource type="Texture2D" uid="uid://dgr47oep1n57i" path="res://scenes/level_3/preview.png" id="5_htctk"]
+[ext_resource type="Texture2D" uid="uid://bplgsd6p75top" path="res://scenes/level_4/preview.png" id="6_htctk"]
+[ext_resource type="Texture2D" uid="uid://m8twggk6t78x" path="res://scenes/level_5/preview.png" id="6_s6tf7"]
+[ext_resource type="Texture2D" uid="uid://cwekv3qhsrb64" path="res://scenes/level_7/preview.png" id="9_rovvv"]
+[ext_resource type="Texture2D" uid="uid://djy2ysommtucl" path="res://scenes/level_8/preview.png" id="10_0wyvj"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_64kqf"]
 size = Vector2(480, 320)
@@ -56,51 +55,46 @@ offset_right = 213.0
 offset_bottom = 160.0
 grow_vertical = 2
 
-[node name="Beta" type="Button" parent="Center/VBoxContainer"]
+[node name="Level0" type="Button" parent="Center/VBoxContainer"]
 layout_mode = 2
 toggle_mode = true
 text = "Beta (QA World)"
 
-[node name="AnimalCrossingNewLeaf" type="Button" parent="Center/VBoxContainer"]
+[node name="Level1" type="Button" parent="Center/VBoxContainer"]
 layout_mode = 2
 toggle_mode = true
 text = "Animal Crossing: New Leaf"
 
-[node name="GuildWars" type="Button" parent="Center/VBoxContainer"]
+[node name="Level2" type="Button" parent="Center/VBoxContainer"]
 layout_mode = 2
 toggle_mode = true
 text = "Guild Wars"
 
-[node name="Minecraft" type="Button" parent="Center/VBoxContainer"]
+[node name="Level3" type="Button" parent="Center/VBoxContainer"]
 layout_mode = 2
 toggle_mode = true
 text = "Minecraft"
 
-[node name="PokemonLegendsZA" type="Button" parent="Center/VBoxContainer"]
+[node name="Level4" type="Button" parent="Center/VBoxContainer"]
 layout_mode = 2
 text = "Pokémon Legends: Z-A"
 
-[node name="Portal" type="Button" parent="Center/VBoxContainer"]
+[node name="Level5" type="Button" parent="Center/VBoxContainer"]
 layout_mode = 2
 toggle_mode = true
 text = "Portal"
 
-[node name="SuperMarioGalaxy" type="Button" parent="Center/VBoxContainer"]
+[node name="Level6" type="Button" parent="Center/VBoxContainer"]
 layout_mode = 2
 toggle_mode = true
 text = "Super Mario Galaxy"
 
-[node name="SuperMarioOdyssey" type="Button" parent="Center/VBoxContainer"]
-layout_mode = 2
-toggle_mode = true
-text = "Super Mario Odyssey"
-
-[node name="ZeldaBreathOfTheWild" type="Button" parent="Center/VBoxContainer"]
+[node name="Level7" type="Button" parent="Center/VBoxContainer"]
 layout_mode = 2
 toggle_mode = true
 text = "Zelda: Breath of the Wild"
 
-[node name="ZeldaLinksAwakening" type="Button" parent="Center/VBoxContainer"]
+[node name="Level8" type="Button" parent="Center/VBoxContainer"]
 layout_mode = 2
 toggle_mode = true
 text = "Zelda: Link's Awakening"
@@ -122,53 +116,48 @@ grow_vertical = 2
 layout_mode = 2
 texture = SubResource("PlaceholderTexture2D_64kqf")
 
-[node name="Beta" type="TextureRect" parent="Center/CenterContainer"]
+[node name="Level0" type="TextureRect" parent="Center/CenterContainer"]
 visible = false
 layout_mode = 2
 texture = ExtResource("2_2epne")
 stretch_mode = 5
 
-[node name="AnimalCrossingNewLeaf" type="TextureRect" parent="Center/CenterContainer"]
+[node name="Level1" type="TextureRect" parent="Center/CenterContainer"]
 visible = false
 layout_mode = 2
 texture = ExtResource("3_o2xx4")
 
-[node name="GuildWars" type="TextureRect" parent="Center/CenterContainer"]
+[node name="Level2" type="TextureRect" parent="Center/CenterContainer"]
 visible = false
 layout_mode = 2
 texture = ExtResource("3_rif6e")
 
-[node name="Minecraft" type="TextureRect" parent="Center/CenterContainer"]
+[node name="Level3" type="TextureRect" parent="Center/CenterContainer"]
 visible = false
 layout_mode = 2
 texture = ExtResource("5_htctk")
 
-[node name="PokemonLegendsZA" type="TextureRect" parent="Center/CenterContainer"]
+[node name="Level4" type="TextureRect" parent="Center/CenterContainer"]
 visible = false
 layout_mode = 2
 texture = ExtResource("6_htctk")
 
-[node name="Portal" type="TextureRect" parent="Center/CenterContainer"]
+[node name="Level5" type="TextureRect" parent="Center/CenterContainer"]
 visible = false
 layout_mode = 2
 texture = ExtResource("6_s6tf7")
 
-[node name="SuperMarioGalaxy" type="TextureRect" parent="Center/CenterContainer"]
+[node name="Level6" type="TextureRect" parent="Center/CenterContainer"]
 visible = false
 layout_mode = 2
 texture = ExtResource("3_2epne")
 
-[node name="SuperMarioOdyssey" type="TextureRect" parent="Center/CenterContainer"]
-visible = false
-layout_mode = 2
-texture = ExtResource("8_u4mbh")
-
-[node name="ZeldaBreathOfTheWild" type="TextureRect" parent="Center/CenterContainer"]
+[node name="Level7" type="TextureRect" parent="Center/CenterContainer"]
 visible = false
 layout_mode = 2
 texture = ExtResource("9_rovvv")
 
-[node name="ZeldaLinksAwakening" type="TextureRect" parent="Center/CenterContainer"]
+[node name="Level8" type="TextureRect" parent="Center/CenterContainer"]
 visible = false
 layout_mode = 2
 texture = ExtResource("10_0wyvj")
@@ -257,15 +246,14 @@ grow_vertical = 2
 text = "Loading..."
 label_settings = SubResource("LabelSettings_p0wlc")
 
-[connection signal="pressed" from="Center/VBoxContainer/Beta" to="." method="_on_beta_pressed"]
-[connection signal="pressed" from="Center/VBoxContainer/AnimalCrossingNewLeaf" to="." method="_on_animal_crossing_new_leaf_pressed"]
-[connection signal="pressed" from="Center/VBoxContainer/GuildWars" to="." method="_on_guild_wars_pressed"]
-[connection signal="pressed" from="Center/VBoxContainer/Minecraft" to="." method="_on_minecraft_pressed"]
-[connection signal="pressed" from="Center/VBoxContainer/PokemonLegendsZA" to="." method="_on_pokemon_legends_za_pressed"]
-[connection signal="pressed" from="Center/VBoxContainer/Portal" to="." method="_on_portal_pressed"]
-[connection signal="pressed" from="Center/VBoxContainer/SuperMarioGalaxy" to="." method="_on_super_mario_galaxy_pressed"]
-[connection signal="pressed" from="Center/VBoxContainer/SuperMarioOdyssey" to="." method="_on_super_mario_odyssey_pressed"]
-[connection signal="pressed" from="Center/VBoxContainer/ZeldaBreathOfTheWild" to="." method="_on_zelda_breath_of_the_wild_pressed"]
-[connection signal="pressed" from="Center/VBoxContainer/ZeldaLinksAwakening" to="." method="_on_zelda_links_awakening_pressed"]
+[connection signal="pressed" from="Center/VBoxContainer/Level0" to="." method="_on_level0_pressed"]
+[connection signal="pressed" from="Center/VBoxContainer/Level1" to="." method="_on_level1_pressed"]
+[connection signal="pressed" from="Center/VBoxContainer/Level2" to="." method="_on_level2_pressed"]
+[connection signal="pressed" from="Center/VBoxContainer/Level3" to="." method="_on_level3_pressed"]
+[connection signal="pressed" from="Center/VBoxContainer/Level4" to="." method="_on_level4_pressed"]
+[connection signal="pressed" from="Center/VBoxContainer/Level5" to="." method="_on_level5_pressed"]
+[connection signal="pressed" from="Center/VBoxContainer/Level6" to="." method="_on_level6_pressed"]
+[connection signal="pressed" from="Center/VBoxContainer/Level7" to="." method="_on_level7_pressed"]
+[connection signal="pressed" from="Center/VBoxContainer/Level8" to="." method="_on_level8_pressed"]
 [connection signal="pressed" from="Center/EnterLevel" to="." method="_on_enter_level_pressed"]
 [connection signal="pressed" from="Center/Exit" to="." method="_on_exit_pressed"]

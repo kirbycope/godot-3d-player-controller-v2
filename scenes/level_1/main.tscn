@@ -1,0 +1,83 @@
+[gd_scene load_steps=15 format=3 uid="uid://cuv5tyqdnexh7"]
+
+[ext_resource type="Script" uid="uid://bej28j4s4snv4" path="res://scenes/level_1/main.gd" id="1_snl0e"]
+[ext_resource type="Shader" uid="uid://ee3nunu0omht" path="res://scenes/level_1/sky.gdshader" id="2_5orwh"]
+[ext_resource type="PackedScene" uid="uid://f6xpywa7euq2" path="res://addons/3d_player_controller_v2/player.tscn" id="3_5orwh"]
+[ext_resource type="Texture2D" uid="uid://rhk6o1flmsl8" path="res://scenes/level_1/tex_cloud.png" id="3_hgwfd"]
+[ext_resource type="Texture2D" uid="uid://dgycy03umala6" path="res://assets/textures/voxel/Tiles/grass_top.png" id="5_hgwfd"]
+[ext_resource type="PackedScene" uid="uid://ct4lxo11yu7sv" path="res://scenes/level_2/tree.tscn" id="6_ieuxx"]
+[ext_resource type="PackedScene" uid="uid://byfteqoslg6sb" path="res://scenes/level_2/house.tscn" id="7_ed38x"]
+[ext_resource type="PackedScene" uid="uid://bcehl7lcpdma7" path="res://scenes/level_2/bush.tscn" id="7_heivl"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hgwfd"]
+shader = ExtResource("2_5orwh")
+shader_parameter/sky_top_color = Color(0.2, 0.4, 1, 1)
+shader_parameter/sky_horizon_color = Color(0.4, 0.6, 1, 1)
+shader_parameter/horizon_blur = 0.05
+shader_parameter/noise_texture = ExtResource("3_hgwfd")
+shader_parameter/cloud_color = Color(1, 1, 1, 1)
+shader_parameter/cloud_scale = 2.0
+shader_parameter/cloud_density = 0.5
+shader_parameter/cloud_speed = 0.01
+shader_parameter/time = 0.0
+
+[sub_resource type="Sky" id="Sky_ieuxx"]
+sky_material = SubResource("ShaderMaterial_hgwfd")
+
+[sub_resource type="Environment" id="Environment_ed38x"]
+background_mode = 2
+sky = SubResource("Sky_ieuxx")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_heivl"]
+height = 128.0
+radius = 10.973
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f2hfk"]
+albedo_texture = ExtResource("5_hgwfd")
+uv1_triplanar = true
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_r5aou"]
+material = SubResource("StandardMaterial3D_f2hfk")
+top_radius = 10.973
+bottom_radius = 10.973
+height = 128.0
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_snl0e")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ed38x")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Player" parent="." instance=ExtResource("3_5orwh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.973, 0)
+
+[node name="Ground" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("CylinderShape3D_heivl")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_r5aou")
+
+[node name="Tree" parent="Ground" instance=ExtResource("6_ieuxx")]
+transform = Transform3D(1, 0, 0, 0, 0.98480785, -0.17364816, 0, 0.17364816, 0.98480785, -4.1, 10.700001, 2)
+
+[node name="Bush" parent="Ground" instance=ExtResource("7_heivl")]
+transform = Transform3D(-4.3711385e-08, 0, -1, 0.3420201, 0.9396926, -1.4950174e-08, 0.93969256, -0.34202012, -4.1075268e-08, -2.2999997, 10.5, -3)
+
+[node name="House" parent="Ground" instance=ExtResource("7_ed38x")]
+transform = Transform3D(2.999999, 0, 0, -4.860398e-15, 2.819077, 1.0260602, -1.3353835e-14, -1.0260601, 2.8190777, 5.9604645e-08, 11.499998, -4)
+
+[node name="Bush2" parent="Ground" instance=ExtResource("7_heivl")]
+transform = Transform3D(-4.618853e-08, 9.0160424e-10, -1.0000001, 0.3420201, 0.93969274, -1.4950176e-08, 0.9396926, -0.34202012, -4.3711392e-08, 2.3, 10.5, -3)
+
+[node name="Tree2" parent="Ground" instance=ExtResource("6_ieuxx")]
+transform = Transform3D(1.0000001, 0, 0, 0, 0.9848077, -0.17364816, 0, 0.17364815, 0.9848076, 4.1, 10.8, 2)

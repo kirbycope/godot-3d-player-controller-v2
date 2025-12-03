@@ -1,4 +1,3 @@
-class_name Controls
 extends CharacterBody3D
 ## 3D player controller with state machine supporting climbing, combat, driving, swimming, and various movement modes
 
