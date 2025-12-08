@@ -30,6 +30,8 @@ var perspective: Perspective = Perspective.FIRST_PERSON ## Camera perspective
 ## Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	ray_cast.add_exception(player)
+	# Make the spring arm ignore the player's collision
+	camera_spring_arm.add_excluded_object(player)
 	# Remove any baked local tilt from the Camera3D node
 	rotation_degrees = Vector3.ZERO
 
