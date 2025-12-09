@@ -112,9 +112,9 @@ func _process(_delta: float) -> void:
 	# 🛹 Show controls for "skateboarding"
 	if player.is_skateboarding:
 		if player.controls.last_input_type == player.controls.InputType.CONTROLLER:
-			contextual_controls.text = "Press (B) to speed up \nPress (A) to jump"
+			contextual_controls.text = "Hold (B) to go faster \nPress (A) to jump"
 		else:
-			contextual_controls.text = "Press [Shift] to speed up \n Press [Space] to jump"
+			contextual_controls.text = "Hold [Shift] to go faster \n Press [Space] to jump"
 
 	# 🔫 Show controls for "shooting"
 	if player.is_holding_rifle:
