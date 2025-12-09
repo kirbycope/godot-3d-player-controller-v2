@@ -185,11 +185,11 @@ offset_bottom = 31.0
 grow_horizontal = 0
 mouse_filter = 1
 
-[node name="EnableNavigation" type="CheckButton" parent="Configuration"]
+[node name="EnableMantling" type="CheckButton" parent="Configuration"]
 layout_mode = 2
-text = "EnableNavigation"
+text = "EnableMantling"
 
-[node name="Panel" type="Panel" parent="Configuration/EnableNavigation"]
+[node name="Panel" type="Panel" parent="Configuration/EnableMantling"]
 z_index = -1
 layout_mode = 1
 anchors_preset = 1
@@ -458,6 +458,22 @@ offset_bottom = 31.0
 grow_horizontal = 0
 mouse_filter = 1
 
+[node name="EnableNavigation" type="CheckButton" parent="Configuration2"]
+layout_mode = 2
+text = "EnableNavigation"
+
+[node name="Panel" type="Panel" parent="Configuration2/EnableNavigation"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -222.0
+offset_right = -2.0
+offset_bottom = 31.0
+grow_horizontal = 0
+mouse_filter = 1
+
 [node name="EnableRetical" type="CheckButton" parent="Configuration2"]
 layout_mode = 2
 text = "EnableRetical"
@@ -616,12 +632,12 @@ layout_mode = 0
 offset_right = 164.0
 offset_bottom = 31.0
 
-[node name="IsNavigating" type="CheckBox" parent="States"]
+[node name="IsMantling" type="CheckBox" parent="States"]
 layout_mode = 2
 disabled = true
-text = "IsNavigating"
+text = "IsMantling"
 
-[node name="Panel" type="Panel" parent="States/IsNavigating"]
+[node name="Panel" type="Panel" parent="States/IsMantling"]
 z_index = -1
 layout_mode = 0
 offset_right = 164.0
@@ -760,6 +776,17 @@ disabled = true
 text = "IsOnFloor"
 
 [node name="Panel" type="Panel" parent="States2/IsOnFloor"]
+z_index = -1
+layout_mode = 0
+offset_right = 164.0
+offset_bottom = 31.0
+
+[node name="IsNavigating" type="CheckBox" parent="States2"]
+layout_mode = 2
+disabled = true
+text = "IsNavigating"
+
+[node name="Panel" type="Panel" parent="States2/IsNavigating"]
 z_index = -1
 layout_mode = 0
 offset_right = 164.0
@@ -1048,7 +1075,7 @@ scroll_active = false
 [connection signal="toggled" from="Configuration/EnableHoldingObjects" to="." method="_on_enable_holding_objects_toggled"]
 [connection signal="toggled" from="Configuration/EnableJumping" to="." method="_on_enable_jumping_toggled"]
 [connection signal="toggled" from="Configuration/EnableKicking" to="." method="_on_enable_kicking_toggled"]
-[connection signal="toggled" from="Configuration/EnableNavigation" to="." method="_on_enable_navigation_toggled"]
+[connection signal="toggled" from="Configuration/EnableMantling" to="." method="_on_enable_mantling_toggled"]
 [connection signal="toggled" from="Configuration/EnableParagliding" to="." method="_on_enable_paragliding_toggled"]
 [connection signal="toggled" from="Configuration/EnablePunching" to="." method="_on_enable_punching_toggled"]
 [connection signal="toggled" from="Configuration/EnablePushing" to="." method="_on_enable_pushing_toggled"]

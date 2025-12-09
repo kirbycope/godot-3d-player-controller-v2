@@ -17,7 +17,8 @@ var yellow_sphere: MeshInstance3D
 @onready var enable_holding_objects: CheckButton = $Configuration/EnableHoldingObjects
 @onready var enable_jumping: CheckButton = $Configuration/EnableJumping
 @onready var enable_kicking: CheckButton = $Configuration/EnableKicking
-@onready var enable_navigation: CheckButton = $Configuration/EnableNavigation
+@onready var enable_mantling: CheckButton = $Configuration/EnableMantling
+@onready var enable_navigation: CheckButton = $Configuration2/EnableNavigation
 @onready var enable_paragliding: CheckButton = $Configuration/EnableParagliding
 @onready var enable_punching: CheckButton = $Configuration/EnablePunching
 @onready var enable_pushing: CheckButton = $Configuration/EnablePushing
@@ -57,7 +58,8 @@ var yellow_sphere: MeshInstance3D
 @onready var is_ragdolling: CheckBox = $States2/IsRagdolling
 @onready var is_reeling_fishing: CheckBox = $States2/IsReelingFishing
 @onready var is_rolling: CheckBox = $States/IsRolling
-@onready var is_navigating: CheckBox = $States/IsNavigating
+@onready var is_mantling: CheckBox = $States/IsMantling
+@onready var is_navigating: CheckBox = $States2/IsNavigating
 @onready var is_paragliding: CheckBox = $States/IsParagliding
 @onready var is_pushing: CheckBox = $States/IsPushing
 @onready var is_running: CheckBox = $States/IsRunning
@@ -118,6 +120,7 @@ func _process(_delta: float) -> void:
 		enable_holding_objects.button_pressed = player.enable_holding_objects
 		enable_jumping.button_pressed = player.enable_jumping
 		enable_kicking.button_pressed = player.enable_kicking
+		enable_mantling.button_pressed = player.enable_mantling
 		enable_navigation.button_pressed = player.enable_navigation
 		enable_paragliding.button_pressed = player.enable_paragliding
 		enable_punching.button_pressed = player.enable_punching
@@ -152,6 +155,7 @@ func _process(_delta: float) -> void:
 		is_jumping.button_pressed = player.is_jumping
 		is_kicking_left.button_pressed = player.is_kicking_left
 		is_kicking_right.button_pressed = player.is_kicking_right
+		is_mantling.button_pressed = player.is_mantling
 		is_navigating.button_pressed = player.is_navigating
 		is_on_floor.button_pressed = player.is_on_floor()
 		is_ragdolling.button_pressed = player.is_ragdolling
@@ -271,6 +275,10 @@ func _on_enable_jumping_toggled(toggled_on: bool) -> void:
 
 func _on_enable_kicking_toggled(toggled_on: bool) -> void:
 	player.enable_kicking = toggled_on
+
+
+func _on_enable_mantling_toggled(toggled_on: bool) -> void:
+	player.enable_mantling = toggled_on
 
 
 func _on_enable_navigation_toggled(toggled_on: bool) -> void:

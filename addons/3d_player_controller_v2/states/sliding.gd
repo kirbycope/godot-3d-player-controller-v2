@@ -19,12 +19,14 @@ func _process(delta: float) -> void:
 ## Plays the appropriate animation based on player state.
 func play_animation() -> void:
 	if player.animation_player.current_animation != ANIMATION_SLIDING:
-		_on_animation_finished(player.animation_player.current_animation)
 		player.animation_player.play(ANIMATION_SLIDING)
+		player.animation_player.connect("animation_finished", _on_animation_finished)
 
 
-func _on_animation_finished(animation_name: String) -> void:
-	if animation_name == ANIMATION_SLIDING:
+func _on_animation_finished(anim_name: String) -> void:
+	if anim_name == ANIMATION_SLIDING:
+		if player.animation_player.is_connected("animation_finished", _on_animation_finished):
+			player.animation_player.disconnect("animation_finished", _on_animation_finished)
 		if Input.is_action_pressed(player.controls.button_1):
 			transition_state(NODE_STATE, States.State.SPRINTING)
 		elif player.input_direction != Vector2.ZERO:

@@ -14,6 +14,7 @@ extends CharacterBody3D
 @export var enable_holding_objects := false ## Enable holding objects
 @export var enable_jumping := false ## Enable jumping
 @export var enable_kicking := false ## Enable kicking
+@export var enable_mantling := false ## Enable mantling (ledge climbing)
 @export var enable_navigation := false ## Enable navigation (pathfinding)
 @export var enable_paragliding := false ## Enable paragliding
 @export var enable_punching := false ## Enable punching
@@ -86,6 +87,7 @@ var is_firing_rifle := false ## Is the player firing a rifle?
 var is_jumping := false ## Is the player jumping?
 var is_kicking_left := false ## Is the player kicking with their left foot?
 var is_kicking_right := false ## Is the player kicking with their right foot?
+var is_mantling := false ## Is the player mantling (climbing up from a ledge)?
 var is_navigating := false ## Is the player navigating?
 var is_paragliding := false ## Is the player paragliding?
 var is_punching_left := false ## Is the player punching with thier left hand?

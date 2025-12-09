@@ -22,6 +22,7 @@ func _ready() -> void:
 	player.enable_holding_objects = true
 	player.enable_jumping = true
 	player.enable_kicking = true
+	#player.enable_mantling = true
 	#player.enable_navigation = true
 	#player.enable_paragliding = true
 	player.enable_punching = true

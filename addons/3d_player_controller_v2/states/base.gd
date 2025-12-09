@@ -20,6 +20,7 @@ func _physics_process(delta: float) -> void:
 	if player.enable_hanging:
 		if not player.is_flying \
 		and not player.is_hanging \
+		and not player.is_mantling \
 		and not player.is_on_floor() \
 		and not player.is_ragdolling \
 		and not player.is_skateboarding \
@@ -41,6 +42,7 @@ func _physics_process(delta: float) -> void:
 	and not player.is_flying \
 	and not player.is_hanging \
 	and not player.is_jumping \
+	and not player.is_mantling \
 	and not player.is_paragliding \
 	and not player.is_pushing \
 	and not player.is_ragdolling \
