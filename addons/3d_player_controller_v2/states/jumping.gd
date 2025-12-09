@@ -23,8 +23,12 @@ func _input(event: InputEvent) -> void:
 				var collision_object = player.ray_cast_high.get_collider()
 				if not collision_object is CharacterBody3D \
 				and not collision_object is SoftBody3D:
-					transition_state(player.current_state, States.State.CLIMBING)
-					return
+					if collision_object.is_in_group("Ladder"):
+						transition_state(player.current_state, States.State.CLIMBING_LADDER)
+						return
+					else:
+						transition_state(player.current_state, States.State.CLIMBING)
+						return
 
 	# Ⓐ/[Space] _pressed_ -> Start "double-jumping"
 	if event.is_action_pressed(player.controls.button_0):

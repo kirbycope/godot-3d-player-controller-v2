@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://dey7ls45vvlck"]
+[gd_scene load_steps=41 format=3 uid="uid://dey7ls45vvlck"]
 
 [ext_resource type="Script" uid="uid://dhm0w0mgw28o6" path="res://scenes/level_0/main.gd" id="1_4go8p"]
 [ext_resource type="Script" uid="uid://8l3f4y4aesia" path="res://scenes/level_0/contextual_controls.gd" id="2_2f6vg"]
@@ -93,6 +93,20 @@ radius = 0.3
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r3gsl"]
 albedo_texture = ExtResource("12_q7lbx")
 uv1_triplanar = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2f6vg"]
+size = Vector3(0.5, 10, 0.1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_2f6vg"]
+material = SubResource("StandardMaterial3D_tbgi4")
+top_radius = 0.05
+bottom_radius = 0.05
+height = 0.5
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_1jlf3"]
+material = SubResource("StandardMaterial3D_tbgi4")
+top_radius = 0.05
+bottom_radius = 0.05
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_4go8p")
@@ -281,6 +295,300 @@ transform = Transform3D(0, 0, -0.99999994, 0, 1, 0, 0.99999994, 0, 0, 4, 0, 2)
 [node name="Stool" parent="NavigationRegion3D" instance=ExtResource("18_07c6r")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
 
+[node name="Ladder_0_5x10_0x0_1" type="StaticBody3D" parent="NavigationRegion3D" groups=["Ladder"]]
+transform = Transform3D(-1, 0, 2.6226832e-07, 0, 1, 0, -2.6226832e-07, 0, -1, -6, 5, 8.5)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Ladder_0_5x10_0x0_1"]
+shape = SubResource("BoxShape3D_2f6vg")
+
+[node name="Section" type="Node3D" parent="NavigationRegion3D/Ladder_0_5x10_0x0_1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.1, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Ladder_0_5x10_0x0_1/Section"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0, -0.8, 0)
+mesh = SubResource("CylinderMesh_2f6vg")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="NavigationRegion3D/Ladder_0_5x10_0x0_1/Section"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0, -0.5, 0)
+mesh = SubResource("CylinderMesh_2f6vg")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="NavigationRegion3D/Ladder_0_5x10_0x0_1/Section"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0, -0.19999999, 0)
+mesh = SubResource("CylinderMesh_2f6vg")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="NavigationRegion3D/Ladder_0_5x10_0x0_1/Section"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0, 0.100000024, 0)
+mesh = SubResource("CylinderMesh_2f6vg")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="NavigationRegion3D/Ladder_0_5x10_0x0_1/Section"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0, 0.4000001, 0)
+mesh = SubResource("CylinderMesh_2f6vg")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="NavigationRegion3D/Ladder_0_5x10_0x0_1/Section"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0, 0.70000005, 0)
+mesh = SubResource("CylinderMesh_2f6vg")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="NavigationRegion3D/Ladder_0_5x10_0x0_1/Section"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CylinderMesh_2f6vg")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="NavigationRegion3D/Ladder_0_5x10_0x0_1/Section"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.19999981, 0, 0)
+mesh = SubResource("CylinderMesh_1jlf3")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="NavigationRegion3D/Ladder_0_5x10_0x0_1/Section"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.20000029, 0, 0)
+mesh = SubResource("CylinderMesh_1jlf3")
+skeleton = NodePath("../..")
+
+[node name="Section2" type="Node3D" parent="NavigationRegion3D/Ladder_0_5x10_0x0_1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.2999997, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Ladder_0_5x10_0x0_1/Section2"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0, -0.8, 0)
+mesh = SubResource("CylinderMesh_2f6vg")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="NavigationRegion3D/Ladder_0_5x10_0x0_1/Section2"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0, -0.5, 0)
+mesh = SubResource("CylinderMesh_2f6vg")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="NavigationRegion3D/Ladder_0_5x10_0x0_1/Section2"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0, -0.19999999, 0)
+mesh = SubResource("CylinderMesh_2f6vg")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="NavigationRegion3D/Ladder_0_5x10_0x0_1/Section2"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0, 0.100000024, 0)
+mesh = SubResource("CylinderMesh_2f6vg")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="NavigationRegion3D/Ladder_0_5x10_0x0_1/Section2"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0, 0.4000001, 0)
+mesh = SubResource("CylinderMesh_2f6vg")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="NavigationRegion3D/Ladder_0_5x10_0x0_1/Section2"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0, 0.70000005, 0)
+mesh = SubResource("CylinderMesh_2f6vg")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="NavigationRegion3D/Ladder_0_5x10_0x0_1/Section2"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CylinderMesh_2f6vg")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="NavigationRegion3D/Ladder_0_5x10_0x0_1/Section2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.19999981, 0, 0)
+mesh = SubResource("CylinderMesh_1jlf3")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="NavigationRegion3D/Ladder_0_5x10_0x0_1/Section2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.20000029, 0, 0)
+mesh = SubResource("CylinderMesh_1jlf3")
+skeleton = NodePath("../..")
+
+[node name="Section3" type="Node3D" parent="NavigationRegion3D/Ladder_0_5x10_0x0_1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49999952, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Ladder_0_5x10_0x0_1/Section3"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0, -0.8, 0)
+mesh = SubResource("CylinderMesh_2f6vg")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="NavigationRegion3D/Ladder_0_5x10_0x0_1/Section3"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0, -0.5, 0)
+mesh = SubResource("CylinderMesh_2f6vg")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="NavigationRegion3D/Ladder_0_5x10_0x0_1/Section3"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0, -0.19999999, 0)
+mesh = SubResource("CylinderMesh_2f6vg")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="NavigationRegion3D/Ladder_0_5x10_0x0_1/Section3"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0, 0.100000024, 0)
+mesh = SubResource("CylinderMesh_2f6vg")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="NavigationRegion3D/Ladder_0_5x10_0x0_1/Section3"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0, 0.4000001, 0)
+mesh = SubResource("CylinderMesh_2f6vg")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="NavigationRegion3D/Ladder_0_5x10_0x0_1/Section3"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0, 0.70000005, 0)
+mesh = SubResource("CylinderMesh_2f6vg")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="NavigationRegion3D/Ladder_0_5x10_0x0_1/Section3"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CylinderMesh_2f6vg")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="NavigationRegion3D/Ladder_0_5x10_0x0_1/Section3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.19999981, 0, 0)
+mesh = SubResource("CylinderMesh_1jlf3")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="NavigationRegion3D/Ladder_0_5x10_0x0_1/Section3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.20000029, 0, 0)
+mesh = SubResource("CylinderMesh_1jlf3")
+skeleton = NodePath("../..")
+
+[node name="Section4" type="Node3D" parent="NavigationRegion3D/Ladder_0_5x10_0x0_1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3000007, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Ladder_0_5x10_0x0_1/Section4"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0, -0.8, 0)
+mesh = SubResource("CylinderMesh_2f6vg")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="NavigationRegion3D/Ladder_0_5x10_0x0_1/Section4"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0, -0.5, 0)
+mesh = SubResource("CylinderMesh_2f6vg")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="NavigationRegion3D/Ladder_0_5x10_0x0_1/Section4"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0, -0.19999999, 0)
+mesh = SubResource("CylinderMesh_2f6vg")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="NavigationRegion3D/Ladder_0_5x10_0x0_1/Section4"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0, 0.100000024, 0)
+mesh = SubResource("CylinderMesh_2f6vg")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="NavigationRegion3D/Ladder_0_5x10_0x0_1/Section4"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0, 0.4000001, 0)
+mesh = SubResource("CylinderMesh_2f6vg")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="NavigationRegion3D/Ladder_0_5x10_0x0_1/Section4"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0, 0.70000005, 0)
+mesh = SubResource("CylinderMesh_2f6vg")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="NavigationRegion3D/Ladder_0_5x10_0x0_1/Section4"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CylinderMesh_2f6vg")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="NavigationRegion3D/Ladder_0_5x10_0x0_1/Section4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.19999981, 0, 0)
+mesh = SubResource("CylinderMesh_1jlf3")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="NavigationRegion3D/Ladder_0_5x10_0x0_1/Section4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.20000029, 0, 0)
+mesh = SubResource("CylinderMesh_1jlf3")
+skeleton = NodePath("../..")
+
+[node name="Section5" type="Node3D" parent="NavigationRegion3D/Ladder_0_5x10_0x0_1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.1000004, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Ladder_0_5x10_0x0_1/Section5"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0, -0.8, 0)
+mesh = SubResource("CylinderMesh_2f6vg")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="NavigationRegion3D/Ladder_0_5x10_0x0_1/Section5"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0, -0.5, 0)
+mesh = SubResource("CylinderMesh_2f6vg")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="NavigationRegion3D/Ladder_0_5x10_0x0_1/Section5"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0, -0.19999999, 0)
+mesh = SubResource("CylinderMesh_2f6vg")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="NavigationRegion3D/Ladder_0_5x10_0x0_1/Section5"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0, 0.100000024, 0)
+mesh = SubResource("CylinderMesh_2f6vg")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="NavigationRegion3D/Ladder_0_5x10_0x0_1/Section5"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0, 0.4000001, 0)
+mesh = SubResource("CylinderMesh_2f6vg")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="NavigationRegion3D/Ladder_0_5x10_0x0_1/Section5"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0, 0.70000005, 0)
+mesh = SubResource("CylinderMesh_2f6vg")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="NavigationRegion3D/Ladder_0_5x10_0x0_1/Section5"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CylinderMesh_2f6vg")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="NavigationRegion3D/Ladder_0_5x10_0x0_1/Section5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.19999981, 0, 0)
+mesh = SubResource("CylinderMesh_1jlf3")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="NavigationRegion3D/Ladder_0_5x10_0x0_1/Section5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.20000029, 0, 0)
+mesh = SubResource("CylinderMesh_1jlf3")
+skeleton = NodePath("../..")
+
+[node name="Section6" type="Node3D" parent="NavigationRegion3D/Ladder_0_5x10_0x0_1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Ladder_0_5x10_0x0_1/Section6"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0, -0.8, 0)
+mesh = SubResource("CylinderMesh_2f6vg")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="NavigationRegion3D/Ladder_0_5x10_0x0_1/Section6"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0, -0.5, 0)
+mesh = SubResource("CylinderMesh_2f6vg")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="NavigationRegion3D/Ladder_0_5x10_0x0_1/Section6"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0, -0.19999999, 0)
+mesh = SubResource("CylinderMesh_2f6vg")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="NavigationRegion3D/Ladder_0_5x10_0x0_1/Section6"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0, 0.100000024, 0)
+mesh = SubResource("CylinderMesh_2f6vg")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="NavigationRegion3D/Ladder_0_5x10_0x0_1/Section6"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0, 0.4000001, 0)
+mesh = SubResource("CylinderMesh_2f6vg")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="NavigationRegion3D/Ladder_0_5x10_0x0_1/Section6"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0, 0.70000005, 0)
+mesh = SubResource("CylinderMesh_2f6vg")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="NavigationRegion3D/Ladder_0_5x10_0x0_1/Section6"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CylinderMesh_2f6vg")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="NavigationRegion3D/Ladder_0_5x10_0x0_1/Section6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.19999981, 0, 0)
+mesh = SubResource("CylinderMesh_1jlf3")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="NavigationRegion3D/Ladder_0_5x10_0x0_1/Section6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.20000029, 0, 0)
+mesh = SubResource("CylinderMesh_1jlf3")
+skeleton = NodePath("../..")
+
 [node name="Cat" parent="." instance=ExtResource("14_tvgdf")]
 transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, -1.3509828, 1.13, -4.061725)
 
@@ -288,7 +596,7 @@ transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -2.5, 0, -4)
 
 [node name="Axe" parent="." instance=ExtResource("7_up5x4")]
-transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, -6.1000004, 0.099999994, 6.5)
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, -6.1000004, 0.099999994, 3.5)
 
 [node name="Car" parent="." instance=ExtResource("6_mf6xi")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 5, 0, -4)
@@ -303,10 +611,10 @@ transform = Transform3D(-4.222196e-08, -0.9659258, 0.25881904, 1, -4.371139e-08,
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, -0.059921123, 0.39999998)
 
 [node name="FishingRod" parent="." instance=ExtResource("8_a8mrn")]
-transform = Transform3D(0.09767043, 0.28365555, 4.5298737e-08, 0.26654902, -0.0917802, 0.102606036, -0.097015925, 0.033405215, 0.28190777, -6, 0.19999999, 3.5)
+transform = Transform3D(0.09767043, 0.28365555, 4.5298737e-08, 0.26654902, -0.0917802, 0.102606036, -0.097015925, 0.033405215, 0.28190777, -8, 0.19999999, -2.5)
 
 [node name="FoamSword" parent="." instance=ExtResource("16_1jnxa")]
 transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, -6, 0.1, 2)
 
 [node name="TennisBall" parent="." instance=ExtResource("12_r3gsl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -1)

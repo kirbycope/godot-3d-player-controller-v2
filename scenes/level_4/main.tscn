@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://ciovvk3slq8lc"]
+[gd_scene load_steps=31 format=3 uid="uid://ciovvk3slq8lc"]
 
 [ext_resource type="Script" uid="uid://dnnatqu7iska0" path="res://scenes/level_4/main.gd" id="1_m2d4j"]
 [ext_resource type="PackedScene" uid="uid://f6xpywa7euq2" path="res://addons/3d_player_controller_v2/player.tscn" id="2_sp3de"]
@@ -70,13 +70,28 @@ albedo_color = Color(1, 1, 1, 0)
 [sub_resource type="BoxShape3D" id="BoxShape3D_m2d4j"]
 size = Vector3(0.5, 2, 0.1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bpj45"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_humui"]
 albedo_texture = ExtResource("9_m2d4j")
 uv1_triplanar = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_xckoa"]
-material = SubResource("StandardMaterial3D_bpj45")
+material = SubResource("StandardMaterial3D_humui")
 size = Vector3(0.5, 2, 0.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tbgi4"]
+albedo_texture = ExtResource("3_ty8ub")
+uv1_triplanar = true
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_6jfq5"]
+material = SubResource("StandardMaterial3D_tbgi4")
+top_radius = 0.05
+bottom_radius = 0.05
+height = 0.5
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_nsek0"]
+material = SubResource("StandardMaterial3D_tbgi4")
+top_radius = 0.05
+bottom_radius = 0.05
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_m2d4j")
@@ -258,10 +273,58 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 1.45
 shape = SubResource("BoxShape3D_m2d4j")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Ladder_0_5x2_0x0_1"]
+visible = false
 mesh = SubResource("BoxMesh_xckoa")
 
+[node name="Section" type="Node3D" parent="Ladder_0_5x2_0x0_1"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ladder_0_5x2_0x0_1/Section"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0, -0.8, 0)
+mesh = SubResource("CylinderMesh_6jfq5")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Ladder_0_5x2_0x0_1/Section"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0, -0.5, 0)
+mesh = SubResource("CylinderMesh_6jfq5")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Ladder_0_5x2_0x0_1/Section"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0, -0.19999999, 0)
+mesh = SubResource("CylinderMesh_6jfq5")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Ladder_0_5x2_0x0_1/Section"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0, 0.100000024, 0)
+mesh = SubResource("CylinderMesh_6jfq5")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Ladder_0_5x2_0x0_1/Section"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0, 0.4000001, 0)
+mesh = SubResource("CylinderMesh_6jfq5")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="Ladder_0_5x2_0x0_1/Section"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0, 0.70000005, 0)
+mesh = SubResource("CylinderMesh_6jfq5")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="Ladder_0_5x2_0x0_1/Section"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CylinderMesh_6jfq5")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="Ladder_0_5x2_0x0_1/Section"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.19999981, 0, 0)
+mesh = SubResource("CylinderMesh_nsek0")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="Ladder_0_5x2_0x0_1/Section"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.20000029, 0, 0)
+mesh = SubResource("CylinderMesh_nsek0")
+skeleton = NodePath("../..")
+
 [node name="TennisBall" parent="." instance=ExtResource("10_bpj45")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0.5, 6.5, -5)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0.5, 6.584821, -5)
 
 [connection signal="body_entered" from="Slab_2_0x0_1x2_25/PlayerDetection" to="Slab_2_0x0_1x2_25" method="_on_player_detection_body_entered"]
 [connection signal="body_exited" from="Slab_2_0x0_1x2_25/PlayerDetection" to="Slab_2_0x0_1x2_25" method="_on_player_detection_body_exited"]
