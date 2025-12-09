@@ -199,7 +199,7 @@ func _process(delta: float) -> void:
 
 ## Plays the appropriate animation based on player state.
 func play_animation() -> void:
-	# -- Fishing animations --
+	# 🎣 -- Fishing animations --
 	if player.is_holding_fishing_rod:
 		if player.is_casting_fishing:
 			if player.animation_player.current_animation != ANIMATION_FISHING_CASTING:
@@ -214,7 +214,7 @@ func play_animation() -> void:
 				_on_animation_finished(player.animation_player.current_animation)
 				player.animation_player.play(ANIMATION_FISHING_IDLE)
 
-	# -- Kicking animations --
+	# 🦵 -- Kicking animations --
 	elif player.enable_kicking \
 	and player.is_kicking_left:
 		if player.animation_player.current_animation != ANIMATION_KICKING_LEFT:
@@ -226,7 +226,7 @@ func play_animation() -> void:
 			_on_animation_finished(player.animation_player.current_animation)
 			player.animation_player.play(ANIMATION_KICKING_RIGHT)
 
-	# -- Rifle animations --
+	# 🔫 -- Rifle animations --
 	elif player.is_holding_rifle:
 		if player.is_firing_rifle:
 			if player.animation_player.current_animation != ANIMATION_RIFLE_FIRING:
@@ -241,7 +241,19 @@ func play_animation() -> void:
 				_on_animation_finished(player.animation_player.current_animation)
 				player.animation_player.play(ANIMATION_HOLDING_RIFLE)
 
-	# -- 1H animations --
+	# 🛠️ -- 1H animations --
+	elif player.is_holding_1h_left \
+	and player.is_holding_1h_right:
+		if player.is_swinging_1h_left:
+			if player.animation_player.current_animation != ANIMATION_SWINGING_1H_LEFT:
+				_on_animation_finished(player.animation_player.current_animation)
+				player.animation_player.play(ANIMATION_SWINGING_1H_LEFT)
+		elif player.is_swinging_1h_right:	
+			if player.animation_player.current_animation != ANIMATION_SWINGING_1H_RIGHT:
+				_on_animation_finished(player.animation_player.current_animation)
+				player.animation_player.play(ANIMATION_SWINGING_1H_RIGHT)
+		elif player.animation_player.current_animation != ANIMATION_HOLDING_1H_RIGHT:
+			player.animation_player.play(ANIMATION_HOLDING_1H_RIGHT)
 	elif player.is_holding_1h_left:
 		if player.is_blocking_1h_left:
 			if player.animation_player.current_animation != ANIMATION_BLOCKING_1H_LEFT:
@@ -263,7 +275,7 @@ func play_animation() -> void:
 		elif player.animation_player.current_animation != ANIMATION_HOLDING_1H_RIGHT:
 			player.animation_player.play(ANIMATION_HOLDING_1H_RIGHT)
 
-	# -- Throwing animations --
+	# 🤾 -- Throwing animations --
 	elif player.is_holding_left \
 	and player.is_throwing_left:
 		if player.animation_player.current_animation != ANIMATION_THROWING_LEFT:
@@ -275,7 +287,7 @@ func play_animation() -> void:
 			_on_animation_finished(player.animation_player.current_animation)
 			player.animation_player.play(ANIMATION_THROWING_RIGHT)
 
-	# -- Punching animations --
+	# 🥊 -- Punching animations --
 	elif player.enable_punching \
 	and player.is_punching_left:
 		if player.animation_player.current_animation != ANIMATION_PUNCHING_LEFT:
@@ -287,7 +299,7 @@ func play_animation() -> void:
 			_on_animation_finished(player.animation_player.current_animation)
 			player.animation_player.play(ANIMATION_PUNCHING_RIGHT)
 
-	# -- Unarmed animation --
+	# ✋ -- Unarmed animation --
 	else:
 		if player.animation_player.current_animation != ANIMATION_STANDING_IDLE:
 			_on_animation_finished(player.animation_player.current_animation)

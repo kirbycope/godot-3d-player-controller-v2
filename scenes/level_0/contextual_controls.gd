@@ -19,6 +19,18 @@ func _process(_delta: float) -> void:
 
 	# Continue only if there's a collider
 	if collider:
+		# 🧗 Show controls for "climbing"
+		if player.enable_climbing \
+		and not player.is_climbing \
+		and not player.is_hanging \
+		and not collider is CharacterBody3D \
+		and not collider is SoftBody3D \
+		and player.ray_cast_high.is_colliding():
+			if player.controls.last_input_type == player.controls.InputType.CONTROLLER:
+				contextual_controls.text = "Press (A) to climb"
+			else:
+				contextual_controls.text = "Press [Space] to climb"
+
 		# 🥊 Show controls for "punching bag"
 		if collider.name == "Bag":
 			if player.controls.last_input_type == player.controls.InputType.CONTROLLER:
@@ -41,9 +53,9 @@ func _process(_delta: float) -> void:
 		if collider.is_in_group("Ladder"):
 			if player.is_climbing_ladder:
 				if player.controls.last_input_type == player.controls.InputType.CONTROLLER:
-					contextual_controls.text = "Press (Y) to release"
+					contextual_controls.text = "Press (Y) to release \nHold (B) to climb faster"
 				else:
-					contextual_controls.text = "Press [Ctrl] to release"
+					contextual_controls.text = "Press [Ctrl] to release \nHold [Shift] to climb faster"
 			else:
 				if player.controls.last_input_type == player.controls.InputType.CONTROLLER:
 					contextual_controls.text = "Press (X) to climb"
@@ -58,7 +70,28 @@ func _process(_delta: float) -> void:
 			else:
 				contextual_controls.text = "Press [E] to drive"
 
-	# 🛠️ Show controls for "Left-hand swinging" (tool/weapon)
+	# 🧗 Show controls for "climbing"
+	if player.is_climbing:
+		if player.controls.last_input_type == player.controls.InputType.CONTROLLER:
+			contextual_controls.text = "Press (Y) to release \nHold (B) to climb faster"
+		else:
+			contextual_controls.text = "Press [Ctrl] to release \nHold [Shift] to climb faster"
+
+	# 🎣 Show controls for "fishing"
+	if player.is_holding_fishing_rod:
+		if player.controls.last_input_type == player.controls.InputType.CONTROLLER:
+			contextual_controls.text = "Press (L1) to cast \nPress (R1) to reel"
+		else:
+			contextual_controls.text = "Press [MB0] to cast \nPress [MB1] to reel"
+
+	# 🦥 Show controls for "hanging"
+	if player.is_hanging:
+		if player.controls.last_input_type == player.controls.InputType.CONTROLLER:
+			contextual_controls.text = "Press (Y) to release \nPress (A) to climb up"
+		else:
+			contextual_controls.text = "Press [Ctrl] to release \nPress [Space] to climb up"
+
+	# 🛠️ Show controls for "one-hand swinging" (tool/weapon)
 	if player.is_holding_1h_left \
 	and player.is_holding_1h_right:
 		if player.controls.last_input_type == player.controls.InputType.CONTROLLER:
@@ -75,13 +108,6 @@ func _process(_delta: float) -> void:
 			contextual_controls.text = "Hold (L1) to block \nPress (R1) to swing"
 		else:
 			contextual_controls.text = "Hold [MB0] to block \n Press [MB1] to swing"
-
-	# 🎣 Show controls for "fishing"
-	if player.is_holding_fishing_rod:
-		if player.controls.last_input_type == player.controls.InputType.CONTROLLER:
-			contextual_controls.text = "Press (L1) to cast \nPress (R1) to reel"
-		else:
-			contextual_controls.text = "Press [MB0] to cast \nPress [MB1] to reel"
 
 	# 🛹 Show controls for "skateboarding"
 	if player.is_skateboarding:
