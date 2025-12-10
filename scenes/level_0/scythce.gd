@@ -1,5 +1,5 @@
 extends Node3D
-## Watering can pickup that attaches to player's right hand.
+## Scythe pickup that attaches to player's right hand.
 
 var bone_attachment: BoneAttachment3D
 var player: CharacterBody3D
@@ -9,21 +9,14 @@ var player: CharacterBody3D
 @onready var initial_position: Vector3 = global_position
 
 
-func _input(event: InputEvent) -> void:
+func _input(_event: InputEvent) -> void:
 	if player:
 		# Do nothing if the "pause" menu is visible
 		if player.pause.visible: return
 
-		# Ⓧ/[E] _pressed_ -> Start "watering" animation
-		if event.is_action_pressed(player.controls.button_2):
-			#player.play_locked_animation("Standing_Watering/mixamo_com")
-			pass
-
 		# (D-Pad Down) /[Q] _just_pressed_ -> Drop _this_ node
 		if Input.is_action_just_pressed(player.controls.button_13):
-			player.is_holding_1h_right = false
-			player.is_holding_watering_can = false
-			player.is_swinging_1h_right = false
+			player.is_holding_2h = false
 			player = null
 			reparent(initial_parent)
 			global_position = initial_position
@@ -39,19 +32,13 @@ func _on_player_detection_body_entered(body: Node3D) -> void:
 	and body.is_in_group("Player") \
 	and player == null:
 		player = body
-		player.is_holding_1h_right = true
-		player.is_holding_watering_can = true
+		player.is_holding_2h = true
 		bone_attachment = BoneAttachment3D.new()
 		bone_attachment.bone_name = player.bone_name_right_hand
 		player.skeleton.add_child(bone_attachment)
 		reparent(bone_attachment)
 		global_position = bone_attachment.global_position
 		global_rotation = bone_attachment.global_rotation
-		print(global_basis.x)
-		print(global_basis.y)
-		print(global_basis.z)
-		if global_basis.y == Vector3.ONE:
-			global_scale(Vector3(0.667, 0.667, 0.667))
 
 
 ## Detach _this_ node from the player when they exit the detection area.

@@ -13,7 +13,7 @@ func _input(event: InputEvent) -> void:
 		# Ⓧ/[E] _pressed_ -> Start "watering" animation
 		if event.is_action_pressed(player.controls.button_2):
 			if player.is_holding_2h:
-				player.play_locked_animation("Standing_Digging/mixamo_com")
+				player.play_locked_animation("Standing_Digging/mixamo_com", 3.0)
 			if player.is_holding_watering_can:
 				player.play_locked_animation("Standing_Watering/mixamo_com")
 				is_moist = true

@@ -41,7 +41,6 @@ func _on_player_detection_body_entered(body: Node3D) -> void:
 		global_rotation = bone_attachment.global_rotation
 
 
-
 ## Detach _this_ node from the player when they exit the detection area.
 func _on_player_detection_body_exited(body: Node3D) -> void:
 	if body == player:

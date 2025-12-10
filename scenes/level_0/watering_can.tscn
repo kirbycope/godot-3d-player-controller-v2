@@ -48,13 +48,14 @@ shadow_mesh = SubResource("ArrayMesh_u3qua")
 [sub_resource type="BoxShape3D" id="BoxShape3D_l4bqs"]
 
 [node name="WateringCan" type="Node3D"]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 0)
 script = ExtResource("1_1qerc")
 
 [node name="Visuals" type="Node3D" parent="."]
-transform = Transform3D(-2.8849517e-08, 0.66, 0, 2.8849517e-08, 1.2610525e-15, -0.66, -0.66, -2.8849517e-08, -2.8849517e-08, 0.01, 0.35, 0.045)
+transform = Transform3D(-2.9155496e-08, -0.667, 2.9155496e-08, 0, -2.9155496e-08, -0.667, 0.667, -2.9155496e-08, 1.2744272e-15, 0.01, 0.35, 0.045)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Visuals"]
-transform = Transform3D(100.000015, 0, 0, 0, 100.00001, 0, 0, 0, 100.00001, 0, 0, 0)
+transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0)
 mesh = SubResource("ArrayMesh_1qerc")
 skeleton = NodePath("")
 

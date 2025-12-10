@@ -51,10 +51,10 @@ shadow_mesh = SubResource("ArrayMesh_0b0l2")
 script = ExtResource("1_sb01u")
 
 [node name="Visuals" type="Node3D" parent="."]
-transform = Transform3D(-2.8849517e-08, 0.66, 0, 0.66, 2.8849517e-08, 5.7699033e-08, 5.7699033e-08, 2.522105e-15, -0.66, -0.2, 0.05, 0.03)
+transform = Transform3D(-5.0357094e-08, 0.667, -5.831099e-08, 0.667, 5.0357098e-08, 5.831099e-08, 5.8310995e-08, -5.8310988e-08, -0.667, -0.2, 0.05, 0.03)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Visuals"]
-transform = Transform3D(100, 0, 0, 0, -1.1920929e-05, 99.99999, 0, -99.99999, -1.1920929e-05, 0, 0, 0)
+transform = Transform3D(100, 0, 0, 0, -4.371139e-06, 100, 0, -100, -4.371139e-06, 0, 0, 0)
 mesh = SubResource("ArrayMesh_sb01u")
 skeleton = NodePath("")
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://dey7ls45vvlck"]
+[gd_scene load_steps=45 format=3 uid="uid://dey7ls45vvlck"]
 
 [ext_resource type="Script" uid="uid://dhm0w0mgw28o6" path="res://scenes/level_0/main.gd" id="1_4go8p"]
 [ext_resource type="Script" uid="uid://8l3f4y4aesia" path="res://scenes/level_0/contextual_controls.gd" id="2_2f6vg"]
@@ -23,6 +23,7 @@
 [ext_resource type="PackedScene" uid="uid://civrt6ecmuj2m" path="res://scenes/level_0/stool.tscn" id="18_07c6r"]
 [ext_resource type="PackedScene" uid="uid://o0sk0jyjm1dv" path="res://scenes/level_3/blocks/dirt_block.tscn" id="22_1jlf3"]
 [ext_resource type="PackedScene" uid="uid://dnvd8inn503gd" path="res://scenes/level_0/watering_can.tscn" id="22_hd8a5"]
+[ext_resource type="PackedScene" uid="uid://drn2auj7jc0am" path="res://scenes/level_0/scythce.tscn" id="24_n5cls"]
 [ext_resource type="PackedScene" uid="uid://cfr5eo71u1wuv" path="res://scenes/level_0/hoe.tscn" id="24_y6tby"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sugp2"]
@@ -622,11 +623,14 @@ transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, -6, 
 [node name="TennisBall" parent="." instance=ExtResource("12_r3gsl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -1)
 
-[node name="WateringCan" parent="." instance=ExtResource("22_hd8a5")]
-transform = Transform3D(1, 0, 0, 0, -1, -8.742278e-08, 0, 8.742278e-08, -1, 1, 0.3, 2)
-
 [node name="DirtBlock" parent="." instance=ExtResource("22_1jlf3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4902432, 2)
 
 [node name="Hoe" parent="." instance=ExtResource("24_y6tby")]
-transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, -1, 0.20000002, 2)
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, -1, 0, 2)
+
+[node name="Scythce" parent="." instance=ExtResource("24_n5cls")]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 3)
+
+[node name="WateringCan" parent="." instance=ExtResource("22_hd8a5")]
+transform = Transform3D(1, -8.742278e-08, -8.742278e-08, -8.742278e-08, -1, 7.642742e-15, -8.742278e-08, 0, -1, 1, 0.4, 2)
