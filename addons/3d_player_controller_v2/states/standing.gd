@@ -7,8 +7,10 @@ const ANIMATION_FISHING_IDLE := "Standing_Fishing_Idle/mixamo_com"
 const ANIMATION_FISHING_REELING := "Standing_Fishing_Reel/mixamo_com"
 const ANIMATION_BLOCKING_1H_LEFT := "Standing_Blocking_1H_Left/mixamo_com"
 const ANIMATION_BLOCKING_1H_RIGHT := "Standing_Blocking_1H_Right/mixamo_com"
+const ANIMATION_BLOCKING_2H := "Standing_Blocking_2H/mixamo_com"
 const ANIMATION_HOLDING_1H_LEFT := "Standing_Holding_1H_Left/mixamo_com"
 const ANIMATION_HOLDING_1H_RIGHT := "Standing_Holding_1H_Right/mixamo_com"
+const ANIMATION_HOLDING_2H := "Standing_Holding_2H/mixamo_com"
 const ANIMATION_KICKING_LEFT := "Standing_Kicking_Left/mixamo_com"
 const ANIMATION_KICKING_RIGHT := "Standing_Kicking_Right/mixamo_com"
 const ANIMATION_PUNCHING_LEFT := "Standing_Punching_Left/mixamo_com"
@@ -17,8 +19,9 @@ const ANIMATION_HOLDING_RIFLE := "Standing_Holding_Rifle/mixamo_com"
 const ANIMATION_RIFLE_AIMING := "Standing_Aiming_Rifle/mixamo_com"
 const ANIMATION_RIFLE_FIRING := "Standing_Firing_Rifle/mixamo_com"
 const ANIMATION_STANDING_IDLE := "Standing/mixamo_com"
-const ANIMATION_SWINGING_1H_LEFT := "Standing_Melee_Attack_Downward_Left/mixamo_com"
-const ANIMATION_SWINGING_1H_RIGHT := "Standing_Melee_Attack_Downward_Right/mixamo_com"
+const ANIMATION_SWINGING_1H_LEFT := "Standing_Swinging_1H_Left/mixamo_com"
+const ANIMATION_SWINGING_1H_RIGHT := "Standing_Swinging_1H_Right/mixamo_com"
+const ANIMATION_SWINGING_2H := "Standing_Swinging_2H/mixamo_com"
 const ANIMATION_THROWING_LEFT := "Standing_Throwing_Left/mixamo_com"
 const ANIMATION_THROWING_RIGHT := "Standing_Throwing_Right/mixamo_com"
 const NODE_NAME := "Standing"
@@ -75,6 +78,11 @@ func _input(event: InputEvent) -> void:
 			if not player.is_blocking_1h_right:
 				player.is_blocking_1h_right = true
 				player.is_swinging_1h_right = false
+			return
+		# 2H "swinging"
+		if player.is_holding_2h:
+			if not player.is_blocking_2h:
+				player.is_swinging_2h = true
 			return
 		# Left hand "throwing" 
 		if player.is_holding_left:
@@ -140,6 +148,12 @@ func _input(event: InputEvent) -> void:
 				player.is_blocking_1h_left = true
 				player.is_swinging_1h_left = false
 			return
+		# 2H "blocking"
+		if player.is_holding_2h:
+			if not player.is_blocking_2h:
+				player.is_blocking_2h = true
+				player.is_swinging_2h = false
+			return
 		# Right hand "throwing" 
 		if player.is_holding_right:
 			if not player.is_throwing_right:
@@ -153,7 +167,7 @@ func _input(event: InputEvent) -> void:
 				player.timer_punch_right.start()
 			return
 
-	#  🄻1/[MB1] _released_
+	# 🅁1/[MB1] _released_
 	if event.is_action_released(player.controls.button_5):
 		# Rifle "aiming" [MB0] release
 		if event is InputEventMouseButton:
@@ -162,6 +176,9 @@ func _input(event: InputEvent) -> void:
 		# Left 1H "blocking" release
 		if player.is_blocking_1h_left:
 			player.is_blocking_1h_left = false
+		# 2H "blocking" release
+		if player.is_blocking_2h:
+			player.is_blocking_2h = false
 
 	# 🅁2/[MB4] _pressed_
 	if event.is_action_pressed(player.controls.button_7):
@@ -275,6 +292,18 @@ func play_animation() -> void:
 		elif player.animation_player.current_animation != ANIMATION_HOLDING_1H_RIGHT:
 			player.animation_player.play(ANIMATION_HOLDING_1H_RIGHT)
 
+	# 👐 -- 2H animations --
+	elif player.is_holding_2h:
+		if player.is_blocking_2h:
+			if player.animation_player.current_animation != ANIMATION_BLOCKING_2H:
+				player.animation_player.play(ANIMATION_BLOCKING_2H)
+		elif player.is_swinging_2h:
+			if player.animation_player.current_animation != ANIMATION_SWINGING_2H:
+				_on_animation_finished(player.animation_player.current_animation)
+				player.animation_player.play(ANIMATION_SWINGING_2H)
+		elif player.animation_player.current_animation != ANIMATION_HOLDING_2H:
+			player.animation_player.play(ANIMATION_HOLDING_2H)
+
 	# 🤾 -- Throwing animations --
 	elif player.is_holding_left \
 	and player.is_throwing_left:
@@ -325,6 +354,8 @@ func _on_animation_finished(animation_name: String) -> void:
 		player.is_swinging_1h_left = false
 	elif animation_name == ANIMATION_SWINGING_1H_RIGHT:
 		player.is_swinging_1h_right = false
+	elif animation_name == ANIMATION_SWINGING_2H:
+		player.is_swinging_2h = false
 	elif animation_name == ANIMATION_THROWING_LEFT:
 		player.is_throwing_left = false
 	elif animation_name == ANIMATION_THROWING_RIGHT:

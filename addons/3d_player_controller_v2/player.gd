@@ -55,12 +55,13 @@ extends CharacterBody3D
 @export var force_pushing := 0.2 ## Force applied when pushing
 @export var force_pushing_sprinting := 0.4 ## Force applied when pushing while sprinting
 
-var current_state: States.State ## The current state of the 
-var previous_state: States.State ## The previous state of the 
+var current_state: States.State ## The current state of the player
+var previous_state: States.State ## The previous state of the player
 var input_direction := Vector2.ZERO ## The direction of the player input (UP/DOWN, LEFT/RIGHT).
 var is_animation_locked := false ## Is the player's animation locked?
 var is_blocking_1h_left := false ## Is the player blocking with a 1-handed tool or weapon with their left hand?
 var is_blocking_1h_right := false ## Is the player blocking with a 1-handed tool or weapon with their right hand?
+var is_blocking_2h := false ## Is the player blocking with a 2-handed tool or weapon?
 var is_climbing := false ## Is the player climbing a surface?
 var is_climbing_ladder := false ## Is the player climbing a ladder?
 var is_crawling := false ## Is the player crawling?
@@ -74,6 +75,8 @@ var is_holding_1h_left := false ## Is the player holding a 1-handed tool or weap
 var is_swinging_1h_left := false ## Is the player swinging a 1-handed tool or weapon with their left hand?
 var is_holding_1h_right := false ## Is the player holding a 1-handed tool or weapon with their right hand?
 var is_swinging_1h_right := false ## Is the player swinging a 1-handed tool or weapon with their right hand?
+var is_holding_2h := false ## Is the player holding a 2-handed tool or weapon?
+var is_swinging_2h := false ## Is the player swinging a 2-handed tool or weapon?
 var is_holding_left := false ## Is the player holding a ball with their left hand?
 var is_throwing_left := false ## Is the player throwing a ball with their left hand?
 var is_holding_right := false ## Is the player holding a ball with their right hand?
@@ -81,6 +84,7 @@ var is_throwing_right := false ## Is the player throwing a ball with their right
 var is_holding_fishing_rod := false ## Is the player wielding a fishing rod?
 var is_casting_fishing := false ## Is the player casting a fishing line?
 var is_reeling_fishing := false ## Is the player reeling in a fishing line?
+var is_holding_watering_can := false ## Is the player wielding a watering can?
 var is_holding_rifle := false ## Is the player wielding a rifle?
 var is_aiming_rifle := false ## Is the player aiming a rifle?
 var is_firing_rifle := false ## Is the player firing a rifle?

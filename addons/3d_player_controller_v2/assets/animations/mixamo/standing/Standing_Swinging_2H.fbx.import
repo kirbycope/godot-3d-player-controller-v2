@@ -3,13 +3,13 @@
 importer="animation_library"
 importer_version=1
 type="AnimationLibrary"
-uid="uid://slcohhns0ggs"
-path="res://.godot/imported/Standing_Melee_Attack_Downward_Right.fbx-b68b67c62da14c735c2a6ec431e36ffa.res"
+uid="uid://bvs4a4m0inuak"
+path="res://.godot/imported/Standing_Swinging_2H.fbx-a010b9f5493b00c371eebab738140df9.res"
 
 [deps]
 
-source_file="res://addons/3d_player_controller_v2/assets/animations/mixamo/standing/Standing_Melee_Attack_Downward_Right.fbx"
-dest_files=["res://.godot/imported/Standing_Melee_Attack_Downward_Right.fbx-b68b67c62da14c735c2a6ec431e36ffa.res"]
+source_file="res://addons/3d_player_controller_v2/assets/animations/mixamo/standing/Standing_Swinging_2H.fbx"
+dest_files=["res://.godot/imported/Standing_Swinging_2H.fbx-a010b9f5493b00c371eebab738140df9.res"]
 
 [params]
 

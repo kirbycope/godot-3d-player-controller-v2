@@ -1,5 +1,5 @@
 extends Node3D
-## Basic pick-up axe that attaches to player's left hand.
+## Watering can pickup that attaches to player's right hand.
 
 var bone_attachment: BoneAttachment3D
 var player: CharacterBody3D
@@ -9,15 +9,21 @@ var player: CharacterBody3D
 @onready var initial_position: Vector3 = global_position
 
 
-func _input(_event: InputEvent) -> void:
+func _input(event: InputEvent) -> void:
 	if player:
 		# Do nothing if the "pause" menu is visible
 		if player.pause.visible: return
 
+		# Ⓧ/[E] _pressed_ -> Start "watering" animation
+		if event.is_action_pressed(player.controls.button_2):
+			#player.play_locked_animation("Standing_Watering/mixamo_com")
+			pass
+
 		# (D-Pad Down) /[Q] _just_pressed_ -> Drop _this_ node
 		if Input.is_action_just_pressed(player.controls.button_13):
-			player.is_holding_1h_left = false
-			player.is_swinging_1h_left = false
+			player.is_holding_1h_right = false
+			player.is_holding_watering_can = false
+			player.is_swinging_1h_right = false
 			player = null
 			reparent(initial_parent)
 			global_position = initial_position
@@ -27,15 +33,16 @@ func _input(_event: InputEvent) -> void:
 			return
 
 
-## Attach _this_ node to the player's left hand when they enter the detection area.
+## Attach _this_ node to the player's right hand when they enter the detection area.
 func _on_player_detection_body_entered(body: Node3D) -> void:
 	if body is CharacterBody3D \
 	and body.is_in_group("Player") \
 	and player == null:
 		player = body
-		player.is_holding_1h_left = true
+		player.is_holding_1h_right = true
+		player.is_holding_watering_can = true
 		bone_attachment = BoneAttachment3D.new()
-		bone_attachment.bone_name = player.bone_name_left_hand
+		bone_attachment.bone_name = player.bone_name_right_hand
 		player.skeleton.add_child(bone_attachment)
 		reparent(bone_attachment)
 		global_position = bone_attachment.global_position

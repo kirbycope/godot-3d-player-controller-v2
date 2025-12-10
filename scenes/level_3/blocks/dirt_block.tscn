@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://o0sk0jyjm1dv"]
+[gd_scene load_steps=7 format=3 uid="uid://o0sk0jyjm1dv"]
 
 [ext_resource type="Texture2D" uid="uid://bs1rgj4ryg5pa" path="res://assets/textures/voxel/Tiles/dirt.png" id="1_q8flr"]
+[ext_resource type="Script" uid="uid://j11m77nie3ar" path="res://scenes/level_3/blocks/dirt_block.gd" id="1_uqwe0"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_jhnos"]
 
@@ -11,10 +12,23 @@ uv1_triplanar = true
 [sub_resource type="BoxMesh" id="BoxMesh_5085k"]
 material = SubResource("StandardMaterial3D_wlwc7")
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_uqwe0"]
+size = Vector3(1.25, 0.1, 1.25)
+
 [node name="DirtBlock" type="StaticBody3D"]
+script = ExtResource("1_uqwe0")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_jhnos")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_5085k")
+
+[node name="PlayerDetection" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerDetection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("BoxShape3D_uqwe0")
+
+[connection signal="body_entered" from="PlayerDetection" to="." method="_on_player_detection_body_entered"]
+[connection signal="body_exited" from="PlayerDetection" to="." method="_on_player_detection_body_exited"]

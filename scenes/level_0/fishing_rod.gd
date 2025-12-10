@@ -15,7 +15,7 @@ func _input(event: InputEvent) -> void:
 		# Do nothing if the "pause" menu is visible
 		if player.pause.visible: return
 
-		# (D-Pad Down) /[Q] _just_pressed_ -> Drop _this_node
+		# (D-Pad Down) /[Q] _just_pressed_ -> Drop _this_ node
 		if Input.is_action_just_pressed(player.controls.button_13):
 			player.is_holding_fishing_rod = false
 			player.is_casting_fishing = false
