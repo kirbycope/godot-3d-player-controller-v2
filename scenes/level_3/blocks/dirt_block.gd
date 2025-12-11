@@ -1,6 +1,7 @@
 extends StaticBody3D
 
 @export var is_moist: bool = false ## Is the dirt block moist?
+var planted: StaticBody3D ## The plant placed on this block (if any)
 
 var player: CharacterBody3D
 
@@ -12,9 +13,8 @@ func _input(event: InputEvent) -> void:
 
 		# Ⓧ/[E] _pressed_
 		if event.is_action_pressed(player.controls.button_2):
-			if player.get_meta("is_holding_scythe", false):
-				player.play_locked_animation("Standing_Harvesting/mixamo_com", 1.0)
-			elif player.get_meta("is_holding_watering_can", false) \
+			# Use watering can
+			if player.get_meta("is_holding_watering_can", false) \
 			and not is_moist:
 				player.play_locked_animation("Standing_Watering/mixamo_com")
 				is_moist = true
@@ -28,7 +28,29 @@ func _input(event: InputEvent) -> void:
 					Color8(123, 123, 123),
 					animation_length / 2.0
 				)#.set_delay(animation_length / 2.0)
-				return
+			# Plant seeds
+			elif player.get_meta("is_holding_seeds", false) \
+			and is_moist \
+			and planted == null:
+				var flat_target := Vector3(
+					global_position.x,
+					player.global_position.y,
+					global_position.z,
+				)
+				player.look_at(flat_target, player.up_direction)
+				player.play_locked_animation("Crouching_Planting/mixamo_com")
+				var flower_red_scene := preload("res://scenes/level_3/blocks/flower_red.tscn")
+				var flower_red_instance := flower_red_scene.instantiate()
+				var top_position := global_transform.origin + Vector3(
+					0,
+					$CollisionShape3D.shape.size.y / 2.0,
+					0,
+				)
+				flower_red_instance.global_transform.origin = top_position
+				get_parent().add_child(flower_red_instance)
+				flower_red_instance.block_below = self
+				planted = flower_red_instance
+				#queue_free()
 
 
 ## A helper function for interaction (called from the player).

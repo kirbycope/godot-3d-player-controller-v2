@@ -83,6 +83,7 @@ script = ExtResource("2_mpser")
 
 [node name="RayCast3D" type="RayCast3D" parent="CameraMount/CameraSpringArm/Camera3D"]
 target_position = Vector3(0, 0, -2)
+collision_mask = 3
 
 [node name="ContextualControls" type="Label" parent="CameraMount/CameraSpringArm/Camera3D"]
 anchors_preset = 6

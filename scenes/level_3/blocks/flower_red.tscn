@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://b1vs0syexp5ph"]
+
+[ext_resource type="Texture2D" uid="uid://bv18dk4oyqlx8" path="res://assets/textures/voxel_expansion/tile_flowerRed.png" id="1_cke3i"]
+[ext_resource type="Script" uid="uid://cg271ll8jck4d" path="res://scenes/level_3/blocks/flower_red.gd" id="1_dkpfw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j3sw6"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+cull_mode = 2
+albedo_texture = ExtResource("1_cke3i")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_dkpfw"]
+material = SubResource("StandardMaterial3D_j3sw6")
+size = Vector2(0.5, 0.5)
+orientation = 2
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cke3i"]
+size = Vector3(0.2, 0.4, 0.2)
+
+[node name="FlowerRed" type="StaticBody3D" groups=["Plant"]]
+collision_layer = 2
+script = ExtResource("1_dkpfw")
+
+[node name="Side1" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, 0, 0.25, 0)
+mesh = SubResource("PlaneMesh_dkpfw")
+
+[node name="Side2" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.7071068, 0, -0.7071067, 0, 1, 0, 0.7071067, 0, -0.7071068, 0, 0.25, 0)
+mesh = SubResource("PlaneMesh_dkpfw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.9802322e-08, 0.19999997, 2.9802322e-08)
+shape = SubResource("BoxShape3D_cke3i")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://begj0slbblw6d"]
+[gd_scene load_steps=27 format=3 uid="uid://begj0slbblw6d"]
 
 [ext_resource type="Script" uid="uid://bgxu1puoa0ev7" path="res://scenes/level_3/main.gd" id="1_lbibe"]
 [ext_resource type="PackedScene" uid="uid://j5twp0ffld88" path="res://scenes/level_3/blocks/grass_block.tscn" id="3_fd5ct"]
@@ -9,9 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://bwhcwtjejhvfk" path="res://assets/textures/voxel/Tiles/grass1.png" id="8_n03mq"]
 [ext_resource type="Texture2D" uid="uid://dvqrkgbh8iysp" path="res://assets/textures/voxel/Tiles/grass2.png" id="9_mubsw"]
 [ext_resource type="Texture2D" uid="uid://b84phpsjskbcj" path="res://assets/textures/voxel/Tiles/grass3.png" id="10_2f0pr"]
+[ext_resource type="PackedScene" uid="uid://b1vs0syexp5ph" path="res://scenes/level_3/blocks/flower_red.tscn" id="11_686vk"]
 [ext_resource type="PackedScene" uid="uid://b2vdq21kfmov7" path="res://scenes/level_3/blocks/table_block.tscn" id="11_hxnpf"]
 [ext_resource type="Texture2D" uid="uid://co63c7x8876gi" path="res://assets/textures/voxel/Tiles/grass4.png" id="11_svb63"]
-[ext_resource type="Texture2D" uid="uid://bv18dk4oyqlx8" path="res://assets/textures/voxel_expansion/tile_flowerRed.png" id="14_fd5ct"]
 [ext_resource type="Texture2D" uid="uid://bpphvcjayw7wc" path="res://assets/textures/voxel_expansion/tile_flowerSun.png" id="15_8vsgy"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_gww7y"]
@@ -71,18 +71,6 @@ albedo_texture = ExtResource("11_svb63")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_3ypik"]
 material = SubResource("StandardMaterial3D_8vsgy")
-size = Vector2(0.5, 0.5)
-orientation = 2
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j3sw6"]
-transparency = 2
-alpha_scissor_threshold = 0.5
-alpha_antialiasing_mode = 0
-cull_mode = 2
-albedo_texture = ExtResource("14_fd5ct")
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_fda56"]
-material = SubResource("StandardMaterial3D_j3sw6")
 size = Vector2(0.5, 0.5)
 orientation = 2
 
@@ -670,16 +658,8 @@ mesh = SubResource("PlaneMesh_3ypik")
 transform = Transform3D(-0.7071068, 0, -0.7071067, 0, 1, 0, 0.7071067, 0, -0.7071068, 0, 0.25, 0)
 mesh = SubResource("PlaneMesh_3ypik")
 
-[node name="FlowerRed" type="Node3D" parent="."]
+[node name="FlowerRed" parent="." instance=ExtResource("11_686vk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5000001, 0, 2.5)
-
-[node name="Side1" type="MeshInstance3D" parent="FlowerRed"]
-transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, 0, 0.25, 0)
-mesh = SubResource("PlaneMesh_fda56")
-
-[node name="Side2" type="MeshInstance3D" parent="FlowerRed"]
-transform = Transform3D(-0.7071068, 0, -0.7071067, 0, 1, 0, 0.7071067, 0, -0.7071068, 0, 0.25, 0)
-mesh = SubResource("PlaneMesh_fda56")
 
 [node name="FlowersYellow" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, -1.5)
