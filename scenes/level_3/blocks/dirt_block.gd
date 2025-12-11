@@ -12,9 +12,9 @@ func _input(event: InputEvent) -> void:
 
 		# Ⓧ/[E] _pressed_
 		if event.is_action_pressed(player.controls.button_2):
-			if player.get_meta("is_holding_scythe"):
+			if player.get_meta("is_holding_scythe", false):
 				player.play_locked_animation("Standing_Harvesting/mixamo_com", 1.0)
-			elif player.get_meta("is_holding_watering_can") \
+			elif player.get_meta("is_holding_watering_can", false) \
 			and not is_moist:
 				player.play_locked_animation("Standing_Watering/mixamo_com")
 				is_moist = true

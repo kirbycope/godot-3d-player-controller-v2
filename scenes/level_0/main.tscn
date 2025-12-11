@@ -634,7 +634,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4902432, 1)
 transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, -1, 0, 2)
 
 [node name="Scythce" parent="." instance=ExtResource("24_n5cls")]
-transform = Transform3D(0.3420201, -0.93969256, 0, 0.93969256, 0.3420201, 0, 0, 0, 1, 0.1, 0.8, 3)
+transform = Transform3D(0.3420201, -0.93969256, 0, 0.93969256, 0.3420201, 0, 0, 0, 1, 0.1, 0.7764178, 3)
 
 [node name="WateringCan" parent="." instance=ExtResource("22_hd8a5")]
-transform = Transform3D(1, -8.742278e-08, -8.742278e-08, -8.742278e-08, -1, 7.642742e-15, -8.742278e-08, 0, -1, 1, 0.4, 2)
+transform = Transform3D(1, -8.742278e-08, -8.742278e-08, -8.742278e-08, -1, 7.642742e-15, -8.742278e-08, 0, -1, 1, 0.3555403, 2)
