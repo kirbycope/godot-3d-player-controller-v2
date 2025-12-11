@@ -1,7 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://7bmrbudeq40y"]
+[gd_scene load_steps=15 format=3 uid="uid://7bmrbudeq40y"]
 
 [ext_resource type="Script" uid="uid://cw48aw6pubuwl" path="res://scenes/level_select.gd" id="1_p0wlc"]
 [ext_resource type="Texture2D" uid="uid://7fjc1etvog52" path="res://scenes/level_0/sample.png" id="2_2epne"]
+[ext_resource type="PackedScene" uid="uid://cxky6pmyip083" path="res://addons/3d_player_controller_v2/controls.tscn" id="2_htctk"]
 [ext_resource type="Texture2D" uid="uid://cr2mxxoiwbrta" path="res://scenes/level_6/preview.png" id="3_2epne"]
 [ext_resource type="Texture2D" uid="uid://b2aj55v7b6d6g" path="res://scenes/level_1/preview.png" id="3_o2xx4"]
 [ext_resource type="Texture2D" uid="uid://t5iy8syqok2g" path="res://scenes/level_2/preview.png" id="3_rif6e"]
@@ -30,6 +31,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_p0wlc")
+
+[node name="Controls" parent="." instance=ExtResource("2_htctk")]
+visible = false
 
 [node name="Center" type="Control" parent="."]
 layout_mode = 1
@@ -77,6 +81,7 @@ text = "Minecraft"
 
 [node name="Level4" type="Button" parent="Center/VBoxContainer"]
 layout_mode = 2
+toggle_mode = true
 text = "Pokémon Legends: Z-A"
 
 [node name="Level5" type="Button" parent="Center/VBoxContainer"]

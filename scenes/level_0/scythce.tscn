@@ -51,7 +51,7 @@ shadow_mesh = SubResource("ArrayMesh_nwl4f")
 script = ExtResource("1_63icg")
 
 [node name="Visuals" type="Node3D" parent="."]
-transform = Transform3D(-2.9155496e-08, 0.667, 0, 0.667, 2.9155496e-08, 5.831099e-08, 5.831099e-08, 2.5488545e-15, -0.667, -0.25, 0.09, 0.035)
+transform = Transform3D(-0.2226492, 0.62874186, -5.831099e-08, 0.62874186, 0.2226492, 0, 1.9464611e-08, -5.496636e-08, -0.667, -0.75, -0.185, 0.035)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Visuals"]
 transform = Transform3D(100, 0, 0, 0, -4.371139e-06, 100, 0, -100, -4.371139e-06, 0, 0, 0)

@@ -35,7 +35,7 @@ func _process(delta: float) -> void:
 	# Ⓐ/[Space] button currently _pressed_ -> Increase player's vertical position
 	if Input.is_action_pressed(player.controls.button_0) \
 	and not player.pause.visible:
-		var current_water_level = player.is_swimming_in.global_position.y + player.is_swimming_in.size.y/2 # The origin of the shape is at its center
+		var current_water_level = player.swimming_in.global_position.y + player.swimming_in.size.y/2 # The origin of the shape is at its center
 		var new_player_position_y = player.position.y + 5 * delta
 		var player_shoulder_height = new_player_position_y + (player.collision_height * 0.75)
 		if player_shoulder_height < current_water_level:

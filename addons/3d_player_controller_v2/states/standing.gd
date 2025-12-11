@@ -216,8 +216,20 @@ func _process(delta: float) -> void:
 
 ## Plays the appropriate animation based on player state.
 func play_animation() -> void:
+	# 🦵 -- Kicking animations --
+	if player.enable_kicking \
+	and player.is_kicking_left:
+		if player.animation_player.current_animation != ANIMATION_KICKING_LEFT:
+			_on_animation_finished(player.animation_player.current_animation)
+			player.animation_player.play(ANIMATION_KICKING_LEFT)
+	elif player.enable_kicking \
+	and player.is_kicking_right:
+		if player.animation_player.current_animation != ANIMATION_KICKING_RIGHT:
+			_on_animation_finished(player.animation_player.current_animation)
+			player.animation_player.play(ANIMATION_KICKING_RIGHT)
+
 	# 🎣 -- Fishing animations --
-	if player.is_holding_fishing_rod:
+	elif player.is_holding_fishing_rod:
 		if player.is_casting_fishing:
 			if player.animation_player.current_animation != ANIMATION_FISHING_CASTING:
 				_on_animation_finished(player.animation_player.current_animation)
@@ -230,18 +242,6 @@ func play_animation() -> void:
 			if player.animation_player.current_animation != ANIMATION_FISHING_IDLE:
 				_on_animation_finished(player.animation_player.current_animation)
 				player.animation_player.play(ANIMATION_FISHING_IDLE)
-
-	# 🦵 -- Kicking animations --
-	elif player.enable_kicking \
-	and player.is_kicking_left:
-		if player.animation_player.current_animation != ANIMATION_KICKING_LEFT:
-			_on_animation_finished(player.animation_player.current_animation)
-			player.animation_player.play(ANIMATION_KICKING_LEFT)
-	elif player.enable_kicking \
-	and player.is_kicking_right:
-		if player.animation_player.current_animation != ANIMATION_KICKING_RIGHT:
-			_on_animation_finished(player.animation_player.current_animation)
-			player.animation_player.play(ANIMATION_KICKING_RIGHT)
 
 	# 🔫 -- Rifle animations --
 	elif player.is_holding_rifle:

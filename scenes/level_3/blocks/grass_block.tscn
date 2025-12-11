@@ -1,6 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://j5twp0ffld88"]
+[gd_scene load_steps=13 format=3 uid="uid://j5twp0ffld88"]
 
 [ext_resource type="Texture2D" uid="uid://dgycy03umala6" path="res://assets/textures/voxel/Tiles/grass_top.png" id="1_nrika"]
+[ext_resource type="Script" uid="uid://cumq4qje8pj81" path="res://scenes/level_3/blocks/grass_block.gd" id="1_wo3rc"]
 [ext_resource type="Texture2D" uid="uid://cmk0hjqhagddc" path="res://assets/textures/voxel/Tiles/dirt_grass.png" id="2_8fxkl"]
 [ext_resource type="Texture2D" uid="uid://bs1rgj4ryg5pa" path="res://assets/textures/voxel/Tiles/dirt.png" id="2_voj85"]
 
@@ -28,7 +29,10 @@ albedo_texture = ExtResource("2_voj85")
 material = SubResource("StandardMaterial3D_lpqhp")
 size = Vector2(1, 1)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_wo3rc"]
+
 [node name="GrassBlock" type="StaticBody3D"]
+script = ExtResource("1_wo3rc")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_8fxkl")
@@ -56,3 +60,11 @@ mesh = SubResource("PlaneMesh_efmof")
 [node name="UVBottom" type="MeshInstance3D" parent="."]
 transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
 mesh = SubResource("PlaneMesh_f1bt0")
+
+[node name="PlayerDetection" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerDetection"]
+shape = SubResource("BoxShape3D_wo3rc")
+
+[connection signal="body_entered" from="PlayerDetection" to="." method="_on_player_detection_body_entered"]
+[connection signal="body_exited" from="PlayerDetection" to="." method="_on_player_detection_body_exited"]

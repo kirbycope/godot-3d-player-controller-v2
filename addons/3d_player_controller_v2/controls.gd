@@ -172,6 +172,8 @@ func _ready() -> void:
 		var joypad_button_event = InputEventJoypadButton.new()
 		joypad_button_event.button_index = JOY_BUTTON_A
 		InputMap.action_add_event(button_0, joypad_button_event)
+		# [Hack] for settings menu(s)
+		InputMap.action_add_event("ui_accept", joypad_button_event)
 	# Ⓑ Check if [button_1] action is not in the Input Map
 	if not InputMap.has_action(button_1):
 		# Add the [button_1] action to the Input Map
@@ -184,6 +186,8 @@ func _ready() -> void:
 		var joypad_button_event = InputEventJoypadButton.new()
 		joypad_button_event.button_index = JOY_BUTTON_B
 		InputMap.action_add_event(button_1, joypad_button_event)
+		# [Hack] for settings menu(s)
+		InputMap.action_add_event("ui_cancel", joypad_button_event)
 	# Ⓧ Check if [button_2] action is not in the Input Map
 	if not InputMap.has_action(button_2):
 		# Add the [button_2] action to the Input Map

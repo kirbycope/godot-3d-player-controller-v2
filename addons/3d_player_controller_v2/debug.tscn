@@ -186,10 +186,27 @@ grow_horizontal = 0
 mouse_filter = 1
 
 [node name="EnableMantling" type="CheckButton" parent="Configuration"]
+visible = false
 layout_mode = 2
 text = "EnableMantling"
 
 [node name="Panel" type="Panel" parent="Configuration/EnableMantling"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -222.0
+offset_right = -2.0
+offset_bottom = 31.0
+grow_horizontal = 0
+mouse_filter = 1
+
+[node name="EnableNavigation" type="CheckButton" parent="Configuration"]
+layout_mode = 2
+text = "EnableNavigation"
+
+[node name="Panel" type="Panel" parent="Configuration/EnableNavigation"]
 z_index = -1
 layout_mode = 1
 anchors_preset = 1
@@ -458,22 +475,6 @@ offset_bottom = 31.0
 grow_horizontal = 0
 mouse_filter = 1
 
-[node name="EnableNavigation" type="CheckButton" parent="Configuration2"]
-layout_mode = 2
-text = "EnableNavigation"
-
-[node name="Panel" type="Panel" parent="Configuration2/EnableNavigation"]
-z_index = -1
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -222.0
-offset_right = -2.0
-offset_bottom = 31.0
-grow_horizontal = 0
-mouse_filter = 1
-
 [node name="EnableRetical" type="CheckButton" parent="Configuration2"]
 layout_mode = 2
 text = "EnableRetical"
@@ -633,6 +634,7 @@ offset_right = 164.0
 offset_bottom = 31.0
 
 [node name="IsMantling" type="CheckBox" parent="States"]
+visible = false
 layout_mode = 2
 disabled = true
 text = "IsMantling"
@@ -693,6 +695,17 @@ disabled = true
 text = "IsSitting"
 
 [node name="Panel" type="Panel" parent="States/IsSitting"]
+z_index = -1
+layout_mode = 0
+offset_right = 164.0
+offset_bottom = 31.0
+
+[node name="IsSkateboarding" type="CheckBox" parent="States"]
+layout_mode = 2
+disabled = true
+text = "IsSkateboarding"
+
+[node name="Panel" type="Panel" parent="States/IsSkateboarding"]
 z_index = -1
 layout_mode = 0
 offset_right = 164.0
@@ -803,166 +816,367 @@ layout_mode = 0
 offset_right = 164.0
 offset_bottom = 31.0
 
-[node name="IsKickingLeft" type="CheckBox" parent="States2"]
+[node name="COMBAT_1H" type="VBoxContainer" parent="."]
+visible = false
+offset_left = 167.0
+offset_top = 281.0
+offset_right = 331.0
+offset_bottom = 502.0
+theme_override_constants/separation = 2
+
+[node name="Label" type="Label" parent="COMBAT_1H"]
+layout_mode = 2
+text = "1-HANDED"
+horizontal_alignment = 1
+
+[node name="Panel" type="Panel" parent="COMBAT_1H/Label"]
+z_index = -1
+layout_mode = 0
+offset_right = 164.0
+offset_bottom = 23.0
+
+[node name="IsHolding1HL" type="CheckBox" parent="COMBAT_1H"]
 layout_mode = 2
 disabled = true
-text = "IsKickingLeft"
+text = "IsHolding1HL"
 
-[node name="Panel" type="Panel" parent="States2/IsKickingLeft"]
+[node name="Panel" type="Panel" parent="COMBAT_1H/IsHolding1HL"]
 z_index = -1
 layout_mode = 0
 offset_right = 164.0
 offset_bottom = 31.0
 
-[node name="IsKickingRight" type="CheckBox" parent="States2"]
-layout_mode = 2
-disabled = true
-text = "IsKickingRight"
-
-[node name="Panel" type="Panel" parent="States2/IsKickingRight"]
-z_index = -1
-layout_mode = 0
-offset_right = 164.0
-offset_bottom = 31.0
-
-[node name="IsCastingFishing" type="CheckBox" parent="States2"]
-layout_mode = 2
-disabled = true
-text = "IsCastingFishing"
-
-[node name="Panel" type="Panel" parent="States2/IsCastingFishing"]
-z_index = -1
-layout_mode = 0
-offset_right = 164.0
-offset_bottom = 31.0
-
-[node name="IsReelingFishing" type="CheckBox" parent="States2"]
-layout_mode = 2
-disabled = true
-text = "IsReelingFishing"
-
-[node name="Panel" type="Panel" parent="States2/IsReelingFishing"]
-z_index = -1
-layout_mode = 0
-offset_right = 164.0
-offset_bottom = 31.0
-
-[node name="IsPunchingLeft" type="CheckBox" parent="States2"]
-layout_mode = 2
-disabled = true
-text = "IsPunchingLeft"
-
-[node name="Panel" type="Panel" parent="States2/IsPunchingLeft"]
-z_index = -1
-layout_mode = 0
-offset_right = 164.0
-offset_bottom = 31.0
-
-[node name="IsPunchingRight" type="CheckBox" parent="States2"]
-layout_mode = 2
-disabled = true
-text = "IsPunchingRight"
-
-[node name="Panel" type="Panel" parent="States2/IsPunchingRight"]
-z_index = -1
-layout_mode = 0
-offset_right = 164.0
-offset_bottom = 31.0
-
-[node name="IsAimingRifle" type="CheckBox" parent="States2"]
-layout_mode = 2
-disabled = true
-text = "IsAimingRifle"
-
-[node name="Panel" type="Panel" parent="States2/IsAimingRifle"]
-z_index = -1
-layout_mode = 0
-offset_right = 164.0
-offset_bottom = 31.0
-
-[node name="IsFiringRifle" type="CheckBox" parent="States2"]
-layout_mode = 2
-disabled = true
-text = "IsFiringRifle"
-
-[node name="Panel" type="Panel" parent="States2/IsFiringRifle"]
-z_index = -1
-layout_mode = 0
-offset_right = 164.0
-offset_bottom = 31.0
-
-[node name="IsSkateboarding" type="CheckBox" parent="States2"]
-layout_mode = 2
-disabled = true
-text = "IsSkateboarding"
-
-[node name="Panel" type="Panel" parent="States2/IsSkateboarding"]
-z_index = -1
-layout_mode = 0
-offset_right = 164.0
-offset_bottom = 31.0
-
-[node name="IsBlocking1HL" type="CheckBox" parent="States2"]
+[node name="IsBlocking1HL" type="CheckBox" parent="COMBAT_1H"]
 layout_mode = 2
 disabled = true
 text = "IsBlocking1HL"
 
-[node name="Panel" type="Panel" parent="States2/IsBlocking1HL"]
+[node name="Panel" type="Panel" parent="COMBAT_1H/IsBlocking1HL"]
 z_index = -1
 layout_mode = 0
 offset_right = 164.0
 offset_bottom = 31.0
 
-[node name="IsBlocking1HR" type="CheckBox" parent="States2"]
-layout_mode = 2
-disabled = true
-text = "IsBlocking1HR"
-
-[node name="Panel" type="Panel" parent="States2/IsBlocking1HR"]
-z_index = -1
-layout_mode = 0
-offset_right = 164.0
-offset_bottom = 31.0
-
-[node name="IsSwinging1HLeft" type="CheckBox" parent="States2"]
+[node name="IsSwinging1HL" type="CheckBox" parent="COMBAT_1H"]
 layout_mode = 2
 disabled = true
 text = "IsSwinging1HL"
 
-[node name="Panel" type="Panel" parent="States2/IsSwinging1HLeft"]
+[node name="Panel" type="Panel" parent="COMBAT_1H/IsSwinging1HL"]
 z_index = -1
 layout_mode = 0
 offset_right = 164.0
 offset_bottom = 31.0
 
-[node name="IsSwinging1HRight" type="CheckBox" parent="States2"]
+[node name="IsHolding1HR" type="CheckBox" parent="COMBAT_1H"]
+layout_mode = 2
+disabled = true
+text = "IsHolding1HR"
+
+[node name="Panel" type="Panel" parent="COMBAT_1H/IsHolding1HR"]
+z_index = -1
+layout_mode = 0
+offset_right = 164.0
+offset_bottom = 31.0
+
+[node name="IsBlocking1HR" type="CheckBox" parent="COMBAT_1H"]
+layout_mode = 2
+disabled = true
+text = "IsBlocking1HR"
+
+[node name="Panel" type="Panel" parent="COMBAT_1H/IsBlocking1HR"]
+z_index = -1
+layout_mode = 0
+offset_right = 164.0
+offset_bottom = 31.0
+
+[node name="IsSwinging1HR" type="CheckBox" parent="COMBAT_1H"]
 layout_mode = 2
 disabled = true
 text = "IsSwinging1HR"
 
-[node name="Panel" type="Panel" parent="States2/IsSwinging1HRight"]
+[node name="Panel" type="Panel" parent="COMBAT_1H/IsSwinging1HR"]
 z_index = -1
 layout_mode = 0
 offset_right = 164.0
 offset_bottom = 31.0
 
-[node name="IsThrowingLeft" type="CheckBox" parent="States2"]
+[node name="COMBAT_2H" type="VBoxContainer" parent="."]
+visible = false
+offset_left = 167.0
+offset_top = 281.0
+offset_right = 331.0
+offset_bottom = 403.0
+theme_override_constants/separation = 2
+
+[node name="Label" type="Label" parent="COMBAT_2H"]
+layout_mode = 2
+text = "2-HANDED"
+horizontal_alignment = 1
+
+[node name="Panel" type="Panel" parent="COMBAT_2H/Label"]
+z_index = -1
+layout_mode = 0
+offset_right = 164.0
+offset_bottom = 23.0
+
+[node name="IsHolding2H" type="CheckBox" parent="COMBAT_2H"]
+layout_mode = 2
+disabled = true
+text = "IsHolding2H"
+
+[node name="Panel" type="Panel" parent="COMBAT_2H/IsHolding2H"]
+z_index = -1
+layout_mode = 0
+offset_right = 164.0
+offset_bottom = 31.0
+
+[node name="IsBlocking2H" type="CheckBox" parent="COMBAT_2H"]
+layout_mode = 2
+disabled = true
+text = "IsBlocking2H"
+
+[node name="Panel" type="Panel" parent="COMBAT_2H/IsBlocking2H"]
+z_index = -1
+layout_mode = 0
+offset_right = 164.0
+offset_bottom = 31.0
+
+[node name="IsSwinging2H" type="CheckBox" parent="COMBAT_2H"]
+layout_mode = 2
+disabled = true
+text = "IsSwinging2H"
+
+[node name="Panel" type="Panel" parent="COMBAT_2H/IsSwinging2H"]
+z_index = -1
+layout_mode = 0
+offset_right = 164.0
+offset_bottom = 31.0
+
+[node name="FISHING" type="VBoxContainer" parent="."]
+visible = false
+offset_left = 167.0
+offset_top = 280.0
+offset_right = 352.0
+offset_bottom = 402.0
+theme_override_constants/separation = 2
+
+[node name="Label" type="Label" parent="FISHING"]
+layout_mode = 2
+text = "FISHING"
+horizontal_alignment = 1
+
+[node name="Panel" type="Panel" parent="FISHING/Label"]
+z_index = -1
+layout_mode = 0
+offset_right = 185.0
+offset_bottom = 23.0
+
+[node name="IsHoldingFishingRod" type="CheckBox" parent="FISHING"]
+layout_mode = 2
+disabled = true
+text = "IsHoldingFishingRod"
+
+[node name="Panel" type="Panel" parent="FISHING/IsHoldingFishingRod"]
+z_index = -1
+layout_mode = 0
+offset_right = 185.0
+offset_bottom = 31.0
+
+[node name="IsCastingFishing" type="CheckBox" parent="FISHING"]
+layout_mode = 2
+disabled = true
+text = "IsCastingFishing"
+
+[node name="Panel" type="Panel" parent="FISHING/IsCastingFishing"]
+z_index = -1
+layout_mode = 0
+offset_right = 185.0
+offset_bottom = 31.0
+
+[node name="IsReelingFishing" type="CheckBox" parent="FISHING"]
+layout_mode = 2
+disabled = true
+text = "IsReelingFishing"
+
+[node name="Panel" type="Panel" parent="FISHING/IsReelingFishing"]
+z_index = -1
+layout_mode = 0
+offset_right = 185.0
+offset_bottom = 31.0
+
+[node name="SHOOTING" type="VBoxContainer" parent="."]
+visible = false
+offset_left = 167.0
+offset_top = 281.0
+offset_right = 331.0
+offset_bottom = 403.0
+theme_override_constants/separation = 2
+
+[node name="Label" type="Label" parent="SHOOTING"]
+layout_mode = 2
+text = "SHOOTING"
+horizontal_alignment = 1
+
+[node name="Panel" type="Panel" parent="SHOOTING/Label"]
+z_index = -1
+layout_mode = 0
+offset_right = 164.0
+offset_bottom = 23.0
+
+[node name="IsHoldingRifle" type="CheckBox" parent="SHOOTING"]
+layout_mode = 2
+disabled = true
+text = "IsHoldingRifle"
+
+[node name="Panel" type="Panel" parent="SHOOTING/IsHoldingRifle"]
+z_index = -1
+layout_mode = 0
+offset_right = 164.0
+offset_bottom = 31.0
+
+[node name="IsAimingRifle" type="CheckBox" parent="SHOOTING"]
+layout_mode = 2
+disabled = true
+text = "IsAimingRifle"
+
+[node name="Panel" type="Panel" parent="SHOOTING/IsAimingRifle"]
+z_index = -1
+layout_mode = 0
+offset_right = 164.0
+offset_bottom = 31.0
+
+[node name="IsFiringRifle" type="CheckBox" parent="SHOOTING"]
+layout_mode = 2
+disabled = true
+text = "IsFiringRifle"
+
+[node name="Panel" type="Panel" parent="SHOOTING/IsFiringRifle"]
+z_index = -1
+layout_mode = 0
+offset_right = 164.0
+offset_bottom = 31.0
+
+[node name="THROWING" type="VBoxContainer" parent="."]
+visible = false
+offset_left = 167.0
+offset_top = 281.0
+offset_right = 331.0
+offset_bottom = 436.0
+theme_override_constants/separation = 2
+
+[node name="Label" type="Label" parent="THROWING"]
+layout_mode = 2
+text = "THROWING"
+horizontal_alignment = 1
+
+[node name="Panel" type="Panel" parent="THROWING/Label"]
+z_index = -1
+layout_mode = 0
+offset_right = 164.0
+offset_bottom = 23.0
+
+[node name="IsHoldingLeft" type="CheckBox" parent="THROWING"]
+layout_mode = 2
+disabled = true
+text = "IsHoldingLeft"
+
+[node name="Panel" type="Panel" parent="THROWING/IsHoldingLeft"]
+z_index = -1
+layout_mode = 0
+offset_right = 164.0
+offset_bottom = 31.0
+
+[node name="IsThrowingLeft" type="CheckBox" parent="THROWING"]
 layout_mode = 2
 disabled = true
 text = "IsThrowingLeft"
 
-[node name="Panel" type="Panel" parent="States2/IsThrowingLeft"]
+[node name="Panel" type="Panel" parent="THROWING/IsThrowingLeft"]
 z_index = -1
 layout_mode = 0
 offset_right = 164.0
 offset_bottom = 31.0
 
-[node name="IsThrowingRight" type="CheckBox" parent="States2"]
+[node name="IsHoldingRight" type="CheckBox" parent="THROWING"]
+layout_mode = 2
+disabled = true
+text = "IsHoldingRight"
+
+[node name="Panel" type="Panel" parent="THROWING/IsHoldingRight"]
+z_index = -1
+layout_mode = 0
+offset_right = 164.0
+offset_bottom = 31.0
+
+[node name="IsThrowingRight" type="CheckBox" parent="THROWING"]
 layout_mode = 2
 disabled = true
 text = "IsThrowingRight"
 
-[node name="Panel" type="Panel" parent="States2/IsThrowingRight"]
+[node name="Panel" type="Panel" parent="THROWING/IsThrowingRight"]
+z_index = -1
+layout_mode = 0
+offset_right = 164.0
+offset_bottom = 31.0
+
+[node name="UNARMED" type="VBoxContainer" parent="."]
+offset_left = 167.0
+offset_top = 124.0
+offset_right = 331.0
+offset_bottom = 279.0
+theme_override_constants/separation = 2
+
+[node name="Label" type="Label" parent="UNARMED"]
+layout_mode = 2
+text = "UNARMED"
+horizontal_alignment = 1
+
+[node name="Panel" type="Panel" parent="UNARMED/Label"]
+z_index = -1
+layout_mode = 0
+offset_right = 164.0
+offset_bottom = 23.0
+
+[node name="IsKickingLeft" type="CheckBox" parent="UNARMED"]
+layout_mode = 2
+disabled = true
+text = "IsKickingLeft"
+
+[node name="Panel" type="Panel" parent="UNARMED/IsKickingLeft"]
+z_index = -1
+layout_mode = 0
+offset_right = 164.0
+offset_bottom = 31.0
+
+[node name="IsKickingRight" type="CheckBox" parent="UNARMED"]
+layout_mode = 2
+disabled = true
+text = "IsKickingRight"
+
+[node name="Panel" type="Panel" parent="UNARMED/IsKickingRight"]
+z_index = -1
+layout_mode = 0
+offset_right = 164.0
+offset_bottom = 31.0
+
+[node name="IsPunchingLeft" type="CheckBox" parent="UNARMED"]
+layout_mode = 2
+disabled = true
+text = "IsPunchingLeft"
+
+[node name="Panel" type="Panel" parent="UNARMED/IsPunchingLeft"]
+z_index = -1
+layout_mode = 0
+offset_right = 164.0
+offset_bottom = 31.0
+
+[node name="IsPunchingRight" type="CheckBox" parent="UNARMED"]
+layout_mode = 2
+disabled = true
+text = "IsPunchingRight"
+
+[node name="Panel" type="Panel" parent="UNARMED/IsPunchingRight"]
 z_index = -1
 layout_mode = 0
 offset_right = 164.0
@@ -1076,6 +1290,7 @@ scroll_active = false
 [connection signal="toggled" from="Configuration/EnableJumping" to="." method="_on_enable_jumping_toggled"]
 [connection signal="toggled" from="Configuration/EnableKicking" to="." method="_on_enable_kicking_toggled"]
 [connection signal="toggled" from="Configuration/EnableMantling" to="." method="_on_enable_mantling_toggled"]
+[connection signal="toggled" from="Configuration/EnableNavigation" to="." method="_on_enable_navigation_toggled"]
 [connection signal="toggled" from="Configuration/EnableParagliding" to="." method="_on_enable_paragliding_toggled"]
 [connection signal="toggled" from="Configuration/EnablePunching" to="." method="_on_enable_punching_toggled"]
 [connection signal="toggled" from="Configuration/EnablePushing" to="." method="_on_enable_pushing_toggled"]

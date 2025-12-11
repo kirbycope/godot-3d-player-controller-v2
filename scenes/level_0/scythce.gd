@@ -17,6 +17,7 @@ func _input(_event: InputEvent) -> void:
 		# (D-Pad Down) /[Q] _just_pressed_ -> Drop _this_ node
 		if Input.is_action_just_pressed(player.controls.button_13):
 			player.is_holding_2h = false
+			player.set_meta("is_holding_scythe", false)
 			player = null
 			reparent(initial_parent)
 			global_position = initial_position
@@ -33,6 +34,7 @@ func _on_player_detection_body_entered(body: Node3D) -> void:
 	and player == null:
 		player = body
 		player.is_holding_2h = true
+		player.set_meta("is_holding_scythe", true)
 		bone_attachment = BoneAttachment3D.new()
 		bone_attachment.bone_name = player.bone_name_right_hand
 		player.skeleton.add_child(bone_attachment)

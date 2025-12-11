@@ -107,6 +107,14 @@ func _input(event: InputEvent) -> void:
 			player.base_state.transition_state(player.current_state, States.State.CLIMBING_LADDER)
 			return
 
+	# Ⓧ/[E] _pressed_ -> Interact with object
+	if event.is_action_pressed(player.controls.button_2) \
+	and ray_cast.is_colliding():
+		var collider = ray_cast.get_collider()
+		if collider.has_method("on_interact"):
+			collider.call("on_interact", player)
+			return
+
 	# Ⓧ/[E] _pressed_ -> Release object
 	if event.is_action_pressed(player.controls.button_2) \
 	and player.enable_holding_objects \
