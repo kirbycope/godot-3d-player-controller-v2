@@ -59,6 +59,7 @@ mesh = SubResource("ArrayMesh_63icg")
 skeleton = NodePath("")
 
 [node name="PlayerDetection" type="Area3D" parent="."]
+transform = Transform3D(0.9396926, -0.34202012, 0, 0.34202012, 0.9396926, 0, 0, 0, 1, -0.7539575, -0.18638939, 0.034923077)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerDetection"]
 shape = SubResource("BoxShape3D_k7e0p")

@@ -1,6 +1,7 @@
 extends StaticBody3D
 
-var block_below: StaticBody3D # This plant requires a block to be placed below it
+@export var block_below: StaticBody3D # This plant requires a block to be placed below it
+
 var player: CharacterBody3D
 
 

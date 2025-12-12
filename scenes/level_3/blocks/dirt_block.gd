@@ -1,9 +1,16 @@
 extends StaticBody3D
 
 @export var is_moist: bool = false ## Is the dirt block moist?
-var planted: StaticBody3D ## The plant placed on this block (if any)
+@export var planted: StaticBody3D ## The plant placed on this block (if any)
 
 var player: CharacterBody3D
+
+
+func _ready() -> void:
+	if is_moist:
+		var material = $MeshInstance3D.get_active_material(0).duplicate()
+		$MeshInstance3D.set_surface_override_material(0, material)
+		material.albedo_color = Color8(123, 123, 123)
 
 
 func _input(event: InputEvent) -> void:
@@ -20,7 +27,8 @@ func _input(event: InputEvent) -> void:
 				is_moist = true
 				# Tween albedo color starting halfway through the animation
 				var animation_length = player.animation_player.current_animation_length
-				var material = $MeshInstance3D.get_active_material(0)
+				var material = $MeshInstance3D.get_active_material(0).duplicate()
+				$MeshInstance3D.set_surface_override_material(0, material)
 				var tween = get_tree().create_tween()
 				tween.tween_property(
 					material,
@@ -39,6 +47,7 @@ func _input(event: InputEvent) -> void:
 				)
 				player.look_at(flat_target, player.up_direction)
 				player.play_locked_animation("Crouching_Planting/mixamo_com")
+				await get_tree().create_timer(2.5).timeout
 				var flower_red_scene := preload("res://scenes/level_3/blocks/flower_red.tscn")
 				var flower_red_instance := flower_red_scene.instantiate()
 				var top_position := global_transform.origin + Vector3(

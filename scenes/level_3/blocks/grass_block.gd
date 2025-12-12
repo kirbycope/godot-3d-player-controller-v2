@@ -11,6 +11,7 @@ func _input(event: InputEvent) -> void:
 		# Ⓧ/[E] _pressed_ -> Convert `grass` to `dirt` using hoe
 		if event.is_action_pressed(player.controls.button_2):
 			if player.get_meta("is_holding_hoe", false):
+				player.play_locked_animation("Standing_Digging/mixamo_com", 3.0)
 				await get_tree().create_timer(3.0).timeout
 				var dirt_block_scene := preload("res://scenes/level_3/blocks/dirt_block.tscn")
 				var dirt_block_instance := dirt_block_scene.instantiate()

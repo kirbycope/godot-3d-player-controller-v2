@@ -15,11 +15,11 @@ material = SubResource("StandardMaterial3D_j3sw6")
 size = Vector2(0.5, 0.5)
 orientation = 2
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_cke3i"]
-size = Vector3(0.2, 0.4, 0.2)
+[sub_resource type="BoxShape3D" id="BoxShape3D_dkpfw"]
 
 [node name="FlowerRed" type="StaticBody3D" groups=["Plant"]]
 collision_layer = 2
+collision_mask = 3
 script = ExtResource("1_dkpfw")
 
 [node name="Side1" type="MeshInstance3D" parent="."]
@@ -31,5 +31,5 @@ transform = Transform3D(-0.7071068, 0, -0.7071067, 0, 1, 0, 0.7071067, 0, -0.707
 mesh = SubResource("PlaneMesh_dkpfw")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.9802322e-08, 0.19999997, 2.9802322e-08)
-shape = SubResource("BoxShape3D_cke3i")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.9802322e-08, 0.5, 2.9802322e-08)
+shape = SubResource("BoxShape3D_dkpfw")
