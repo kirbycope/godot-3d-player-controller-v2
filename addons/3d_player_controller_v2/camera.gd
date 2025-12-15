@@ -129,6 +129,7 @@ func _input(event: InputEvent) -> void:
 			child.freeze = false
 		# Reparent the child object back to its original parent (assuming that's the Player's parent too)
 		child.reparent(player.get_parent(), true)
+		return
 
 	# Ⓧ/[E] _pressed_ -> Pickup object
 	if event.is_action_pressed(player.controls.button_2) \
@@ -153,6 +154,7 @@ func _input(event: InputEvent) -> void:
 					collider.rotation = Vector3.ZERO
 					# Reparent the Ridgidbody3D to the item mount
 					collider.reparent(item_spring_arm)
+					return
 	
 	# 🅁1/[MB1] press to pick up an object -> Throw object
 	if event.is_action_pressed(player.controls.button_5) \

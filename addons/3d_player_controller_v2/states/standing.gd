@@ -381,7 +381,8 @@ func start() -> void:
 	player.virtual_velocity = Vector3.ZERO
 
 	# Connect animation finished signal
-	player.animation_player.connect("animation_finished", _on_animation_finished)
+	if not player.animation_player.is_connected("animation_finished", _on_animation_finished):
+		player.animation_player.connect("animation_finished", _on_animation_finished)
 
 
 ## Stop "standing".

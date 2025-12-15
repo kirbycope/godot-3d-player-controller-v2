@@ -121,7 +121,7 @@ var is_holding_rifle := false ## Is the player wielding a rifle?
 var is_aiming_rifle := false ## Is the player aiming a rifle?
 var is_firing_rifle := false ## Is the player firing a rifle?
 
-@onready var animation_player: AnimationPlayer = $Visuals/Godette/AnimationPlayer
+@onready var animation_player: AnimationPlayer = $Visuals/Character/AnimationPlayer
 @onready var base_state: BaseState = $States/Base
 @onready var collision_shape: CollisionShape3D = $CollisionShape3D
 @onready var collision_height: float  = collision_shape.shape.height

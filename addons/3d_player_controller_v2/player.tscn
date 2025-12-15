@@ -188,7 +188,7 @@ one_shot = true
 
 [node name="Visuals" type="Node3D" parent="."]
 
-[node name="Godette" parent="Visuals" instance=ExtResource("12_ahy2k")]
+[node name="Character" parent="Visuals" instance=ExtResource("12_ahy2k")]
 
 [node name="RayCast3D_JumpTarget" type="RayCast3D" parent="Visuals"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -0.315)
