@@ -22,21 +22,21 @@ func _process(delta: float) -> void:
 ## Plays the appropriate animation based on player state.
 func play_animation() -> void:
 	if player.is_reacting_low_left:
-		if player.animation_player.current_animation != ANIMATION_REACTING_LOW_LEFT:
-			player.animation_player.play(ANIMATION_REACTING_LOW_LEFT)
-			player.animation_player.connect("animation_finished", _on_animation_finished)
+		if player.animation_player_current_animation() != ANIMATION_REACTING_LOW_LEFT:
+			player.animation_player_play(ANIMATION_REACTING_LOW_LEFT)
+			player.animation_player_connect("animation_finished", _on_animation_finished)
 	elif player.is_reacting_low_right:
-		if player.animation_player.current_animation != ANIMATION_REACTING_LOW_RIGHT:
-			player.animation_player.play(ANIMATION_REACTING_LOW_RIGHT)
-			player.animation_player.connect("animation_finished", _on_animation_finished)
+		if player.animation_player_current_animation() != ANIMATION_REACTING_LOW_RIGHT:
+			player.animation_player_play(ANIMATION_REACTING_LOW_RIGHT)
+			player.animation_player_connect("animation_finished", _on_animation_finished)
 	elif player.is_reacting_high_left:
-		if player.animation_player.current_animation != ANIMATION_REACTING_HIGH_LEFT:
-			player.animation_player.play(ANIMATION_REACTING_HIGH_LEFT)
-			player.animation_player.connect("animation_finished", _on_animation_finished)
+		if player.animation_player_current_animation() != ANIMATION_REACTING_HIGH_LEFT:
+			player.animation_player_play(ANIMATION_REACTING_HIGH_LEFT)
+			player.animation_player_connect("animation_finished", _on_animation_finished)
 	elif player.is_reacting_high_right:
-		if player.animation_player.current_animation != ANIMATION_REACTING_HIGH_RIGHT:
-			player.animation_player.play(ANIMATION_REACTING_HIGH_RIGHT)
-			player.animation_player.connect("animation_finished", _on_animation_finished)
+		if player.animation_player_current_animation() != ANIMATION_REACTING_HIGH_RIGHT:
+			player.animation_player_play(ANIMATION_REACTING_HIGH_RIGHT)
+			player.animation_player_connect("animation_finished", _on_animation_finished)
 
 
 func _on_animation_finished(animation_name: String) -> void:
@@ -63,7 +63,7 @@ func start() -> void:
 	player.is_reacting = true
 
 	# Connect animation finished signal
-	player.animation_player.connect("animation_finished", _on_animation_finished)
+	player.animation_player_connect("animation_finished", _on_animation_finished)
 
 
 ## Stop "reacting".
@@ -75,8 +75,8 @@ func stop() -> void:
 	player.is_reacting = false
 
 	# Clear state specific flags
-	_on_animation_finished(player.animation_player.current_animation)
+	_on_animation_finished(player.animation_player_current_animation()) 
 
 	# Disconnect animation finished signal
-	if player.animation_player.is_connected("animation_finished", _on_animation_finished):
-		player.animation_player.disconnect("animation_finished", _on_animation_finished)
+	if player.animation_player_is_connected("animation_finished", _on_animation_finished):
+		player.animation_player_disconnect("animation_finished", _on_animation_finished)

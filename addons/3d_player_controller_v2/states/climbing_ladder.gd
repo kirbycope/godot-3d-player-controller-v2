@@ -52,21 +52,21 @@ func _process(delta: float) -> void:
 ## Plays the appropriate animation based on player state.
 func play_animation() -> void:
 	if player.speed_current > player.speed_climbing:
-		player.animation_player.speed_scale = 1.5
+		player.animation_player_set_speed_scale(1.5)
 	else:
-		player.animation_player.speed_scale = 1.0
-	if player.animation_player.current_animation != ANIMATION_CLIMBING_LADDER:
-		player.animation_player.play(ANIMATION_CLIMBING_LADDER, 0.0)
+		player.animation_player_set_speed_scale(1.0)
+	if player.animation_player_current_animation() != ANIMATION_CLIMBING_LADDER:
+		player.animation_player_play(ANIMATION_CLIMBING_LADDER, 0.0)
 	if player.input_direction.y < 0:
-		if player.animation_player.current_animation != ANIMATION_CLIMBING_LADDER:
-			player.animation_player.play(ANIMATION_CLIMBING_LADDER)
+		if player.animation_player_current_animation() != ANIMATION_CLIMBING_LADDER:
+			player.animation_player_play(ANIMATION_CLIMBING_LADDER)
 	elif player.input_direction.y > 0:
-		if player.animation_player.current_animation != ANIMATION_CLIMBING_LADDER:
-			player.animation_player.play_backwards(ANIMATION_CLIMBING_LADDER)
+		if player.animation_player_current_animation() != ANIMATION_CLIMBING_LADDER:
+			player.animation_player_play_backwards(ANIMATION_CLIMBING_LADDER)
 	else:
-		if player.animation_player.current_animation == ANIMATION_CLIMBING_LADDER:
-			player.animation_player.play(ANIMATION_CLIMBING_LADDER, 0.0)
-		player.animation_player.pause()
+		if player.animation_player_current_animation() == ANIMATION_CLIMBING_LADDER:
+			player.animation_player_play(ANIMATION_CLIMBING_LADDER, 0.0)
+		player.animation_player_pause()
 
 
 ## Start "climbing ladder".
@@ -92,7 +92,7 @@ func start() -> void:
 
 	# Play the appropriate animation
 	await get_tree().process_frame
-	player.play_locked_animation(ANIMATION_CLIMBING_LADDER, 0.2)
+	player.animation_player_play_locked(ANIMATION_CLIMBING_LADDER, 0.2)
 
 
 ## Stop "climbing ladder".
@@ -104,4 +104,4 @@ func stop() -> void:
 	player.is_climbing_ladder = false
 
 	# Reset animation playback speed
-	player.animation_player.speed_scale = 1.0
+	player.animation_player_set_speed_scale(1.0)

@@ -26,19 +26,19 @@ func _process(delta: float) -> void:
 	else:
 		# (DPad-Up)/[Tab] _released_ -> Emote __
 		if Input.is_action_just_released(player.controls.button_12):
-			player.play_locked_animation("Standing_Clapping/mixamo_com")
+			player.animation_player_play_locked("Standing_Clapping/mixamo_com")
 			hide()
 		# (DPad-Down)/[Q] _released_ -> Emote __
 		elif Input.is_action_just_released(player.controls.button_13):
-			player.play_locked_animation("Standing_Crying/mixamo_com")
+			player.animation_player_play_locked("Standing_Crying/mixamo_com")
 			hide()
 		# (DPad-Down)/[B] _released_ -> Emote __
 		elif Input.is_action_just_released(player.controls.button_14):
-			player.play_locked_animation("Standing_Waving/mixamo_com")
+			player.animation_player_play_locked("Standing_Waving/mixamo_com")
 			hide()
 		# (DPad-Right)/[T] _released_ -> Emote __
 		elif Input.is_action_just_released(player.controls.button_15):
-			player.play_locked_animation("Standing_Quick_Informal_Bow/mixamo_com")
+			player.animation_player_play_locked("Standing_Quick_Informal_Bow/mixamo_com")
 			hide()
 		# (Start)/[Esc] _pressed_ -> Hide emotes
 		elif Input.is_action_just_pressed(player.controls.button_9):

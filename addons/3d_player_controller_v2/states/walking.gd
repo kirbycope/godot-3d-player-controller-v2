@@ -97,30 +97,30 @@ func play_animation() -> void:
 	# -- Rifle animations --
 	if player.is_holding_rifle:
 		if player.is_firing_rifle:
-			if player.animation_player.current_animation != ANIMATION_WALKING_FIRING_RIFLE:
+			if player.animation_player_current_animation() != ANIMATION_WALKING_FIRING_RIFLE:
 				if play_backwards:
-					_on_animation_finished(player.animation_player.current_animation)
-					player.animation_player.play_backwards(ANIMATION_WALKING_FIRING_RIFLE)
+					_on_animation_finished(player.animation_player_current_animation()) 
+					player.animation_player_play_backwards(ANIMATION_WALKING_FIRING_RIFLE)
 				else:
-					player.animation_player.play(ANIMATION_WALKING_FIRING_RIFLE)
+					player.animation_player_play(ANIMATION_WALKING_FIRING_RIFLE)
 		else:
-			if player.animation_player.current_animation != ANIMATION_WALKING_HOLDING_RIFLE:
+			if player.animation_player_current_animation() != ANIMATION_WALKING_HOLDING_RIFLE:
 				if play_backwards:
-					_on_animation_finished(player.animation_player.current_animation)
-					player.animation_player.play_backwards(ANIMATION_WALKING_HOLDING_RIFLE)
+					_on_animation_finished(player.animation_player_current_animation()) 
+					player.animation_player_play_backwards(ANIMATION_WALKING_HOLDING_RIFLE)
 				else:
-					_on_animation_finished(player.animation_player.current_animation)
-					player.animation_player.play(ANIMATION_WALKING_HOLDING_RIFLE)
+					_on_animation_finished(player.animation_player_current_animation()) 
+					player.animation_player_play(ANIMATION_WALKING_HOLDING_RIFLE)
 
 	# -- Unarmed animations --
 	else:
-		if player.animation_player.current_animation != ANIMATION_WALKING:
+		if player.animation_player_current_animation() != ANIMATION_WALKING:
 			if play_backwards:
-				_on_animation_finished(player.animation_player.current_animation)
-				player.animation_player.play_backwards(ANIMATION_WALKING)
+				_on_animation_finished(player.animation_player_current_animation()) 
+				player.animation_player_play_backwards(ANIMATION_WALKING)
 			else:
-				_on_animation_finished(player.animation_player.current_animation)
-				player.animation_player.play(ANIMATION_WALKING)
+				_on_animation_finished(player.animation_player_current_animation()) 
+				player.animation_player_play(ANIMATION_WALKING)
 
 
 func _on_animation_finished(animation_name: String) -> void:
@@ -143,7 +143,7 @@ func start() -> void:
 	player.speed_current = player.speed_walking
 
 	# Connect animation finished signal
-	player.animation_player.connect("animation_finished", _on_animation_finished)
+	player.animation_player_connect("animation_finished", _on_animation_finished)
 
 
 ## Stop "walking".
@@ -155,8 +155,8 @@ func stop() -> void:
 	player.is_walking = false
 
 	# Clear state specific flags
-	_on_animation_finished(player.animation_player.current_animation)
+	_on_animation_finished(player.animation_player_current_animation()) 
 
 	# Disconnect animation finished signal
-	if player.animation_player.is_connected("animation_finished", _on_animation_finished):
-		player.animation_player.disconnect("animation_finished", _on_animation_finished)
+	if player.animation_player_is_connected("animation_finished", _on_animation_finished):
+		player.animation_player_disconnect("animation_finished", _on_animation_finished)

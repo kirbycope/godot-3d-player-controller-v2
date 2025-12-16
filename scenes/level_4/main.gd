@@ -16,7 +16,7 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed(player.controls.button_5) \
 	and player.enable_throwing:
-		player.play_locked_animation("Standing_Throwing_Right/mixamo_com")
+		player.animation_player_play_locked("Standing_Throwing_Right/mixamo_com")
 		await get_tree().create_timer(0.8).timeout
 		var tennis_ball = $TennisBall.duplicate()
 		tennis_ball.get_node("PlayerDetection").monitoring = false

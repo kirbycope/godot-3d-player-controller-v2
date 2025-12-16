@@ -24,9 +24,9 @@ func play_animation() -> void:
 	var is_braced = player.ray_cast_low.is_colliding()
 
 	if is_braced:
-		if player.animation_player.current_animation != ANIMATION_MANTLING_BRACED:
-			player.animation_player.play(ANIMATION_MANTLING_BRACED)
-			player.animation_player.connect("animation_finished", _on_animation_finished)
+		if player.animation_player_current_animation() != ANIMATION_MANTLING_BRACED:
+			player.animation_player_play(ANIMATION_MANTLING_BRACED)
+			player.animation_player_connect("animation_finished", _on_animation_finished)
 			# Tween camera position during animation
 			var camera_start_position = player.camera.global_position
 			var end_position = player.ray_cast_jump_target.get_collision_point()
@@ -37,12 +37,12 @@ func play_animation() -> void:
 				player.camera,
 				"global_position",
 				camera_end_position,
-				player.animation_player.current_animation_length
+				player.animation_player_current_animation_length()
 			)
 	else:
-		if player.animation_player.current_animation != ANIMATION_MANTLING_HANGING:
-			player.animation_player.play(ANIMATION_MANTLING_HANGING)
-			player.animation_player.connect("animation_finished", _on_animation_finished)
+		if player.animation_player_current_animation() != ANIMATION_MANTLING_HANGING:
+			player.animation_player_play(ANIMATION_MANTLING_HANGING)
+			player.animation_player_connect("animation_finished", _on_animation_finished)
 			# Tween camera position during animation
 			var camera_start_position = player.camera.global_position
 			var end_position = player.ray_cast_jump_target.get_collision_point()
@@ -53,7 +53,7 @@ func play_animation() -> void:
 				player.camera,
 				"global_position",
 				camera_end_position,
-				player.animation_player.current_animation_length
+				player.animation_player_current_animation_length()
 			)
 
 
@@ -62,9 +62,9 @@ func _on_animation_finished(anim_name: String) -> void:
 		ANIMATION_MANTLING_BRACED,
 		ANIMATION_MANTLING_HANGING,
 	]:
-		if player.animation_player.is_connected("animation_finished", _on_animation_finished):
-			player.animation_player.disconnect("animation_finished", _on_animation_finished)
-		player.animation_player.play("Standing/mixamo_com", 0.0, 1.0, false)
+		if player.animation_player_is_connected("animation_finished", _on_animation_finished):
+			player.animation_player_disconnect("animation_finished", _on_animation_finished)
+		player.animation_player_play("Standing/mixamo_com", 0.0, 1.0, false)
 		player.global_position = player.ray_cast_jump_target.get_collision_point()
 		transition_state(NODE_STATE, States.State.STANDING)
 

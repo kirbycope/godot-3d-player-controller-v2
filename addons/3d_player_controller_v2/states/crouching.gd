@@ -86,23 +86,23 @@ func play_animation() -> void:
 	# -- Rifle animations --
 	if player.is_holding_rifle:
 		if player.is_firing_rifle:
-			if player.animation_player.current_animation != ANIMATION_CROUCHING_FIRING:
-				_on_animation_finished(player.animation_player.current_animation)
-				player.animation_player.play(ANIMATION_CROUCHING_FIRING)
+			if player.animation_player_current_animation() != ANIMATION_CROUCHING_FIRING:
+				_on_animation_finished(player.animation_player_current_animation())
+				player.animation_player_play(ANIMATION_CROUCHING_FIRING)
 		elif player.is_aiming_rifle:
-			if player.animation_player.current_animation != ANIMATION_CROUCHING_AIMING:
-				_on_animation_finished(player.animation_player.current_animation)
-				player.animation_player.play(ANIMATION_CROUCHING_AIMING)
+			if player.animation_player_current_animation() != ANIMATION_CROUCHING_AIMING:
+				_on_animation_finished(player.animation_player_current_animation())
+				player.animation_player_play(ANIMATION_CROUCHING_AIMING)
 		else:
-			if player.animation_player.current_animation != ANIMATION_CROUCHING_HOLDING_RIFLE:
-				_on_animation_finished(player.animation_player.current_animation)
-				player.animation_player.play(ANIMATION_CROUCHING_HOLDING_RIFLE)
+			if player.animation_player_current_animation() != ANIMATION_CROUCHING_HOLDING_RIFLE:
+				_on_animation_finished(player.animation_player_current_animation())
+				player.animation_player_play(ANIMATION_CROUCHING_HOLDING_RIFLE)
 
 	# -- Unarmed animation --
 	else:
-		if player.animation_player.current_animation != ANIMATION_CROUCHING_IDLE:
-			_on_animation_finished(player.animation_player.current_animation)
-			player.animation_player.play(ANIMATION_CROUCHING_IDLE)
+		if player.animation_player_current_animation() != ANIMATION_CROUCHING_IDLE:
+			_on_animation_finished(player.animation_player_current_animation())
+			player.animation_player_play(ANIMATION_CROUCHING_IDLE)
 
 
 func _on_animation_finished(animation_name: String) -> void:
@@ -134,7 +134,7 @@ func start() -> void:
 	player.collision_shape.position = player.collision_position / 2
 
 	# Connect animation finished signal
-	player.animation_player.connect("animation_finished", _on_animation_finished)
+	player.animation_player_connect("animation_finished", _on_animation_finished)
 
 
 ## Stop "crouching".
@@ -152,8 +152,8 @@ func stop() -> void:
 	player.collision_shape.position = player.collision_position
 
 	# Clear state specific flags
-	_on_animation_finished(player.animation_player.current_animation)
+	_on_animation_finished(player.animation_player_current_animation())
 
 	# Disconnect animation finished signal
-	if player.animation_player.is_connected("animation_finished", _on_animation_finished):
-		player.animation_player.disconnect("animation_finished", _on_animation_finished)
+	if player.animation_player_is_connected("animation_finished", _on_animation_finished):
+		player.animation_player_disconnect("animation_finished", _on_animation_finished)

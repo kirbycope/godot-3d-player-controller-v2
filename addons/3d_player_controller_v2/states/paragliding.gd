@@ -43,9 +43,9 @@ func _process(delta: float) -> void:
 ## Plays the appropriate animation based on player state.
 func play_animation() -> void:
 	# Check if the animation player is not already playing the appropriate animation
-	if player.animation_player.current_animation != ANIMATION_PARAGLIDING:
+	if player.animation_player_current_animation() != ANIMATION_PARAGLIDING:
 		# Play the "paragliding" animation
-		player.animation_player.play(ANIMATION_PARAGLIDING)
+		player.animation_player_play(ANIMATION_PARAGLIDING)
 
 
 ## Start "paragliding".

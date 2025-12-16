@@ -105,13 +105,13 @@ func _process(delta: float) -> void:
 func play_animation() -> void:
 	# -- Rifle animations --
 	if player.is_holding_rifle:
-		if player.animation_player.current_animation != ANIMATION_JUMPING_HOLDING_RIFLE:
-			player.animation_player.play(ANIMATION_JUMPING_HOLDING_RIFLE)
+		if player.animation_player_current_animation() != ANIMATION_JUMPING_HOLDING_RIFLE:
+			player.animation_player_play(ANIMATION_JUMPING_HOLDING_RIFLE)
 
 	# -- Unarmed animations --
 	else:
-		if player.animation_player.current_animation != ANIMATION_JUMPING:
-			player.animation_player.play(ANIMATION_JUMPING)
+		if player.animation_player_current_animation() != ANIMATION_JUMPING:
+			player.animation_player_play(ANIMATION_JUMPING)
 
 
 ## Start "jumping".

@@ -54,9 +54,9 @@ func _physics_process(delta: float) -> void:
 ## Plays the appropriate animation based on player state.
 func play_animation() -> void:
 	# Check if the animation player is not already playing the appropriate animation
-	if player.animation_player.current_animation != ANIMATION_RUNNING:
+	if player.animation_player_current_animation() != ANIMATION_RUNNING:
 		# Play the "running" animation
-		player.animation_player.play(ANIMATION_RUNNING)
+		player.animation_player_play(ANIMATION_RUNNING)
 
 
 ## Navigate to the next position in the path. Called during physics process if navigating.

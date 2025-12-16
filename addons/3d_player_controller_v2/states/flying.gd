@@ -54,12 +54,12 @@ func _process(delta: float) -> void:
 func play_animation() -> void:
 	if player.speed_current == player.speed_flying * 2:
 		# Check if the animation player is not already playing the appropriate animation
-		if player.animation_player.current_animation != ANIMATION_FLYING_FAST:
-			player.animation_player.play(ANIMATION_FLYING_FAST)
+		if player.animation_player_current_animation() != ANIMATION_FLYING_FAST:
+			player.animation_player_play(ANIMATION_FLYING_FAST)
 	else:
 		# Check if the animation player is not already playing the appropriate animation
-		if player.animation_player.current_animation != ANIMATION_FLYING:
-			player.animation_player.play(ANIMATION_FLYING)
+		if player.animation_player_current_animation() != ANIMATION_FLYING:
+			player.animation_player_play(ANIMATION_FLYING)
 
 
 ## Start "flying".

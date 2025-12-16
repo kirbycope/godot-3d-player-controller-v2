@@ -16,7 +16,7 @@ func _input(event: InputEvent) -> void:
 
 		# Ⓧ/[E] _pressed_ -> Start "watering" animation
 		if event.is_action_pressed(player.controls.button_2):
-			#player.play_locked_animation("Standing_Watering/mixamo_com")
+			#player.animation_player_play_locked("Standing_Watering/mixamo_com")
 			pass
 
 		# (D-Pad Down) /[Q] _just_pressed_ -> Drop _this_ node

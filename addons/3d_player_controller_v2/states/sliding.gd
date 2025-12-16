@@ -18,15 +18,15 @@ func _process(delta: float) -> void:
 
 ## Plays the appropriate animation based on player state.
 func play_animation() -> void:
-	if player.animation_player.current_animation != ANIMATION_SLIDING:
-		player.animation_player.play(ANIMATION_SLIDING)
-		player.animation_player.connect("animation_finished", _on_animation_finished)
+	if player.animation_player_current_animation() != ANIMATION_SLIDING:
+		player.animation_player_play(ANIMATION_SLIDING)
+		player.animation_player_connect("animation_finished", _on_animation_finished)
 
 
 func _on_animation_finished(anim_name: String) -> void:
 	if anim_name == ANIMATION_SLIDING:
-		if player.animation_player.is_connected("animation_finished", _on_animation_finished):
-			player.animation_player.disconnect("animation_finished", _on_animation_finished)
+		if player.animation_player_is_connected("animation_finished", _on_animation_finished):
+			player.animation_player_disconnect("animation_finished", _on_animation_finished)
 		if Input.is_action_pressed(player.controls.button_1):
 			transition_state(NODE_STATE, States.State.SPRINTING)
 		elif player.input_direction != Vector2.ZERO:
@@ -53,7 +53,7 @@ func start() -> void:
 	player.collision_shape.position = player.collision_position / 2
 
 	# Connect animation finished signal
-	player.animation_player.connect("animation_finished", _on_animation_finished)
+	player.animation_player_connect("animation_finished", _on_animation_finished)
 
 
 ## Stop "sliding".
@@ -71,8 +71,8 @@ func stop() -> void:
 	player.collision_shape.position = player.collision_position
 
 	# Clear state specific flags
-	_on_animation_finished(player.animation_player.current_animation)
+	_on_animation_finished(player.animation_player_current_animation()) 
 
 	# Disconnect animation finished signal
-	if player.animation_player.is_connected("animation_finished", _on_animation_finished):
-		player.animation_player.disconnect("animation_finished", _on_animation_finished)
+	if player.animation_player_is_connected("animation_finished", _on_animation_finished):
+		player.animation_player_disconnect("animation_finished", _on_animation_finished)

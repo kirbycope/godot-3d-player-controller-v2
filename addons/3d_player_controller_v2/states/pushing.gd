@@ -25,9 +25,9 @@ func _process(_delta: float) -> void:
 ## Plays the appropriate animation based on player state.
 func play_animation() -> void:
 	# Check if the animation player is not already playing the appropriate animation
-	if player.animation_player.current_animation != ANIMATION_PUSHING:
+	if player.animation_player_current_animation() != ANIMATION_PUSHING:
 		# Play the "pushing" animation
-		player.animation_player.play(ANIMATION_PUSHING)
+		player.animation_player_play(ANIMATION_PUSHING)
 
 
 ## Start "pushing".

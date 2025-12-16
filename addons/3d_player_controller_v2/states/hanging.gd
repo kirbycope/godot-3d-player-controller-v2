@@ -86,9 +86,9 @@ func _process(delta: float) -> void:
 func play_animation() -> void:
 	# Adjust playback speed based on hanging speed
 	if player.speed_current > player.speed_hanging:
-		player.animation_player.speed_scale = 1.5
+		player.animation_player_set_speed_scale(1.5)
 	else:
-		player.animation_player.speed_scale = 1.0
+		player.animation_player_set_speed_scale(1.0)
 
 	# Check if the player's hang is braced (the collider has somewhere for the player's footing)
 	var is_braced = player.ray_cast_low.is_colliding()
@@ -96,23 +96,23 @@ func play_animation() -> void:
 	# Move left
 	if Input.is_action_pressed(player.controls.move_left):
 		if is_braced:
-			player.animation_player.play(ANIMATION_HANGING_BRACED_SHIMMY_LEFT)
+			player.animation_player_play(ANIMATION_HANGING_BRACED_SHIMMY_LEFT)
 		else:
-			player.animation_player.play(ANIMATION_HANGING_SHIMMY_LEFT)
+			player.animation_player_play(ANIMATION_HANGING_SHIMMY_LEFT)
 
 	# Move right
 	elif Input.is_action_pressed(player.controls.move_right):
 		if is_braced:
-			player.animation_player.play(ANIMATION_HANGING_BRACED_SHIMMY_RIGHT)
+			player.animation_player_play(ANIMATION_HANGING_BRACED_SHIMMY_RIGHT)
 		else:
-			player.animation_player.play(ANIMATION_HANGING_SHIMMY_RIGHT)
+			player.animation_player_play(ANIMATION_HANGING_SHIMMY_RIGHT)
 
 	# Idle
 	else:
 		if is_braced:
-			player.animation_player.play(ANIMATION_HANGING_BRACED)
+			player.animation_player_play(ANIMATION_HANGING_BRACED)
 		else:
-			player.animation_player.play(ANIMATION_HANGING)
+			player.animation_player_play(ANIMATION_HANGING)
 
 
 ## Start "hanging".
@@ -146,4 +146,4 @@ func stop() -> void:
 	player.is_hanging = false
 
 	# Reset animation playback speed
-	player.animation_player.speed_scale = 1.0
+	player.animation_player_set_speed_scale(1.0)

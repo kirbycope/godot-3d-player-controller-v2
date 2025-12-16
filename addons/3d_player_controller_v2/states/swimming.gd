@@ -54,12 +54,12 @@ func _process(delta: float) -> void:
 func play_animation() -> void:
 	if player.input_direction == Vector2.ZERO:
 		# Check if the animation player is not already playing the appropriate animation
-		if player.animation_player.current_animation != ANIMATION_WADING:
-			player.animation_player.play(ANIMATION_WADING)
+		if player.animation_player_current_animation() != ANIMATION_WADING:
+			player.animation_player_play(ANIMATION_WADING)
 	else:
 		# Check if the animation player is not already playing the appropriate animation
-		if player.animation_player.current_animation != ANIMATION_SWIMMING:
-			player.animation_player.play(ANIMATION_SWIMMING)
+		if player.animation_player_current_animation() != ANIMATION_SWIMMING:
+			player.animation_player_play(ANIMATION_SWIMMING)
 
 
 ## Start "swimming".

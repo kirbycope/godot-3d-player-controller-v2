@@ -89,35 +89,35 @@ func play_animation() -> void:
 	# -- Rifle animations --
 	if player.is_holding_rifle:
 		if player.is_firing_rifle:
-			if player.animation_player.current_animation != ANIMATION_CRAWLING_FIRING_RIFLE:
+			if player.animation_player_current_animation() != ANIMATION_CRAWLING_FIRING_RIFLE:
 				if play_backwards:
-					player.animation_player.play_backwards(ANIMATION_CRAWLING_FIRING_RIFLE)
+					player.animation_player_play_backwards(ANIMATION_CRAWLING_FIRING_RIFLE)
 				else:
-					_on_animation_finished(player.animation_player.current_animation)
-					player.animation_player.play(ANIMATION_CRAWLING_FIRING_RIFLE)
+					_on_animation_finished(player.animation_player_current_animation())
+					player.animation_player_play(ANIMATION_CRAWLING_FIRING_RIFLE)
 		elif player.is_aiming_rifle:
-			if player.animation_player.current_animation != ANIMATION_CRAWLING_AIMING_RIFLE:
+			if player.animation_player_current_animation() != ANIMATION_CRAWLING_AIMING_RIFLE:
 				if play_backwards:
-					player.animation_player.play_backwards(ANIMATION_CRAWLING_AIMING_RIFLE)
+					player.animation_player_play_backwards(ANIMATION_CRAWLING_AIMING_RIFLE)
 				else:
-					_on_animation_finished(player.animation_player.current_animation)
-					player.animation_player.play(ANIMATION_CRAWLING_AIMING_RIFLE)
+					_on_animation_finished(player.animation_player_current_animation())
+					player.animation_player_play(ANIMATION_CRAWLING_AIMING_RIFLE)
 		else:
-			if player.animation_player.current_animation != ANIMATION_CRAWLING_HOLDING_RIFLE:
+			if player.animation_player_current_animation() != ANIMATION_CRAWLING_HOLDING_RIFLE:
 				if play_backwards:
-					player.animation_player.play_backwards(ANIMATION_CRAWLING_HOLDING_RIFLE)
+					player.animation_player_play_backwards(ANIMATION_CRAWLING_HOLDING_RIFLE)
 				else:
-					_on_animation_finished(player.animation_player.current_animation)
-					player.animation_player.play(ANIMATION_CRAWLING_HOLDING_RIFLE)
+					_on_animation_finished(player.animation_player_current_animation())
+					player.animation_player_play(ANIMATION_CRAWLING_HOLDING_RIFLE)
 
 	# -- Unarmed animation --
 	else:
-		if player.animation_player.current_animation != ANIMATION_CRAWLING:
+		if player.animation_player_current_animation() != ANIMATION_CRAWLING:
 			if play_backwards:
-				player.animation_player.play_backwards(ANIMATION_CRAWLING)
+				player.animation_player_play_backwards(ANIMATION_CRAWLING)
 			else:
-				_on_animation_finished(player.animation_player.current_animation)
-				player.animation_player.play(ANIMATION_CRAWLING)
+				_on_animation_finished(player.animation_player_current_animation())
+				player.animation_player_play(ANIMATION_CRAWLING)
 
 
 func _on_animation_finished(animation_name: String) -> void:
@@ -150,7 +150,8 @@ func start() -> void:
 	player.collision_shape.position.z += player.collision_height / 3
 
 	# Connect animation finished signal
-	player.animation_player.connect("animation_finished", _on_animation_finished)
+	if not player.animation_player_is_connected("animation_finished", _on_animation_finished):
+		player.animation_player_connect("animation_finished", _on_animation_finished)
 
 
 ## Stop "crawling".
@@ -171,8 +172,8 @@ func stop() -> void:
 	player.collision_shape.position = player.collision_position
 
 	# Clear state specific flags
-	_on_animation_finished(player.animation_player.current_animation)
+	_on_animation_finished(player.animation_player_current_animation())
 
 	# Disconnect animation finished signal
-	if player.animation_player.is_connected("animation_finished", _on_animation_finished):
-		player.animation_player.disconnect("animation_finished", _on_animation_finished)
+	if player.animation_player_is_connected("animation_finished", _on_animation_finished):
+		player.animation_player_disconnect("animation_finished", _on_animation_finished)

@@ -27,12 +27,12 @@ func _input(_event: InputEvent) -> void:
 				# (dot product > 0.5 means roughly facing the wall, allowing ~60 degree cone)
 				if input_dir_3d.dot(wall_direction) > 0.5:
 					_face_wall()
-					var animation_length = player.play_locked_animation(CLIMBING_ANIMATION)
+					var animation_length = player.animation_player_play_locked(CLIMBING_ANIMATION)
 					var tween = get_tree().create_tween()
 					tween.tween_property(player, "global_position", $EndPoint.global_position, animation_length)
 					tween.finished.connect(func(): 
 						if player:
-							player.animation_player.play(CLIMBING_CROUCHING, 0.0)
+							player.animation_player_play(CLIMBING_CROUCHING, 0.0)
 							tween.queue_free()
 					)
 

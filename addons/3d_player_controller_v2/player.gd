@@ -121,13 +121,14 @@ var is_holding_rifle := false ## Is the player wielding a rifle?
 var is_aiming_rifle := false ## Is the player aiming a rifle?
 var is_firing_rifle := false ## Is the player firing a rifle?
 
-@onready var animation_player: AnimationPlayer = $Visuals/Character/AnimationPlayer
 @onready var base_state: BaseState = $States/Base
 @onready var collision_shape: CollisionShape3D = $CollisionShape3D
-@onready var collision_height: float  = collision_shape.shape.height
-@onready var collision_width: float  = collision_shape.shape.radius * 2
+@onready var collision_height: float = collision_shape.shape.height
+@onready var collision_width: float = collision_shape.shape.radius * 2
 @onready var collision_position: Vector3  = collision_shape.position
 @onready var camera_mount = $CameraMount
+@onready var character: Node3D = $Visuals/Character
+@onready var character_animation_player_speed_scale := 1.0
 @onready var spring_arm = camera_mount.get_node("CameraSpringArm")
 @onready var camera = spring_arm.get_node("Camera3D")
 @onready var chat = $Chat
@@ -151,7 +152,7 @@ var is_firing_rifle := false ## Is the player firing a rifle?
 @onready var ray_cast_below: RayCast3D = visuals.get_node("RayCast3D_Below")
 @onready var settings: CanvasLayer = $Settings
 @onready var skeleton: Skeleton3D = visuals.find_child("GeneralSkeleton")
-@onready var physical_bone_simulator: PhysicalBoneSimulator3D = skeleton.get_node_or_null("PhysicalBoneSimulator3D") ## Setting up a ragdoll is optional so null is allowed
+@onready var physical_bone_simulator: PhysicalBoneSimulator3D = skeleton.get_node_or_null("PhysicalBoneSimulator3D") ## Setting up a ragdoll is optional, so null is allowed
 
 
 ## Called when the node is "ready", i.e. when both the node and its children have entered the scene tree.
@@ -325,6 +326,104 @@ func _physics_process(delta: float) -> void:
 
 	# Move the body based on velocity
 	move(delta)
+
+
+## Connects a [Signal] (by name) to a [Callable] on all [AnimationPlayer] nodes found as the children of [character].
+func animation_player_connect(_signal: String, callable: Callable) -> void:
+	for child in character.get_children():
+		var animation_player: AnimationPlayer = child.get_node("AnimationPlayer")
+		if not animation_player.is_connected(_signal, callable):
+			animation_player.connect(_signal, callable)
+
+
+## Gets the _current animation_ name from the first [AnimationPlayer] node found as a child of [character].
+func animation_player_current_animation() -> String:
+	for child in character.get_children():
+		var animation_player: AnimationPlayer = child.get_node("AnimationPlayer")
+		return animation_player.current_animation
+	return ""
+
+
+## Get the length of the _current animation_ from the first [AnimationPlayer] node found as a child of [character].
+func animation_player_current_animation_length() -> float:
+	for child in character.get_children():
+		var animation_player: AnimationPlayer = child.get_node("AnimationPlayer")
+		return animation_player.current_animation_length
+	return 0.0
+
+
+## Disconnects a [Signal] (by name) from a [Callable] on all [AnimationPlayer] nodes found as the children of [character].
+func animation_player_disconnect(_signal: String, callable: Callable) -> void:
+	for child in character.get_children():
+		var animation_player: AnimationPlayer = child.get_node("AnimationPlayer")
+		if animation_player.is_connected(_signal, callable):
+			animation_player.disconnect(_signal, callable)
+
+
+## Checks if a [Signal] (by name) is connected to a [Callable] on any [AnimationPlayer] nodes found as the children of [character].
+func animation_player_is_connected(_signal: String, callable: Callable) -> bool:
+	for child in character.get_children():
+		var animation_player: AnimationPlayer = child.get_node("AnimationPlayer")
+		if animation_player.is_connected(_signal, callable):
+			return true
+	return false
+
+
+## Pauses all animations on all [AnimationPlayer] nodes found as the children of [character].
+func animation_player_pause() -> void:
+	for child in character.get_children():
+		var animation_player: AnimationPlayer = child.get_node("AnimationPlayer")
+		animation_player.call_deferred("pause")
+
+
+## Plays an animation on all [AnimationPlayer] nodes found as the children of [character].
+func animation_player_play(name: StringName = &"", custom_blend: float = -1, custom_speed: float = 1.0, from_end: bool = false) -> void:
+	for child in character.get_children():
+		var animation_player: AnimationPlayer = child.get_node("AnimationPlayer")
+		animation_player.call_deferred("play", name, custom_blend, custom_speed, from_end)
+
+
+## Plays an animation backwards on all [AnimationPlayer] nodes found as the children of [character].
+func animation_player_play_backwards(name: StringName = &"", custom_blend: float = -1) -> void:
+	for child in character.get_children():
+		var animation_player: AnimationPlayer = child.get_node("AnimationPlayer")
+		animation_player.call_deferred("play_backwards", name, custom_blend)
+
+
+## Plays a locked animation that disables state processing until it finishes.
+func animation_player_play_locked(name: String, duration: float = -1.0) -> float:
+	var current_state_name = base_state.get_state_name(current_state)
+	var current_state_scene = get_parent().find_child(current_state_name)
+	current_state_scene.process_mode = Node.PROCESS_MODE_DISABLED
+	if duration == -1.0:
+		animation_player_play(name)
+	else:
+		animation_player_play_section(name, 0.0, duration)
+	animation_player_connect("animation_finished", _on_locked_animation_finished)
+	is_animation_locked = true
+	return animation_player_current_animation_length()
+
+
+## Plays a section of an animation on all [AnimationPlayer] nodes found as the children of [character].
+func  animation_player_play_section(name: StringName = &"", start_time: float = -1, end_time: float = -1, custom_blend: float = -1, custom_speed: float = 1.0, from_end: bool = false) -> void:
+	for child in character.get_children():
+		var animation_player: AnimationPlayer = child.get_node("AnimationPlayer")
+		animation_player.call_deferred("play_section", name, start_time, end_time, custom_blend, custom_speed, from_end)
+
+
+## Sets the _speed scale_ on all [AnimationPlayer] nodes found as the children of [character].
+func animation_player_set_speed_scale(speed_scale: float) -> void:
+	for child in character.get_children():
+		var animation_player: AnimationPlayer = child.get_node("AnimationPlayer")
+		animation_player.call_deferred("set_speed_scale", speed_scale)
+		character_animation_player_speed_scale = speed_scale
+
+
+## Stops all animations on all [AnimationPlayer] nodes found as the children of [character].
+func animation_player_stop() -> void:
+	for child in character.get_children():
+		var animation_player: AnimationPlayer = child.get_node("AnimationPlayer")
+		animation_player.call_deferred("stop")
 
 
 ## Applies an impact impulse to a collider at the specified bone's position.
@@ -554,23 +653,9 @@ func move_to_wall() -> void:
 		visuals.look_at(position + wall_direction, up_direction)
 
 
-## Plays a locked animation that disables state processing until it finishes.
-func play_locked_animation(animation_name: String, duration: float = -1.0) -> float:
-	var current_state_name = base_state.get_state_name(current_state)
-	var current_state_scene = get_parent().find_child(current_state_name)
-	current_state_scene.process_mode = Node.PROCESS_MODE_DISABLED
-	if duration == -1.0:
-		animation_player.play(animation_name)
-	else:
-		animation_player.play_section(animation_name, 0.0, duration)
-	animation_player.connect("animation_finished", _on_locked_animation_finished)
-	is_animation_locked = true
-	return animation_player.current_animation_length
-
-
 ## Callback for when a locked animation finishes playing.
 func _on_locked_animation_finished(animation_name: String) -> void:
-	animation_player.disconnect("animation_finished", _on_locked_animation_finished)
+	animation_player_disconnect("animation_finished", _on_locked_animation_finished)
 	var current_state_name = base_state.get_state_name(current_state)
 	var current_state_scene = get_parent().find_child(current_state_name)
 	current_state_scene.process_mode = Node.PROCESS_MODE_INHERIT

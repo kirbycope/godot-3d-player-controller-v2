@@ -13,7 +13,7 @@ func _input(event: InputEvent) -> void:
 		# Ⓧ/[E] _pressed_ -> Swing scythe
 		if event.is_action_pressed(player.controls.button_2):
 			if player.get_meta("is_holding_scythe", false):
-				player.play_locked_animation("Standing_Harvesting/mixamo_com", 1.0)
+				player.animation_player_play_locked("Standing_Harvesting/mixamo_com", 1.0)
 				if block_below:
 					block_below.planted = null
 				queue_free()

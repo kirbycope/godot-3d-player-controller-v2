@@ -23,10 +23,10 @@ func _input(event: InputEvent) -> void:
 			# Use watering can
 			if player.get_meta("is_holding_watering_can", false) \
 			and not is_moist:
-				player.play_locked_animation("Standing_Watering/mixamo_com")
+				player.animation_player_play_locked("Standing_Watering/mixamo_com")
 				is_moist = true
 				# Tween albedo color starting halfway through the animation
-				var animation_length = player.animation_player.current_animation_length
+				var animation_length = player.animation_player_current_animation_length()
 				var material = $MeshInstance3D.get_active_material(0).duplicate()
 				$MeshInstance3D.set_surface_override_material(0, material)
 				var tween = get_tree().create_tween()
@@ -46,7 +46,7 @@ func _input(event: InputEvent) -> void:
 					global_position.z,
 				)
 				player.look_at(flat_target, player.up_direction)
-				player.play_locked_animation("Crouching_Planting/mixamo_com")
+				player.animation_player_play_locked("Crouching_Planting/mixamo_com")
 				await get_tree().create_timer(2.5).timeout
 				var flower_red_scene := preload("res://scenes/level_3/blocks/flower_red.tscn")
 				var flower_red_instance := flower_red_scene.instantiate()

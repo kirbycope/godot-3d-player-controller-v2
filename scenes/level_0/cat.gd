@@ -24,7 +24,7 @@ func _input(event: InputEvent) -> void:
 			if animation_player.current_animation != "Caress_idle":
 				animation_player.play("Caress_idle")
 				animation_player.connect("animation_finished", _on_cat_animation_finished)
-			player.play_locked_animation("Standing_Petting_Animal_High/mixamo_com")
+			player.animation_player_play_locked("Standing_Petting_Animal_High/mixamo_com")
 
 
 func _on_area_3d_body_entered(body: Node3D) -> void:

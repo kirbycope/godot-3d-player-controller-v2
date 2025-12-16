@@ -67,7 +67,7 @@ func _process(_delta: float) -> void:
 			# Start the hide progress bar timer
 			timer_hide.start()
 			if player.is_on_floor():
-				player.play_locked_animation("Standing_Breathing_Heavy/mixamo_com")
+				player.animation_player_play_locked("Standing_Breathing_Heavy/mixamo_com")
 
 		# Check if the game is paused
 		if player.pause.is_visible():

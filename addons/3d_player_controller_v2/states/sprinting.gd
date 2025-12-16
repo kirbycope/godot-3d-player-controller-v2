@@ -58,19 +58,19 @@ func play_animation() -> void:
 
 	# -- Rifle animations --
 	if player.is_holding_rifle:
-		if player.animation_player.current_animation != ANIMATION_SPRINTING_HOLDING_RIFLE:
+		if player.animation_player_current_animation() != ANIMATION_SPRINTING_HOLDING_RIFLE:
 			if play_backwards:
-				player.animation_player.play_backwards(ANIMATION_SPRINTING_HOLDING_RIFLE)
+				player.animation_player_play_backwards(ANIMATION_SPRINTING_HOLDING_RIFLE)
 			else:
-				player.animation_player.play(ANIMATION_SPRINTING_HOLDING_RIFLE)
+				player.animation_player_play(ANIMATION_SPRINTING_HOLDING_RIFLE)
 
 	# -- Unarmed animations --
 	else:
-		if player.animation_player.current_animation != ANIMATION_SPRINTING:
+		if player.animation_player_current_animation() != ANIMATION_SPRINTING:
 			if play_backwards:
-				player.animation_player.play_backwards(ANIMATION_SPRINTING)
+				player.animation_player_play_backwards(ANIMATION_SPRINTING)
 			else:
-				player.animation_player.play(ANIMATION_SPRINTING)
+				player.animation_player_play(ANIMATION_SPRINTING)
 
 
 ## Start "sprinting".

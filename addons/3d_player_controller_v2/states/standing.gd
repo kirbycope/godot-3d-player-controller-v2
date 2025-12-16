@@ -92,7 +92,7 @@ func _input(event: InputEvent) -> void:
 		# Left "punching"
 		if player.enable_punching:
 			if not player.is_punching_left:
-				_on_animation_finished(player.animation_player.current_animation)
+				_on_animation_finished(player.animation_player_current_animation()) 
 				player.is_punching_left = true
 				player.timer_punch_left.start()
 			return
@@ -112,7 +112,7 @@ func _input(event: InputEvent) -> void:
 		# Left "kicking"
 		if player.enable_kicking \
 		and not player.is_kicking_left:
-			_on_animation_finished(player.animation_player.current_animation)
+			_on_animation_finished(player.animation_player_current_animation()) 
 			player.is_kicking_left = true
 			player.timer_kick_left.start()
 
@@ -162,7 +162,7 @@ func _input(event: InputEvent) -> void:
 		# Right "punching"
 		elif player.enable_punching:
 			if not player.is_punching_right:
-				_on_animation_finished(player.animation_player.current_animation)
+				_on_animation_finished(player.animation_player_current_animation()) 
 				player.is_punching_right = true
 				player.timer_punch_right.start()
 			return
@@ -185,7 +185,7 @@ func _input(event: InputEvent) -> void:
 		# Right "kicking"
 		if player.enable_kicking \
 		and not player.is_kicking_right:
-			_on_animation_finished(player.animation_player.current_animation)
+			_on_animation_finished(player.animation_player_current_animation()) 
 			player.is_kicking_right = true
 			player.timer_kick_right.start()
 
@@ -219,120 +219,120 @@ func play_animation() -> void:
 	# 🦵 -- Kicking animations --
 	if player.enable_kicking \
 	and player.is_kicking_left:
-		if player.animation_player.current_animation != ANIMATION_KICKING_LEFT:
-			_on_animation_finished(player.animation_player.current_animation)
-			player.animation_player.play(ANIMATION_KICKING_LEFT)
+		if player.animation_player_current_animation() != ANIMATION_KICKING_LEFT:
+			_on_animation_finished(player.animation_player_current_animation()) 
+			player.animation_player_play(ANIMATION_KICKING_LEFT)
 	elif player.enable_kicking \
 	and player.is_kicking_right:
-		if player.animation_player.current_animation != ANIMATION_KICKING_RIGHT:
-			_on_animation_finished(player.animation_player.current_animation)
-			player.animation_player.play(ANIMATION_KICKING_RIGHT)
+		if player.animation_player_current_animation() != ANIMATION_KICKING_RIGHT:
+			_on_animation_finished(player.animation_player_current_animation()) 
+			player.animation_player_play(ANIMATION_KICKING_RIGHT)
 
 	# 🎣 -- Fishing animations --
 	elif player.is_holding_fishing_rod:
 		if player.is_casting_fishing:
-			if player.animation_player.current_animation != ANIMATION_FISHING_CASTING:
-				_on_animation_finished(player.animation_player.current_animation)
-				player.animation_player.play(ANIMATION_FISHING_CASTING)
+			if player.animation_player_current_animation() != ANIMATION_FISHING_CASTING:
+				_on_animation_finished(player.animation_player_current_animation()) 
+				player.animation_player_play(ANIMATION_FISHING_CASTING)
 		elif player.is_reeling_fishing:
-			if player.animation_player.current_animation != ANIMATION_FISHING_REELING:
-				_on_animation_finished(player.animation_player.current_animation)
-				player.animation_player.play(ANIMATION_FISHING_REELING)
+			if player.animation_player_current_animation() != ANIMATION_FISHING_REELING:
+				_on_animation_finished(player.animation_player_current_animation()) 
+				player.animation_player_play(ANIMATION_FISHING_REELING)
 		else:
-			if player.animation_player.current_animation != ANIMATION_FISHING_IDLE:
-				_on_animation_finished(player.animation_player.current_animation)
-				player.animation_player.play(ANIMATION_FISHING_IDLE)
+			if player.animation_player_current_animation() != ANIMATION_FISHING_IDLE:
+				_on_animation_finished(player.animation_player_current_animation()) 
+				player.animation_player_play(ANIMATION_FISHING_IDLE)
 
 	# 🔫 -- Rifle animations --
 	elif player.is_holding_rifle:
 		if player.is_firing_rifle:
-			if player.animation_player.current_animation != ANIMATION_RIFLE_FIRING:
-				_on_animation_finished(player.animation_player.current_animation)
-				player.animation_player.play(ANIMATION_RIFLE_FIRING)
+			if player.animation_player_current_animation() != ANIMATION_RIFLE_FIRING:
+				_on_animation_finished(player.animation_player_current_animation()) 
+				player.animation_player_play(ANIMATION_RIFLE_FIRING)
 		elif player.is_aiming_rifle:
-			if player.animation_player.current_animation != ANIMATION_RIFLE_AIMING:
-				_on_animation_finished(player.animation_player.current_animation)
-				player.animation_player.play(ANIMATION_RIFLE_AIMING)
+			if player.animation_player_current_animation() != ANIMATION_RIFLE_AIMING:
+				_on_animation_finished(player.animation_player_current_animation()) 
+				player.animation_player_play(ANIMATION_RIFLE_AIMING)
 		else:
-			if player.animation_player.current_animation != ANIMATION_HOLDING_RIFLE:
-				_on_animation_finished(player.animation_player.current_animation)
-				player.animation_player.play(ANIMATION_HOLDING_RIFLE)
+			if player.animation_player_current_animation() != ANIMATION_HOLDING_RIFLE:
+				_on_animation_finished(player.animation_player_current_animation()) 
+				player.animation_player_play(ANIMATION_HOLDING_RIFLE)
 
 	# 🛠️ -- 1H animations --
 	elif player.is_holding_1h_left \
 	and player.is_holding_1h_right:
 		if player.is_swinging_1h_left:
-			if player.animation_player.current_animation != ANIMATION_SWINGING_1H_LEFT:
-				_on_animation_finished(player.animation_player.current_animation)
-				player.animation_player.play(ANIMATION_SWINGING_1H_LEFT)
+			if player.animation_player_current_animation() != ANIMATION_SWINGING_1H_LEFT:
+				_on_animation_finished(player.animation_player_current_animation()) 
+				player.animation_player_play(ANIMATION_SWINGING_1H_LEFT)
 		elif player.is_swinging_1h_right:	
-			if player.animation_player.current_animation != ANIMATION_SWINGING_1H_RIGHT:
-				_on_animation_finished(player.animation_player.current_animation)
-				player.animation_player.play(ANIMATION_SWINGING_1H_RIGHT)
-		elif player.animation_player.current_animation != ANIMATION_HOLDING_1H_RIGHT:
-			player.animation_player.play(ANIMATION_HOLDING_1H_RIGHT)
+			if player.animation_player_current_animation() != ANIMATION_SWINGING_1H_RIGHT:
+				_on_animation_finished(player.animation_player_current_animation()) 
+				player.animation_player_play(ANIMATION_SWINGING_1H_RIGHT)
+		elif player.animation_player_current_animation() != ANIMATION_HOLDING_1H_RIGHT:
+			player.animation_player_play(ANIMATION_HOLDING_1H_RIGHT)
 	elif player.is_holding_1h_left:
 		if player.is_blocking_1h_left:
-			if player.animation_player.current_animation != ANIMATION_BLOCKING_1H_LEFT:
-				player.animation_player.play(ANIMATION_BLOCKING_1H_LEFT)
+			if player.animation_player_current_animation() != ANIMATION_BLOCKING_1H_LEFT:
+				player.animation_player_play(ANIMATION_BLOCKING_1H_LEFT)
 		elif player.is_swinging_1h_left:
-			if player.animation_player.current_animation != ANIMATION_SWINGING_1H_LEFT:
-				_on_animation_finished(player.animation_player.current_animation)
-				player.animation_player.play(ANIMATION_SWINGING_1H_LEFT)
-		elif player.animation_player.current_animation != ANIMATION_HOLDING_1H_LEFT:
-			player.animation_player.play(ANIMATION_HOLDING_1H_LEFT)
+			if player.animation_player_current_animation() != ANIMATION_SWINGING_1H_LEFT:
+				_on_animation_finished(player.animation_player_current_animation()) 
+				player.animation_player_play(ANIMATION_SWINGING_1H_LEFT)
+		elif player.animation_player_current_animation() != ANIMATION_HOLDING_1H_LEFT:
+			player.animation_player_play(ANIMATION_HOLDING_1H_LEFT)
 	elif player.is_holding_1h_right:
 		if player.is_blocking_1h_right:
-			if player.animation_player.current_animation != ANIMATION_BLOCKING_1H_RIGHT:
-				player.animation_player.play(ANIMATION_BLOCKING_1H_RIGHT)
+			if player.animation_player_current_animation() != ANIMATION_BLOCKING_1H_RIGHT:
+				player.animation_player_play(ANIMATION_BLOCKING_1H_RIGHT)
 		elif player.is_swinging_1h_right:
-			if player.animation_player.current_animation != ANIMATION_SWINGING_1H_RIGHT:
-				_on_animation_finished(player.animation_player.current_animation)
-				player.animation_player.play(ANIMATION_SWINGING_1H_RIGHT)
-		elif player.animation_player.current_animation != ANIMATION_HOLDING_1H_RIGHT:
-			player.animation_player.play(ANIMATION_HOLDING_1H_RIGHT)
+			if player.animation_player_current_animation() != ANIMATION_SWINGING_1H_RIGHT:
+				_on_animation_finished(player.animation_player_current_animation()) 
+				player.animation_player_play(ANIMATION_SWINGING_1H_RIGHT)
+		elif player.animation_player_current_animation() != ANIMATION_HOLDING_1H_RIGHT:
+			player.animation_player_play(ANIMATION_HOLDING_1H_RIGHT)
 
 	# 👐 -- 2H animations --
 	elif player.is_holding_2h:
 		if player.is_blocking_2h:
-			if player.animation_player.current_animation != ANIMATION_BLOCKING_2H:
-				player.animation_player.play(ANIMATION_BLOCKING_2H)
+			if player.animation_player_current_animation() != ANIMATION_BLOCKING_2H:
+				player.animation_player_play(ANIMATION_BLOCKING_2H)
 		elif player.is_swinging_2h:
-			if player.animation_player.current_animation != ANIMATION_SWINGING_2H:
-				_on_animation_finished(player.animation_player.current_animation)
-				player.animation_player.play(ANIMATION_SWINGING_2H)
-		elif player.animation_player.current_animation != ANIMATION_HOLDING_2H:
-			player.animation_player.play(ANIMATION_HOLDING_2H)
+			if player.animation_player_current_animation() != ANIMATION_SWINGING_2H:
+				_on_animation_finished(player.animation_player_current_animation()) 
+				player.animation_player_play(ANIMATION_SWINGING_2H)
+		elif player.animation_player_current_animation() != ANIMATION_HOLDING_2H:
+			player.animation_player_play(ANIMATION_HOLDING_2H)
 
 	# 🤾 -- Throwing animations --
 	elif player.is_holding_left \
 	and player.is_throwing_left:
-		if player.animation_player.current_animation != ANIMATION_THROWING_LEFT:
-			_on_animation_finished(player.animation_player.current_animation)
-			player.animation_player.play(ANIMATION_THROWING_LEFT)
+		if player.animation_player_current_animation() != ANIMATION_THROWING_LEFT:
+			_on_animation_finished(player.animation_player_current_animation()) 
+			player.animation_player_play(ANIMATION_THROWING_LEFT)
 	elif player.is_holding_right \
 	and player.is_throwing_right:
-		if player.animation_player.current_animation != ANIMATION_THROWING_RIGHT:
-			_on_animation_finished(player.animation_player.current_animation)
-			player.animation_player.play(ANIMATION_THROWING_RIGHT)
+		if player.animation_player_current_animation() != ANIMATION_THROWING_RIGHT:
+			_on_animation_finished(player.animation_player_current_animation()) 
+			player.animation_player_play(ANIMATION_THROWING_RIGHT)
 
 	# 🥊 -- Punching animations --
 	elif player.enable_punching \
 	and player.is_punching_left:
-		if player.animation_player.current_animation != ANIMATION_PUNCHING_LEFT:
-			_on_animation_finished(player.animation_player.current_animation)
-			player.animation_player.play(ANIMATION_PUNCHING_LEFT)
+		if player.animation_player_current_animation() != ANIMATION_PUNCHING_LEFT:
+			_on_animation_finished(player.animation_player_current_animation()) 
+			player.animation_player_play(ANIMATION_PUNCHING_LEFT)
 	elif player.enable_punching \
 	and player.is_punching_right:
-		if player.animation_player.current_animation != ANIMATION_PUNCHING_RIGHT:
-			_on_animation_finished(player.animation_player.current_animation)
-			player.animation_player.play(ANIMATION_PUNCHING_RIGHT)
+		if player.animation_player_current_animation() != ANIMATION_PUNCHING_RIGHT:
+			_on_animation_finished(player.animation_player_current_animation()) 
+			player.animation_player_play(ANIMATION_PUNCHING_RIGHT)
 
 	# ✋ -- Unarmed animation --
 	else:
-		if player.animation_player.current_animation != ANIMATION_STANDING_IDLE:
-			_on_animation_finished(player.animation_player.current_animation)
-			player.animation_player.play(ANIMATION_STANDING_IDLE)
+		if player.animation_player_current_animation() != ANIMATION_STANDING_IDLE:
+			_on_animation_finished(player.animation_player_current_animation()) 
+			player.animation_player_play(ANIMATION_STANDING_IDLE)
 
 
 func _on_animation_finished(animation_name: String) -> void:
@@ -381,8 +381,8 @@ func start() -> void:
 	player.virtual_velocity = Vector3.ZERO
 
 	# Connect animation finished signal
-	if not player.animation_player.is_connected("animation_finished", _on_animation_finished):
-		player.animation_player.connect("animation_finished", _on_animation_finished)
+	if not player.animation_player_is_connected("animation_finished", _on_animation_finished):
+		player.animation_player_connect("animation_finished", _on_animation_finished)
 
 
 ## Stop "standing".
@@ -394,8 +394,8 @@ func stop() -> void:
 	player.is_standing = false
 
 	# Clear state specific flags
-	_on_animation_finished(player.animation_player.current_animation)
+	_on_animation_finished(player.animation_player_current_animation()) 
 
 	# Disconnect animation finished signal
-	if player.animation_player.is_connected("animation_finished", _on_animation_finished):
-		player.animation_player.disconnect("animation_finished", _on_animation_finished)
+	if player.animation_player_is_connected("animation_finished", _on_animation_finished):
+		player.animation_player_disconnect("animation_finished", _on_animation_finished)
