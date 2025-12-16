@@ -30,8 +30,8 @@ func _process(delta: float) -> void:
 	# Have the player follow the hips bone position, so that the camera follows the ragdoll
 	if not player.pause.visible:
 		time_ragdolling += delta
-		if player.skeleton.has_node(BONE_FOR_CAMERA_TO_FOLLOW):
-			player.global_position = player.skeleton.get_node(BONE_FOR_CAMERA_TO_FOLLOW).global_position
+		if player.skeleton().has_node(BONE_FOR_CAMERA_TO_FOLLOW):
+			player.global_position = player.skeleton().get_node(BONE_FOR_CAMERA_TO_FOLLOW).global_position
 
 
 ## Start ragdoll state
@@ -49,14 +49,14 @@ func start() -> void:
 	time_ragdolling = 0.0
 
 	# Check if player has a physical bone simulator
-	if player.physical_bone_simulator:
+	if player.physical_bone_simulator():
 
 		# Ensure collision is disabled
 		player.collision_shape.disabled = true
 
 		# Now activate the ragdoll simulation
-		player.physical_bone_simulator.active = true
-		player.physical_bone_simulator.physical_bones_start_simulation()
+		player.physical_bone_simulator().active = true
+		player.physical_bone_simulator().physical_bones_start_simulation()
 
 
 ## Stop ragdoll state
@@ -68,10 +68,10 @@ func stop() -> void:
 	player.is_ragdolling = false
 
 	# Ensure ragdoll is properly stopped
-	if player.physical_bone_simulator:
-		if player.physical_bone_simulator.active:
-			player.physical_bone_simulator.physical_bones_stop_simulation()
-			player.physical_bone_simulator.active = false
+	if player.physical_bone_simulator():
+		if player.physical_bone_simulator().active:
+			player.physical_bone_simulator().physical_bones_stop_simulation()
+			player.physical_bone_simulator().active = false
 
 	# Ensure collision is re-enabled
 	player.collision_shape.disabled = false

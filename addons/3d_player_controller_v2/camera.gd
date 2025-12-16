@@ -272,9 +272,9 @@ func move_camera_mount_to_player() -> void:
 
 ## Update the camera to follow the character head's position (while in "first person").
 func move_camera_to_player_head() -> void:
-	var bone_index = player.skeleton.find_bone(player.bone_name_head)
-	var bone_pose = player.skeleton.get_bone_global_pose(bone_index)
-	var bone_world_pos = player.skeleton.global_transform * bone_pose.origin
+	var bone_index = player.skeleton().find_bone(player.bone_name_head)
+	var bone_pose = player.skeleton().get_bone_global_pose(bone_index)
+	var bone_world_pos = player.skeleton().global_transform * bone_pose.origin
 	global_position = bone_world_pos
 	global_rotation = camera_mount.global_rotation
 	global_position += global_transform.basis.z * -0.15 # Adjust as needed

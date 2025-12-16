@@ -151,8 +151,6 @@ var is_firing_rifle := false ## Is the player firing a rifle?
 @onready var ray_cast_low: RayCast3D = visuals.get_node("RayCast3D_Low")
 @onready var ray_cast_below: RayCast3D = visuals.get_node("RayCast3D_Below")
 @onready var settings: CanvasLayer = $Settings
-@onready var skeleton: Skeleton3D = visuals.find_child("GeneralSkeleton")
-@onready var physical_bone_simulator: PhysicalBoneSimulator3D = skeleton.get_node_or_null("PhysicalBoneSimulator3D") ## Setting up a ragdoll is optional, so null is allowed
 
 
 ## Called when the node is "ready", i.e. when both the node and its children have entered the scene tree.
@@ -328,6 +326,30 @@ func _physics_process(delta: float) -> void:
 	move(delta)
 
 
+@rpc("any_peer", "call_local")
+func animate_hit_low_left() -> void:
+	is_reacting_low_left = true
+	base_state.transition_state(current_state, States.State.REACTING)
+
+
+@rpc("any_peer", "call_local")
+func animate_hit_low_right() -> void:
+	is_reacting_low_right = true
+	base_state.transition_state(current_state, States.State.REACTING)
+
+
+@rpc("any_peer", "call_local")
+func animate_hit_high_left() -> void:
+	is_reacting_high_left = true
+	base_state.transition_state(current_state, States.State.REACTING)
+
+
+@rpc("any_peer", "call_local")
+func animate_hit_high_right() -> void:
+	is_reacting_high_right = true
+	base_state.transition_state(current_state, States.State.REACTING)
+
+
 ## Connects a [Signal] (by name) to a [Callable] on all [AnimationPlayer] nodes found as the children of [character].
 func animation_player_connect(_signal: String, callable: Callable) -> void:
 	for child in character.get_children():
@@ -338,18 +360,24 @@ func animation_player_connect(_signal: String, callable: Callable) -> void:
 
 ## Gets the _current animation_ name from the first [AnimationPlayer] node found as a child of [character].
 func animation_player_current_animation() -> String:
+	var animation_name: String = "" ## The key of the currently playing animation.
 	for child in character.get_children():
-		var animation_player: AnimationPlayer = child.get_node("AnimationPlayer")
-		return animation_player.current_animation
-	return ""
+		var animation_player: AnimationPlayer = child.get_node_or_null("AnimationPlayer")
+		if animation_player:
+			animation_name = animation_player.current_animation
+			break
+	return animation_name
 
 
 ## Get the length of the _current animation_ from the first [AnimationPlayer] node found as a child of [character].
 func animation_player_current_animation_length() -> float:
+	var animation_length: float = 0.0 ## The length (in seconds) of the currently playing animation.
 	for child in character.get_children():
-		var animation_player: AnimationPlayer = child.get_node("AnimationPlayer")
-		return animation_player.current_animation_length
-	return 0.0
+		var animation_player: AnimationPlayer = child.get_node_or_null("AnimationPlayer")
+		if animation_player:
+			animation_length = animation_player.current_animation_length
+			break
+	return animation_length
 
 
 ## Disconnects a [Signal] (by name) from a [Callable] on all [AnimationPlayer] nodes found as the children of [character].
@@ -430,10 +458,10 @@ func animation_player_stop() -> void:
 func apply_impact(collider, bone_name, force_multiplier = 1.0) -> void:
 	# Get the bone's global position
 	var bone_position = global_position
-	var bone_idx = skeleton.find_bone(bone_name)
+	var bone_idx = skeleton().find_bone(bone_name)
 	if bone_idx != -1:
 		# Get the current global position of the bone
-		bone_position = skeleton.to_global(skeleton.get_bone_global_pose(bone_idx).origin)
+		bone_position = skeleton().to_global(skeleton().get_bone_global_pose(bone_idx).origin)
 
 	# Calculate the direction from the bone to the collider's position
 	var collider_position = collider.global_position
@@ -458,6 +486,30 @@ func apply_impact(collider, bone_name, force_multiplier = 1.0) -> void:
 			Input.start_joy_vibration(0, 1.0, 1.0, 0.1)
 		else:
 			Input.start_joy_vibration(0, 0.0, 1.0, 0.2)
+
+
+## Applies impulse to colliders when sliding against them.
+func handle_collisions() -> void:
+	# Iterate through all slide collisions; from move_and_slide()
+	for i in get_slide_collision_count():
+		var collision = get_slide_collision(i)
+		var collider = collision.get_collider()
+
+		# Handle RigidBody3D collisions
+		if collider is RigidBody3D:
+			var push_force = force_pushing_sprinting if is_sprinting else force_pushing
+			var push_direction = collision.get_normal() * -1.0
+			var velocity_factor = min(velocity.length(), 5.0)
+			var impulse = push_direction * push_force * velocity_factor
+			collider.apply_central_impulse(impulse)
+
+		# Handle SoftBody3D collisions
+		elif collider is SoftBody3D:
+			var push_force = force_pushing_sprinting if is_sprinting else force_pushing
+			var push_direction = collision.get_normal() * -1.0
+			var velocity_factor = min(velocity.length(), 5.0)
+			var impulse = push_direction * push_force * velocity_factor
+			collider.apply_central_impulse(impulse)
 
 
 ## Moves the player while adhering to the current surface orientation.
@@ -551,30 +603,6 @@ func move_player() -> void:
 		visuals.look_at(position + wall_forward, up_direction)
 
 
-## Applies impulse to colliders when sliding against them.
-func handle_collisions() -> void:
-	# Iterate through all slide collisions; from move_and_slide()
-	for i in get_slide_collision_count():
-		var collision = get_slide_collision(i)
-		var collider = collision.get_collider()
-
-		# Handle RigidBody3D collisions
-		if collider is RigidBody3D:
-			var push_force = force_pushing_sprinting if is_sprinting else force_pushing
-			var push_direction = collision.get_normal() * -1.0
-			var velocity_factor = min(velocity.length(), 5.0)
-			var impulse = push_direction * push_force * velocity_factor
-			collider.apply_central_impulse(impulse)
-
-		# Handle SoftBody3D collisions
-		elif collider is SoftBody3D:
-			var push_force = force_pushing_sprinting if is_sprinting else force_pushing
-			var push_direction = collision.get_normal() * -1.0
-			var velocity_factor = min(velocity.length(), 5.0)
-			var impulse = push_direction * push_force * velocity_factor
-			collider.apply_central_impulse(impulse)
-
-
 ## Snaps the player to the middle of the ladder they are climbing.
 func move_to_ladder() -> void:
 	# Get the collision point
@@ -653,6 +681,24 @@ func move_to_wall() -> void:
 		visuals.look_at(position + wall_direction, up_direction)
 
 
+## Gets the [PhysicalBoneSimulator3D] node from the player's [Skeleton3D].
+func physical_bone_simulator() -> PhysicalBoneSimulator3D:
+	var physical_bone_simulator: PhysicalBoneSimulator3D = null
+	if skeleton():
+		physical_bone_simulator = skeleton().get_node_or_null("PhysicalBoneSimulator3D")
+	return physical_bone_simulator
+
+
+## Gets the [Skeleton3D] node from the player's `$Character`.
+func skeleton() -> Skeleton3D:
+	var skeleton: Skeleton3D = null
+	for child in character.get_children():
+		skeleton = child.get_node_or_null("%GeneralSkeleton")
+		if skeleton:
+			break
+	return skeleton
+
+
 ## Callback for when a locked animation finishes playing.
 func _on_locked_animation_finished(animation_name: String) -> void:
 	animation_player_disconnect("animation_finished", _on_locked_animation_finished)
@@ -660,30 +706,6 @@ func _on_locked_animation_finished(animation_name: String) -> void:
 	var current_state_scene = get_parent().find_child(current_state_name)
 	current_state_scene.process_mode = Node.PROCESS_MODE_INHERIT
 	is_animation_locked = false
-
-
-@rpc("any_peer", "call_local")
-func animate_hit_low_left() -> void:
-	is_reacting_low_left = true
-	base_state.transition_state(current_state, States.State.REACTING)
-
-
-@rpc("any_peer", "call_local")
-func animate_hit_low_right() -> void:
-	is_reacting_low_right = true
-	base_state.transition_state(current_state, States.State.REACTING)
-
-
-@rpc("any_peer", "call_local")
-func animate_hit_high_left() -> void:
-	is_reacting_high_left = true
-	base_state.transition_state(current_state, States.State.REACTING)
-
-
-@rpc("any_peer", "call_local")
-func animate_hit_high_right() -> void:
-	is_reacting_high_right = true
-	base_state.transition_state(current_state, States.State.REACTING)
 
 
 func _on_kick_left_timeout() -> void:
