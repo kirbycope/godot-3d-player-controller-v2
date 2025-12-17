@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://f6xpywa7euq2"]
+[gd_scene load_steps=21 format=3 uid="uid://f6xpywa7euq2"]
 
 [ext_resource type="Script" uid="uid://b7plmenqhwlu4" path="res://addons/3d_player_controller_v2/player.gd" id="1_ifhah"]
 [ext_resource type="Script" uid="uid://5rlkn1wdmtq0" path="res://addons/3d_player_controller_v2/camera.gd" id="2_mpser"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://bvr74sywbui7h" path="res://addons/3d_player_controller_v2/assets/textures/game_icons/white/2x/audioOn.png" id="8_7nn76"]
 [ext_resource type="PackedScene" uid="uid://ddphjodki6dkl" path="res://addons/3d_player_controller_v2/settings.tscn" id="9_ok7gw"]
 [ext_resource type="PackedScene" uid="uid://phce5r228frv" path="res://addons/3d_player_controller_v2/godette.tscn" id="12_ahy2k"]
+[ext_resource type="Script" uid="uid://cvexaudeea2b8" path="res://addons/3d_player_controller_v2/character.gd" id="13_a5e81"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ifhah"]
 radius = 0.3
@@ -189,6 +190,8 @@ one_shot = true
 [node name="Visuals" type="Node3D" parent="."]
 
 [node name="Character" parent="Visuals" instance=ExtResource("12_ahy2k")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+script = ExtResource("13_a5e81")
 
 [node name="RayCast3D_JumpTarget" type="RayCast3D" parent="Visuals"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -0.315)
