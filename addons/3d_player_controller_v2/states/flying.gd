@@ -91,6 +91,9 @@ func start() -> void:
 	# Set the player collision shape's position
 	player.collision_shape.position = player.collision_position / 3
 
+	# Move the player slightly upward to avoid immediate ground collision
+	player.position.y += player.collision_shape.shape.height / 4
+
 
 ## Stop "flying".
 func stop() -> void:

@@ -38,6 +38,7 @@ extends CharacterBody3D
 @export var bone_name_left_hand := "LeftHand" ## Name of the left hand bone in the skeleton
 @export var bone_name_right_hand := "RightHand" ## Name of the right hand bone in the skeleton
 @export_group("SPEED")
+@export var playback_default_blend_time: float = 0.2
 @export var speed_climbing := 1.0 ## Speed while climbing
 @export var speed_crawling := 0.75 ## Speed while crawling
 @export var speed_flying := 5.0 ## Speed while flying
@@ -155,6 +156,12 @@ var is_firing_rifle := false ## Is the player firing a rifle?
 
 ## Called when the node is "ready", i.e. when both the node and its children have entered the scene tree.
 func _ready() -> void:
+	# Setup animations for all `character` components
+	setup_animations()
+
+	# Setup physical bone simulators for all `character` components
+	setup_physical_bone_simulators()
+
 	# Initialize the state machine
 	$States/Standing.start()
 
@@ -350,10 +357,9 @@ func animate_hit_high_right() -> void:
 	base_state.transition_state(current_state, States.State.REACTING)
 
 
-## Connects a [Signal] (by name) to a [Callable] on all [AnimationPlayer] nodes found as the children of [character].
+## Connects a [Signal] (by name) to a [Callable] on all [AnimationPlayer] nodes found under [character] (recursively).
 func animation_player_connect(_signal: String, callable: Callable) -> void:
-	for child in character.get_children():
-		var animation_player: AnimationPlayer = child.get_node("AnimationPlayer")
+	for animation_player in animation_players():
 		if not animation_player.is_connected(_signal, callable):
 			animation_player.connect(_signal, callable)
 
@@ -361,60 +367,51 @@ func animation_player_connect(_signal: String, callable: Callable) -> void:
 ## Gets the _current animation_ name from the first [AnimationPlayer] node found as a child of [character].
 func animation_player_current_animation() -> String:
 	var animation_name: String = "" ## The key of the currently playing animation.
-	for child in character.get_children():
-		var animation_player: AnimationPlayer = child.get_node_or_null("AnimationPlayer")
-		if animation_player:
-			animation_name = animation_player.current_animation
-			break
+	for animation_player in animation_players():
+		animation_name = animation_player.current_animation
+		break
 	return animation_name
 
 
 ## Get the length of the _current animation_ from the first [AnimationPlayer] node found as a child of [character].
 func animation_player_current_animation_length() -> float:
 	var animation_length: float = 0.0 ## The length (in seconds) of the currently playing animation.
-	for child in character.get_children():
-		var animation_player: AnimationPlayer = child.get_node_or_null("AnimationPlayer")
-		if animation_player:
-			animation_length = animation_player.current_animation_length
-			break
+	for animation_player in animation_players():
+		animation_length = animation_player.current_animation_length
+		break
 	return animation_length
 
 
-## Disconnects a [Signal] (by name) from a [Callable] on all [AnimationPlayer] nodes found as the children of [character].
+## Disconnects a [Signal] (by name) from a [Callable] on all [AnimationPlayer] nodes found under [character] (recursively).
 func animation_player_disconnect(_signal: String, callable: Callable) -> void:
-	for child in character.get_children():
-		var animation_player: AnimationPlayer = child.get_node("AnimationPlayer")
+	for animation_player in animation_players():
 		if animation_player.is_connected(_signal, callable):
 			animation_player.disconnect(_signal, callable)
 
 
-## Checks if a [Signal] (by name) is connected to a [Callable] on any [AnimationPlayer] nodes found as the children of [character].
+## Checks if a [Signal] (by name) is connected to a [Callable] on any [AnimationPlayer] nodes found under [character] (recursively).
 func animation_player_is_connected(_signal: String, callable: Callable) -> bool:
-	for child in character.get_children():
-		var animation_player: AnimationPlayer = child.get_node("AnimationPlayer")
+	for animation_player in animation_players():
 		if animation_player.is_connected(_signal, callable):
 			return true
 	return false
 
 
-## Pauses all animations on all [AnimationPlayer] nodes found as the children of [character].
+## Pauses all animations on all [AnimationPlayer] nodes found under [character] (recursively).
 func animation_player_pause() -> void:
-	for child in character.get_children():
-		var animation_player: AnimationPlayer = child.get_node("AnimationPlayer")
+	for animation_player in animation_players():
 		animation_player.call_deferred("pause")
 
 
-## Plays an animation on all [AnimationPlayer] nodes found as the children of [character].
+## Plays an animation on all [AnimationPlayer] nodes found under [character] (recursively).
 func animation_player_play(name: StringName = &"", custom_blend: float = -1, custom_speed: float = 1.0, from_end: bool = false) -> void:
-	for child in character.get_children():
-		var animation_player: AnimationPlayer = child.get_node("AnimationPlayer")
+	for animation_player in animation_players():
 		animation_player.call_deferred("play", name, custom_blend, custom_speed, from_end)
 
 
-## Plays an animation backwards on all [AnimationPlayer] nodes found as the children of [character].
+## Plays an animation backwards on all [AnimationPlayer] nodes found under [character] (recursively).
 func animation_player_play_backwards(name: StringName = &"", custom_blend: float = -1) -> void:
-	for child in character.get_children():
-		var animation_player: AnimationPlayer = child.get_node("AnimationPlayer")
+	for animation_player in animation_players():
 		animation_player.call_deferred("play_backwards", name, custom_blend)
 
 
@@ -432,26 +429,33 @@ func animation_player_play_locked(name: String, duration: float = -1.0) -> float
 	return animation_player_current_animation_length()
 
 
-## Plays a section of an animation on all [AnimationPlayer] nodes found as the children of [character].
+## Plays a section of an animation on all [AnimationPlayer] nodes found under [character] (recursively).
 func  animation_player_play_section(name: StringName = &"", start_time: float = -1, end_time: float = -1, custom_blend: float = -1, custom_speed: float = 1.0, from_end: bool = false) -> void:
-	for child in character.get_children():
-		var animation_player: AnimationPlayer = child.get_node("AnimationPlayer")
+	for animation_player in animation_players():
 		animation_player.call_deferred("play_section", name, start_time, end_time, custom_blend, custom_speed, from_end)
 
 
-## Sets the _speed scale_ on all [AnimationPlayer] nodes found as the children of [character].
+## Sets the _speed scale_ on all [AnimationPlayer] nodes found under [character] (recursively).
 func animation_player_set_speed_scale(speed_scale: float) -> void:
-	for child in character.get_children():
-		var animation_player: AnimationPlayer = child.get_node("AnimationPlayer")
+	for animation_player in animation_players():
 		animation_player.call_deferred("set_speed_scale", speed_scale)
 		character_animation_player_speed_scale = speed_scale
 
 
-## Stops all animations on all [AnimationPlayer] nodes found as the children of [character].
+## Stops all animations on all [AnimationPlayer] nodes found under [character] (recursively).
 func animation_player_stop() -> void:
-	for child in character.get_children():
-		var animation_player: AnimationPlayer = child.get_node("AnimationPlayer")
+	for animation_player in animation_players():
 		animation_player.call_deferred("stop")
+
+
+## Gets all child [AnimationPlayer] nodes found under [character] (recursively).
+func animation_players() -> Array:
+	var animation_players: Array = []
+	if character:
+		var nodes = character.find_children("*", "AnimationPlayer", true, true)
+		for node in nodes:
+			animation_players.append(node)
+	return animation_players
 
 
 ## Applies an impact impulse to a collider at the specified bone's position.
@@ -687,6 +691,101 @@ func physical_bone_simulator() -> PhysicalBoneSimulator3D:
 	if skeleton():
 		physical_bone_simulator = skeleton().get_node_or_null("PhysicalBoneSimulator3D")
 	return physical_bone_simulator
+
+
+## Sets up an [AnimationPlayer] for all child nodes of the `character`.
+func setup_animations() -> void:
+	### Animations from "quaternius.com"
+	#var quaternius: AnimationLibrary = load("res://assets/universal_animation_library/AnimationLibrary_Godot.glb")
+	# Add an [AnimationPlayer] to each child and attach the library
+	#for child in character.get_children():
+	#	var animation_player: AnimationPlayer = child.get_node_or_null("AnimationPlayer")
+	#	if animation_player == null:
+	#		animation_player = AnimationPlayer.new()
+	#		animation_player.name = "AnimationPlayer"
+	#		child.add_child(animation_player)
+	#	# Ensure the library is attached (add if not present)
+	#	if not animation_player.has_animation_library("AnimationLibrary_Godot"):
+	#		animation_player.add_animation_library("AnimationLibrary_Godot", quaternius)
+	#	# Configuration - Set the default blend time
+	#	animation_player.playback_default_blend_time = playback_default_blend_time
+
+	for child in character.get_children():
+		## Animations from "mixamo.com"
+		var animation_player: AnimationPlayer = null
+		# If the child is itself an [AnimationPlayer] (e.g., GLTF rig root), use it directly
+		if child is AnimationPlayer:
+			animation_player = child
+		else:
+			# Otherwise look for a direct child, named "AnimationPlayer"
+			animation_player = child.get_node_or_null("AnimationPlayer")
+		# If no [AnimationPlayer] is found, continue this `for` loop iteration to create one
+		if animation_player == null:
+			animation_player = AnimationPlayer.new()
+			animation_player.name = "AnimationPlayer"
+			child.add_child(animation_player)
+		# Configuration - Set the default blend time
+		animation_player.playback_default_blend_time = playback_default_blend_time
+		# Load and add animations from addons/3d_player_controller_v2/assets/animations/mixamo/
+		var base_path = "res://addons/3d_player_controller_v2/assets/animations/mixamo/"
+		# Dynamically get all subdirectories in the base path
+		var dir = DirAccess.open(base_path)
+		if dir:
+			dir.list_dir_begin()
+			var category = dir.get_next()
+			while category != "":
+				if category != "." and category != ".." and dir.current_is_dir():
+					var category_path = base_path + category + "/"
+					# Load all .fbx files from each category; ".../climbing/Climbing_Down.fbx" -> 'Climbing_Down' (library) > 'Climbing_Down/mixamo_com' (animation)
+					var category_dir = DirAccess.open(category_path)
+					if category_dir:
+						category_dir.list_dir_begin()
+						var file_name = category_dir.get_next()
+						while file_name != "":
+							if file_name.ends_with(".fbx"):
+								var animation_path = category_path + file_name
+								if ResourceLoader.exists(animation_path):
+									var animation_lib: AnimationLibrary = load(animation_path)
+									var lib_name = file_name.trim_suffix(".fbx")
+									if animation_lib and not animation_player.has_animation_library(lib_name):
+										animation_player.add_animation_library(lib_name, animation_lib)
+							file_name = category_dir.get_next()
+				category = dir.get_next()
+
+
+## Sets up a [PhysicalBoneSimulator3D] for all child nodes of the `character`.
+func setup_physical_bone_simulators() -> void:
+	# Add a PhysicalBoneSimulator3D to each skeleton and setup bones
+	for child in character.get_children():
+		# Locate the skeleton; adjust the path if your rigs differ
+		var skeleton: Skeleton3D = child.get_node_or_null("%GeneralSkeleton")
+		if skeleton == null: continue
+		# Ensure a simulator exists under the skeleton
+		var simulator: PhysicalBoneSimulator3D = skeleton.get_node_or_null("PhysicalBoneSimulator3D")
+		if simulator == null:
+			simulator = PhysicalBoneSimulator3D.new()
+			simulator.name = "PhysicalBoneSimulator3D"
+			simulator.active = false
+			skeleton.add_child(simulator)
+
+		# If no physical bones exist yet, build them manually
+		if simulator.get_child_count() == 0:
+			var bone_count := skeleton.get_bone_count()
+			for bone_idx in bone_count:
+				var bone_name := skeleton.get_bone_name(bone_idx)
+				var phys_bone := PhysicalBone3D.new()
+				phys_bone.name = "Physical Bone " + bone_name
+				phys_bone.bone_name = bone_name
+				phys_bone.transform = skeleton.get_bone_global_rest(bone_idx)
+				simulator.add_child(phys_bone)
+
+				# Minimal collision so the ragdoll can interact; tune per bone later
+				var shape := CollisionShape3D.new()
+				shape.shape = CapsuleShape3D.new()
+				phys_bone.add_child(shape)
+
+		# Leave simulation disabled; ragdoll state toggles it
+		simulator.active = false
 
 
 ## Gets the [Skeleton3D] node from the player's `$Character`.
