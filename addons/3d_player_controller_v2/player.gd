@@ -123,6 +123,8 @@ var is_holding_rifle := false ## Is the player wielding a rifle?
 var is_aiming_rifle := false ## Is the player aiming a rifle?
 var is_firing_rifle := false ## Is the player firing a rifle?
 
+var setup_character = preload("res://addons/3d_player_controller_v2/setup_character.gd")
+
 @onready var base_state: BaseState = $States/Base
 @onready var collision_shape: CollisionShape3D = $CollisionShape3D
 @onready var collision_height: float = collision_shape.shape.height
@@ -157,6 +159,12 @@ var is_firing_rifle := false ## Is the player firing a rifle?
 
 ## Called when the node is "ready", i.e. when both the node and its children have entered the scene tree.
 func _ready() -> void:
+	# Setup animations for all `character` components. Comment out the next line if you have manually added [AnimationPlayer](s) and animations to your `character` model.
+	setup_character.animations(character, 0.2)
+
+	# Setup physical bone simulators for all `character` components
+	setup_character.physical_bone_simulators(character)
+
 	# Initialize the state machine
 	$States/Standing.start()
 

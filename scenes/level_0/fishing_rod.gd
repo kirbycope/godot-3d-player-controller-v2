@@ -49,7 +49,7 @@ func _on_player_detection_body_entered(body: Node3D) -> void:
 		player.is_holding_fishing_rod = true
 		bone_attachment = BoneAttachment3D.new()
 		bone_attachment.bone_name = player.bone_name_left_hand
-		player.skeleton.add_child(bone_attachment)
+		player.skeleton().add_child(bone_attachment)
 		reparent(bone_attachment)
 		global_position = bone_attachment.global_position
 		global_rotation = bone_attachment.global_rotation
