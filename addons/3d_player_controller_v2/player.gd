@@ -1,6 +1,7 @@
+class_name Player
 extends CharacterBody3D
-## 3D player controller with state machine supporting climbing, combat, driving, swimming, and various movement modes
 
+## 3D player controller with state machine supporting climbing, combat, driving, swimming, and various movement modes
 
 @export_group("CONFIG")
 @export var enable_climbing := false ## Enable climbing
