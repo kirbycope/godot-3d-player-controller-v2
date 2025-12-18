@@ -1,50 +1,19 @@
 extends Node3D
 
-# -- SETUP ANIMATIONS -- 
-# TSCN Example: Godette (Rigged) - https://sketchfab.com/3d-models/godette-rigged-dd05b69799a2438e97c90d166f6e416a
-#   * This model comes with an AnimationPlayer. We will add our animation to that library.
-#   * This is in addition to adding AnimationPlayers to any child nodes of its parent Node3D (`Rig`, `Bone_Circle`, etc.)
-# ```
-# Player: [CharacterBody3D] (res://addons/3d_player_controller_v2/player.tscn)
-# ├── Visuals: [Node3D]
-# │   └──  Character: [Character]
-# │	  	└──  Godette: [Node3D]
-# │     	└── Godette: [Node3D] (res://addons/3d_player_controller_v2/assets/characters/godette/Godette.gltf)
-# │      		└── Rig: [Node3D]
-# │      			└── %GeneralSkeleton: [Skeleton3D] (The name _after_ Retargeting)
-# │      				└── Mesh: [MeshInstance3D]
-# │      		└── AnimationPlayer: [Node3D]
-# │   			└── ...
-# ```
-
 
 ## Adds an [AnimationPlayer] for all child nodes of the `character` (unless one already exists) and loads animations from Mixamo.
-static func animations(character: Node3D, playback_default_blend_time = 0.0) -> void:
-	### Animations from "quaternius.com"
-	#var quaternius: AnimationLibrary = load("res://assets/universal_animation_library/AnimationLibrary_Godot.glb")
-	# Add an [AnimationPlayer] to each child and attach the library
-	#for child in character.get_children():
-	#	var animation_player: AnimationPlayer = child.get_node_or_null("AnimationPlayer")
-	#	if animation_player == null:
-	#		animation_player = AnimationPlayer.new()
-	#		animation_player.name = "AnimationPlayer"
-	#		child.add_child(animation_player)
-	#	# Ensure the library is attached (add if not present)
-	#	if not animation_player.has_animation_library("AnimationLibrary_Godot"):
-	#		animation_player.add_animation_library("AnimationLibrary_Godot", quaternius)
-	#	# Configuration - Set the default blend time
-	#	animation_player.playback_default_blend_time = playback_default_blend_time
-
+static func animations_mixamo(character: Node3D, playback_default_blend_time = 0.0) -> void:
+	#print("Setting up Mixamo animations...") # DEBUGGING
+	# Iterate over each child of the `character`
 	for child in character.get_children():
-		## Animations from "mixamo.com"
 		var animation_player: AnimationPlayer = null
-		# If the child is itself an [AnimationPlayer] (e.g., GLTF rig root), use it directly
+		# If the child is itself an [AnimationPlayer], then use it directly
 		if child is AnimationPlayer:
 			animation_player = child
+		# Otherwise, check for a grandchild named "AnimationPlayer"
 		else:
-			# Otherwise look for a direct child, named "AnimationPlayer"
 			animation_player = child.get_node_or_null("AnimationPlayer")
-		# If no [AnimationPlayer] is found, continue this `for` loop iteration to create one
+		# If no [AnimationPlayer] is found, the create one and add it
 		if animation_player == null:
 			animation_player = AnimationPlayer.new()
 			animation_player.name = "AnimationPlayer"
@@ -76,10 +45,45 @@ static func animations(character: Node3D, playback_default_blend_time = 0.0) -> 
 										animation_player.add_animation_library(lib_name, animation_lib)
 							file_name = category_dir.get_next()
 				category = dir.get_next()
+		#print("    AnimationPlayer added to `", child.get_path(), "`")
+	#print("└── Mixamo animations setup complete.") # DEBUGGING
+
+
+## Adds an [AnimationPlayer] for all child nodes of the `character` (unless one already exists) and loads animations from Quaternius.
+static func animations_quaternius(character: Node3D, playback_default_blend_time = 0.0) -> void:
+	#print("Setting up Quaternius animations...") # DEBUGGING
+	var quaternius: AnimationLibrary = load("res://assets/universal_animation_library/AnimationLibrary_Godot.glb")
+	# Iterate over each child of the `character`
+	for child in character.get_children():
+		var animation_player: AnimationPlayer = null
+		# If the child is itself an [AnimationPlayer], then use it directly
+		if child is AnimationPlayer:
+			animation_player = child
+		# Otherwise, check for a grandchild named "AnimationPlayer"
+		else:
+			animation_player = child.get_node_or_null("AnimationPlayer")
+		# If no [AnimationPlayer] is found, then create one and add it
+		if animation_player == null:
+			animation_player = AnimationPlayer.new()
+			animation_player.name = "AnimationPlayer"
+			child.add_child(animation_player)
+		# Configuration - Set the default blend time
+		animation_player.playback_default_blend_time = playback_default_blend_time
+		# Ensure the library is attached (add if not present)
+		if not animation_player.has_animation_library("AnimationLibrary_Godot"):
+			animation_player.add_animation_library("AnimationLibrary_Godot", quaternius)
+		# Set Idle to looping and play it
+		var animation : Animation = animation_player.get_animation("AnimationLibrary_Godot/Idle")
+		if animation:
+			animation.loop_mode = (Animation.LOOP_LINEAR)
+			animation_player.play("AnimationLibrary_Godot/Idle")
+		#print("    AnimationPlayer added to `", child.get_path(), "`") # DEBUGGING
+	#print("└── Quaternius animations setup complete.") # DEBUGGING
 
 
 ## Sets up a [PhysicalBoneSimulator3D] for all child nodes of the `character`.
 static func physical_bone_simulators(character: Node3D) -> void:
+	#print("Setting up PhysicalBoneSimulators...") # DEBUGGING
 	# Add a PhysicalBoneSimulator3D to each skeleton and setup bones
 	for child in character.get_children():
 		# Locate the skeleton; adjust the path if your rigs differ
@@ -111,3 +115,4 @@ static func physical_bone_simulators(character: Node3D) -> void:
 
 		# Leave simulation disabled; ragdoll state toggles it
 		simulator.active = false
+	#print("└── PhysicalBoneSimulators setup complete.") # DEBUGGING

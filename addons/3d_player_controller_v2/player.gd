@@ -160,7 +160,7 @@ var setup_character = preload("res://addons/3d_player_controller_v2/setup_charac
 ## Called when the node is "ready", i.e. when both the node and its children have entered the scene tree.
 func _ready() -> void:
 	# Setup animations for all `character` components. Comment out the next line if you have manually added [AnimationPlayer](s) and animations to your `character` model.
-	setup_character.animations(character, 0.2)
+	setup_character.animations_mixamo(character, 0.2)
 
 	# Setup physical bone simulators for all `character` components
 	setup_character.physical_bone_simulators(character)
@@ -454,10 +454,14 @@ func animation_player_stop() -> void:
 ## Gets all child [AnimationPlayer] nodes found under [character] (recursively).
 func animation_players() -> Array:
 	var animation_players: Array = []
+	# Only continue if `character` is not null
 	if character:
-		var nodes = character.find_children("*", "AnimationPlayer", true, true)
-		for node in nodes:
+		# Search for all [AnimationPlayer] nodes under `character`
+		var search_results = character.find_children("*", "AnimationPlayer", true, false)
+		# Add each found node to the array
+		for node in search_results:
 			animation_players.append(node)
+	#print("Found ", animation_players.size(), " AnimationPlayer(s) under `", character.get_path(), "`") # DEBUGGING
 	return animation_players
 
 

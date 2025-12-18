@@ -124,7 +124,7 @@ func transition_state(from_state: States.State, to_state: States.State) -> void:
 	var to_scene = get_parent().find_child(to_name)
 	# Check if the scenes exist
 	if from_scene and to_scene:
-		print(from_name, " -> ", to_name) # DEBUGGING
+		#print(from_name, " -> ", to_name) # DEBUGGING
 		# Stop processing the "from" scene
 		from_scene.stop()
 		# Start processing the "to" scene
