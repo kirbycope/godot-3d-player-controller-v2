@@ -76,7 +76,7 @@ static func animations_quaternius(character: Node3D, playback_default_blend_time
 		var animation : Animation = animation_player.get_animation("AnimationLibrary_Godot/Idle")
 		if animation:
 			animation.loop_mode = (Animation.LOOP_LINEAR)
-			animation_player.play("AnimationLibrary_Godot/Idle")
+			animation_player.call_deferred("play", "AnimationLibrary_Godot/Idle")
 		#print("    AnimationPlayer added to `", child.get_path(), "`") # DEBUGGING
 	#print("└── Quaternius animations setup complete.") # DEBUGGING
 
