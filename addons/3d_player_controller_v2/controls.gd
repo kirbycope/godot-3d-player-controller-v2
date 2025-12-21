@@ -41,8 +41,8 @@ var last_input_type: InputType
 
 ## Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	# By default, hide the controls UI
-	hide()
+	# By default, hide the mobile controls UI
+	mobile.hide()
 	# Check if [debug] action is not in the Input Map
 	if not InputMap.has_action(debug):
 		# Add the [debug] action to the Input Map

@@ -59,10 +59,18 @@ func _on_resume_pressed() -> void:
 	toggle_menu()
 
 
+func _on_resume_touch_screen_button_pressed() -> void:
+	_on_resume_pressed()
+
+
 func _on_settings_pressed() -> void:
 	player.settings.visible = !player.settings.visible
 	player.settings.back.grab_focus()
 	panel.visible = !player.settings.visible
+
+
+func _on_settings_touch_screen_button_pressed() -> void:
+	_on_settings_pressed()
 
 
 func _on_title_pressed() -> void:
@@ -71,6 +79,14 @@ func _on_title_pressed() -> void:
 	get_parent().get_parent().queue_free()
 
 
+func _on_title_touch_screen_button_pressed() -> void:
+	_on_title_pressed()
+
+
 func _on_exit_pressed() -> void:
 	# Close the application
 	get_tree().quit()
+
+
+func _on_exit_touch_screen_button_pressed() -> void:
+	_on_exit_pressed()

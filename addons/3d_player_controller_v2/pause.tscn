@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://2p8pyabd2bmo"]
+[gd_scene load_steps=3 format=3 uid="uid://2p8pyabd2bmo"]
 
 [ext_resource type="Script" uid="uid://dc3a38bp7370j" path="res://addons/3d_player_controller_v2/pause.gd" id="1_mnl7l"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mnl7l"]
+size = Vector2(70, 31)
 
 [node name="Pause" type="CanvasLayer"]
 script = ExtResource("1_mnl7l")
@@ -37,19 +40,39 @@ horizontal_alignment = 1
 layout_mode = 2
 text = "Resume"
 
+[node name="ResumeTouchScreenButton" type="TouchScreenButton" parent="Panel/VBoxContainer/Resume"]
+position = Vector2(35, 15)
+shape = SubResource("RectangleShape2D_mnl7l")
+
 [node name="Settings" type="Button" parent="Panel/VBoxContainer"]
 layout_mode = 2
 text = "Settings"
+
+[node name="SettingsTouchScreenButton" type="TouchScreenButton" parent="Panel/VBoxContainer/Settings"]
+position = Vector2(35, 15)
+shape = SubResource("RectangleShape2D_mnl7l")
 
 [node name="Title" type="Button" parent="Panel/VBoxContainer"]
 layout_mode = 2
 text = "Title"
 
+[node name="TitleTouchScreenButton" type="TouchScreenButton" parent="Panel/VBoxContainer/Title"]
+position = Vector2(35, 15)
+shape = SubResource("RectangleShape2D_mnl7l")
+
 [node name="Exit" type="Button" parent="Panel/VBoxContainer"]
 layout_mode = 2
 text = "Exit"
 
+[node name="ExitTouchScreenButton" type="TouchScreenButton" parent="Panel/VBoxContainer/Exit"]
+position = Vector2(35, 15)
+shape = SubResource("RectangleShape2D_mnl7l")
+
 [connection signal="pressed" from="Panel/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/Resume/ResumeTouchScreenButton" to="." method="_on_resume_touch_screen_button_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/Settings/SettingsTouchScreenButton" to="." method="_on_settings_touch_screen_button_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/Title" to="." method="_on_title_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/Title/TitleTouchScreenButton" to="." method="_on_title_touch_screen_button_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/Exit/ExitTouchScreenButton" to="." method="_on_exit_touch_screen_button_pressed"]

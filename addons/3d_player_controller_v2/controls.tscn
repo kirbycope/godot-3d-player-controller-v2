@@ -213,7 +213,6 @@ offset_right = 144.0
 offset_bottom = 80.0
 
 [node name="Button4" type="TouchScreenButton" parent="Mobile/ShoulderLeft"]
-position = Vector2(0, 80)
 texture_normal = ExtResource("17_u0chb")
 texture_pressed = ExtResource("18_ino70")
 action = "button_4"
@@ -247,6 +246,7 @@ texture = ExtResource("20_ddkv6")
 metadata/_edit_use_anchors_ = true
 
 [node name="Button6" type="TouchScreenButton" parent="Mobile/ShoulderLeft"]
+position = Vector2(0, 80)
 texture_normal = ExtResource("17_u0chb")
 texture_pressed = ExtResource("18_ino70")
 action = "button_6"
@@ -287,13 +287,25 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -24.0
+offset_left = -48.0
 offset_top = -24.0
-offset_right = 24.0
 offset_bottom = 24.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("21_82d4g")
+
+[node name="TextureRect2" type="TextureRect" parent="Mobile/ShoulderRight/Button5"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = -24.0
+offset_right = 48.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("20_ddkv6")
 
 [node name="Button7" type="TouchScreenButton" parent="Mobile/ShoulderRight"]
 position = Vector2(0, 80)
@@ -307,25 +319,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -48.0
+offset_left = -24.0
 offset_top = -24.0
+offset_right = 24.0
 offset_bottom = 24.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("21_82d4g")
-
-[node name="TextureRect2" type="TextureRect" parent="Mobile/ShoulderRight/Button7"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_top = -24.0
-offset_right = 48.0
-offset_bottom = 24.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("20_ddkv6")
 
 [node name="Select" type="Control" parent="Mobile"]
 layout_mode = 1

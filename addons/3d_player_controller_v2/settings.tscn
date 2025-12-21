@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://ddphjodki6dkl"]
+[gd_scene load_steps=3 format=3 uid="uid://ddphjodki6dkl"]
 
 [ext_resource type="Script" uid="uid://c7um6pc42hdiw" path="res://addons/3d_player_controller_v2/settings.gd" id="1_p63df"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p63df"]
+size = Vector2(193, 24)
 
 [node name="Settings" type="CanvasLayer"]
 script = ExtResource("1_p63df")
@@ -14,7 +17,7 @@ anchor_bottom = 0.5
 offset_left = -96.5
 offset_top = -123.5
 offset_right = 96.5
-offset_bottom = 123.5
+offset_bottom = 156.5
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -26,9 +29,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -96.5
-offset_top = -106.0
+offset_top = -137.5
 offset_right = 96.5
-offset_bottom = 106.0
+offset_bottom = 137.5
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -56,6 +59,10 @@ grow_horizontal = 2
 grow_vertical = 2
 text = " VSYNC"
 vertical_alignment = 1
+
+[node name="VSYNCTouchScreenButton" type="TouchScreenButton" parent="Panel/VBoxContainer/VSYNC"]
+position = Vector2(96, 12)
+shape = SubResource("RectangleShape2D_p63df")
 
 [node name="MSAA" type="OptionButton" parent="Panel/VBoxContainer"]
 layout_mode = 2
@@ -87,6 +94,10 @@ grow_vertical = 2
 text = " MSAA"
 vertical_alignment = 1
 
+[node name="MSAATouchScreenButton" type="TouchScreenButton" parent="Panel/VBoxContainer/MSAA"]
+position = Vector2(3, 15)
+shape = SubResource("RectangleShape2D_p63df")
+
 [node name="SSAA" type="OptionButton" parent="Panel/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
@@ -112,6 +123,10 @@ grow_vertical = 2
 text = " SSAA"
 vertical_alignment = 1
 
+[node name="SSAATouchScreenButton" type="TouchScreenButton" parent="Panel/VBoxContainer/SSAA"]
+position = Vector2(19, 15)
+shape = SubResource("RectangleShape2D_p63df")
+
 [node name="FXAA" type="CheckButton" parent="Panel/VBoxContainer"]
 layout_mode = 2
 
@@ -131,6 +146,33 @@ grow_vertical = 2
 text = " FXAA"
 vertical_alignment = 1
 
+[node name="FXAATouchScreenButton" type="TouchScreenButton" parent="Panel/VBoxContainer/FXAA"]
+position = Vector2(96, 12)
+shape = SubResource("RectangleShape2D_p63df")
+
+[node name="SSRL" type="CheckButton" parent="Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer/SSRL"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.5
+offset_top = -11.5
+offset_right = 96.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "SSRL"
+vertical_alignment = 1
+
+[node name="SSRLTouchScreenButton" type="TouchScreenButton" parent="Panel/VBoxContainer/SSRL"]
+position = Vector2(96, 12)
+shape = SubResource("RectangleShape2D_p63df")
+
 [node name="TAA" type="CheckButton" parent="Panel/VBoxContainer"]
 layout_mode = 2
 
@@ -149,6 +191,10 @@ grow_horizontal = 2
 grow_vertical = 2
 text = " TAA"
 vertical_alignment = 1
+
+[node name="TAATouchScreenButton" type="TouchScreenButton" parent="Panel/VBoxContainer/TAA"]
+position = Vector2(96, 12)
+shape = SubResource("RectangleShape2D_p63df")
 
 [node name="FSR" type="OptionButton" parent="Panel/VBoxContainer"]
 layout_mode = 2
@@ -175,14 +221,31 @@ grow_vertical = 2
 text = " FSR"
 vertical_alignment = 1
 
+[node name="FSRTouchScreenButton" type="TouchScreenButton" parent="Panel/VBoxContainer/FSR"]
+position = Vector2(-40, 16)
+shape = SubResource("RectangleShape2D_p63df")
+
 [node name="BACK" type="Button" parent="Panel/VBoxContainer"]
 layout_mode = 2
 text = "BACK"
 
+[node name="BACKTouchScreenButton" type="TouchScreenButton" parent="Panel/VBoxContainer/BACK"]
+position = Vector2(96, 15)
+shape = SubResource("RectangleShape2D_p63df")
+
 [connection signal="toggled" from="Panel/VBoxContainer/VSYNC" to="." method="_on_vsync_toggled"]
+[connection signal="pressed" from="Panel/VBoxContainer/VSYNC/VSYNCTouchScreenButton" to="." method="_on_vsync_touch_screen_button_pressed"]
 [connection signal="item_selected" from="Panel/VBoxContainer/MSAA" to="." method="_on_msaa_item_selected"]
+[connection signal="pressed" from="Panel/VBoxContainer/MSAA/MSAATouchScreenButton" to="." method="_on_msaa_touch_screen_button_pressed"]
 [connection signal="item_selected" from="Panel/VBoxContainer/SSAA" to="." method="_on_ssaa_item_selected"]
+[connection signal="pressed" from="Panel/VBoxContainer/SSAA/SSAATouchScreenButton" to="." method="_on_ssaa_touch_screen_button_pressed"]
 [connection signal="toggled" from="Panel/VBoxContainer/FXAA" to="." method="_on_fxaa_toggled"]
+[connection signal="pressed" from="Panel/VBoxContainer/FXAA/FXAATouchScreenButton" to="." method="_on_fxaa_touch_screen_button_pressed"]
+[connection signal="toggled" from="Panel/VBoxContainer/SSRL" to="." method="_on_ssrl_toggled"]
+[connection signal="pressed" from="Panel/VBoxContainer/SSRL/SSRLTouchScreenButton" to="." method="_on_ssrl_touch_screen_button_pressed"]
 [connection signal="toggled" from="Panel/VBoxContainer/TAA" to="." method="_on_taa_toggled"]
+[connection signal="pressed" from="Panel/VBoxContainer/TAA/TAATouchScreenButton" to="." method="_on_taa_touch_screen_button_pressed"]
 [connection signal="item_selected" from="Panel/VBoxContainer/FSR" to="." method="_on_fsr_item_selected"]
+[connection signal="pressed" from="Panel/VBoxContainer/FSR/FSRTouchScreenButton" to="." method="_on_fsr_touch_screen_button_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/BACK" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/BACK/BACKTouchScreenButton" to="." method="_on_back_touch_screen_button_pressed"]
