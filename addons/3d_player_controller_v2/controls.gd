@@ -416,11 +416,35 @@ func _input(event: InputEvent) -> void:
 			joy_circle_left_texture_rect.global_position = joy_circle_left_texture_position + joystick_left_offset - joy_circle_left_texture_center
 			# Store the normalized offset for movement input
 			joystick_left_offset = joystick_left_offset.normalized() if joystick_left_offset.length() > 0 else Vector2.ZERO
+			# Handle Left/Right movement for left-joystick
+			if joystick_left_offset.x > 0.0:
+				Input.action_release("move_left")
+				Input.action_press("move_right", abs(joystick_left_offset.x))
+			elif joystick_left_offset.x < 0.0:
+				Input.action_release("move_right")
+				Input.action_press("move_left", abs(joystick_left_offset.x))
+			else:
+				Input.action_release("move_left")
+				Input.action_release("move_right")
+			# Handle Up/Down movement for left-joystick
+			if joystick_left_offset.y < 0.0:
+				Input.action_release("move_down")
+				Input.action_press("move_up", abs(joystick_left_offset.y))
+			elif joystick_left_offset.y > 0.0:
+				Input.action_release("move_up")
+				Input.action_press("move_down", abs(joystick_left_offset.y))
+			else:
+				Input.action_release("move_up")
+				Input.action_release("move_down")
 		else:
 			# Reset the left joystick circle position to the base position
 			joy_circle_left_texture_rect.global_position = joystick_left.position
 			# Reset the left joystick offset (no movement)
 			joystick_left_offset = Vector2.ZERO
+			Input.action_release("move_up")
+			Input.action_release("move_down")
+			Input.action_release("move_left")
+			Input.action_release("move_right")
 
 		if joy_circle_right_pressed:
 			# Calculate the difference between the touch position and the center of the joystick
@@ -433,12 +457,37 @@ func _input(event: InputEvent) -> void:
 			joy_circle_right_texture_rect.global_position = joy_circle_right_texture_position + joystick_right_offset - joy_circle_right_texture_center
 			# Store the normalized offset for camera input
 			joystick_right_offset = joystick_right_offset.normalized() if joystick_right_offset.length() > 0 else Vector2.ZERO
+			# Handle Left/Right movement for right-joystick
+			if joystick_right_offset.x > 0.0:
+				Input.action_release("look_left")
+				Input.action_press("look_right", abs(joystick_right_offset.x))
+			elif joystick_right_offset.x < 0.0:
+				Input.action_release("look_right")
+				Input.action_press("look_left", abs(joystick_right_offset.x))
+			else:
+				Input.action_release("look_left")
+				Input.action_release("look_right")
+			# Handle Up/Down movement for right-joystick
+			if joystick_right_offset.y < 0.0:
+				Input.action_release("look_down")
+				Input.action_press("look_up", abs(joystick_right_offset.y))
+			elif joystick_right_offset.y > 0.0:
+				Input.action_release("look_up")
+				Input.action_press("look_down", abs(joystick_right_offset.y))
+			else:
+				Input.action_release("look_up")
+				Input.action_release("look_down")
 		else:
 			# Reset the right joystick circle position to the base position
 			joy_circle_right_texture_rect.global_position = joystick_right.position
 			# Reset the right joystick offset (no camera movement)
 			joystick_right_offset = Vector2.ZERO
+			Input.action_release("look_up")
+			Input.action_release("look_down")
+			Input.action_release("look_left")
+			Input.action_release("look_right")
 
+	# Show/hide mobile controls based on last input type
 	mobile.visible = last_input_type == InputType.TOUCH
 
 
