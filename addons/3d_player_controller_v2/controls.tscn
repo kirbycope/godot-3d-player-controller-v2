@@ -50,24 +50,28 @@ grow_vertical = 0
 position = Vector2(41, 0)
 texture_normal = ExtResource("8_g5qx6")
 texture_pressed = ExtResource("9_tpkx0")
+passby_press = true
 action = "button_12"
 
 [node name="Button13" type="TouchScreenButton" parent="Mobile/DPad"]
 position = Vector2(40, 80)
 texture_normal = ExtResource("2_wumfa")
 texture_pressed = ExtResource("3_3d87y")
+passby_press = true
 action = "button_13"
 
 [node name="Button14" type="TouchScreenButton" parent="Mobile/DPad"]
 position = Vector2(0, 40)
 texture_normal = ExtResource("4_wrmi3")
 texture_pressed = ExtResource("5_7rcu1")
+passby_press = true
 action = "button_14"
 
 [node name="Button15" type="TouchScreenButton" parent="Mobile/DPad"]
 position = Vector2(80, 40)
 texture_normal = ExtResource("6_1e0vr")
 texture_pressed = ExtResource("7_x0dse")
+passby_press = true
 action = "button_15"
 
 [node name="JoystickLeft" type="Control" parent="Mobile"]
@@ -125,6 +129,7 @@ grow_vertical = 0
 position = Vector2(64, 128)
 texture_normal = ExtResource("11_gjg2b")
 texture_pressed = ExtResource("12_egw0h")
+passby_press = true
 action = "button_0"
 
 [node name="TextureRect" type="TextureRect" parent="Mobile/Buttons/Button0"]
@@ -146,6 +151,7 @@ expand_mode = 1
 position = Vector2(128, 64)
 texture_normal = ExtResource("11_gjg2b")
 texture_pressed = ExtResource("12_egw0h")
+passby_press = true
 action = "button_1"
 
 [node name="TextureRect" type="TextureRect" parent="Mobile/Buttons/Button1"]
@@ -167,6 +173,7 @@ expand_mode = 1
 position = Vector2(0, 64)
 texture_normal = ExtResource("11_gjg2b")
 texture_pressed = ExtResource("12_egw0h")
+passby_press = true
 action = "button_2"
 
 [node name="TextureRect" type="TextureRect" parent="Mobile/Buttons/Button2"]
@@ -188,6 +195,7 @@ expand_mode = 1
 position = Vector2(64, 0)
 texture_normal = ExtResource("11_gjg2b")
 texture_pressed = ExtResource("12_egw0h")
+passby_press = true
 action = "button_3"
 
 [node name="TextureRect" type="TextureRect" parent="Mobile/Buttons/Button3"]
