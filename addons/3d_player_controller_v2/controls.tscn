@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://cxky6pmyip083"]
+[gd_scene load_steps=27 format=3 uid="uid://cxky6pmyip083"]
 
 [ext_resource type="Script" uid="uid://lsm3ddt2fwo7" path="res://addons/3d_player_controller_v2/controls.gd" id="1_bjg8p"]
 [ext_resource type="Texture2D" uid="uid://c45yiy17wckqi" path="res://addons/3d_player_controller_v2/assets/textures/mobile_controls/style_b/1x/dpad_element_south.png" id="2_wumfa"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://5jfwns4vc1op" path="res://addons/3d_player_controller_v2/assets/textures/mobile_controls/style_f/1x/dpad_element_north.png" id="9_tpkx0"]
 [ext_resource type="Texture2D" uid="uid://cth60qqqc7x6b" path="res://addons/3d_player_controller_v2/assets/textures/mobile_controls/style_f/1x/joystick_circle_pad_d.png" id="10_axo25"]
 [ext_resource type="Texture2D" uid="uid://ogifk2ngdjpf" path="res://addons/3d_player_controller_v2/assets/textures/mobile_controls/style_b/1x/button_circle.png" id="11_gjg2b"]
+[ext_resource type="Texture2D" uid="uid://d2nn62b7tk73e" path="res://addons/3d_player_controller_v2/assets/textures/mobile_controls/style_b/2x/joystick_circle_nub_a.png" id="11_wrmi3"]
 [ext_resource type="Texture2D" uid="uid://c45x82ahms5qc" path="res://addons/3d_player_controller_v2/assets/textures/mobile_controls/style_f/1x/button_circle.png" id="12_egw0h"]
 [ext_resource type="Texture2D" uid="uid://c0xuwwus13ixf" path="res://addons/3d_player_controller_v2/assets/textures/mobile_controls/icons/2x/icon_button_a.png" id="13_vhi6a"]
 [ext_resource type="Texture2D" uid="uid://b5nu0ebdgfw7t" path="res://addons/3d_player_controller_v2/assets/textures/mobile_controls/icons/2x/icon_button_b.png" id="14_np3kd"]
@@ -23,6 +24,12 @@
 [ext_resource type="Texture2D" uid="uid://d0q8sxa73m0l4" path="res://addons/3d_player_controller_v2/assets/textures/mobile_controls/icons/1x/icon_button_r.png" id="21_82d4g"]
 [ext_resource type="Texture2D" uid="uid://carnypb7bny6p" path="res://addons/3d_player_controller_v2/assets/textures/mobile_controls/icons/1x/icon_dash.png" id="22_wumfa"]
 [ext_resource type="Texture2D" uid="uid://caolxlejohrvt" path="res://addons/3d_player_controller_v2/assets/textures/mobile_controls/icons/1x/icon_plus.png" id="23_3d87y"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3d87y"]
+radius = 64.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wrmi3"]
+radius = 64.0
 
 [node name="Controls" type="CanvasLayer"]
 script = ExtResource("1_bjg8p")
@@ -50,31 +57,63 @@ grow_vertical = 0
 position = Vector2(41, 0)
 texture_normal = ExtResource("8_g5qx6")
 texture_pressed = ExtResource("9_tpkx0")
-passby_press = true
 action = "button_12"
 
 [node name="Button13" type="TouchScreenButton" parent="Mobile/DPad"]
 position = Vector2(40, 80)
 texture_normal = ExtResource("2_wumfa")
 texture_pressed = ExtResource("3_3d87y")
-passby_press = true
 action = "button_13"
 
 [node name="Button14" type="TouchScreenButton" parent="Mobile/DPad"]
 position = Vector2(0, 40)
 texture_normal = ExtResource("4_wrmi3")
 texture_pressed = ExtResource("5_7rcu1")
-passby_press = true
 action = "button_14"
 
 [node name="Button15" type="TouchScreenButton" parent="Mobile/DPad"]
 position = Vector2(80, 40)
 texture_normal = ExtResource("6_1e0vr")
 texture_pressed = ExtResource("7_x0dse")
-passby_press = true
 action = "button_15"
 
 [node name="JoystickLeft" type="Control" parent="Mobile"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = -296.0
+offset_right = 152.0
+offset_bottom = -168.0
+grow_vertical = 0
+
+[node name="TextureRect" type="TextureRect" parent="Mobile/JoystickLeft"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+pivot_offset = Vector2(64, 64)
+texture = ExtResource("10_axo25")
+
+[node name="JoyCircleLeft" type="TouchScreenButton" parent="Mobile/JoystickLeft"]
+position = Vector2(64, 64)
+shape = SubResource("CircleShape2D_3d87y")
+
+[node name="TextureRect" type="TextureRect" parent="Mobile/JoystickLeft/JoyCircleLeft"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("11_wrmi3")
+
+[node name="JoystickRight" type="Control" parent="Mobile"]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -88,28 +127,30 @@ offset_bottom = -16.0
 grow_horizontal = 0
 grow_vertical = 0
 
-[node name="TextureRect" type="TextureRect" parent="Mobile/JoystickLeft"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-texture = ExtResource("10_axo25")
-
-[node name="JoystickRight" type="Control" parent="Mobile"]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 24.0
-offset_top = -296.0
-offset_right = 152.0
-offset_bottom = -168.0
-grow_vertical = 0
-
 [node name="TextureRect" type="TextureRect" parent="Mobile/JoystickRight"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
+pivot_offset = Vector2(64, 64)
 texture = ExtResource("10_axo25")
+
+[node name="JoyCircleRight" type="TouchScreenButton" parent="Mobile/JoystickRight"]
+position = Vector2(64, 64)
+shape = SubResource("CircleShape2D_wrmi3")
+
+[node name="TextureRect" type="TextureRect" parent="Mobile/JoystickRight/JoyCircleRight"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("11_wrmi3")
 
 [node name="Buttons" type="Control" parent="Mobile"]
 layout_mode = 1
@@ -367,3 +408,8 @@ grow_vertical = 0
 [node name="Button9" type="TouchScreenButton" parent="Mobile/Start"]
 texture_normal = ExtResource("23_3d87y")
 action = "button_9"
+
+[connection signal="pressed" from="Mobile/JoystickLeft/JoyCircleLeft" to="." method="_on_joy_circle_left_pressed"]
+[connection signal="released" from="Mobile/JoystickLeft/JoyCircleLeft" to="." method="_on_joy_circle_left_released"]
+[connection signal="pressed" from="Mobile/JoystickRight/JoyCircleRight" to="." method="_on_joy_circle_right_pressed"]
+[connection signal="released" from="Mobile/JoystickRight/JoyCircleRight" to="." method="_on_joy_circle_right_released"]
