@@ -407,15 +407,15 @@ func _input(event: InputEvent) -> void:
 
 		if joy_circle_left_pressed:
 			# Calculate the difference between the touch (event.position) and the center (joy_circle_left_texture_position) of the left-joystick texture
-			var offset_left: Vector2 = event.position - joy_circle_left_texture_position
+			joystick_left_offset = event.position - joy_circle_left_texture_position
 			# Check if the difference exceeds 1/2 the joystick texture size
-			if offset_left.length() > (joy_circle_left_texture_center.x):
+			if joystick_left_offset.length() > (joy_circle_left_texture_center.x):
 				# Set the offset to be at maximum distance in the same direction
-				offset_left = offset_left.normalized() * (joy_circle_left_texture_center.x)
+				joystick_left_offset = joystick_left_offset.normalized() * (joy_circle_left_texture_center.x)
 			# Update the position of the joystick circle texture
-			joy_circle_left_texture_rect.global_position = joy_circle_left_texture_position + offset_left - joy_circle_left_texture_center
+			joy_circle_left_texture_rect.global_position = joy_circle_left_texture_position + joystick_left_offset - joy_circle_left_texture_center
 			# Store the normalized offset for movement input
-			joystick_left_offset = offset_left.normalized() if offset_left.length() > 0 else Vector2.ZERO
+			joystick_left_offset = joystick_left_offset.normalized() if joystick_left_offset.length() > 0 else Vector2.ZERO
 		else:
 			# Reset the left joystick circle position to the base position
 			joy_circle_left_texture_rect.global_position = joystick_left.position
@@ -424,7 +424,7 @@ func _input(event: InputEvent) -> void:
 
 		if joy_circle_right_pressed:
 			# Calculate the difference between the touch position and the center of the joystick
-			var joystick_right_offset = event.position - joy_circle_right_texture_position
+			joystick_right_offset = event.position - joy_circle_right_texture_position
 			# Check if the difference exceeds 1/2 the joystick texture size
 			if joystick_right_offset.length() > (joy_circle_right_texture_center.x):
 				# Set the offset to be at maximum distance in the same direction
