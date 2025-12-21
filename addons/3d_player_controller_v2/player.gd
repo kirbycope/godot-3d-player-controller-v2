@@ -408,18 +408,42 @@ func animation_player_pause() -> void:
 
 ## Plays an animation on all [AnimationPlayer] nodes found under [character] (recursively).
 func animation_player_play(name: StringName = &"", custom_blend: float = -1, custom_speed: float = 1.0, from_end: bool = false) -> void:
+	# Skip if no animation name was provided
+	if name == &"": return
+
+	# Play the animation on each AnimationPlayer that has it
 	for animation_player in animation_players():
-		animation_player.call_deferred("play", name, custom_blend, custom_speed, from_end)
+		if animation_player.has_animation(name):
+			animation_player.call_deferred("play", name, custom_blend, custom_speed, from_end)
+		#else: push_warning("Animation '%s' not found on AnimationPlayer '%s'" % [name, animation_player.name]) ## DEBUGGING
 
 
 ## Plays an animation backwards on all [AnimationPlayer] nodes found under [character] (recursively).
 func animation_player_play_backwards(name: StringName = &"", custom_blend: float = -1) -> void:
+	# Skip if no animation name was provided
+	if name == &"": return
+	# Play the animation backwards on each AnimationPlayer that has it
 	for animation_player in animation_players():
-		animation_player.call_deferred("play_backwards", name, custom_blend)
+		if animation_player.has_animation(name):
+			animation_player.call_deferred("play_backwards", name, custom_blend)
+		#else: push_warning("Animation '%s' not found on AnimationPlayer '%s'" % [name, animation_player.name]) ## DEBUGGING
 
 
 ## Plays a locked animation that disables state processing until it finishes.
 func animation_player_play_locked(name: String, duration: float = -1.0) -> float:
+	# Skip if no animation name was provided
+	if name == "": return 0.0
+
+	# Ensure at least one AnimationPlayer has this animation before locking state
+	var has_animation := false
+	for animation_player in animation_players():
+		if animation_player.has_animation(name):
+			has_animation = true
+			break
+	if not has_animation:
+		push_warning("Animation '%s' not found on any AnimationPlayer" % name)
+		return 0.0
+
 	var current_state_name = base_state.get_state_name(current_state)
 	var current_state_scene = get_parent().find_child(current_state_name)
 	current_state_scene.process_mode = Node.PROCESS_MODE_DISABLED
@@ -434,8 +458,13 @@ func animation_player_play_locked(name: String, duration: float = -1.0) -> float
 
 ## Plays a section of an animation on all [AnimationPlayer] nodes found under [character] (recursively).
 func  animation_player_play_section(name: StringName = &"", start_time: float = -1, end_time: float = -1, custom_blend: float = -1, custom_speed: float = 1.0, from_end: bool = false) -> void:
+	# Skip if no animation name was provided
+	if name == &"": return
+
+	# Play the animation section on each AnimationPlayer that has it
 	for animation_player in animation_players():
-		animation_player.call_deferred("play_section", name, start_time, end_time, custom_blend, custom_speed, from_end)
+		if animation_player.has_animation(name):
+			animation_player.call_deferred("play_section", name, start_time, end_time, custom_blend, custom_speed, from_end)
 
 
 ## Sets the _speed scale_ on all [AnimationPlayer] nodes found under [character] (recursively).

@@ -120,10 +120,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -336.0
-offset_top = -144.0
-offset_right = -208.0
-offset_bottom = -16.0
+offset_left = -152.0
+offset_top = -296.0
+offset_right = -24.0
+offset_bottom = -168.0
 grow_horizontal = 0
 grow_vertical = 0
 
@@ -159,10 +159,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -208.0
-offset_top = -336.0
-offset_right = -16.0
-offset_bottom = -144.0
+offset_left = -344.0
+offset_top = -208.0
+offset_right = -152.0
+offset_bottom = -16.0
 grow_horizontal = 0
 grow_vertical = 0
 
@@ -408,8 +408,3 @@ grow_vertical = 0
 [node name="Button9" type="TouchScreenButton" parent="Mobile/Start"]
 texture_normal = ExtResource("23_3d87y")
 action = "button_9"
-
-[connection signal="pressed" from="Mobile/JoystickLeft/JoyCircleLeft" to="." method="_on_joy_circle_left_pressed"]
-[connection signal="released" from="Mobile/JoystickLeft/JoyCircleLeft" to="." method="_on_joy_circle_left_released"]
-[connection signal="pressed" from="Mobile/JoystickRight/JoyCircleRight" to="." method="_on_joy_circle_right_pressed"]
-[connection signal="released" from="Mobile/JoystickRight/JoyCircleRight" to="." method="_on_joy_circle_right_released"]

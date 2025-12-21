@@ -8,8 +8,6 @@ enum InputType {
 }
 
 var last_input_type: InputType
-var joy_circle_left_pressed := false
-var joy_circle_right_pressed := false
 
 @export var button_0 = "button_0" 		## Key: Space, Controller: Ⓐ (Microsoft), Ⓑ (Nintendo), ⮾ (Sony)
 @export var button_1 = "button_1" 		## Key: Shift, Controller: Ⓑ (Microsoft), Ⓐ (Nintendo), 🄋 (Sony)
@@ -51,6 +49,9 @@ var joy_circle_left_texture_position := Vector2.ZERO ## The center position of t
 var joystick_right_offset := Vector2.ZERO ## The normalized offset of the right joystick for camera movement
 var joy_circle_right_texture_center := Vector2.ZERO ## The "center" of the right joystick texture. Example; 128px x 128px = Vector2(64.0, 64.0)
 var joy_circle_right_texture_position := Vector2.ZERO ## The center position of the right-joystick texture
+
+var left_touch_index := -1
+var right_touch_index := -1
 
 
 ## Called when the node enters the scene tree for the first time.
@@ -405,103 +406,129 @@ func _input(event: InputEvent) -> void:
 	or event is InputEventScreenTouch:
 		last_input_type = InputType.TOUCH
 
-		if joy_circle_left_pressed:
-			# Calculate the difference between the touch (event.position) and the center (joy_circle_left_texture_position) of the left-joystick texture
-			joystick_left_offset = event.position - joy_circle_left_texture_position
-			# Check if the difference exceeds 1/2 the joystick texture size
-			if joystick_left_offset.length() > (joy_circle_left_texture_center.x):
-				# Set the offset to be at maximum distance in the same direction
-				joystick_left_offset = joystick_left_offset.normalized() * (joy_circle_left_texture_center.x)
-			# Update the position of the joystick circle texture
-			joy_circle_left_texture_rect.global_position = joy_circle_left_texture_position + joystick_left_offset - joy_circle_left_texture_center
-			# Store the normalized offset for movement input
-			joystick_left_offset = joystick_left_offset.normalized() if joystick_left_offset.length() > 0 else Vector2.ZERO
-			# Handle Left/Right movement for left-joystick
-			if joystick_left_offset.x > 0.0:
-				Input.action_release("move_left")
-				Input.action_press("move_right", abs(joystick_left_offset.x))
-			elif joystick_left_offset.x < 0.0:
-				Input.action_release("move_right")
-				Input.action_press("move_left", abs(joystick_left_offset.x))
+		# Handle [initial] "touch" input for mobile joystick(s)
+		if event is InputEventScreenTouch:
+			var touch := event as InputEventScreenTouch
+			if touch.pressed:
+				if left_touch_index == -1 and _is_on_left_knob(touch.position):
+					left_touch_index = touch.index
+				elif right_touch_index == -1 and _is_on_right_knob(touch.position):
+					right_touch_index = touch.index
 			else:
-				Input.action_release("move_left")
-				Input.action_release("move_right")
-			# Handle Up/Down movement for left-joystick
-			if joystick_left_offset.y < 0.0:
-				Input.action_release("move_down")
-				Input.action_press("move_up", abs(joystick_left_offset.y))
-			elif joystick_left_offset.y > 0.0:
-				Input.action_release("move_up")
-				Input.action_press("move_down", abs(joystick_left_offset.y))
-			else:
-				Input.action_release("move_up")
-				Input.action_release("move_down")
-		else:
-			# Reset the left joystick circle position to the base position
-			joy_circle_left_texture_rect.global_position = joystick_left.position
-			# Reset the left joystick offset (no movement)
-			joystick_left_offset = Vector2.ZERO
-			Input.action_release("move_up")
-			Input.action_release("move_down")
-			Input.action_release("move_left")
-			Input.action_release("move_right")
+				if touch.index == left_touch_index:
+					_reset_left_touch()
+					left_touch_index = -1
+				if touch.index == right_touch_index:
+					_reset_right_touch()
+					right_touch_index = -1
 
-		if joy_circle_right_pressed:
-			# Calculate the difference between the touch position and the center of the joystick
-			joystick_right_offset = event.position - joy_circle_right_texture_position
-			# Check if the difference exceeds 1/2 the joystick texture size
-			if joystick_right_offset.length() > (joy_circle_right_texture_center.x):
-				# Set the offset to be at maximum distance in the same direction
-				joystick_right_offset = joystick_right_offset.normalized() * (joy_circle_right_texture_center.x)
-			# Update the position of the joystick circle texture
-			joy_circle_right_texture_rect.global_position = joy_circle_right_texture_position + joystick_right_offset - joy_circle_right_texture_center
-			# Store the normalized offset for camera input
-			joystick_right_offset = joystick_right_offset.normalized() if joystick_right_offset.length() > 0 else Vector2.ZERO
-			# Handle Left/Right movement for right-joystick
-			if joystick_right_offset.x > 0.0:
-				Input.action_release("look_left")
-				Input.action_press("look_right", abs(joystick_right_offset.x))
-			elif joystick_right_offset.x < 0.0:
-				Input.action_release("look_right")
-				Input.action_press("look_left", abs(joystick_right_offset.x))
-			else:
-				Input.action_release("look_left")
-				Input.action_release("look_right")
-			# Handle Up/Down movement for right-joystick
-			if joystick_right_offset.y < 0.0:
-				Input.action_release("look_down")
-				Input.action_press("look_up", abs(joystick_right_offset.y))
-			elif joystick_right_offset.y > 0.0:
-				Input.action_release("look_up")
-				Input.action_press("look_down", abs(joystick_right_offset.y))
-			else:
-				Input.action_release("look_up")
-				Input.action_release("look_down")
-		else:
-			# Reset the right joystick circle position to the base position
-			joy_circle_right_texture_rect.global_position = joystick_right.position
-			# Reset the right joystick offset (no camera movement)
-			joystick_right_offset = Vector2.ZERO
-			Input.action_release("look_up")
-			Input.action_release("look_down")
-			Input.action_release("look_left")
-			Input.action_release("look_right")
+		# Handle "drag" input for mobile joystick(s)
+		elif event is InputEventScreenDrag:
+			var drag := event as InputEventScreenDrag
+			if drag.index == left_touch_index:
+				_handle_left_touch(drag.position)
+			if drag.index == right_touch_index:
+				_handle_right_touch(drag.position)
 
 	# Show/hide mobile controls based on last input type
 	mobile.visible = last_input_type == InputType.TOUCH
 
 
-func _on_joy_circle_left_pressed() -> void:
-	joy_circle_left_pressed = true
+## Helper function to check if a position is on the left joystick knob.
+func _is_on_left_knob(p: Vector2) -> bool:
+	var rect := Rect2(joy_circle_left_texture_rect.global_position, joy_circle_left_texture_rect.size)
+	return rect.has_point(p)
 
 
-func _on_joy_circle_left_released() -> void:
-	joy_circle_left_pressed = false
+## Helper function to check if a position is on the right joystick knob.
+func _is_on_right_knob(p: Vector2) -> bool:
+	var rect := Rect2(joy_circle_right_texture_rect.global_position, joy_circle_right_texture_rect.size)
+	return rect.has_point(p)
 
 
-func _on_joy_circle_right_pressed() -> void:
-	joy_circle_right_pressed = true
+## Helper function to handle left joystick touch input.
+func _handle_left_touch(pos: Vector2) -> void:
+	# Calculate the difference between the touch position and the center of the joystick's inital position
+	joystick_left_offset = pos - joy_circle_left_texture_position
+	# Check if the offset exceeds the joystick's radius
+	if joystick_left_offset.length() > joy_circle_left_texture_center.x:
+		# Clamp the offset to the joystick's radius
+		joystick_left_offset = joystick_left_offset.normalized() * joy_circle_left_texture_center.x
+	# Update the position of the joystick's top texture
+	joy_circle_left_texture_rect.global_position = joy_circle_left_texture_position + joystick_left_offset - joy_circle_left_texture_center
+	# Normalize the offset for input processing
+	joystick_left_offset = joystick_left_offset.normalized() if joystick_left_offset.length() > 0.0 else Vector2.ZERO
+	# Handle (left/right) movement input based on joystick offset
+	if joystick_left_offset.x > 0.0:
+		Input.action_release("move_left")
+		Input.action_press("move_right", abs(joystick_left_offset.x))
+	elif joystick_left_offset.x < 0.0:
+		Input.action_release("move_right")
+		Input.action_press("move_left", abs(joystick_left_offset.x))
+	else:
+		Input.action_release("move_left")
+		Input.action_release("move_right")
+	# Handle (up/down) movement input based on joystick offset
+	if joystick_left_offset.y < 0.0:
+		Input.action_release("move_down")
+		Input.action_press("move_up", abs(joystick_left_offset.y))
+	elif joystick_left_offset.y > 0.0:
+		Input.action_release("move_up")
+		Input.action_press("move_down", abs(joystick_left_offset.y))
+	else:
+		Input.action_release("move_up")
+		Input.action_release("move_down")
 
 
-func _on_joy_circle_right_released() -> void:
-	joy_circle_right_pressed = false
+## Helper function to reset left joystick touch input.
+func _reset_left_touch() -> void:
+	joy_circle_left_texture_rect.global_position = joystick_left.position
+	joystick_left_offset = Vector2.ZERO
+	Input.action_release("move_up")
+	Input.action_release("move_down")
+	Input.action_release("move_left")
+	Input.action_release("move_right")
+
+
+## Helper function to handle right joystick touch input.
+func _handle_right_touch(pos: Vector2) -> void:
+	# Calculate the difference between the touch position and the center of the joystick's inital position
+	joystick_right_offset = pos - joy_circle_right_texture_position
+	# Check if the offset exceeds the joystick's radius
+	if joystick_right_offset.length() > joy_circle_right_texture_center.x:
+		# Clamp the offset to the joystick's radius
+		joystick_right_offset = joystick_right_offset.normalized() * joy_circle_right_texture_center.x
+	# Update the position of the joystick's top texture
+	joy_circle_right_texture_rect.global_position = joy_circle_right_texture_position + joystick_right_offset - joy_circle_right_texture_center
+	# Normalize the offset for input processing
+	joystick_right_offset = joystick_right_offset.normalized() if joystick_right_offset.length() > 0.0 else Vector2.ZERO
+	# Handle (left/right) look input based on joystick offset
+	if joystick_right_offset.x > 0.0:
+		Input.action_release("look_left")
+		Input.action_press("look_right", abs(joystick_right_offset.x))
+	elif joystick_right_offset.x < 0.0:
+		Input.action_release("look_right")
+		Input.action_press("look_left", abs(joystick_right_offset.x))
+	else:
+		Input.action_release("look_left")
+		Input.action_release("look_right")
+	# Handle (up/down) look input based on joystick offset
+	if joystick_right_offset.y < 0.0:
+		Input.action_release("look_down")
+		Input.action_press("look_up", abs(joystick_right_offset.y))
+	elif joystick_right_offset.y > 0.0:
+		Input.action_release("look_up")
+		Input.action_press("look_down", abs(joystick_right_offset.y))
+	else:
+		Input.action_release("look_up")
+		Input.action_release("look_down")
+
+
+## Helper function to reset right joystick touch input.
+func _reset_right_touch() -> void:
+	joy_circle_right_texture_rect.global_position = joystick_right.position
+	joystick_right_offset = Vector2.ZERO
+	Input.action_release("look_up")
+	Input.action_release("look_down")
+	Input.action_release("look_left")
+	Input.action_release("look_right")
