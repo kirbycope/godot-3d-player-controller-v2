@@ -62,6 +62,10 @@ func _on_level0_pressed() -> void:
 	current_index = get_level_index()
 
 
+func _on_level_0_touch_screen_button_pressed() -> void:
+	_on_level0_pressed()
+
+
 func _on_level1_pressed() -> void:
 	description.text = "Move the player side-to-side and rotate the world up-and-down."
 	hide_previews()
@@ -69,6 +73,10 @@ func _on_level1_pressed() -> void:
 	reset_buttons()
 	level1.button_pressed = true
 	current_index = get_level_index()
+
+
+func _on_level_1_touch_screen_button_pressed() -> void:
+	_on_level1_pressed()
 
 
 func _on_level2_pressed() -> void:
@@ -80,6 +88,10 @@ func _on_level2_pressed() -> void:
 	current_index = get_level_index()
 
 
+func _on_level_2_touch_screen_button_pressed() -> void:
+	_on_level2_pressed()
+
+
 func _on_level3_pressed() -> void:
 	description.text = "Multiple perspectives."
 	hide_previews()
@@ -87,6 +99,10 @@ func _on_level3_pressed() -> void:
 	reset_buttons()
 	level3.button_pressed = true
 	current_index = get_level_index()
+
+
+func _on_level_3_touch_screen_button_pressed() -> void:
+	_on_level3_pressed()
 
 
 func _on_level4_pressed() -> void:
@@ -98,6 +114,10 @@ func _on_level4_pressed() -> void:
 	current_index = get_level_index()
 
 
+func _on_level_4_touch_screen_button_pressed() -> void:
+	_on_level4_pressed()
+
+
 func _on_level5_pressed() -> void:
 	description.text = "First-person perspective. Interact with environment."
 	hide_previews()
@@ -105,6 +125,10 @@ func _on_level5_pressed() -> void:
 	reset_buttons()
 	level5.button_pressed = true
 	current_index = get_level_index()
+
+
+func _on_level_5_touch_screen_button_pressed() -> void:
+	_on_level5_pressed()
 
 
 func _on_level6_pressed() -> void:
@@ -116,6 +140,10 @@ func _on_level6_pressed() -> void:
 	current_index = get_level_index()
 
 
+func _on_level_6_touch_screen_button_pressed() -> void:
+	_on_level6_pressed()
+
+
 func _on_level7_pressed() -> void:
 	description.text = "Third-person perspective. Climbable surfaces. Stamina."
 	hide_previews()
@@ -125,6 +153,10 @@ func _on_level7_pressed() -> void:
 	current_index = get_level_index()
 
 
+func _on_level_7_touch_screen_button_pressed() -> void:
+	_on_level7_pressed()
+
+
 func _on_level8_pressed() -> void:
 	description.text = "Top-down perspective. Locked camera."
 	hide_previews()
@@ -132,6 +164,10 @@ func _on_level8_pressed() -> void:
 	reset_buttons()
 	level8.button_pressed = true
 	current_index = get_level_index()
+
+
+func _on_level_8_touch_screen_button_pressed() -> void:
+	_on_level8_pressed()
 
 
 func _on_enter_level_pressed() -> void:
@@ -167,5 +203,13 @@ func _on_enter_level_pressed() -> void:
 		queue_free()
 
 
+func _on_enter_level_touch_screen_button_pressed() -> void:
+	_on_enter_level_pressed()
+
+
 func _on_exit_pressed() -> void:
 	get_tree().quit()
+
+
+func _on_exit_touch_screen_button_pressed() -> void:
+	_on_exit_pressed()

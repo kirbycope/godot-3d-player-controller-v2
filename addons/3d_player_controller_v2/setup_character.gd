@@ -20,24 +20,39 @@ static func animations_mixamo(character: Node3D, playback_default_blend_time = 0
 			child.add_child(animation_player)
 		# Configuration - Set the default blend time
 		animation_player.playback_default_blend_time = playback_default_blend_time
+
 		# Load and add animations from addons/3d_player_controller_v2/assets/animations/mixamo/
 		var base_path = "res://addons/3d_player_controller_v2/assets/animations/mixamo/"
-		# Dynamically get all subdirectories in the base path
+		# Check if the mixamo directory exists
 		var dir = DirAccess.open(base_path)
+		#print("    Checking for subdirectories in in path: `/", base_path, "`...") # DEBUGGING
 		if dir:
+			# Iterate over each category (subfolder); '/climbing', '/crawling', etc.
 			dir.list_dir_begin()
 			var category = dir.get_next()
 			while category != "":
-				if category != "." and category != ".." and dir.current_is_dir():
+				#print("        Checking for animations in subdirectory: `/", category, "`...") # DEBUGGING
+				if category != "." \
+				and category != ".." \
+				and dir.current_is_dir() \
+				and not category.contains(".import") \
+				and not category.to_lower().contains(".fbx"):
+					# Define the path to the category
 					var category_path = base_path + category + "/"
-					# Load all .fbx files from each category; ".../climbing/Climbing_Down.fbx" -> 'Climbing_Down' (library) > 'Climbing_Down/mixamo_com' (animation)
+					var dir2 = DirAccess.open(category_path)
+					# Check if the category directory exists
 					var category_dir = DirAccess.open(category_path)
 					if category_dir:
+						# Iterate over each .fbx file in the category
 						category_dir.list_dir_begin()
 						var file_name = category_dir.get_next()
 						while file_name != "":
-							if file_name.ends_with(".fbx"):
+							# Look for the import file, which shares the name of the original .fbx
+							if file_name.ends_with(".fbx.import"):
+								file_name = file_name.trim_suffix(".import") # Remove the .import suffix to get the original file name
+								#print("            Found animation: `/", file_name, "`") # DEBUGGING
 								var animation_path = category_path + file_name
+								#print("                Loading animation resource from path: `", animation_path, "`") # DEBUGGING
 								if ResourceLoader.exists(animation_path):
 									var animation_lib: AnimationLibrary = load(animation_path)
 									var lib_name = file_name.trim_suffix(".fbx")

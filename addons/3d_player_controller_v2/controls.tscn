@@ -1,6 +1,361 @@
-[gd_scene load_steps=2 format=3 uid="uid://cxky6pmyip083"]
+[gd_scene load_steps=24 format=3 uid="uid://cxky6pmyip083"]
 
 [ext_resource type="Script" uid="uid://lsm3ddt2fwo7" path="res://addons/3d_player_controller_v2/controls.gd" id="1_bjg8p"]
+[ext_resource type="Texture2D" uid="uid://c45yiy17wckqi" path="res://addons/3d_player_controller_v2/assets/textures/mobile_controls/style_b/1x/dpad_element_south.png" id="2_wumfa"]
+[ext_resource type="Texture2D" uid="uid://bmsh2k35djt4m" path="res://addons/3d_player_controller_v2/assets/textures/mobile_controls/style_f/1x/dpad_element_south.png" id="3_3d87y"]
+[ext_resource type="Texture2D" uid="uid://byenv77gjmb0q" path="res://addons/3d_player_controller_v2/assets/textures/mobile_controls/style_b/1x/dpad_element_west.png" id="4_wrmi3"]
+[ext_resource type="Texture2D" uid="uid://vwupb8pdmnpo" path="res://addons/3d_player_controller_v2/assets/textures/mobile_controls/style_f/1x/dpad_element_west.png" id="5_7rcu1"]
+[ext_resource type="Texture2D" uid="uid://bqnr3lpbkjhoc" path="res://addons/3d_player_controller_v2/assets/textures/mobile_controls/style_b/1x/dpad_element_east.png" id="6_1e0vr"]
+[ext_resource type="Texture2D" uid="uid://r0sx17shbwef" path="res://addons/3d_player_controller_v2/assets/textures/mobile_controls/style_f/1x/dpad_element_east.png" id="7_x0dse"]
+[ext_resource type="Texture2D" uid="uid://c4oledk21uo0v" path="res://addons/3d_player_controller_v2/assets/textures/mobile_controls/style_b/1x/dpad_element_north.png" id="8_g5qx6"]
+[ext_resource type="Texture2D" uid="uid://5jfwns4vc1op" path="res://addons/3d_player_controller_v2/assets/textures/mobile_controls/style_f/1x/dpad_element_north.png" id="9_tpkx0"]
+[ext_resource type="Texture2D" uid="uid://cth60qqqc7x6b" path="res://addons/3d_player_controller_v2/assets/textures/mobile_controls/style_f/1x/joystick_circle_pad_d.png" id="10_axo25"]
+[ext_resource type="Texture2D" uid="uid://ogifk2ngdjpf" path="res://addons/3d_player_controller_v2/assets/textures/mobile_controls/style_b/1x/button_circle.png" id="11_gjg2b"]
+[ext_resource type="Texture2D" uid="uid://c45x82ahms5qc" path="res://addons/3d_player_controller_v2/assets/textures/mobile_controls/style_f/1x/button_circle.png" id="12_egw0h"]
+[ext_resource type="Texture2D" uid="uid://c0xuwwus13ixf" path="res://addons/3d_player_controller_v2/assets/textures/mobile_controls/icons/2x/icon_button_a.png" id="13_vhi6a"]
+[ext_resource type="Texture2D" uid="uid://b5nu0ebdgfw7t" path="res://addons/3d_player_controller_v2/assets/textures/mobile_controls/icons/2x/icon_button_b.png" id="14_np3kd"]
+[ext_resource type="Texture2D" uid="uid://do1ox5c6rifv6" path="res://addons/3d_player_controller_v2/assets/textures/mobile_controls/icons/2x/icon_button_x.png" id="15_xvx5r"]
+[ext_resource type="Texture2D" uid="uid://crksjhofluvid" path="res://addons/3d_player_controller_v2/assets/textures/mobile_controls/icons/2x/icon_button_y.png" id="16_mava2"]
+[ext_resource type="Texture2D" uid="uid://bj5imhn25hlo3" path="res://addons/3d_player_controller_v2/assets/textures/mobile_controls/style_b/1x/button_square_wide.png" id="17_u0chb"]
+[ext_resource type="Texture2D" uid="uid://bdvkte3snm25u" path="res://addons/3d_player_controller_v2/assets/textures/mobile_controls/style_f/1x/button_square_wide.png" id="18_ino70"]
+[ext_resource type="Texture2D" uid="uid://djnyypxvb55ro" path="res://addons/3d_player_controller_v2/assets/textures/mobile_controls/icons/1x/icon_button_l.png" id="19_qq0we"]
+[ext_resource type="Texture2D" uid="uid://bfd80gn34iubt" path="res://addons/3d_player_controller_v2/assets/textures/mobile_controls/icons/1x/icon_button_b.png" id="20_ddkv6"]
+[ext_resource type="Texture2D" uid="uid://d0q8sxa73m0l4" path="res://addons/3d_player_controller_v2/assets/textures/mobile_controls/icons/1x/icon_button_r.png" id="21_82d4g"]
+[ext_resource type="Texture2D" uid="uid://carnypb7bny6p" path="res://addons/3d_player_controller_v2/assets/textures/mobile_controls/icons/1x/icon_dash.png" id="22_wumfa"]
+[ext_resource type="Texture2D" uid="uid://caolxlejohrvt" path="res://addons/3d_player_controller_v2/assets/textures/mobile_controls/icons/1x/icon_plus.png" id="23_3d87y"]
 
 [node name="Controls" type="CanvasLayer"]
 script = ExtResource("1_bjg8p")
+
+[node name="Mobile" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DPad" type="Control" parent="Mobile"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 152.0
+offset_top = -160.0
+offset_right = 296.0
+offset_bottom = -16.0
+grow_vertical = 0
+
+[node name="Button12" type="TouchScreenButton" parent="Mobile/DPad"]
+position = Vector2(41, 0)
+texture_normal = ExtResource("8_g5qx6")
+texture_pressed = ExtResource("9_tpkx0")
+action = "button_12"
+
+[node name="Button13" type="TouchScreenButton" parent="Mobile/DPad"]
+position = Vector2(40, 80)
+texture_normal = ExtResource("2_wumfa")
+texture_pressed = ExtResource("3_3d87y")
+action = "button_13"
+
+[node name="Button14" type="TouchScreenButton" parent="Mobile/DPad"]
+position = Vector2(0, 40)
+texture_normal = ExtResource("4_wrmi3")
+texture_pressed = ExtResource("5_7rcu1")
+action = "button_14"
+
+[node name="Button15" type="TouchScreenButton" parent="Mobile/DPad"]
+position = Vector2(80, 40)
+texture_normal = ExtResource("6_1e0vr")
+texture_pressed = ExtResource("7_x0dse")
+action = "button_15"
+
+[node name="JoystickLeft" type="Control" parent="Mobile"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -336.0
+offset_top = -144.0
+offset_right = -208.0
+offset_bottom = -16.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="TextureRect" type="TextureRect" parent="Mobile/JoystickLeft"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("10_axo25")
+
+[node name="JoystickRight" type="Control" parent="Mobile"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = -296.0
+offset_right = 152.0
+offset_bottom = -168.0
+grow_vertical = 0
+
+[node name="TextureRect" type="TextureRect" parent="Mobile/JoystickRight"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("10_axo25")
+
+[node name="Buttons" type="Control" parent="Mobile"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -208.0
+offset_top = -336.0
+offset_right = -16.0
+offset_bottom = -144.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="Button0" type="TouchScreenButton" parent="Mobile/Buttons"]
+position = Vector2(64, 128)
+texture_normal = ExtResource("11_gjg2b")
+texture_pressed = ExtResource("12_egw0h")
+action = "button_0"
+
+[node name="TextureRect" type="TextureRect" parent="Mobile/Buttons/Button0"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -21.0
+offset_top = -21.0
+offset_right = 21.0
+offset_bottom = 21.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("13_vhi6a")
+expand_mode = 1
+
+[node name="Button1" type="TouchScreenButton" parent="Mobile/Buttons"]
+position = Vector2(128, 64)
+texture_normal = ExtResource("11_gjg2b")
+texture_pressed = ExtResource("12_egw0h")
+action = "button_1"
+
+[node name="TextureRect" type="TextureRect" parent="Mobile/Buttons/Button1"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -21.0
+offset_top = -21.0
+offset_right = 21.0
+offset_bottom = 21.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("14_np3kd")
+expand_mode = 1
+
+[node name="Button2" type="TouchScreenButton" parent="Mobile/Buttons"]
+position = Vector2(0, 64)
+texture_normal = ExtResource("11_gjg2b")
+texture_pressed = ExtResource("12_egw0h")
+action = "button_2"
+
+[node name="TextureRect" type="TextureRect" parent="Mobile/Buttons/Button2"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -21.0
+offset_top = -21.0
+offset_right = 21.0
+offset_bottom = 21.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("15_xvx5r")
+expand_mode = 1
+
+[node name="Button3" type="TouchScreenButton" parent="Mobile/Buttons"]
+position = Vector2(64, 0)
+texture_normal = ExtResource("11_gjg2b")
+texture_pressed = ExtResource("12_egw0h")
+action = "button_3"
+
+[node name="TextureRect" type="TextureRect" parent="Mobile/Buttons/Button3"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -21.0
+offset_top = -21.0
+offset_right = 21.0
+offset_bottom = 21.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("16_mava2")
+expand_mode = 1
+
+[node name="ShoulderLeft" type="Control" parent="Mobile"]
+anchors_preset = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 144.0
+offset_bottom = 80.0
+
+[node name="Button4" type="TouchScreenButton" parent="Mobile/ShoulderLeft"]
+position = Vector2(0, 80)
+texture_normal = ExtResource("17_u0chb")
+texture_pressed = ExtResource("18_ino70")
+action = "button_4"
+
+[node name="TextureRect" type="TextureRect" parent="Mobile/ShoulderLeft/Button4"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.0
+offset_top = -24.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("19_qq0we")
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect2" type="TextureRect" parent="Mobile/ShoulderLeft/Button4"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = -24.0
+offset_right = 48.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("20_ddkv6")
+metadata/_edit_use_anchors_ = true
+
+[node name="Button6" type="TouchScreenButton" parent="Mobile/ShoulderLeft"]
+texture_normal = ExtResource("17_u0chb")
+texture_pressed = ExtResource("18_ino70")
+action = "button_6"
+
+[node name="TextureRect" type="TextureRect" parent="Mobile/ShoulderLeft/Button6"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -24.0
+offset_right = 24.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("19_qq0we")
+
+[node name="ShoulderRight" type="Control" parent="Mobile"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -144.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = 80.0
+grow_horizontal = 0
+
+[node name="Button5" type="TouchScreenButton" parent="Mobile/ShoulderRight"]
+texture_normal = ExtResource("17_u0chb")
+texture_pressed = ExtResource("18_ino70")
+action = "button_5"
+
+[node name="TextureRect" type="TextureRect" parent="Mobile/ShoulderRight/Button5"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -24.0
+offset_right = 24.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("21_82d4g")
+
+[node name="Button7" type="TouchScreenButton" parent="Mobile/ShoulderRight"]
+position = Vector2(0, 80)
+texture_normal = ExtResource("17_u0chb")
+texture_pressed = ExtResource("18_ino70")
+action = "button_7"
+
+[node name="TextureRect" type="TextureRect" parent="Mobile/ShoulderRight/Button7"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.0
+offset_top = -24.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("21_82d4g")
+
+[node name="TextureRect2" type="TextureRect" parent="Mobile/ShoulderRight/Button7"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = -24.0
+offset_right = 48.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("20_ddkv6")
+
+[node name="Select" type="Control" parent="Mobile"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -64.0
+offset_right = 66.0
+offset_bottom = -14.0
+grow_vertical = 0
+
+[node name="Button8" type="TouchScreenButton" parent="Mobile/Select"]
+texture_normal = ExtResource("22_wumfa")
+action = "button_8"
+
+[node name="Start" type="Control" parent="Mobile"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -64.0
+offset_top = -64.0
+offset_right = -16.0
+offset_bottom = -16.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="Button9" type="TouchScreenButton" parent="Mobile/Start"]
+texture_normal = ExtResource("23_3d87y")
+action = "button_9"

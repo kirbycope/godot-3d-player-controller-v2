@@ -1,7 +1,6 @@
 extends CanvasLayer
 ## Manages input mapping for controller, keyboard/mouse, and touch controls with dynamic InputMap setup
 
-
 enum InputType {
 	CONTROLLER,
 	KEYBOARD_MOUSE,
@@ -37,9 +36,13 @@ var last_input_type: InputType
 @export var move_right = "move_right"	## Key: D, Controller: Left Stick Right
 @export var move_up = "move_up"			## Key: W, Controller: Left Stick Up
 
+@onready var mobile: Control = $Mobile
+
 
 ## Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	# By default, hide the controls UI
+	hide()
 	# Check if [debug] action is not in the Input Map
 	if not InputMap.has_action(debug):
 		# Add the [debug] action to the Input Map
@@ -378,3 +381,4 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventScreenDrag \
 	or event is InputEventScreenTouch:
 		last_input_type = InputType.TOUCH
+	mobile.visible = last_input_type == InputType.TOUCH

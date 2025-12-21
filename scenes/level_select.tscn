@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://7bmrbudeq40y"]
+[gd_scene load_steps=18 format=3 uid="uid://7bmrbudeq40y"]
 
 [ext_resource type="Script" uid="uid://cw48aw6pubuwl" path="res://scenes/level_select.gd" id="1_p0wlc"]
 [ext_resource type="Texture2D" uid="uid://7fjc1etvog52" path="res://scenes/level_0/sample.png" id="2_2epne"]
@@ -12,6 +12,9 @@
 [ext_resource type="Texture2D" uid="uid://cwekv3qhsrb64" path="res://scenes/level_7/preview.png" id="9_rovvv"]
 [ext_resource type="Texture2D" uid="uid://djy2ysommtucl" path="res://scenes/level_8/preview.png" id="10_0wyvj"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_htctk"]
+size = Vector2(213, 31)
+
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_64kqf"]
 size = Vector2(480, 320)
 
@@ -19,6 +22,12 @@ size = Vector2(480, 320)
 font_size = 24
 shadow_size = 4
 shadow_color = Color(0, 0, 0, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s6tf7"]
+size = Vector2(94, 31)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u4mbh"]
+size = Vector2(27, 31)
 
 [sub_resource type="LabelSettings" id="LabelSettings_p0wlc"]
 font_size = 32
@@ -64,45 +73,81 @@ layout_mode = 2
 toggle_mode = true
 text = "Beta (QA World)"
 
+[node name="Level0TouchScreenButton" type="TouchScreenButton" parent="Center/VBoxContainer/Level0"]
+position = Vector2(106, 16)
+shape = SubResource("RectangleShape2D_htctk")
+
 [node name="Level1" type="Button" parent="Center/VBoxContainer"]
 layout_mode = 2
 toggle_mode = true
 text = "Animal Crossing: New Leaf"
+
+[node name="Level1TouchScreenButton" type="TouchScreenButton" parent="Center/VBoxContainer/Level1"]
+position = Vector2(106, 16)
+shape = SubResource("RectangleShape2D_htctk")
 
 [node name="Level2" type="Button" parent="Center/VBoxContainer"]
 layout_mode = 2
 toggle_mode = true
 text = "Guild Wars"
 
+[node name="Level2TouchScreenButton" type="TouchScreenButton" parent="Center/VBoxContainer/Level2"]
+position = Vector2(106, 16)
+shape = SubResource("RectangleShape2D_htctk")
+
 [node name="Level3" type="Button" parent="Center/VBoxContainer"]
 layout_mode = 2
 toggle_mode = true
 text = "Minecraft"
+
+[node name="Level3TouchScreenButton" type="TouchScreenButton" parent="Center/VBoxContainer/Level3"]
+position = Vector2(106, 16)
+shape = SubResource("RectangleShape2D_htctk")
 
 [node name="Level4" type="Button" parent="Center/VBoxContainer"]
 layout_mode = 2
 toggle_mode = true
 text = "Pokémon Legends: Z-A"
 
+[node name="Level4TouchScreenButton" type="TouchScreenButton" parent="Center/VBoxContainer/Level4"]
+position = Vector2(106, 16)
+shape = SubResource("RectangleShape2D_htctk")
+
 [node name="Level5" type="Button" parent="Center/VBoxContainer"]
 layout_mode = 2
 toggle_mode = true
 text = "Portal"
+
+[node name="Level5TouchScreenButton" type="TouchScreenButton" parent="Center/VBoxContainer/Level5"]
+position = Vector2(106, 16)
+shape = SubResource("RectangleShape2D_htctk")
 
 [node name="Level6" type="Button" parent="Center/VBoxContainer"]
 layout_mode = 2
 toggle_mode = true
 text = "Super Mario Galaxy"
 
+[node name="Level6TouchScreenButton" type="TouchScreenButton" parent="Center/VBoxContainer/Level6"]
+position = Vector2(106, 16)
+shape = SubResource("RectangleShape2D_htctk")
+
 [node name="Level7" type="Button" parent="Center/VBoxContainer"]
 layout_mode = 2
 toggle_mode = true
 text = "Zelda: Breath of the Wild"
 
+[node name="Level7TouchScreenButton" type="TouchScreenButton" parent="Center/VBoxContainer/Level7"]
+position = Vector2(106, 16)
+shape = SubResource("RectangleShape2D_htctk")
+
 [node name="Level8" type="Button" parent="Center/VBoxContainer"]
 layout_mode = 2
 toggle_mode = true
 text = "Zelda: Link's Awakening"
+
+[node name="Level8TouchScreenButton" type="TouchScreenButton" parent="Center/VBoxContainer/Level8"]
+position = Vector2(106, 16)
+shape = SubResource("RectangleShape2D_htctk")
 
 [node name="CenterContainer" type="CenterContainer" parent="Center"]
 layout_mode = 1
@@ -208,6 +253,10 @@ grow_horizontal = 0
 grow_vertical = 0
 text = "Enter Level"
 
+[node name="EnterLevelTouchScreenButton" type="TouchScreenButton" parent="Center/EnterLevel"]
+position = Vector2(48, 16)
+shape = SubResource("RectangleShape2D_s6tf7")
+
 [node name="Exit" type="Button" parent="Center"]
 layout_mode = 1
 anchors_preset = 1
@@ -217,6 +266,10 @@ offset_left = -27.0
 offset_bottom = 31.0
 grow_horizontal = 0
 text = " X "
+
+[node name="ExitTouchScreenButton" type="TouchScreenButton" parent="Center/Exit"]
+position = Vector2(14, 15)
+shape = SubResource("RectangleShape2D_u4mbh")
 
 [node name="Loading" type="ColorRect" parent="."]
 visible = false
@@ -252,13 +305,24 @@ text = "Loading..."
 label_settings = SubResource("LabelSettings_p0wlc")
 
 [connection signal="pressed" from="Center/VBoxContainer/Level0" to="." method="_on_level0_pressed"]
+[connection signal="pressed" from="Center/VBoxContainer/Level0/Level0TouchScreenButton" to="." method="_on_level_0_touch_screen_button_pressed"]
 [connection signal="pressed" from="Center/VBoxContainer/Level1" to="." method="_on_level1_pressed"]
+[connection signal="pressed" from="Center/VBoxContainer/Level1/Level1TouchScreenButton" to="." method="_on_level_1_touch_screen_button_pressed"]
 [connection signal="pressed" from="Center/VBoxContainer/Level2" to="." method="_on_level2_pressed"]
+[connection signal="pressed" from="Center/VBoxContainer/Level2/Level2TouchScreenButton" to="." method="_on_level_2_touch_screen_button_pressed"]
 [connection signal="pressed" from="Center/VBoxContainer/Level3" to="." method="_on_level3_pressed"]
+[connection signal="pressed" from="Center/VBoxContainer/Level3/Level3TouchScreenButton" to="." method="_on_level_3_touch_screen_button_pressed"]
 [connection signal="pressed" from="Center/VBoxContainer/Level4" to="." method="_on_level4_pressed"]
+[connection signal="pressed" from="Center/VBoxContainer/Level4/Level4TouchScreenButton" to="." method="_on_level_4_touch_screen_button_pressed"]
 [connection signal="pressed" from="Center/VBoxContainer/Level5" to="." method="_on_level5_pressed"]
+[connection signal="pressed" from="Center/VBoxContainer/Level5/Level5TouchScreenButton" to="." method="_on_level_5_touch_screen_button_pressed"]
 [connection signal="pressed" from="Center/VBoxContainer/Level6" to="." method="_on_level6_pressed"]
+[connection signal="pressed" from="Center/VBoxContainer/Level6/Level6TouchScreenButton" to="." method="_on_level_6_touch_screen_button_pressed"]
 [connection signal="pressed" from="Center/VBoxContainer/Level7" to="." method="_on_level7_pressed"]
+[connection signal="pressed" from="Center/VBoxContainer/Level7/Level7TouchScreenButton" to="." method="_on_level_7_touch_screen_button_pressed"]
 [connection signal="pressed" from="Center/VBoxContainer/Level8" to="." method="_on_level8_pressed"]
+[connection signal="pressed" from="Center/VBoxContainer/Level8/Level8TouchScreenButton" to="." method="_on_level_8_touch_screen_button_pressed"]
 [connection signal="pressed" from="Center/EnterLevel" to="." method="_on_enter_level_pressed"]
+[connection signal="pressed" from="Center/EnterLevel/EnterLevelTouchScreenButton" to="." method="_on_enter_level_touch_screen_button_pressed"]
 [connection signal="pressed" from="Center/Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="Center/Exit/ExitTouchScreenButton" to="." method="_on_exit_touch_screen_button_pressed"]

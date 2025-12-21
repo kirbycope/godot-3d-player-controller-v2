@@ -125,13 +125,11 @@ shape = SubResource("CapsuleShape3D_ifhah")
 [node name="Chat" parent="." instance=ExtResource("4_pyrav")]
 
 [node name="Controls" parent="." instance=ExtResource("3_uu7fq")]
-visible = false
 
 [node name="Debug" parent="." instance=ExtResource("4_uu7fq")]
 visible = false
 
 [node name="Emotes" parent="." instance=ExtResource("6_nlsti")]
-visible = false
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_nlsti")
