@@ -3,6 +3,7 @@ extends CanvasLayer
 
 
 var initial_mouse_mode := -1
+var player_initial_position: Vector3
 
 @onready var player: CharacterBody3D = get_parent()
 @onready var settings: CanvasLayer = player.settings
@@ -12,6 +13,10 @@ var initial_mouse_mode := -1
 @onready var settings_button = panel.get_node("VBoxContainer/Settings")
 @onready var title_button = panel.get_node("VBoxContainer/Title")
 @onready var exit_button = panel.get_node("VBoxContainer/Exit")
+
+
+func _ready() -> void:
+	player_initial_position = player.global_position
 
 
 ## Called when there is an input event.
@@ -81,6 +86,14 @@ func _on_title_pressed() -> void:
 
 func _on_title_touch_screen_button_pressed() -> void:
 	_on_title_pressed()
+
+
+func _on_unstuck_pressed() -> void:
+	player.global_position = player_initial_position
+
+
+func _on_unstuck_touch_screen_button_pressed() -> void:
+	_on_unstuck_pressed()
 
 
 func _on_exit_pressed() -> void:

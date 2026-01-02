@@ -15,9 +15,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -50.0
-offset_top = -81.5
+offset_top = -104.75
 offset_right = 50.0
-offset_bottom = 90.5
+offset_bottom = 104.75
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -60,6 +60,14 @@ text = "Title"
 position = Vector2(35, 15)
 shape = SubResource("RectangleShape2D_mnl7l")
 
+[node name="Unstuck" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "Unstuck"
+
+[node name="UnstuckTouchScreenButton" type="TouchScreenButton" parent="Panel/VBoxContainer/Unstuck"]
+position = Vector2(35, 15)
+shape = SubResource("RectangleShape2D_mnl7l")
+
 [node name="Exit" type="Button" parent="Panel/VBoxContainer"]
 layout_mode = 2
 text = "Exit"
@@ -74,5 +82,7 @@ shape = SubResource("RectangleShape2D_mnl7l")
 [connection signal="pressed" from="Panel/VBoxContainer/Settings/SettingsTouchScreenButton" to="." method="_on_settings_touch_screen_button_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/Title" to="." method="_on_title_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/Title/TitleTouchScreenButton" to="." method="_on_title_touch_screen_button_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/Unstuck" to="." method="_on_unstuck_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/Unstuck/UnstuckTouchScreenButton" to="." method="_on_unstuck_touch_screen_button_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/Exit/ExitTouchScreenButton" to="." method="_on_exit_touch_screen_button_pressed"]
