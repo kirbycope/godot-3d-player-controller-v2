@@ -399,3 +399,8 @@ func stop() -> void:
 	# Disconnect animation finished signal
 	if player.animation_player_is_connected("animation_finished", _on_animation_finished):
 		player.animation_player_disconnect("animation_finished", _on_animation_finished)
+
+	# Ensure blocking flags are cleared
+	player.is_blocking_1h_left = false
+	player.is_blocking_1h_right = false	
+	player.is_blocking_2h = false

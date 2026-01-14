@@ -61,6 +61,7 @@ extends CharacterBody3D
 var current_state: States.State ## The current state of the player
 var input_direction := Vector2.ZERO ## The direction of the player input (UP/DOWN, LEFT/RIGHT).
 var is_animation_locked := false ## Is the player's animation locked?
+var is_auto_running := false ## Is the player auto-running?
 var is_blocking_1h_left := false ## Is the player blocking with a 1-handed tool or weapon with their left hand?
 var is_blocking_1h_right := false ## Is the player blocking with a 1-handed tool or weapon with their right hand?
 var is_blocking_2h := false ## Is the player blocking with a 2-handed tool or weapon?
@@ -191,6 +192,20 @@ func _input(event: InputEvent) -> void:
 				if not is_navigating:
 					base_state.transition_state(current_state, States.State.NAVIGATING)
 
+	# [Left Mouse Button] and [Right Mouse Button] _pressed_ -> Start "running"
+	if event is InputEventMouseButton \
+	and Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) \
+	and Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT) \
+	and Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE:
+		is_auto_running = true
+
+	# [Left Mouse Button] and [Right Mouse Button] _released_ -> Start "running"
+	if event is InputEventMouseButton \
+	and not Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) \
+	and not Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT) \
+	and Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE:
+		is_auto_running = false
+
 
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -244,6 +259,9 @@ func _physics_process(delta: float) -> void:
 		if pause.visible \
 		or chat.line_edit.visible:
 			input_direction = Vector2.ZERO
+		# Auto-run if both mouse buttons are held
+		elif is_auto_running:
+			input_direction = Vector2(0, -1)
 		# Get the input vector by specifying four actions for the positive and negative X and Y axes
 		else:
 			input_direction = Input.get_vector(

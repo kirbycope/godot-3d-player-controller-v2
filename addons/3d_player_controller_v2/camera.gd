@@ -175,21 +175,21 @@ func _input(event: InputEvent) -> void:
 		child.apply_impulse(force_direction * 5.0, Vector3.ZERO)
 		#player.base_state.transition_state(player.current_state, States.State.THROWING)
 
-	# Ⓛ3/[M-Scroll-Up] _pressed_ -> Zoom out (third-person only)
+	# ⓁⓇ3/[M-Scroll-Down] _pressed_ -> Zoom out (third-person only)
 	if event.is_action_pressed(player.controls.button_10) \
 	and perspective == Perspective.THIRD_PERSON:
 		camera_spring_arm.spring_length = clamp(
-			camera_spring_arm.spring_length - zoom_speed,
+			camera_spring_arm.spring_length + zoom_speed,
 			zoom_min,
 			zoom_max,
 		)
 		ray_cast.position.z = -camera_spring_arm.spring_length
 
-	# Ⓡ3/[M-Scroll-Down] _pressed_ -> Zoom in (third-person only)
+	# Ⓡ3/[M-Scroll-Up] _pressed_ -> Zoom in (third-person only)
 	if event.is_action_pressed(player.controls.button_11) \
 	and perspective == Perspective.THIRD_PERSON:
 		camera_spring_arm.spring_length = clamp(
-			camera_spring_arm.spring_length + zoom_speed,
+			camera_spring_arm.spring_length - zoom_speed,
 			zoom_min,
 			zoom_max,
 		)
