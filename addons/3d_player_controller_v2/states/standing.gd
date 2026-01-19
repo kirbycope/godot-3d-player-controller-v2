@@ -220,13 +220,21 @@ func play_animation() -> void:
 	if player.enable_kicking \
 	and player.is_kicking_left:
 		if player.animation_player_current_animation() != ANIMATION_KICKING_LEFT:
+			# 🏃 Play animation
 			_on_animation_finished(player.animation_player_current_animation()) 
 			player.animation_player_play(ANIMATION_KICKING_LEFT)
+			# Play sound effect
+			if player.character.has_method("play_attack_long_sound_effect"):
+				player.character.play_attack_long_sound_effect()
 	elif player.enable_kicking \
 	and player.is_kicking_right:
 		if player.animation_player_current_animation() != ANIMATION_KICKING_RIGHT:
+			# 🏃 Play animation
 			_on_animation_finished(player.animation_player_current_animation()) 
 			player.animation_player_play(ANIMATION_KICKING_RIGHT)
+			# Play sound effect
+			if player.character.has_method("play_attack_long_sound_effect"):
+				player.character.play_attack_long_sound_effect()
 
 	# 🎣 -- Fishing animations --
 	elif player.is_holding_fishing_rod:
@@ -263,12 +271,20 @@ func play_animation() -> void:
 	and player.is_holding_1h_right:
 		if player.is_swinging_1h_left:
 			if player.animation_player_current_animation() != ANIMATION_SWINGING_1H_LEFT:
+				# 🏃 Play animation
 				_on_animation_finished(player.animation_player_current_animation()) 
 				player.animation_player_play(ANIMATION_SWINGING_1H_LEFT)
+				# 🔊 Play sound effect
+				if player.character.has_method("play_attack_short_sound_effect"):
+					player.character.play_attack_short_sound_effect()
 		elif player.is_swinging_1h_right:	
 			if player.animation_player_current_animation() != ANIMATION_SWINGING_1H_RIGHT:
+				# 🏃 Play animation
 				_on_animation_finished(player.animation_player_current_animation()) 
 				player.animation_player_play(ANIMATION_SWINGING_1H_RIGHT)
+				# 🔊 Play sound effect
+				if player.character.has_method("play_attack_short_sound_effect"):
+					player.character.play_attack_short_sound_effect()
 		elif player.animation_player_current_animation() != ANIMATION_HOLDING_1H_RIGHT:
 			player.animation_player_play(ANIMATION_HOLDING_1H_RIGHT)
 	elif player.is_holding_1h_left:
@@ -277,8 +293,12 @@ func play_animation() -> void:
 				player.animation_player_play(ANIMATION_BLOCKING_1H_LEFT)
 		elif player.is_swinging_1h_left:
 			if player.animation_player_current_animation() != ANIMATION_SWINGING_1H_LEFT:
+				# 🏃 Play animation
 				_on_animation_finished(player.animation_player_current_animation()) 
 				player.animation_player_play(ANIMATION_SWINGING_1H_LEFT)
+				# 🔊 Play sound effect
+				if player.character.has_method("play_attack_short_sound_effect"):
+					player.character.play_attack_short_sound_effect()
 		elif player.animation_player_current_animation() != ANIMATION_HOLDING_1H_LEFT:
 			player.animation_player_play(ANIMATION_HOLDING_1H_LEFT)
 	elif player.is_holding_1h_right:
@@ -287,8 +307,12 @@ func play_animation() -> void:
 				player.animation_player_play(ANIMATION_BLOCKING_1H_RIGHT)
 		elif player.is_swinging_1h_right:
 			if player.animation_player_current_animation() != ANIMATION_SWINGING_1H_RIGHT:
+				# 🏃 Play animation
 				_on_animation_finished(player.animation_player_current_animation()) 
 				player.animation_player_play(ANIMATION_SWINGING_1H_RIGHT)
+				# 🔊 Play sound effect
+				if player.character.has_method("play_attack_short_sound_effect"):
+					player.character.play_attack_short_sound_effect()
 		elif player.animation_player_current_animation() != ANIMATION_HOLDING_1H_RIGHT:
 			player.animation_player_play(ANIMATION_HOLDING_1H_RIGHT)
 
@@ -299,8 +323,12 @@ func play_animation() -> void:
 				player.animation_player_play(ANIMATION_BLOCKING_2H)
 		elif player.is_swinging_2h:
 			if player.animation_player_current_animation() != ANIMATION_SWINGING_2H:
+				# 🏃 Play animation
 				_on_animation_finished(player.animation_player_current_animation()) 
 				player.animation_player_play(ANIMATION_SWINGING_2H)
+				# 🔊 Play sound effect
+				if player.character.has_method("play_attack_long_sound_effect"):
+					player.character.play_attack_long_sound_effect()
 		elif player.animation_player_current_animation() != ANIMATION_HOLDING_2H:
 			player.animation_player_play(ANIMATION_HOLDING_2H)
 
@@ -320,13 +348,21 @@ func play_animation() -> void:
 	elif player.enable_punching \
 	and player.is_punching_left:
 		if player.animation_player_current_animation() != ANIMATION_PUNCHING_LEFT:
+			# 🏃 Play animation
 			_on_animation_finished(player.animation_player_current_animation()) 
 			player.animation_player_play(ANIMATION_PUNCHING_LEFT)
+			# 🔊 Play sound effect
+			if player.character.has_method("play_attack_short_sound_effect"):
+				player.character.play_attack_short_sound_effect()
 	elif player.enable_punching \
 	and player.is_punching_right:
 		if player.animation_player_current_animation() != ANIMATION_PUNCHING_RIGHT:
+			# 🏃 Play animation
 			_on_animation_finished(player.animation_player_current_animation()) 
 			player.animation_player_play(ANIMATION_PUNCHING_RIGHT)
+			# 🔊 Play sound effect
+			if player.character.has_method("play_attack_short_sound_effect"):
+				player.character.play_attack_short_sound_effect()
 
 	# ✋ -- Unarmed animation --
 	else:
@@ -335,6 +371,7 @@ func play_animation() -> void:
 			player.animation_player_play(ANIMATION_STANDING_IDLE)
 
 
+## Resets the related state flag when an animation is finished.
 func _on_animation_finished(animation_name: String) -> void:
 	if animation_name == ANIMATION_FISHING_CASTING:
 		player.is_casting_fishing = false
@@ -400,7 +437,20 @@ func stop() -> void:
 	if player.animation_player_is_connected("animation_finished", _on_animation_finished):
 		player.animation_player_disconnect("animation_finished", _on_animation_finished)
 
-	# Ensure blocking flags are cleared
+	# Ensure all state flags are cleared (precautionary)
+	player.is_aiming_rifle = false
+	player.is_firing_rifle = false
+	player.is_casting_fishing = false
+	player.is_reeling_fishing = false
 	player.is_blocking_1h_left = false
 	player.is_blocking_1h_right = false	
 	player.is_blocking_2h = false
+	player.is_kicking_left = false
+	player.is_kicking_right = false
+	player.is_punching_left = false
+	player.is_punching_right = false
+	player.is_swinging_1h_left = false
+	player.is_swinging_1h_right = false
+	player.is_swinging_2h = false
+	player.is_throwing_left = false
+	player.is_throwing_right = false

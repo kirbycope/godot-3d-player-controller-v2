@@ -47,8 +47,12 @@ func _process(delta: float) -> void:
 		transition_state(player.current_state, States.State.FALLING)
 		return
 
-	# Play the animation
+	# 🏃 Play animation
 	play_animation()
+
+	#  🔊 Play sound effect
+	if player.character.has_method("play_sprint_sound_effect"):
+		player.character.play_sprint_sound_effect()
 
 
 ## Plays the appropriate animation based on player state.
@@ -95,3 +99,7 @@ func stop() -> void:
 
 	# Flag the player as not "sprinting"
 	player.is_sprinting = false
+
+	# 🔇 Stop "sprinting" sound effect
+	if player.character.has_method("stop_sprint_sound_effect"):
+		player.character.stop_sprint_sound_effect()

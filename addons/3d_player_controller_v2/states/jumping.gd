@@ -128,6 +128,10 @@ func start() -> void:
 	# Increase the player's velocity in the up direction
 	player.velocity += player.up_direction * player.speed_jumping
 
+	# 🔊 Play "jumping" sound effect
+	if player.character.has_method("play_jump_sound_effect"):
+		player.character.play_jump_sound_effect()
+
 
 ## Stop "jumping".
 func stop() -> void:

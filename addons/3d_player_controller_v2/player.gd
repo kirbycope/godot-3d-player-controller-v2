@@ -126,6 +126,7 @@ var is_firing_rifle := false ## Is the player firing a rifle?
 
 var setup_character = preload("res://addons/3d_player_controller_v2/setup_character.gd")
 
+@onready var audio_stream_player: AudioStreamPlayer3D = $AudioStreamPlayer3D
 @onready var base_state: BaseState = $States/Base
 @onready var collision_shape: CollisionShape3D = $CollisionShape3D
 @onready var collision_height: float = collision_shape.shape.height
@@ -751,9 +752,11 @@ func physical_bone_simulator() -> PhysicalBoneSimulator3D:
 func skeleton() -> Skeleton3D:
 	var skeleton: Skeleton3D = null
 	for child in character.get_children():
-		skeleton = child.get_node_or_null("%GeneralSkeleton")
-		if skeleton:
-			break
+		# Only consider visible nodes to avoid getting wrong skeleton
+		if child.visible:
+			skeleton = child.get_node_or_null("%GeneralSkeleton")
+			if skeleton:
+				break
 	return skeleton
 
 
@@ -778,7 +781,8 @@ func _on_kick_left_timeout() -> void:
 		# Player Kicking Low Left -> Enemy Reacting Low Right
 		if collider is SoftBody3D \
 		or collider is RigidBody3D:
-			collider.rpc("animate_hit_low_right")
+			if collider.has_method("animate_hit_low_right"):
+				collider.rpc("animate_hit_low_right")
 
 
 func _on_kick_right_timeout() -> void:
@@ -793,7 +797,8 @@ func _on_kick_right_timeout() -> void:
 		# Player Kicking Low Right -> Enemy Reacting Low Left
 		if collider is SoftBody3D \
 		or collider is RigidBody3D:
-			collider.rpc("animate_hit_low_left")
+			if collider.has_method("animate_hit_low_left"):
+				collider.rpc("animate_hit_low_left")
 
 
 func _on_punch_left_timeout() -> void:
@@ -808,7 +813,8 @@ func _on_punch_left_timeout() -> void:
 		# Player Punching Left -> Enemy Reacting Right
 		if collider is SoftBody3D \
 		or collider is RigidBody3D:
-			collider.rpc("animate_hit_high_right")
+			if collider.has_method("animate_hit_high_right"):
+				collider.rpc("animate_hit_high_right")
 
 
 func _on_punch_right_timeout() -> void:
@@ -823,4 +829,5 @@ func _on_punch_right_timeout() -> void:
 		# Player Punching Right -> Enemy Reacting Left
 		if collider is SoftBody3D \
 		or collider is RigidBody3D:
-			collider.rpc("animate_hit_high_left")
+			if collider.has_method("animate_hit_high_left"):
+				collider.rpc("animate_hit_high_left")
