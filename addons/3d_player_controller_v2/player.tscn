@@ -76,6 +76,7 @@ volume_db = -20.0
 
 [node name="CameraMount" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
+top_level = true
 
 [node name="CameraSpringArm" type="SpringArm3D" parent="CameraMount"]
 spring_length = 1.5
@@ -190,7 +191,7 @@ one_shot = true
 [node name="Visuals" type="Node3D" parent="."]
 
 [node name="Character" parent="Visuals" instance=ExtResource("12_ahy2k")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+top_level = true
 
 [node name="RayCast3D_JumpTarget" type="RayCast3D" parent="Visuals"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -0.315)

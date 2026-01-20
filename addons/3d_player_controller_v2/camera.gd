@@ -15,6 +15,7 @@ enum Perspective {
 @export var zoom_speed := 0.2 ## Camera zoom speed
 
 var is_rotating_camera := false ## Is the player holding the right mouse button to rotate the camera?
+var camera_pitch := 0.0 ## Camera pitch (up/down) rotation in degrees
 var perspective: Perspective = Perspective.FIRST_PERSON ## Camera perspective
 
 @onready var camera_spring_arm: SpringArm3D = get_parent()
@@ -34,7 +35,6 @@ func _ready() -> void:
 	camera_spring_arm.add_excluded_object(player)
 	# Remove any baked local tilt from the Camera3D node
 	rotation_degrees = Vector3.ZERO
-
 
 ## Called when there is an input event.
 func _input(event: InputEvent) -> void:
@@ -175,7 +175,7 @@ func _input(event: InputEvent) -> void:
 		child.apply_impulse(force_direction * 5.0, Vector3.ZERO)
 		#player.base_state.transition_state(player.current_state, States.State.THROWING)
 
-	# ⓁⓇ3/[M-Scroll-Down] _pressed_ -> Zoom out (third-person only)
+	# Ⓛ3/[M-Scroll-Down] _pressed_ -> Zoom out (third-person only)
 	if event.is_action_pressed(player.controls.button_10) \
 	and perspective == Perspective.THIRD_PERSON:
 		camera_spring_arm.spring_length = clamp(
@@ -231,9 +231,7 @@ func camera_rotate_by_controller(delta: float) -> void:
 	var input_x = Input.get_action_strength(player.controls.look_right) - Input.get_action_strength(player.controls.look_left)
 	var input_y = Input.get_action_strength(player.controls.look_up) - Input.get_action_strength(player.controls.look_down)
 
-	var new_rotation_x = camera_mount.rotation_degrees.x + input_y * look_sensitivity_controller * delta
-	new_rotation_x = clamp(new_rotation_x, -80, 90)
-	camera_mount.rotation_degrees.x = new_rotation_x
+	camera_pitch = clamp(camera_pitch + input_y * look_sensitivity_controller * delta, -80, 90)
 	var new_rotation_y = -input_x * look_sensitivity_controller * delta
 	player.rotate(player.basis.y, deg_to_rad(new_rotation_y))
 	if perspective == Perspective.THIRD_PERSON:
@@ -242,32 +240,46 @@ func camera_rotate_by_controller(delta: float) -> void:
 
 ## Rotate camera using the mouse motion.
 func camera_rotate_by_mouse(event: InputEvent) -> void:
-	var new_rotation_x = camera_mount.rotation_degrees.x - event.relative.y * look_sensitivity_mouse
-	new_rotation_x = clamp(new_rotation_x, -80, 90)
-	camera_mount.rotation_degrees.x = new_rotation_x
+	camera_pitch = clamp(camera_pitch - event.relative.y * look_sensitivity_mouse, -80, 90)
 	var new_rotation_y = -event.relative.x * look_sensitivity_mouse
 	player.rotate(player.basis.y, deg_to_rad(new_rotation_y))
 	if perspective == Perspective.THIRD_PERSON:
 		player.visuals.rotate_y(deg_to_rad(event.relative.x * look_sensitivity_mouse))
+	if camera_mount.top_level:
+		camera_mount.rotate_y(-deg_to_rad(event.relative.x * look_sensitivity_mouse))
 
 
-## Update the camera mount to follow the player's position.
+## Update the camera mount to follow the player's position and align with up direction.
 func move_camera_mount_to_player() -> void:
-	# Get the target position (player position + initial offset)
-	var target_position = player.global_position + camera_mount_initial_position
+	# Align the camera mount's basis with the player's up direction
+	var target_basis = Basis()
+	target_basis.y = player.up_direction
+	target_basis.x = -player.transform.basis.z.cross(player.up_direction).normalized()
+	target_basis.z = target_basis.x.cross(player.up_direction).normalized()
+	target_basis = target_basis.orthonormalized()
+	
+	# Apply pitch rotation around the local right axis
+	var pitch_rotation = Basis(Vector3.RIGHT, deg_to_rad(camera_pitch))
+	camera_mount.global_transform.basis = target_basis * pitch_rotation
 
-	# Directly match x and z
-	camera_mount.global_position.x = target_position.x
-	camera_mount.global_position.z = target_position.z
+	# Preserve original offset but orient it using the player's current up direction
+	var target_position = player.global_transform.origin + player.global_transform.basis * camera_mount_initial_position
+	var up_dir = player.up_direction.normalized()
+	var diff = target_position - camera_mount.global_position
+	var up_diff = diff.dot(up_dir)
+	var lateral_diff = diff - up_dir * up_diff
 
-	# Lerp y-position with max difference of 0.5
-	var y_diff = target_position.y - camera_mount.global_position.y
-	if abs(y_diff) > 0.5:
-		# If difference is greater than 0.5, move directly to maintain max distance of 0.5
-		camera_mount.global_position.y = target_position.y - sign(y_diff) * 0.5
+	# Snap lateral axes directly; smooth the up axis while keeping within 0.5 units
+	var new_position = camera_mount.global_position + lateral_diff
+	if abs(up_diff) > 0.5:
+		new_position += up_dir * (up_diff - sign(up_diff) * 0.5)
 	else:
-		# Otherwise lerp smoothly
-		camera_mount.global_position.y = lerp(camera_mount.global_position.y, target_position.y, 0.1)
+		# Use delta time for frame-rate independent smoothing
+		# Lower factor (e.g. 2.0) = "increased time" / smoother movement
+		var delta = get_physics_process_delta_time()
+		new_position += up_dir * (up_diff * 4.0 * delta)
+
+	camera_mount.global_position = new_position
 
 
 ## Update the camera to follow the character head's position (while in "first person").
