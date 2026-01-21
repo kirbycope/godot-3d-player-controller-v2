@@ -24,6 +24,9 @@ const ANIMATION_SWINGING_1H_RIGHT := "Standing_Swinging_1H_Right/mixamo_com"
 const ANIMATION_SWINGING_2H := "Standing_Swinging_2H/mixamo_com"
 const ANIMATION_THROWING_LEFT := "Standing_Throwing_Left/mixamo_com"
 const ANIMATION_THROWING_RIGHT := "Standing_Throwing_Right/mixamo_com"
+const ANIMATION_TURNING_LEFT := "Standing_Left_Turn/mixamo_com"
+const ANIMATION_TURNING_RIGHT := "Standing_Right_Turn/mixamo_com"
+const TURN_ANGLE_DEGREES := 90.0
 const NODE_NAME := "Standing"
 const NODE_STATE := States.State.STANDING
 
@@ -397,6 +400,10 @@ func _on_animation_finished(animation_name: String) -> void:
 		player.is_throwing_left = false
 	elif animation_name == ANIMATION_THROWING_RIGHT:
 		player.is_throwing_right = false
+	elif animation_name == ANIMATION_TURNING_LEFT:
+		turning_left = false
+	elif animation_name == ANIMATION_TURNING_RIGHT:
+		turning_right = false
 
 
 ## Start "standing".
@@ -454,3 +461,5 @@ func stop() -> void:
 	player.is_swinging_2h = false
 	player.is_throwing_left = false
 	player.is_throwing_right = false
+	turning_left = false
+	turning_right = false
