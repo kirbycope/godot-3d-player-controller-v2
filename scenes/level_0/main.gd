@@ -28,7 +28,7 @@ func _ready() -> void:
 	player.enable_punching = true
 	player.enable_pushing = true
 	player.enable_ragdolling = true
-	player.enable_retical = true
+	#player.enable_retical = true
 	player.enable_rolling = true
 	player.enable_sitting = true
 	player.enable_sliding = true

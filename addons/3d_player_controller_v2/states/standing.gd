@@ -30,6 +30,9 @@ const TURN_ANGLE_DEGREES := 90.0
 const NODE_NAME := "Standing"
 const NODE_STATE := States.State.STANDING
 
+var turning_left := false
+var turning_right := false
+
 
 ## Called when there is an input event.
 func _input(event: InputEvent) -> void:
