@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://dtwm52qmgra46"]
+[gd_scene load_steps=2 format=3]
 
-[ext_resource type="Script" uid="uid://dc8c25aem5mtx" path="res://addons/3d_player_controller_v2/chat.gd" id="1_4q40p"]
+[ext_resource type="Script" path="res://addons/3d_player_controller_v2/chat.gd" id="1_4q40p"]
 
 [node name="Chat" type="CanvasLayer"]
 script = ExtResource("1_4q40p")

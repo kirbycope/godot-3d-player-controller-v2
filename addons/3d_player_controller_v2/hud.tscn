@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://c7xhqfwb66o1a"]
+[gd_scene load_steps=2 format=3]
 
-[ext_resource type="Texture2D" uid="uid://djq4xv33k8a6p" path="res://addons/3d_player_controller_v2/assets/textures/game_icons/white/1x/plus.png" id="2_j6kbt"]
+[ext_resource type="Texture2D" path="res://addons/3d_player_controller_v2/assets/textures/game_icons/white/1x/plus.png" id="2_j6kbt"]
 
 [node name="HUD" type="CanvasLayer"]
 

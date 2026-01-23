@@ -79,7 +79,7 @@ func _on_settings_touch_screen_button_pressed() -> void:
 
 
 func _on_title_pressed() -> void:
-	var level_select_scene = load("uid://7bmrbudeq40y").instantiate()
+	var level_select_scene = load("uid://d2tpp6qt80cyu").instantiate()
 	get_tree().root.add_child(level_select_scene)
 	get_parent().get_parent().queue_free()
 

@@ -1,6 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://dvpsvwsy5wedp"]
+[gd_scene load_steps=3 format=3]
 
-[ext_resource type="Script" uid="uid://b5k6lxvw3d3xa" path="res://addons/3d_player_controller_v2/debug.gd" id="1_k3k7b"]
+[ext_resource type="Script" path="res://addons/3d_player_controller_v2/debug.gd" id="1_k3k7b"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_3bd2f"]
 outline_color = Color(0, 0, 0, 1)

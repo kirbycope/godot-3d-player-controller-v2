@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://phce5r228frv"]
+[gd_scene load_steps=2 format=3]
 
-[ext_resource type="PackedScene" uid="uid://jj27pdpt5h1b" path="res://addons/3d_player_controller_v2/assets/characters/godette/Godette.gltf" id="1_x1x75"]
+[ext_resource type="PackedScene" path="res://addons/3d_player_controller_v2/assets/characters/godette/Godette.gltf" id="1_x1x75"]
 
 [node name="Godette" type="Node3D"]
 
