@@ -221,18 +221,6 @@ func _process(delta: float) -> void:
 	target_basis = target_basis.orthonormalized()
 	transform.basis = target_basis
 
-	if character.top_level:
-		# Move the character to follow the player
-		# Snap the character to the player's lateral position (relative to up_direction)
-		# Interpolate the vertical position (for stair stepping smoothness)
-		var diff = global_position - character.global_position
-		var vertical_diff = diff.dot(up_direction) * up_direction
-		var lateral_diff = diff - vertical_diff
-		character.global_position += lateral_diff + vertical_diff * 20.0 * delta
-
-		# Rotate the character to follow the visuals
-		character.global_transform.basis = character.global_transform.basis.orthonormalized().slerp(visuals.global_transform.basis.orthonormalized(), 20.0 * delta)
-
 
 ## Called once on each physics tick, and allows Nodes to synchronize their logic with physics ticks.
 func _physics_process(delta: float) -> void:
