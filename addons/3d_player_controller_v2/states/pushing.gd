@@ -1,9 +1,14 @@
 extends BaseState
+class_name Pushing
+## 🧱 Pushing a large object or against the wall.
 
-## Handles pushing state: plays push animation while player moves against obstacles and transitions to standing when input stops.
+# Pushing 🔵 Mixamo animations
+const MIX_ANIMATION_PUSHING := "Standing_Pushing/mixamo_com"
+# Pushing 🟣 Quaternius animations
+const QUAT_ANIMATION_PUSHING := "AnimationLibrary_Godot/Push"
+const QUAT_ANIMATION_PUSHING_START := "AnimationLibrary_Godot/Push_Enter"
+const QUAT_ANIMATION_PUSHING_STOP := "AnimationLibrary_Godot/Push_Exit"
 
-const ANIMATION_PUSHING := "Standing_Pushing/mixamo_com"
-const NODE_NAME := "Pushing"
 const NODE_STATE := States.State.PUSHING
 
 
@@ -24,10 +29,13 @@ func _process(_delta: float) -> void:
 
 ## Plays the appropriate animation based on player state.
 func play_animation() -> void:
-	# Check if the animation player is not already playing the appropriate animation
-	if player.animation_player_current_animation() != ANIMATION_PUSHING:
+	var anim = QUAT_ANIMATION_PUSHING if player.animation_set == 1 else MIX_ANIMATION_PUSHING
+	if player.animation_player_current_animation() != anim:
 		# Play the "pushing" animation
-		player.animation_player_play(ANIMATION_PUSHING)
+		player.animation_player_play(anim)
+	# Pause the animation if no input
+	if player.input_direction == Vector2.ZERO:
+		player.animation_player_pause()
 
 
 ## Start "pushing".

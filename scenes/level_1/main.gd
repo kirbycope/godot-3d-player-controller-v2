@@ -21,7 +21,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	# Rotate the world
 	# ToDo: Test potential collision with wall before rotating, do not rotate if colliding with wall
-	if Input.is_action_pressed(player.controls.move_up):
+	if Input.is_action_pressed(player.Controls.MOVE_UP):
 		ground.rotate_x(deg_to_rad(10) * delta)
-	elif Input.is_action_pressed(player.controls.move_down):
+	elif Input.is_action_pressed(player.Controls.MOVE_DOWN):
 		ground.rotate_x(deg_to_rad(-10) * delta)

@@ -1,5 +1,6 @@
-class_name States
 extends Node
+class_name States
+## State enumeration for the 3D Player Controller V2.
 
 # Define states as an enum for clarity
 enum State {

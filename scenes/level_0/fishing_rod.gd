@@ -16,7 +16,7 @@ func _input(event: InputEvent) -> void:
 		if player.pause.visible: return
 
 		# (D-Pad Down) /[Q] _just_pressed_ -> Drop _this_ node
-		if Input.is_action_just_pressed(player.controls.button_13):
+		if Input.is_action_just_pressed(Controls.BUTTON_13):
 			player.is_holding_fishing_rod = false
 			player.is_casting_fishing = false
 			player.is_reeling_fishing = false
@@ -33,7 +33,7 @@ func _input(event: InputEvent) -> void:
 			return
 
 		# 🅁1/[MB1] _pressed_ -> Start "reeling"
-		if event.is_action_pressed(player.controls.button_5):
+		if event.is_action_pressed(Controls.BUTTON_5):
 			# Check if the animation player is not already playing the appropriate animation
 			if animation_player.current_animation != "Take 001":
 				# Play the "reeling" animation

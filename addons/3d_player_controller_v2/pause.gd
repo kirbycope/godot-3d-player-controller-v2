@@ -1,6 +1,8 @@
 extends CanvasLayer
 ## Manages pause menu UI with resume, settings, title, and exit options while handling mouse mode
 
+@export var title_screen: String = "res://scenes/main.tscn" ## Path to the title screen scene
+
 
 var initial_mouse_mode := -1
 var player_initial_position: Vector3
@@ -25,7 +27,7 @@ func _input(event: InputEvent) -> void:
 	if !is_multiplayer_authority(): return
 
 	# Toggle pause menu visibility
-	if event.is_action_pressed(player.controls.button_9) \
+	if event.is_action_pressed(Controls.BUTTON_9) \
 	and not player.chat.line_edit.visible:
 		toggle_menu()
 
@@ -79,7 +81,7 @@ func _on_settings_touch_screen_button_pressed() -> void:
 
 
 func _on_title_pressed() -> void:
-	var level_select_scene = load("uid://d2tpp6qt80cyu").instantiate()
+	var level_select_scene = load(title_screen).instantiate()
 	get_tree().root.add_child(level_select_scene)
 	get_parent().get_parent().queue_free()
 

@@ -1,37 +1,56 @@
 extends BaseState
-## Handles standing idle state with support for fishing, punching, kicking, rifle aiming/firing, melee swinging, and throwing animations
+class_name Standing
+## 🚶 Standing still, on the floor.
 
-
-const ANIMATION_FISHING_CASTING := "Standing_Fishing_Cast/mixamo_com"
-const ANIMATION_FISHING_IDLE := "Standing_Fishing_Idle/mixamo_com"
-const ANIMATION_FISHING_REELING := "Standing_Fishing_Reel/mixamo_com"
-const ANIMATION_BLOCKING_1H_LEFT := "Standing_Blocking_1H_Left/mixamo_com"
-const ANIMATION_BLOCKING_1H_RIGHT := "Standing_Blocking_1H_Right/mixamo_com"
-const ANIMATION_BLOCKING_2H := "Standing_Blocking_2H/mixamo_com"
-const ANIMATION_HOLDING_1H_LEFT := "Standing_Holding_1H_Left/mixamo_com"
-const ANIMATION_HOLDING_1H_RIGHT := "Standing_Holding_1H_Right/mixamo_com"
-const ANIMATION_HOLDING_2H := "Standing_Holding_2H/mixamo_com"
-const ANIMATION_KICKING_LEFT := "Standing_Kicking_Left/mixamo_com"
-const ANIMATION_KICKING_RIGHT := "Standing_Kicking_Right/mixamo_com"
-const ANIMATION_PUNCHING_LEFT := "Standing_Punching_Left/mixamo_com"
-const ANIMATION_PUNCHING_RIGHT := "Standing_Punching_Right/mixamo_com"
-const ANIMATION_HOLDING_RIFLE := "Standing_Holding_Rifle/mixamo_com"
-const ANIMATION_RIFLE_AIMING := "Standing_Aiming_Rifle/mixamo_com"
-const ANIMATION_RIFLE_FIRING := "Standing_Firing_Rifle/mixamo_com"
-const ANIMATION_STANDING_IDLE := "Standing/mixamo_com"
-const ANIMATION_SWINGING_1H_LEFT := "Standing_Swinging_1H_Left/mixamo_com"
-const ANIMATION_SWINGING_1H_RIGHT := "Standing_Swinging_1H_Right/mixamo_com"
-const ANIMATION_SWINGING_2H := "Standing_Swinging_2H/mixamo_com"
-const ANIMATION_THROWING_LEFT := "Standing_Throwing_Left/mixamo_com"
-const ANIMATION_THROWING_RIGHT := "Standing_Throwing_Right/mixamo_com"
-const ANIMATION_TURNING_LEFT := "Standing_Left_Turn/mixamo_com"
-const ANIMATION_TURNING_RIGHT := "Standing_Right_Turn/mixamo_com"
-const TURN_ANGLE_DEGREES := 90.0
-const NODE_NAME := "Standing"
+# Standing 🔵 Mixamo animations
+const MIX_ANIMATION_FISHING_CASTING := "Standing_Fishing_Cast/mixamo_com"
+const MIX_ANIMATION_FISHING_IDLE := "Standing_Fishing_Idle/mixamo_com"
+const MIX_ANIMATION_FISHING_REELING := "Standing_Fishing_Reel/mixamo_com"
+const MIX_ANIMATION_BLOCKING_1H_LEFT := "Standing_Blocking_1H_Left/mixamo_com"
+const MIX_ANIMATION_BLOCKING_1H_RIGHT := "Standing_Blocking_1H_Right/mixamo_com"
+const MIX_ANIMATION_BLOCKING_2H := "Standing_Blocking_2H/mixamo_com"
+const MIX_ANIMATION_HOLDING_1H_LEFT := "Standing_Holding_1H_Left/mixamo_com"
+const MIX_ANIMATION_HOLDING_1H_RIGHT := "Standing_Holding_1H_Right/mixamo_com"
+const MIX_ANIMATION_HOLDING_2H := "Standing_Holding_2H/mixamo_com"
+const MIX_ANIMATION_KICKING_LEFT := "Standing_Kicking_Left/mixamo_com"
+const MIX_ANIMATION_KICKING_RIGHT := "Standing_Kicking_Right/mixamo_com"
+const MIX_ANIMATION_PUNCHING_LEFT := "Standing_Punching_Left/mixamo_com"
+const MIX_ANIMATION_PUNCHING_RIGHT := "Standing_Punching_Right/mixamo_com"
+const MIX_ANIMATION_HOLDING_RIFLE := "Standing_Holding_Rifle/mixamo_com"
+const MIX_ANIMATION_RIFLE_AIMING := "Standing_Aiming_Rifle/mixamo_com"
+const MIX_ANIMATION_RIFLE_FIRING := "Standing_Firing_Rifle/mixamo_com"
+const MIX_ANIMATION_STANDING_IDLE := "Standing/mixamo_com"
+const MIX_ANIMATION_SWINGING_1H_LEFT := "Standing_Swinging_1H_Left/mixamo_com"
+const MIX_ANIMATION_SWINGING_1H_RIGHT := "Standing_Swinging_1H_Right/mixamo_com"
+const MIX_ANIMATION_SWINGING_2H := "Standing_Swinging_2H/mixamo_com"
+const MIX_ANIMATION_THROWING_LEFT := "Standing_Throwing_Left/mixamo_com"
+const MIX_ANIMATION_THROWING_RIGHT := "Standing_Throwing_Right/mixamo_com"
+const MIX_ANIMATION_TURNING_LEFT := "Standing_Left_Turn/mixamo_com" # TODO: Implement
+const MIX_ANIMATION_TURNING_RIGHT := "Standing_Right_Turn/mixamo_com" # TODO: Implement
+# Standing 🟣 Quaternius animations
+const QUAT_ANIMATION_FISHING_CASTING := "Standing_Fishing_Cast/mixamo_com" # TODO: Replace with actual Quaternius animation name
+const QUAT_ANIMATION_FISHING_IDLE := "Standing_Fishing_Idle/mixamo_com" # TODO: Replace with actual Quaternius animation name
+const QUAT_ANIMATION_FISHING_REELING := "Standing_Fishing_Reel/mixamo_com" # TODO: Replace with actual Quaternius animation name
+const QUAT_ANIMATION_BLOCKING_1H_LEFT := "Standing_Blocking_1H_Left/mixamo_com" # TODO: Replace with actual Quaternius animation name
+const QUAT_ANIMATION_BLOCKING_1H_RIGHT := "Standing_Blocking_1H_Right/mixamo_com" # TODO: Replace with actual Quaternius animation name
+const QUAT_ANIMATION_BLOCKING_2H := "Standing_Blocking_2H/mixamo_com" # TODO: Replace with actual Quaternius animation name
+const QUAT_ANIMATION_HOLDING_1H_LEFT := "Standing_Holding_1H_Left/mixamo_com" # TODO: Replace with actual Quaternius animation name
+const QUAT_ANIMATION_HOLDING_1H_RIGHT := "Standing_Holding_1H_Right/mixamo_com" # TODO: Replace with actual Quaternius animation name
+const QUAT_ANIMATION_HOLDING_2H := "Standing_Holding_2H/mixamo_com" # TODO: Replace with actual Quaternius animation name
+const QUAT_ANIMATION_KICKING_RIGHT := "AnimationLibrary_Godot/Kick"
+const QUAT_ANIMATION_PUNCHING_LEFT := "AnimationLibrary_Godot/Punch_Jab"
+const QUAT_ANIMATION_PUNCHING_RIGHT := "AnimationLibrary_Godot/Punch_Cross"
+const QUAT_ANIMATION_HOLDING_RIFLE := "Standing_Holding_Rifle/mixamo_com" # TODO: Replace with actual Quaternius animation name
+const QUAT_ANIMATION_RIFLE_AIMING := "Standing_Aiming_Rifle/mixamo_com" # TODO: Replace with actual Quaternius animation name
+const QUAT_ANIMATION_RIFLE_FIRING := "Standing_Firing_Rifle/mixamo_com" # TODO: Replace with actual Quaternius animation name
+const QUAT_ANIMATION_STANDING_IDLE := "AnimationLibrary_Godot/Idle"
+const QUAT_ANIMATION_SWINGING_1H_LEFT := "Standing_Swinging_1H_Left/mixamo_com" # TODO: Replace with actual Quaternius animation name
+const QUAT_ANIMATION_SWINGING_1H_RIGHT := "AnimationLibrary_Godot/Sword_Attack_Standing"
+const QUAT_ANIMATION_THROWING_LEFT := "Standing_Throwing_Left/mixamo_com" # TODO: Replace with actual Quaternius animation name
+const QUAT_ANIMATION_THROWING_RIGHT := "Standing_Throwing_Right/mixamo_com" # TODO: Replace with actual Quaternius animation name
+const QUAT_ANIMATION_TURNING_LEFT := "AnimationLibrary_Godot/Turn90_L" # TODO: Implement
+const QUAT_ANIMATION_TURNING_RIGHT := "AnimationLibrary_Godot/Turn90_R" # TODO: Implement
 const NODE_STATE := States.State.STANDING
-
-var turning_left := false
-var turning_right := false
 
 
 ## Called when there is an input event.
@@ -43,22 +62,28 @@ func _input(event: InputEvent) -> void:
 	if player.pause.visible: return
 
 	# Ⓐ/[Space] _pressed_ -> Start "jumping"
-	if event.is_action_pressed(player.controls.button_0):
+	if event.is_action_pressed(Controls.BUTTON_0):
 		if player.enable_jumping \
 		and player.is_on_floor() \
 		and not player.chat.line_edit.visible:
 			transition_state(player.current_state, States.State.JUMPING)
+			return
 
 	# Ⓑ/[shift] _pressed_ -> Start "sprinting"
-	if event.is_action_pressed(player.controls.button_1):
+	if event.is_action_pressed(Controls.BUTTON_1):
 		if player.enable_sprinting \
 		and player.input_direction != Vector2.ZERO \
 		and player.is_on_floor():
 			transition_state(NODE_STATE, States.State.SPRINTING)
 			return
 
+	# Do nothing if the mouse is visible (UI is active)
+	if Input.mouse_mode == Input.MOUSE_MODE_VISIBLE \
+	or player.camera.is_rotating_camera:
+		return
+
 	# 🄻1/[MB0] _pressed_
-	if event.is_action_pressed(player.controls.button_4):
+	if event.is_action_pressed(Controls.BUTTON_4):
 		# Fishing "casting"
 		if player.is_holding_fishing_rod:
 			if not player.is_reeling_fishing:
@@ -104,7 +129,7 @@ func _input(event: InputEvent) -> void:
 			return
 
 	# 🄻1/[MB0] _released_
-	if event.is_action_released(player.controls.button_4):
+	if event.is_action_released(Controls.BUTTON_4):
 		# Rifle "aiming" 🄻1 release
 		if event is InputEventJoypadButton:
 			if player.is_holding_rifle:
@@ -114,7 +139,7 @@ func _input(event: InputEvent) -> void:
 			player.is_blocking_1h_right = false
 
 	# 🄻2/[MB3] _pressed_
-	if event.is_action_pressed(player.controls.button_6):
+	if event.is_action_pressed(Controls.BUTTON_6):
 		# Left "kicking"
 		if player.enable_kicking \
 		and not player.is_kicking_left:
@@ -123,7 +148,7 @@ func _input(event: InputEvent) -> void:
 			player.timer_kick_left.start()
 
 	# 🅁1/[MB1] _pressed_ 
-	if event.is_action_pressed(player.controls.button_5):
+	if event.is_action_pressed(Controls.BUTTON_5):
 		# Held object "throwing"
 		if player.enable_throwing \
 		and player.camera.item_spring_arm.get_child_count() != 0:
@@ -174,7 +199,7 @@ func _input(event: InputEvent) -> void:
 			return
 
 	# 🅁1/[MB1] _released_
-	if event.is_action_released(player.controls.button_5):
+	if event.is_action_released(Controls.BUTTON_5):
 		# Rifle "aiming" [MB0] release
 		if event is InputEventMouseButton:
 			if player.is_holding_rifle:
@@ -187,7 +212,7 @@ func _input(event: InputEvent) -> void:
 			player.is_blocking_2h = false
 
 	# 🅁2/[MB4] _pressed_
-	if event.is_action_pressed(player.controls.button_7):
+	if event.is_action_pressed(Controls.BUTTON_7):
 		# Right "kicking"
 		if player.enable_kicking \
 		and not player.is_kicking_right:
@@ -209,7 +234,7 @@ func _process(delta: float) -> void:
 
 	# Ⓨ/[Ctrl] _pressed_ -> Start "crouching"
 	# Not in _input() to allow holding down the button while in other states and trasitioning to "standing"
-	if Input.is_action_pressed(player.controls.button_3) \
+	if Input.is_action_pressed(Controls.BUTTON_3) \
 	and not player.pause.visible:
 		if player.enable_crouching \
 		and player.is_on_floor():
@@ -222,22 +247,23 @@ func _process(delta: float) -> void:
 
 ## Plays the appropriate animation based on player state.
 func play_animation() -> void:
+	var current = player.animation_player_current_animation()
 	# 🦵 -- Kicking animations --
 	if player.enable_kicking \
 	and player.is_kicking_left:
-		if player.animation_player_current_animation() != ANIMATION_KICKING_LEFT:
+		if current != MIX_ANIMATION_KICKING_LEFT:
 			# 🏃 Play animation
-			_on_animation_finished(player.animation_player_current_animation()) 
-			player.animation_player_play(ANIMATION_KICKING_LEFT)
+			_on_animation_finished(current)
+			player.animation_player_play(MIX_ANIMATION_KICKING_LEFT)
 			# Play sound effect
 			if player.character.has_method("play_attack_long_sound_effect"):
 				player.character.play_attack_long_sound_effect()
 	elif player.enable_kicking \
 	and player.is_kicking_right:
-		if player.animation_player_current_animation() != ANIMATION_KICKING_RIGHT:
+		if current != MIX_ANIMATION_KICKING_RIGHT:
 			# 🏃 Play animation
-			_on_animation_finished(player.animation_player_current_animation()) 
-			player.animation_player_play(ANIMATION_KICKING_RIGHT)
+			_on_animation_finished(current)
+			player.animation_player_play(MIX_ANIMATION_KICKING_RIGHT)
 			# Play sound effect
 			if player.character.has_method("play_attack_long_sound_effect"):
 				player.character.play_attack_long_sound_effect()
@@ -245,168 +271,164 @@ func play_animation() -> void:
 	# 🎣 -- Fishing animations --
 	elif player.is_holding_fishing_rod:
 		if player.is_casting_fishing:
-			if player.animation_player_current_animation() != ANIMATION_FISHING_CASTING:
-				_on_animation_finished(player.animation_player_current_animation()) 
-				player.animation_player_play(ANIMATION_FISHING_CASTING)
+			if current != MIX_ANIMATION_FISHING_CASTING:
+				_on_animation_finished(current)
+				player.animation_player_play(MIX_ANIMATION_FISHING_CASTING)
 		elif player.is_reeling_fishing:
-			if player.animation_player_current_animation() != ANIMATION_FISHING_REELING:
-				_on_animation_finished(player.animation_player_current_animation()) 
-				player.animation_player_play(ANIMATION_FISHING_REELING)
+			if current != MIX_ANIMATION_FISHING_REELING:
+				_on_animation_finished(current)
+				player.animation_player_play(MIX_ANIMATION_FISHING_REELING)
 		else:
-			if player.animation_player_current_animation() != ANIMATION_FISHING_IDLE:
-				_on_animation_finished(player.animation_player_current_animation()) 
-				player.animation_player_play(ANIMATION_FISHING_IDLE)
+			if current != MIX_ANIMATION_FISHING_IDLE:
+				_on_animation_finished(current)
+				player.animation_player_play(MIX_ANIMATION_FISHING_IDLE)
 
 	# 🔫 -- Rifle animations --
 	elif player.is_holding_rifle:
 		if player.is_firing_rifle:
-			if player.animation_player_current_animation() != ANIMATION_RIFLE_FIRING:
-				_on_animation_finished(player.animation_player_current_animation()) 
-				player.animation_player_play(ANIMATION_RIFLE_FIRING)
+			if current != MIX_ANIMATION_RIFLE_FIRING:
+				_on_animation_finished(current)
+				player.animation_player_play(MIX_ANIMATION_RIFLE_FIRING)
 		elif player.is_aiming_rifle:
-			if player.animation_player_current_animation() != ANIMATION_RIFLE_AIMING:
-				_on_animation_finished(player.animation_player_current_animation()) 
-				player.animation_player_play(ANIMATION_RIFLE_AIMING)
+			if current != MIX_ANIMATION_RIFLE_AIMING:
+				_on_animation_finished(current)
+				player.animation_player_play(MIX_ANIMATION_RIFLE_AIMING)
 		else:
-			if player.animation_player_current_animation() != ANIMATION_HOLDING_RIFLE:
-				_on_animation_finished(player.animation_player_current_animation()) 
-				player.animation_player_play(ANIMATION_HOLDING_RIFLE)
+			if current != MIX_ANIMATION_HOLDING_RIFLE:
+				_on_animation_finished(current)
+				player.animation_player_play(MIX_ANIMATION_HOLDING_RIFLE)
 
 	# 🛠️ -- 1H animations --
 	elif player.is_holding_1h_left \
 	and player.is_holding_1h_right:
 		if player.is_swinging_1h_left:
-			if player.animation_player_current_animation() != ANIMATION_SWINGING_1H_LEFT:
+			if current != MIX_ANIMATION_SWINGING_1H_LEFT:
 				# 🏃 Play animation
-				_on_animation_finished(player.animation_player_current_animation()) 
-				player.animation_player_play(ANIMATION_SWINGING_1H_LEFT)
+				_on_animation_finished(current)
+				player.animation_player_play(MIX_ANIMATION_SWINGING_1H_LEFT)
 				# 🔊 Play sound effect
 				if player.character.has_method("play_attack_short_sound_effect"):
 					player.character.play_attack_short_sound_effect()
 		elif player.is_swinging_1h_right:	
-			if player.animation_player_current_animation() != ANIMATION_SWINGING_1H_RIGHT:
+			if current != MIX_ANIMATION_SWINGING_1H_RIGHT:
 				# 🏃 Play animation
-				_on_animation_finished(player.animation_player_current_animation()) 
-				player.animation_player_play(ANIMATION_SWINGING_1H_RIGHT)
+				_on_animation_finished(current)
+				player.animation_player_play(MIX_ANIMATION_SWINGING_1H_RIGHT)
 				# 🔊 Play sound effect
 				if player.character.has_method("play_attack_short_sound_effect"):
 					player.character.play_attack_short_sound_effect()
-		elif player.animation_player_current_animation() != ANIMATION_HOLDING_1H_RIGHT:
-			player.animation_player_play(ANIMATION_HOLDING_1H_RIGHT)
+		elif current != MIX_ANIMATION_HOLDING_1H_RIGHT:
+			player.animation_player_play(MIX_ANIMATION_HOLDING_1H_RIGHT)
 	elif player.is_holding_1h_left:
 		if player.is_blocking_1h_left:
-			if player.animation_player_current_animation() != ANIMATION_BLOCKING_1H_LEFT:
-				player.animation_player_play(ANIMATION_BLOCKING_1H_LEFT)
+			if current != MIX_ANIMATION_BLOCKING_1H_LEFT:
+				player.animation_player_play(MIX_ANIMATION_BLOCKING_1H_LEFT)
 		elif player.is_swinging_1h_left:
-			if player.animation_player_current_animation() != ANIMATION_SWINGING_1H_LEFT:
+			if current != MIX_ANIMATION_SWINGING_1H_LEFT:
 				# 🏃 Play animation
-				_on_animation_finished(player.animation_player_current_animation()) 
-				player.animation_player_play(ANIMATION_SWINGING_1H_LEFT)
+				_on_animation_finished(current)
+				player.animation_player_play(MIX_ANIMATION_SWINGING_1H_LEFT)
 				# 🔊 Play sound effect
 				if player.character.has_method("play_attack_short_sound_effect"):
 					player.character.play_attack_short_sound_effect()
-		elif player.animation_player_current_animation() != ANIMATION_HOLDING_1H_LEFT:
-			player.animation_player_play(ANIMATION_HOLDING_1H_LEFT)
+		elif current != MIX_ANIMATION_HOLDING_1H_LEFT:
+			player.animation_player_play(MIX_ANIMATION_HOLDING_1H_LEFT)
 	elif player.is_holding_1h_right:
 		if player.is_blocking_1h_right:
-			if player.animation_player_current_animation() != ANIMATION_BLOCKING_1H_RIGHT:
-				player.animation_player_play(ANIMATION_BLOCKING_1H_RIGHT)
+			if current != MIX_ANIMATION_BLOCKING_1H_RIGHT:
+				player.animation_player_play(MIX_ANIMATION_BLOCKING_1H_RIGHT)
 		elif player.is_swinging_1h_right:
-			if player.animation_player_current_animation() != ANIMATION_SWINGING_1H_RIGHT:
+			if current != MIX_ANIMATION_SWINGING_1H_RIGHT:
 				# 🏃 Play animation
-				_on_animation_finished(player.animation_player_current_animation()) 
-				player.animation_player_play(ANIMATION_SWINGING_1H_RIGHT)
+				_on_animation_finished(current)
+				player.animation_player_play(MIX_ANIMATION_SWINGING_1H_RIGHT)
 				# 🔊 Play sound effect
 				if player.character.has_method("play_attack_short_sound_effect"):
 					player.character.play_attack_short_sound_effect()
-		elif player.animation_player_current_animation() != ANIMATION_HOLDING_1H_RIGHT:
-			player.animation_player_play(ANIMATION_HOLDING_1H_RIGHT)
+		elif current != MIX_ANIMATION_HOLDING_1H_RIGHT:
+			player.animation_player_play(MIX_ANIMATION_HOLDING_1H_RIGHT)
 
 	# 👐 -- 2H animations --
 	elif player.is_holding_2h:
 		if player.is_blocking_2h:
-			if player.animation_player_current_animation() != ANIMATION_BLOCKING_2H:
-				player.animation_player_play(ANIMATION_BLOCKING_2H)
+			if current != MIX_ANIMATION_BLOCKING_2H:
+				player.animation_player_play(MIX_ANIMATION_BLOCKING_2H)
 		elif player.is_swinging_2h:
-			if player.animation_player_current_animation() != ANIMATION_SWINGING_2H:
+			if current != MIX_ANIMATION_SWINGING_2H:
 				# 🏃 Play animation
-				_on_animation_finished(player.animation_player_current_animation()) 
-				player.animation_player_play(ANIMATION_SWINGING_2H)
+				_on_animation_finished(current)
+				player.animation_player_play(MIX_ANIMATION_SWINGING_2H)
 				# 🔊 Play sound effect
 				if player.character.has_method("play_attack_long_sound_effect"):
 					player.character.play_attack_long_sound_effect()
-		elif player.animation_player_current_animation() != ANIMATION_HOLDING_2H:
-			player.animation_player_play(ANIMATION_HOLDING_2H)
+		elif current != MIX_ANIMATION_HOLDING_2H:
+			player.animation_player_play(MIX_ANIMATION_HOLDING_2H)
 
 	# 🤾 -- Throwing animations --
 	elif player.is_holding_left \
 	and player.is_throwing_left:
-		if player.animation_player_current_animation() != ANIMATION_THROWING_LEFT:
-			_on_animation_finished(player.animation_player_current_animation()) 
-			player.animation_player_play(ANIMATION_THROWING_LEFT)
+		if current != MIX_ANIMATION_THROWING_LEFT:
+			_on_animation_finished(current)
+			player.animation_player_play(MIX_ANIMATION_THROWING_LEFT)
 	elif player.is_holding_right \
 	and player.is_throwing_right:
-		if player.animation_player_current_animation() != ANIMATION_THROWING_RIGHT:
-			_on_animation_finished(player.animation_player_current_animation()) 
-			player.animation_player_play(ANIMATION_THROWING_RIGHT)
+		if current != MIX_ANIMATION_THROWING_RIGHT:
+			_on_animation_finished(current)
+			player.animation_player_play(MIX_ANIMATION_THROWING_RIGHT)
 
 	# 🥊 -- Punching animations --
 	elif player.enable_punching \
 	and player.is_punching_left:
-		if player.animation_player_current_animation() != ANIMATION_PUNCHING_LEFT:
+		if current != MIX_ANIMATION_PUNCHING_LEFT:
 			# 🏃 Play animation
-			_on_animation_finished(player.animation_player_current_animation()) 
-			player.animation_player_play(ANIMATION_PUNCHING_LEFT)
+			_on_animation_finished(current)
+			player.animation_player_play(MIX_ANIMATION_PUNCHING_LEFT)
 			# 🔊 Play sound effect
 			if player.character.has_method("play_attack_short_sound_effect"):
 				player.character.play_attack_short_sound_effect()
 	elif player.enable_punching \
 	and player.is_punching_right:
-		if player.animation_player_current_animation() != ANIMATION_PUNCHING_RIGHT:
+		if current != MIX_ANIMATION_PUNCHING_RIGHT:
 			# 🏃 Play animation
-			_on_animation_finished(player.animation_player_current_animation()) 
-			player.animation_player_play(ANIMATION_PUNCHING_RIGHT)
+			_on_animation_finished(current)
+			player.animation_player_play(MIX_ANIMATION_PUNCHING_RIGHT)
 			# 🔊 Play sound effect
 			if player.character.has_method("play_attack_short_sound_effect"):
 				player.character.play_attack_short_sound_effect()
 
 	# ✋ -- Unarmed animation --
 	else:
-		if player.animation_player_current_animation() != ANIMATION_STANDING_IDLE:
-			_on_animation_finished(player.animation_player_current_animation()) 
-			player.animation_player_play(ANIMATION_STANDING_IDLE)
+		if current != MIX_ANIMATION_STANDING_IDLE:
+			_on_animation_finished(current)
+			player.animation_player_play(MIX_ANIMATION_STANDING_IDLE)
 
 
 ## Resets the related state flag when an animation is finished.
 func _on_animation_finished(animation_name: String) -> void:
-	if animation_name == ANIMATION_FISHING_CASTING:
+	if animation_name == MIX_ANIMATION_FISHING_CASTING:
 		player.is_casting_fishing = false
-	elif animation_name == ANIMATION_FISHING_REELING:
+	elif animation_name == MIX_ANIMATION_FISHING_REELING:
 		player.is_reeling_fishing = false
-	elif animation_name == ANIMATION_KICKING_LEFT:
+	elif animation_name == MIX_ANIMATION_KICKING_LEFT:
 		player.is_kicking_left = false
-	elif animation_name == ANIMATION_KICKING_RIGHT:
+	elif animation_name == MIX_ANIMATION_KICKING_RIGHT:
 		player.is_kicking_right = false
-	elif animation_name == ANIMATION_RIFLE_FIRING:
+	elif animation_name == MIX_ANIMATION_RIFLE_FIRING:
 		player.is_firing_rifle = false
-	elif animation_name == ANIMATION_PUNCHING_LEFT:
+	elif animation_name == MIX_ANIMATION_PUNCHING_LEFT:
 		player.is_punching_left = false
-	elif animation_name == ANIMATION_PUNCHING_RIGHT:
+	elif animation_name == MIX_ANIMATION_PUNCHING_RIGHT:
 		player.is_punching_right = false
-	elif animation_name == ANIMATION_SWINGING_1H_LEFT:
+	elif animation_name == MIX_ANIMATION_SWINGING_1H_LEFT:
 		player.is_swinging_1h_left = false
-	elif animation_name == ANIMATION_SWINGING_1H_RIGHT:
+	elif animation_name == MIX_ANIMATION_SWINGING_1H_RIGHT:
 		player.is_swinging_1h_right = false
-	elif animation_name == ANIMATION_SWINGING_2H:
+	elif animation_name == MIX_ANIMATION_SWINGING_2H:
 		player.is_swinging_2h = false
-	elif animation_name == ANIMATION_THROWING_LEFT:
+	elif animation_name == MIX_ANIMATION_THROWING_LEFT:
 		player.is_throwing_left = false
-	elif animation_name == ANIMATION_THROWING_RIGHT:
+	elif animation_name == MIX_ANIMATION_THROWING_RIGHT:
 		player.is_throwing_right = false
-	elif animation_name == ANIMATION_TURNING_LEFT:
-		turning_left = false
-	elif animation_name == ANIMATION_TURNING_RIGHT:
-		turning_right = false
 
 
 ## Start "standing".
@@ -464,5 +486,3 @@ func stop() -> void:
 	player.is_swinging_2h = false
 	player.is_throwing_left = false
 	player.is_throwing_right = false
-	turning_left = false
-	turning_right = false

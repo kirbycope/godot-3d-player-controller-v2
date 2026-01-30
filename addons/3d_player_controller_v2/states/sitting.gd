@@ -1,9 +1,14 @@
 extends BaseState
+class_name Sitting
+## 🪑 Sitting down (at chair height).
 
-## Handles sitting state with idle animation and transition to standing on jump button press.
+# Sitting 🔵 Mixamo animations
+const MIX_ANIMATION_SITTING := "Sitting/mixamo_com"
+# Sitting 🟣 Quaternius animations
+const QUAT_ANIMATION_SITTING := "AnimationLibrary_Godot/Sitting_Idle"
+#const QUAT_ANIMATION_SITTING_START := "AnimationLibrary_Godot/Sitting_Enter" # TODO: Implement
+#const QUAT_ANIMATION_SITTING_STOP := "AnimationLibrary_Godot/Sitting_Exit" # TODO: Implement
 
-const ANIMATION_SITTING := "Sitting/mixamo_com"
-const NODE_NAME := "Sitting"
 const NODE_STATE := States.State.SITTING
 
 
@@ -16,7 +21,7 @@ func _input(event: InputEvent) -> void:
 	if player.pause.visible: return
 
 	# Ⓐ/[Space] _pressed_ -> Start "standing"
-	if event.is_action_pressed(player.controls.button_0) \
+	if event.is_action_pressed(Controls.BUTTON_0) \
 	and not player.chat.line_edit.visible:
 		transition_state(NODE_STATE, States.State.STANDING)
 
@@ -32,9 +37,9 @@ func _process(delta: float) -> void:
 
 ## Plays the appropriate animation based on player state.
 func play_animation() -> void:
-	# Check if the animation player is not already playing the appropriate animation
-	if player.animation_player_current_animation() != ANIMATION_SITTING:
-		player.animation_player_play(ANIMATION_SITTING)
+	var anim = QUAT_ANIMATION_SITTING if player.animation_set == 1 else MIX_ANIMATION_SITTING
+	if player.animation_player_current_animation() != anim:
+		player.animation_player_play(anim)
 
 
 ## Start "sitting".

@@ -1,9 +1,12 @@
 extends BaseState
+class_name Rolling
+## 🤸 Rolling forward to dodge or move quickly
 
-## Handles rolling/dodge movement with collision shape adjustment, speed boost, and automatic transition to crouching or standing on completion.
+# Rolling 🔵 Mixamo animations
+const MIX_ANIMATION_ROLLING := "Rolling/mixamo_com"
+# Rolling 🟣 Quaternius animations
+const QUAT_ANIMATION_ROLLING := "AnimationLibrary_Godot/Roll"
 
-const ANIMATION_ROLLING := "Rolling/mixamo_com"
-const NODE_NAME := "Rolling"
 const NODE_STATE := States.State.ROLLING
 
 
@@ -29,14 +32,16 @@ func _process(delta: float) -> void:
 
 ## Plays the appropriate animation based on player state.
 func play_animation() -> void:
-	if player.animation_player_current_animation() != ANIMATION_ROLLING:
-		_on_animation_finished(player.animation_player_current_animation()) 
-		player.animation_player_play(ANIMATION_ROLLING)
+	var anim = QUAT_ANIMATION_ROLLING if player.animation_set == 1 else MIX_ANIMATION_ROLLING
+	if player.animation_player_current_animation() != anim:
+		_on_animation_finished(player.animation_player_current_animation())
+		player.animation_player_play(anim)
 
 
 func _on_animation_finished(animation_name: String) -> void:
-	if animation_name == ANIMATION_ROLLING:
-		if Input.is_action_pressed(player.controls.button_3):
+	if animation_name == MIX_ANIMATION_ROLLING \
+	or animation_name == QUAT_ANIMATION_ROLLING:
+		if Input.is_action_pressed(Controls.BUTTON_3):
 			transition_state(NODE_STATE, States.State.CROUCHING)
 		else:
 			transition_state(NODE_STATE, States.State.STANDING)

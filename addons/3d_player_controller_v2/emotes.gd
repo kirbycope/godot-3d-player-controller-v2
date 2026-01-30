@@ -25,30 +25,30 @@ func _process(delta: float) -> void:
 
 	if not visible:
 		# (DPad-Down)/[B] _released_ -> Show emotes
-		if Input.is_action_just_released(player.controls.button_14):
+		if Input.is_action_just_released(Controls.BUTTON_14):
 			show()
 	else:
 		# (DPad-Up)/[Tab] _released_ -> Emote __
-		if Input.is_action_just_released(player.controls.button_12):
+		if Input.is_action_just_released(Controls.BUTTON_12):
 			player.animation_player_play_locked("Standing_Clapping/mixamo_com")
 			hide()
 		# (DPad-Down)/[Q] _released_ -> Emote __
-		elif Input.is_action_just_released(player.controls.button_13):
+		elif Input.is_action_just_released(Controls.BUTTON_13):
 			player.animation_player_play_locked("Standing_Crying/mixamo_com")
 			hide()
 		# (DPad-Down)/[B] _released_ -> Emote __
-		elif Input.is_action_just_released(player.controls.button_14):
+		elif Input.is_action_just_released(Controls.BUTTON_14):
 			player.animation_player_play_locked("Standing_Waving/mixamo_com")
 			hide()
 		# (DPad-Right)/[T] _released_ -> Emote __
-		elif Input.is_action_just_released(player.controls.button_15):
+		elif Input.is_action_just_released(Controls.BUTTON_15):
 			player.animation_player_play_locked("Standing_Quick_Informal_Bow/mixamo_com")
 			hide()
 		# (Start)/[Esc] _pressed_ -> Hide emotes
-		elif Input.is_action_just_pressed(player.controls.button_9):
+		elif Input.is_action_just_pressed(Controls.BUTTON_9):
 			hide()
 
 	if visible:
 		# Display appropriate controls
-		$DPad.visible = (player.controls.last_input_type == player.controls.InputType.CONTROLLER)
-		$Keyboard.visible = (player.controls.last_input_type == player.controls.InputType.KEYBOARD_MOUSE)
+		$DPad.visible = (player.controls.last_input_type == Controls.InputType.CONTROLLER)
+		$Keyboard.visible = (player.controls.last_input_type == Controls.InputType.KEYBOARD_MOUSE)

@@ -20,7 +20,7 @@ func _input(event: InputEvent) -> void:
 		if player.pause.visible: return
 
 		# Ⓧ/[E] press to drive vehicle - Enter vehicle
-		if event.is_action_pressed(player.controls.button_2) \
+		if event.is_action_pressed(Controls.BUTTON_2) \
 		and not player.is_driving:
 			if player.camera.ray_cast.is_colliding():
 				var collider = player.camera.ray_cast.get_collider()
@@ -43,13 +43,13 @@ func _physics_process(_delta: float) -> void:
 		if player.is_driving:
 			var steer_input = 0.0
 			var throttle_input = 0.0
-			if Input.is_action_pressed(player.controls.move_left):
+			if Input.is_action_pressed(player.Controls.MOVE_LEFT):
 				steer_input += 1.0
-			if Input.is_action_pressed(player.controls.move_right):
+			if Input.is_action_pressed(player.Controls.MOVE_RIGHT):
 				steer_input -= 1.0
-			if Input.is_action_pressed(player.controls.move_up):
+			if Input.is_action_pressed(player.Controls.MOVE_UP):
 				throttle_input += 1.0
-			if Input.is_action_pressed(player.controls.move_down):
+			if Input.is_action_pressed(player.Controls.MOVE_DOWN):
 				throttle_input -= 1.0
 			steering = steer_input * max_steer
 			engine_force = throttle_input * engine_power

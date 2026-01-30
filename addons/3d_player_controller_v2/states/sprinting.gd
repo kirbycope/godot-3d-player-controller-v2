@@ -1,10 +1,14 @@
 extends BaseState
+## 🏃 Sprinting at high speed.
 
-## Handles sprinting movement with jump/slide transitions, rifle animations, and directional playback (backwards in first-person).
-
-const ANIMATION_SPRINTING := "Sprinting/mixamo_com"
-const ANIMATION_SPRINTING_HOLDING_RIFLE := "Sprinting_Holding_Rifle/mixamo_com"
-const NODE_NAME := "Sprinting"
+# Sprinting 🔵 Mixamo animations
+const MIX_ANIMATION_SPRINTING := "Sprinting/mixamo_com"
+const MIX_ANIMATION_SPRINTING_HOLDING_RIFLE := "Sprinting_Holding_Rifle/mixamo_com"
+# Sprinting 🟣 Quaternius animations
+const QUAT_ANIMATION_SPRINTING := "AnimationLibrary_Godot/Sprint"
+const QUAT_ANIMATION_SPRINTING_HOLDING_RIFLE := "AnimationLibrary_Godot/Sprint_Holding_Rifle" # TODO: Implement
+const QUAT_ANIMATION_SPRINTING_START := "AnimationLibrary_Godot/Sprint_Enter" # TODO: Implement
+const QUAT_ANIMATION_SPRINTING_STOP := "AnimationLibrary_Godot/Sprint_Exit" # TODO: Implement
 const NODE_STATE := States.State.SPRINTING
 
 
@@ -17,20 +21,20 @@ func _input(event: InputEvent) -> void:
 	if player.pause.visible: return
 
 	# Ⓐ/[Space] _pressed_ -> Start "jumping"
-	if event.is_action_pressed(player.controls.button_0):
+	if event.is_action_pressed(Controls.BUTTON_0):
 		if player.enable_jumping \
 		and player.is_on_floor() \
 		and not player.chat.line_edit.visible:
 			transition_state(player.current_state, States.State.JUMPING)
 
 	# Ⓑ/[shift] _released_ -> Start "standing"
-	if event.is_action_released(player.controls.button_1):
+	if event.is_action_released(Controls.BUTTON_1):
 		transition_state(NODE_STATE, States.State.STANDING)
 		return
 
 	# Ⓨ/[Ctrl] _pressed_ -> Start "sliding"
 	if player.enable_sliding:
-		if event.is_action_pressed(player.controls.button_3) \
+		if event.is_action_pressed(Controls.BUTTON_3) \
 		and player.is_on_floor():
 			transition_state(NODE_STATE, States.State.SLIDING)
 			return
@@ -50,7 +54,7 @@ func _process(delta: float) -> void:
 	# 🏃 Play animation
 	play_animation()
 
-	#  🔊 Play sound effect
+	# 🔊 Play sound effect
 	if player.character.has_method("play_sprint_sound_effect"):
 		player.character.play_sprint_sound_effect()
 
@@ -58,23 +62,22 @@ func _process(delta: float) -> void:
 ## Plays the appropriate animation based on player state.
 func play_animation() -> void:
 	# Check if in first person and moving backwards
-	var play_backwards = (player.camera.perspective == player.camera.Perspective.FIRST_PERSON) and Input.is_action_pressed(player.controls.move_down)
+	var play_backwards = (player.camera.perspective == player.camera.Perspective.FIRST_PERSON) and Input.is_action_pressed(Controls.MOVE_DOWN)
+	var mix_anim = MIX_ANIMATION_SPRINTING_HOLDING_RIFLE if player.is_holding_rifle else MIX_ANIMATION_SPRINTING
+	var quat_anim = QUAT_ANIMATION_SPRINTING_HOLDING_RIFLE if player.is_holding_rifle else QUAT_ANIMATION_SPRINTING
 
-	# -- Rifle animations --
-	if player.is_holding_rifle:
-		if player.animation_player_current_animation() != ANIMATION_SPRINTING_HOLDING_RIFLE:
+	if player.animation_set == 0:
+		if player.animation_player_current_animation() != mix_anim:
 			if play_backwards:
-				player.animation_player_play_backwards(ANIMATION_SPRINTING_HOLDING_RIFLE)
+				player.animation_player_play_backwards(mix_anim)
 			else:
-				player.animation_player_play(ANIMATION_SPRINTING_HOLDING_RIFLE)
-
-	# -- Unarmed animations --
-	else:
-		if player.animation_player_current_animation() != ANIMATION_SPRINTING:
+				player.animation_player_play(mix_anim)
+	elif player.animation_set == 1:
+		if player.animation_player_current_animation() != quat_anim:
 			if play_backwards:
-				player.animation_player_play_backwards(ANIMATION_SPRINTING)
+				player.animation_player_play_backwards(quat_anim)
 			else:
-				player.animation_player_play(ANIMATION_SPRINTING)
+				player.animation_player_play(quat_anim)
 
 
 ## Start "sprinting".

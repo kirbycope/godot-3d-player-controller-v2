@@ -1,12 +1,18 @@
 extends BaseState
+class_name Crawling
+## 🥷 Crawling on the floor. Crouching if the player is holding a rifle.
 
-## Handles crawling movement, rifle aiming/firing state flags, collision shape adjustments, and transition logic.
+# Crawling 🔵 Mixamo animations
+const MIX_ANIMATION_CRAWLING := "Crawling/mixamo_com"
+const MIX_ANIMATION_CRAWLING_HOLDING_RIFLE := "Crouching_Walking_Holding_Rifle/mixamo_com"
+const MIX_ANIMATION_CRAWLING_AIMING_RIFLE := "Crouching_Walking_Aiming_Rifle/mixamo_com"
+const MIX_ANIMATION_CRAWLING_FIRING_RIFLE := "Crouching_Firing_Rifle/mixamo_com"
+# Crawling 🟣 Quaternius animations
+const QUAT_ANIMATION_CRAWLING := "AnimationLibrary_Godot/Crawl_Fwd"
+const QUAT_ANIMATION_CRAWLING_HOLDING_RIFLE := "Crouching_Walking_Holding_Rifle/mixamo_com" # TODO: Replace with actual Quaternius animation name
+const QUAT_ANIMATION_CRAWLING_AIMING_RIFLE := "Crouching_Walking_Aiming_Rifle/mixamo_com" # TODO: Replace with actual Quaternius animation name
+const QUAT_ANIMATION_CRAWLING_FIRING_RIFLE := "Crouching_Firing_Rifle/mixamo_com" # TODO: Replace with actual Quaternius animation name
 
-const ANIMATION_CRAWLING := "Crawling/mixamo_com"
-const ANIMATION_CRAWLING_HOLDING_RIFLE := "Crouching_Walking_Holding_Rifle/mixamo_com"
-const ANIMATION_CRAWLING_AIMING_RIFLE := "Crouching_Walking_Aiming_Rifle/mixamo_com"
-const ANIMATION_CRAWLING_FIRING_RIFLE := "Crouching_Firing_Rifle/mixamo_com"
-const NODE_NAME := "Crawling"
 const NODE_STATE := States.State.CRAWLING
 
 
@@ -20,17 +26,17 @@ func _input(event: InputEvent) -> void:
 
 	# Ⓐ/[Space] _pressed_ -> Start "rolling"
 	if player.enable_rolling:
-		if event.is_action_pressed(player.controls.button_0):
+		if event.is_action_pressed(Controls.BUTTON_0):
 			transition_state(NODE_STATE, States.State.ROLLING)
 			return
 
 	# Ⓨ/[Ctrl] _released_ -> Start "standing"
-	if event.is_action_released(player.controls.button_3):
+	if event.is_action_released(Controls.BUTTON_3):
 		transition_state(NODE_STATE, States.State.STANDING)
 		return
 
 	# 🄻1/[MB0] _pressed_
-	if event.is_action_pressed(player.controls.button_4):
+	if event.is_action_pressed(Controls.BUTTON_4):
 		# Rifle "aiming" 🄻1
 		if player.is_holding_rifle \
 		and event is InputEventJoypadButton:
@@ -41,14 +47,14 @@ func _input(event: InputEvent) -> void:
 			player.is_firing_rifle = true
 
 	# 🄻1 _released_ -> Lower rifle
-	if event.is_action_released(player.controls.button_4) \
+	if event.is_action_released(Controls.BUTTON_4) \
 	and event is InputEventJoypadButton:
 		# Rifle "aiming" 🄻1
 		if player.is_holding_rifle:
 			player.is_aiming_rifle = false
 
 	# 🅁1/[MB1] _pressed_ -> Aim rifle
-	if event.is_action_pressed(player.controls.button_5):
+	if event.is_action_pressed(Controls.BUTTON_5):
 		# Rifle "aiming" [MB1]
 		if player.is_holding_rifle \
 		and event is InputEventMouseButton:
@@ -59,7 +65,7 @@ func _input(event: InputEvent) -> void:
 			player.is_firing_rifle = true
 
 	# [MB1] _released_ -> Lower rifle
-	if event.is_action_released(player.controls.button_5) \
+	if event.is_action_released(Controls.BUTTON_5) \
 	and event is InputEventMouseButton:
 		if player.is_holding_rifle:
 			player.is_aiming_rifle = false
@@ -72,7 +78,7 @@ func _process(delta: float) -> void:
 
 	# Check if there is no input (but still crouching) -> Start "crouching"
 	if player.input_direction == Vector2.ZERO \
-	and Input.is_action_pressed(player.controls.button_3) \
+	and Input.is_action_pressed(Controls.BUTTON_3) \
 	and not player.pause.visible:
 		transition_state(NODE_STATE, States.State.CROUCHING)
 		return
@@ -84,44 +90,42 @@ func _process(delta: float) -> void:
 ## Plays the appropriate animation based on player state.
 func play_animation() -> void:
 	# Check if in first person and moving backwards
-	var play_backwards = (player.camera.perspective == player.camera.Perspective.FIRST_PERSON) and Input.is_action_pressed(player.controls.move_down)
-
-	# -- Rifle animations --
+	var play_backwards = (player.camera.perspective == player.camera.Perspective.FIRST_PERSON) and Input.is_action_pressed(Controls.MOVE_DOWN)
+	var mix_anim: String
+	var quat_anim: String
 	if player.is_holding_rifle:
 		if player.is_firing_rifle:
-			if player.animation_player_current_animation() != ANIMATION_CRAWLING_FIRING_RIFLE:
-				if play_backwards:
-					player.animation_player_play_backwards(ANIMATION_CRAWLING_FIRING_RIFLE)
-				else:
-					_on_animation_finished(player.animation_player_current_animation())
-					player.animation_player_play(ANIMATION_CRAWLING_FIRING_RIFLE)
+			mix_anim = MIX_ANIMATION_CRAWLING_FIRING_RIFLE
+			quat_anim = QUAT_ANIMATION_CRAWLING_FIRING_RIFLE
 		elif player.is_aiming_rifle:
-			if player.animation_player_current_animation() != ANIMATION_CRAWLING_AIMING_RIFLE:
-				if play_backwards:
-					player.animation_player_play_backwards(ANIMATION_CRAWLING_AIMING_RIFLE)
-				else:
-					_on_animation_finished(player.animation_player_current_animation())
-					player.animation_player_play(ANIMATION_CRAWLING_AIMING_RIFLE)
+			mix_anim = MIX_ANIMATION_CRAWLING_AIMING_RIFLE
+			quat_anim = QUAT_ANIMATION_CRAWLING_AIMING_RIFLE
 		else:
-			if player.animation_player_current_animation() != ANIMATION_CRAWLING_HOLDING_RIFLE:
-				if play_backwards:
-					player.animation_player_play_backwards(ANIMATION_CRAWLING_HOLDING_RIFLE)
-				else:
-					_on_animation_finished(player.animation_player_current_animation())
-					player.animation_player_play(ANIMATION_CRAWLING_HOLDING_RIFLE)
-
-	# -- Unarmed animation --
+			mix_anim = MIX_ANIMATION_CRAWLING_HOLDING_RIFLE
+			quat_anim = QUAT_ANIMATION_CRAWLING_HOLDING_RIFLE
 	else:
-		if player.animation_player_current_animation() != ANIMATION_CRAWLING:
+		mix_anim = MIX_ANIMATION_CRAWLING
+		quat_anim = QUAT_ANIMATION_CRAWLING
+
+	if player.animation_set == 0:
+		if player.animation_player_current_animation() != mix_anim:
 			if play_backwards:
-				player.animation_player_play_backwards(ANIMATION_CRAWLING)
+				player.animation_player_play_backwards(mix_anim)
 			else:
 				_on_animation_finished(player.animation_player_current_animation())
-				player.animation_player_play(ANIMATION_CRAWLING)
+				player.animation_player_play(mix_anim)
+	elif player.animation_set == 1:
+		if player.animation_player_current_animation() != quat_anim:
+			if play_backwards:
+				player.animation_player_play_backwards(quat_anim)
+			else:
+				_on_animation_finished(player.animation_player_current_animation())
+				player.animation_player_play(quat_anim)
 
 
 func _on_animation_finished(animation_name: String) -> void:
-	if animation_name == ANIMATION_CRAWLING_FIRING_RIFLE:
+	if animation_name == MIX_ANIMATION_CRAWLING_FIRING_RIFLE \
+	or animation_name == QUAT_ANIMATION_CRAWLING_FIRING_RIFLE:
 		player.is_firing_rifle = false
 
 

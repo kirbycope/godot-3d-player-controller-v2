@@ -18,12 +18,12 @@ func _input(event: InputEvent) -> void:
 	if !is_multiplayer_authority(): return
 
 	# (☰)/[Esc] _pressed_ -> Hide chat input
-	if event.is_action_pressed(player.controls.button_9) \
+	if event.is_action_pressed(Controls.BUTTON_9) \
 	and line_edit.visible:
 		clear_and_hide_input()
 
 	# (D-Pad Right)/[T] _released_ -> Show chat input
-	if event.is_action_released(player.controls.button_15) \
+	if event.is_action_released(Controls.BUTTON_15) \
 	and not line_edit.visible \
 	and not player.emotes.visible:
 		clear_and_show_input()

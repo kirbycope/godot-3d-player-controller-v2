@@ -1,14 +1,22 @@
 extends BaseState
+class_name Hanging
+## 🐒 Hanging from ledges (braced) or bars (not braced).
 
-## Handles ledge hanging: shimmy movement, sprint speed scaling, braced vs unbraced animations, and transitions (mantle, fall, stand).
+# Hanging 🔵 Mixamo animations
+const MIX_ANIMATION_HANGING := "Hanging/mixamo_com"
+const MIX_ANIMATION_HANGING_SHIMMY_LEFT := "Hanging_Shimmy_Left/mixamo_com"
+const MIX_ANIMATION_HANGING_SHIMMY_RIGHT := "Hanging_Shimmy_Right/mixamo_com"
+const MIX_ANIMATION_HANGING_BRACED := "Hanging_Braced/mixamo_com"
+const MIX_ANIMATION_HANGING_BRACED_SHIMMY_LEFT := "Hanging_Braced_Shimmy_Left/mixamo_com"
+const MIX_ANIMATION_HANGING_BRACED_SHIMMY_RIGHT := "Hanging_Braced_Shimmy_Right/mixamo_com"
+# Hanging 🟣 Quaternius animations
+const QUAT_ANIMATION_HANGING := "Hanging/mixamo_com" # TODO: Replace with actual Quaternius animation name
+const QUAT_ANIMATION_HANGING_SHIMMY_LEFT := "Hanging_Shimmy_Left/mixamo_com" # TODO: Replace with actual Quaternius animation name
+const QUAT_ANIMATION_HANGING_SHIMMY_RIGHT := "Hanging_Shimmy_Right/mixamo_com" # TODO: Replace with actual Quaternius animation name
+const QUAT_ANIMATION_HANGING_BRACED := "Hanging_Braced/mixamo_com" # TODO: Replace with actual Quaternius animation name
+const QUAT_ANIMATION_HANGING_BRACED_SHIMMY_LEFT := "Hanging_Braced_Shimmy_Left/mixamo_com" # TODO: Replace with actual Quaternius animation name
+const QUAT_ANIMATION_HANGING_BRACED_SHIMMY_RIGHT := "Hanging_Braced_Shimmy_Right/mixamo_com" # TODO: Replace with actual Quaternius animation name
 
-const ANIMATION_HANGING := "Hanging/mixamo_com"
-const ANIMATION_HANGING_SHIMMY_LEFT := "Hanging_Shimmy_Left/mixamo_com"
-const ANIMATION_HANGING_SHIMMY_RIGHT := "Hanging_Shimmy_Right/mixamo_com"
-const ANIMATION_HANGING_BRACED := "Hanging_Braced/mixamo_com"
-const ANIMATION_HANGING_BRACED_SHIMMY_LEFT := "Hanging_Braced_Shimmy_Left/mixamo_com"
-const ANIMATION_HANGING_BRACED_SHIMMY_RIGHT := "Hanging_Braced_Shimmy_Right/mixamo_com"
-const NODE_NAME := "Hanging"
 const NODE_STATE := States.State.HANGING
 
 
@@ -21,7 +29,7 @@ func _input(event: InputEvent) -> void:
 	if player.pause.visible: return
 
 	# Ⓐ/[Space] _pressed_ -> Start "mantling"
-	if event.is_action_pressed(player.controls.button_0):
+	if event.is_action_pressed(Controls.BUTTON_0):
 		if player.ray_cast_jump_target.is_colliding():
 			if player.enable_mantling:
 				transition_state(NODE_STATE, States.State.MANTLING)
@@ -41,7 +49,7 @@ func _input(event: InputEvent) -> void:
 				return
 
 	# Ⓨ/[Ctrl] _pressed_ -> Start "falling"
-	if event.is_action_pressed(player.controls.button_3):
+	if event.is_action_pressed(Controls.BUTTON_3):
 		transition_state(NODE_STATE, States.State.FALLING)
 		return
 
@@ -70,7 +78,7 @@ func _process(delta: float) -> void:
 
 	# Ⓑ/[shift] _pressed_ -> Move faster while "hanging"
 	if player.enable_sprinting:
-		if Input.is_action_pressed(player.controls.button_1):
+		if Input.is_action_pressed(Controls.BUTTON_1):
 			player.speed_current = player.speed_hanging * 2
 		else:
 			player.speed_current = player.speed_hanging
@@ -84,7 +92,7 @@ func _process(delta: float) -> void:
 
 ## Plays the appropriate animation based on player state.
 func play_animation() -> void:
-	# Adjust playback speed based on hanging speed
+	# 🐢🐇 Set animation playback speed based on [Hanging] speed
 	if player.speed_current > player.speed_hanging:
 		player.animation_player_set_speed_scale(1.5)
 	else:
@@ -93,26 +101,23 @@ func play_animation() -> void:
 	# Check if the player's hang is braced (the collider has somewhere for the player's footing)
 	var is_braced = player.ray_cast_low.is_colliding()
 
-	# Move left
-	if Input.is_action_pressed(player.controls.move_left):
-		if is_braced:
-			player.animation_player_play(ANIMATION_HANGING_BRACED_SHIMMY_LEFT)
-		else:
-			player.animation_player_play(ANIMATION_HANGING_SHIMMY_LEFT)
-
-	# Move right
-	elif Input.is_action_pressed(player.controls.move_right):
-		if is_braced:
-			player.animation_player_play(ANIMATION_HANGING_BRACED_SHIMMY_RIGHT)
-		else:
-			player.animation_player_play(ANIMATION_HANGING_SHIMMY_RIGHT)
-
-	# Idle
+	var mix_anim: String
+	var quat_anim: String
+	# "shimmy" left ←
+	if Input.is_action_pressed(Controls.MOVE_LEFT):
+		mix_anim = MIX_ANIMATION_HANGING_BRACED_SHIMMY_LEFT if is_braced else MIX_ANIMATION_HANGING_SHIMMY_LEFT
+		quat_anim = QUAT_ANIMATION_HANGING_BRACED_SHIMMY_LEFT if is_braced else QUAT_ANIMATION_HANGING_SHIMMY_LEFT
+	# "shimmy" right →
+	elif Input.is_action_pressed(Controls.MOVE_RIGHT):
+		mix_anim = MIX_ANIMATION_HANGING_BRACED_SHIMMY_RIGHT if is_braced else MIX_ANIMATION_HANGING_SHIMMY_RIGHT
+		quat_anim = QUAT_ANIMATION_HANGING_BRACED_SHIMMY_RIGHT if is_braced else QUAT_ANIMATION_HANGING_SHIMMY_RIGHT
+	# "hanging" idle
 	else:
-		if is_braced:
-			player.animation_player_play(ANIMATION_HANGING_BRACED)
-		else:
-			player.animation_player_play(ANIMATION_HANGING)
+		mix_anim = MIX_ANIMATION_HANGING_BRACED if is_braced else MIX_ANIMATION_HANGING
+		quat_anim = QUAT_ANIMATION_HANGING_BRACED if is_braced else QUAT_ANIMATION_HANGING
+
+	var anim = quat_anim if player.animation_set == 1 else mix_anim
+	player.animation_player_play(anim)
 
 
 ## Start "hanging".

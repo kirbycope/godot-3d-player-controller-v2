@@ -1,9 +1,11 @@
 extends BaseState
+## 🛷 Sliding on the floor.
 
-## Handles sliding state with collision shape adjustment, plays slide animation, and transitions to sprint/run/stand on completion.
+# Sliding 🔵 Mixamo animations
+const MIX_ANIMATION_SLIDING := "Running_Slide/mixamo_com"
+# Sliding 🟣 Quaternius animations
+const QUAT_ANIMATION_SLIDING := "Running_Slide/mixamo_com" # TODO: Replace with actual Quaternius animation name
 
-const ANIMATION_SLIDING := "Running_Slide/mixamo_com"
-const NODE_NAME := "Sliding"
 const NODE_STATE := States.State.SLIDING
 
 
@@ -18,16 +20,17 @@ func _process(delta: float) -> void:
 
 ## Plays the appropriate animation based on player state.
 func play_animation() -> void:
-	if player.animation_player_current_animation() != ANIMATION_SLIDING:
-		player.animation_player_play(ANIMATION_SLIDING)
+	var anim = QUAT_ANIMATION_SLIDING if player.animation_set == 1 else MIX_ANIMATION_SLIDING
+	if player.animation_player_current_animation() != anim:
+		player.animation_player_play(anim)
 		player.animation_player_connect("animation_finished", _on_animation_finished)
 
-
 func _on_animation_finished(anim_name: String) -> void:
-	if anim_name == ANIMATION_SLIDING:
+	if anim_name == MIX_ANIMATION_SLIDING \
+	or anim_name == QUAT_ANIMATION_SLIDING:
 		if player.animation_player_is_connected("animation_finished", _on_animation_finished):
 			player.animation_player_disconnect("animation_finished", _on_animation_finished)
-		if Input.is_action_pressed(player.controls.button_1):
+		if Input.is_action_pressed(Controls.BUTTON_1):
 			transition_state(NODE_STATE, States.State.SPRINTING)
 		elif player.input_direction != Vector2.ZERO:
 			transition_state(NODE_STATE, States.State.RUNNING)

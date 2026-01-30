@@ -1,12 +1,18 @@
 extends BaseState
+class_name Reacting
+## 🤕 Reacting to hits (low/high, left/right).
 
-## Handles hit reactions in four directions (low/high, left/right), plays corresponding animations, and returns to previous state when finished.
+# Reacting 🔵 Mixamo animations
+const MIX_ANIMATION_REACTING_LOW_LEFT := "Standing_Reaction_Low_Left/mixamo_com"
+const MIX_ANIMATION_REACTING_LOW_RIGHT := "Standing_Reaction_Low_Right/mixamo_com"
+const MIX_ANIMATION_REACTING_HIGH_LEFT := "Standing_Reaction_High_Left/mixamo_com"
+const MIX_ANIMATION_REACTING_HIGH_RIGHT := "Standing_Reaction_High_Right/mixamo_com"
+# Reacting 🟣 Quaternius animations
+const QUAT_ANIMATION_REACTING_LOW_LEFT := "AnimationLibrary_Godot/Hit_Stomach"
+const QUAT_ANIMATION_REACTING_LOW_RIGHT := "AnimationLibrary_Godot/Hit_Stomach"
+const QUAT_ANIMATION_REACTING_HIGH_LEFT := "AnimationLibrary_Godot/Hit_Shoulder_L"
+const QUAT_ANIMATION_REACTING_HIGH_RIGHT := "AnimationLibrary_Godot/Hit_Shoulder_R"
 
-const ANIMATION_REACTING_LOW_LEFT := "Standing_Reaction_Low_Left/mixamo_com"
-const ANIMATION_REACTING_LOW_RIGHT := "Standing_Reaction_Low_Right/mixamo_com"
-const ANIMATION_REACTING_HIGH_LEFT := "Standing_Reaction_High_Left/mixamo_com"
-const ANIMATION_REACTING_HIGH_RIGHT := "Standing_Reaction_High_Right/mixamo_com"
-const NODE_NAME := "Reacting"
 const NODE_STATE := States.State.REACTING
 
 
@@ -21,32 +27,41 @@ func _process(delta: float) -> void:
 
 ## Plays the appropriate animation based on player state.
 func play_animation() -> void:
+	var mix_anim := ""
+	var quat_anim := ""
 	if player.is_reacting_low_left:
-		if player.animation_player_current_animation() != ANIMATION_REACTING_LOW_LEFT:
-			player.animation_player_play(ANIMATION_REACTING_LOW_LEFT)
-			player.animation_player_connect("animation_finished", _on_animation_finished)
+		mix_anim = MIX_ANIMATION_REACTING_LOW_LEFT
+		quat_anim = QUAT_ANIMATION_REACTING_LOW_LEFT
 	elif player.is_reacting_low_right:
-		if player.animation_player_current_animation() != ANIMATION_REACTING_LOW_RIGHT:
-			player.animation_player_play(ANIMATION_REACTING_LOW_RIGHT)
-			player.animation_player_connect("animation_finished", _on_animation_finished)
+		mix_anim = MIX_ANIMATION_REACTING_LOW_RIGHT
+		quat_anim = QUAT_ANIMATION_REACTING_LOW_RIGHT
 	elif player.is_reacting_high_left:
-		if player.animation_player_current_animation() != ANIMATION_REACTING_HIGH_LEFT:
-			player.animation_player_play(ANIMATION_REACTING_HIGH_LEFT)
-			player.animation_player_connect("animation_finished", _on_animation_finished)
+		mix_anim = MIX_ANIMATION_REACTING_HIGH_LEFT
+		quat_anim = QUAT_ANIMATION_REACTING_HIGH_LEFT
 	elif player.is_reacting_high_right:
-		if player.animation_player_current_animation() != ANIMATION_REACTING_HIGH_RIGHT:
-			player.animation_player_play(ANIMATION_REACTING_HIGH_RIGHT)
-			player.animation_player_connect("animation_finished", _on_animation_finished)
+		mix_anim = MIX_ANIMATION_REACTING_HIGH_RIGHT
+		quat_anim = QUAT_ANIMATION_REACTING_HIGH_RIGHT
+	else:
+		return
+
+	var anim = quat_anim if player.animation_set == 1 else mix_anim
+	if player.animation_player_current_animation() != anim:
+		player.animation_player_play(anim)
+		player.animation_player_connect("animation_finished", _on_animation_finished)
 
 
 func _on_animation_finished(animation_name: String) -> void:
-	if animation_name == ANIMATION_REACTING_LOW_LEFT:
+	if animation_name == MIX_ANIMATION_REACTING_LOW_LEFT \
+	or animation_name == QUAT_ANIMATION_REACTING_LOW_LEFT:
 		player.is_reacting_left = false
-	elif animation_name == ANIMATION_REACTING_LOW_RIGHT:
+	elif animation_name == MIX_ANIMATION_REACTING_LOW_RIGHT \
+	or animation_name == QUAT_ANIMATION_REACTING_LOW_RIGHT:
 		player.is_reacting_right = false
-	elif animation_name == ANIMATION_REACTING_HIGH_LEFT:
+	elif animation_name == MIX_ANIMATION_REACTING_HIGH_LEFT \
+	or animation_name == QUAT_ANIMATION_REACTING_HIGH_LEFT:
 		player.is_reacting_left = false
-	elif animation_name == ANIMATION_REACTING_HIGH_RIGHT:
+	elif animation_name == MIX_ANIMATION_REACTING_HIGH_RIGHT \
+	or animation_name == QUAT_ANIMATION_REACTING_HIGH_RIGHT:
 		player.is_reacting_right = false
 	transition_state(NODE_STATE, player.previous_state)
 

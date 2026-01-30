@@ -4,6 +4,7 @@ extends CharacterBody3D
 ## 3D player controller with state machine supporting climbing, combat, driving, swimming, and various movement modes
 
 @export_group("CONFIG")
+@export_enum("Mixamo", "Quaternius") var animation_set := 0 ## Animation set selection; 0=Mixamo, 1=Quaternius
 @export var enable_climbing := false ## Enable climbing
 @export var enable_crawling := false ## Enable crawling
 @export var enable_crouching := false ## Enable crouching
@@ -21,7 +22,7 @@ extends CharacterBody3D
 @export var enable_punching := false ## Enable punching
 @export var enable_pushing := false ## Enable pushing
 @export var enable_ragdolling := false ## Enable ragdoll physics
-@export var enable_retical := false ## Enable the rectical
+@export var enable_retical := false ## Enable the retical
 @export var enable_rolling := false ## Enable rolling
 @export var enable_sitting := false ## Enable sitting
 @export var enable_sliding := false ## Enable sliding
@@ -123,8 +124,11 @@ var is_reeling_fishing := false ## Is the player reeling in a fishing line?
 var is_holding_rifle := false ## Is the player wielding a rifle?
 var is_aiming_rifle := false ## Is the player aiming a rifle?
 var is_firing_rifle := false ## Is the player firing a rifle?
-
-var setup_character = preload("res://addons/3d_player_controller_v2/setup_character.gd")
+## -- Character VARIABLES --
+var animations_mixamo := false ## Are Mixamo animations enabled?
+var animations_quaternius := false ## Are Quaternius animations enabled?
+var animations_quaternius_2 := false ## Are Quaternius 2 animations enabled?
+var setup_character: GDScript = preload("res://addons/3d_player_controller_v2/setup_character.gd")
 
 @onready var audio_stream_player: AudioStreamPlayer3D = $AudioStreamPlayer3D
 @onready var base_state: BaseState = $States/Base
@@ -161,8 +165,8 @@ var setup_character = preload("res://addons/3d_player_controller_v2/setup_charac
 
 ## Called when the node is "ready", i.e. when both the node and its children have entered the scene tree.
 func _ready() -> void:
-	# Setup animations for all `character` components. Comment out the next line if you have manually added [AnimationPlayer](s) and animations to your `character` model.
-	setup_character.animations_mixamo(character, 0.2)
+	# Setup animations for all `character` components
+	setup_character.add_animations(character, self)
 
 	# Setup physical bone simulators for all `character` components
 	setup_character.physical_bone_simulators(character)
@@ -266,10 +270,10 @@ func _physics_process(delta: float) -> void:
 		# Get the input vector by specifying four actions for the positive and negative X and Y axes
 		else:
 			input_direction = Input.get_vector(
-				controls.move_left,
-				controls.move_right,
-				controls.move_up,
-				controls.move_down,
+				Controls.MOVE_LEFT,
+				Controls.MOVE_RIGHT,
+				Controls.MOVE_UP,
+				Controls.MOVE_DOWN,
 			)
 
 		# Handle player input for lateral movement (disabled while climbing/hanging)
@@ -542,7 +546,7 @@ func apply_impact(collider, bone_name, force_multiplier = 1.0) -> void:
 
 	# Vibrate the controller, if enabled
 	if enable_vibration \
-	and controls.last_input_type == controls.InputType.CONTROLLER:
+	and controls.last_input_type == Controls.InputType.CONTROLLER:
 		if force_multiplier <= 1.0:
 			Input.start_joy_vibration(0, 1.0, 1.0, 0.1)
 		else:
@@ -637,16 +641,16 @@ func move_player() -> void:
 	var move_direction: Vector3 = Vector3.ZERO
 	# Only apply horizontal movement if not climbing a ladder
 	if not is_climbing_ladder:
-		if Input.is_action_pressed(controls.move_left):
+		if Input.is_action_pressed(Controls.MOVE_LEFT):
 			move_direction -= wall_right
-		if Input.is_action_pressed(controls.move_right):
+		if Input.is_action_pressed(Controls.MOVE_RIGHT):
 			move_direction += wall_right
 	# Only apply vertical movement if climbing (a surface or ladder)
 	if is_climbing \
 	or is_climbing_ladder:
-		if Input.is_action_pressed(controls.move_up):
+		if Input.is_action_pressed(Controls.MOVE_UP):
 			move_direction += wall_up
-		if Input.is_action_pressed(controls.move_down):
+		if Input.is_action_pressed(Controls.MOVE_DOWN):
 			move_direction -= wall_up
 
 	# Normalize to keep diagonal speed consistent

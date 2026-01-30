@@ -1,9 +1,8 @@
 extends BaseState
-
-## Handles ragdoll physics simulation when player falls too hard, camera follows hips bone, requires button press after 3s to stand.
+class_name Ragdolling
+## 🧸 Ragdolling (limp body physics) when knocked out or killed.
 
 const BONE_FOR_CAMERA_TO_FOLLOW := "PhysicalBoneSimulator3D/Physical Bone Hips" # Adjust as needed
-const NODE_NAME := "Ragdolling"
 const NODE_STATE := States.State.RAGDOLLING
 
 var time_ragdolling := 0.0 ## The time spent in the "ragdolling" state."
@@ -18,7 +17,7 @@ func _input(event: InputEvent) -> void:
 	if player.pause.visible: return
 
 	# (A)/[Space] _pressed_ (after 3 seconds or ragdolling) -> Start "standing"
-	if event.is_action_pressed(player.controls.button_0) and time_ragdolling > 3.0:
+	if event.is_action_pressed(Controls.BUTTON_0) and time_ragdolling > 3.0:
 		transition_state(player.current_state, States.State.STANDING)
 
 

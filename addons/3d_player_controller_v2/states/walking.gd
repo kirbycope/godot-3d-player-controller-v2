@@ -1,12 +1,17 @@
 extends BaseState
-## Handles walking movement with jump/sprint transitions, rifle animations, and directional playback
+class_name Walking
+## 🚶 Walking on the floor.
 
-
-const ANIMATION_WALKING := "Walking/mixamo_com"
-const ANIMATION_WALKING_HOLDING_RIFLE := "Walking_Holding_Rifle/mixamo_com"
-const ANIMATION_WALKING_HOLDING_AIMING := "Walking_Aiming_Rifle/mixamo_com"
-const ANIMATION_WALKING_FIRING_RIFLE := "Walking_Firing_Rifle/mixamo_com"
-const NODE_NAME := "Walking"
+# Walking 🔵 Mixamo animations
+const MIX_ANIMATION_WALKING := "Walking/mixamo_com"
+const MIX_ANIMATION_WALKING_HOLDING_RIFLE := "Walking_Holding_Rifle/mixamo_com"
+const MIX_ANIMATION_WALKING_HOLDING_AIMING := "Walking_Aiming_Rifle/mixamo_com"
+const MIX_ANIMATION_WALKING_FIRING_RIFLE := "Walking_Firing_Rifle/mixamo_com"
+# Walking 🟣 Quaternius animations
+const QUAT_ANIMATION_WALKING := "AnimationLibrary_Godot/Walk"
+const QUAT_ANIMATION_WALKING_HOLDING_RIFLE := "AnimationLibrary_Godot/Walk_Holding_Rifle" # TODO: Replace with actual Quaternius animation name
+const QUAT_ANIMATION_WALKING_HOLDING_AIMING := "AnimationLibrary_Godot/Walk_Holding_Aiming" # TODO: Replace with actual Quaternius animation name
+const QUAT_ANIMATION_WALKING_FIRING_RIFLE := "AnimationLibrary_Godot/Walk_Firing_Rifle" # TODO: Replace with actual Quaternius animation name
 const NODE_STATE := States.State.WALKING
 
 
@@ -19,14 +24,14 @@ func _input(event: InputEvent) -> void:
 	if player.pause.visible: return
 
 	# Ⓐ/[Space] _pressed_ -> Start "jumping"
-	if event.is_action_pressed(player.controls.button_0):
+	if event.is_action_pressed(Controls.BUTTON_0):
 		if player.enable_jumping \
 		and player.is_on_floor() \
 		and not player.chat.line_edit.visible:
 			transition_state(player.current_state, States.State.JUMPING)
 
 	# Ⓑ/[shift] _pressed_ -> Start "sprinting"
-	if event.is_action_pressed(player.controls.button_1):
+	if event.is_action_pressed(Controls.BUTTON_1):
 		if player.enable_sprinting \
 		and player.input_direction != Vector2.ZERO \
 		and player.is_on_floor():
@@ -34,7 +39,7 @@ func _input(event: InputEvent) -> void:
 			return
 
 	# 🄻1/[MB0] _pressed_
-	if event.is_action_pressed(player.controls.button_4):
+	if event.is_action_pressed(Controls.BUTTON_4):
 		# Rifle "aiming" 🄻1
 		if player.is_holding_rifle \
 		and event is InputEventJoypadButton:
@@ -45,14 +50,14 @@ func _input(event: InputEvent) -> void:
 			player.is_firing_rifle = true
 
 	# 🄻1 _released_ -> Lower rifle
-	if event.is_action_released(player.controls.button_4) \
+	if event.is_action_released(Controls.BUTTON_4) \
 	and event is InputEventJoypadButton:
 		# Rifle "aiming" 🄻1
 		if player.is_holding_rifle:
 			player.is_aiming_rifle = false
 
 	# 🅁1/[MB1] _pressed_ -> Aim rifle
-	if event.is_action_pressed(player.controls.button_5):
+	if event.is_action_pressed(Controls.BUTTON_5):
 		# Rifle "aiming" [MB1]
 		if player.is_holding_rifle \
 		and event is InputEventMouseButton:
@@ -63,7 +68,7 @@ func _input(event: InputEvent) -> void:
 			player.is_firing_rifle = true
 
 	# [MB1] _released_ -> Lower rifle
-	if event.is_action_released(player.controls.button_5) \
+	if event.is_action_released(Controls.BUTTON_5) \
 	and event is InputEventMouseButton:
 		if player.is_holding_rifle:
 			player.is_aiming_rifle = false
@@ -92,39 +97,39 @@ func _process(delta: float) -> void:
 ## Plays the appropriate animation based on player state.
 func play_animation() -> void:
 	# Check if in first person and moving backwards
-	var play_backwards = (player.camera.perspective == player.camera.Perspective.FIRST_PERSON) and Input.is_action_pressed(player.controls.move_down)
-
-	# -- Rifle animations --
+	var play_backwards = (player.camera.perspective == player.camera.Perspective.FIRST_PERSON) and Input.is_action_pressed(Controls.MOVE_DOWN)
+	var mix_anim: String
+	var quat_anim: String
 	if player.is_holding_rifle:
 		if player.is_firing_rifle:
-			if player.animation_player_current_animation() != ANIMATION_WALKING_FIRING_RIFLE:
-				if play_backwards:
-					_on_animation_finished(player.animation_player_current_animation()) 
-					player.animation_player_play_backwards(ANIMATION_WALKING_FIRING_RIFLE)
-				else:
-					player.animation_player_play(ANIMATION_WALKING_FIRING_RIFLE)
+			mix_anim = MIX_ANIMATION_WALKING_FIRING_RIFLE
+			quat_anim = QUAT_ANIMATION_WALKING_FIRING_RIFLE
 		else:
-			if player.animation_player_current_animation() != ANIMATION_WALKING_HOLDING_RIFLE:
-				if play_backwards:
-					_on_animation_finished(player.animation_player_current_animation()) 
-					player.animation_player_play_backwards(ANIMATION_WALKING_HOLDING_RIFLE)
-				else:
-					_on_animation_finished(player.animation_player_current_animation()) 
-					player.animation_player_play(ANIMATION_WALKING_HOLDING_RIFLE)
-
-	# -- Unarmed animations --
+			mix_anim = MIX_ANIMATION_WALKING_HOLDING_RIFLE
+			quat_anim = QUAT_ANIMATION_WALKING_HOLDING_RIFLE
 	else:
-		if player.animation_player_current_animation() != ANIMATION_WALKING:
+		mix_anim = MIX_ANIMATION_WALKING
+		quat_anim = QUAT_ANIMATION_WALKING
+
+	if player.animation_set == 0:
+		if player.animation_player_current_animation() != mix_anim:
+			_on_animation_finished(player.animation_player_current_animation())
 			if play_backwards:
-				_on_animation_finished(player.animation_player_current_animation()) 
-				player.animation_player_play_backwards(ANIMATION_WALKING)
+				player.animation_player_play_backwards(mix_anim)
 			else:
-				_on_animation_finished(player.animation_player_current_animation()) 
-				player.animation_player_play(ANIMATION_WALKING)
+				player.animation_player_play(mix_anim)
+	elif player.animation_set == 1:
+		if player.animation_player_current_animation() != quat_anim:
+			_on_animation_finished(player.animation_player_current_animation())
+			if play_backwards:
+				player.animation_player_play_backwards(quat_anim)
+			else:
+				player.animation_player_play(quat_anim)
 
 
 func _on_animation_finished(animation_name: String) -> void:
-	if animation_name == ANIMATION_WALKING_FIRING_RIFLE:
+	if animation_name == MIX_ANIMATION_WALKING_FIRING_RIFLE \
+	or animation_name == QUAT_ANIMATION_WALKING_FIRING_RIFLE:
 		player.is_firing_rifle = false
 
 

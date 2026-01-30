@@ -1,9 +1,12 @@
 extends BaseState
+class_name Navigating
+## 🧭 Navigating to a target position.
 
-## Handles AI/pathfinding navigation using NavigationAgent3D to move player along calculated paths.
+# Navigating 🔵 Mixamo animations
+const MIX_ANIMATION_RUNNING := "Running/mixamo_com"
+# Navigating 🟣 Quaternius animations
+const QUAT_ANIMATION_RUNNING := "Running/mixamo_com" # TODO: Replace with actual Quaternius animation name
 
-const ANIMATION_RUNNING := "Running/mixamo_com"
-const NODE_NAME := "Navigating"
 const NODE_STATE := States.State.NAVIGATING
 
 @onready var navigation_agent = player.get_node("NavigationAgent3D")
@@ -53,10 +56,9 @@ func _physics_process(delta: float) -> void:
 
 ## Plays the appropriate animation based on player state.
 func play_animation() -> void:
-	# Check if the animation player is not already playing the appropriate animation
-	if player.animation_player_current_animation() != ANIMATION_RUNNING:
-		# Play the "running" animation
-		player.animation_player_play(ANIMATION_RUNNING)
+	var anim = QUAT_ANIMATION_RUNNING if player.animation_set == 1 else MIX_ANIMATION_RUNNING
+	if player.animation_player_current_animation() != anim:
+		player.animation_player_play(anim)
 
 
 ## Navigate to the next position in the path. Called during physics process if navigating.
@@ -68,7 +70,6 @@ func navigate_to_next_position() -> void:
 	player.virtual_velocity = Vector3(player.velocity.x, 0, player.velocity.z)
 	# Face the direction of movement
 	player.visuals.look_at(player.position + Vector3(player.velocity.x, 0, player.velocity.z), player.up_direction)
-
 
 
 ## Called when the NavigationAgent3D has finished.

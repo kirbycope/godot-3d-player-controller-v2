@@ -1,6 +1,26 @@
 extends Node3D
 
 
+## Adds animation libraries to the character and sets flags on the `player` to indicate which sets are available.
+static func add_animations(character: Node3D, player: CharacterBody3D) -> void:
+	# https://www.mixamo.com/#/
+	animations_mixamo(character, 0.2)
+	if player:
+		player.animations_mixamo = true
+
+	# https://quaternius.com/packs/universalanimationlibrary.html
+	if ResourceLoader.exists("res://assets/universal_animation_library/UAL1.glb"):
+		animations_quaternius(character, 0.2)
+		if player:
+			player.animations_quaternius = true
+
+	# https://quaternius.com/packs/universalanimationlibrary2.html
+	if ResourceLoader.exists("res://assets/universal_animation_library_2/UAL2.glb"):
+		animations_quaternius_2(character, 0.2)
+		if player:
+			player.animations_quaternius_2 = true
+
+
 ## Adds an [AnimationPlayer] for all child nodes of the `character` (unless one already exists) and loads animations from Mixamo.
 static func animations_mixamo(character: Node3D, playback_default_blend_time = 0.0) -> void:
 	#print("Setting up Mixamo animations...") # DEBUGGING
@@ -67,7 +87,7 @@ static func animations_mixamo(character: Node3D, playback_default_blend_time = 0
 ## Adds an [AnimationPlayer] for all child nodes of the `character` (unless one already exists) and loads animations from Quaternius.
 static func animations_quaternius(character: Node3D, playback_default_blend_time = 0.0) -> void:
 	#print("Setting up Quaternius animations...") # DEBUGGING
-	var quaternius: AnimationLibrary = load("res://assets/universal_animation_library/AnimationLibrary_Godot.glb")
+	var quaternius: AnimationLibrary = load("res://assets/universal_animation_library/UAL1.glb")
 	# Iterate over each child of the `character`
 	for child in character.get_children():
 		var animation_player: AnimationPlayer = null
@@ -92,6 +112,33 @@ static func animations_quaternius(character: Node3D, playback_default_blend_time
 		if animation:
 			animation.loop_mode = (Animation.LOOP_LINEAR)
 			animation_player.call_deferred("play", "AnimationLibrary_Godot/Idle")
+		#print("    AnimationPlayer added to `", child.get_path(), "`") # DEBUGGING
+	#print("└── Quaternius animations setup complete.") # DEBUGGING
+
+
+## Adds an [AnimationPlayer] for all child nodes of the `character` (unless one already exists) and loads animations from Quaternius.
+static func animations_quaternius_2(character: Node3D, playback_default_blend_time = 0.0) -> void:
+	#print("Setting up Quaternius animations...") # DEBUGGING
+	var quaternius_2: AnimationLibrary = load("res://assets/universal_animation_library_2/UAL2.glb")
+	# Iterate over each child of the `character`
+	for child in character.get_children():
+		var animation_player: AnimationPlayer = null
+		# If the child is itself an [AnimationPlayer], then use it directly
+		if child is AnimationPlayer:
+			animation_player = child
+		# Otherwise, check for a grandchild named "AnimationPlayer"
+		else:
+			animation_player = child.get_node_or_null("AnimationPlayer")
+		# If no [AnimationPlayer] is found, then create one and add it
+		if animation_player == null:
+			animation_player = AnimationPlayer.new()
+			animation_player.name = "AnimationPlayer"
+			child.add_child(animation_player)
+		# Configuration - Set the default blend time
+		animation_player.playback_default_blend_time = playback_default_blend_time
+		# Ensure the library is attached (add if not present)
+		if not animation_player.has_animation_library("UAL2"):
+			animation_player.add_animation_library("UAL2", quaternius_2)
 		#print("    AnimationPlayer added to `", child.get_path(), "`") # DEBUGGING
 	#print("└── Quaternius animations setup complete.") # DEBUGGING
 

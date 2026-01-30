@@ -1,10 +1,14 @@
 extends BaseState
+class_name Mantling
+## 🧗 Mantling on top of ledges (braced) and bars (not braced).
 
-## Handles mantling state: climbing up from a ledge hang to standing position.
+# Mantling 🔵 Mixamo animations
+const MIX_ANIMATION_MANTLING_BRACED := "Hanging_Braced_To_Crouch/mixamo_com"
+const MIX_ANIMATION_MANTLING_HANGING := "Hanging_Climb_To_Standing/mixamo_com"
+# Mantling 🟣 Quaternius animations
+const QUAT_ANIMATION_MANTLING_BRACED := "AnimationLibrary_Godot/ClimbLedge"
+const QUAT_ANIMATION_MANTLING_HANGING := "AnimationLibrary_Godot/ClimbLedge"
 
-const ANIMATION_MANTLING_BRACED := "Hanging_Braced_To_Crouch/mixamo_com"
-const ANIMATION_MANTLING_HANGING := "Hanging_Climb_To_Standing/mixamo_com"
-const NODE_NAME := "Mantling"
 const NODE_STATE := States.State.MANTLING
 
 
@@ -19,48 +23,35 @@ func _process(delta: float) -> void:
 
 ## Plays the appropriate animation based on player state.
 func play_animation() -> void:
-
 	# Check if the player's hang is braced (the collider has somewhere for the player's footing)
 	var is_braced = player.ray_cast_low.is_colliding()
+	var mix_anim = MIX_ANIMATION_MANTLING_BRACED if is_braced else MIX_ANIMATION_MANTLING_HANGING
+	var quat_anim = QUAT_ANIMATION_MANTLING_BRACED if is_braced else QUAT_ANIMATION_MANTLING_HANGING
+	var anim = quat_anim if player.animation_set == 1 else mix_anim
 
-	if is_braced:
-		if player.animation_player_current_animation() != ANIMATION_MANTLING_BRACED:
-			player.animation_player_play(ANIMATION_MANTLING_BRACED)
-			player.animation_player_connect("animation_finished", _on_animation_finished)
-			# Tween camera position during animation
-			var camera_start_position = player.camera.global_position
-			var end_position = player.ray_cast_jump_target.get_collision_point()
-			var camera_end_position = camera_start_position + (end_position - player.global_position)
-			var tween = get_tree().create_tween()
-			tween.set_trans(Tween.TRANS_LINEAR)
-			tween.tween_property(
-				player.camera,
-				"global_position",
-				camera_end_position,
-				player.animation_player_current_animation_length()
-			)
-	else:
-		if player.animation_player_current_animation() != ANIMATION_MANTLING_HANGING:
-			player.animation_player_play(ANIMATION_MANTLING_HANGING)
-			player.animation_player_connect("animation_finished", _on_animation_finished)
-			# Tween camera position during animation
-			var camera_start_position = player.camera.global_position
-			var end_position = player.ray_cast_jump_target.get_collision_point()
-			var camera_end_position = camera_start_position + (end_position - player.global_position)
-			var tween = get_tree().create_tween()
-			tween.set_trans(Tween.TRANS_LINEAR)
-			tween.tween_property(
-				player.camera,
-				"global_position",
-				camera_end_position,
-				player.animation_player_current_animation_length()
-			)
+	if player.animation_player_current_animation() != anim:
+		player.animation_player_play(anim)
+		player.animation_player_connect("animation_finished", _on_animation_finished)
+		# Tween camera position during animation
+		var camera_start_position = player.camera.global_position
+		var end_position = player.ray_cast_jump_target.get_collision_point()
+		var camera_end_position = camera_start_position + (end_position - player.global_position)
+		var tween = get_tree().create_tween()
+		tween.set_trans(Tween.TRANS_LINEAR)
+		tween.tween_property(
+			player.camera,
+			"global_position",
+			camera_end_position,
+			player.animation_player_current_animation_length()
+		)
 
 
 func _on_animation_finished(anim_name: String) -> void:
 	if anim_name in [
-		ANIMATION_MANTLING_BRACED,
-		ANIMATION_MANTLING_HANGING,
+		MIX_ANIMATION_MANTLING_BRACED,
+		MIX_ANIMATION_MANTLING_HANGING,
+		QUAT_ANIMATION_MANTLING_BRACED,
+		QUAT_ANIMATION_MANTLING_HANGING
 	]:
 		if player.animation_player_is_connected("animation_finished", _on_animation_finished):
 			player.animation_player_disconnect("animation_finished", _on_animation_finished)

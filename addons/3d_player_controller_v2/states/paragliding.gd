@@ -1,9 +1,12 @@
 extends BaseState
+class_name Paragliding
+## 🪂 Paragliding through the air.
 
-## Handles paragliding: reduced gravity falling with directional control, spawns/removes paraglider mesh, and landing transition.
+# Paragliding 🔵 Mixamo animations
+const MIX_ANIMATION_PARAGLIDING := "Hanging/mixamo_com"
+# Paragliding 🟣 Quaternius animations
+const QUAT_ANIMATION_PARAGLIDING := "Hanging/mixamo_com" # TODO: Replace with actual Quaternius animation name
 
-const ANIMATION_PARAGLIDING := "Hanging/mixamo_com"
-const NODE_NAME := "Paragliding"
 const NODE_STATE := States.State.PARAGLIDING
 
 @export var paraglider_gravity := 3.0 ## Reduced gravity value while paragliding.
@@ -20,7 +23,7 @@ func _input(event: InputEvent) -> void:
 	if player.pause.visible: return
 
 	# Ⓨ/[Ctrl] _pressed_ -> Start "falling"
-	if event.is_action_pressed(player.controls.button_3):
+	if event.is_action_pressed(Controls.BUTTON_3):
 		transition_state(NODE_STATE, States.State.FALLING)
 		return
 
@@ -42,10 +45,9 @@ func _process(delta: float) -> void:
 
 ## Plays the appropriate animation based on player state.
 func play_animation() -> void:
-	# Check if the animation player is not already playing the appropriate animation
-	if player.animation_player_current_animation() != ANIMATION_PARAGLIDING:
-		# Play the "paragliding" animation
-		player.animation_player_play(ANIMATION_PARAGLIDING)
+	var anim = QUAT_ANIMATION_PARAGLIDING if player.animation_set == 1 else MIX_ANIMATION_PARAGLIDING
+	if player.animation_player_current_animation() != anim:
+		player.animation_player_play(anim)
 
 
 ## Start "paragliding".
@@ -71,7 +73,7 @@ func start() -> void:
 	player.gravity = paraglider_gravity
 
 	# Spawn the paraglider
-	paraglider = load("uid://crkvmowfmaa1r").instantiate()
+	paraglider = load("uid://crkvmowfmaa1r").instantiate() ## Adjust resource loaded as needed
 	player.visuals.add_child(paraglider)
 	paraglider.position = Vector3(0, 1.8, 0)  # Adjust position as needed
 	paraglider.rotation = Vector3(0, deg_to_rad(180), 0)  # Adjust rotation as needed

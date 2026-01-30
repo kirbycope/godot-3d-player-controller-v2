@@ -11,7 +11,7 @@ func _input(event: InputEvent) -> void:
 		if player.pause.visible: return
 
 		# Ⓧ/[E] _pressed_ -> Swing scythe
-		if event.is_action_pressed(player.controls.button_2):
+		if event.is_action_pressed(Controls.BUTTON_2):
 			if player.get_meta("is_holding_scythe", false):
 				player.animation_player_play_locked("Standing_Harvesting/mixamo_com", 1.0)
 				if block_below:
@@ -24,7 +24,7 @@ func on_interact(caller) -> void:
 	player = caller
 
 	var ev := InputEventAction.new()
-	ev.action = player.controls.button_2
+	ev.action = Controls.BUTTON_2
 	ev.pressed = true
 	_input(ev)
 

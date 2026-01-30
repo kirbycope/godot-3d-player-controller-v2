@@ -14,7 +14,7 @@ func _input(_event: InputEvent) -> void:
 		if player.pause.visible: return
 
 		# (D-Pad Down) /[Q] _just_pressed_ -> Drop _this_ node
-		if Input.is_action_just_pressed(player.controls.button_13):
+		if Input.is_action_just_pressed(Controls.BUTTON_13):
 			player.base_state.transition_state(player.current_state, States.State.STANDING)
 			player = null
 			reparent(initial_parent)

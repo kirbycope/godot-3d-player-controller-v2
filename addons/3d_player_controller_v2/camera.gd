@@ -45,7 +45,7 @@ func _input(event: InputEvent) -> void:
 	if player.pause.visible: return
 
 	# [F2] _pressed_ -> Take screenshot
-	if event.is_action_pressed(player.controls.screenshot):
+	if event.is_action_pressed(Controls.SCREENSHOT):
 		var screenshot_image = get_viewport().get_texture().get_image()
 		var timestamp = Time.get_unix_time_from_system()
 		var file_path = "user://screenshot_%d.png" % timestamp
@@ -58,7 +58,7 @@ func _input(event: InputEvent) -> void:
 	if lock_camera: return
 
 	# ⧉/[F5] _pressed_ -> Toggle "perspective"
-	if event.is_action_pressed(player.controls.button_8) \
+	if event.is_action_pressed(Controls.BUTTON_8) \
 	and not lock_perspective:
 		toggle_perspective()
 
@@ -89,17 +89,17 @@ func _input(event: InputEvent) -> void:
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 	# Ⓨ/[Ctrl] _pressed_ -> Lower camera
-	if event.is_action_pressed(player.controls.button_3):
+	if event.is_action_pressed(Controls.BUTTON_3):
 		if perspective == Perspective.FIRST_PERSON:
 			camera_mount.position.y = 0.6 # Adjust as needed
 
 	# Ⓨ/[Ctrl] _released_ -> Raise camera
-	if event.is_action_released(player.controls.button_3):
+	if event.is_action_released(Controls.BUTTON_3):
 		if perspective == Perspective.FIRST_PERSON:
 			camera_mount.position.y = 1.6 # Adjust as needed
 
 	# Ⓧ/[E] _pressed_ -> Climb ladder
-	if event.is_action_pressed(player.controls.button_2) \
+	if event.is_action_pressed(Controls.BUTTON_2) \
 	and ray_cast.is_colliding() \
 	and not player.is_climbing_ladder:
 		var collider = ray_cast.get_collider()
@@ -108,7 +108,7 @@ func _input(event: InputEvent) -> void:
 			return
 
 	# Ⓧ/[E] _pressed_ -> Interact with object
-	if event.is_action_pressed(player.controls.button_2) \
+	if event.is_action_pressed(Controls.BUTTON_2) \
 	and ray_cast.is_colliding():
 		var collider = ray_cast.get_collider()
 		if collider.has_method("on_interact"):
@@ -116,7 +116,7 @@ func _input(event: InputEvent) -> void:
 			return
 
 	# Ⓧ/[E] _pressed_ -> Release object
-	if event.is_action_pressed(player.controls.button_2) \
+	if event.is_action_pressed(Controls.BUTTON_2) \
 	and player.enable_holding_objects \
 	and item_spring_arm.get_child_count() != 0:
 		# Get the [first] child node of the item spring arm
@@ -132,7 +132,7 @@ func _input(event: InputEvent) -> void:
 		return
 
 	# Ⓧ/[E] _pressed_ -> Pickup object
-	if event.is_action_pressed(player.controls.button_2) \
+	if event.is_action_pressed(Controls.BUTTON_2) \
 	and player.enable_holding_objects \
 	and item_spring_arm.get_child_count() == 0:
 		# Check for a collision with the raycast
@@ -157,7 +157,7 @@ func _input(event: InputEvent) -> void:
 					return
 	
 	# 🅁1/[MB1] press to pick up an object -> Throw object
-	if event.is_action_pressed(player.controls.button_5) \
+	if event.is_action_pressed(Controls.BUTTON_5) \
 	and player.enable_throwing \
 	and item_spring_arm.get_child_count() != 0:
 		# Get the [first] child node of the item spring arm
@@ -176,7 +176,7 @@ func _input(event: InputEvent) -> void:
 		#player.base_state.transition_state(player.current_state, States.State.THROWING)
 
 	# Ⓛ3/[M-Scroll-Down] _pressed_ -> Zoom out (third-person only)
-	if event.is_action_pressed(player.controls.button_10) \
+	if event.is_action_pressed(Controls.BUTTON_10) \
 	and perspective == Perspective.THIRD_PERSON:
 		camera_spring_arm.spring_length = clamp(
 			camera_spring_arm.spring_length + zoom_speed,
@@ -186,7 +186,7 @@ func _input(event: InputEvent) -> void:
 		ray_cast.position.z = -camera_spring_arm.spring_length
 
 	# Ⓡ3/[M-Scroll-Up] _pressed_ -> Zoom in (third-person only)
-	if event.is_action_pressed(player.controls.button_11) \
+	if event.is_action_pressed(Controls.BUTTON_11) \
 	and perspective == Perspective.THIRD_PERSON:
 		camera_spring_arm.spring_length = clamp(
 			camera_spring_arm.spring_length - zoom_speed,
@@ -200,7 +200,7 @@ func _input(event: InputEvent) -> void:
 func _process(delta: float) -> void:
 	if !is_multiplayer_authority(): return
 
-	var look_actions = [player.controls.look_up, player.controls.look_down, player.controls.look_left, player.controls.look_right]
+	var look_actions = [Controls.LOOK_UP, Controls.LOOK_DOWN, Controls.LOOK_LEFT, Controls.LOOK_RIGHT]
 	for action in look_actions:
 		# Check if the action is pressed and the camera is not locked -> Rotate camera
 		if Input.is_action_pressed(action) \
@@ -228,8 +228,8 @@ func _physics_process(delta: float) -> void:
 
 ## Rotate camera using the controller.
 func camera_rotate_by_controller(delta: float) -> void:
-	var input_x = Input.get_action_strength(player.controls.look_right) - Input.get_action_strength(player.controls.look_left)
-	var input_y = Input.get_action_strength(player.controls.look_up) - Input.get_action_strength(player.controls.look_down)
+	var input_x = Input.get_action_strength(Controls.LOOK_RIGHT) - Input.get_action_strength(Controls.LOOK_LEFT)
+	var input_y = Input.get_action_strength(Controls.LOOK_UP) - Input.get_action_strength(Controls.LOOK_DOWN)
 
 	camera_pitch = clamp(camera_pitch + input_y * look_sensitivity_controller * delta, -80, 90)
 	var new_rotation_y = -input_x * look_sensitivity_controller * delta

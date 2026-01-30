@@ -1,12 +1,18 @@
 extends BaseState
+class_name Crouching
+## 🥷 Crouching down.
 
-## Handles crouching movement restrictions, rifle aiming/firing flags, transitions (standing, crawling, jumping), and collision shape adjustments.
+# Crouching 🔵 Mixamo animations
+const MIX_ANIMATION_CROUCHING_IDLE := "Crouching/mixamo_com"
+const MIX_ANIMATION_CROUCHING_HOLDING_RIFLE := "Crouching_Holding_Rifle/mixamo_com"
+const MIX_ANIMATION_CROUCHING_AIMING := "Crouching_Aiming_Rifle/mixamo_com"
+const MIX_ANIMATION_CROUCHING_FIRING := "Crouching_Firing_Rifle/mixamo_com"
+# Crouching 🟣 Quaternius animations
+const QUAT_ANIMATION_CROUCHING_IDLE := "AnimationLibrary_Godot/Crouch_Idle"
+const QUAT_ANIMATION_CROUCHING_HOLDING_RIFLE := "Crouching_Holding_Rifle/mixamo_com" # TODO: Replace with actual Quaternius animation name
+const QUAT_ANIMATION_CROUCHING_AIMING := "Crouching_Aiming_Rifle/mixamo_com" # TODO: Replace with actual Quaternius animation name
+const QUAT_ANIMATION_CROUCHING_FIRING := "Crouching_Firing_Rifle/mixamo_com" # TODO: Replace with actual Quaternius animation name
 
-const ANIMATION_CROUCHING_IDLE := "Crouching/mixamo_com"
-const ANIMATION_CROUCHING_HOLDING_RIFLE := "Crouching_Holding_Rifle/mixamo_com"
-const ANIMATION_CROUCHING_AIMING := "Crouching_Aiming_Rifle/mixamo_com"
-const ANIMATION_CROUCHING_FIRING := "Crouching_Firing_Rifle/mixamo_com"
-const NODE_NAME := "Crouching"
 const NODE_STATE := States.State.CROUCHING
 
 
@@ -19,19 +25,19 @@ func _input(event: InputEvent) -> void:
 	if player.pause.visible: return
 
 	# Ⓐ/[Space] _pressed_ -> Start "jumping"
-	if event.is_action_pressed(player.controls.button_0):
+	if event.is_action_pressed(Controls.BUTTON_0):
 		if player.enable_jumping \
 		and player.is_on_floor() \
 		and not player.chat.line_edit.visible:
 			transition_state(player.current_state, States.State.JUMPING)
 
 	# Ⓨ/[Ctrl] _released_ -> Start "standing"
-	if event.is_action_released(player.controls.button_3):
+	if event.is_action_released(Controls.BUTTON_3):
 		transition_state(NODE_STATE, States.State.STANDING)
 		return
 
 	# 🄻1/[MB0] _pressed_
-	if event.is_action_pressed(player.controls.button_4):
+	if event.is_action_pressed(Controls.BUTTON_4):
 		# Rifle "aiming" 🄻1
 		if player.is_holding_rifle \
 		and event is InputEventJoypadButton:
@@ -42,14 +48,14 @@ func _input(event: InputEvent) -> void:
 			player.is_firing_rifle = true
 
 	# 🄻1 _released_ -> Lower rifle
-	if event.is_action_released(player.controls.button_4) \
+	if event.is_action_released(Controls.BUTTON_4) \
 	and event is InputEventJoypadButton:
 		# Rifle "aiming" 🄻1
 		if player.is_holding_rifle:
 			player.is_aiming_rifle = false
 
 	# 🅁1/[MB1] _pressed_ -> Aim rifle
-	if event.is_action_pressed(player.controls.button_5):
+	if event.is_action_pressed(Controls.BUTTON_5):
 		# Rifle "aiming" [MB1]
 		if player.is_holding_rifle \
 		and event is InputEventMouseButton:
@@ -60,7 +66,7 @@ func _input(event: InputEvent) -> void:
 			player.is_firing_rifle = true
 
 	# [MB1] _released_ -> Lower rifle
-	if event.is_action_released(player.controls.button_5) \
+	if event.is_action_released(Controls.BUTTON_5) \
 	and event is InputEventMouseButton:
 		if player.is_holding_rifle:
 			player.is_aiming_rifle = false
@@ -83,30 +89,35 @@ func _process(delta: float) -> void:
 
 ## Plays the appropriate animation based on player state.
 func play_animation() -> void:
-	# -- Rifle animations --
+	var mix_anim: String
+	var quat_anim: String
 	if player.is_holding_rifle:
 		if player.is_firing_rifle:
-			if player.animation_player_current_animation() != ANIMATION_CROUCHING_FIRING:
-				_on_animation_finished(player.animation_player_current_animation())
-				player.animation_player_play(ANIMATION_CROUCHING_FIRING)
+			mix_anim = MIX_ANIMATION_CROUCHING_FIRING
+			quat_anim = QUAT_ANIMATION_CROUCHING_FIRING
 		elif player.is_aiming_rifle:
-			if player.animation_player_current_animation() != ANIMATION_CROUCHING_AIMING:
-				_on_animation_finished(player.animation_player_current_animation())
-				player.animation_player_play(ANIMATION_CROUCHING_AIMING)
+			mix_anim = MIX_ANIMATION_CROUCHING_AIMING
+			quat_anim = QUAT_ANIMATION_CROUCHING_AIMING
 		else:
-			if player.animation_player_current_animation() != ANIMATION_CROUCHING_HOLDING_RIFLE:
-				_on_animation_finished(player.animation_player_current_animation())
-				player.animation_player_play(ANIMATION_CROUCHING_HOLDING_RIFLE)
-
-	# -- Unarmed animation --
+			mix_anim = MIX_ANIMATION_CROUCHING_HOLDING_RIFLE
+			quat_anim = QUAT_ANIMATION_CROUCHING_HOLDING_RIFLE
 	else:
-		if player.animation_player_current_animation() != ANIMATION_CROUCHING_IDLE:
+		mix_anim = MIX_ANIMATION_CROUCHING_IDLE
+		quat_anim = QUAT_ANIMATION_CROUCHING_IDLE
+
+	if player.animation_set == 0:
+		if player.animation_player_current_animation() != mix_anim:
 			_on_animation_finished(player.animation_player_current_animation())
-			player.animation_player_play(ANIMATION_CROUCHING_IDLE)
+			player.animation_player_play(mix_anim)
+	elif player.animation_set == 1:
+		if player.animation_player_current_animation() != quat_anim:
+			_on_animation_finished(player.animation_player_current_animation())
+			player.animation_player_play(quat_anim)
 
 
 func _on_animation_finished(animation_name: String) -> void:
-	if animation_name == ANIMATION_CROUCHING_FIRING:
+	if animation_name == MIX_ANIMATION_CROUCHING_FIRING \
+	or animation_name == QUAT_ANIMATION_CROUCHING_FIRING:
 		player.is_firing_rifle = false
 
 

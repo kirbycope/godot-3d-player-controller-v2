@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://ptprsawyi7ql"]
+[gd_scene format=3 uid="uid://ptprsawyi7ql"]
 
 [ext_resource type="Script" uid="uid://b7plmenqhwlu4" path="res://addons/3d_player_controller_v2/player.gd" id="1_ifhah"]
 [ext_resource type="Script" uid="uid://5rlkn1wdmtq0" path="res://addons/3d_player_controller_v2/camera.gd" id="2_mpser"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" path="res://addons/3d_player_controller_v2/pause.tscn" id="5_7fj78"]
 [ext_resource type="PackedScene" path="res://addons/3d_player_controller_v2/emotes.tscn" id="6_nlsti"]
 [ext_resource type="Texture2D" uid="uid://bvr74sywbui7h" path="res://addons/3d_player_controller_v2/assets/textures/game_icons/white/2x/audioOn.png" id="8_7nn76"]
+[ext_resource type="PackedScene" uid="uid://cto31sxtpfiop" path="res://addons/3d_player_controller_v2/loading.tscn" id="8_wgsvs"]
 [ext_resource type="PackedScene" path="res://addons/3d_player_controller_v2/settings.tscn" id="9_ok7gw"]
 [ext_resource type="Script" uid="uid://cytx6jg6c3c4c" path="res://addons/3d_player_controller_v2/visuals.gd" id="12_a5e81"]
 [ext_resource type="PackedScene" path="res://addons/3d_player_controller_v2/godette.tscn" id="12_ahy2k"]
@@ -69,28 +70,27 @@ size = Vector2(0.3, 0.3)
 height = 0.1
 radius = 0.3
 
-[node name="Player" type="CharacterBody3D" groups=["Player"]]
+[node name="Player" type="CharacterBody3D" unique_id=346875681 groups=["Player"]]
 script = ExtResource("1_ifhah")
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
-volume_db = -20.0
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=1320316015]
 
-[node name="CameraMount" type="Node3D" parent="."]
+[node name="CameraMount" type="Node3D" parent="." unique_id=1071985085]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
 top_level = true
 
-[node name="CameraSpringArm" type="SpringArm3D" parent="CameraMount"]
+[node name="CameraSpringArm" type="SpringArm3D" parent="CameraMount" unique_id=1237835798]
 spring_length = 1.5
 
-[node name="Camera3D" type="Camera3D" parent="CameraMount/CameraSpringArm"]
+[node name="Camera3D" type="Camera3D" parent="CameraMount/CameraSpringArm" unique_id=152078509]
 transform = Transform3D(1, 0, 0, 0, 0.9659259, 0.25881907, 0, -0.25881907, 0.9659258, 0, 0, 0)
 script = ExtResource("2_mpser")
 
-[node name="RayCast3D" type="RayCast3D" parent="CameraMount/CameraSpringArm/Camera3D"]
+[node name="RayCast3D" type="RayCast3D" parent="CameraMount/CameraSpringArm/Camera3D" unique_id=1984525815]
 target_position = Vector3(0, 0, -2)
 collision_mask = 3
 
-[node name="ContextualControls" type="Label" parent="CameraMount/CameraSpringArm/Camera3D"]
+[node name="ContextualControls" type="Label" parent="CameraMount/CameraSpringArm/Camera3D" unique_id=1061978030]
 anchors_preset = 6
 anchor_left = 1.0
 anchor_top = 0.5
@@ -103,7 +103,7 @@ grow_horizontal = 0
 grow_vertical = 2
 horizontal_alignment = 1
 
-[node name="Retical" type="TextureRect" parent="CameraMount/CameraSpringArm/Camera3D"]
+[node name="Retical" type="TextureRect" parent="CameraMount/CameraSpringArm/Camera3D" unique_id=2042737826]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -119,103 +119,106 @@ scale = Vector2(0.25, 0.25)
 pivot_offset = Vector2(25, 25)
 texture = ExtResource("3_ffasv")
 
-[node name="ItemSpringArm" type="SpringArm3D" parent="CameraMount"]
+[node name="ItemSpringArm" type="SpringArm3D" parent="CameraMount" unique_id=888511040]
 transform = Transform3D(-1, 0, -8.742278e-08, -1.7763568e-15, 1, 0, 8.742278e-08, 0, -1, 0, -0.1, 0)
 spring_length = 1.5
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=7047845]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
 shape = SubResource("CapsuleShape3D_ifhah")
 
-[node name="Chat" parent="." instance=ExtResource("4_pyrav")]
+[node name="Chat" parent="." unique_id=251638172 instance=ExtResource("4_pyrav")]
 
-[node name="Controls" parent="." instance=ExtResource("3_uu7fq")]
+[node name="Controls" parent="." unique_id=2103074329 instance=ExtResource("3_uu7fq")]
 
-[node name="Debug" parent="." instance=ExtResource("4_uu7fq")]
+[node name="Debug" parent="." unique_id=426142649 instance=ExtResource("4_uu7fq")]
 visible = false
 
-[node name="Emotes" parent="." instance=ExtResource("6_nlsti")]
+[node name="Emotes" parent="." unique_id=1795697336 instance=ExtResource("6_nlsti")]
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+[node name="Loading" parent="." unique_id=977696200 instance=ExtResource("8_wgsvs")]
+visible = false
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1581210879]
 replication_config = SubResource("SceneReplicationConfig_nlsti")
 
-[node name="NameLabel" type="Label3D" parent="."]
+[node name="NameLabel" type="Label3D" parent="." unique_id=1967883711]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 billboard = 1
 
-[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=973979313]
 
-[node name="Pause" parent="." instance=ExtResource("5_7fj78")]
+[node name="Pause" parent="." unique_id=96312269 instance=ExtResource("5_7fj78")]
 visible = false
 
-[node name="ProximityChatIndicator" type="MeshInstance3D" parent="."]
+[node name="ProximityChatIndicator" type="MeshInstance3D" parent="." unique_id=363935685]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2, 0)
 visible = false
 mesh = SubResource("QuadMesh_pyrav")
 
-[node name="ProximityChatLocal" type="AudioStreamPlayer3D" parent="."]
+[node name="ProximityChatLocal" type="AudioStreamPlayer3D" parent="." unique_id=2078732930]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
 stream = SubResource("AudioStreamGenerator_k3k34")
 
-[node name="ProximityChatNetwork" type="AudioStreamPlayer3D" parent="."]
+[node name="ProximityChatNetwork" type="AudioStreamPlayer3D" parent="." unique_id=1468858582]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
 stream = SubResource("AudioStreamGenerator_8o733")
 
-[node name="Settings" parent="." instance=ExtResource("9_ok7gw")]
+[node name="Settings" parent="." unique_id=1418900386 instance=ExtResource("9_ok7gw")]
 visible = false
 
-[node name="ShapeCast3D" type="ShapeCast3D" parent="."]
+[node name="ShapeCast3D" type="ShapeCast3D" parent="." unique_id=1167803229]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35000002, 0)
 shape = SubResource("CylinderShape3D_nlsti")
 target_position = Vector3(0, -0.5, 0)
 
-[node name="States" parent="." instance=ExtResource("5_5e1u4")]
+[node name="States" parent="." unique_id=1887746606 instance=ExtResource("5_5e1u4")]
 
-[node name="Timers" type="Node" parent="."]
+[node name="Timers" type="Node" parent="." unique_id=2078331381]
 
-[node name="KickLeft" type="Timer" parent="Timers"]
+[node name="KickLeft" type="Timer" parent="Timers" unique_id=195208033]
 wait_time = 0.7
 one_shot = true
 
-[node name="KickRight" type="Timer" parent="Timers"]
+[node name="KickRight" type="Timer" parent="Timers" unique_id=1525599838]
 wait_time = 0.7
 one_shot = true
 
-[node name="PunchLeft" type="Timer" parent="Timers"]
+[node name="PunchLeft" type="Timer" parent="Timers" unique_id=1247633396]
 wait_time = 0.4
 one_shot = true
 
-[node name="PunchRight" type="Timer" parent="Timers"]
+[node name="PunchRight" type="Timer" parent="Timers" unique_id=1592093021]
 wait_time = 0.4
 one_shot = true
 
-[node name="Visuals" type="Node3D" parent="."]
+[node name="Visuals" type="Node3D" parent="." unique_id=581905910]
 script = ExtResource("12_a5e81")
 
-[node name="Character" parent="Visuals" instance=ExtResource("12_ahy2k")]
+[node name="Character" parent="Visuals" unique_id=76213539 instance=ExtResource("12_ahy2k")]
 top_level = true
 
-[node name="RayCast3D_JumpTarget" type="RayCast3D" parent="Visuals"]
+[node name="RayCast3D_JumpTarget" type="RayCast3D" parent="Visuals" unique_id=1438036776]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -0.315)
 target_position = Vector3(0, -0.75, 0)
 
-[node name="RayCast3D_Top" type="RayCast3D" parent="Visuals"]
+[node name="RayCast3D_Top" type="RayCast3D" parent="Visuals" unique_id=1088517173]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
 target_position = Vector3(0, 0, -1)
 
-[node name="RayCast3D_High" type="RayCast3D" parent="Visuals"]
+[node name="RayCast3D_High" type="RayCast3D" parent="Visuals" unique_id=810450360]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6999999, 0)
 target_position = Vector3(0, 0, -1)
 
-[node name="RayCast3D_Middle" type="RayCast3D" parent="Visuals"]
+[node name="RayCast3D_Middle" type="RayCast3D" parent="Visuals" unique_id=2076302729]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9999999, 0)
 target_position = Vector3(0, 0, -1)
 
-[node name="RayCast3D_Low" type="RayCast3D" parent="Visuals"]
+[node name="RayCast3D_Low" type="RayCast3D" parent="Visuals" unique_id=1774267327]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.59999996, 0)
 target_position = Vector3(0, 0, -1)
 
-[node name="RayCast3D_Below" type="RayCast3D" parent="Visuals"]
+[node name="RayCast3D_Below" type="RayCast3D" parent="Visuals" unique_id=1145444501]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, 0)
 target_position = Vector3(0, -0.5, 0)
 

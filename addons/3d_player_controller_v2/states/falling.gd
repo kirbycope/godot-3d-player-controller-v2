@@ -1,10 +1,14 @@
 extends BaseState
+class_name Falling
+## 🍃 Falling in mid-air.
 
-## Handles airborne falling logic: multi-action space key transitions (climb, double-jump, fly, paraglide), landing outcomes (ragdoll vs stand), and fall animations.
+# Falling 🔵 Mixamo animations
+const MIX_ANIMATION_FALLING := "Falling/mixamo_com"
+const MIX_ANIMATION_FALLING_HOLDING_RIFLE := "Falling_Holding_Rifle/mixamo_com"
+# Falling 🟣 Quaternius animations
+const QUAT_ANIMATION_FALLING := "AnimationLibrary_Godot/Jump"
+const QUAT_ANIMATION_FALLING_HOLDING_RIFLE := "Falling_Holding_Rifle/mixamo_com" # TODO: Replace with actual Quaternius animation name
 
-const ANIMATION_FALLING := "Falling/mixamo_com"
-const ANIMATION_FALLING_HOLDING_RIFLE := "Falling_Holding_Rifle/mixamo_com"
-const NODE_NAME := "Falling"
 const NODE_STATE := States.State.FALLING
 
 
@@ -17,7 +21,7 @@ func _input(event: InputEvent) -> void:
 	if player.pause.visible: return
 
 	# Ⓐ/[Space] _pressed_ -> Start "climbing"
-	if event.is_action_pressed(player.controls.button_0):
+	if event.is_action_pressed(Controls.BUTTON_0):
 		if player.enable_climbing:
 			if player.ray_cast_high.is_colliding():
 				var collision_object = player.ray_cast_high.get_collider()
@@ -31,7 +35,7 @@ func _input(event: InputEvent) -> void:
 						return
 
 	# Ⓐ/[Space] _pressed_ -> Start "double-jumping"
-	if event.is_action_pressed(player.controls.button_0):
+	if event.is_action_pressed(Controls.BUTTON_0):
 		if player.enable_double_jumping \
 		and not player.is_double_jumping:
 			player.is_double_jumping = true
@@ -39,13 +43,13 @@ func _input(event: InputEvent) -> void:
 			return
 
 	# Ⓐ/[Space] _pressed_ -> Start "flying"
-	if event.is_action_pressed(player.controls.button_0):
+	if event.is_action_pressed(Controls.BUTTON_0):
 		if player.enable_flying:
 			transition_state(player.current_state, States.State.FLYING)
 			return
 
 	# Ⓐ/[Space] _pressed_ -> Start "paragliding"
-	if event.is_action_pressed(player.controls.button_0):
+	if event.is_action_pressed(Controls.BUTTON_0):
 		if player.enable_paragliding:
 			transition_state(player.current_state, States.State.PARAGLIDING)
 			return
@@ -74,15 +78,15 @@ func _process(delta: float) -> void:
 
 ## Plays the appropriate animation based on player state.
 func play_animation() -> void:
-	# -- Rifle animations --
-	if player.is_holding_rifle:
-		if player.animation_player_current_animation() != ANIMATION_FALLING_HOLDING_RIFLE:
-			player.animation_player_play(ANIMATION_FALLING_HOLDING_RIFLE)
+	var mix_anim = MIX_ANIMATION_FALLING_HOLDING_RIFLE if player.is_holding_rifle else MIX_ANIMATION_FALLING
+	var quat_anim = QUAT_ANIMATION_FALLING_HOLDING_RIFLE if player.is_holding_rifle else QUAT_ANIMATION_FALLING
 
-	# -- Unarmed animations --
-	else:
-		if player.animation_player_current_animation() != ANIMATION_FALLING:
-			player.animation_player_play(ANIMATION_FALLING)
+	if player.animation_set == 0:
+		if player.animation_player_current_animation() != mix_anim:
+			player.animation_player_play(mix_anim)
+	elif player.animation_set == 1:
+		if player.animation_player_current_animation() != quat_anim:
+			player.animation_player_play(quat_anim)
 
 
 ## Start "falling".

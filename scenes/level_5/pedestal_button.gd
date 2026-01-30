@@ -15,7 +15,7 @@ func _input(event: InputEvent) -> void:
 		if player.pause.visible: return
 
 		# Ⓧ/[E] _pressed_ -> Start "pressing" animation
-		if event.is_action_pressed(player.controls.button_2):
+		if event.is_action_pressed(Controls.BUTTON_2):
 			if player.camera.ray_cast.is_colliding():
 				var collider = player.camera.ray_cast.get_collider()
 				if collider.get_parent() == self:

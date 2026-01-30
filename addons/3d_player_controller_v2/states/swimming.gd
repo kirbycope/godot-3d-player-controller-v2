@@ -1,10 +1,14 @@
 extends BaseState
-## Handles swimming and treading water with vertical movement control and floor snapping override
+class_name Swimming
+## 🏊 Swimming in a body of liquid.
 
+# Swimming 🔵 Mixamo animations
+const MIX_ANIMATION_SWIMMING := "Swimming/mixamo_com"
+const MIX_ANIMATION_WADING := "Swimming_Treading_Water/mixamo_com"
+# Swimming 🟣 Quaternius animations
+const QUAT_ANIMATION_SWIMMING := "AnimationLibrary_Godot/Swim_Fwd"
+const QUAT_ANIMATION_WADING := "AnimationLibrary_Godot/Swim_Idle"
 
-const ANIMATION_SWIMMING := "Swimming/mixamo_com"
-const ANIMATION_WADING := "Swimming_Treading_Water/mixamo_com"
-const NODE_NAME := "Swimming"
 const NODE_STATE := States.State.SWIMMING
 
 # Preserve/override floor snapping while swimming
@@ -20,7 +24,7 @@ func _input(event: InputEvent) -> void:
 	if player.pause.visible: return
 
 	# Ⓐ/[Space] _pressed_ -> Start "mantling"
-	if event.is_action_pressed(player.controls.button_0):
+	if event.is_action_pressed(Controls.BUTTON_0):
 		if player.ray_cast_jump_target.is_colliding():
 			player.global_position = player.ray_cast_jump_target.get_collision_point()
 			transition_state(NODE_STATE, States.State.STANDING) # TODO: Create a mantling state
@@ -33,7 +37,7 @@ func _process(delta: float) -> void:
 	if !is_multiplayer_authority(): return
 
 	# Ⓐ/[Space] button currently _pressed_ -> Increase player's vertical position
-	if Input.is_action_pressed(player.controls.button_0) \
+	if Input.is_action_pressed(Controls.BUTTON_0) \
 	and not player.pause.visible:
 		var current_water_level = player.swimming_in.global_position.y + player.swimming_in.size.y/2 # The origin of the shape is at its center
 		var new_player_position_y = player.position.y + 5 * delta
@@ -42,7 +46,7 @@ func _process(delta: float) -> void:
 			player.position.y += 5 * delta
 
 	# Ⓨ/[Ctrl] currently _pressed_ -> Decrease player's vertical position
-	if Input.is_action_pressed(player.controls.button_3) \
+	if Input.is_action_pressed(Controls.BUTTON_3) \
 	and not player.pause.visible:
 		player.position.y -= 5 * delta
 
@@ -52,14 +56,15 @@ func _process(delta: float) -> void:
 
 ## Plays the appropriate animation based on player state.
 func play_animation() -> void:
-	if player.input_direction == Vector2.ZERO:
-		# Check if the animation player is not already playing the appropriate animation
-		if player.animation_player_current_animation() != ANIMATION_WADING:
-			player.animation_player_play(ANIMATION_WADING)
-	else:
-		# Check if the animation player is not already playing the appropriate animation
-		if player.animation_player_current_animation() != ANIMATION_SWIMMING:
-			player.animation_player_play(ANIMATION_SWIMMING)
+	var mix_anim = MIX_ANIMATION_WADING if player.input_direction == Vector2.ZERO else MIX_ANIMATION_SWIMMING
+	var quat_anim = QUAT_ANIMATION_WADING if player.input_direction == Vector2.ZERO else QUAT_ANIMATION_SWIMMING
+
+	if player.animation_set == 0:
+		if player.animation_player_current_animation() != mix_anim:
+			player.animation_player_play(mix_anim)
+	elif player.animation_set == 1:
+		if player.animation_player_current_animation() != quat_anim:
+			player.animation_player_play(quat_anim)
 
 
 ## Start "swimming".

@@ -1,10 +1,14 @@
 extends BaseState
+class_name Jumping
+## 🦘 Jumping into the air.
 
-## Handles jumping upward movement, mid-air transitions (climb, double-jump, fly, paraglide), rifle aiming/firing flags, and jump animations.
+# Jumping 🔵 Mixamo animations
+const MIX_ANIMATION_JUMPING := "Falling/mixamo_com"
+const MIX_ANIMATION_JUMPING_HOLDING_RIFLE := "Falling_Holding_Rifle/mixamo_com"
+# Jumping 🟣 Quaternius animations
+const QUAT_ANIMATION_JUMPING := "AnimationLibrary_Godot/Jump_Start" 
+const QUAT_ANIMATION_JUMPING_HOLDING_RIFLE := "AnimationLibrary_Godot/Jump_Holding_Rifle" # TODO: Replace with actual Quaternius animation name
 
-const ANIMATION_JUMPING := "Falling/mixamo_com"
-const ANIMATION_JUMPING_HOLDING_RIFLE := "Falling_Holding_Rifle/mixamo_com"
-const NODE_NAME := "Jumping"
 const NODE_STATE := States.State.JUMPING
 
 
@@ -17,7 +21,7 @@ func _input(event: InputEvent) -> void:
 	if player.pause.visible: return
 
 	# Ⓐ/[Space] _pressed_ -> Start "climbing"
-	if event.is_action_pressed(player.controls.button_0):
+	if event.is_action_pressed(Controls.BUTTON_0):
 		if player.enable_climbing:
 			if player.ray_cast_high.is_colliding():
 				var collision_object = player.ray_cast_high.get_collider()
@@ -31,7 +35,7 @@ func _input(event: InputEvent) -> void:
 						return
 
 	# Ⓐ/[Space] _pressed_ -> Start "double-jumping"
-	if event.is_action_pressed(player.controls.button_0):
+	if event.is_action_pressed(Controls.BUTTON_0):
 		if player.enable_double_jumping \
 		and not player.is_double_jumping:
 			player.is_double_jumping = true
@@ -39,20 +43,20 @@ func _input(event: InputEvent) -> void:
 			return
 
 	# Ⓐ/[Space] _pressed_ -> Start "flying"
-	if event.is_action_pressed(player.controls.button_0):
+	if event.is_action_pressed(Controls.BUTTON_0):
 		if player.enable_flying:
 			transition_state(player.current_state, States.State.FLYING)
 			return
 
 	# Ⓐ/[Space] _pressed_ -> Start "paragliding"
-	if event.is_action_pressed(player.controls.button_0) \
+	if event.is_action_pressed(Controls.BUTTON_0) \
 	and not player.is_on_floor():
 		if player.enable_paragliding:
 			transition_state(player.current_state, States.State.PARAGLIDING)
 			return
 
 	# 🄻1/[MB0] _pressed_
-	if event.is_action_pressed(player.controls.button_4):
+	if event.is_action_pressed(Controls.BUTTON_4):
 		# Rifle "aiming" 🄻1
 		if player.is_holding_rifle \
 		and event is InputEventJoypadButton:
@@ -63,14 +67,14 @@ func _input(event: InputEvent) -> void:
 			player.is_firing_rifle = true
 
 	# 🄻1 _released_ -> Lower rifle
-	if event.is_action_released(player.controls.button_4) \
+	if event.is_action_released(Controls.BUTTON_4) \
 	and event is InputEventJoypadButton:
 		# Rifle "aiming" 🄻1
 		if player.is_holding_rifle:
 			player.is_aiming_rifle = false
 
 	# 🅁1/[MB1] _pressed_ -> Aim rifle
-	if event.is_action_pressed(player.controls.button_5):
+	if event.is_action_pressed(Controls.BUTTON_5):
 		# Rifle "aiming" [MB1]
 		if player.is_holding_rifle \
 		and event is InputEventMouseButton:
@@ -81,7 +85,7 @@ func _input(event: InputEvent) -> void:
 			player.is_firing_rifle = true
 
 	# [MB1] _released_ -> Lower rifle
-	if event.is_action_released(player.controls.button_5) \
+	if event.is_action_released(Controls.BUTTON_5) \
 	and event is InputEventMouseButton:
 		if player.is_holding_rifle:
 			player.is_aiming_rifle = false
@@ -103,15 +107,15 @@ func _process(delta: float) -> void:
 
 ## Plays the appropriate animation based on player state.
 func play_animation() -> void:
-	# -- Rifle animations --
-	if player.is_holding_rifle:
-		if player.animation_player_current_animation() != ANIMATION_JUMPING_HOLDING_RIFLE:
-			player.animation_player_play(ANIMATION_JUMPING_HOLDING_RIFLE)
+	var mix_anim = MIX_ANIMATION_JUMPING_HOLDING_RIFLE if player.is_holding_rifle else MIX_ANIMATION_JUMPING
+	var quat_anim = QUAT_ANIMATION_JUMPING_HOLDING_RIFLE if player.is_holding_rifle else QUAT_ANIMATION_JUMPING
 
-	# -- Unarmed animations --
-	else:
-		if player.animation_player_current_animation() != ANIMATION_JUMPING:
-			player.animation_player_play(ANIMATION_JUMPING)
+	if player.animation_set == 0:
+		if player.animation_player_current_animation() != mix_anim:
+			player.animation_player_play(mix_anim)
+	elif player.animation_set == 1:
+		if player.animation_player_current_animation() != quat_anim:
+			player.animation_player_play(quat_anim)
 
 
 ## Start "jumping".

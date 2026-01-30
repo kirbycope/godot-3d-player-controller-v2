@@ -14,7 +14,7 @@ func _input(event: InputEvent) -> void:
 		if player.pause.visible: return
 
 		# Ⓧ/[E] _pressed_ -> Start "petting" animation
-		if event.is_action_pressed(player.controls.button_2):
+		if event.is_action_pressed(Controls.BUTTON_2):
 			var flat_target := Vector3(
 				global_position.x,
 				player.global_position.y,

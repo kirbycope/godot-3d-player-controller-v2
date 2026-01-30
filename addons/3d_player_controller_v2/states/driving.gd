@@ -1,9 +1,12 @@
 extends BaseState
+class_name Driving
+## 🚗 Driving a vehicle.
 
-## Handles vehicle driving: input to exit, animation playback, and collision shape toggling while in a vehicle.
+# Driving 🔵 Mixamo animations
+const MIX_ANIMATION_DRIVING := "Driving/mixamo_com"
+# Driving 🟣 Quaternius animations
+const QUAT_ANIMATION_DRIVING := "AnimationLibrary_Godot/Driving"
 
-const ANIMATION_DRIVING := "Driving/mixamo_com"
-const NODE_NAME := "Driving"
 const NODE_STATE := States.State.DRIVING
 
 
@@ -17,7 +20,7 @@ func _input(event: InputEvent) -> void:
 
 	# Ⓨ/[Ctrl] _pressed_ -> Exit vehicle
 	if player.is_driving:
-		if event.is_action_pressed(player.controls.button_3):
+		if event.is_action_pressed(Controls.BUTTON_3):
 			transition_state(player.current_state, States.State.STANDING)
 		else:
 			return
@@ -34,9 +37,9 @@ func _process(delta: float) -> void:
 
 ## Plays the appropriate animation based on player state.
 func play_animation() -> void:
-	# Check if the animation player is not already playing the appropriate animation
-	if player.animation_player_current_animation() != ANIMATION_DRIVING:
-		player.animation_player_play(ANIMATION_DRIVING)
+	var anim = QUAT_ANIMATION_DRIVING if player.animation_set == 1 else MIX_ANIMATION_DRIVING
+	if player.animation_player_current_animation() != anim:
+		player.animation_player_play(anim)
 
 
 ## Start "driving".

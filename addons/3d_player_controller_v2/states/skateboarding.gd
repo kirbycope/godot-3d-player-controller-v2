@@ -1,11 +1,16 @@
 extends BaseState
+class_name Skateboarding
+## 🛹 Skateboarding on a skateboard.
 
-## Handles skateboarding movement with ollie jump, speed variations (slow/normal/fast), sprint boost, and dynamic collision shape adjustments.
+# Skateboarding 🔵 Mixamo animations
+const MIX_ANIMATION_SKATEBOARDING := "Skateboarding/mixamo_com"
+const MIX_ANIMATION_SKATEBOARDING_FAST := "Skateboarding_Fast/mixamo_com"
+const MIX_ANIMATION_SKATEBOARDING_SLOW := "Skateboarding_Slow/mixamo_com"
+# Skateboarding 🟣 Quaternius animations
+const QUAT_ANIMATION_SKATEBOARDING := "Skateboarding/mixamo_com" # TODO: Replace with actual Quaternius animation name
+const QUAT_ANIMATION_SKATEBOARDING_FAST := "Skateboarding_Fast/mixamo_com" # TODO: Replace with actual Quaternius animation name
+const QUAT_ANIMATION_SKATEBOARDING_SLOW := "Skateboarding_Slow/mixamo_com" # TODO: Replace with actual Quaternius animation name
 
-const ANIMATION_SKATEBOARDING := "Skateboarding/mixamo_com"
-const ANIMATION_SKATEBOARDING_FAST := "Skateboarding_Fast/mixamo_com"
-const ANIMATION_SKATEBOARDING_SLOW := "Skateboarding_Slow/mixamo_com"
-const NODE_NAME := "Skateboarding"
 const NODE_STATE := States.State.SKATEBOARDING
 
 
@@ -18,7 +23,7 @@ func _input(event: InputEvent) -> void:
 	if player.pause.visible: return
 
 	# Ⓐ/[Space] _pressed_ (while grounded) -> Perform "ollie"
-	if event.is_action_pressed(player.controls.button_0)\
+	if event.is_action_pressed(Controls.BUTTON_0)\
 	and player.is_on_floor():
 		# Increase the player's velocity in the up direction
 		player.velocity += player.up_direction * player.speed_jumping
@@ -29,11 +34,10 @@ func _process(delta: float) -> void:
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
 
-
 	# Ⓑ/[shift] _pressed_ -> Move faster while "skateboarding"
 	if player.enable_sprinting \
 	and not player.pause.visible:
-		if Input.is_action_pressed(player.controls.button_1):
+		if Input.is_action_pressed(Controls.BUTTON_1):
 			player.speed_current = player.speed_skateboarding * 1.5
 		else:
 			player.speed_current = player.speed_skateboarding
@@ -44,30 +48,29 @@ func _process(delta: float) -> void:
 
 ## Plays the appropriate animation based on player state.
 func play_animation() -> void:
+	var mix_anim: String
+	var quat_anim: String
+	var height_scale := 1.0
 	if player.input_direction == Vector2.ZERO:
-		# Check if the animation player is not already playing the appropriate animation
-		if player.animation_player_current_animation() != ANIMATION_SKATEBOARDING_SLOW:
-			player.animation_player_play(ANIMATION_SKATEBOARDING_SLOW)
-			# [Re]set the player collision shape's height
-			player.collision_shape.shape.height = player.collision_height
-			# [Re]set the player collision shape's position
-			player.collision_shape.position = player.collision_position
+		mix_anim = MIX_ANIMATION_SKATEBOARDING_SLOW
+		quat_anim = QUAT_ANIMATION_SKATEBOARDING_SLOW
+		height_scale = 1.0
 	elif player.speed_current == player.speed_skateboarding:
-		# Check if the animation player is not already playing the appropriate animation
-		if player.animation_player_current_animation() != ANIMATION_SKATEBOARDING:
-			player.animation_player_play(ANIMATION_SKATEBOARDING)
-			# Set the player collision shape's height
-			player.collision_shape.shape.height = player.collision_height * 0.95
-			# Set the player collision shape's position
-			player.collision_shape.position = player.collision_position * 0.95
+		mix_anim = MIX_ANIMATION_SKATEBOARDING
+		quat_anim = QUAT_ANIMATION_SKATEBOARDING
+		height_scale = 0.95
 	elif player.speed_current > player.speed_skateboarding:
-		# Check if the animation player is not already playing the appropriate animation
-		if player.animation_player_current_animation() != ANIMATION_SKATEBOARDING_FAST:
-			player.animation_player_play(ANIMATION_SKATEBOARDING_FAST)
-			# Set the player collision shape's height
-			player.collision_shape.shape.height = player.collision_height * 0.9
-			# Set the player collision shape's position
-			player.collision_shape.position = player.collision_position * 0.9
+		mix_anim = MIX_ANIMATION_SKATEBOARDING_FAST
+		quat_anim = QUAT_ANIMATION_SKATEBOARDING_FAST
+		height_scale = 0.9
+
+	var anim = quat_anim if player.animation_set == 1 else mix_anim
+	if player.animation_player_current_animation() != anim:
+		player.animation_player_play(anim)
+		# Set the player collision shape's height
+		player.collision_shape.shape.height = player.collision_height * height_scale
+		# Set the player collision shape's position
+		player.collision_shape.position = player.collision_position * height_scale
 
 
 ## Start "skateboarding".

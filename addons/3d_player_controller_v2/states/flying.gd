@@ -1,10 +1,14 @@
 extends BaseState
+class_name Flying
+## ✈️ Flying through the air (like Superman).
 
-## Handles flight movement (ascend/descend, sprint speed), landing transition, and flying animations; also zeroes gravity and vertical velocity on start.
-
+# Flying 🔵 Mixamo animations
 const ANIMATION_FLYING := "Flying/mixamo_com"
 const ANIMATION_FLYING_FAST := "Flying_Fast/mixamo_com"
-const NODE_NAME := "Flying"
+# Flying 🟣 Quaternius animations
+const QUAT_ANIMATION_FLYING := "Flying/mixamo_com" # TODO: Replace with actual Quaternius animation name
+const QUAT_ANIMATION_FLYING_FAST := "Flying_Fast/mixamo_com" # TODO: Replace with actual Quaternius animation name
+
 const NODE_STATE := States.State.FLYING
 
 
@@ -29,20 +33,20 @@ func _process(delta: float) -> void:
 		return
 
 	# Ⓐ/[Space] button currently _pressed_
-	if Input.is_action_pressed(player.controls.button_0) \
+	if Input.is_action_pressed(Controls.BUTTON_0) \
 	and not player.pause.visible:
 		# Increase the player's vertical position
 		player.position.y += 5 * delta
 
 	# Ⓑ/[shift] _pressed_ -> Move faster while "flying"
 	if player.enable_sprinting:
-		if Input.is_action_pressed(player.controls.button_1):
+		if Input.is_action_pressed(Controls.BUTTON_1):
 			player.speed_current = player.speed_flying * 2
 		else:
 			player.speed_current = player.speed_flying
 
 	# Ⓨ/[Ctrl] currently _pressed_
-	if Input.is_action_pressed(player.controls.button_3):
+	if Input.is_action_pressed(Controls.BUTTON_3):
 		# Decrease the player's vertical position
 		player.position.y -= 5 * delta
 
@@ -52,14 +56,15 @@ func _process(delta: float) -> void:
 
 ## Plays the appropriate animation based on player state.
 func play_animation() -> void:
-	if player.speed_current == player.speed_flying * 2:
-		# Check if the animation player is not already playing the appropriate animation
-		if player.animation_player_current_animation() != ANIMATION_FLYING_FAST:
-			player.animation_player_play(ANIMATION_FLYING_FAST)
-	else:
-		# Check if the animation player is not already playing the appropriate animation
-		if player.animation_player_current_animation() != ANIMATION_FLYING:
-			player.animation_player_play(ANIMATION_FLYING)
+	var mix_anim = ANIMATION_FLYING_FAST if player.speed_current == player.speed_flying * 2 else ANIMATION_FLYING
+	var quat_anim = QUAT_ANIMATION_FLYING_FAST if player.speed_current == player.speed_flying * 2 else QUAT_ANIMATION_FLYING
+
+	if player.animation_set == 0:
+		if player.animation_player_current_animation() != mix_anim:
+			player.animation_player_play(mix_anim)
+	elif player.animation_set == 1:
+		if player.animation_player_current_animation() != quat_anim:
+			player.animation_player_play(quat_anim)
 
 
 ## Start "flying".

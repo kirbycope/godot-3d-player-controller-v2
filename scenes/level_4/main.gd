@@ -14,7 +14,7 @@ func _ready() -> void:
 
 ## Called when there is an input event.
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed(player.controls.button_5) \
+	if event.is_action_pressed(Controls.BUTTON_5) \
 	and player.enable_throwing:
 		player.animation_player_play_locked("Standing_Throwing_Right/mixamo_com")
 		await get_tree().create_timer(0.8).timeout

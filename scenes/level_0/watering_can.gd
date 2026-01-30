@@ -15,12 +15,12 @@ func _input(event: InputEvent) -> void:
 		if player.pause.visible: return
 
 		# Ⓧ/[E] _pressed_ -> Start "watering" animation
-		if event.is_action_pressed(player.controls.button_2):
+		if event.is_action_pressed(Controls.BUTTON_2):
 			#player.animation_player_play_locked("Standing_Watering/mixamo_com")
 			pass
 
 		# (D-Pad Down) /[Q] _just_pressed_ -> Drop _this_ node
-		if Input.is_action_just_pressed(player.controls.button_13):
+		if Input.is_action_just_pressed(Controls.BUTTON_13):
 			player.is_holding_1h_right = false
 			player.set_meta("is_holding_watering_can", false)
 			player.is_swinging_1h_right = false

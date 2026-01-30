@@ -9,7 +9,7 @@ var player: CharacterBody3D
 func _input(event: InputEvent) -> void:
 	if player:
 		if  not player.pause.visible:
-			if event.is_action_pressed(player.controls.button_1) \
+			if event.is_action_pressed(Controls.BUTTON_1) \
 			and not player.is_sitting:
 				player.global_position = $Seat.global_position
 				player.global_position -= Vector3(0, 0.4, 0) # [Hack] Adjust player visuals
