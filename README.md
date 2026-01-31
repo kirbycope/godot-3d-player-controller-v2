@@ -12,7 +12,7 @@ Click >>[here](https://timothycope.com/godot-3d-player-controller-v2/)<< to try 
 The player's appearance comes from the imported scene, `$Visuals/Character`. It requires a "retargetted" model that is both rigged and in a T-Pose. This way, if the addon gets updated you shouldn't have to repeat swapping out the model.
 
 ### Retarget Your Model
-[Retargetting](https://docs.godotengine.org/en/stable/tutorials/assets_pipeline/retargeting_3d_skeletons.html) the skeleton will allow you to use the provided [Mixamo](https://www.mixamo.com/#/)animations and sets you up to use others like _Quaternius's_ [Universal Animation Library](https://quaternius.com/packs/universalanimationlibrary.html).
+[Retargetting](https://docs.godotengine.org/en/stable/tutorials/assets_pipeline/retargeting_3d_skeletons.html) the skeleton will allow you to use the provided [Mixamo](https://www.mixamo.com/#/) animations and sets you up to use others like _Quaternius's_ [Universal Animation Library](https://quaternius.com/packs/universalanimationlibrary.html).
 1. Open the Godot Editor
 1. Click the character model in the FileSystem
 1. Click the "Import" tab (at the top-right of the editor)
@@ -44,3 +44,8 @@ The [Setup Character](/addons//3d_player_controller_v2/setup_character.gd) scrip
 
 ### Use the New Character
 You can remove the Node at `$Visuals/Character` and then replace it with your own, in the Editor or during runtime.
+
+### Swap Animation Sets
+This pack comes with [Mixamo](https://www.mixamo.com/#/) animations and sets you up to use _Quaternius's_ [Universal Animation Library](https://quaternius.com/packs/universalanimationlibrary.html) and/or [Universal Animation Library 2](https://quaternius.com/packs/universalanimationlibrary2.html). Change `player.animation_set` to:
+    - `0`: "Mixamo"
+    - `1`: Quaternius"

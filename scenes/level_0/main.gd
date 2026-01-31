@@ -39,3 +39,17 @@ func _ready() -> void:
 	#player.lock_movement_x = true
 	#player.lock_movement_y = true
 	#player.lock_movement_z = true
+
+
+func _input(event: InputEvent) -> void:
+	# (DPad-Up)/[Tab] _released_ -> Swap character model
+	if event.is_action_pressed(Controls.BUTTON_12):
+		var old_character = player.character
+		var new_character = load("res://scenes/male.tscn").instantiate()
+		old_character.name = "DELETE_ME"
+		new_character.name = "Character"
+		new_character.transform = old_character.transform
+		new_character.top_level = old_character.top_level
+		player.visuals.add_child(new_character)
+		player.character = new_character
+		old_character.queue_free()

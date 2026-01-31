@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://cgbnyctknc7ku"]
+
+[ext_resource type="PackedScene" uid="uid://w6ms664smgwp" path="res://assets/universal_base_characters/Base Characters/Superhero_Male_FullBody.gltf" id="1_jgqlu"]
+[ext_resource type="PackedScene" uid="uid://cv4otv6ufuil" path="res://assets/universal_base_characters/Hairstyles/Rigged/Eyebrows_Regular.gltf" id="2_g4xk2"]
+[ext_resource type="PackedScene" uid="uid://cf3ybwko48ys1" path="res://assets/universal_base_characters/Hairstyles/Rigged/Hair_Beard.gltf" id="3_1qs4a"]
+[ext_resource type="PackedScene" uid="uid://c51ejy2x7toe1" path="res://assets/universal_base_characters/Hairstyles/Rigged/Hair_Buzzed.gltf" id="4_8o8b0"]
+[ext_resource type="PackedScene" uid="uid://cavuabcf7wocy" path="res://assets/universal_base_characters/Hairstyles/Rigged/Hair_SimpleParted.gltf" id="5_u7xjh"]
+
+[node name="Male" type="Node3D" unique_id=547792811]
+
+[node name="Superhero_Male_FullBody" parent="." unique_id=908500105 instance=ExtResource("1_jgqlu")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+
+[node name="Eyebrows_Regular2" parent="." unique_id=495039607 instance=ExtResource("2_g4xk2")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+visible = false
+
+[node name="Hair_Beard2" parent="." unique_id=206605587 instance=ExtResource("3_1qs4a")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+
+[node name="Hair_Buzzed2" parent="." unique_id=125062300 instance=ExtResource("4_8o8b0")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+visible = false
+
+[node name="Hair_SimpleParted2" parent="." unique_id=240575434 instance=ExtResource("5_u7xjh")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
