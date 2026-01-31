@@ -5,7 +5,7 @@ class_name Rolling
 # Rolling 🔵 Mixamo animations
 const MIX_ANIMATION_ROLLING := "Rolling/mixamo_com"
 # Rolling 🟣 Quaternius animations
-const QUAT_ANIMATION_ROLLING := "AnimationLibrary_Godot/Roll"
+const QUAT_ANIMATION_ROLLING := "UAL1/Roll"
 
 const NODE_STATE := States.State.ROLLING
 

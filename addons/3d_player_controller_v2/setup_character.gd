@@ -33,7 +33,7 @@ static func animations_mixamo(character: Node3D, playback_default_blend_time: fl
 			var base_path = "res://addons/3d_player_controller_v2/assets/animations/mixamo/"
 			# Check if the mixamo directory exists
 			var dir = DirAccess.open(base_path)
-			##print(  "│  Checking for subdirectories in in path: `/", base_path, "`...") # DEBUGGING
+			#print(  "│  Checking for subdirectories in in path: `/", base_path, "`...") # DEBUGGING
 			if dir:
 				# Iterate over each category (subfolder); '/climbing', '/crawling', etc.
 				dir.list_dir_begin()
@@ -45,7 +45,7 @@ static func animations_mixamo(character: Node3D, playback_default_blend_time: fl
 					and dir.current_is_dir() \
 					and not category.contains(".import") \
 					and not category.to_lower().contains(".fbx"):
-						##print(  "│  Checking for animations in subdirectory: `/", category, "`...") # DEBUGGING
+						#print(  "│  Checking for animations in subdirectory: `/", category, "`...") # DEBUGGING
 						# Define the path to the category
 						var category_path = base_path + category + "/"
 						var dir2 = DirAccess.open(category_path)
@@ -59,15 +59,15 @@ static func animations_mixamo(character: Node3D, playback_default_blend_time: fl
 								# Look for the import file, which shares the name of the original .fbx
 								if file_name.ends_with(".fbx.import"):
 									file_name = file_name.trim_suffix(".import") # Remove the .import suffix to get the original file name
-									##print(  "│    Found animation: `/", file_name, "`") # DEBUGGING
+									#print(  "│    Found animation: `/", file_name, "`") # DEBUGGING
 									var animation_path = category_path + file_name
-									##print(  "│    Loading animation resource from path: `", animation_path, "`") # DEBUGGING
+									#print(  "│    Loading animation resource from path: `", animation_path, "`") # DEBUGGING
 									if ResourceLoader.exists(animation_path):
 										var animation_lib: AnimationLibrary = load(animation_path)
 										var lib_name = file_name.trim_suffix(".fbx")
 										if animation_lib and not animation_player.has_animation_library(lib_name):
 											animation_player.add_animation_library(lib_name, animation_lib)
-											#print(  "│    Added Mixamo animation library `", lib_name, "` to AnimationPlayer in `", animation_player.get_path(), "`") # DEBUGGING
+											#print(  "│    Added Mixamo animation library: `", lib_name, "`") # DEBUGGING
 								# Get the next file in the category directory, for the next iteration
 								file_name = category_dir.get_next()
 					# Get the next category in the base directory, for the next iteration
@@ -87,13 +87,13 @@ static func animations_quaternius(character: Node3D, playback_default_blend_time
 			# Ensure the library is attached (add if not present)
 			if not animation_player.has_animation_library("UAL1"):
 				animation_player.add_animation_library("UAL1", quaternius)
-				#print(  "│    Added Quaternius' `UAL1` animation library to AnimationPlayer in `", animation_player.get_path(), "`") # DEBUGGING
+				#print(  "│    Added Quaternius' `UAL1` animation library") # DEBUGGING
 		#print(  "└── Quaternius animations setup complete.") # DEBUGGING
 
 
 ## Adds an [AnimationPlayer] for all child nodes of the `character` (unless one already exists) and loads animations from Quaternius.
 static func animations_quaternius_2(character: Node3D, playback_default_blend_time: float = 0.0) -> void:
-	#print(  "Setting up Quaternius animations...") # DEBUGGING
+	#print(  "Setting up Quaternius 2 animations...") # DEBUGGING
 	# Iterate over each child of the `character`
 	for child in character.get_children():
 		# Find or create an AnimationPlayer under the child (character.child.child)
@@ -102,7 +102,7 @@ static func animations_quaternius_2(character: Node3D, playback_default_blend_ti
 			var quaternius_2: AnimationLibrary = load("res://assets/universal_animation_library_2/UAL2.glb")
 			if not animation_player.has_animation_library("UAL2"):
 				animation_player.add_animation_library("UAL2", quaternius_2)
-				#print(  "│    Added Quaternius' `UAL2` animation library to AnimationPlayer in `", animation_player.get_path(), "`") # DEBUGGING
+				#print(  "│    Added Quaternius' `UAL2` animation library") # DEBUGGING
 	#print(  "└── Quaternius animations setup complete.") # DEBUGGING
 
 

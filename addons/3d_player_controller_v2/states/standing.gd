@@ -37,19 +37,19 @@ const QUAT_ANIMATION_BLOCKING_2H := "Standing_Blocking_2H/mixamo_com" # TODO: Re
 const QUAT_ANIMATION_HOLDING_1H_LEFT := "Standing_Holding_1H_Left/mixamo_com" # TODO: Replace with actual Quaternius animation name
 const QUAT_ANIMATION_HOLDING_1H_RIGHT := "Standing_Holding_1H_Right/mixamo_com" # TODO: Replace with actual Quaternius animation name
 const QUAT_ANIMATION_HOLDING_2H := "Standing_Holding_2H/mixamo_com" # TODO: Replace with actual Quaternius animation name
-const QUAT_ANIMATION_KICKING_RIGHT := "AnimationLibrary_Godot/Kick"
-const QUAT_ANIMATION_PUNCHING_LEFT := "AnimationLibrary_Godot/Punch_Jab"
-const QUAT_ANIMATION_PUNCHING_RIGHT := "AnimationLibrary_Godot/Punch_Cross"
+const QUAT_ANIMATION_KICKING_RIGHT := "UAL1/Kick"
+const QUAT_ANIMATION_PUNCHING_LEFT := "UAL1/Punch_Jab"
+const QUAT_ANIMATION_PUNCHING_RIGHT := "UAL1/Punch_Cross"
 const QUAT_ANIMATION_HOLDING_RIFLE := "Standing_Holding_Rifle/mixamo_com" # TODO: Replace with actual Quaternius animation name
 const QUAT_ANIMATION_RIFLE_AIMING := "Standing_Aiming_Rifle/mixamo_com" # TODO: Replace with actual Quaternius animation name
 const QUAT_ANIMATION_RIFLE_FIRING := "Standing_Firing_Rifle/mixamo_com" # TODO: Replace with actual Quaternius animation name
-const QUAT_ANIMATION_STANDING_IDLE := "AnimationLibrary_Godot/Idle"
+const QUAT_ANIMATION_STANDING_IDLE := "UAL1/Idle"
 const QUAT_ANIMATION_SWINGING_1H_LEFT := "Standing_Swinging_1H_Left/mixamo_com" # TODO: Replace with actual Quaternius animation name
-const QUAT_ANIMATION_SWINGING_1H_RIGHT := "AnimationLibrary_Godot/Sword_Attack_Standing"
+const QUAT_ANIMATION_SWINGING_1H_RIGHT := "UAL1/Sword_Attack_Standing"
 const QUAT_ANIMATION_THROWING_LEFT := "Standing_Throwing_Left/mixamo_com" # TODO: Replace with actual Quaternius animation name
 const QUAT_ANIMATION_THROWING_RIGHT := "Standing_Throwing_Right/mixamo_com" # TODO: Replace with actual Quaternius animation name
-const QUAT_ANIMATION_TURNING_LEFT := "AnimationLibrary_Godot/Turn90_L" # TODO: Implement
-const QUAT_ANIMATION_TURNING_RIGHT := "AnimationLibrary_Godot/Turn90_R" # TODO: Implement
+const QUAT_ANIMATION_TURNING_LEFT := "UAL1/Turn90_L" # TODO: Implement
+const QUAT_ANIMATION_TURNING_RIGHT := "UAL1/Turn90_R" # TODO: Implement
 const NODE_STATE := States.State.STANDING
 
 

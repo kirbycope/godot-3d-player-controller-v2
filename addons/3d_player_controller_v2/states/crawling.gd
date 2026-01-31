@@ -8,7 +8,7 @@ const MIX_ANIMATION_CRAWLING_HOLDING_RIFLE := "Crouching_Walking_Holding_Rifle/m
 const MIX_ANIMATION_CRAWLING_AIMING_RIFLE := "Crouching_Walking_Aiming_Rifle/mixamo_com"
 const MIX_ANIMATION_CRAWLING_FIRING_RIFLE := "Crouching_Firing_Rifle/mixamo_com"
 # Crawling 🟣 Quaternius animations
-const QUAT_ANIMATION_CRAWLING := "AnimationLibrary_Godot/Crawl_Fwd"
+const QUAT_ANIMATION_CRAWLING := "UAL1/Crawl_Fwd"
 const QUAT_ANIMATION_CRAWLING_HOLDING_RIFLE := "Crouching_Walking_Holding_Rifle/mixamo_com" # TODO: Replace with actual Quaternius animation name
 const QUAT_ANIMATION_CRAWLING_AIMING_RIFLE := "Crouching_Walking_Aiming_Rifle/mixamo_com" # TODO: Replace with actual Quaternius animation name
 const QUAT_ANIMATION_CRAWLING_FIRING_RIFLE := "Crouching_Firing_Rifle/mixamo_com" # TODO: Replace with actual Quaternius animation name

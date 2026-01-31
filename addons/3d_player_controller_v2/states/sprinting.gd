@@ -5,10 +5,10 @@ extends BaseState
 const MIX_ANIMATION_SPRINTING := "Sprinting/mixamo_com"
 const MIX_ANIMATION_SPRINTING_HOLDING_RIFLE := "Sprinting_Holding_Rifle/mixamo_com"
 # Sprinting 🟣 Quaternius animations
-const QUAT_ANIMATION_SPRINTING := "AnimationLibrary_Godot/Sprint"
-const QUAT_ANIMATION_SPRINTING_HOLDING_RIFLE := "AnimationLibrary_Godot/Sprint_Holding_Rifle" # TODO: Implement
-const QUAT_ANIMATION_SPRINTING_START := "AnimationLibrary_Godot/Sprint_Enter" # TODO: Implement
-const QUAT_ANIMATION_SPRINTING_STOP := "AnimationLibrary_Godot/Sprint_Exit" # TODO: Implement
+const QUAT_ANIMATION_SPRINTING := "UAL1/Sprint"
+const QUAT_ANIMATION_SPRINTING_HOLDING_RIFLE := "UAL1/Sprint_Holding_Rifle" # TODO: Implement
+const QUAT_ANIMATION_SPRINTING_START := "UAL1/Sprint_Enter" # TODO: Implement
+const QUAT_ANIMATION_SPRINTING_STOP := "UAL1/Sprint_Exit" # TODO: Implement
 const NODE_STATE := States.State.SPRINTING
 
 

@@ -5,9 +5,9 @@ class_name Sitting
 # Sitting 🔵 Mixamo animations
 const MIX_ANIMATION_SITTING := "Sitting/mixamo_com"
 # Sitting 🟣 Quaternius animations
-const QUAT_ANIMATION_SITTING := "AnimationLibrary_Godot/Sitting_Idle"
-#const QUAT_ANIMATION_SITTING_START := "AnimationLibrary_Godot/Sitting_Enter" # TODO: Implement
-#const QUAT_ANIMATION_SITTING_STOP := "AnimationLibrary_Godot/Sitting_Exit" # TODO: Implement
+const QUAT_ANIMATION_SITTING := "UAL1/Sitting_Idle"
+#const QUAT_ANIMATION_SITTING_START := "UAL1/Sitting_Enter" # TODO: Implement
+#const QUAT_ANIMATION_SITTING_STOP := "UAL1/Sitting_Exit" # TODO: Implement
 
 const NODE_STATE := States.State.SITTING
 

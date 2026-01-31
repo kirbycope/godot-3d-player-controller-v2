@@ -5,9 +5,9 @@ class_name Pushing
 # Pushing 🔵 Mixamo animations
 const MIX_ANIMATION_PUSHING := "Standing_Pushing/mixamo_com"
 # Pushing 🟣 Quaternius animations
-const QUAT_ANIMATION_PUSHING := "AnimationLibrary_Godot/Push"
-const QUAT_ANIMATION_PUSHING_START := "AnimationLibrary_Godot/Push_Enter"
-const QUAT_ANIMATION_PUSHING_STOP := "AnimationLibrary_Godot/Push_Exit"
+const QUAT_ANIMATION_PUSHING := "UAL1/Push"
+const QUAT_ANIMATION_PUSHING_START := "UAL1/Push_Enter"
+const QUAT_ANIMATION_PUSHING_STOP := "UAL1/Push_Exit"
 
 const NODE_STATE := States.State.PUSHING
 

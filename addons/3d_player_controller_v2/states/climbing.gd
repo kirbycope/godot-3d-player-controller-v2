@@ -8,10 +8,10 @@ const MIX_ANIMATION_CLIMBING_DOWN := "Climbing_Down/mixamo_com"
 const MIX_ANIMATION_CLIMBING_LEFT := "Hanging_Braced_Shimmy_Left/mixamo_com"
 const MIX_ANIMATION_CLIMBING_RIGHT := "Hanging_Braced_Shimmy_Right/mixamo_com"
 # Climbing 🟣 Quaternius animations
-const QUAT_ANIMATION_CLIMBING_UP := "AnimationLibrary_Godot/Climb_Up"
-const QUAT_ANIMATION_CLIMBING_DOWN := "AnimationLibrary_Godot/Climb_Down"
-const QUAT_ANIMATION_CLIMBING_LEFT := "AnimationLibrary_Godot/Climb_Left"
-const QUAT_ANIMATION_CLIMBING_RIGHT := "AnimationLibrary_Godot/Climb_Right"
+const QUAT_ANIMATION_CLIMBING_UP := "UAL1/Climb_Up"
+const QUAT_ANIMATION_CLIMBING_DOWN := "UAL1/Climb_Down"
+const QUAT_ANIMATION_CLIMBING_LEFT := "UAL1/Climb_Left"
+const QUAT_ANIMATION_CLIMBING_RIGHT := "UAL1/Climb_Right"
 
 const NODE_STATE := States.State.CLIMBING
 

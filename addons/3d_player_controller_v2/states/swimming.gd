@@ -6,8 +6,8 @@ class_name Swimming
 const MIX_ANIMATION_SWIMMING := "Swimming/mixamo_com"
 const MIX_ANIMATION_WADING := "Swimming_Treading_Water/mixamo_com"
 # Swimming 🟣 Quaternius animations
-const QUAT_ANIMATION_SWIMMING := "AnimationLibrary_Godot/Swim_Fwd"
-const QUAT_ANIMATION_WADING := "AnimationLibrary_Godot/Swim_Idle"
+const QUAT_ANIMATION_SWIMMING := "UAL1/Swim_Fwd"
+const QUAT_ANIMATION_WADING := "UAL1/Swim_Idle"
 
 const NODE_STATE := States.State.SWIMMING
 

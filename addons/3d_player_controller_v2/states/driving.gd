@@ -5,7 +5,7 @@ class_name Driving
 # Driving 🔵 Mixamo animations
 const MIX_ANIMATION_DRIVING := "Driving/mixamo_com"
 # Driving 🟣 Quaternius animations
-const QUAT_ANIMATION_DRIVING := "AnimationLibrary_Godot/Driving"
+const QUAT_ANIMATION_DRIVING := "UAL1/Driving"
 
 const NODE_STATE := States.State.DRIVING
 

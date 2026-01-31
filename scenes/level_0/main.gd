@@ -56,7 +56,7 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	# (DPad-Up)/[Tab] _released_ -> Swap character model
+	# (DPad-Up)/[Tab] _pressed_ -> Swap character model
 	if event.is_action_pressed(Controls.BUTTON_12):
 		if event is InputEventKey and event.echo:
 			return

@@ -6,8 +6,8 @@ class_name Mantling
 const MIX_ANIMATION_MANTLING_BRACED := "Hanging_Braced_To_Crouch/mixamo_com"
 const MIX_ANIMATION_MANTLING_HANGING := "Hanging_Climb_To_Standing/mixamo_com"
 # Mantling 🟣 Quaternius animations
-const QUAT_ANIMATION_MANTLING_BRACED := "AnimationLibrary_Godot/ClimbLedge"
-const QUAT_ANIMATION_MANTLING_HANGING := "AnimationLibrary_Godot/ClimbLedge"
+const QUAT_ANIMATION_MANTLING_BRACED := "UAL1/ClimbLedge"
+const QUAT_ANIMATION_MANTLING_HANGING := "UAL1/ClimbLedge"
 
 const NODE_STATE := States.State.MANTLING
 

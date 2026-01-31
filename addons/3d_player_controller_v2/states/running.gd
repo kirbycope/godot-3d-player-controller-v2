@@ -7,15 +7,15 @@ const MIX_ANIMATION_RUNNING_HOLDING_RIFLE := "Running_Holding_Rifle/mixamo_com"
 const MIX_ANIMATION_RUNNING_AIMING_RIFLE := "Running_Aiming_Rifle/mixamo_com"
 const MIX_ANIMATION_RUNNING_FIRING_RIFLE := "Running_Firing_Rifle/mixamo_com"
 # Running 🟣 Quaternius animations
-const QUAT_ANIMATION_RUNNING := "AnimationLibrary_Godot/Jog_Fwd"
+const QUAT_ANIMATION_RUNNING := "UAL1/Jog_Fwd"
 const QUAT_ANIMATION_RUNNING_HOLDING_RIFLE := "Running_Holding_Rifle/mixamo_com" # TODO: Replace with actual Quaternius animation name
 const QUAT_ANIMATION_RUNNING_AIMING_RIFLE := "Running_Aiming_Rifle/mixamo_com" # TODO: Replace with actual Quaternius animation name
 const QUAT_ANIMATION_RUNNING_FIRING_RIFLE := "Running_Firing_Rifle/mixamo_com" # TODO: Replace with actual Quaternius animation name
-#const QUAT_ANIMATION_RUNNING_STRAFE_LEFT := "AnimationLibrary_Godot/Jog_Fwd_L" # TODO: Implement
-#const QUAT_ANIMATION_RUNNING_STRAFE_RIGHT := "AnimationLibrary_Godot/Jog_Fwd_R" # TODO: Implement
-#const QUAT_ANIMATION_RUNNING_BACKWARDS := "AnimationLibrary_Godot/Jog_Bwd" # TODO: Implement
-#const QUAT_ANIMATION_RUNNING_BACKWARDS_STRAFE_LEFT := "AnimationLibrary_Godot/Jog_Bwd_L" # TODO: Implement
-#const QUAT_ANIMATION_RUNNING_BACKWARDS_STRAFE_RIGHT := "AnimationLibrary_Godot/Jog_Bwd_R" # TODO: Implement
+#const QUAT_ANIMATION_RUNNING_STRAFE_LEFT := "UAL1/Jog_Fwd_L" # TODO: Implement
+#const QUAT_ANIMATION_RUNNING_STRAFE_RIGHT := "UAL1/Jog_Fwd_R" # TODO: Implement
+#const QUAT_ANIMATION_RUNNING_BACKWARDS := "UAL1/Jog_Bwd" # TODO: Implement
+#const QUAT_ANIMATION_RUNNING_BACKWARDS_STRAFE_LEFT := "UAL1/Jog_Bwd_L" # TODO: Implement
+#const QUAT_ANIMATION_RUNNING_BACKWARDS_STRAFE_RIGHT := "UAL1/Jog_Bwd_R" # TODO: Implement
 
 const NODE_STATE := States.State.RUNNING
 

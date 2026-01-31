@@ -8,7 +8,7 @@ const MIX_ANIMATION_CROUCHING_HOLDING_RIFLE := "Crouching_Holding_Rifle/mixamo_c
 const MIX_ANIMATION_CROUCHING_AIMING := "Crouching_Aiming_Rifle/mixamo_com"
 const MIX_ANIMATION_CROUCHING_FIRING := "Crouching_Firing_Rifle/mixamo_com"
 # Crouching 🟣 Quaternius animations
-const QUAT_ANIMATION_CROUCHING_IDLE := "AnimationLibrary_Godot/Crouch_Idle"
+const QUAT_ANIMATION_CROUCHING_IDLE := "UAL1/Crouch_Idle"
 const QUAT_ANIMATION_CROUCHING_HOLDING_RIFLE := "Crouching_Holding_Rifle/mixamo_com" # TODO: Replace with actual Quaternius animation name
 const QUAT_ANIMATION_CROUCHING_AIMING := "Crouching_Aiming_Rifle/mixamo_com" # TODO: Replace with actual Quaternius animation name
 const QUAT_ANIMATION_CROUCHING_FIRING := "Crouching_Firing_Rifle/mixamo_com" # TODO: Replace with actual Quaternius animation name

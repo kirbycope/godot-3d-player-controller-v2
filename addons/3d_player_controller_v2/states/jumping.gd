@@ -6,8 +6,8 @@ class_name Jumping
 const MIX_ANIMATION_JUMPING := "Falling/mixamo_com"
 const MIX_ANIMATION_JUMPING_HOLDING_RIFLE := "Falling_Holding_Rifle/mixamo_com"
 # Jumping 🟣 Quaternius animations
-const QUAT_ANIMATION_JUMPING := "AnimationLibrary_Godot/Jump_Start" 
-const QUAT_ANIMATION_JUMPING_HOLDING_RIFLE := "AnimationLibrary_Godot/Jump_Holding_Rifle" # TODO: Replace with actual Quaternius animation name
+const QUAT_ANIMATION_JUMPING := "UAL1/Jump_Start" 
+const QUAT_ANIMATION_JUMPING_HOLDING_RIFLE := "UAL1/Jump_Holding_Rifle" # TODO: Replace with actual Quaternius animation name
 
 const NODE_STATE := States.State.JUMPING
 

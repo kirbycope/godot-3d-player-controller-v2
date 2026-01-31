@@ -8,10 +8,10 @@ const MIX_ANIMATION_REACTING_LOW_RIGHT := "Standing_Reaction_Low_Right/mixamo_co
 const MIX_ANIMATION_REACTING_HIGH_LEFT := "Standing_Reaction_High_Left/mixamo_com"
 const MIX_ANIMATION_REACTING_HIGH_RIGHT := "Standing_Reaction_High_Right/mixamo_com"
 # Reacting 🟣 Quaternius animations
-const QUAT_ANIMATION_REACTING_LOW_LEFT := "AnimationLibrary_Godot/Hit_Stomach"
-const QUAT_ANIMATION_REACTING_LOW_RIGHT := "AnimationLibrary_Godot/Hit_Stomach"
-const QUAT_ANIMATION_REACTING_HIGH_LEFT := "AnimationLibrary_Godot/Hit_Shoulder_L"
-const QUAT_ANIMATION_REACTING_HIGH_RIGHT := "AnimationLibrary_Godot/Hit_Shoulder_R"
+const QUAT_ANIMATION_REACTING_LOW_LEFT := "UAL1/Hit_Stomach"
+const QUAT_ANIMATION_REACTING_LOW_RIGHT := "UAL1/Hit_Stomach"
+const QUAT_ANIMATION_REACTING_HIGH_LEFT := "UAL1/Hit_Shoulder_L"
+const QUAT_ANIMATION_REACTING_HIGH_RIGHT := "UAL1/Hit_Shoulder_R"
 
 const NODE_STATE := States.State.REACTING
 
