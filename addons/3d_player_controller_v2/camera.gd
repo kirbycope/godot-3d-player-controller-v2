@@ -224,6 +224,9 @@ func _physics_process(delta: float) -> void:
 
 	if camera_mount.top_level:
 		move_camera_mount_to_player()
+	else:
+		# Apply pitch rotation when not using top_level
+		camera_mount.rotation.x = deg_to_rad(camera_pitch)
 
 
 ## Rotate camera using the controller.

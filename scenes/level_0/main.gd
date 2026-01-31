@@ -55,13 +55,16 @@ func _ready() -> void:
 	#player.lock_movement_z = true
 
 
-func _input(_event: InputEvent) -> void:
+func _input(event: InputEvent) -> void:
 	# (DPad-Up)/[Tab] _released_ -> Swap character model
-	if Input.is_action_just_pressed(Controls.BUTTON_12):
+	if event.is_action_pressed(Controls.BUTTON_12):
+		if event is InputEventKey and event.echo:
+			return
 		# Get the current character model
 		var old_character = player.character
 		# Increment the character index
 		current_character_index = (current_character_index + 1) % characters.size()
+		print("Swapping to character model: `", characters[current_character_index], "`")
 		# Instantiate the new character model
 		var new_character = load(characters[current_character_index]).instantiate()
 		# Rename the old character model to avoid name conflicts
