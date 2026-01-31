@@ -3,20 +3,19 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://uv45osjoug5s"
-path.s3tc="res://.godot/imported/T_Superhero_Male_Normal.png-c6291e9b5d9c72d0f20fed87910a0a3e.s3tc.ctex"
+path="res://.godot/imported/T_Superhero_Male_Normal.png-c6291e9b5d9c72d0f20fed87910a0a3e.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://assets/universal_base_characters/Base Characters/T_Superhero_Male_Normal.png"
-dest_files=["res://.godot/imported/T_Superhero_Male_Normal.png-c6291e9b5d9c72d0f20fed87910a0a3e.s3tc.ctex"]
+dest_files=["res://.godot/imported/T_Superhero_Male_Normal.png-c6291e9b5d9c72d0f20fed87910a0a3e.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=1
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

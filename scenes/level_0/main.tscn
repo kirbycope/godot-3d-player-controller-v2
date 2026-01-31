@@ -28,8 +28,11 @@
 [ext_resource type="PackedScene" uid="uid://drn2auj7jc0am" path="res://scenes/level_0/scythce.tscn" id="24_n5cls"]
 [ext_resource type="PackedScene" uid="uid://cfr5eo71u1wuv" path="res://scenes/level_0/hoe.tscn" id="24_y6tby"]
 [ext_resource type="PackedScene" uid="uid://b1vs0syexp5ph" path="res://scenes/level_3/blocks/flower_red.tscn" id="27_06n6y"]
-[ext_resource type="PackedScene" path="res://addons/3d_player_controller_v2/godette.tscn" id="29_xc83s"]
-[ext_resource type="PackedScene" uid="uid://cgbnyctknc7ku" path="res://scenes/male.tscn" id="30_6npof"]
+[ext_resource type="PackedScene" path="res://addons/3d_player_controller_v2/assets/characters/godette/godette.tscn" id="29_xc83s"]
+[ext_resource type="PackedScene" uid="uid://cgbnyctknc7ku" path="res://assets/universal_base_characters/male.tscn" id="30_6npof"]
+[ext_resource type="PackedScene" uid="uid://7l472kewn4r3" path="res://assets/universal_base_characters/female.tscn" id="30_ekdm7"]
+[ext_resource type="PackedScene" uid="uid://f7yfxivr5rmg" path="res://assets/universal_animation_library_2/mannequin_female.tscn" id="31_ffetv"]
+[ext_resource type="PackedScene" uid="uid://cigyajcwkv7wp" path="res://assets/universal_animation_library/mannequin_male.tscn" id="32_ekdm7"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sugp2"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -665,7 +668,16 @@ text = "Press [E]/(X) to \"use\" tools
 Press [Q]/(DPad-Down) to \"drop\" tools"
 
 [node name="Godette" parent="." unique_id=647098479 instance=ExtResource("29_xc83s")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.2)
+
+[node name="Female" parent="." unique_id=1932551248 instance=ExtResource("30_ekdm7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 6.2)
 
 [node name="Male" parent="." unique_id=547792811 instance=ExtResource("30_6npof")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 6.2)
+
+[node name="Mannequin_Female" parent="." unique_id=1676470452 instance=ExtResource("31_ffetv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 6.2)
+
+[node name="Mannequin_Male" parent="." unique_id=2021633820 instance=ExtResource("32_ekdm7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 6.2)

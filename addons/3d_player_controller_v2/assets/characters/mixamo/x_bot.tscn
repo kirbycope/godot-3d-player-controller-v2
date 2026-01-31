@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://bq173p46qjxly"]
+
+[ext_resource type="PackedScene" uid="uid://ceqdq2iwuohsy" path="res://addons/3d_player_controller_v2/assets/characters/mixamo/X_Bot.fbx" id="1_vhxac"]
+
+[node name="X_Bot" type="Node3D" unique_id=835807755]
+
+[node name="X_Bot" parent="." unique_id=1925265932 instance=ExtResource("1_vhxac")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)

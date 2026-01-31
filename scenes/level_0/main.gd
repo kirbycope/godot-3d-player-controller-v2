@@ -1,7 +1,21 @@
 extends Node3D
 ## Beta testbed scene enabling most features.
 
+const SetupCharacter = preload("res://addons/3d_player_controller_v2/setup_character.gd")
+
 @onready var player: CharacterBody3D = $Player
+
+var characters = [
+	"res://addons/3d_player_controller_v2/assets/characters/godette/godette.tscn",
+	"res://addons/3d_player_controller_v2/assets/characters/mixamo/x_bot.tscn",
+	"res://addons/3d_player_controller_v2/assets/characters/mixamo/y_bot.tscn",
+	"res://assets/universal_animation_library/mannequin_male.tscn",
+	"res://assets/universal_animation_library_2/mannequin_female.tscn",
+	"res://assets/universal_base_characters/female.tscn",
+	"res://assets/universal_base_characters/male.tscn",
+]
+
+var current_character_index := 0
 
 
 ## Called when the node enters the scene tree for the first time.
@@ -41,15 +55,36 @@ func _ready() -> void:
 	#player.lock_movement_z = true
 
 
-func _input(event: InputEvent) -> void:
+func _input(_event: InputEvent) -> void:
 	# (DPad-Up)/[Tab] _released_ -> Swap character model
-	if event.is_action_pressed(Controls.BUTTON_12):
+	if Input.is_action_just_pressed(Controls.BUTTON_12):
+		# Get the current character model
 		var old_character = player.character
-		var new_character = load("res://scenes/male.tscn").instantiate()
+		# Increment the character index
+		current_character_index = (current_character_index + 1) % characters.size()
+		# Instantiate the new character model
+		var new_character = load(characters[current_character_index]).instantiate()
+		# Rename the old character model to avoid name conflicts
 		old_character.name = "DELETE_ME"
+		# Name the new character model
 		new_character.name = "Character"
+		# Transfer transform status to the new character model
 		new_character.transform = old_character.transform
+		# Transfer top_level status to the new character model
 		new_character.top_level = old_character.top_level
+		# Add the new character model to the $Visuals node
 		player.visuals.add_child(new_character)
+		# Replace the `@onready var character` reference
 		player.character = new_character
+		# Replace the `@onready var character` reference
+		player.visuals.character = new_character
+		# Remove the old character model from the scene tree
 		old_character.queue_free()
+
+		# Setup animations for all `character` components
+		SetupCharacter.add_animations(new_character, player)
+
+		# Setup physical bone simulators for all `character` components
+		SetupCharacter.physical_bone_simulators(new_character)
+
+		return

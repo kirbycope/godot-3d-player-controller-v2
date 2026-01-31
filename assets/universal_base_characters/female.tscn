@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://7l472kewn4r3"]
+
+[ext_resource type="PackedScene" uid="uid://dt28ay8fdf086" path="res://assets/universal_base_characters/Base Characters/Superhero_Female_FullBody.gltf" id="1_1xjc6"]
+[ext_resource type="PackedScene" uid="uid://cj82wecm7uiji" path="res://assets/universal_base_characters/Hairstyles/Rigged/Eyebrows_Female.gltf" id="2_3e7sd"]
+[ext_resource type="PackedScene" uid="uid://gfl45scyblfp" path="res://assets/universal_base_characters/Hairstyles/Rigged/Hair_Buns.gltf" id="3_54o47"]
+[ext_resource type="PackedScene" uid="uid://bg3j4ap4bd05b" path="res://assets/universal_base_characters/Hairstyles/Rigged/Hair_BuzzedFemale.gltf" id="4_5pui0"]
+[ext_resource type="PackedScene" uid="uid://djwtltfacdltt" path="res://assets/universal_base_characters/Hairstyles/Rigged/Hair_Long.gltf" id="5_xjwcq"]
+
+[node name="Female" type="Node3D" unique_id=1932551248]
+
+[node name="Superhero_Female_FullBody" parent="." unique_id=1355343131 instance=ExtResource("1_1xjc6")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+
+[node name="Eyebrows_Female2" parent="." unique_id=389457808 instance=ExtResource("2_3e7sd")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+visible = false
+
+[node name="Hair_Buns2" parent="." unique_id=1783478561 instance=ExtResource("3_54o47")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+visible = false
+
+[node name="Hair_BuzzedFemale2" parent="." unique_id=1948914760 instance=ExtResource("4_5pui0")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+visible = false
+
+[node name="Hair_Long2" parent="." unique_id=2090125232 instance=ExtResource("5_xjwcq")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)

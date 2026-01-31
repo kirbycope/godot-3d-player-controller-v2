@@ -26,7 +26,7 @@ func _process(_delta: float) -> void:
 		# Check if player is sprinting (on ground) or fast climbing
 		var is_fast_climbing = player.is_climbing and Input.is_action_pressed(Controls.BUTTON_1)
 		# Check if player is climbing and actively moving via input (not just physics-induced velocity)
-		var has_movement_input = Input.is_action_pressed(player.Controls.MOVE_LEFT) or Input.is_action_pressed(player.Controls.MOVE_RIGHT) or Input.is_action_pressed(player.Controls.MOVE_UP) or Input.is_action_pressed(player.Controls.MOVE_DOWN)
+		var has_movement_input = Input.is_action_pressed(Controls.MOVE_LEFT) or Input.is_action_pressed(Controls.MOVE_RIGHT) or Input.is_action_pressed(Controls.MOVE_UP) or Input.is_action_pressed(Controls.MOVE_DOWN)
 		var is_climbing_and_moving = player.is_climbing and has_movement_input
 		var is_draining_stamina = player.is_sprinting or is_fast_climbing or is_climbing_and_moving
 		

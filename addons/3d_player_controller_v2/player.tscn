@@ -13,7 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://cto31sxtpfiop" path="res://addons/3d_player_controller_v2/loading.tscn" id="8_wgsvs"]
 [ext_resource type="PackedScene" path="res://addons/3d_player_controller_v2/settings.tscn" id="9_ok7gw"]
 [ext_resource type="Script" uid="uid://cytx6jg6c3c4c" path="res://addons/3d_player_controller_v2/visuals.gd" id="12_a5e81"]
-[ext_resource type="PackedScene" path="res://addons/3d_player_controller_v2/godette.tscn" id="12_ahy2k"]
+[ext_resource type="PackedScene" path="res://addons/3d_player_controller_v2/assets/characters/godette/godette.tscn" id="12_ahy2k"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ifhah"]
 radius = 0.3

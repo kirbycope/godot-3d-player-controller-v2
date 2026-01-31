@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://bgrrxk458bp5v"]
+
+[ext_resource type="PackedScene" uid="uid://biaxtdg6cji4j" path="res://addons/3d_player_controller_v2/assets/characters/mixamo/Y_Bot.fbx" id="1_eekd5"]
+
+[node name="Y_Bot" type="Node3D" unique_id=1193744009]
+
+[node name="Y_Bot" parent="." unique_id=983877401 instance=ExtResource("1_eekd5")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
