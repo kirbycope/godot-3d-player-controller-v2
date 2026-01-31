@@ -9,7 +9,7 @@ Click >>[here](https://timothycope.com/godot-3d-player-controller-v2/)<< to try 
 1. Drag the [Player.tscn](/addons/3d_player_controller_v2/player.tscn) from the "FileSystem" into the "Scene" tree
 
 ## Using A Different Character Model
-The player's appearance comes from the imported scene, `$Visuals/Character`. It requires a "retargetted" model that is both rigged and in a T-Pose. This way, if the addon gets updated you shouldn't have to repeat swapping out the model.
+The player's appearance comes from the imported scene, `$Visuals/Character`. It requires a "retargetted" model that is both "rigged" and in a "T-pose".
 
 ### Retarget Your Model
 [Retargetting](https://docs.godotengine.org/en/stable/tutorials/assets_pipeline/retargeting_3d_skeletons.html) the skeleton will allow you to use the provided [Mixamo](https://www.mixamo.com/#/) animations and sets you up to use others like _Quaternius's_ [Universal Animation Library](https://quaternius.com/packs/universalanimationlibrary.html).
@@ -24,12 +24,13 @@ The player's appearance comes from the imported scene, `$Visuals/Character`. It 
 1. Click the "Reimport" button to apply changes
 
 ### Create the Character Scene
-1. Click the "Scene" tab (at the top-right of the editor)
+1. Click the "Scene" tab (at the top-left of the editor)
 1. Create a new ![Node3D](https://raw.githubusercontent.com/godotengine/godot/refs/heads/master/editor/icons/Node3D.svg) 3D Scene
 1. Rename the Node3D to your model's name
 1. Drag your model into the new Scene tree
 1. Select the imported scene and set the "Transform" > "Rotation" > "y" to `180`
 	- Godot's "forward" direction is -Z ([source](https://docs.godotengine.org/en/stable/tutorials/3d/introduction_to_3d.html#coordinate-system))
+	- The model is imported as a child of the scene root so that when added to another scene the transform isn't reset and the character stays facing forward
 1. Save the scene
 
 #### [Optional] Add Animations to Model
@@ -44,6 +45,7 @@ The [Setup Character](/addons//3d_player_controller_v2/setup_character.gd) scrip
 
 ### Use the New Character
 You can remove the Node at `$Visuals/Character` and then replace it with your own, in the Editor or during runtime.
+- The Beta (QA World)'s [main.gd](/scenes/level_0/main.gd) script show you how in the `_input()` function.
 
 ### Swap Animation Sets
 This pack comes with [Mixamo](https://www.mixamo.com/#/) animations and sets you up to use _Quaternius's_ [Universal Animation Library](https://quaternius.com/packs/universalanimationlibrary.html) and/or [Universal Animation Library 2](https://quaternius.com/packs/universalanimationlibrary2.html). Change `player.animation_set` to:
