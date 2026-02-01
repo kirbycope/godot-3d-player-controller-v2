@@ -222,11 +222,8 @@ func _physics_process(delta: float) -> void:
 	if perspective == Perspective.FIRST_PERSON:
 		move_camera_to_player_head()
 
-	if camera_mount.top_level:
-		move_camera_mount_to_player()
-	else:
-		# Apply pitch rotation when not using top_level
-		camera_mount.rotation.x = deg_to_rad(camera_pitch)
+	# Apply pitch rotation
+	camera_mount.rotation.x = deg_to_rad(camera_pitch)
 
 
 ## Rotate camera using the controller.
@@ -248,8 +245,6 @@ func camera_rotate_by_mouse(event: InputEvent) -> void:
 	player.rotate(player.basis.y, deg_to_rad(new_rotation_y))
 	if perspective == Perspective.THIRD_PERSON:
 		player.visuals.rotate_y(deg_to_rad(event.relative.x * look_sensitivity_mouse))
-	if camera_mount.top_level:
-		camera_mount.rotate_y(-deg_to_rad(event.relative.x * look_sensitivity_mouse))
 
 
 ## Update the camera mount to follow the player's position and align with up direction.

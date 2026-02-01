@@ -73,14 +73,12 @@ func _input(event: InputEvent) -> void:
 		new_character.name = "Character"
 		# Transfer transform status to the new character model
 		new_character.transform = old_character.transform
-		# Transfer top_level status to the new character model
-		new_character.top_level = old_character.top_level
 		# Add the new character model to the $Visuals node
 		player.visuals.add_child(new_character)
 		# Replace the `@onready var character` reference
 		player.character = new_character
 		# Replace the `@onready var character` reference
-		player.visuals.character = new_character
+		player.character = new_character
 		# Remove the old character model from the scene tree
 		old_character.queue_free()
 
@@ -88,6 +86,4 @@ func _input(event: InputEvent) -> void:
 		SetupCharacter.add_animations(new_character, player)
 
 		# Setup physical bone simulators for all `character` components
-		SetupCharacter.physical_bone_simulators(new_character)
-
-		return
+		#SetupCharacter.physical_bone_simulators(new_character)

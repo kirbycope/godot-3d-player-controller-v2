@@ -147,7 +147,6 @@ var setup_character: GDScript = preload("res://addons/3d_player_controller_v2/se
 @onready var emotes = $Emotes
 @onready var navigation_agent: NavigationAgent3D = $NavigationAgent3D
 @onready var pause: CanvasLayer = $Pause
-@onready var shape_cast: ShapeCast3D = $ShapeCast3D
 @onready var timers: Node = $Timers
 @onready var timer_kick_left = timers.get_node("KickLeft")
 @onready var timer_kick_right = timers.get_node("KickRight")
@@ -169,7 +168,7 @@ func _ready() -> void:
 	setup_character.add_animations(character, self)
 
 	# Setup physical bone simulators for all `character` components
-	setup_character.physical_bone_simulators(character)
+	#setup_character.physical_bone_simulators(character)
 
 	# Initialize the state machine
 	$States/Standing.start()
@@ -308,8 +307,6 @@ func _physics_process(delta: float) -> void:
 				and not is_hanging:
 					# Update the visuals to look in the direction based on player input
 					visuals.look_at(position + lateral_dir, new_up)
-					if character.top_level:
-						character.look_at(position + lateral_dir, new_up)
 
 		# If flying and no input, stop lateral movement
 		if is_flying and input_direction == Vector2.ZERO:
@@ -579,46 +576,10 @@ func handle_collisions() -> void:
 
 ## Moves the player while adhering to the current surface orientation.
 func move(delta) -> void:
-	if input_direction != Vector2.ZERO \
-	and not is_skateboarding:
-		# Extract the vertical component of velocity along the current up direction
-		var vertical_speed: float = velocity.dot(up_direction)
-		# Decompose velocity relative to current up_direction
-		var lateral_velocity: Vector3 = velocity - up_direction * vertical_speed
-
-		# Predict lateral displacement over this tick (tangent to surface)
-		var lateral_displacement: Vector3 = lateral_velocity * delta
-		# Preserve original shape_cast height relative to player by moving only laterally
-		var original_offset: Vector3 = shape_cast.global_position - global_position
-		var original_vertical_component: Vector3 = up_direction * original_offset.dot(up_direction)
-		shape_cast.global_position = global_position + original_vertical_component + lateral_displacement
-
-		# Adjust local target_position only along local Y for floor probing so existing scene setup works
-		if is_on_floor():
-			shape_cast.target_position.y = -0.5
-		else:
-			shape_cast.target_position.y = 0.0
-
-		# Query potential intersections at the predicted position
-		var query = PhysicsShapeQueryParameters3D.new()
-		query.exclude = [self]
-		query.shape = shape_cast.shape
-		query.transform = shape_cast.global_transform
-		var result = get_world_3d().direct_space_state.intersect_shape(query, 1)
-
-		if !result:
-			shape_cast.force_shapecast_update()
-
-		# Snap down if moving downward along up axis and surface angle within threshold
-		if shape_cast.is_colliding() \
-		and vertical_speed <= 0.0 \
-		and !result \
-		and shape_cast.get_collision_normal(0).angle_to(up_direction) < floor_max_angle:
-			var collision_point: Vector3 = shape_cast.get_collision_point(0)
-			var up_delta: float = (collision_point - global_position).dot(up_direction)
-			global_position += up_direction * up_delta
-			# Remove vertical component, keep lateral motion
-			velocity = lateral_velocity
+	# Use CharacterBody3D's built-in floor snapping for smooth slope traversal and step climbing
+	# floor_snap_length helps climb small steps when combined with floor_constant_speed
+	floor_snap_length = 0.5 if (input_direction != Vector2.ZERO and not is_skateboarding) else 0.0
+	floor_stop_on_slope = true
 
 	move_and_slide()
 
