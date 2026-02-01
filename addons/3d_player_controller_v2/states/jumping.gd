@@ -7,7 +7,7 @@ const MIX_ANIMATION_JUMPING := "Falling/mixamo_com"
 const MIX_ANIMATION_JUMPING_HOLDING_RIFLE := "Falling_Holding_Rifle/mixamo_com"
 # Jumping 🟣 Quaternius animations
 const QUAT_ANIMATION_JUMPING := "UAL1/Jump_Start" 
-const QUAT_ANIMATION_JUMPING_HOLDING_RIFLE := "UAL1/Jump_Holding_Rifle" # TODO: Replace with actual Quaternius animation name
+const QUAT_ANIMATION_JUMPING_HOLDING_RIFLE := "UAL1/Jump_Holding_Rifle" # There is no Quaternius animation yet (UAl1/UAL2)
 
 const NODE_STATE := States.State.JUMPING
 

@@ -9,9 +9,9 @@ const MIX_ANIMATION_WALKING_HOLDING_AIMING := "Walking_Aiming_Rifle/mixamo_com"
 const MIX_ANIMATION_WALKING_FIRING_RIFLE := "Walking_Firing_Rifle/mixamo_com"
 # Walking 🟣 Quaternius animations
 const QUAT_ANIMATION_WALKING := "UAL1/Walk"
-const QUAT_ANIMATION_WALKING_HOLDING_RIFLE := "UAL1/Walk_Holding_Rifle" # TODO: Replace with actual Quaternius animation name
-const QUAT_ANIMATION_WALKING_HOLDING_AIMING := "UAL1/Walk_Holding_Aiming" # TODO: Replace with actual Quaternius animation name
-const QUAT_ANIMATION_WALKING_FIRING_RIFLE := "UAL1/Walk_Firing_Rifle" # TODO: Replace with actual Quaternius animation name
+const QUAT_ANIMATION_WALKING_HOLDING_RIFLE := "UAL1/Walk_Holding_Rifle" # There is no Quaternius animation yet (UAl1/UAL2)
+const QUAT_ANIMATION_WALKING_HOLDING_AIMING := "UAL1/Walk_Holding_Aiming" # There is no Quaternius animation yet (UAl1/UAL2)
+const QUAT_ANIMATION_WALKING_FIRING_RIFLE := "UAL1/Walk_Firing_Rifle" # There is no Quaternius animation yet (UAl1/UAL2)
 const NODE_STATE := States.State.WALKING
 
 

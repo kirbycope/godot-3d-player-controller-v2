@@ -10,12 +10,12 @@ const MIX_ANIMATION_HANGING_BRACED := "Hanging_Braced/mixamo_com"
 const MIX_ANIMATION_HANGING_BRACED_SHIMMY_LEFT := "Hanging_Braced_Shimmy_Left/mixamo_com"
 const MIX_ANIMATION_HANGING_BRACED_SHIMMY_RIGHT := "Hanging_Braced_Shimmy_Right/mixamo_com"
 # Hanging 🟣 Quaternius animations
-const QUAT_ANIMATION_HANGING := "Hanging/mixamo_com" # TODO: Replace with actual Quaternius animation name
-const QUAT_ANIMATION_HANGING_SHIMMY_LEFT := "Hanging_Shimmy_Left/mixamo_com" # TODO: Replace with actual Quaternius animation name
-const QUAT_ANIMATION_HANGING_SHIMMY_RIGHT := "Hanging_Shimmy_Right/mixamo_com" # TODO: Replace with actual Quaternius animation name
-const QUAT_ANIMATION_HANGING_BRACED := "Hanging_Braced/mixamo_com" # TODO: Replace with actual Quaternius animation name
-const QUAT_ANIMATION_HANGING_BRACED_SHIMMY_LEFT := "Hanging_Braced_Shimmy_Left/mixamo_com" # TODO: Replace with actual Quaternius animation name
-const QUAT_ANIMATION_HANGING_BRACED_SHIMMY_RIGHT := "Hanging_Braced_Shimmy_Right/mixamo_com" # TODO: Replace with actual Quaternius animation name
+const QUAT_ANIMATION_HANGING := "Hanging/mixamo_com" # There is no Quaternius animation yet (UAl1/UAL2)
+const QUAT_ANIMATION_HANGING_SHIMMY_LEFT := "Hanging_Shimmy_Left/mixamo_com" # There is no Quaternius animation yet (UAl1/UAL2)
+const QUAT_ANIMATION_HANGING_SHIMMY_RIGHT := "Hanging_Shimmy_Right/mixamo_com" # There is no Quaternius animation yet (UAl1/UAL2)
+const QUAT_ANIMATION_HANGING_BRACED := "Hanging_Braced/mixamo_com" # There is no Quaternius animation yet (UAl1/UAL2)
+const QUAT_ANIMATION_HANGING_BRACED_SHIMMY_LEFT := "Hanging_Braced_Shimmy_Left/mixamo_com" # There is no Quaternius animation yet (UAl1/UAL2)
+const QUAT_ANIMATION_HANGING_BRACED_SHIMMY_RIGHT := "Hanging_Braced_Shimmy_Right/mixamo_com" # There is no Quaternius animation yet (UAl1/UAL2)
 
 const NODE_STATE := States.State.HANGING
 

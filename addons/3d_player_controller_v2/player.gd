@@ -211,20 +211,6 @@ func _input(event: InputEvent) -> void:
 		is_auto_running = false
 
 
-## Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	# Do nothing if not the authority
-	if !is_multiplayer_authority(): return
-
-	# Rotate the player to align with the current "up direction"
-	var target_basis = Basis()
-	target_basis.y = up_direction
-	target_basis.x = - transform.basis.z.cross(up_direction).normalized()
-	target_basis.z = target_basis.x.cross(up_direction).normalized()
-	target_basis = target_basis.orthonormalized()
-	transform.basis = target_basis
-
-
 ## Called once on each physics tick, and allows Nodes to synchronize their logic with physics ticks.
 func _physics_process(delta: float) -> void:
 	# Do nothing if not the authority
@@ -241,6 +227,14 @@ func _physics_process(delta: float) -> void:
 
 	# Skip movement processing while "sitting"
 	if is_sitting: return
+
+	# Rotate the player to align with the current "up direction"
+	var target_basis = Basis()
+	target_basis.y = up_direction
+	target_basis.x = - transform.basis.z.cross(up_direction).normalized()
+	target_basis.z = target_basis.x.cross(up_direction).normalized()
+	target_basis = target_basis.orthonormalized()
+	transform.basis = target_basis
 
 	# Calculate movement if not navigating
 	if not is_navigating:
@@ -380,6 +374,17 @@ func animate_hit_high_left() -> void:
 func animate_hit_high_right() -> void:
 	is_reacting_high_right = true
 	base_state.transition_state(current_state, States.State.REACTING)
+
+
+## Makes the player's visuals face a target node while staying upright (no tilting).
+func look_at_upright(target: Node3D) -> void:
+	var direction = Vector3(
+		target.global_position.x - visuals.global_position.x,
+		0,
+		target.global_position.z - visuals.global_position.z
+	)
+	if direction.length() > 0.001:
+		visuals.look_at(visuals.global_position + direction, Vector3.UP)
 
 
 ## Connects a [Signal] (by name) to a [Callable] on all [AnimationPlayer] nodes found under [character] (recursively).

@@ -5,7 +5,7 @@ class_name Navigating
 # Navigating 🔵 Mixamo animations
 const MIX_ANIMATION_RUNNING := "Running/mixamo_com"
 # Navigating 🟣 Quaternius animations
-const QUAT_ANIMATION_RUNNING := "Running/mixamo_com" # TODO: Replace with actual Quaternius animation name
+const QUAT_ANIMATION_RUNNING := "UAL1/Jog_Fwd"
 
 const NODE_STATE := States.State.NAVIGATING
 

@@ -7,9 +7,9 @@ const MIX_ANIMATION_SKATEBOARDING := "Skateboarding/mixamo_com"
 const MIX_ANIMATION_SKATEBOARDING_FAST := "Skateboarding_Fast/mixamo_com"
 const MIX_ANIMATION_SKATEBOARDING_SLOW := "Skateboarding_Slow/mixamo_com"
 # Skateboarding 🟣 Quaternius animations
-const QUAT_ANIMATION_SKATEBOARDING := "Skateboarding/mixamo_com" # TODO: Replace with actual Quaternius animation name
-const QUAT_ANIMATION_SKATEBOARDING_FAST := "Skateboarding_Fast/mixamo_com" # TODO: Replace with actual Quaternius animation name
-const QUAT_ANIMATION_SKATEBOARDING_SLOW := "Skateboarding_Slow/mixamo_com" # TODO: Replace with actual Quaternius animation name
+const QUAT_ANIMATION_SKATEBOARDING := "Skateboarding/mixamo_com" # There is no Quaternius animation yet (UAl1/UAL2)
+const QUAT_ANIMATION_SKATEBOARDING_FAST := "Skateboarding_Fast/mixamo_com" # There is no Quaternius animation yet (UAl1/UAL2)
+const QUAT_ANIMATION_SKATEBOARDING_SLOW := "Skateboarding_Slow/mixamo_com" # There is no Quaternius animation yet (UAl1/UAL2)
 
 const NODE_STATE := States.State.SKATEBOARDING
 

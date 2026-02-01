@@ -9,9 +9,9 @@ const MIX_ANIMATION_CRAWLING_AIMING_RIFLE := "Crouching_Walking_Aiming_Rifle/mix
 const MIX_ANIMATION_CRAWLING_FIRING_RIFLE := "Crouching_Firing_Rifle/mixamo_com"
 # Crawling 🟣 Quaternius animations
 const QUAT_ANIMATION_CRAWLING := "UAL1/Crawl_Fwd"
-const QUAT_ANIMATION_CRAWLING_HOLDING_RIFLE := "Crouching_Walking_Holding_Rifle/mixamo_com" # TODO: Replace with actual Quaternius animation name
-const QUAT_ANIMATION_CRAWLING_AIMING_RIFLE := "Crouching_Walking_Aiming_Rifle/mixamo_com" # TODO: Replace with actual Quaternius animation name
-const QUAT_ANIMATION_CRAWLING_FIRING_RIFLE := "Crouching_Firing_Rifle/mixamo_com" # TODO: Replace with actual Quaternius animation name
+const QUAT_ANIMATION_CRAWLING_HOLDING_RIFLE := "Crouching_Walking_Holding_Rifle/mixamo_com" # There is no Quaternius animation yet (UAl1/UAL2)
+const QUAT_ANIMATION_CRAWLING_AIMING_RIFLE := "Crouching_Walking_Aiming_Rifle/mixamo_com" # There is no Quaternius animation yet (UAl1/UAL2)
+const QUAT_ANIMATION_CRAWLING_FIRING_RIFLE := "Crouching_Firing_Rifle/mixamo_com" # There is no Quaternius animation yet (UAl1/UAL2)
 
 const NODE_STATE := States.State.CRAWLING
 

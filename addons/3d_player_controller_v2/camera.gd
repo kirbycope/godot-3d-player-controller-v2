@@ -247,39 +247,6 @@ func camera_rotate_by_mouse(event: InputEvent) -> void:
 		player.visuals.rotate_y(deg_to_rad(event.relative.x * look_sensitivity_mouse))
 
 
-## Update the camera mount to follow the player's position and align with up direction.
-func move_camera_mount_to_player() -> void:
-	# Align the camera mount's basis with the player's up direction
-	var target_basis = Basis()
-	target_basis.y = player.up_direction
-	target_basis.x = -player.transform.basis.z.cross(player.up_direction).normalized()
-	target_basis.z = target_basis.x.cross(player.up_direction).normalized()
-	target_basis = target_basis.orthonormalized()
-	
-	# Apply pitch rotation around the local right axis
-	var pitch_rotation = Basis(Vector3.RIGHT, deg_to_rad(camera_pitch))
-	camera_mount.global_transform.basis = target_basis * pitch_rotation
-
-	# Preserve original offset but orient it using the player's current up direction
-	var target_position = player.global_transform.origin + player.global_transform.basis * camera_mount_initial_position
-	var up_dir = player.up_direction.normalized()
-	var diff = target_position - camera_mount.global_position
-	var up_diff = diff.dot(up_dir)
-	var lateral_diff = diff - up_dir * up_diff
-
-	# Snap lateral axes directly; smooth the up axis while keeping within 0.5 units
-	var new_position = camera_mount.global_position + lateral_diff
-	if abs(up_diff) > 0.5:
-		new_position += up_dir * (up_diff - sign(up_diff) * 0.5)
-	else:
-		# Use delta time for frame-rate independent smoothing
-		# Lower factor (e.g. 2.0) = "increased time" / smoother movement
-		var delta = get_physics_process_delta_time()
-		new_position += up_dir * (up_diff * 4.0 * delta)
-
-	camera_mount.global_position = new_position
-
-
 ## Update the camera to follow the character head's position (while in "first person").
 func move_camera_to_player_head() -> void:
 	var bone_index = player.skeleton().find_bone(player.bone_name_head)

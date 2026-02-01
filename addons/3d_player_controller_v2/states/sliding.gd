@@ -4,7 +4,7 @@ extends BaseState
 # Sliding 🔵 Mixamo animations
 const MIX_ANIMATION_SLIDING := "Running_Slide/mixamo_com"
 # Sliding 🟣 Quaternius animations
-const QUAT_ANIMATION_SLIDING := "Running_Slide/mixamo_com" # TODO: Replace with actual Quaternius animation name
+const QUAT_ANIMATION_SLIDING := "UAL2/Slide"
 
 const NODE_STATE := States.State.SLIDING
 
