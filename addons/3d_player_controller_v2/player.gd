@@ -302,6 +302,17 @@ func _physics_process(delta: float) -> void:
 			var raw_dir: Vector3 = transform.basis * Vector3(input_direction.x, 0, input_direction.y)
 			var lateral_dir: Vector3 = raw_dir - new_up * raw_dir.dot(new_up)
 			lateral_dir = lateral_dir.normalized()
+			var strafe_target: Node3D = null
+			if enable_strafing and is_strafing:
+				strafe_target = get_focus_target()
+			if strafe_target:
+				var to_player = global_position - strafe_target.global_position
+				to_player = to_player - new_up * to_player.dot(new_up)
+				if to_player.length() > 0.001:
+					var tangent = new_up.cross(to_player).normalized()
+					if input_direction.x < 0.0:
+						tangent = -tangent
+					lateral_dir = tangent
 			if lateral_dir:
 				# Compute desired tangential (horizontal) velocity on the surface
 				var tangential_velocity: Vector3 = lateral_dir * speed_current
@@ -314,12 +325,18 @@ func _physics_process(delta: float) -> void:
 				and not is_climbing \
 				and not is_climbing_ladder \
 				and not is_hanging:
-					# Update the visuals to look in the direction based on player input
-					if enable_strafing and (is_strafing or is_backpedaling):
+					# Strafe while facing the Focus target
+					if strafe_target:
+						look_at(strafe_target.global_position, new_up)
+						visuals.look_at(strafe_target.global_position, new_up)
+						camera_mount.look_at(strafe_target.global_position, new_up)
+					# Strafe using camera forward direction
+					elif enable_strafing and (is_strafing or is_backpedaling):
 						var camera_forward: Vector3 = -camera.global_transform.basis.z
 						camera_forward = (camera_forward - new_up * camera_forward.dot(new_up)).normalized()
 						if camera_forward.length() > 0.001:
 							visuals.look_at(position + camera_forward, new_up)
+					# Face the movement direction
 					else:
 						visuals.look_at(position + lateral_dir, new_up)
 
@@ -406,6 +423,20 @@ func look_at_upright(target: Node3D) -> void:
 	)
 	if direction.length() > 0.001:
 		visuals.look_at(visuals.global_position + direction, Vector3.UP)
+
+
+## Returns the closest valid focus target, if any.
+func get_focus_target() -> Node3D:
+	var closest: Node3D = null
+	var closest_distance_sq := INF
+	for target in targets.values():
+		if not is_instance_valid(target):
+			continue
+		var distance_sq = global_position.distance_squared_to(target.global_position)
+		if distance_sq < closest_distance_sq:
+			closest_distance_sq = distance_sq
+			closest = target
+	return closest
 
 
 ## Connects a [Signal] (by name) to a [Callable] on all [AnimationPlayer] nodes found under [character] (recursively).

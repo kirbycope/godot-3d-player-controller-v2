@@ -4,6 +4,8 @@ class_name Jumping
 
 # Jumping 🔵 Mixamo animations
 const MIX_ANIMATION_JUMPING := "Falling/mixamo_com"
+const MIX_ANIMATION_JUMPING_BACKWARD := "Running_Backward_Flip/mixamo_com"
+const MIX_ANIMATION_JUMPING_FORWARD := "Running_Forward_Flip/mixamo_com"
 const MIX_ANIMATION_JUMPING_HOLDING_RIFLE := "Falling_Holding_Rifle/mixamo_com"
 # Jumping 🟣 Quaternius animations
 const QUAT_ANIMATION_JUMPING := "UAL1/Jump_Start" 
