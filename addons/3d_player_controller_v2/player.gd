@@ -27,6 +27,7 @@ extends CharacterBody3D
 @export var enable_sitting := false ## Enable sitting
 @export var enable_sliding := false ## Enable sliding
 @export var enable_sprinting := false ## Enable sprinting
+@export var enable_strafing := false ## Enable strafing
 @export var enable_swimming := false ## Enable swimming
 @export var enable_throwing := false ## Enable throwing objects
 @export var enable_vibration := false ## Enable controller vibration
@@ -63,6 +64,7 @@ var current_state: States.State ## The current state of the player
 var input_direction := Vector2.ZERO ## The direction of the player input (UP/DOWN, LEFT/RIGHT).
 var is_animation_locked := false ## Is the player's animation locked?
 var is_auto_running := false ## Is the player auto-running?
+var is_backpedaling := false ## Is the player backpedaling (moving backwards)?
 var is_blocking_1h_left := false ## Is the player blocking with a 1-handed tool or weapon with their left hand?
 var is_blocking_1h_right := false ## Is the player blocking with a 1-handed tool or weapon with their right hand?
 var is_blocking_2h := false ## Is the player blocking with a 2-handed tool or weapon?
@@ -95,8 +97,9 @@ var is_running := false ## Is the player running?
 var is_sitting := false ## Is the player sitting on a seat?
 var is_skateboarding := false ## Is the player skateboarding?
 var is_sliding := false ## Is the player sliding?
-var is_standing := false ## Is the player standing?
 var is_sprinting := false ## Is the player sprinting?
+var is_standing := false ## Is the player standing?
+var is_strafing := false ## Is the player strafing?
 var is_swimming := false ## Is the player swimming?
 var is_throwing := false ## Is the player throwing an object?
 var is_walking := false ## Is the player walking?
@@ -181,7 +184,7 @@ func _input(event: InputEvent) -> void:
 
 	# Do nothing if the "pause" menu is visible
 	if pause.visible: return
-
+	
 	# [Left Mouse Button] _pressed_ -> Start "navigating"
 	if enable_navigation:
 		if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) \
@@ -269,6 +272,15 @@ func _physics_process(delta: float) -> void:
 				Controls.MOVE_DOWN,
 			)
 
+		# Update strafing/backpedal flags
+		if enable_strafing:
+			var strafe_threshold := 0.1
+			is_strafing = abs(input_direction.x) > strafe_threshold and abs(input_direction.y) <= strafe_threshold
+			is_backpedaling = input_direction.y > strafe_threshold
+		else:
+			is_strafing = false
+			is_backpedaling = false
+
 		# Handle player input for lateral movement (disabled while climbing/hanging)
 		if not pause.visible \
 		and not is_climbing \
@@ -300,7 +312,13 @@ func _physics_process(delta: float) -> void:
 				and not is_climbing_ladder \
 				and not is_hanging:
 					# Update the visuals to look in the direction based on player input
-					visuals.look_at(position + lateral_dir, new_up)
+					if enable_strafing and (is_strafing or is_backpedaling):
+						var camera_forward: Vector3 = -camera.global_transform.basis.z
+						camera_forward = (camera_forward - new_up * camera_forward.dot(new_up)).normalized()
+						if camera_forward.length() > 0.001:
+							visuals.look_at(position + camera_forward, new_up)
+					else:
+						visuals.look_at(position + lateral_dir, new_up)
 
 		# If flying and no input, stop lateral movement
 		if is_flying and input_direction == Vector2.ZERO:
