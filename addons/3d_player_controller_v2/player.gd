@@ -132,6 +132,7 @@ var animations_mixamo := false ## Are Mixamo animations enabled?
 var animations_quaternius := false ## Are Quaternius animations enabled?
 var animations_quaternius_2 := false ## Are Quaternius 2 animations enabled?
 var setup_character: GDScript = preload("res://addons/3d_player_controller_v2/setup_character.gd")
+var targets = {}
 
 @onready var audio_stream_player: AudioStreamPlayer3D = $AudioStreamPlayer3D
 @onready var base_state: BaseState = $States/Base
@@ -148,6 +149,7 @@ var setup_character: GDScript = preload("res://addons/3d_player_controller_v2/se
 @onready var controls = $Controls
 @onready var debug = $Debug
 @onready var emotes = $Emotes
+@onready var focus_target_indicator: Node3D = $EnemyDetection/FocusTargetIndicator
 @onready var navigation_agent: NavigationAgent3D = $NavigationAgent3D
 @onready var pause: CanvasLayer = $Pause
 @onready var timers: Node = $Timers
@@ -822,3 +824,17 @@ func _on_punch_right_timeout() -> void:
 		or collider is RigidBody3D:
 			if collider.has_method("animate_hit_high_left"):
 				collider.rpc("animate_hit_high_left")
+
+
+func _on_enemy_detection_body_entered(body: Node3D) -> void:
+	if body.is_in_group("Focusable"):
+		targets[body.get_instance_id()] = body
+		if body.get_node_or_null("FocusTargetIndicator") == null:
+			var indicator_instance = focus_target_indicator.duplicate()
+			body.add_child(indicator_instance)
+			indicator_instance.show()
+
+
+func _on_enemy_detection_body_exited(body: Node3D) -> void:
+	if body.is_in_group("Focusable"):
+		targets.erase(body.get_instance_id())

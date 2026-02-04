@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://y43ofen5o2s3"]
+
+[ext_resource type="Texture2D" uid="uid://dlq5ogue3t74f" path="res://addons/3d_player_controller_v2/assets/textures/game_icons/white/2x/down.png" id="1_rwodh"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m64og"]
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+albedo_color = Color(0.7647059, 0.81960785, 0.2509804, 1)
+albedo_texture = ExtResource("1_rwodh")
+billboard_mode = 1
+billboard_keep_scale = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_lvnkq"]
+material = SubResource("StandardMaterial3D_m64og")
+
+[sub_resource type="Animation" id="Animation_rwodh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_m64og"]
+resource_name = "bounce"
+length = 0.6667
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6666667, 0.6667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0.25, 0), Vector3(0, 0.25, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lvnkq"]
+_data = {
+&"RESET": SubResource("Animation_rwodh"),
+&"bounce": SubResource("Animation_m64og")
+}
+
+[node name="FocusTargetIndicator" type="Node3D" unique_id=1112065412]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1540475698]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+mesh = SubResource("QuadMesh_lvnkq")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1762423243]
+libraries/ = SubResource("AnimationLibrary_lvnkq")
+autoplay = &"bounce"
