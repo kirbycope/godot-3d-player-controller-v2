@@ -40,8 +40,8 @@ func _process(delta: float) -> void:
 	if not player.ray_cast_top.is_colliding() \
 	and player.ray_cast_high.is_colliding():
 		# Make sure there is somewhere for the player to "exit" climbing the ladder
-		if player.ray_cast_jump_target.is_colliding():
-			player.global_position = player.ray_cast_jump_target.global_position
+		if player.shape_cast_jump_target.is_colliding(0):
+			player.global_position = player.shape_cast_jump_target.global_position
 			transition_state(NODE_STATE, States.State.STANDING)
 			return
 

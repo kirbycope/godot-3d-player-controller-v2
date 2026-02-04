@@ -65,9 +65,14 @@ size = Vector2(0.3, 0.3)
 
 [sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_8o733"]
 
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_a5e81"]
+height = 0.2
+radius = 0.2
+
 [node name="Player" type="CharacterBody3D" unique_id=346875681 groups=["Player"]]
 floor_constant_speed = true
 script = ExtResource("1_ifhah")
+enable_strafing = true
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=1320316015]
 
@@ -186,10 +191,6 @@ one_shot = true
 
 [node name="Character" parent="Visuals" unique_id=76213539 instance=ExtResource("12_ahy2k")]
 
-[node name="RayCast3D_JumpTarget" type="RayCast3D" parent="Visuals" unique_id=1438036776]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -0.315)
-target_position = Vector3(0, -0.75, 0)
-
 [node name="RayCast3D_Top" type="RayCast3D" parent="Visuals" unique_id=1088517173]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
 target_position = Vector3(0, 0, -1)
@@ -209,6 +210,11 @@ target_position = Vector3(0, 0, -1)
 [node name="RayCast3D_Below" type="RayCast3D" parent="Visuals" unique_id=1145444501]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, 0)
 target_position = Vector3(0, -0.5, 0)
+
+[node name="ShapeCast3D_JumpTarget" type="ShapeCast3D" parent="Visuals" unique_id=2127367137]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.25, -0.4)
+shape = SubResource("CylinderShape3D_a5e81")
+collide_with_areas = true
 
 [connection signal="navigation_finished" from="NavigationAgent3D" to="NavigationAgent3D" method="_on_navigation_finished"]
 [connection signal="timeout" from="Timers/KickLeft" to="." method="_on_kick_left_timeout"]

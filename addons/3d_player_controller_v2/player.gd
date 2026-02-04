@@ -156,12 +156,12 @@ var setup_character: GDScript = preload("res://addons/3d_player_controller_v2/se
 @onready var timer_punch_left = timers.get_node("PunchLeft")
 @onready var timer_punch_right = timers.get_node("PunchRight")
 @onready var visuals = $Visuals
-@onready var ray_cast_jump_target: RayCast3D = visuals.get_node("RayCast3D_JumpTarget")
 @onready var ray_cast_top: RayCast3D = visuals.get_node("RayCast3D_Top")
 @onready var ray_cast_high: RayCast3D = visuals.get_node("RayCast3D_High")
 @onready var ray_cast_middle: RayCast3D = visuals.get_node("RayCast3D_Middle")
 @onready var ray_cast_low: RayCast3D = visuals.get_node("RayCast3D_Low")
 @onready var ray_cast_below: RayCast3D = visuals.get_node("RayCast3D_Below")
+@onready var shape_cast_jump_target: ShapeCast3D = visuals.get_node("ShapeCast3D_JumpTarget")
 @onready var settings: CanvasLayer = $Settings
 
 
@@ -171,7 +171,7 @@ func _ready() -> void:
 	setup_character.add_animations(character, self)
 
 	# Setup physical bone simulators for all `character` components
-	#setup_character.physical_bone_simulators(character)
+	setup_character.physical_bone_simulators(character)
 
 	# Initialize the state machine
 	$States/Standing.start()
@@ -273,7 +273,8 @@ func _physics_process(delta: float) -> void:
 			)
 
 		# Update strafing/backpedal flags
-		if enable_strafing:
+		if enable_strafing \
+		and Input.is_action_pressed(Controls.BUTTON_6):
 			var strafe_threshold := 0.1
 			is_strafing = abs(input_direction.x) > strafe_threshold and abs(input_direction.y) <= strafe_threshold
 			is_backpedaling = input_direction.y > strafe_threshold

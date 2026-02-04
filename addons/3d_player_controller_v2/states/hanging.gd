@@ -30,13 +30,13 @@ func _input(event: InputEvent) -> void:
 
 	# Ⓐ/[Space] _pressed_ -> Start "mantling"
 	if event.is_action_pressed(Controls.BUTTON_0):
-		if player.ray_cast_jump_target.is_colliding():
+		if player.shape_cast_jump_target.is_colliding():
 			if player.enable_mantling:
 				transition_state(NODE_STATE, States.State.MANTLING)
 				return
 			else:
 				# Tween player position to target
-				var end_position = player.ray_cast_jump_target.get_collision_point()
+				var end_position = player.shape_cast_jump_target.get_collision_point(0)
 				var tween = get_tree().create_tween()
 				tween.set_trans(Tween.TRANS_LINEAR)
 				tween.tween_property(

@@ -34,7 +34,7 @@ func play_animation() -> void:
 		player.animation_player_connect("animation_finished", _on_animation_finished)
 		# Tween camera position during animation
 		var camera_start_position = player.camera.global_position
-		var end_position = player.ray_cast_jump_target.get_collision_point()
+		var end_position = player.shape_cast_jump_target.get_collision_point()
 		var camera_end_position = camera_start_position + (end_position - player.global_position)
 		var tween = get_tree().create_tween()
 		tween.set_trans(Tween.TRANS_LINEAR)
@@ -56,7 +56,7 @@ func _on_animation_finished(anim_name: String) -> void:
 		if player.animation_player_is_connected("animation_finished", _on_animation_finished):
 			player.animation_player_disconnect("animation_finished", _on_animation_finished)
 		player.animation_player_play("Standing/mixamo_com", 0.0, 1.0, false)
-		player.global_position = player.ray_cast_jump_target.get_collision_point()
+		player.global_position = player.shape_cast_jump_target.get_collision_point()
 		transition_state(NODE_STATE, States.State.STANDING)
 
 
