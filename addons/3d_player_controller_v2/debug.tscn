@@ -105,6 +105,22 @@ offset_bottom = 31.0
 grow_horizontal = 0
 mouse_filter = 1
 
+[node name="EnableFlipping" type="CheckButton" parent="Configuration" unique_id=1893647219]
+layout_mode = 2
+text = "EnableFlipping"
+
+[node name="Panel" type="Panel" parent="Configuration/EnableFlipping" unique_id=959708475]
+z_index = -1
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -222.0
+offset_right = -2.0
+offset_bottom = 31.0
+grow_horizontal = 0
+mouse_filter = 1
+
 [node name="EnableFlying" type="CheckButton" parent="Configuration" unique_id=1207358254]
 layout_mode = 2
 text = "EnableFlying"
@@ -595,6 +611,17 @@ disabled = true
 text = "IsFalling"
 
 [node name="Panel" type="Panel" parent="States/IsFalling" unique_id=699995901]
+z_index = -1
+layout_mode = 0
+offset_right = 164.0
+offset_bottom = 31.0
+
+[node name="IsFlipping" type="CheckBox" parent="States" unique_id=489582548]
+layout_mode = 2
+disabled = true
+text = "IsFlipping"
+
+[node name="Panel" type="Panel" parent="States/IsFlipping" unique_id=1774356421]
 z_index = -1
 layout_mode = 0
 offset_right = 164.0
@@ -1284,6 +1311,7 @@ scroll_active = false
 [connection signal="toggled" from="Configuration/EnableCrouching" to="." method="_on_enable_crouching_toggled"]
 [connection signal="toggled" from="Configuration/EnableDoubleJumping" to="." method="_on_enable_double_jumping_toggled"]
 [connection signal="toggled" from="Configuration/EnableDriving" to="." method="_on_enable_driving_toggled"]
+[connection signal="toggled" from="Configuration/EnableFlipping" to="." method="_on_enable_flipping_toggled"]
 [connection signal="toggled" from="Configuration/EnableFlying" to="." method="_on_enable_flying_toggled"]
 [connection signal="toggled" from="Configuration/EnableHanging" to="." method="_on_enable_hanging_toggled"]
 [connection signal="toggled" from="Configuration/EnableHoldingObjects" to="." method="_on_enable_holding_objects_toggled"]

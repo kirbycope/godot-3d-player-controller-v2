@@ -10,22 +10,23 @@ enum State {
 	CROUCHING,       # 3
 	DRIVING,         # 4
 	FALLING,         # 5
-	FLYING,          # 6
-	HANGING,         # 7
-	JUMPING,         # 8
-	MANTLING,		 # 9
-	NAVIGATING,      # 10
-	PARAGLIDING,     # 11
-	PUSHING,         # 12
-	RAGDOLLING,      # 13
-	REACTING,        # 14
-	ROLLING,         # 15
-	RUNNING,         # 16
-	SITTING,         # 17
-	SLIDING,         # 18
-	SKATEBOARDING,   # 19
-	SPRINTING,       # 20
-	STANDING,        # 21
-	SWIMMING,        # 22
-	WALKING,         # 23
+	FLIPPING,        # 6
+	FLYING,          # 7
+	HANGING,         # 8
+	JUMPING,         # 9
+	MANTLING,		 # 10
+	NAVIGATING,      # 11
+	PARAGLIDING,     # 12
+	PUSHING,         # 13
+	RAGDOLLING,      # 14
+	REACTING,        # 15
+	ROLLING,         # 16
+	RUNNING,         # 17
+	SITTING,         # 18
+	SLIDING,         # 19
+	SKATEBOARDING,   # 20
+	SPRINTING,       # 21
+	STANDING,        # 22
+	SWIMMING,        # 23
+	WALKING,         # 24
 }

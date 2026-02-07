@@ -35,7 +35,7 @@
 [ext_resource type="PackedScene" uid="uid://cigyajcwkv7wp" path="res://assets/universal_animation_library/mannequin_male.tscn" id="32_ekdm7"]
 [ext_resource type="PackedScene" uid="uid://bq173p46qjxly" path="res://addons/3d_player_controller_v2/assets/characters/mixamo/x_bot.tscn" id="34_q7wdv"]
 [ext_resource type="PackedScene" uid="uid://bgrrxk458bp5v" path="res://addons/3d_player_controller_v2/assets/characters/mixamo/y_bot.tscn" id="35_jubdp"]
-[ext_resource type="PackedScene" uid="uid://cppos668fpq33" path="res://scenes/level_0/npc.tscn" id="36_jubdp"]
+[ext_resource type="PackedScene" uid="uid://dn7yj1hdarclt" path="res://scenes/level_0/npc.tscn" id="36_jubdp"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sugp2"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)

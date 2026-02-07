@@ -11,6 +11,7 @@ extends CharacterBody3D
 @export var enable_double_jumping := false ## Enable double jumping
 @export var enable_driving := false ## Enable driving
 @export var enable_emotes := false ## Enable emotes
+@export var enable_flipping := false ## Enable flipping
 @export var enable_flying := false ## Enable flying
 @export var enable_hanging := false ## Enable hanging
 @export var enable_holding_objects := false ## Enable holding objects
@@ -76,6 +77,7 @@ var is_crouching := false ## Is the player crouching?
 var is_double_jumping := false ## Is the player double jumping?
 var is_driving := false ## Is the player driving?
 var is_falling := false ## Is the player falling?
+var is_flipping := false ## Is the player flipping?
 var is_flying := false ## Is the player flying?
 var is_hanging := false ## Is the player hanging?
 var is_jumping := false ## Is the player jumping?

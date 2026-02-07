@@ -40,19 +40,19 @@ const MIX_ANIMATION_TURNING_RIGHT := "Standing_Right_Turn/mixamo_com" # TODO: Im
 
 # Standing 🟣 Quaternius animations
 const QUAT_ANIMATION_STANDING_IDLE := "UAL1/Idle"
-const QUAT_ANIMATION_STANDING_READY := "Standing_Ready/mixamo_com" # TODO lookg for QUAT alternative
+const QUAT_ANIMATION_STANDING_READY := MIX_ANIMATION_STANDING_READY # TODO look for QUAT alternative
 # Standing 🟣 Quaternius animations (holding a fishing rod)
 const QUAT_ANIMATION_FISHING_CASTING := "UAL2/Fishing_Cast"
 const QUAT_ANIMATION_FISHING_IDLE := "UAL2/Fishing_Cast_Idle"
 const QUAT_ANIMATION_FISHING_REELING := "UAL2/Fish_Reel"
 # Standing 🟣 Quaternius animations (blocking using held equipment)
-const QUAT_ANIMATION_BLOCKING_1H_LEFT := "Standing_Blocking_1H_Left/mixamo_com" # There is no Quaternius animation yet (UAl1/UAL2)
-const QUAT_ANIMATION_BLOCKING_1H_RIGHT := "Standing_Blocking_1H_Right/mixamo_com"# There is no Quaternius animation yet (UAl1/UAL2)
-const QUAT_ANIMATION_BLOCKING_2H := "Standing_Blocking_2H/mixamo_com" # There is no Quaternius animation yet (UAl1/UAL2)
+const QUAT_ANIMATION_BLOCKING_1H_LEFT := MIX_ANIMATION_BLOCKING_1H_LEFT # There is no Quaternius animation yet (UAl1/UAL2)
+const QUAT_ANIMATION_BLOCKING_1H_RIGHT := MIX_ANIMATION_BLOCKING_1H_RIGHT # There is no Quaternius animation yet (UAl1/UAL2)
+const QUAT_ANIMATION_BLOCKING_2H := MIX_ANIMATION_BLOCKING_2H # There is no Quaternius animation yet (UAl1/UAL2)
 # Standing 🟣 Quaternius animations (holding equipment)
 const QUAT_ANIMATION_HOLDING_1H_LEFT := "UAL1/Sword_Idle" # TODO: Scale -1?
 const QUAT_ANIMATION_HOLDING_1H_RIGHT := "UAL1/Sword_Idle"
-const QUAT_ANIMATION_HOLDING_2H := "Standing_Holding_2H/mixamo_com" # There is no Quaternius animation yet (UAl1/UAL2)
+const QUAT_ANIMATION_HOLDING_2H := MIX_ANIMATION_HOLDING_2H # There is no Quaternius animation yet (UAl1/UAL2)
 # Standing 🟣 Quaternius animations (kicking)
 const QUAT_ANIMATION_KICKING_LEFT := "UAL1/Kick" # TODO: Scale -1?
 const QUAT_ANIMATION_KICKING_RIGHT := "UAL1/Kick"
@@ -60,11 +60,11 @@ const QUAT_ANIMATION_KICKING_RIGHT := "UAL1/Kick"
 const QUAT_ANIMATION_PUNCHING_LEFT := "UAL1/Punch_Jab"
 const QUAT_ANIMATION_PUNCHING_RIGHT := "UAL1/Punch_Cross"
 # Standing 🟣 Quaternius animations (holding a rifle)
-const QUAT_ANIMATION_HOLDING_RIFLE := "Standing_Holding_Rifle/mixamo_com" # There is no Quaternius animation yet (UAl1/UAL2)
-const QUAT_ANIMATION_RIFLE_AIMING := "Standing_Aiming_Rifle/mixamo_com" # There is no Quaternius animation yet (UAl1/UAL2)
-const QUAT_ANIMATION_RIFLE_FIRING := "Standing_Firing_Rifle/mixamo_com" # There is no Quaternius animation yet (UAl1/UAL2)
+const QUAT_ANIMATION_HOLDING_RIFLE := MIX_ANIMATION_HOLDING_RIFLE # There is no Quaternius animation yet (UAl1/UAL2)
+const QUAT_ANIMATION_RIFLE_AIMING := MIX_ANIMATION_RIFLE_AIMING # There is no Quaternius animation yet (UAl1/UAL2)
+const QUAT_ANIMATION_RIFLE_FIRING := MIX_ANIMATION_RIFLE_FIRING # There is no Quaternius animation yet (UAl1/UAL2)
 # Standing 🟣 Quaternius animations (swinging using held equipment, swing a pickaxe or sword)
-const QUAT_ANIMATION_SWINGING_1H_LEFT := "Standing_Swinging_1H_Left/mixamo_com" # TODO: Scale -1?
+const QUAT_ANIMATION_SWINGING_1H_LEFT := "UAL1/Sword_Attack_Standing" # TODO: Scale -1?
 const QUAT_ANIMATION_SWINGING_1H_RIGHT := "UAL1/Sword_Attack_Standing"
 const QUAT_ANIMATION_SWINGING_2H := "UAL1/Sword_Attack_Standing" # TODO: Replace with proper 2H animation
 # Standing 🟣 Quaternius animations (throwing)
@@ -84,12 +84,19 @@ func _input(event: InputEvent) -> void:
 	# Do nothing if the "pause" menu is visible
 	if player.pause.visible: return
 
-	# Ⓐ/[Space] _pressed_ -> Start "jumping"
+	# Ⓐ/[Space] _pressed_ -> Start "jumping" or "flipping"
 	if event.is_action_pressed(Controls.BUTTON_0):
 		if player.enable_jumping \
 		and player.is_on_floor() \
 		and not player.chat.line_edit.visible:
-			transition_state(player.current_state, States.State.JUMPING)
+			if player.is_target_locked \
+			and player.enable_flipping \
+			and (Input.is_action_pressed(Controls.MOVE_DOWN) or Input.is_action_pressed(Controls.MOVE_UP)):
+				# Start "flipping"
+				transition_state(player.current_state, States.State.FLIPPING)
+			else:
+				# Start "jumping"
+				transition_state(player.current_state, States.State.JUMPING)
 			return
 
 	# Ⓑ/[shift] _pressed_ -> Start "sprinting"

@@ -11,6 +11,7 @@ var yellow_sphere: MeshInstance3D
 @onready var enable_crouching: CheckButton = $Configuration/EnableCrouching
 @onready var enable_driving: CheckButton = $Configuration/EnableDriving
 @onready var enable_double_jumping: CheckButton = $Configuration/EnableDoubleJumping
+@onready var enable_flipping: CheckButton = $Configuration/EnableFlipping
 @onready var enable_flying: CheckButton = $Configuration/EnableFlying
 @onready var enable_hanging: CheckButton = $Configuration/EnableHanging
 @onready var enable_holding_objects: CheckButton = $Configuration/EnableHoldingObjects
@@ -44,6 +45,7 @@ var yellow_sphere: MeshInstance3D
 @onready var is_double_jumping: CheckBox = $States/IsDoubleJumping
 @onready var is_driving: CheckBox = $States/IsDriving
 @onready var is_falling: CheckBox = $States/IsFalling
+@onready var is_flipping: CheckBox = $States/IsFlipping
 @onready var is_flying: CheckBox = $States/IsFlying
 @onready var is_hanging: CheckBox = $States/IsHanging
 @onready var is_jumping: CheckBox = $States/IsJumping
@@ -135,6 +137,7 @@ func _process(_delta: float) -> void:
 		enable_double_jumping.button_pressed = player.enable_double_jumping
 		enable_driving.button_pressed = player.enable_driving
 		enable_emotes.button_pressed = player.enable_emotes
+		enable_flipping.button_pressed = player.enable_flipping
 		enable_flying.button_pressed = player.enable_flying
 		enable_hanging.button_pressed = player.enable_hanging
 		enable_holding_objects.button_pressed = player.enable_holding_objects
@@ -171,6 +174,7 @@ func _process(_delta: float) -> void:
 		is_double_jumping.button_pressed = player.is_double_jumping
 		is_falling.button_pressed = player.is_falling
 		is_firing_rifle.button_pressed = player.is_firing_rifle
+		is_flipping.button_pressed = player.is_flipping
 		is_flying.button_pressed = player.is_flying
 		is_hanging.button_pressed = player.is_hanging
 		is_holding_1h_left.button_pressed = player.is_holding_1h_left
@@ -289,6 +293,10 @@ func _on_enable_emotes_toggled(toggled_on: bool) -> void:
 
 func _on_enable_fishing_toggled(toggled_on: bool) -> void:
 	player.enable_fishing = toggled_on
+
+
+func _on_enable_flipping_toggled(toggled_on: bool) -> void:
+	player.enable_flipping = toggled_on
 
 
 func _on_enable_flying_toggled(toggled_on: bool) -> void:

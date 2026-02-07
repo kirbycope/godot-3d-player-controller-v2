@@ -31,6 +31,7 @@ func _ready() -> void:
 	#player.enable_double_jumping = true
 	player.enable_driving = true
 	player.enable_emotes = true
+	player.enable_flipping = true
 	#player.enable_flying = true
 	player.enable_hanging = true
 	player.enable_holding_objects = true

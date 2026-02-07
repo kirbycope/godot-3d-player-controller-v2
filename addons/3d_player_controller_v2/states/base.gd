@@ -38,6 +38,7 @@ func _physics_process(delta: float) -> void:
 		or player.is_crouching \
 		or player.is_driving \
 		or player.is_falling \
+		or player.is_flipping \
 		or player.is_flying \
 		or player.is_hanging \
 		or player.is_jumping \

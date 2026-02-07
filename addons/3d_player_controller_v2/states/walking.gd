@@ -23,12 +23,20 @@ func _input(event: InputEvent) -> void:
 	# Do nothing if the "pause" menu is visible
 	if player.pause.visible: return
 
-	# Ⓐ/[Space] _pressed_ -> Start "jumping"
+	# Ⓐ/[Space] _pressed_ -> Start "jumping" or "flipping"
 	if event.is_action_pressed(Controls.BUTTON_0):
 		if player.enable_jumping \
 		and player.is_on_floor() \
 		and not player.chat.line_edit.visible:
-			transition_state(player.current_state, States.State.JUMPING)
+			if player.is_target_locked \
+			and player.enable_flipping \
+			and (Input.is_action_pressed(Controls.MOVE_DOWN) or Input.is_action_pressed(Controls.MOVE_UP)):
+				# Start "flipping"
+				transition_state(player.current_state, States.State.FLIPPING)
+			else:
+				# Start "jumping"
+				transition_state(player.current_state, States.State.JUMPING)
+			return
 
 	# Ⓑ/[shift] _pressed_ -> Start "sprinting"
 	if event.is_action_pressed(Controls.BUTTON_1):
