@@ -5,6 +5,13 @@ extends CharacterBody3D
 const DAMAGE_1_ALEX = preload("res://assets/audio/super_dialogue_audio_pack_v1/7 - Damage/Male/Alex Brodie/damage_1_alex.wav")
 const DAMAGE_2_ALEX = preload("res://assets/audio/super_dialogue_audio_pack_v1/7 - Damage/Male/Alex Brodie/damage_2_alex.wav")
 const DAMAGE_3_ALEX = preload("res://assets/audio/super_dialogue_audio_pack_v1/7 - Damage/Male/Alex Brodie/damage_3_alex.wav")
+const DAMAGE_4_ALEX = preload("res://assets/audio/super_dialogue_audio_pack_v1/7 - Damage/Male/Alex Brodie/damage_4_alex.wav")
+const DAMAGE_5_ALEX = preload("res://assets/audio/super_dialogue_audio_pack_v1/7 - Damage/Male/Alex Brodie/damage_5_alex.wav")
+const DAMAGE_6_ALEX = preload("res://assets/audio/super_dialogue_audio_pack_v1/7 - Damage/Male/Alex Brodie/damage_6_alex.wav")
+const DAMAGE_7_ALEX = preload("res://assets/audio/super_dialogue_audio_pack_v1/7 - Damage/Male/Alex Brodie/damage_7_alex.wav")
+const DAMAGE_8_ALEX = preload("res://assets/audio/super_dialogue_audio_pack_v1/7 - Damage/Male/Alex Brodie/damage_8_alex.wav")
+const DAMAGE_9_ALEX = preload("res://assets/audio/super_dialogue_audio_pack_v1/7 - Damage/Male/Alex Brodie/damage_9_alex.wav")
+const DAMAGE_10_ALEX = preload("res://assets/audio/super_dialogue_audio_pack_v1/7 - Damage/Male/Alex Brodie/damage_10_alex.wav")
 
 var is_reacting_low_left: bool = false
 var is_reacting_low_right: bool = false
@@ -162,6 +169,13 @@ func play_damage_sound_effect() -> void:
 		DAMAGE_1_ALEX,
 		DAMAGE_2_ALEX,
 		DAMAGE_3_ALEX,
+		DAMAGE_4_ALEX,
+		DAMAGE_5_ALEX,
+		DAMAGE_6_ALEX,
+		DAMAGE_7_ALEX,
+		DAMAGE_8_ALEX,
+		DAMAGE_9_ALEX,
+		DAMAGE_10_ALEX,
 	]
 	if audio_stream_player.stream in sounds \
 	and audio_stream_player.playing:
