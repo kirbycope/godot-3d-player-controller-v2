@@ -13,6 +13,7 @@
         "joypad",
         "Mixamo",
         "onready",
+        "pathfinding",
         "Quaternius",
         "ragdoll",
         "ragdolling"

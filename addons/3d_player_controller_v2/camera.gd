@@ -25,7 +25,7 @@ var perspective: Perspective = Perspective.FIRST_PERSON ## Camera perspective
 @onready var item_spring_arm: SpringArm3D = camera_mount.get_node("ItemSpringArm")
 @onready var player: CharacterBody3D = get_parent().get_parent().get_parent()
 @onready var ray_cast: RayCast3D = $RayCast3D
-@onready var retical: TextureRect = $Retical
+@onready var reticle: TextureRect = $Reticle
 
 
 ## Called when the node enters the scene tree for the first time.
@@ -212,7 +212,7 @@ func _process(delta: float) -> void:
 		and not is_rotating_camera:
 			camera_rotate_by_controller(delta)
 
-	retical.visible = player.enable_retical
+	reticle.visible = player.enable_reticle
 
 
 ## Called once on each physics tick, and allows Nodes to synchronize their logic with physics ticks.

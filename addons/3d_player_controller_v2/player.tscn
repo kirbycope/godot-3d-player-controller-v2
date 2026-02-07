@@ -5,8 +5,8 @@
 [ext_resource type="Texture2D" uid="uid://djq4xv33k8a6p" path="res://addons/3d_player_controller_v2/assets/textures/game_icons/white/1x/plus.png" id="3_ffasv"]
 [ext_resource type="PackedScene" path="res://addons/3d_player_controller_v2/controls.tscn" id="3_uu7fq"]
 [ext_resource type="PackedScene" path="res://addons/3d_player_controller_v2/chat.tscn" id="4_pyrav"]
-[ext_resource type="PackedScene" path="res://addons/3d_player_controller_v2/debug.tscn" id="4_uu7fq"]
-[ext_resource type="PackedScene" path="res://addons/3d_player_controller_v2/states.tscn" id="5_5e1u4"]
+[ext_resource type="PackedScene" uid="uid://ds02q02sva748" path="res://addons/3d_player_controller_v2/debug.tscn" id="4_uu7fq"]
+[ext_resource type="PackedScene" uid="uid://no1gio6fxvfg" path="res://addons/3d_player_controller_v2/states.tscn" id="5_5e1u4"]
 [ext_resource type="PackedScene" path="res://addons/3d_player_controller_v2/pause.tscn" id="5_7fj78"]
 [ext_resource type="PackedScene" path="res://addons/3d_player_controller_v2/emotes.tscn" id="6_nlsti"]
 [ext_resource type="Texture2D" uid="uid://bvr74sywbui7h" path="res://addons/3d_player_controller_v2/assets/textures/game_icons/white/2x/audioOn.png" id="8_7nn76"]
@@ -108,7 +108,7 @@ grow_horizontal = 0
 grow_vertical = 2
 horizontal_alignment = 1
 
-[node name="Retical" type="TextureRect" parent="CameraMount/CameraSpringArm/Camera3D" unique_id=2042737826]
+[node name="Reticle" type="TextureRect" parent="CameraMount/CameraSpringArm/Camera3D" unique_id=2042737826]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5

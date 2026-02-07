@@ -22,7 +22,7 @@ extends CharacterBody3D
 @export var enable_punching := false ## Enable punching
 @export var enable_pushing := false ## Enable pushing
 @export var enable_ragdolling := false ## Enable ragdoll physics
-@export var enable_retical := false ## Enable the retical
+@export var enable_reticle := false ## Enable the reticle
 @export var enable_rolling := false ## Enable rolling
 @export var enable_sitting := false ## Enable sitting
 @export var enable_sliding := false ## Enable sliding
@@ -40,8 +40,7 @@ extends CharacterBody3D
 @export var bone_name_right_foot := "RightFoot" ## Name of the right foot bone in the skeleton
 @export var bone_name_left_hand := "LeftHand" ## Name of the left hand bone in the skeleton
 @export var bone_name_right_hand := "RightHand" ## Name of the right hand bone in the skeleton
-@export var enable_head_look_at := true ## Allow LookAtModifier3D on the head bone
-@export var head_look_target_offset := 1.65 ## Height above target origin to look at (meters)
+@export var head_look_target_offset := 1.65 ## Height above target origin to look at (in meters), defaults to player eye-line
 @export_group("SPEED")
 @export var playback_default_blend_time: float = 0.2
 @export var speed_climbing := 1.0 ## Speed while climbing
@@ -478,8 +477,6 @@ func _setup_head_look_at() -> void:
 
 
 func _update_head_look_at(target: Node3D) -> void:
-	if not enable_head_look_at:
-		return
 	for skel in skeletons():
 		var modifier := _ensure_head_modifier_for(skel)
 		if not modifier:

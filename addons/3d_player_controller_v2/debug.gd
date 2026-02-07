@@ -30,7 +30,7 @@ var yellow_sphere: MeshInstance3D
 @onready var enable_throwing: CheckButton = $Configuration/EnableThrowing
 ## -- CONFIG 2 --
 @onready var enable_emotes: CheckButton = $Configuration2/EnableEmotes
-@onready var enable_retical: CheckButton = $Configuration2/EnableRetical
+@onready var enable_reticle: CheckButton = $Configuration2/EnableReticle
 @onready var enable_vibration: CheckButton = $Configuration2/EnableVibration
 @onready var lock_camera: CheckButton = $Configuration2/LockCamera
 @onready var lock_movement_x: CheckButton = $Configuration2/LockMovementX
@@ -146,7 +146,7 @@ func _process(_delta: float) -> void:
 		enable_punching.button_pressed = player.enable_punching
 		enable_pushing.button_pressed = player.enable_pushing
 		enable_ragdolling.button_pressed = player.enable_ragdolling
-		enable_retical.button_pressed = player.enable_retical
+		enable_reticle.button_pressed = player.enable_reticle
 		enable_rolling.button_pressed = player.enable_rolling
 		enable_sitting.button_pressed = player.enable_sitting
 		enable_sliding.button_pressed = player.enable_sliding
@@ -336,7 +336,7 @@ func _on_enable_ragdolling_toggled(toggled_on: bool) -> void:
 
 
 func _on_enable_retical_toggled(toggled_on: bool) -> void:
-	player.enable_retical = toggled_on
+	player.enable_reticle = toggled_on
 
 
 func _on_enable_rolling_toggled(toggled_on: bool) -> void:
