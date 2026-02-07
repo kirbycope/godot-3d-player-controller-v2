@@ -416,7 +416,11 @@ func play_animation() -> void:
 
 	# ✋ -- Unarmed animation --
 	else:
-		var anim = MIX_ANIMATION_STANDING_IDLE if player.animation_set == 0 else QUAT_ANIMATION_STANDING_IDLE
+		var anim: String
+		if player.is_target_locked:
+			anim = MIX_ANIMATION_STANDING_READY if player.animation_set == 0 else QUAT_ANIMATION_STANDING_READY
+		else:
+			anim = MIX_ANIMATION_STANDING_IDLE if player.animation_set == 0 else QUAT_ANIMATION_STANDING_IDLE
 		if current != anim:
 			_on_animation_finished(current)
 			player.animation_player_play(anim)
