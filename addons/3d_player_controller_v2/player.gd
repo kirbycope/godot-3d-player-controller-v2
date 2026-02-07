@@ -40,6 +40,8 @@ extends CharacterBody3D
 @export var bone_name_right_foot := "RightFoot" ## Name of the right foot bone in the skeleton
 @export var bone_name_left_hand := "LeftHand" ## Name of the left hand bone in the skeleton
 @export var bone_name_right_hand := "RightHand" ## Name of the right hand bone in the skeleton
+@export var enable_head_look_at := true ## Allow LookAtModifier3D on the head bone
+@export var head_look_target_offset := 1.65 ## Height above target origin to look at (meters)
 @export_group("SPEED")
 @export var playback_default_blend_time: float = 0.2
 @export var speed_climbing := 1.0 ## Speed while climbing
@@ -83,7 +85,7 @@ var is_kicking_right := false ## Is the player kicking with their right foot?
 var is_mantling := false ## Is the player mantling (climbing up from a ledge)?
 var is_navigating := false ## Is the player navigating?
 var is_paragliding := false ## Is the player paragliding?
-var is_punching_left := false ## Is the player punching with thier left hand?
+var is_punching_left := false ## Is the player punching with their left hand?
 var is_punching_right := false ## Is the player punching with their right hand?
 var is_pushing := false ## Is the player pushing?
 var is_ragdolling := false ## Is the player ragdolling?
@@ -133,6 +135,10 @@ var animations_quaternius := false ## Are Quaternius animations enabled?
 var animations_quaternius_2 := false ## Are Quaternius 2 animations enabled?
 var setup_character: GDScript = preload("res://addons/3d_player_controller_v2/setup_character.gd")
 var targets = {}
+var current_focused_target: Node3D = null ## The current strafing focus target
+var is_target_locked := false ## Is the player actively locked onto a target?
+var head_look_modifiers := {} ## instance_id -> LookAtModifier3D, one per skeleton
+var head_look_anchors := {} ## instance_id -> Node3D anchor used as target
 
 @onready var audio_stream_player: AudioStreamPlayer3D = $AudioStreamPlayer3D
 @onready var base_state: BaseState = $States/Base
@@ -174,6 +180,8 @@ func _ready() -> void:
 
 	# Setup physical bone simulators for all `character` components
 	setup_character.physical_bone_simulators(character)
+
+	_setup_head_look_at()
 
 	# Initialize the state machine
 	$States/Standing.start()
@@ -233,6 +241,8 @@ func _physics_process(delta: float) -> void:
 	# Skip movement processing while "sitting"
 	if is_sitting: return
 
+	var head_look_target: Node3D = null
+
 	# Rotate the player to align with the current "up direction"
 	var target_basis = Basis()
 	target_basis.y = up_direction
@@ -274,15 +284,38 @@ func _physics_process(delta: float) -> void:
 				Controls.MOVE_DOWN,
 			)
 
-		# Update strafing/backpedal flags
+		# Update strafing/backpedal flags and handle targeting
 		if enable_strafing \
 		and Input.is_action_pressed(Controls.BUTTON_6):
+			# Strafing is active if the player is holding the strafe button and providing directional input that isn't _mostly_ forward/backward
 			var strafe_threshold := 0.1
 			is_strafing = abs(input_direction.x) > strafe_threshold and abs(input_direction.y) <= strafe_threshold
+			# Backpedaling is active if the player is holding the strafe button and providing backward input that isn't _mostly_ lateral
 			is_backpedaling = input_direction.y > strafe_threshold
+			# Lock onto nearest target when button_6 is FIRST pressed
+			if Input.is_action_just_pressed(Controls.BUTTON_6):
+				var strafe_target = get_focus_target()
+				if strafe_target:
+					is_target_locked = true
+			# Maintain lock or cancel if target is out of range
+			if is_target_locked:
+				var strafe_target = get_focus_target()
+				if strafe_target and camera.perspective == camera.Perspective.THIRD_PERSON:
+					# Rotate to face the target while flattening the look vector onto the surface plane (avoid pitching down toward ground)
+					look_at_flat_upright(self, strafe_target.global_position, new_up)
+					look_at_flat_upright(visuals, strafe_target.global_position, new_up)
+					look_at_flat_upright(camera_mount, strafe_target.global_position, new_up)
+				head_look_target = strafe_target
+			else:
+				is_target_locked = false
 		else:
 			is_strafing = false
 			is_backpedaling = false
+			# Reset target when button_6 is released
+			if current_focused_target:
+				_reset_target_material(current_focused_target)
+				current_focused_target = null
+			is_target_locked = false
 
 		# Handle player input for lateral movement (disabled while climbing/hanging)
 		if not pause.visible \
@@ -302,8 +335,9 @@ func _physics_process(delta: float) -> void:
 			var raw_dir: Vector3 = transform.basis * Vector3(input_direction.x, 0, input_direction.y)
 			var lateral_dir: Vector3 = raw_dir - new_up * raw_dir.dot(new_up)
 			lateral_dir = lateral_dir.normalized()
+			# Handle strafing and "focus target" (if applicable)
 			var strafe_target: Node3D = null
-			if enable_strafing and is_strafing:
+			if enable_strafing and is_strafing and is_target_locked:
 				strafe_target = get_focus_target()
 			if strafe_target:
 				var to_player = global_position - strafe_target.global_position
@@ -325,11 +359,11 @@ func _physics_process(delta: float) -> void:
 				and not is_climbing \
 				and not is_climbing_ladder \
 				and not is_hanging:
-					# Strafe while facing the Focus target
+					# Strafe while facing the "focus target"
 					if strafe_target:
-						look_at(strafe_target.global_position, new_up)
-						visuals.look_at(strafe_target.global_position, new_up)
-						camera_mount.look_at(strafe_target.global_position, new_up)
+						look_at_flat_upright(self, strafe_target.global_position, new_up)
+						look_at_flat_upright(visuals, strafe_target.global_position, new_up)
+						look_at_flat_upright(camera_mount, strafe_target.global_position, new_up)
 					# Strafe using camera forward direction
 					elif enable_strafing and (is_strafing or is_backpedaling):
 						var camera_forward: Vector3 = -camera.global_transform.basis.z
@@ -374,6 +408,8 @@ func _physics_process(delta: float) -> void:
 			velocity += gravity_accel * delta
 		# Commit the new up direction after applying gravity
 		up_direction = new_up
+
+	_update_head_look_at(head_look_target)
 
 	# Record the player's "virtual velocity"
 	virtual_velocity = velocity
@@ -425,8 +461,105 @@ func look_at_upright(target: Node3D) -> void:
 		visuals.look_at(visuals.global_position + direction, Vector3.UP)
 
 
+## Rotates a node toward a target while flattening pitch onto the plane defined by up (no looking down when above target).
+func look_at_flat_upright(node: Node3D, target_position: Vector3, up: Vector3) -> void:
+	var direction: Vector3 = target_position - node.global_position
+	# Remove vertical component so the node stays upright relative to the surface normal
+	direction -= up * direction.dot(up)
+	if direction.length() > 0.001:
+		node.look_at(node.global_position + direction, up)
+
+
+func _setup_head_look_at() -> void:
+	for skel in skeletons():
+		var modifier := _ensure_head_modifier_for(skel)
+		if modifier:
+			head_look_modifiers[skel.get_instance_id()] = modifier
+
+
+func _update_head_look_at(target: Node3D) -> void:
+	if not enable_head_look_at:
+		return
+	for skel in skeletons():
+		var modifier := _ensure_head_modifier_for(skel)
+		if not modifier:
+			continue
+		var anchor := _ensure_head_anchor_for(skel)
+		if not anchor:
+			modifier.target_node = NodePath("")
+			continue
+		if target and is_instance_valid(target):
+			anchor.global_position = target.global_transform.origin + up_direction * head_look_target_offset
+			modifier.target_node = modifier.get_path_to(anchor)
+		else:
+			modifier.target_node = NodePath("")
+
+
+func _ensure_head_modifier_for(skel: Skeleton3D) -> LookAtModifier3D:
+	if not skel:
+		return null
+	var key = skel.get_instance_id()
+	if key in head_look_modifiers:
+		var cached: LookAtModifier3D = head_look_modifiers[key]
+		if cached and is_instance_valid(cached):
+			return cached
+	# Try to find an existing one on the skeleton
+	var existing: LookAtModifier3D = skel.get_node_or_null("HeadLookAt")
+	if existing and is_instance_valid(existing):
+		head_look_modifiers[key] = existing
+		return existing
+	# Create a new modifier
+	var modifier := LookAtModifier3D.new()
+	modifier.name = "HeadLookAt"
+	modifier.bone_name = bone_name_head
+	modifier.use_angle_limitation = true
+	modifier.primary_limit_angle = deg_to_rad(80.0)
+	modifier.secondary_limit_angle = deg_to_rad(60.0)
+	modifier.relative = true
+	modifier.use_secondary_rotation = true
+	skel.add_child(modifier)
+	modifier.owner = get_tree().current_scene
+	head_look_modifiers[key] = modifier
+	return modifier
+
+
+func _ensure_head_anchor_for(skel: Skeleton3D) -> Node3D:
+	if not skel:
+		return null
+	var key = skel.get_instance_id()
+	if key in head_look_anchors:
+		var cached: Node3D = head_look_anchors[key]
+		if cached and is_instance_valid(cached):
+			return cached
+	var anchor := Node3D.new()
+	anchor.name = "HeadLookTargetAnchor"
+	skel.add_child(anchor)
+	anchor.owner = get_tree().current_scene
+	head_look_anchors[key] = anchor
+	return anchor
+
+
 ## Returns the closest valid focus target, if any.
 func get_focus_target() -> Node3D:
+	# If player is actively locked onto a target, only check that target
+	if is_target_locked:
+		if current_focused_target and is_instance_valid(current_focused_target):
+			# Check if the target is still in the targets dictionary (in range)
+			var target_id = current_focused_target.get_instance_id()
+			if target_id in targets:
+				return current_focused_target
+			else:
+				# Target went out of range, cancel the lock
+				_reset_target_material(current_focused_target)
+				current_focused_target = null
+				is_target_locked = false
+				return null
+		else:
+			# Locked but no valid target, unlock
+			is_target_locked = false
+			return null
+	
+	# Search for a new target only if not currently locked
 	var closest: Node3D = null
 	var closest_distance_sq := INF
 	for target in targets.values():
@@ -436,6 +569,15 @@ func get_focus_target() -> Node3D:
 		if distance_sq < closest_distance_sq:
 			closest_distance_sq = distance_sq
 			closest = target
+	
+	# Update focus target highlighting
+	if closest != current_focused_target:
+		if current_focused_target:
+			_reset_target_material(current_focused_target)
+		current_focused_target = closest
+		if current_focused_target:
+			_highlight_target_material(current_focused_target)
+	
 	return closest
 
 
@@ -486,64 +628,64 @@ func animation_player_pause() -> void:
 
 
 ## Plays an animation on all [AnimationPlayer] nodes found under [character] (recursively).
-func animation_player_play(name: StringName = &"", custom_blend: float = -1, custom_speed: float = 1.0, from_end: bool = false) -> void:
+func animation_player_play(_name: StringName = &"", custom_blend: float = -1, custom_speed: float = 1.0, from_end: bool = false) -> void:
 	# Skip if no animation name was provided
-	if name == &"": return
+	if _name == &"": return
 
 	# Play the animation on each AnimationPlayer that has it
 	for animation_player in animation_players():
-		if animation_player.has_animation(name):
-			animation_player.call_deferred("play", name, custom_blend, custom_speed, from_end)
+		if animation_player.has_animation(_name):
+			animation_player.call_deferred("play", _name, custom_blend, custom_speed, from_end)
 		#else: push_warning("Animation '%s' not found on AnimationPlayer '%s'" % [name, animation_player.name]) ## DEBUGGING
 
 
 ## Plays an animation backwards on all [AnimationPlayer] nodes found under [character] (recursively).
-func animation_player_play_backwards(name: StringName = &"", custom_blend: float = -1) -> void:
+func animation_player_play_backwards(_name: StringName = &"", custom_blend: float = -1) -> void:
 	# Skip if no animation name was provided
-	if name == &"": return
+	if _name == &"": return
 	# Play the animation backwards on each AnimationPlayer that has it
 	for animation_player in animation_players():
-		if animation_player.has_animation(name):
-			animation_player.call_deferred("play_backwards", name, custom_blend)
+		if animation_player.has_animation(_name):
+			animation_player.call_deferred("play_backwards", _name, custom_blend)
 		#else: push_warning("Animation '%s' not found on AnimationPlayer '%s'" % [name, animation_player.name]) ## DEBUGGING
 
 
 ## Plays a locked animation that disables state processing until it finishes.
-func animation_player_play_locked(name: String, duration: float = -1.0) -> float:
+func animation_player_play_locked(_name: String, duration: float = -1.0) -> float:
 	# Skip if no animation name was provided
-	if name == "": return 0.0
+	if _name == "": return 0.0
 
 	# Ensure at least one AnimationPlayer has this animation before locking state
 	var has_animation := false
 	for animation_player in animation_players():
-		if animation_player.has_animation(name):
+		if animation_player.has_animation(_name):
 			has_animation = true
 			break
 	if not has_animation:
-		push_warning("Animation '%s' not found on any AnimationPlayer" % name)
+		push_warning("Animation '%s' not found on any AnimationPlayer" % _name)
 		return 0.0
 
 	var current_state_name = base_state.get_state_name(current_state)
 	var current_state_scene = get_parent().find_child(current_state_name)
 	current_state_scene.process_mode = Node.PROCESS_MODE_DISABLED
 	if duration == -1.0:
-		animation_player_play(name)
+		animation_player_play(_name)
 	else:
-		animation_player_play_section(name, 0.0, duration)
+		animation_player_play_section(_name, 0.0, duration)
 	animation_player_connect("animation_finished", _on_locked_animation_finished)
 	is_animation_locked = true
 	return animation_player_current_animation_length()
 
 
 ## Plays a section of an animation on all [AnimationPlayer] nodes found under [character] (recursively).
-func  animation_player_play_section(name: StringName = &"", start_time: float = -1, end_time: float = -1, custom_blend: float = -1, custom_speed: float = 1.0, from_end: bool = false) -> void:
+func  animation_player_play_section(_name: StringName = &"", start_time: float = -1, end_time: float = -1, custom_blend: float = -1, custom_speed: float = 1.0, from_end: bool = false) -> void:
 	# Skip if no animation name was provided
-	if name == &"": return
+	if _name == &"": return
 
 	# Play the animation section on each AnimationPlayer that has it
 	for animation_player in animation_players():
-		if animation_player.has_animation(name):
-			animation_player.call_deferred("play_section", name, start_time, end_time, custom_blend, custom_speed, from_end)
+		if animation_player.has_animation(_name):
+			animation_player.call_deferred("play_section", _name, start_time, end_time, custom_blend, custom_speed, from_end)
 
 
 ## Sets the _speed scale_ on all [AnimationPlayer] nodes found under [character] (recursively).
@@ -655,7 +797,7 @@ func move_player() -> void:
 	# Right axis along the wall (perpendicular to wall_up and normal)
 	var wall_right: Vector3 = wall_up.cross(collision_normal_normalized).normalized()
 
-	# Gather inputs mapped onto wall axies
+	# Gather inputs mapped onto wall axis
 	var move_direction: Vector3 = Vector3.ZERO
 	# Only apply horizontal movement if not climbing a ladder
 	if not is_climbing_ladder:
@@ -784,6 +926,17 @@ func skeleton() -> Skeleton3D:
 	return skeleton
 
 
+func skeletons() -> Array:
+	var list: Array = []
+	for child in character.get_children():
+		if not child.visible:
+			continue
+		var skel: Skeleton3D = child.get_node_or_null("%GeneralSkeleton")
+		if skel:
+			list.append(skel)
+	return list
+
+
 ## Callback for when a locked animation finishes playing.
 func _on_locked_animation_finished(animation_name: String) -> void:
 	animation_player_disconnect("animation_finished", _on_locked_animation_finished)
@@ -791,6 +944,29 @@ func _on_locked_animation_finished(animation_name: String) -> void:
 	var current_state_scene = get_parent().find_child(current_state_name)
 	current_state_scene.process_mode = Node.PROCESS_MODE_INHERIT
 	is_animation_locked = false
+
+
+## Highlights a target by changing its FocusTargetIndicator to yellow.
+func _highlight_target_material(target: Node3D) -> void:
+	var indicator = target.get_node_or_null("FocusTargetIndicator")
+	if indicator:
+		var mesh_instance = indicator.get_node_or_null("MeshInstance3D")
+		if mesh_instance and mesh_instance is MeshInstance3D:
+			var current_material = mesh_instance.get_active_material(0)
+			if current_material:
+				var highlighted_material = current_material.duplicate()
+				if highlighted_material is StandardMaterial3D:
+					highlighted_material.albedo_color = Color.YELLOW
+				mesh_instance.set_surface_override_material(0, highlighted_material)
+
+
+## Resets a target's FocusTargetIndicator to white.
+func _reset_target_material(target: Node3D) -> void:
+	var indicator = target.get_node_or_null("FocusTargetIndicator")
+	if indicator:
+		var mesh_instance = indicator.get_node_or_null("MeshInstance3D")
+		if mesh_instance and mesh_instance is MeshInstance3D:
+			mesh_instance.set_surface_override_material(0, null)
 
 
 func _on_kick_left_timeout() -> void:
@@ -803,10 +979,11 @@ func _on_kick_left_timeout() -> void:
 		apply_impact(collider, bone_name_left_foot, 2.0)
 
 		# Player Kicking Low Left -> Enemy Reacting Low Right
-		if collider is SoftBody3D \
-		or collider is RigidBody3D:
+		if collider is CharacterBody3D \
+		or collider is RigidBody3D \
+		or collider is SoftBody3D:
 			if collider.has_method("animate_hit_low_right"):
-				collider.rpc("animate_hit_low_right")
+				collider.rpc("animate_hit_low_right", self)
 
 
 func _on_kick_right_timeout() -> void:
@@ -819,10 +996,11 @@ func _on_kick_right_timeout() -> void:
 		apply_impact(collider, bone_name_right_foot, 2.0)
 
 		# Player Kicking Low Right -> Enemy Reacting Low Left
-		if collider is SoftBody3D \
-		or collider is RigidBody3D:
+		if collider is CharacterBody3D \
+		or collider is RigidBody3D \
+		or collider is SoftBody3D:
 			if collider.has_method("animate_hit_low_left"):
-				collider.rpc("animate_hit_low_left")
+				collider.rpc("animate_hit_low_left", self)
 
 
 func _on_punch_left_timeout() -> void:
@@ -835,10 +1013,11 @@ func _on_punch_left_timeout() -> void:
 		apply_impact(collider, bone_name_left_hand, 1.0)
 
 		# Player Punching Left -> Enemy Reacting Right
-		if collider is SoftBody3D \
-		or collider is RigidBody3D:
+		if collider is CharacterBody3D \
+		or collider is RigidBody3D \
+		or collider is SoftBody3D:
 			if collider.has_method("animate_hit_high_right"):
-				collider.rpc("animate_hit_high_right")
+				collider.rpc("animate_hit_high_right", self)
 
 
 func _on_punch_right_timeout() -> void:
@@ -851,10 +1030,11 @@ func _on_punch_right_timeout() -> void:
 		apply_impact(collider, bone_name_right_hand, 1.0)
 
 		# Player Punching Right -> Enemy Reacting Left
-		if collider is SoftBody3D \
-		or collider is RigidBody3D:
+		if collider is CharacterBody3D \
+		or collider is RigidBody3D \
+		or collider is SoftBody3D:
 			if collider.has_method("animate_hit_high_left"):
-				collider.rpc("animate_hit_high_left")
+				collider.rpc("animate_hit_high_left", self)
 
 
 func _on_enemy_detection_body_entered(body: Node3D) -> void:
@@ -869,3 +1049,11 @@ func _on_enemy_detection_body_entered(body: Node3D) -> void:
 func _on_enemy_detection_body_exited(body: Node3D) -> void:
 	if body.is_in_group("Focusable"):
 		targets.erase(body.get_instance_id())
+		# Reset material if this was the focused target
+		if current_focused_target == body:
+			_reset_target_material(body)
+			current_focused_target = null
+		# Queue free the indicator
+		var indicator = body.get_node_or_null("FocusTargetIndicator")
+		if indicator:
+			indicator.queue_free()

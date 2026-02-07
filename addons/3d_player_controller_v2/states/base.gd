@@ -1,5 +1,6 @@
-class_name BaseState
 extends Node
+class_name BaseState
+## The base state that all other states inherit from.
 
 @export var walk_run_threshold := 0.5 ## Input magnitude threshold separating walk vs run
 
@@ -52,6 +53,8 @@ func _physics_process(delta: float) -> void:
 	if not is_busy:
 		var has_input = player.input_direction != Vector2.ZERO
 		var input_len = player.input_direction.length()
+		var middle_hit = player.ray_cast_middle.is_colliding() and not (player.ray_cast_middle.get_collider() is CharacterBody3D)
+		var high_hit = player.ray_cast_high.is_colliding() and not (player.ray_cast_high.get_collider() is CharacterBody3D)
 
 		# Reset double-jump flag when on the ground
 		if player.is_on_floor():
@@ -66,7 +69,7 @@ func _physics_process(delta: float) -> void:
 		
 		# Check if there is something in front of the player and the player is moving -> Start "pushing"
 		elif has_input \
-		and (player.ray_cast_middle.is_colliding() or player.ray_cast_high.is_colliding()) \
+		and (middle_hit or high_hit) \
 		and player.enable_pushing \
 		and not player.is_pushing:
 			transition_state(player.current_state, States.State.PUSHING)

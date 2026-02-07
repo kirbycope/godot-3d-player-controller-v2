@@ -144,6 +144,7 @@ visible = false
 [node name="EnemyDetection" type="Area3D" parent="." unique_id=127445399]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="EnemyDetection" unique_id=323991624]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CylinderShape3D_wgsvs")
 
 [node name="FocusTargetIndicator" parent="EnemyDetection" unique_id=1112065412 instance=ExtResource("8_twkb2")]

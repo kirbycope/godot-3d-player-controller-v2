@@ -51,7 +51,7 @@ func _process(delta: float) -> void:
 		transition_state(NODE_STATE, States.State.FALLING)
 		return
 
-	# Check the eyeline for a ledge to grab -> Start "hanging"
+	# Check the eye-line for a ledge to grab -> Start "hanging"
 	if player.enable_hanging:
 		if not player.ray_cast_top.is_colliding() \
 		and player.ray_cast_high.is_colliding():

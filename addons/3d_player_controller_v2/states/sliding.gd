@@ -1,4 +1,5 @@
 extends BaseState
+class_name Sliding
 ## 🛷 Sliding on the floor.
 
 # Sliding 🔵 Mixamo animations

@@ -1,131 +1,131 @@
-[gd_scene load_steps=27 format=3]
+[gd_scene format=3 uid="uid://no1gio6fxvfg"]
 
-[ext_resource type="Script" path="res://addons/3d_player_controller_v2/states/states.gd" id="1_gr8r5"]
-[ext_resource type="Script" path="res://addons/3d_player_controller_v2/states/base.gd" id="2_uuywk"]
-[ext_resource type="Script" path="res://addons/3d_player_controller_v2/states/climbing.gd" id="3_ixqbx"]
-[ext_resource type="Script" path="res://addons/3d_player_controller_v2/states/crawling.gd" id="3_u0yrf"]
-[ext_resource type="Script" path="res://addons/3d_player_controller_v2/states/climbing_ladder.gd" id="4_nohs4"]
-[ext_resource type="Script" path="res://addons/3d_player_controller_v2/states/crouching.gd" id="4_ta1xp"]
-[ext_resource type="Script" path="res://addons/3d_player_controller_v2/states/falling.gd" id="5_4c2up"]
-[ext_resource type="Script" path="res://addons/3d_player_controller_v2/states/driving.gd" id="6_80cnw"]
-[ext_resource type="Script" path="res://addons/3d_player_controller_v2/states/jumping.gd" id="6_e4nj5"]
-[ext_resource type="Script" path="res://addons/3d_player_controller_v2/states/running.gd" id="7_ixqbx"]
-[ext_resource type="Script" path="res://addons/3d_player_controller_v2/states/hanging.gd" id="7_smmr0"]
-[ext_resource type="Script" path="res://addons/3d_player_controller_v2/states/navigating.gd" id="7_uuywk"]
-[ext_resource type="Script" path="res://addons/3d_player_controller_v2/states/flying.gd" id="8_8p57p"]
-[ext_resource type="Script" path="res://addons/3d_player_controller_v2/states/sprinting.gd" id="8_smmr0"]
-[ext_resource type="Script" path="res://addons/3d_player_controller_v2/states/standing.gd" id="9_qtidm"]
-[ext_resource type="Script" path="res://addons/3d_player_controller_v2/states/walking.gd" id="10_fl747"]
-[ext_resource type="Script" path="res://addons/3d_player_controller_v2/states/mantling.gd" id="13_npvs6"]
-[ext_resource type="Script" path="res://addons/3d_player_controller_v2/states/reacting.gd" id="14_8p57p"]
-[ext_resource type="Script" path="res://addons/3d_player_controller_v2/states/pushing.gd" id="15_0t5q5"]
-[ext_resource type="Script" path="res://addons/3d_player_controller_v2/states/rolling.gd" id="15_3qar2"]
-[ext_resource type="Script" path="res://addons/3d_player_controller_v2/states/ragdolling.gd" id="15_nohs4"]
-[ext_resource type="Script" path="res://addons/3d_player_controller_v2/states/sliding.gd" id="15_qtidm"]
-[ext_resource type="Script" path="res://addons/3d_player_controller_v2/states/sitting.gd" id="20_dw7f0"]
-[ext_resource type="Script" path="res://addons/3d_player_controller_v2/states/skateboarding.gd" id="20_nohs4"]
-[ext_resource type="Script" path="res://addons/3d_player_controller_v2/states/paragliding.gd" id="21_3qar2"]
-[ext_resource type="Script" path="res://addons/3d_player_controller_v2/states/swimming.gd" id="23_0t5q5"]
+[ext_resource type="Script" uid="uid://bu32m3koxydbf" path="res://addons/3d_player_controller_v2/states/states.gd" id="1_gr8r5"]
+[ext_resource type="Script" uid="uid://5livqgnjxl8w" path="res://addons/3d_player_controller_v2/states/base.gd" id="2_uuywk"]
+[ext_resource type="Script" uid="uid://u4usf7g247rs" path="res://addons/3d_player_controller_v2/states/climbing.gd" id="3_ixqbx"]
+[ext_resource type="Script" uid="uid://u1m1wsuqbxfb" path="res://addons/3d_player_controller_v2/states/crawling.gd" id="3_u0yrf"]
+[ext_resource type="Script" uid="uid://dwn2bqrrrloc2" path="res://addons/3d_player_controller_v2/states/climbing_ladder.gd" id="4_nohs4"]
+[ext_resource type="Script" uid="uid://egvxkbvrdt6b" path="res://addons/3d_player_controller_v2/states/crouching.gd" id="4_ta1xp"]
+[ext_resource type="Script" uid="uid://b6ajd7mxue7ub" path="res://addons/3d_player_controller_v2/states/falling.gd" id="5_4c2up"]
+[ext_resource type="Script" uid="uid://cqnkj8fy6587" path="res://addons/3d_player_controller_v2/states/driving.gd" id="6_80cnw"]
+[ext_resource type="Script" uid="uid://dquv153nwr5ps" path="res://addons/3d_player_controller_v2/states/jumping.gd" id="6_e4nj5"]
+[ext_resource type="Script" uid="uid://cvi6mwjf3t6cu" path="res://addons/3d_player_controller_v2/states/running.gd" id="7_ixqbx"]
+[ext_resource type="Script" uid="uid://bkyh00o4i441c" path="res://addons/3d_player_controller_v2/states/hanging.gd" id="7_smmr0"]
+[ext_resource type="Script" uid="uid://c1uvv1dvb1537" path="res://addons/3d_player_controller_v2/states/navigating.gd" id="7_uuywk"]
+[ext_resource type="Script" uid="uid://ccn7s5h0qq54p" path="res://addons/3d_player_controller_v2/states/flying.gd" id="8_8p57p"]
+[ext_resource type="Script" uid="uid://bkt6xfceqexr" path="res://addons/3d_player_controller_v2/states/sprinting.gd" id="8_smmr0"]
+[ext_resource type="Script" uid="uid://fep426f0srya" path="res://addons/3d_player_controller_v2/states/standing.gd" id="9_qtidm"]
+[ext_resource type="Script" uid="uid://tnxern5p0mas" path="res://addons/3d_player_controller_v2/states/walking.gd" id="10_fl747"]
+[ext_resource type="Script" uid="uid://dcf32lcicph2l" path="res://addons/3d_player_controller_v2/states/mantling.gd" id="13_npvs6"]
+[ext_resource type="Script" uid="uid://c6buw3vevvq0o" path="res://addons/3d_player_controller_v2/states/reacting.gd" id="14_8p57p"]
+[ext_resource type="Script" uid="uid://bq70kvtaakibj" path="res://addons/3d_player_controller_v2/states/pushing.gd" id="15_0t5q5"]
+[ext_resource type="Script" uid="uid://dv7brwoujcdcu" path="res://addons/3d_player_controller_v2/states/rolling.gd" id="15_3qar2"]
+[ext_resource type="Script" uid="uid://c26yt186k4qv3" path="res://addons/3d_player_controller_v2/states/ragdolling.gd" id="15_nohs4"]
+[ext_resource type="Script" uid="uid://djuxs8olgukcn" path="res://addons/3d_player_controller_v2/states/sliding.gd" id="15_qtidm"]
+[ext_resource type="Script" uid="uid://b55wspntfvfxj" path="res://addons/3d_player_controller_v2/states/sitting.gd" id="20_dw7f0"]
+[ext_resource type="Script" uid="uid://beiuekwn2aoy8" path="res://addons/3d_player_controller_v2/states/skateboarding.gd" id="20_nohs4"]
+[ext_resource type="Script" uid="uid://db70cyli03pn2" path="res://addons/3d_player_controller_v2/states/paragliding.gd" id="21_3qar2"]
+[ext_resource type="Script" uid="uid://d26mvtc01de4g" path="res://addons/3d_player_controller_v2/states/swimming.gd" id="23_0t5q5"]
 
-[node name="States" type="Node"]
+[node name="States" type="Node" unique_id=1528534369]
 script = ExtResource("1_gr8r5")
 
-[node name="Base" type="Node" parent="."]
+[node name="Base" type="Node" parent="." unique_id=1106706092]
 process_mode = 4
 script = ExtResource("2_uuywk")
 
-[node name="Climbing" type="Node" parent="."]
+[node name="Climbing" type="Node" parent="." unique_id=1320522043]
 process_mode = 4
 script = ExtResource("3_ixqbx")
 
-[node name="ClimbingLadder" type="Node" parent="."]
+[node name="ClimbingLadder" type="Node" parent="." unique_id=1208344076]
 process_mode = 4
 script = ExtResource("4_nohs4")
 
-[node name="Crawling" type="Node" parent="."]
+[node name="Crawling" type="Node" parent="." unique_id=744883127]
 process_mode = 4
 script = ExtResource("3_u0yrf")
 
-[node name="Crouching" type="Node" parent="."]
+[node name="Crouching" type="Node" parent="." unique_id=106735928]
 process_mode = 4
 script = ExtResource("4_ta1xp")
 
-[node name="Driving" type="Node" parent="."]
+[node name="Driving" type="Node" parent="." unique_id=885657]
 process_mode = 4
 script = ExtResource("6_80cnw")
 
-[node name="Falling" type="Node" parent="."]
+[node name="Falling" type="Node" parent="." unique_id=198950633]
 process_mode = 4
 script = ExtResource("5_4c2up")
 
-[node name="Flying" type="Node" parent="."]
+[node name="Flying" type="Node" parent="." unique_id=1123467197]
 process_mode = 4
 script = ExtResource("8_8p57p")
 
-[node name="Hanging" type="Node" parent="."]
+[node name="Hanging" type="Node" parent="." unique_id=1919196254]
 process_mode = 4
 script = ExtResource("7_smmr0")
 
-[node name="Jumping" type="Node" parent="."]
+[node name="Jumping" type="Node" parent="." unique_id=1353799209]
 process_mode = 4
 script = ExtResource("6_e4nj5")
 
-[node name="Mantling" type="Node" parent="."]
+[node name="Mantling" type="Node" parent="." unique_id=378813603]
 process_mode = 4
 script = ExtResource("13_npvs6")
 
-[node name="Navigating" type="Node" parent="."]
+[node name="Navigating" type="Node" parent="." unique_id=431111347]
 process_mode = 4
 script = ExtResource("7_uuywk")
 
-[node name="Paragliding" type="Node" parent="."]
+[node name="Paragliding" type="Node" parent="." unique_id=1713389456]
 process_mode = 4
 script = ExtResource("21_3qar2")
 
-[node name="Pushing" type="Node" parent="."]
+[node name="Pushing" type="Node" parent="." unique_id=1554417791]
 process_mode = 4
 script = ExtResource("15_0t5q5")
 
-[node name="Ragdolling" type="Node" parent="."]
+[node name="Ragdolling" type="Node" parent="." unique_id=1369641246]
 process_mode = 4
 script = ExtResource("15_nohs4")
 
-[node name="Reacting" type="Node" parent="."]
+[node name="Reacting" type="Node" parent="." unique_id=70250035]
 process_mode = 4
 script = ExtResource("14_8p57p")
 
-[node name="Rolling" type="Node" parent="."]
+[node name="Rolling" type="Node" parent="." unique_id=783715236]
 process_mode = 4
 script = ExtResource("15_3qar2")
 
-[node name="Running" type="Node" parent="."]
+[node name="Running" type="Node" parent="." unique_id=644285075]
 process_mode = 4
 script = ExtResource("7_ixqbx")
 
-[node name="Sitting" type="Node" parent="."]
+[node name="Sitting" type="Node" parent="." unique_id=765594296]
 process_mode = 4
 script = ExtResource("20_dw7f0")
 
-[node name="Sliding" type="Node" parent="."]
+[node name="Sliding" type="Node" parent="." unique_id=724483627]
 process_mode = 4
 script = ExtResource("15_qtidm")
 
-[node name="Skateboarding" type="Node" parent="."]
+[node name="Skateboarding" type="Node" parent="." unique_id=56152355]
 process_mode = 4
 script = ExtResource("20_nohs4")
 
-[node name="Sprinting" type="Node" parent="."]
+[node name="Sprinting" type="Node" parent="." unique_id=2028394052]
 process_mode = 4
 script = ExtResource("8_smmr0")
 
-[node name="Swimming" type="Node" parent="."]
+[node name="Swimming" type="Node" parent="." unique_id=692660911]
 process_mode = 4
 script = ExtResource("23_0t5q5")
 
-[node name="Standing" type="Node" parent="."]
+[node name="Standing" type="Node" parent="." unique_id=992472653]
 process_mode = 4
 script = ExtResource("9_qtidm")
 
-[node name="Walking" type="Node" parent="."]
+[node name="Walking" type="Node" parent="." unique_id=1834723224]
 process_mode = 4
 script = ExtResource("10_fl747")

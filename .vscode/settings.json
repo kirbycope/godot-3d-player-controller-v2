@@ -7,6 +7,15 @@
         "cert": "C:\\GitHub\\localhost.pem",
         "key": "C:\\GitHub\\localhost.key",
         "passphrase": "godot"
-    }
+    },
+    "cSpell.words": [
+        "elif",
+        "joypad",
+        "Mixamo",
+        "onready",
+        "Quaternius",
+        "ragdoll",
+        "ragdolling"
+    ]
 
 }

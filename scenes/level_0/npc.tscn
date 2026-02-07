@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://cppos668fpq33"]
+
+[ext_resource type="PackedScene" uid="uid://bgrrxk458bp5v" path="res://addons/3d_player_controller_v2/assets/characters/mixamo/y_bot.tscn" id="1_aphpg"]
+[ext_resource type="Script" uid="uid://w4x2ikgoiogd" path="res://scenes/level_0/npc.gd" id="1_k75rr"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_k75rr"]
+radius = 0.3
+height = 1.8
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_q42f8"]
+radius = 0.3
+height = 1.8
+
+[node name="NPC" type="CharacterBody3D" unique_id=1410988741 groups=["Focusable"]]
+script = ExtResource("1_k75rr")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=582733851]
+volume_db = -15.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=733832833]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_k75rr")
+
+[node name="Y_Bot" parent="." unique_id=1193744009 instance=ExtResource("1_aphpg")]
+
+[node name="Area3D" type="Area3D" parent="." unique_id=898710818]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=707150640]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_q42f8")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

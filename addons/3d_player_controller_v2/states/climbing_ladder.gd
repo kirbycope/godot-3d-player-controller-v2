@@ -36,12 +36,12 @@ func _process(delta: float) -> void:
 	# Do nothing if not the authority
 	if !is_multiplayer_authority(): return
 
-	# Check the eyeline for a ledge to grab -> Move to "jump target" (like mantling)
+	# Check the eye-line for a ledge to grab -> Move to "jump target" (like mantling)
 	if not player.ray_cast_top.is_colliding() \
 	and player.ray_cast_high.is_colliding():
 		# Make sure there is somewhere for the player to "exit" climbing the ladder
-		if player.shape_cast_jump_target.is_colliding(0):
-			player.global_position = player.shape_cast_jump_target.global_position
+		if player.shape_cast_jump_target.is_colliding():
+			player.global_position = player.shape_cast_jump_target.get_collision_point(0)
 			transition_state(NODE_STATE, States.State.STANDING)
 			return
 

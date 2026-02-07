@@ -1,4 +1,5 @@
 extends BaseState
+class_name Sprinting
 ## 🏃 Sprinting at high speed.
 
 # Sprinting 🔵 Mixamo animations

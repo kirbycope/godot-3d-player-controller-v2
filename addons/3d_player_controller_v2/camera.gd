@@ -231,6 +231,10 @@ func camera_rotate_by_controller(delta: float) -> void:
 	var input_x = Input.get_action_strength(Controls.LOOK_RIGHT) - Input.get_action_strength(Controls.LOOK_LEFT)
 	var input_y = Input.get_action_strength(Controls.LOOK_UP) - Input.get_action_strength(Controls.LOOK_DOWN)
 
+	# Disable left/right camera movement if player is locked onto a target
+	if player.current_focused_target:
+		input_x = 0.0
+
 	camera_pitch = clamp(camera_pitch + input_y * look_sensitivity_controller * delta, -80, 90)
 	var new_rotation_y = -input_x * look_sensitivity_controller * delta
 	player.rotate(player.basis.y, deg_to_rad(new_rotation_y))
@@ -241,10 +245,16 @@ func camera_rotate_by_controller(delta: float) -> void:
 ## Rotate camera using the mouse motion.
 func camera_rotate_by_mouse(event: InputEvent) -> void:
 	camera_pitch = clamp(camera_pitch - event.relative.y * look_sensitivity_mouse, -80, 90)
-	var new_rotation_y = -event.relative.x * look_sensitivity_mouse
+	var relative_x = event.relative.x
+	
+	# Disable left/right camera movement if player is locked onto a target
+	if player.current_focused_target:
+		relative_x = 0.0
+	
+	var new_rotation_y = -relative_x * look_sensitivity_mouse
 	player.rotate(player.basis.y, deg_to_rad(new_rotation_y))
 	if perspective == Perspective.THIRD_PERSON:
-		player.visuals.rotate_y(deg_to_rad(event.relative.x * look_sensitivity_mouse))
+		player.visuals.rotate_y(deg_to_rad(relative_x * look_sensitivity_mouse))
 
 
 ## Update the camera to follow the character head's position (while in "first person").

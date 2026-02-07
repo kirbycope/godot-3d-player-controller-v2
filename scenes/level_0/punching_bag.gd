@@ -12,23 +12,31 @@ const SFX_6: AudioStream = preload("res://assets/audio/punching_bag/594416__cash
 
 
 @rpc("any_peer", "call_local")
-func animate_hit_low_left() -> void:
+func animate_hit_low_left(player: CharacterBody3D = null) -> void:
 	play_kick_sound()
+	if player:
+		pass # Placeholder
 
 
 @rpc("any_peer", "call_local")
-func animate_hit_low_right() -> void:
+func animate_hit_low_right(player: CharacterBody3D = null) -> void:
 	play_kick_sound()
+	if player:
+		pass # Placeholder
 
 
 @rpc("any_peer", "call_local")
-func animate_hit_high_left() -> void:
+func animate_hit_high_left(player: CharacterBody3D = null) -> void:
 	play_punch_sound()
+	if player:
+		pass # Placeholder
 
 
 @rpc("any_peer", "call_local")
-func animate_hit_high_right() -> void:
+func animate_hit_high_right(player: CharacterBody3D = null) -> void:
 	play_punch_sound()
+	if player:
+		pass # Placeholder
 
 
 func play_kick_sound() -> void:

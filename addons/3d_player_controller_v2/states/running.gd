@@ -1,30 +1,32 @@
 extends BaseState
+class_name Running
 ## 🏃 Running on the floor.
 
 # Running 🔵 Mixamo animations
 const MIX_ANIMATION_RUNNING := "Running/mixamo_com"
 const MIX_ANIMATION_RUNNING_BACKWARDS := "Running_Backward/mixamo_com"
-const MIX_ANIMATION_RUNNING_BACKWARDS_HOLDING_RIFLE := "Running_Backward_Holding_Rifle/mixamo_com"
+const MIX_ANIMATION_RUNNING_STRAFE_LEFT := "Running_Strafe_Left/mixamo_com"
+const MIX_ANIMATION_RUNNING_STRAFE_RIGHT := "Running_Strafe_Right/mixamo_com"
+# Running 🔵 Mixamo animations (while holding a rifle)
 const MIX_ANIMATION_RUNNING_HOLDING_RIFLE := "Running_Holding_Rifle/mixamo_com"
+const MIX_ANIMATION_RUNNING_BACKWARDS_HOLDING_RIFLE := "Running_Backward_Holding_Rifle/mixamo_com"
+const MIX_ANIMATION_RUNNING_STRAFE_LEFT_HOLDING_RIFLE := "Running_Strafe_Left_Holding_Rifle/mixamo_com"
+const MIX_ANIMATION_RUNNING_STRAFE_RIGHT_HOLDING_RIFLE := "Running_Strafe_Right_Holding_Rifle/mixamo_com"
 const MIX_ANIMATION_RUNNING_AIMING_RIFLE := "Running_Aiming_Rifle/mixamo_com"
 const MIX_ANIMATION_RUNNING_FIRING_RIFLE := "Running_Firing_Rifle/mixamo_com"
-const MIX_ANIMATION_RUNNING_STRAFE_LEFT := "Running_Strafe_Left/mixamo_com" # TODO: Implement
-const MIX_ANIMATION_RUNNING_STRAFE_LEFT_HOLDING_RIFLE := "Running_Strafe_Left_Holding_Rifle/mixamo_com" # TODO: Implement
-const MIX_ANIMATION_RUNNING_STRAFE_RIGHT := "Running_Strafe_Right/mixamo_com" # TODO: Implement
-const MIX_ANIMATION_RUNNING_STRAFE_RIGHT_HOLDING_RIFLE := "Running_Strafe_Right_Holding_Rifle/mixamo_com" # TODO: Implement
+
 # Running 🟣 Quaternius animations
 const QUAT_ANIMATION_RUNNING := "UAL1/Jog_Fwd"
+const QUAT_ANIMATION_RUNNING_BACKWARDS := "UAL1/Jog_Bwd"  # Requires [Source] version of UAL1
+const QUAT_ANIMATION_RUNNING_STRAFE_LEFT := "UAL1/Jog_Left" # Requires [Source] version of UAL1
+const QUAT_ANIMATION_RUNNING_STRAFE_RIGHT := "UAL1/Jog_Right" # Requires [Source] version of UAL1
+# Running 🟣 Quaternius animations (while holding a rifle)
 const QUAT_ANIMATION_RUNNING_HOLDING_RIFLE := "Running_Holding_Rifle/mixamo_com" # There is no Quaternius animation yet (UAl1/UAL2)
+const QUAT_ANIMATION_RUNNING_BACKWARDS_HOLDING_RIFLE := "Running_Backward_Holding_Rifle/mixamo_com" # There is no Quaternius animation yet (UAl1/UAL2)
+const QUAT_ANIMATION_RUNNING_STRAFE_LEFT_HOLDING_RIFLE := "Running_Strafe_Left_Holding_Rifle/mixamo_com" # There is no Quaternius animation yet (UAl1/UAL2)
+const QUAT_ANIMATION_RUNNING_STRAFE_RIGHT_HOLDING_RIFLE := "Running_Strafe_Right_Holding_Rifle/mixamo_com" # There is no Quaternius animation yet (UAl1/UAL2)
 const QUAT_ANIMATION_RUNNING_AIMING_RIFLE := "Running_Aiming_Rifle/mixamo_com" # There is no Quaternius animation yet (UAl1/UAL2)
 const QUAT_ANIMATION_RUNNING_FIRING_RIFLE := "Running_Firing_Rifle/mixamo_com" # There is no Quaternius animation yet (UAl1/UAL2)
-const QUAT_ANIMATION_RUNNING_STRAFE_LEFT := "UAL1/Jog_Fwd_L" # TODO: Implement
-const QUAT_ANIMATION_RUNNING_STRAFE_RIGHT := "UAL1/Jog_Fwd_R" # TODO: Implement
-const QUAT_ANIMATION_RUNNING_BACKWARDS := "UAL1/Jog_Bwd" # TODO: Implement
-const QUAT_ANIMATION_RUNNING_BACKWARDS_HOLDING_RIFLE := "Running_Backward_Holding_Rifle/mixamo_com" # There is no Quaternius animation yet (UAl1/UAL2)
-#const QUAT_ANIMATION_RUNNING_BACKWARDS_STRAFE_LEFT := "UAL1/Jog_Bwd_L" # TODO: Implement
-const QUAT_ANIMATION_RUNNING_STRAFE_LEFT_HOLDING_RIFLE := "Running_Strafe_Left_Holding_Rifle/mixamo_com" # TODO: Implement
-#const QUAT_ANIMATION_RUNNING_BACKWARDS_STRAFE_RIGHT := "UAL1/Jog_Bwd_R" # TODO: Implement
-const QUAT_ANIMATION_RUNNING_STRAFE_RIGHT_HOLDING_RIFLE := "Running_Strafe_Right_Holding_Rifle/mixamo_com" # TODO: Implement
 
 const NODE_STATE := States.State.RUNNING
 
