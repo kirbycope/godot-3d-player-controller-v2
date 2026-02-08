@@ -515,7 +515,6 @@ func _ensure_head_modifier_for(skel: Skeleton3D) -> LookAtModifier3D:
 	modifier.relative = true
 	modifier.use_secondary_rotation = true
 	skel.add_child(modifier)
-	modifier.owner = get_tree().current_scene
 	head_look_modifiers[key] = modifier
 	return modifier
 
@@ -531,7 +530,6 @@ func _ensure_head_anchor_for(skel: Skeleton3D) -> Node3D:
 	var anchor := Node3D.new()
 	anchor.name = "HeadLookTargetAnchor"
 	skel.add_child(anchor)
-	anchor.owner = get_tree().current_scene
 	head_look_anchors[key] = anchor
 	return anchor
 
