@@ -57,7 +57,7 @@ func play_animation() -> void:
 		quat_anim = QUAT_ANIMATION_FLIPPING_BACKWARD
 	else:  # Forward flip
 		# [Re]set the animation playback speed
-		player.animation_player_set_speed_scale(1.)
+		player.animation_player_set_speed_scale(1.0)
 		mix_anim = MIX_ANIMATION_FLIPPING_FORWARD
 		quat_anim = QUAT_ANIMATION_FLIPPING_FORWARD
 	

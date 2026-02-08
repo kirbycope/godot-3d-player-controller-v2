@@ -8,7 +8,7 @@ const MIX_ANIMATION_BACKWARD := "Walking_Backward/mixamo_com"
 const MIX_ANIMATION_BACKWARD_FLIP := Running.MIX_ANIMATION_BACKWARD_FLIP
 const MIX_ANIMATION_STRAFE_LEFT := "Walking_Strafe_Left/mixamo_com"
 const MIX_ANIMATION_STRAFE_RIGHT := "Walking_Strafe_Right/mixamo_com"
-# Walking 🔵 Mixamo animations (while holding a rifle)
+# Walking 🔵 Mixamo animations (holding a rifle)
 const MIX_ANIMATION_HOLDING_RIFLE := "Walking_Holding_Rifle/mixamo_com"
 const MIX_ANIMATION_BACKWARD_HOLDING_RIFLE := "Walking_Backward_Holding_Rifle/mixamo_com"
 const MIX_ANIMATION_STRAFE_LEFT_HOLDING_RIFLE := "Walking_Strafe_Left_Holding_Rifle/mixamo_com"
@@ -21,7 +21,7 @@ const QUAT_ANIMATION := "UAL1/Walk"
 const QUAT_ANIMATION_BACKWARD := MIX_ANIMATION_BACKWARD # TODO: Look for a proper Quaternius walking backward animation
 const QUAT_ANIMATION_STRAFE_LEFT := MIX_ANIMATION_STRAFE_LEFT # TODO: Look for a proper Quaternius walking strafe left animation
 const QUAT_ANIMATION_STRAFE_RIGHT := MIX_ANIMATION_STRAFE_RIGHT # TODO: Look for a proper Quaternius walking strafe right animation
-# Walking 🟣 Quaternius animations (while holding a rifle)
+# Walking 🟣 Quaternius animations (holding a rifle)
 const QUAT_ANIMATION_HOLDING_RIFLE := MIX_ANIMATION_HOLDING_RIFLE # There is no Quaternius animation yet (UAl1/UAL2)
 const QUAT_ANIMATION_BACKWARD_HOLDING_RIFLE := MIX_ANIMATION_BACKWARD_HOLDING_RIFLE # There is no Quaternius animation yet (UAl1/UAL2)
 const QUAT_ANIMATION_STRAFE_LEFT_HOLDING_RIFLE := MIX_ANIMATION_STRAFE_LEFT_HOLDING_RIFLE # There is no

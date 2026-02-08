@@ -297,7 +297,7 @@ func _physics_process(delta: float) -> void:
 			# Maintain lock or cancel if target is out of range
 			if is_target_locked:
 				var strafe_target = get_focus_target()
-				if strafe_target and camera.perspective == camera.Perspective.THIRD_PERSON:
+				if strafe_target:
 					# Rotate to face the target while flattening the look vector onto the surface plane (avoid pitching down toward ground)
 					look_at_flat_upright(self, strafe_target.global_position, new_up)
 					look_at_flat_upright(visuals, strafe_target.global_position, new_up)

@@ -17,6 +17,8 @@ var is_reacting_low_left: bool = false
 var is_reacting_low_right: bool = false
 var is_reacting_high_left: bool = false
 var is_reacting_high_right: bool = false
+var is_reacting_knocked_over: bool = false
+var is_getting_up: bool = false
 var setup_character: GDScript = preload("res://addons/3d_player_controller_v2/setup_character.gd")
 
 @onready var audio_stream_player: AudioStreamPlayer3D = $AudioStreamPlayer3D
@@ -55,6 +57,12 @@ func play_animation() -> void:
 	elif is_reacting_high_right:
 		mix_anim = Reacting.MIX_ANIMATION_REACTING_HIGH_RIGHT
 		quat_anim = Reacting.QUAT_ANIMATION_REACTING_HIGH_RIGHT
+	elif is_reacting_knocked_over:
+		mix_anim = Reacting.MIX_ANIMATION_REACTING_KNOCKED_OVER
+		quat_anim = Reacting.QUAT_ANIMATION_REACTING_KNOCKED_OVER
+	elif is_getting_up:
+		mix_anim = Reacting.MIX_ANIMATION_REACTING_GETTING_UP
+		quat_anim = Reacting.QUAT_ANIMATION_REACTING_GETTING_UP
 	else:
 		mix_anim = Standing.MIX_ANIMATION_STANDING_IDLE
 		quat_anim = Standing.QUAT_ANIMATION_STANDING_IDLE
@@ -78,6 +86,13 @@ func _on_animation_finished(animation_name: String) -> void:
 	elif animation_name == Reacting.MIX_ANIMATION_REACTING_HIGH_RIGHT \
 	or animation_name == Reacting.QUAT_ANIMATION_REACTING_HIGH_RIGHT:
 		is_reacting_high_right = false
+	elif animation_name == Reacting.MIX_ANIMATION_REACTING_KNOCKED_OVER \
+	or animation_name == Reacting.QUAT_ANIMATION_REACTING_KNOCKED_OVER:
+		is_reacting_knocked_over = false
+		is_getting_up = true
+	elif animation_name == Reacting.MIX_ANIMATION_REACTING_GETTING_UP \
+	or animation_name == Reacting.QUAT_ANIMATION_REACTING_GETTING_UP:
+		is_getting_up = false
 
 
 ## Connects a [Signal] (by name) to a [Callable] on all [AnimationPlayer] nodes found under [character] (recursively).
@@ -125,6 +140,7 @@ func _reset_reactions() -> void:
 	is_reacting_low_right = false
 	is_reacting_high_left = false
 	is_reacting_high_right = false
+	is_reacting_knocked_over = false
 
 
 @rpc("any_peer", "call_local")
@@ -162,6 +178,13 @@ func animate_hit_high_right(player: CharacterBody3D = null) -> void:
 	if player:
 		pass # Placeholder
 
+@rpc("any_peer", "call_local")
+func animate_knocked_over(player: CharacterBody3D = null) -> void:
+	is_reacting_knocked_over = true
+	play_damage_sound_effect()
+	if player:
+		pass # Placeholder
+
 
 ## Plays the sound effect for when the character takes damage.
 func play_damage_sound_effect() -> void:
@@ -191,10 +214,12 @@ func _is_reacting_animation_playing() -> bool:
 		Reacting.MIX_ANIMATION_REACTING_LOW_RIGHT,
 		Reacting.MIX_ANIMATION_REACTING_HIGH_LEFT,
 		Reacting.MIX_ANIMATION_REACTING_HIGH_RIGHT,
+		Reacting.MIX_ANIMATION_REACTING_KNOCKED_OVER,
 		Reacting.QUAT_ANIMATION_REACTING_LOW_LEFT,
 		Reacting.QUAT_ANIMATION_REACTING_LOW_RIGHT,
 		Reacting.QUAT_ANIMATION_REACTING_HIGH_LEFT,
 		Reacting.QUAT_ANIMATION_REACTING_HIGH_RIGHT,
+		Reacting.QUAT_ANIMATION_REACTING_KNOCKED_OVER,
 	]
 	return current_anim in reacting_animations
 
@@ -203,4 +228,4 @@ func _on_area_3d_body_entered(body: Node3D) -> void:
 	if body is RigidBody3D:
 		if _is_reacting_animation_playing():
 			return # Ignore repeated hits while current reaction plays
-		rpc("animate_hit_high_left")
+		rpc("animate_knocked_over", null)

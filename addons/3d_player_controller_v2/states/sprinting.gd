@@ -3,13 +3,21 @@ class_name Sprinting
 ## 🏃 Sprinting at high speed.
 
 # Sprinting 🔵 Mixamo animations
-const MIX_ANIMATION_SPRINTING := "Sprinting/mixamo_com"
-const MIX_ANIMATION_SPRINTING_HOLDING_RIFLE := "Sprinting_Holding_Rifle/mixamo_com"
+const MIX_ANIMATION := "Sprinting/mixamo_com"
+const MIX_ANIMATION_BACKWARD := "Sprinting_Backward/mixamo_com"
+const MIX_ANIMATION_STRAFE_LEFT := Running.MIX_ANIMATION_STRAFE_LEFT
+const MIX_ANIMATION_STRAFE_RIGHT := Running.MIX_ANIMATION_STRAFE_RIGHT
+# Sprinting 🔵 Mixamo animations (holding a rifle)
+const MIX_ANIMATION_HOLDING_RIFLE := "Sprinting_Holding_Rifle/mixamo_com"
+
 # Sprinting 🟣 Quaternius animations
-const QUAT_ANIMATION_SPRINTING := "UAL1/Sprint"
-const QUAT_ANIMATION_SPRINTING_HOLDING_RIFLE := "UAL1/Sprint_Holding_Rifle" # TODO: Implement
-const QUAT_ANIMATION_SPRINTING_START := "UAL1/Sprint_Enter" # TODO: Implement
-const QUAT_ANIMATION_SPRINTING_STOP := "UAL1/Sprint_Exit" # TODO: Implement
+const QUAT_ANIMATION := "UAL1/Sprint"
+const QUAT_ANIMATION_BACKWARD := MIX_ANIMATION_BACKWARD # TODO: Look for a proper Quaternius sprinting backward animation
+const QUAT_ANIMATION_STRAFE_LEFT := MIX_ANIMATION_STRAFE_LEFT # TODO: Look for a proper Quaternius sprinting strafe left animation
+const QUAT_ANIMATION_STRAFE_RIGHT := MIX_ANIMATION_STRAFE_RIGHT # TODO: Look for a proper Quaternius sprinting strafe right animation
+# Sprinting 🟣 Quaternius animations (holding a rifle)
+const QUAT_ANIMATION_HOLDING_RIFLE := "UAL1/Sprint_Holding_Rifle"
+
 const NODE_STATE := States.State.SPRINTING
 
 
@@ -62,23 +70,56 @@ func _process(delta: float) -> void:
 
 ## Plays the appropriate animation based on player state.
 func play_animation() -> void:
-	# Check if in first person and moving backwards
-	var play_backwards = (player.camera.perspective == player.camera.Perspective.FIRST_PERSON) and Input.is_action_pressed(Controls.MOVE_DOWN)
-	var mix_anim = MIX_ANIMATION_SPRINTING_HOLDING_RIFLE if player.is_holding_rifle else MIX_ANIMATION_SPRINTING
-	var quat_anim = QUAT_ANIMATION_SPRINTING_HOLDING_RIFLE if player.is_holding_rifle else QUAT_ANIMATION_SPRINTING
+	# Check if strafing left or right
+	var is_strafe_left: bool = player.is_strafing and player.input_direction.x < 0.0
+	var is_strafe_right: bool = player.is_strafing and player.input_direction.x > 0.0
+	# Check if moving backwards (first-person, while strafing, or while target-locked)
+	var is_backpedaling = Input.is_action_pressed(Controls.MOVE_DOWN) \
+		and (player.camera.perspective == player.camera.Perspective.FIRST_PERSON \
+		or player.is_strafing \
+		or player.is_target_locked)
+	var mix_anim: String ## The name of the Mixamo animation to play.
+	var quat_anim: String ## The name of the Quaternius animation to play.
 
+	# Handle "running" (while "strafing")
+	if is_strafe_left \
+	or is_strafe_right:
+		# Strafing+Sprinting animations are just Running animations played at a faster speed
+		player.animation_player_set_speed_scale(1.5)
+		# Handle "running" (while "strafing" left and unarmed)
+		if is_strafe_left:
+			mix_anim = MIX_ANIMATION_STRAFE_LEFT
+			quat_anim = QUAT_ANIMATION_STRAFE_LEFT
+		# Handle "running" (while "strafing" right and unarmed)
+		elif is_strafe_right:
+			mix_anim = MIX_ANIMATION_STRAFE_RIGHT
+			quat_anim = QUAT_ANIMATION_STRAFE_RIGHT
+	# Handle "running" (while backpedaling)
+	elif is_backpedaling:
+		mix_anim = MIX_ANIMATION_BACKWARD
+		quat_anim = QUAT_ANIMATION_BACKWARD
+		# [Re]set the animation playback speed
+		player.animation_player_set_speed_scale(1.0)
+	# Handle "sprinting" (unarmed)
+	else:
+		mix_anim = MIX_ANIMATION
+		quat_anim = QUAT_ANIMATION
+		# [Re]set the animation playback speed
+		player.animation_player_set_speed_scale(1.0)
+
+	# Play the appropriate animation based on the player's animation set (🔵 Mixamo or 🟣 Quaternius)
 	if player.animation_set == 0:
 		if player.animation_player_current_animation() != mix_anim:
-			if play_backwards:
-				player.animation_player_play_backwards(mix_anim)
-			else:
-				player.animation_player_play(mix_anim)
+			#_on_animation_finished(player.animation_player_current_animation())
+			player.animation_player_play(mix_anim)
 	elif player.animation_set == 1:
 		if player.animation_player_current_animation() != quat_anim:
-			if play_backwards:
-				player.animation_player_play_backwards(quat_anim)
-			else:
-				player.animation_player_play(quat_anim)
+			#_on_animation_finished(player.animation_player_current_animation())
+			player.animation_player_play(quat_anim)
+
+
+#func _on_animation_finished(animation_name: String) -> void:
+#	pass
 
 
 ## Start "sprinting".
@@ -103,6 +144,9 @@ func stop() -> void:
 
 	# Flag the player as not "sprinting"
 	player.is_sprinting = false
+
+	# Reset animation playback speed
+	player.animation_player_set_speed_scale(1.0)
 
 	# 🔇 Stop "sprinting" sound effect
 	if player.character.has_method("stop_sprint_sound_effect"):
