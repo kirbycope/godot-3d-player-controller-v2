@@ -449,17 +449,6 @@ func animate_hit_high_right() -> void:
 	base_state.transition_state(current_state, States.State.REACTING)
 
 
-## Makes the player's visuals face a target node while staying upright (no tilting).
-func look_at_upright(target: Node3D) -> void:
-	var direction = Vector3(
-		target.global_position.x - visuals.global_position.x,
-		0,
-		target.global_position.z - visuals.global_position.z
-	)
-	if direction.length() > 0.001:
-		visuals.look_at(visuals.global_position + direction, Vector3.UP)
-
-
 ## Rotates a node toward a target while flattening pitch onto the plane defined by up (no looking down when above target).
 func look_at_flat_upright(node: Node3D, target_position: Vector3, up: Vector3) -> void:
 	var direction: Vector3 = target_position - node.global_position
