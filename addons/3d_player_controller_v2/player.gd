@@ -66,7 +66,6 @@ var current_state: States.State ## The current state of the player
 var input_direction := Vector2.ZERO ## The direction of the player input (UP/DOWN, LEFT/RIGHT).
 var is_animation_locked := false ## Is the player's animation locked?
 var is_auto_running := false ## Is the player auto-running?
-var is_backpedaling := false ## Is the player backpedaling (moving backwards)?
 var is_blocking_1h_left := false ## Is the player blocking with a 1-handed tool or weapon with their left hand?
 var is_blocking_1h_right := false ## Is the player blocking with a 1-handed tool or weapon with their right hand?
 var is_blocking_2h := false ## Is the player blocking with a 2-handed tool or weapon?
@@ -288,11 +287,8 @@ func _physics_process(delta: float) -> void:
 		# Update strafing/backpedal flags and handle targeting
 		if enable_strafing \
 		and Input.is_action_pressed(Controls.BUTTON_6):
-			# Strafing is active if the player is holding the strafe button and providing directional input that isn't _mostly_ forward/backward
-			var strafe_threshold := 0.1
-			is_strafing = abs(input_direction.x) > strafe_threshold and abs(input_direction.y) <= strafe_threshold
-			# Backpedaling is active if the player is holding the strafe button and providing backward input that isn't _mostly_ lateral
-			is_backpedaling = input_direction.y > strafe_threshold
+			# Holding the strafe button enables strafing, regardless of input magnitude
+			is_strafing = true
 			# Lock onto nearest target when button_6 is FIRST pressed
 			if Input.is_action_just_pressed(Controls.BUTTON_6):
 				var strafe_target = get_focus_target()
@@ -311,7 +307,6 @@ func _physics_process(delta: float) -> void:
 				is_target_locked = false
 		else:
 			is_strafing = false
-			is_backpedaling = false
 			# Reset target when button_6 is released
 			if current_focused_target:
 				_reset_target_material(current_focused_target)
@@ -338,9 +333,12 @@ func _physics_process(delta: float) -> void:
 			lateral_dir = lateral_dir.normalized()
 			# Handle strafing and "focus target" (if applicable)
 			var strafe_target: Node3D = null
-			if enable_strafing and is_strafing and is_target_locked:
+			# Keep the target reference while locked, even if not actively strafing, so we maintain facing when backpedaling
+			if enable_strafing and is_target_locked:
 				strafe_target = get_focus_target()
-			if strafe_target:
+			# Only project movement onto a strafe tangent when there is horizontal input
+			var has_strafe_input = abs(input_direction.x) > 0.1
+			if strafe_target and is_strafing and has_strafe_input:
 				var to_player = global_position - strafe_target.global_position
 				to_player = to_player - new_up * to_player.dot(new_up)
 				if to_player.length() > 0.001:
@@ -360,13 +358,13 @@ func _physics_process(delta: float) -> void:
 				and not is_climbing \
 				and not is_climbing_ladder \
 				and not is_hanging:
-					# Strafe while facing the "focus target"
+					# Strafe/backpedal while facing the "focus target"
 					if strafe_target:
 						look_at_flat_upright(self, strafe_target.global_position, new_up)
 						look_at_flat_upright(visuals, strafe_target.global_position, new_up)
 						look_at_flat_upright(camera_mount, strafe_target.global_position, new_up)
 					# Strafe using camera forward direction
-					elif enable_strafing and (is_strafing or is_backpedaling):
+					elif enable_strafing and is_strafing:
 						var camera_forward: Vector3 = -camera.global_transform.basis.z
 						camera_forward = (camera_forward - new_up * camera_forward.dot(new_up)).normalized()
 						if camera_forward.length() > 0.001:

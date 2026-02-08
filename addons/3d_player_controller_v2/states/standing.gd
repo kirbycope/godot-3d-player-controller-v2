@@ -89,8 +89,8 @@ func _input(event: InputEvent) -> void:
 		if player.enable_jumping \
 		and player.is_on_floor() \
 		and not player.chat.line_edit.visible:
-			if player.is_target_locked \
-			and player.enable_flipping \
+			if player.enable_flipping \
+			and player.is_strafing \
 			and (Input.is_action_pressed(Controls.MOVE_DOWN) or Input.is_action_pressed(Controls.MOVE_UP)):
 				# Start "flipping"
 				transition_state(player.current_state, States.State.FLIPPING)

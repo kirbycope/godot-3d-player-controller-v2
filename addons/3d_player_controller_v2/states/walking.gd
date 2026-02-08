@@ -3,15 +3,32 @@ class_name Walking
 ## 🚶 Walking on the floor.
 
 # Walking 🔵 Mixamo animations
-const MIX_ANIMATION_WALKING := "Walking/mixamo_com"
-const MIX_ANIMATION_WALKING_HOLDING_RIFLE := "Walking_Holding_Rifle/mixamo_com"
-const MIX_ANIMATION_WALKING_HOLDING_AIMING := "Walking_Aiming_Rifle/mixamo_com"
-const MIX_ANIMATION_WALKING_FIRING_RIFLE := "Walking_Firing_Rifle/mixamo_com"
+const MIX_ANIMATION := "Walking/mixamo_com"
+const MIX_ANIMATION_BACKWARD := "Walking_Backward/mixamo_com"
+const MIX_ANIMATION_BACKWARD_FLIP := Running.MIX_ANIMATION_BACKWARD_FLIP
+const MIX_ANIMATION_STRAFE_LEFT := "Walking_Strafe_Left/mixamo_com"
+const MIX_ANIMATION_STRAFE_RIGHT := "Walking_Strafe_Right/mixamo_com"
+# Walking 🔵 Mixamo animations (while holding a rifle)
+const MIX_ANIMATION_HOLDING_RIFLE := "Walking_Holding_Rifle/mixamo_com"
+const MIX_ANIMATION_BACKWARD_HOLDING_RIFLE := "Walking_Backward_Holding_Rifle/mixamo_com"
+const MIX_ANIMATION_STRAFE_LEFT_HOLDING_RIFLE := "Walking_Strafe_Left_Holding_Rifle/mixamo_com"
+const MIX_ANIMATION_STRAFE_RIGHT_HOLDING_RIFLE := "Walking_Strafe_Right_Holding_Rifle/mixamo_com"
+const MIX_ANIMATION_AIMING_RIFLE := "Walking_Aiming_Rifle/mixamo_com"
+const MIX_ANIMATION_FIRING_RIFLE := "Walking_Firing_Rifle/mixamo_com"
+
 # Walking 🟣 Quaternius animations
-const QUAT_ANIMATION_WALKING := "UAL1/Walk"
-const QUAT_ANIMATION_WALKING_HOLDING_RIFLE := "UAL1/Walk_Holding_Rifle" # There is no Quaternius animation yet (UAl1/UAL2)
-const QUAT_ANIMATION_WALKING_HOLDING_AIMING := "UAL1/Walk_Holding_Aiming" # There is no Quaternius animation yet (UAl1/UAL2)
-const QUAT_ANIMATION_WALKING_FIRING_RIFLE := "UAL1/Walk_Firing_Rifle" # There is no Quaternius animation yet (UAl1/UAL2)
+const QUAT_ANIMATION := "UAL1/Walk"
+const QUAT_ANIMATION_BACKWARD := MIX_ANIMATION_BACKWARD # TODO: Look for a proper Quaternius walking backward animation
+const QUAT_ANIMATION_STRAFE_LEFT := MIX_ANIMATION_STRAFE_LEFT # TODO: Look for a proper Quaternius walking strafe left animation
+const QUAT_ANIMATION_STRAFE_RIGHT := MIX_ANIMATION_STRAFE_RIGHT # TODO: Look for a proper Quaternius walking strafe right animation
+# Walking 🟣 Quaternius animations (while holding a rifle)
+const QUAT_ANIMATION_HOLDING_RIFLE := MIX_ANIMATION_HOLDING_RIFLE # There is no Quaternius animation yet (UAl1/UAL2)
+const QUAT_ANIMATION_BACKWARD_HOLDING_RIFLE := MIX_ANIMATION_BACKWARD_HOLDING_RIFLE # There is no Quaternius animation yet (UAl1/UAL2)
+const QUAT_ANIMATION_STRAFE_LEFT_HOLDING_RIFLE := MIX_ANIMATION_STRAFE_LEFT_HOLDING_RIFLE # There is no
+const QUAT_ANIMATION_STRAFE_RIGHT_HOLDING_RIFLE := MIX_ANIMATION_STRAFE_RIGHT_HOLDING_RIFLE # There is no Quaternius animation yet (UAl1/UAL2)
+const QUAT_ANIMATION_AIMING_RIFLE := MIX_ANIMATION_AIMING_RIFLE # There is no Quaternius animation yet (UAl1/UAL2)
+const QUAT_ANIMATION_FIRING_RIFLE := MIX_ANIMATION_FIRING_RIFLE # There is no Quaternius animation yet (UAl1/UAL2)
+
 const NODE_STATE := States.State.WALKING
 
 
@@ -28,8 +45,8 @@ func _input(event: InputEvent) -> void:
 		if player.enable_jumping \
 		and player.is_on_floor() \
 		and not player.chat.line_edit.visible:
-			if player.is_target_locked \
-			and player.enable_flipping \
+			if player.enable_flipping \
+			and player.is_strafing \
 			and (Input.is_action_pressed(Controls.MOVE_DOWN) or Input.is_action_pressed(Controls.MOVE_UP)):
 				# Start "flipping"
 				transition_state(player.current_state, States.State.FLIPPING)
@@ -104,40 +121,82 @@ func _process(delta: float) -> void:
 
 ## Plays the appropriate animation based on player state.
 func play_animation() -> void:
-	# Check if in first person and moving backwards
-	var play_backwards = (player.camera.perspective == player.camera.Perspective.FIRST_PERSON) and Input.is_action_pressed(Controls.MOVE_DOWN)
-	var mix_anim: String
-	var quat_anim: String
-	if player.is_holding_rifle:
-		if player.is_firing_rifle:
-			mix_anim = MIX_ANIMATION_WALKING_FIRING_RIFLE
-			quat_anim = QUAT_ANIMATION_WALKING_FIRING_RIFLE
-		else:
-			mix_anim = MIX_ANIMATION_WALKING_HOLDING_RIFLE
-			quat_anim = QUAT_ANIMATION_WALKING_HOLDING_RIFLE
-	else:
-		mix_anim = MIX_ANIMATION_WALKING
-		quat_anim = QUAT_ANIMATION_WALKING
+	# Check if strafing left or right
+	var is_strafe_left: bool = player.is_strafing and player.input_direction.x < 0.0
+	var is_strafe_right: bool = player.is_strafing and player.input_direction.x > 0.0
+	# Check if moving backwards (first-person, while strafing, or while target-locked)
+	var is_backpedaling = Input.is_action_pressed(Controls.MOVE_DOWN) \
+		and (player.camera.perspective == player.camera.Perspective.FIRST_PERSON \
+		or player.is_strafing \
+		or player.is_target_locked)
+	var mix_anim: String ## The name of the Mixamo animation to play.
+	var quat_anim: String ## The name of the Quaternius animation to play.
 
+	# Handle "walking" (while "strafing")
+	if is_strafe_left \
+	or is_strafe_right:
+		# Handle "walking" (while "strafing" and holding a rifle)
+		if player.is_holding_rifle:
+			# Handle "walking" (while "strafing" left and holding a rifle)
+			if is_strafe_left:
+				mix_anim = MIX_ANIMATION_STRAFE_LEFT_HOLDING_RIFLE
+				quat_anim = QUAT_ANIMATION_STRAFE_LEFT_HOLDING_RIFLE
+			# Handle "walking" (while "strafing" right and holding a rifle)
+			elif is_strafe_right:
+				mix_anim = MIX_ANIMATION_STRAFE_RIGHT_HOLDING_RIFLE
+				quat_anim = QUAT_ANIMATION_STRAFE_RIGHT_HOLDING_RIFLE
+		# Handle "walking" (while "strafing" and unarmed)
+		else:
+			# Handle "walking" (while "strafing" left and unarmed)
+			if is_strafe_left:
+				mix_anim = MIX_ANIMATION_STRAFE_LEFT
+				quat_anim = QUAT_ANIMATION_STRAFE_LEFT
+			# Handle "walking" (while "strafing" right and unarmed)
+			elif is_strafe_right:
+				mix_anim = MIX_ANIMATION_STRAFE_RIGHT
+				quat_anim = QUAT_ANIMATION_STRAFE_RIGHT
+	# Handle "walking" (while backpedaling)
+	elif is_backpedaling:
+		# Handle "walking" (while backpedaling and holding a rifle)
+		if player.is_holding_rifle:
+			mix_anim = MIX_ANIMATION_BACKWARD_HOLDING_RIFLE
+			quat_anim = QUAT_ANIMATION_BACKWARD_HOLDING_RIFLE
+		# Handle "walking" (while backpedaling and unarmed)
+		else:
+			mix_anim = MIX_ANIMATION_BACKWARD
+			quat_anim = QUAT_ANIMATION_BACKWARD
+	# Handle "walking" (while holding a rifle)
+	elif player.is_holding_rifle:
+		# Handle "walking" (while holding a rifle and firing)
+		if player.is_firing_rifle:
+			mix_anim = MIX_ANIMATION_FIRING_RIFLE
+			quat_anim = QUAT_ANIMATION_FIRING_RIFLE
+		# Handle "walking" (while holding a rifle and aiming)
+		elif player.is_aiming_rifle:
+			mix_anim = MIX_ANIMATION_AIMING_RIFLE
+			quat_anim = QUAT_ANIMATION_AIMING_RIFLE
+		# Handle "walking" (while holding a rifle)
+		else:
+			mix_anim = MIX_ANIMATION_HOLDING_RIFLE
+			quat_anim = QUAT_ANIMATION_HOLDING_RIFLE
+	# Handle "walking" (unarmed)
+	else:
+		mix_anim = MIX_ANIMATION
+		quat_anim = QUAT_ANIMATION
+
+	# Play the appropriate animation based on the player's animation set (🔵 Mixamo or 🟣 Quaternius)
 	if player.animation_set == 0:
 		if player.animation_player_current_animation() != mix_anim:
 			_on_animation_finished(player.animation_player_current_animation())
-			if play_backwards:
-				player.animation_player_play_backwards(mix_anim)
-			else:
-				player.animation_player_play(mix_anim)
+			player.animation_player_play(mix_anim)
 	elif player.animation_set == 1:
 		if player.animation_player_current_animation() != quat_anim:
-			_on_animation_finished(player.animation_player_current_animation())
-			if play_backwards:
-				player.animation_player_play_backwards(quat_anim)
-			else:
-				player.animation_player_play(quat_anim)
+			player.animation_player_play(quat_anim)
 
 
 func _on_animation_finished(animation_name: String) -> void:
-	if animation_name == MIX_ANIMATION_WALKING_FIRING_RIFLE \
-	or animation_name == QUAT_ANIMATION_WALKING_FIRING_RIFLE:
+	if animation_name == MIX_ANIMATION_FIRING_RIFLE \
+	or animation_name == QUAT_ANIMATION_FIRING_RIFLE:
 		player.is_firing_rifle = false
 
 

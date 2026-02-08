@@ -27,6 +27,7 @@ var yellow_sphere: MeshInstance3D
 @onready var enable_sitting: CheckButton = $Configuration/EnableSitting
 @onready var enable_sliding: CheckButton = $Configuration/EnableSliding
 @onready var enable_sprinting: CheckButton = $Configuration/EnableSprinting
+@onready var enable_strafing: CheckButton = $Configuration/EnableStrafing
 @onready var enable_swimming: CheckButton = $Configuration/EnableSwimming
 @onready var enable_throwing: CheckButton = $Configuration/EnableThrowing
 ## -- CONFIG 2 --
@@ -59,6 +60,7 @@ var yellow_sphere: MeshInstance3D
 @onready var is_sliding: CheckBox = $States/IsSliding
 @onready var is_sprinting: CheckBox = $States/IsSprinting
 @onready var is_standing: CheckBox = $States/IsStanding
+@onready var is_strafing: CheckBox = $States2/IsStrafing
 @onready var is_swimming: CheckBox = $States/IsSwimming
 @onready var is_walking: CheckBox = $States/IsWalking
 # -- STATES 2 --
@@ -154,6 +156,7 @@ func _process(_delta: float) -> void:
 		enable_sitting.button_pressed = player.enable_sitting
 		enable_sliding.button_pressed = player.enable_sliding
 		enable_sprinting.button_pressed = player.enable_sprinting
+		enable_strafing.button_pressed = player.enable_strafing
 		enable_swimming.button_pressed = player.enable_swimming
 		enable_throwing.button_pressed = player.enable_throwing
 		enable_vibration.button_pressed = player.enable_vibration
@@ -208,6 +211,7 @@ func _process(_delta: float) -> void:
 		is_sliding.button_pressed = player.is_sliding
 		is_sprinting.button_pressed = player.is_sprinting
 		is_standing.button_pressed = player.is_standing
+		is_strafing.button_pressed = player.is_strafing
 		is_swimming.button_pressed = player.is_swimming
 		is_swinging_1h_left.button_pressed = player.is_swinging_1h_left
 		is_swinging_1h_right.button_pressed = player.is_swinging_1h_right
@@ -361,6 +365,10 @@ func _on_enable_sliding_toggled(toggled_on: bool) -> void:
 
 func _on_enable_sprinting_toggled(toggled_on: bool) -> void:
 	player.enable_sprinting = toggled_on
+
+
+func _on_enable_strafing_toggled(toggled_on: bool) -> void:
+	player.enable_strafing = toggled_on
 
 
 func _on_enable_swimming_toggled(toggled_on: bool) -> void:

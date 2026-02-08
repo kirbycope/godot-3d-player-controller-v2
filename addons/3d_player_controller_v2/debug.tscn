@@ -362,6 +362,22 @@ offset_bottom = 31.0
 grow_horizontal = 0
 mouse_filter = 1
 
+[node name="EnableStrafing" type="CheckButton" parent="Configuration" unique_id=220908985]
+layout_mode = 2
+text = "EnableStrafing"
+
+[node name="Panel" type="Panel" parent="Configuration/EnableStrafing" unique_id=397764975]
+z_index = -1
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -222.0
+offset_right = -2.0
+offset_bottom = 31.0
+grow_horizontal = 0
+mouse_filter = 1
+
 [node name="EnableSwimming" type="CheckButton" parent="Configuration" unique_id=1744784817]
 layout_mode = 2
 text = "Enable Swimming"
@@ -843,6 +859,17 @@ layout_mode = 0
 offset_right = 164.0
 offset_bottom = 31.0
 
+[node name="IsStrafing" type="CheckBox" parent="States2" unique_id=2109753545]
+layout_mode = 2
+disabled = true
+text = "IsStrafing"
+
+[node name="Panel" type="Panel" parent="States2/IsStrafing" unique_id=798500148]
+z_index = -1
+layout_mode = 0
+offset_right = 164.0
+offset_bottom = 31.0
+
 [node name="COMBAT_1H" type="VBoxContainer" parent="." unique_id=1644522861]
 visible = false
 offset_left = 167.0
@@ -1149,9 +1176,9 @@ offset_bottom = 31.0
 
 [node name="UNARMED" type="VBoxContainer" parent="." unique_id=258243805]
 offset_left = 167.0
-offset_top = 124.0
+offset_top = 156.0
 offset_right = 331.0
-offset_bottom = 279.0
+offset_bottom = 311.0
 theme_override_constants/separation = 2
 
 [node name="Label" type="Label" parent="UNARMED" unique_id=1576877435]
@@ -1327,6 +1354,7 @@ scroll_active = false
 [connection signal="toggled" from="Configuration/EnableSitting" to="." method="_on_enable_sitting_toggled"]
 [connection signal="toggled" from="Configuration/EnableSliding" to="." method="_on_enable_sliding_toggled"]
 [connection signal="toggled" from="Configuration/EnableSprinting" to="." method="_on_enable_sprinting_toggled"]
+[connection signal="toggled" from="Configuration/EnableStrafing" to="." method="_on_enable_strafing_toggled"]
 [connection signal="toggled" from="Configuration/EnableSwimming" to="." method="_on_enable_swimming_toggled"]
 [connection signal="toggled" from="Configuration/EnableThrowing" to="." method="_on_enable_throwing_toggled"]
 [connection signal="toggled" from="Configuration2/LockCamera" to="." method="_on_lock_camera_toggled"]

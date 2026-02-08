@@ -3,13 +3,13 @@
 importer="animation_library"
 importer_version=1
 type="AnimationLibrary"
-uid="uid://d3tp60q6vrcki"
-path="res://.godot/imported/Walking_Backwards.fbx-cc46b700a6bb92c3e89aa0ded227aeab.res"
+uid="uid://ccnhk5kh6rww3"
+path="res://.godot/imported/Walking_Strafe_Left.fbx-2d2cce0c12febdecf6df844dbe1a8276.res"
 
 [deps]
 
-source_file="res://addons/3d_player_controller_v2/assets/animations/mixamo/walking/Walking_Backwards.fbx"
-dest_files=["res://.godot/imported/Walking_Backwards.fbx-cc46b700a6bb92c3e89aa0ded227aeab.res"]
+source_file="res://addons/3d_player_controller_v2/assets/animations/mixamo/walking/Walking_Strafe_Left.fbx"
+dest_files=["res://.godot/imported/Walking_Strafe_Left.fbx-2d2cce0c12febdecf6df844dbe1a8276.res"]
 
 [params]
 
