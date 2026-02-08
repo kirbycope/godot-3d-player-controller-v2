@@ -5,7 +5,7 @@ class_name ClimbingLadder
 # Climbing Ladder 🔵 Mixamo animations
 const MIX_ANIMATION_CLIMBING_LADDER := "Climbing_Ladder/mixamo_com"
 # Climbing Ladder 🟣 Quaternius animations
-const QUAT_ANIMATION_CLIMBING_LADDER := "Climbing_Ladder/mixamo_com" # There is no Quaternius animation yet (UAl1/UAL2)
+const QUAT_ANIMATION_CLIMBING_LADDER := MIX_ANIMATION_CLIMBING_LADDER # There is no Quaternius animation yet (UAl1/UAL2)
 
 const NODE_STATE := States.State.CLIMBING_LADDER
 
@@ -13,16 +13,16 @@ const NODE_STATE := States.State.CLIMBING_LADDER
 ## Called when there is an input event.
 func _input(event: InputEvent) -> void:
 	# Do nothing if not the authority
-	if !is_multiplayer_authority(): return
+	if not is_multiplayer_authority(): return
 
 	# Do nothing if the "pause" menu is visible
 	if player.pause.visible: return
 
-	# Ⓑ/[shift] _pressed_ -> Move faster while "climbing"
+	# Ⓑ/[shift] _pressed_ -> Start "sprinting"
 	if player.enable_sprinting:
 		if event.is_action_pressed(Controls.BUTTON_1):
 			player.speed_current = player.speed_climbing * 2
-		else:
+		elif event.is_action_released(Controls.BUTTON_1):
 			player.speed_current = player.speed_climbing
 
 	# Ⓨ/[Ctrl] _pressed_ -> Start "falling"
@@ -32,18 +32,17 @@ func _input(event: InputEvent) -> void:
 
 
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	# Do nothing if not the authority
-	if !is_multiplayer_authority(): return
+	if not is_multiplayer_authority(): return
 
 	# Check the eye-line for a ledge to grab -> Move to "jump target" (like mantling)
 	if not player.ray_cast_top.is_colliding() \
-	and player.ray_cast_high.is_colliding():
-		# Make sure there is somewhere for the player to "exit" climbing the ladder
-		if player.shape_cast_jump_target.is_colliding():
-			player.global_position = player.shape_cast_jump_target.get_collision_point(0)
-			transition_state(NODE_STATE, States.State.STANDING)
-			return
+	and player.ray_cast_high.is_colliding() \
+	and player.shape_cast_jump_target.is_colliding():
+		player.global_position = player.shape_cast_jump_target.get_collision_point(0)
+		transition_state(NODE_STATE, States.State.STANDING)
+		return
 
 	# Move the player while climbing
 	player.move_player()
@@ -55,25 +54,24 @@ func _process(delta: float) -> void:
 ## Plays the appropriate animation based on player state.
 func play_animation() -> void:
 	# 🐢🐇 Set animation playback speed based on [Climbing] speed
-	if player.speed_current > player.speed_climbing:
-		player.animation_player_set_speed_scale(1.5)
-	else:
-		player.animation_player_set_speed_scale(1.0)
+	var speed_scale = 1.5 if player.speed_current > player.speed_climbing else 1.0
+	player.animation_player_set_speed_scale(speed_scale)
 
-	var anim = QUAT_ANIMATION_CLIMBING_LADDER if player.animation_set == 1 else MIX_ANIMATION_CLIMBING_LADDER
+	var animation = MIX_ANIMATION_CLIMBING_LADDER if player.animation_set == 0 else QUAT_ANIMATION_CLIMBING_LADDER
+	var current_animation = player.animation_player_current_animation()
 
 	# ↑ "climbing ladder" up
 	if player.input_direction.y < 0:
-		if player.animation_player_current_animation() != anim:
-			player.animation_player_play(anim)
+		if current_animation != animation:
+			player.animation_player_play(animation)
 	# ↓ "climbing ladder" down
 	elif player.input_direction.y > 0:
-		if player.animation_player_current_animation() != anim:
-			player.animation_player_play_backwards(anim)
+		if current_animation != animation:
+			player.animation_player_play_backwards(animation)
 	# "climbing ladder" idle
 	else:
-		if player.animation_player_current_animation() == anim:
-			player.animation_player_play(anim, 0.0)
+		if current_animation == animation:
+			player.animation_player_play(animation, 0.0)
 		player.animation_player_pause()
 
 
@@ -102,13 +100,7 @@ func start() -> void:
 	await get_tree().process_frame
 
 	# Begin playing the "climbing ladder" animation (locked) as a transition
-	var target_animation := ""
-	# 🔵 Mixamo
-	if player.animation_set == 0:
-		target_animation = MIX_ANIMATION_CLIMBING_LADDER
-	# 🟣 Quaternius
-	elif player.animation_set == 1:
-		target_animation = QUAT_ANIMATION_CLIMBING_LADDER
+	var target_animation = MIX_ANIMATION_CLIMBING_LADDER if player.animation_set == 0 else QUAT_ANIMATION_CLIMBING_LADDER
 	player.animation_player_play_locked(target_animation, 0.2)
 
 

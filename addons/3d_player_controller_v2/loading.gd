@@ -21,6 +21,9 @@ func _ready() -> void:
 
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
+	# Do nothing if not the authority
+	if not is_multiplayer_authority(): return
+
 	# Return early if there's no target scene to load
 	if _target_scene_path == "":
 		return

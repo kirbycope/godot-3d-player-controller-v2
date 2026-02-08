@@ -17,26 +17,24 @@ const NODE_STATE := States.State.SKATEBOARDING
 ## Called when there is an input event.
 func _input(event: InputEvent) -> void:
 	# Do nothing if not the authority
-	if !is_multiplayer_authority(): return
+	if not is_multiplayer_authority(): return
 
 	# Do nothing if the "pause" menu is visible
 	if player.pause.visible: return
 
 	# Ⓐ/[Space] _pressed_ (while grounded) -> Perform "ollie"
-	if event.is_action_pressed(Controls.BUTTON_0)\
-	and player.is_on_floor():
+	if event.is_action_pressed(Controls.BUTTON_0) and player.is_on_floor():
 		# Increase the player's velocity in the up direction
 		player.velocity += player.up_direction * player.speed_jumping
 
 
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	# Do nothing if not the authority
-	if !is_multiplayer_authority(): return
+	if not is_multiplayer_authority(): return
 
 	# Ⓑ/[shift] _pressed_ -> Move faster while "skateboarding"
-	if player.enable_sprinting \
-	and not player.pause.visible:
+	if player.enable_sprinting and not player.pause.visible:
 		if Input.is_action_pressed(Controls.BUTTON_1):
 			player.speed_current = player.speed_skateboarding * 1.5
 		else:
@@ -48,25 +46,26 @@ func _process(delta: float) -> void:
 
 ## Plays the appropriate animation based on player state.
 func play_animation() -> void:
-	var mix_anim: String
-	var quat_anim: String
+	var mixamo_animation: String
+	var quaternius_animation: String
 	var height_scale := 1.0
 	if player.input_direction == Vector2.ZERO:
-		mix_anim = MIX_ANIMATION_SKATEBOARDING_SLOW
-		quat_anim = QUAT_ANIMATION_SKATEBOARDING_SLOW
+		mixamo_animation = MIX_ANIMATION_SKATEBOARDING_SLOW
+		quaternius_animation = QUAT_ANIMATION_SKATEBOARDING_SLOW
 		height_scale = 1.0
 	elif player.speed_current == player.speed_skateboarding:
-		mix_anim = MIX_ANIMATION_SKATEBOARDING
-		quat_anim = QUAT_ANIMATION_SKATEBOARDING
+		mixamo_animation = MIX_ANIMATION_SKATEBOARDING
+		quaternius_animation = QUAT_ANIMATION_SKATEBOARDING
 		height_scale = 0.95
 	elif player.speed_current > player.speed_skateboarding:
-		mix_anim = MIX_ANIMATION_SKATEBOARDING_FAST
-		quat_anim = QUAT_ANIMATION_SKATEBOARDING_FAST
+		mixamo_animation = MIX_ANIMATION_SKATEBOARDING_FAST
+		quaternius_animation = QUAT_ANIMATION_SKATEBOARDING_FAST
 		height_scale = 0.9
 
-	var anim = quat_anim if player.animation_set == 1 else mix_anim
-	if player.animation_player_current_animation() != anim:
-		player.animation_player_play(anim)
+	var animation = quaternius_animation if player.animation_set == 1 else mixamo_animation
+	var current_animation = player.animation_player_current_animation()
+	if current_animation != animation:
+		player.animation_player_play(animation)
 		# Set the player collision shape's height
 		player.collision_shape.shape.height = player.collision_height * height_scale
 		# Set the player collision shape's position

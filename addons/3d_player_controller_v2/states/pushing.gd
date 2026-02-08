@@ -15,13 +15,11 @@ const NODE_STATE := States.State.PUSHING
 ## Called every frame. '_delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	# Do nothing if not the authority
-	if !is_multiplayer_authority(): return
+	if not is_multiplayer_authority(): return
 
 	# Check if the player has stopped pushing -> Transition to "standing" state
-	if player.input_direction == Vector2.ZERO \
-	or (not player.ray_cast_middle.is_colliding() and not player.ray_cast_high.is_colliding()):
+	if player.input_direction == Vector2.ZERO or (not player.ray_cast_middle.is_colliding() and not player.ray_cast_high.is_colliding()):
 		transition_state(NODE_STATE, States.State.STANDING)
-		return
 
 	# Play the animation
 	play_animation()
@@ -29,10 +27,11 @@ func _process(_delta: float) -> void:
 
 ## Plays the appropriate animation based on player state.
 func play_animation() -> void:
-	var anim = QUAT_ANIMATION_PUSHING if player.animation_set == 1 else MIX_ANIMATION_PUSHING
-	if player.animation_player_current_animation() != anim:
+	var animation = QUAT_ANIMATION_PUSHING if player.animation_set == 1 else MIX_ANIMATION_PUSHING
+	var current_animation = player.animation_player_current_animation()
+	if current_animation != animation:
 		# Play the "pushing" animation
-		player.animation_player_play(anim)
+		player.animation_player_play(animation)
 	# Pause the animation if no input
 	if player.input_direction == Vector2.ZERO:
 		player.animation_player_pause()

@@ -24,7 +24,7 @@ const NODE_STATE := States.State.SPRINTING
 ## Called when there is an input event.
 func _input(event: InputEvent) -> void:
 	# Do nothing if not the authority
-	if !is_multiplayer_authority(): return
+	if not is_multiplayer_authority(): return
 
 	# Do nothing if the "pause" menu is visible
 	if player.pause.visible: return
@@ -35,6 +35,7 @@ func _input(event: InputEvent) -> void:
 		and player.is_on_floor() \
 		and not player.chat.line_edit.visible:
 			transition_state(player.current_state, States.State.JUMPING)
+			return
 
 	# Ⓑ/[shift] _released_ -> Start "standing"
 	if event.is_action_released(Controls.BUTTON_1):
@@ -43,16 +44,15 @@ func _input(event: InputEvent) -> void:
 
 	# Ⓨ/[Ctrl] _pressed_ -> Start "sliding"
 	if player.enable_sliding:
-		if event.is_action_pressed(Controls.BUTTON_3) \
-		and player.is_on_floor():
+		if event.is_action_pressed(Controls.BUTTON_3) and player.is_on_floor():
 			transition_state(NODE_STATE, States.State.SLIDING)
 			return
 
 
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	# Do nothing if not the authority
-	if !is_multiplayer_authority(): return
+	if not is_multiplayer_authority(): return
 
 	# Not on floor -> Start "falling"
 	if not player.is_on_floor() \
@@ -78,44 +78,39 @@ func play_animation() -> void:
 		and (player.camera.perspective == player.camera.Perspective.FIRST_PERSON \
 		or player.is_strafing \
 		or player.is_target_locked)
-	var mix_anim: String ## The name of the Mixamo animation to play.
-	var quat_anim: String ## The name of the Quaternius animation to play.
+	var mixamo_animation: String ## The name of the Mixamo animation to play.
+	var quaternius_animation: String ## The name of the Quaternius animation to play.
 
 	# Handle "running" (while "strafing")
-	if is_strafe_left \
-	or is_strafe_right:
+	if is_strafe_left or is_strafe_right:
 		# Strafing+Sprinting animations are just Running animations played at a faster speed
 		player.animation_player_set_speed_scale(1.5)
 		# Handle "running" (while "strafing" left and unarmed)
 		if is_strafe_left:
-			mix_anim = MIX_ANIMATION_STRAFE_LEFT
-			quat_anim = QUAT_ANIMATION_STRAFE_LEFT
+			mixamo_animation = MIX_ANIMATION_STRAFE_LEFT
+			quaternius_animation = QUAT_ANIMATION_STRAFE_LEFT
 		# Handle "running" (while "strafing" right and unarmed)
 		elif is_strafe_right:
-			mix_anim = MIX_ANIMATION_STRAFE_RIGHT
-			quat_anim = QUAT_ANIMATION_STRAFE_RIGHT
+			mixamo_animation = MIX_ANIMATION_STRAFE_RIGHT
+			quaternius_animation = QUAT_ANIMATION_STRAFE_RIGHT
 	# Handle "running" (while backpedaling)
 	elif is_backpedaling:
-		mix_anim = MIX_ANIMATION_BACKWARD
-		quat_anim = QUAT_ANIMATION_BACKWARD
+		mixamo_animation = MIX_ANIMATION_BACKWARD
+		quaternius_animation = QUAT_ANIMATION_BACKWARD
 		# [Re]set the animation playback speed
 		player.animation_player_set_speed_scale(1.0)
 	# Handle "sprinting" (unarmed)
 	else:
-		mix_anim = MIX_ANIMATION
-		quat_anim = QUAT_ANIMATION
+		mixamo_animation = MIX_ANIMATION
+		quaternius_animation = QUAT_ANIMATION
 		# [Re]set the animation playback speed
 		player.animation_player_set_speed_scale(1.0)
 
 	# Play the appropriate animation based on the player's animation set (🔵 Mixamo or 🟣 Quaternius)
-	if player.animation_set == 0:
-		if player.animation_player_current_animation() != mix_anim:
-			#_on_animation_finished(player.animation_player_current_animation())
-			player.animation_player_play(mix_anim)
-	elif player.animation_set == 1:
-		if player.animation_player_current_animation() != quat_anim:
-			#_on_animation_finished(player.animation_player_current_animation())
-			player.animation_player_play(quat_anim)
+	var current_animation = player.animation_player_current_animation()
+	var animation = mixamo_animation if player.animation_set == 0 else quaternius_animation
+	if current_animation != animation:
+		player.animation_player_play(animation)
 
 
 #func _on_animation_finished(animation_name: String) -> void:

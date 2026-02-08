@@ -21,33 +21,30 @@ func _ready() -> void:
 ## Called when there is an input event.
 func _input(event: InputEvent) -> void:
 	# Do nothing if not the authority
-	if !is_multiplayer_authority(): return
+	if not is_multiplayer_authority(): return
 
 	# Do nothing if the "pause" menu is visible
 	if player.pause.visible: return
 
 	# Check for player input
-	if event.is_action_pressed("move_up") \
-	or event.is_action_pressed("move_down") \
-	or event.is_action_pressed("move_left") \
-	or event.is_action_pressed("move_right"):
+	if event.is_action_pressed("move_up") or event.is_action_pressed("move_down") or event.is_action_pressed("move_left") or event.is_action_pressed("move_right"):
 		# Set target position to the player's current position (ending navigation)
 		navigation_agent.target_position = player.global_position
 
 
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	# Do nothing if not the authority
-	if !is_multiplayer_authority(): return
+	if not is_multiplayer_authority(): return
 
 	# Play the animation
 	play_animation()
 
 
 ## Called once on each physics tick, and allows Nodes to synchronize their logic with physics ticks.
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	# Do nothing if not the authority
-	if !is_multiplayer_authority(): return
+	if not is_multiplayer_authority(): return
 
 	# Navigate to the next position
 	if not navigation_agent.is_navigation_finished():
@@ -56,9 +53,10 @@ func _physics_process(delta: float) -> void:
 
 ## Plays the appropriate animation based on player state.
 func play_animation() -> void:
-	var anim = QUAT_ANIMATION_RUNNING if player.animation_set == 1 else MIX_ANIMATION_RUNNING
-	if player.animation_player_current_animation() != anim:
-		player.animation_player_play(anim)
+	var animation = QUAT_ANIMATION_RUNNING if player.animation_set == 1 else MIX_ANIMATION_RUNNING
+	var current_animation = player.animation_player_current_animation()
+	if current_animation != animation:
+		player.animation_player_play(animation)
 
 
 ## Navigate to the next position in the path. Called during physics process if navigating.
@@ -74,6 +72,9 @@ func navigate_to_next_position() -> void:
 
 ## Called when the NavigationAgent3D has finished.
 func _on_navigation_finished() -> void:
+	# Do nothing if not the authority
+	if not is_multiplayer_authority(): return
+
 	player.is_navigating = false
 	# Stop the player's movement
 	player.velocity = Vector3.ZERO

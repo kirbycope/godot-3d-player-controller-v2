@@ -11,7 +11,7 @@ var time_ragdolling := 0.0 ## The time spent in the "ragdolling" state."
 ## Called once for every event before _unhandled_input(), allowing you to consume some events.
 func _input(event: InputEvent) -> void:
 	# Do nothing if not the authority
-	if !is_multiplayer_authority(): return
+	if not is_multiplayer_authority(): return
 
 	# Do nothing if the "pause" menu is visible
 	if player.pause.visible: return
@@ -19,12 +19,13 @@ func _input(event: InputEvent) -> void:
 	# (A)/[Space] _pressed_ (after 3 seconds or ragdolling) -> Start "standing"
 	if event.is_action_pressed(Controls.BUTTON_0) and time_ragdolling > 3.0:
 		transition_state(player.current_state, States.State.STANDING)
+		return
 
 
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	# Do nothing if not the authority
-	if !is_multiplayer_authority(): return
+	if not is_multiplayer_authority(): return
 
 	# Have the player follow the hips bone position, so that the camera follows the ragdoll
 	if not player.pause.visible:

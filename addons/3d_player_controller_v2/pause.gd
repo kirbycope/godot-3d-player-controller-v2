@@ -24,7 +24,7 @@ func _ready() -> void:
 ## Called when there is an input event.
 func _input(event: InputEvent) -> void:
 	# Do nothing if not the authority
-	if !is_multiplayer_authority(): return
+	if not is_multiplayer_authority(): return
 
 	# Toggle pause menu visibility
 	if event.is_action_pressed(Controls.BUTTON_9) \
@@ -38,7 +38,7 @@ func toggle_menu() -> void:
 		initial_mouse_mode = Input.get_mouse_mode()
 
 	# Toggle visibility
-	visible = !visible
+	visible = not visible
 	panel.visible = visible
 
 	# Set initial focus
@@ -71,9 +71,9 @@ func _on_resume_touch_screen_button_pressed() -> void:
 
 
 func _on_settings_pressed() -> void:
-	player.settings.visible = !player.settings.visible
+	player.settings.visible = not player.settings.visible
 	player.settings.back.grab_focus()
-	panel.visible = !player.settings.visible
+	panel.visible = not player.settings.visible
 
 
 func _on_settings_touch_screen_button_pressed() -> void:

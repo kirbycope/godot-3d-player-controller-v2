@@ -18,7 +18,7 @@ var prev_floor_snap_length := -1.0
 ## Called when there is an input event.
 func _input(event: InputEvent) -> void:
 	# Do nothing if not the authority
-	if !is_multiplayer_authority(): return
+	if not is_multiplayer_authority(): return
 
 	# Do nothing if the "pause" menu is visible
 	if player.pause.visible: return
@@ -34,11 +34,10 @@ func _input(event: InputEvent) -> void:
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	# Do nothing if not the authority
-	if !is_multiplayer_authority(): return
+	if not is_multiplayer_authority(): return
 
 	# Ⓐ/[Space] button currently _pressed_ -> Increase player's vertical position
-	if Input.is_action_pressed(Controls.BUTTON_0) \
-	and not player.pause.visible:
+	if Input.is_action_pressed(Controls.BUTTON_0) and not player.pause.visible:
 		var current_water_level = player.swimming_in.global_position.y + player.swimming_in.size.y/2 # The origin of the shape is at its center
 		var new_player_position_y = player.position.y + 5 * delta
 		var player_shoulder_height = new_player_position_y + (player.collision_height * 0.75)
@@ -56,15 +55,13 @@ func _process(delta: float) -> void:
 
 ## Plays the appropriate animation based on player state.
 func play_animation() -> void:
-	var mix_anim = MIX_ANIMATION_WADING if player.input_direction == Vector2.ZERO else MIX_ANIMATION_SWIMMING
-	var quat_anim = QUAT_ANIMATION_WADING if player.input_direction == Vector2.ZERO else QUAT_ANIMATION_SWIMMING
+	var mixamo_animation = MIX_ANIMATION_WADING if player.input_direction == Vector2.ZERO else MIX_ANIMATION_SWIMMING
+	var quaternius_animation = QUAT_ANIMATION_WADING if player.input_direction == Vector2.ZERO else QUAT_ANIMATION_SWIMMING
 
-	if player.animation_set == 0:
-		if player.animation_player_current_animation() != mix_anim:
-			player.animation_player_play(mix_anim)
-	elif player.animation_set == 1:
-		if player.animation_player_current_animation() != quat_anim:
-			player.animation_player_play(quat_anim)
+	var current_animation = player.animation_player_current_animation()
+	var animation = mixamo_animation if player.animation_set == 0 else quaternius_animation
+	if current_animation != animation:
+		player.animation_player_play(animation)
 
 
 ## Start "swimming".

@@ -108,7 +108,7 @@ var yellow_sphere: MeshInstance3D
 ## Called when there is an input event.
 func _input(event: InputEvent) -> void:
 	# Do nothing if not the authority
-	if !is_multiplayer_authority(): return
+	if not is_multiplayer_authority(): return
 
 	# Toggle debug visibility
 	if event is InputEventKey \
@@ -129,7 +129,7 @@ func _input(event: InputEvent) -> void:
 ## Called every frame. '_delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	# Do nothing if not the authority
-	if !is_multiplayer_authority(): return
+	if not is_multiplayer_authority(): return
 
 	# Update debug info if visible
 	if visible:

@@ -11,7 +11,10 @@ func _ready() -> void:
 	hide()
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
+	# Do nothing if not the authority
+	if not is_multiplayer_authority(): return
+
 	# Do nothing if emotes are not enabled
 	if not player.enable_emotes: return
 

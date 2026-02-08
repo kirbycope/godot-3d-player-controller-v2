@@ -19,7 +19,7 @@ const NODE_STATE := States.State.CROUCHING
 ## Called when there is an input event.
 func _input(event: InputEvent) -> void:
 	# Do nothing if not the authority
-	if !is_multiplayer_authority(): return
+	if not is_multiplayer_authority(): return
 
 	# Do nothing if the "pause" menu is visible
 	if player.pause.visible: return
@@ -30,6 +30,7 @@ func _input(event: InputEvent) -> void:
 		and player.is_on_floor() \
 		and not player.chat.line_edit.visible:
 			transition_state(player.current_state, States.State.JUMPING)
+			return
 
 	# Ⓨ/[Ctrl] _released_ -> Start "standing"
 	if event.is_action_released(Controls.BUTTON_3):
@@ -73,15 +74,14 @@ func _input(event: InputEvent) -> void:
 
 
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	# Do nothing if not the authority
-	if !is_multiplayer_authority(): return
+	if not is_multiplayer_authority(): return
 
 	# Check if the player is moving -> Start "crawling"
 	if player.enable_crawling:
 		if player.input_direction != Vector2.ZERO:
 			transition_state(NODE_STATE, States.State.CRAWLING)
-			return
 
 	# Play the animation
 	play_animation()
@@ -89,35 +89,34 @@ func _process(delta: float) -> void:
 
 ## Plays the appropriate animation based on player state.
 func play_animation() -> void:
-	var mix_anim: String
-	var quat_anim: String
+	var mixamo_animation: String
+	var quaternius_animation: String
 	if player.is_holding_rifle:
 		if player.is_firing_rifle:
-			mix_anim = MIX_ANIMATION_CROUCHING_FIRING
-			quat_anim = QUAT_ANIMATION_CROUCHING_FIRING
+			mixamo_animation = MIX_ANIMATION_CROUCHING_FIRING
+			quaternius_animation = QUAT_ANIMATION_CROUCHING_FIRING
 		elif player.is_aiming_rifle:
-			mix_anim = MIX_ANIMATION_CROUCHING_AIMING
-			quat_anim = QUAT_ANIMATION_CROUCHING_AIMING
+			mixamo_animation = MIX_ANIMATION_CROUCHING_AIMING
+			quaternius_animation = QUAT_ANIMATION_CROUCHING_AIMING
 		else:
-			mix_anim = MIX_ANIMATION_CROUCHING_HOLDING_RIFLE
-			quat_anim = QUAT_ANIMATION_CROUCHING_HOLDING_RIFLE
+			mixamo_animation = MIX_ANIMATION_CROUCHING_HOLDING_RIFLE
+			quaternius_animation = QUAT_ANIMATION_CROUCHING_HOLDING_RIFLE
 	else:
-		mix_anim = MIX_ANIMATION_CROUCHING_IDLE
-		quat_anim = QUAT_ANIMATION_CROUCHING_IDLE
+		mixamo_animation = MIX_ANIMATION_CROUCHING_IDLE
+		quaternius_animation = QUAT_ANIMATION_CROUCHING_IDLE
 
-	if player.animation_set == 0:
-		if player.animation_player_current_animation() != mix_anim:
-			_on_animation_finished(player.animation_player_current_animation())
-			player.animation_player_play(mix_anim)
-	elif player.animation_set == 1:
-		if player.animation_player_current_animation() != quat_anim:
-			_on_animation_finished(player.animation_player_current_animation())
-			player.animation_player_play(quat_anim)
+	var current_animation = player.animation_player_current_animation()
+	var animation = mixamo_animation if player.animation_set == 0 else quaternius_animation
+	if current_animation != animation:
+		_on_animation_finished(current_animation)
+		player.animation_player_play(animation)
 
 
 func _on_animation_finished(animation_name: String) -> void:
-	if animation_name == MIX_ANIMATION_CROUCHING_FIRING \
-	or animation_name == QUAT_ANIMATION_CROUCHING_FIRING:
+	# Do nothing if not the authority
+	if not is_multiplayer_authority(): return
+
+	if animation_name == MIX_ANIMATION_CROUCHING_FIRING or animation_name == QUAT_ANIMATION_CROUCHING_FIRING:
 		player.is_firing_rifle = false
 
 

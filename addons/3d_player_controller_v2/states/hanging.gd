@@ -23,7 +23,7 @@ const NODE_STATE := States.State.HANGING
 ## Called when there is an input event.
 func _input(event: InputEvent) -> void:
 	# Do nothing if not the authority
-	if !is_multiplayer_authority(): return
+	if not is_multiplayer_authority(): return
 
 	# Do nothing if the "pause" menu is visible
 	if player.pause.visible: return
@@ -46,7 +46,6 @@ func _input(event: InputEvent) -> void:
 					0.2
 				)
 				tween.tween_callback(func(): transition_state(NODE_STATE, States.State.STANDING))
-				return
 
 	# Ⓨ/[Ctrl] _pressed_ -> Start "falling"
 	if event.is_action_pressed(Controls.BUTTON_3):
@@ -55,26 +54,22 @@ func _input(event: InputEvent) -> void:
 
 
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	# Do nothing if not the authority
-	if !is_multiplayer_authority(): return
+	if not is_multiplayer_authority(): return
 
 	# Do nothing if the "pause" menu is visible
 	if player.pause.visible: return
 
 	# Check if the player has no raycast collision -> Start "falling"
-	if not player.ray_cast_top.is_colliding() \
-	and not player.ray_cast_high.is_colliding():
+	if not player.ray_cast_top.is_colliding() and not player.ray_cast_high.is_colliding():
 		# Start falling
 		transition_state(NODE_STATE, States.State.FALLING)
-		return
 
 	# Check if the player is on the ground -> Start "standing"
-	if player.is_on_floor() \
-	and abs(player.velocity).length() < 0.2:
+	if player.is_on_floor() and abs(player.velocity).length() < 0.2:
 		# Start "standing"
 		transition_state(NODE_STATE, States.State.STANDING)
-		return
 
 	# Ⓑ/[shift] _pressed_ -> Move faster while "hanging"
 	if player.enable_sprinting:
@@ -101,23 +96,23 @@ func play_animation() -> void:
 	# Check if the player's hang is braced (the collider has somewhere for the player's footing)
 	var is_braced = player.ray_cast_low.is_colliding()
 
-	var mix_anim: String
-	var quat_anim: String
+	var mixamo_animation: String
+	var quaternius_animation: String
 	# "shimmy" left ←
 	if Input.is_action_pressed(Controls.MOVE_LEFT):
-		mix_anim = MIX_ANIMATION_HANGING_BRACED_SHIMMY_LEFT if is_braced else MIX_ANIMATION_HANGING_SHIMMY_LEFT
-		quat_anim = QUAT_ANIMATION_HANGING_BRACED_SHIMMY_LEFT if is_braced else QUAT_ANIMATION_HANGING_SHIMMY_LEFT
+		mixamo_animation = MIX_ANIMATION_HANGING_BRACED_SHIMMY_LEFT if is_braced else MIX_ANIMATION_HANGING_SHIMMY_LEFT
+		quaternius_animation = QUAT_ANIMATION_HANGING_BRACED_SHIMMY_LEFT if is_braced else QUAT_ANIMATION_HANGING_SHIMMY_LEFT
 	# "shimmy" right →
 	elif Input.is_action_pressed(Controls.MOVE_RIGHT):
-		mix_anim = MIX_ANIMATION_HANGING_BRACED_SHIMMY_RIGHT if is_braced else MIX_ANIMATION_HANGING_SHIMMY_RIGHT
-		quat_anim = QUAT_ANIMATION_HANGING_BRACED_SHIMMY_RIGHT if is_braced else QUAT_ANIMATION_HANGING_SHIMMY_RIGHT
+		mixamo_animation = MIX_ANIMATION_HANGING_BRACED_SHIMMY_RIGHT if is_braced else MIX_ANIMATION_HANGING_SHIMMY_RIGHT
+		quaternius_animation = QUAT_ANIMATION_HANGING_BRACED_SHIMMY_RIGHT if is_braced else QUAT_ANIMATION_HANGING_SHIMMY_RIGHT
 	# "hanging" idle
 	else:
-		mix_anim = MIX_ANIMATION_HANGING_BRACED if is_braced else MIX_ANIMATION_HANGING
-		quat_anim = QUAT_ANIMATION_HANGING_BRACED if is_braced else QUAT_ANIMATION_HANGING
+		mixamo_animation = MIX_ANIMATION_HANGING_BRACED if is_braced else MIX_ANIMATION_HANGING
+		quaternius_animation = QUAT_ANIMATION_HANGING_BRACED if is_braced else QUAT_ANIMATION_HANGING
 
-	var anim = quat_anim if player.animation_set == 1 else mix_anim
-	player.animation_player_play(anim)
+	var animation = quaternius_animation if player.animation_set == 1 else mixamo_animation
+	player.animation_player_play(animation)
 
 
 ## Start "hanging".

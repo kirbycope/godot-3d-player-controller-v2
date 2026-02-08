@@ -15,7 +15,7 @@ const NODE_STATE := States.State.JUMPING
 ## Called when there is an input event.
 func _input(event: InputEvent) -> void:
 	# Do nothing if not the authority
-	if !is_multiplayer_authority(): return
+	if not is_multiplayer_authority(): return
 
 	# Do nothing if the "pause" menu is visible
 	if player.pause.visible: return
@@ -92,9 +92,9 @@ func _input(event: InputEvent) -> void:
 
 
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	# Do nothing if not the authority
-	if !is_multiplayer_authority(): return
+	if not is_multiplayer_authority(): return
 
 	# Check if the player velocity in the up direction is not positive -> Start "falling"
 	if player.velocity.dot(player.up_direction) <= 0.0:
@@ -107,23 +107,21 @@ func _process(delta: float) -> void:
 
 ## Plays the appropriate animation based on player state.
 func play_animation() -> void:
-	var mix_anim: String ## The name of the Mixamo animation to play.
-	var quat_anim: String ## The name of the Quaternius animation to play.
+	var mixamo_animation: String ## The name of the Mixamo animation to play.
+	var quaternius_animation: String ## The name of the Quaternius animation to play.
 	# Handle "jumping" (while holding rifle)
 	if player.is_holding_rifle:
-		mix_anim = MIX_ANIMATION_JUMPING_HOLDING_RIFLE
-		quat_anim = QUAT_ANIMATION_JUMPING_HOLDING_RIFLE
+		mixamo_animation = MIX_ANIMATION_JUMPING_HOLDING_RIFLE
+		quaternius_animation = QUAT_ANIMATION_JUMPING_HOLDING_RIFLE
 	# Handle "jumping" (upward, unarmed)
 	else:
-		mix_anim = MIX_ANIMATION_JUMPING
-		quat_anim = QUAT_ANIMATION_JUMPING
+		mixamo_animation = MIX_ANIMATION_JUMPING
+		quaternius_animation = QUAT_ANIMATION_JUMPING
 	# Play the appropriate animation based on the player's animation set (🔵 Mixamo or 🟣 Quaternius)
-	if player.animation_set == 0:
-		if player.animation_player_current_animation() != mix_anim:
-			player.animation_player_play(mix_anim)
-	elif player.animation_set == 1:
-		if player.animation_player_current_animation() != quat_anim:
-			player.animation_player_play(quat_anim)
+	var current_animation = player.animation_player_current_animation()
+	var animation = mixamo_animation if player.animation_set == 0 else quaternius_animation
+	if current_animation != animation:
+		player.animation_player_play(animation)
 
 ## Start "jumping".
 func start() -> void:

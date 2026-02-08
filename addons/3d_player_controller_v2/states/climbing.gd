@@ -19,7 +19,7 @@ const NODE_STATE := States.State.CLIMBING
 ## Called when there is an input event.
 func _input(event: InputEvent) -> void:
 	# Do nothing if not the authority
-	if !is_multiplayer_authority(): return
+	if not is_multiplayer_authority(): return
 
 	# Do nothing if the "pause" menu is visible
 	if player.pause.visible: return
@@ -38,9 +38,9 @@ func _input(event: InputEvent) -> void:
 
 
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	# Do nothing if not the authority
-	if !is_multiplayer_authority(): return
+	if not is_multiplayer_authority(): return
 
 	# Do nothing if the "pause" menu is visible
 	if player.pause.visible: return
@@ -71,42 +71,39 @@ func _process(delta: float) -> void:
 ## Plays the appropriate animation based on player state.
 func play_animation() -> void:
 	# Set animation playback speed based on climbing speed
-	if player.speed_current > player.speed_climbing:
-		player.animation_player_set_speed_scale(1.5)
-	else:
-		player.animation_player_set_speed_scale(1.0)
+	var speed_scale = 1.5 if player.speed_current > player.speed_climbing else 1.0
+	player.animation_player_set_speed_scale(speed_scale)
 
-	var mix_anim: String
-	var quat_anim: String
+	var mixamo_animation: String
+	var quaternius_animation: String
 
 	# "climbing" left ←
 	if player.input_direction.x < 0:
-		mix_anim = MIX_ANIMATION_CLIMBING_LEFT
-		quat_anim = QUAT_ANIMATION_CLIMBING_LEFT
+		mixamo_animation = MIX_ANIMATION_CLIMBING_LEFT
+		quaternius_animation = QUAT_ANIMATION_CLIMBING_LEFT
 	# "climbing" right →
 	elif player.input_direction.x > 0:
-		mix_anim = MIX_ANIMATION_CLIMBING_RIGHT
-		quat_anim = QUAT_ANIMATION_CLIMBING_RIGHT
+		mixamo_animation = MIX_ANIMATION_CLIMBING_RIGHT
+		quaternius_animation = QUAT_ANIMATION_CLIMBING_RIGHT
 	else: # Left/Right animations have priority over Up/Down, so if left/right is not pressed, then process up/down input
 		# "climbing" up ↑
 		if player.input_direction.y < 0:
-			mix_anim = MIX_ANIMATION_CLIMBING_UP
-			quat_anim = QUAT_ANIMATION_CLIMBING_UP
+			mixamo_animation = MIX_ANIMATION_CLIMBING_UP
+			quaternius_animation = QUAT_ANIMATION_CLIMBING_UP
 		# "climbing" down ↓
 		elif player.input_direction.y > 0:
-			mix_anim = MIX_ANIMATION_CLIMBING_DOWN
-			quat_anim = QUAT_ANIMATION_CLIMBING_DOWN
+			mixamo_animation = MIX_ANIMATION_CLIMBING_DOWN
+			quaternius_animation = QUAT_ANIMATION_CLIMBING_DOWN
 		# "climbing" idle
 		else:
 			player.animation_player_pause()
 			return
 
-	if player.animation_set == 0:
-		if player.animation_player_current_animation() != mix_anim:
-			player.animation_player_play(mix_anim)
-	elif player.animation_set == 1:
-		if player.animation_player_current_animation() != quat_anim:
-			player.animation_player_play(quat_anim)
+	# Play the appropriate animation based on the player's animation set (🔵 Mixamo or 🟣 Quaternius)
+	var animation = mixamo_animation if player.animation_set == 0 else quaternius_animation
+	var current_animation = player.animation_player_current_animation()
+	if current_animation != animation:
+		player.animation_player_play(animation)
 
 
 ## Start "climbing".
@@ -134,13 +131,7 @@ func start() -> void:
 	await get_tree().process_frame
 
 	# Begin playing the "climbing" animation (locked) as a transition
-	var target_animation := ""
-	# 🔵 Mixamo
-	if player.animation_set == 0:
-		target_animation = MIX_ANIMATION_CLIMBING_UP
-	# 🟣 Quaternius
-	elif player.animation_set == 1:
-		target_animation = QUAT_ANIMATION_CLIMBING_UP
+	var target_animation = MIX_ANIMATION_CLIMBING_UP if player.animation_set == 0 else QUAT_ANIMATION_CLIMBING_UP
 	player.animation_player_play_locked(target_animation, 0.2)
 
 

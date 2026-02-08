@@ -190,11 +190,11 @@ func _ready() -> void:
 ## Called when there is an input event.
 func _input(event: InputEvent) -> void:
 	# Do nothing if not the authority
-	if !is_multiplayer_authority(): return
+	if not is_multiplayer_authority(): return
 
 	# Do nothing if the "pause" menu is visible
 	if pause.visible: return
-	
+
 	# [Left Mouse Button] _pressed_ -> Start "navigating"
 	if enable_navigation:
 		if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) \
@@ -227,7 +227,7 @@ func _input(event: InputEvent) -> void:
 ## Called once on each physics tick, and allows Nodes to synchronize their logic with physics ticks.
 func _physics_process(delta: float) -> void:
 	# Do nothing if not the authority
-	if !is_multiplayer_authority(): return
+	if not is_multiplayer_authority(): return
 
 	# Do nothing if the player's animation is locked
 	if is_animation_locked: return
@@ -936,6 +936,9 @@ func skeletons() -> Array:
 
 ## Callback for when a locked animation finishes playing.
 func _on_locked_animation_finished(animation_name: String) -> void:
+	# Do nothing if not the authority
+	if not is_multiplayer_authority(): return
+
 	animation_player_disconnect("animation_finished", _on_locked_animation_finished)
 	var current_state_name = base_state.get_state_name(current_state)
 	var current_state_scene = get_parent().find_child(current_state_name)
@@ -967,6 +970,9 @@ func _reset_target_material(target: Node3D) -> void:
 
 
 func _on_kick_left_timeout() -> void:
+	# Do nothing if not the authority
+	if not is_multiplayer_authority(): return
+
 	# Do nothing if not still kicking left
 	if not is_kicking_left: return
 
@@ -984,6 +990,9 @@ func _on_kick_left_timeout() -> void:
 
 
 func _on_kick_right_timeout() -> void:
+	# Do nothing if not the authority
+	if not is_multiplayer_authority(): return
+
 	# Do nothing if not still kicking right
 	if not is_kicking_right: return
 
@@ -1001,6 +1010,9 @@ func _on_kick_right_timeout() -> void:
 
 
 func _on_punch_left_timeout() -> void:
+	# Do nothing if not the authority
+	if not is_multiplayer_authority(): return
+
 	# Do nothing if not still punching left
 	if not is_punching_left: return
 
@@ -1018,6 +1030,9 @@ func _on_punch_left_timeout() -> void:
 
 
 func _on_punch_right_timeout() -> void:
+	# Do nothing if not the authority
+	if not is_multiplayer_authority(): return
+
 	# Do nothing if not still punching right
 	if not is_punching_right: return
 
@@ -1035,6 +1050,9 @@ func _on_punch_right_timeout() -> void:
 
 
 func _on_enemy_detection_body_entered(body: Node3D) -> void:
+	# Do nothing if not the authority
+	if not is_multiplayer_authority(): return
+
 	if body.is_in_group("Focusable"):
 		targets[body.get_instance_id()] = body
 		if body.get_node_or_null("FocusTargetIndicator") == null:
@@ -1044,6 +1062,9 @@ func _on_enemy_detection_body_entered(body: Node3D) -> void:
 
 
 func _on_enemy_detection_body_exited(body: Node3D) -> void:
+	# Do nothing if not the authority
+	if not is_multiplayer_authority(): return
+
 	if body.is_in_group("Focusable"):
 		targets.erase(body.get_instance_id())
 		# Reset material if this was the focused target

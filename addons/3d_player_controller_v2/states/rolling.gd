@@ -13,7 +13,7 @@ const NODE_STATE := States.State.ROLLING
 ## Called when there is an input event.
 func _input(event: InputEvent) -> void:
 	# Do nothing if not the authority
-	if !is_multiplayer_authority(): return
+	if not is_multiplayer_authority(): return
 
 	# Do nothing if the "pause" menu is visible
 	if player.pause.visible: return
@@ -22,9 +22,9 @@ func _input(event: InputEvent) -> void:
 
 
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	# Do nothing if not the authority
-	if !is_multiplayer_authority(): return
+	if not is_multiplayer_authority(): return
 
 	# Play the animation
 	play_animation()
@@ -32,19 +32,25 @@ func _process(delta: float) -> void:
 
 ## Plays the appropriate animation based on player state.
 func play_animation() -> void:
-	var anim = QUAT_ANIMATION_ROLLING if player.animation_set == 1 else MIX_ANIMATION_ROLLING
-	if player.animation_player_current_animation() != anim:
-		_on_animation_finished(player.animation_player_current_animation())
-		player.animation_player_play(anim)
+	var animation = QUAT_ANIMATION_ROLLING if player.animation_set == 1 else MIX_ANIMATION_ROLLING
+	var current_animation = player.animation_player_current_animation()
+	if current_animation != animation:
+		_on_animation_finished(current_animation)
+		player.animation_player_play(animation)
 
 
 func _on_animation_finished(animation_name: String) -> void:
+	# Do nothing if not the authority
+	if not is_multiplayer_authority(): return
+
 	if animation_name == MIX_ANIMATION_ROLLING \
 	or animation_name == QUAT_ANIMATION_ROLLING:
 		if Input.is_action_pressed(Controls.BUTTON_3):
 			transition_state(NODE_STATE, States.State.CROUCHING)
+			return
 		else:
 			transition_state(NODE_STATE, States.State.STANDING)
+			return
 
 
 ## Start "rolling".

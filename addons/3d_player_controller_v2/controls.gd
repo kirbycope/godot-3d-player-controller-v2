@@ -396,6 +396,9 @@ func _ready() -> void:
 
 ## Called when there is an input event.
 func _input(event: InputEvent) -> void:
+	# Do nothing if not the authority
+	if not is_multiplayer_authority(): return
+
 	if event is InputEventJoypadButton \
 	or event is InputEventJoypadMotion:
 		last_input_type = InputType.CONTROLLER

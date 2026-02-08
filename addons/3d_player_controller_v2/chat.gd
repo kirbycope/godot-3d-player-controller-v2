@@ -15,7 +15,7 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	# Do nothing if not the authority
-	if !is_multiplayer_authority(): return
+	if not is_multiplayer_authority(): return
 
 	# (☰)/[Esc] _pressed_ -> Hide chat input
 	if event.is_action_pressed(Controls.BUTTON_9) \

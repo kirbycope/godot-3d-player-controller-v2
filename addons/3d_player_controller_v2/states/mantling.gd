@@ -13,9 +13,9 @@ const NODE_STATE := States.State.MANTLING
 
 
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	# Do nothing if not the authority
-	if !is_multiplayer_authority(): return
+	if not is_multiplayer_authority(): return
 
 	# Play the animation
 	play_animation()
@@ -25,12 +25,13 @@ func _process(delta: float) -> void:
 func play_animation() -> void:
 	# Check if the player's hang is braced (the collider has somewhere for the player's footing)
 	var is_braced = player.ray_cast_low.is_colliding()
-	var mix_anim = MIX_ANIMATION_MANTLING_BRACED if is_braced else MIX_ANIMATION_MANTLING_HANGING
-	var quat_anim = QUAT_ANIMATION_MANTLING_BRACED if is_braced else QUAT_ANIMATION_MANTLING_HANGING
-	var anim = quat_anim if player.animation_set == 1 else mix_anim
+	var mixamo_animation = MIX_ANIMATION_MANTLING_BRACED if is_braced else MIX_ANIMATION_MANTLING_HANGING
+	var quaternius_animation = QUAT_ANIMATION_MANTLING_BRACED if is_braced else QUAT_ANIMATION_MANTLING_HANGING
+	var animation = quaternius_animation if player.animation_set == 1 else mixamo_animation
 
-	if player.animation_player_current_animation() != anim:
-		player.animation_player_play(anim)
+	var current_animation = player.animation_player_current_animation()
+	if current_animation != animation:
+		player.animation_player_play(animation)
 		player.animation_player_connect("animation_finished", _on_animation_finished)
 		# Tween camera position during animation
 		var camera_start_position = player.camera.global_position
@@ -47,6 +48,9 @@ func play_animation() -> void:
 
 
 func _on_animation_finished(anim_name: String) -> void:
+	# Do nothing if not the authority
+	if not is_multiplayer_authority(): return
+
 	if anim_name in [
 		MIX_ANIMATION_MANTLING_BRACED,
 		MIX_ANIMATION_MANTLING_HANGING,

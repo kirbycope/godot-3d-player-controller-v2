@@ -15,7 +15,7 @@ const NODE_STATE := States.State.FLYING
 ## Called when there is an input event.
 func _input(event: InputEvent) -> void:
 	# Do nothing if not the authority
-	if !is_multiplayer_authority(): return
+	if not is_multiplayer_authority(): return
 
 	# Do nothing if the "pause" menu is visible
 	if player.pause.visible: return
@@ -24,13 +24,11 @@ func _input(event: InputEvent) -> void:
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	# Do nothing if not the authority
-	if !is_multiplayer_authority(): return
+	if not is_multiplayer_authority(): return
 
 	# Check if the player is on the ground -> Start "standing"
-	if player.is_on_floor() \
-	and abs(player.velocity).length() < 0.2:
+	if player.is_on_floor() and abs(player.velocity).length() < 0.2:
 		transition_state(NODE_STATE, States.State.STANDING)
-		return
 
 	# Ⓐ/[Space] button currently _pressed_
 	if Input.is_action_pressed(Controls.BUTTON_0) \
@@ -56,15 +54,13 @@ func _process(delta: float) -> void:
 
 ## Plays the appropriate animation based on player state.
 func play_animation() -> void:
-	var mix_anim = ANIMATION_FLYING_FAST if player.speed_current == player.speed_flying * 2 else ANIMATION_FLYING
-	var quat_anim = QUAT_ANIMATION_FLYING_FAST if player.speed_current == player.speed_flying * 2 else QUAT_ANIMATION_FLYING
+	var mixamo_animation = ANIMATION_FLYING_FAST if player.speed_current == player.speed_flying * 2 else ANIMATION_FLYING
+	var quaternius_animation = QUAT_ANIMATION_FLYING_FAST if player.speed_current == player.speed_flying * 2 else QUAT_ANIMATION_FLYING
 
-	if player.animation_set == 0:
-		if player.animation_player_current_animation() != mix_anim:
-			player.animation_player_play(mix_anim)
-	elif player.animation_set == 1:
-		if player.animation_player_current_animation() != quat_anim:
-			player.animation_player_play(quat_anim)
+	var current_animation = player.animation_player_current_animation()
+	var animation = mixamo_animation if player.animation_set == 0 else quaternius_animation
+	if current_animation != animation:
+		player.animation_player_play(animation)
 
 
 ## Start "flying".

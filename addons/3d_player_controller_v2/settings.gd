@@ -71,7 +71,7 @@ func _on_vsync_toggled(toggled_on: bool) -> void:
 
 
 func _on_vsync_touch_screen_button_pressed() -> void:
-	_on_vsync_toggled(!vsync_button.button_pressed)
+	_on_vsync_toggled(not vsync_button.button_pressed)
 
 
 ## Change the MSAA value.
@@ -136,7 +136,7 @@ func _on_fxaa_toggled(toggled_on: bool) -> void:
 
 
 func _on_fxaa_touch_screen_button_pressed() -> void:
-	_on_fxaa_toggled(!fxaa_button.button_pressed)
+	_on_fxaa_toggled(not fxaa_button.button_pressed)
 
 
 ## Change the SSRL value.
@@ -146,7 +146,7 @@ func _on_ssrl_toggled(toggled_on: bool) -> void:
 
 
 func _on_ssrl_touch_screen_button_pressed() -> void:
-	_on_ssrl_toggled(!ssrl_button.button_pressed)
+	_on_ssrl_toggled(not ssrl_button.button_pressed)
 
 
 ## Change the TAA value.
@@ -158,7 +158,7 @@ func _on_taa_toggled(toggled_on: bool) -> void:
 
 
 func _on_taa_touch_screen_button_pressed() -> void:
-	_on_taa_toggled(!taa_button.button_pressed)
+	_on_taa_toggled(not taa_button.button_pressed)
 
 
 ## Change the FSR value.
@@ -170,7 +170,7 @@ func _on_fsr_item_selected(index: int) -> void:
 
 
 func _on_fsr_touch_screen_button_pressed() -> void:
-	_on_fsr_item_selected(!fsr_button.button_pressed)
+	_on_fsr_item_selected(not fsr_button.button_pressed)
 
 
 ## Return to the pause menu.

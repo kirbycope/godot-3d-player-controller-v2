@@ -39,7 +39,7 @@ func _ready() -> void:
 ## Called when there is an input event.
 func _input(event: InputEvent) -> void:
 	# Do nothing if not the authority
-	if !is_multiplayer_authority(): return
+	if not is_multiplayer_authority(): return
 
 	# Do nothing if the "pause" menu is visible
 	if player.pause.visible: return
@@ -198,7 +198,7 @@ func _input(event: InputEvent) -> void:
 
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if !is_multiplayer_authority(): return
+	if not is_multiplayer_authority(): return
 
 	var look_actions = [Controls.LOOK_UP, Controls.LOOK_DOWN, Controls.LOOK_LEFT, Controls.LOOK_RIGHT]
 	for action in look_actions:
@@ -216,8 +216,8 @@ func _process(delta: float) -> void:
 
 
 ## Called once on each physics tick, and allows Nodes to synchronize their logic with physics ticks.
-func _physics_process(delta: float) -> void:
-	if !is_multiplayer_authority(): return
+func _physics_process(_delta: float) -> void:
+	if not is_multiplayer_authority(): return
 
 	if perspective == Perspective.FIRST_PERSON:
 		move_camera_to_player_head()

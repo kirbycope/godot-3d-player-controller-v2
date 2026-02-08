@@ -11,9 +11,9 @@ const NODE_STATE := States.State.SLIDING
 
 
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	# Do nothing if not the authority
-	if !is_multiplayer_authority(): return
+	if not is_multiplayer_authority(): return
 
 	# Play the animation
 	play_animation()
@@ -21,22 +21,28 @@ func _process(delta: float) -> void:
 
 ## Plays the appropriate animation based on player state.
 func play_animation() -> void:
-	var anim = QUAT_ANIMATION_SLIDING if player.animation_set == 1 else MIX_ANIMATION_SLIDING
-	if player.animation_player_current_animation() != anim:
-		player.animation_player_play(anim)
+	var animation = QUAT_ANIMATION_SLIDING if player.animation_set == 1 else MIX_ANIMATION_SLIDING
+	var current_animation = player.animation_player_current_animation()
+	if current_animation != animation:
+		player.animation_player_play(animation)
 		player.animation_player_connect("animation_finished", _on_animation_finished)
 
-func _on_animation_finished(anim_name: String) -> void:
-	if anim_name == MIX_ANIMATION_SLIDING \
-	or anim_name == QUAT_ANIMATION_SLIDING:
+func _on_animation_finished(animation_name: String) -> void:
+	# Do nothing if not the authority
+	if not is_multiplayer_authority(): return
+
+	if animation_name == MIX_ANIMATION_SLIDING or animation_name == QUAT_ANIMATION_SLIDING:
 		if player.animation_player_is_connected("animation_finished", _on_animation_finished):
 			player.animation_player_disconnect("animation_finished", _on_animation_finished)
 		if Input.is_action_pressed(Controls.BUTTON_1):
 			transition_state(NODE_STATE, States.State.SPRINTING)
+			return
 		elif player.input_direction != Vector2.ZERO:
 			transition_state(NODE_STATE, States.State.RUNNING)
+			return
 		else:
 			transition_state(NODE_STATE, States.State.STANDING)
+			return
 
 
 ## Start "sliding".

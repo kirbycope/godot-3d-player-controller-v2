@@ -17,28 +17,25 @@ var flip_direction := Vector2.ZERO ## The direction of the flip (backward = posi
 ## Called when there is an input event.
 func _input(event: InputEvent) -> void:
 	# Do nothing if not the authority
-	if !is_multiplayer_authority(): return
+	if not is_multiplayer_authority(): return
 
 	# Do nothing if the "pause" menu is visible
 	if player.pause.visible: return
 
 
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	# Do nothing if not the authority
-	if !is_multiplayer_authority(): return
+	if not is_multiplayer_authority(): return
 
 	# Check if the player is on a floor
 	if player.is_on_floor():
 		# Fell too fast -> Start "ragdolling"
-		if player.virtual_velocity.y < -player.gravity \
-		and player.enable_ragdolling:
+		if player.virtual_velocity.y < -player.gravity and player.enable_ragdolling:
 			transition_state(NODE_STATE, States.State.RAGDOLLING)
-			return
 		# Fell safely -> Start "standing"
 		else:
 			transition_state(NODE_STATE, States.State.STANDING)
-			return
 
 	# Play the animation
 	play_animation()
@@ -46,33 +43,37 @@ func _process(delta: float) -> void:
 
 ## Plays the appropriate animation based on flip direction.
 func play_animation() -> void:
-	var mix_anim: String
-	var quat_anim: String
+	var mixamo_animation: String
+	var quaternius_animation: String
 
 	# Determine which animation to play based on flip direction
 	if flip_direction.y > 0:  # Backward flip
 		# Adjust the animation playback speed (the animation is too long)
 		player.animation_player_set_speed_scale(1.5)
-		mix_anim = MIX_ANIMATION_FLIPPING_BACKWARD
-		quat_anim = QUAT_ANIMATION_FLIPPING_BACKWARD
+		mixamo_animation = MIX_ANIMATION_FLIPPING_BACKWARD
+		quaternius_animation = QUAT_ANIMATION_FLIPPING_BACKWARD
 	else:  # Forward flip
 		# [Re]set the animation playback speed
 		player.animation_player_set_speed_scale(1.0)
-		mix_anim = MIX_ANIMATION_FLIPPING_FORWARD
-		quat_anim = QUAT_ANIMATION_FLIPPING_FORWARD
+		mixamo_animation = MIX_ANIMATION_FLIPPING_FORWARD
+		quaternius_animation = QUAT_ANIMATION_FLIPPING_FORWARD
 	
 	# Play the appropriate animation based on the player's animation set (🔵 Mixamo or 🟣 Quaternius)
-	if player.animation_set == 0:
-		if player.animation_player_current_animation() != mix_anim:
+	var current_animation = player.animation_player_current_animation()
+	var animation = mixamo_animation if player.animation_set == 0 else quaternius_animation
+	if current_animation != animation:
+		if player.animation_set == 0:
 			 # Start the animation 0.2 seconds in (to skip the initial crouch)
-			player.animation_player_play_section(mix_anim, 0.2)
-	elif player.animation_set == 1:
-		if player.animation_player_current_animation() != quat_anim:
-			player.animation_player_play(quat_anim)
+			player.animation_player_play_section(animation, 0.2)
+		else:
+			player.animation_player_play(animation)
 
 
 ## Called when the flip animation finishes.
 func _on_animation_finished(animation_name: String) -> void:
+	# Do nothing if not the authority
+	if not is_multiplayer_authority(): return
+
 	# Only transition when the flip animation finishes (ignore other AnimationPlayers)
 	var expected_animations = [
 		MIX_ANIMATION_FLIPPING_FORWARD,

@@ -79,33 +79,27 @@ const NODE_STATE := States.State.STANDING
 ## Called when there is an input event.
 func _input(event: InputEvent) -> void:
 	# Do nothing if not the authority
-	if !is_multiplayer_authority(): return
+	if not is_multiplayer_authority(): return
 
 	# Do nothing if the "pause" menu is visible
 	if player.pause.visible: return
 
 	# Ⓐ/[Space] _pressed_ -> Start "jumping" or "flipping"
 	if event.is_action_pressed(Controls.BUTTON_0):
-		if player.enable_jumping \
-		and player.is_on_floor() \
-		and not player.chat.line_edit.visible:
-			if player.enable_flipping \
-			and player.is_strafing \
-			and (Input.is_action_pressed(Controls.MOVE_DOWN) or Input.is_action_pressed(Controls.MOVE_UP)):
+		if player.enable_jumping and player.is_on_floor() and not player.chat.line_edit.visible:
+			if player.enable_flipping and player.is_strafing and (Input.is_action_pressed(Controls.MOVE_DOWN) or Input.is_action_pressed(Controls.MOVE_UP)):
 				# Start "flipping"
 				transition_state(player.current_state, States.State.FLIPPING)
+				return
 			else:
 				# Start "jumping"
 				transition_state(player.current_state, States.State.JUMPING)
-			return
+				return
 
 	# Ⓑ/[shift] _pressed_ -> Start "sprinting"
 	if event.is_action_pressed(Controls.BUTTON_1):
-		if player.enable_sprinting \
-		and player.input_direction != Vector2.ZERO \
-		and player.is_on_floor():
+		if player.enable_sprinting and player.input_direction != Vector2.ZERO and player.is_on_floor():
 			transition_state(NODE_STATE, States.State.SPRINTING)
-			return
 
 	# Do nothing if the mouse is visible (UI is active)
 	if Input.mouse_mode == Input.MOUSE_MODE_VISIBLE \
@@ -252,24 +246,19 @@ func _input(event: InputEvent) -> void:
 
 
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	# Do nothing if not the authority
-	if !is_multiplayer_authority(): return
+	if not is_multiplayer_authority(): return
 
 	# Not on floor -> Start "falling"
-	if not player.is_on_floor() \
-	and not player.ray_cast_below.is_colliding():
+	if not player.is_on_floor() and not player.ray_cast_below.is_colliding():
 		transition_state(player.current_state, States.State.FALLING)
-		return
 
 	# Ⓨ/[Ctrl] _pressed_ -> Start "crouching"
 	# Not in _input() to allow holding down the button while in other states and transitioning to "standing"
-	if Input.is_action_pressed(Controls.BUTTON_3) \
-	and not player.pause.visible:
-		if player.enable_crouching \
-		and player.is_on_floor():
+	if Input.is_action_pressed(Controls.BUTTON_3) and not player.pause.visible:
+		if player.enable_crouching and player.is_on_floor():
 			transition_state(NODE_STATE, States.State.CROUCHING)
-			return
 
 	# Play the animation
 	play_animation()
@@ -277,164 +266,167 @@ func _process(delta: float) -> void:
 
 ## Plays the appropriate animation based on player state.
 func play_animation() -> void:
-	var current = player.animation_player_current_animation()
+	var current_animation = player.animation_player_current_animation()
 	
 	# 🦵 -- Kicking animations --
 	if player.enable_kicking and player.is_kicking_left:
-		var anim = MIX_ANIMATION_KICKING_LEFT if player.animation_set == 0 else QUAT_ANIMATION_KICKING_LEFT
-		if current != anim:
-			_on_animation_finished(current)
-			player.animation_player_play(anim)
+		var animation = MIX_ANIMATION_KICKING_LEFT if player.animation_set == 0 else QUAT_ANIMATION_KICKING_LEFT
+		if current_animation != animation:
+			_on_animation_finished(current_animation)
+			player.animation_player_play(animation)
 			if player.character.has_method("play_attack_long_sound_effect"):
 				player.character.play_attack_long_sound_effect()
 	elif player.enable_kicking and player.is_kicking_right:
-		var anim = MIX_ANIMATION_KICKING_RIGHT if player.animation_set == 0 else QUAT_ANIMATION_KICKING_RIGHT
-		if current != anim:
-			_on_animation_finished(current)
-			player.animation_player_play(anim)
+		var animation = MIX_ANIMATION_KICKING_RIGHT if player.animation_set == 0 else QUAT_ANIMATION_KICKING_RIGHT
+		if current_animation != animation:
+			_on_animation_finished(current_animation)
+			player.animation_player_play(animation)
 			if player.character.has_method("play_attack_long_sound_effect"):
 				player.character.play_attack_long_sound_effect()
 
 	# 🎣 -- Fishing animations --
 	elif player.is_holding_fishing_rod:
-		var anim: String
+		var animation: String
 		if player.is_casting_fishing:
-			anim = MIX_ANIMATION_FISHING_CASTING if player.animation_set == 0 else QUAT_ANIMATION_FISHING_CASTING
+			animation = MIX_ANIMATION_FISHING_CASTING if player.animation_set == 0 else QUAT_ANIMATION_FISHING_CASTING
 		elif player.is_reeling_fishing:
-			anim = MIX_ANIMATION_FISHING_REELING if player.animation_set == 0 else QUAT_ANIMATION_FISHING_REELING
+			animation = MIX_ANIMATION_FISHING_REELING if player.animation_set == 0 else QUAT_ANIMATION_FISHING_REELING
 		else:
-			anim = MIX_ANIMATION_FISHING_IDLE if player.animation_set == 0 else QUAT_ANIMATION_FISHING_IDLE
-		if current != anim:
-			_on_animation_finished(current)
-			player.animation_player_play(anim)
+			animation = MIX_ANIMATION_FISHING_IDLE if player.animation_set == 0 else QUAT_ANIMATION_FISHING_IDLE
+		if current_animation != animation:
+			_on_animation_finished(current_animation)
+			player.animation_player_play(animation)
 
 	# 🔫 -- Rifle animations --
 	elif player.is_holding_rifle:
-		var anim: String
+		var animation: String
 		if player.is_firing_rifle:
-			anim = MIX_ANIMATION_RIFLE_FIRING if player.animation_set == 0 else QUAT_ANIMATION_RIFLE_FIRING
+			animation = MIX_ANIMATION_RIFLE_FIRING if player.animation_set == 0 else QUAT_ANIMATION_RIFLE_FIRING
 		elif player.is_aiming_rifle:
-			anim = MIX_ANIMATION_RIFLE_AIMING if player.animation_set == 0 else QUAT_ANIMATION_RIFLE_AIMING
+			animation = MIX_ANIMATION_RIFLE_AIMING if player.animation_set == 0 else QUAT_ANIMATION_RIFLE_AIMING
 		else:
-			anim = MIX_ANIMATION_HOLDING_RIFLE if player.animation_set == 0 else QUAT_ANIMATION_HOLDING_RIFLE
-		if current != anim:
-			_on_animation_finished(current)
-			player.animation_player_play(anim)
+			animation = MIX_ANIMATION_HOLDING_RIFLE if player.animation_set == 0 else QUAT_ANIMATION_HOLDING_RIFLE
+		if current_animation != animation:
+			_on_animation_finished(current_animation)
+			player.animation_player_play(animation)
 
 	# 🛠️ -- 1H animations --
 	elif player.is_holding_1h_left and player.is_holding_1h_right:
-		var anim: String
+		var animation: String
 		if player.is_swinging_1h_left:
-			anim = MIX_ANIMATION_SWINGING_1H_LEFT if player.animation_set == 0 else QUAT_ANIMATION_SWINGING_1H_LEFT
-			if current != anim:
-				_on_animation_finished(current)
-				player.animation_player_play(anim)
+			animation = MIX_ANIMATION_SWINGING_1H_LEFT if player.animation_set == 0 else QUAT_ANIMATION_SWINGING_1H_LEFT
+			if current_animation != animation:
+				_on_animation_finished(current_animation)
+				player.animation_player_play(animation)
 				if player.character.has_method("play_attack_short_sound_effect"):
 					player.character.play_attack_short_sound_effect()
 		elif player.is_swinging_1h_right:
-			anim = MIX_ANIMATION_SWINGING_1H_RIGHT if player.animation_set == 0 else QUAT_ANIMATION_SWINGING_1H_RIGHT
-			if current != anim:
-				_on_animation_finished(current)
-				player.animation_player_play(anim)
+			animation = MIX_ANIMATION_SWINGING_1H_RIGHT if player.animation_set == 0 else QUAT_ANIMATION_SWINGING_1H_RIGHT
+			if current_animation != animation:
+				_on_animation_finished(current_animation)
+				player.animation_player_play(animation)
 				if player.character.has_method("play_attack_short_sound_effect"):
 					player.character.play_attack_short_sound_effect()
 		else:
-			anim = MIX_ANIMATION_HOLDING_1H_RIGHT if player.animation_set == 0 else QUAT_ANIMATION_HOLDING_1H_RIGHT
-			if current != anim:
-				player.animation_player_play(anim)
+			animation = MIX_ANIMATION_HOLDING_1H_RIGHT if player.animation_set == 0 else QUAT_ANIMATION_HOLDING_1H_RIGHT
+			if current_animation != animation:
+				player.animation_player_play(animation)
 	elif player.is_holding_1h_left:
-		var anim: String
+		var animation: String
 		if player.is_blocking_1h_left:
-			anim = MIX_ANIMATION_BLOCKING_1H_LEFT if player.animation_set == 0 else QUAT_ANIMATION_BLOCKING_1H_LEFT
+			animation = MIX_ANIMATION_BLOCKING_1H_LEFT if player.animation_set == 0 else QUAT_ANIMATION_BLOCKING_1H_LEFT
 		elif player.is_swinging_1h_left:
-			anim = MIX_ANIMATION_SWINGING_1H_LEFT if player.animation_set == 0 else QUAT_ANIMATION_SWINGING_1H_LEFT
+			animation = MIX_ANIMATION_SWINGING_1H_LEFT if player.animation_set == 0 else QUAT_ANIMATION_SWINGING_1H_LEFT
 		else:
-			anim = MIX_ANIMATION_HOLDING_1H_LEFT if player.animation_set == 0 else QUAT_ANIMATION_HOLDING_1H_LEFT
-		if current != anim:
+			animation = MIX_ANIMATION_HOLDING_1H_LEFT if player.animation_set == 0 else QUAT_ANIMATION_HOLDING_1H_LEFT
+		if current_animation != animation:
 			if player.is_swinging_1h_left:
-				_on_animation_finished(current)
+				_on_animation_finished(current_animation)
 				if player.character.has_method("play_attack_short_sound_effect"):
 					player.character.play_attack_short_sound_effect()
 			else:
-				_on_animation_finished(current)
-			player.animation_player_play(anim)
+				_on_animation_finished(current_animation)
+			player.animation_player_play(animation)
 	elif player.is_holding_1h_right:
-		var anim: String
+		var animation: String
 		if player.is_blocking_1h_right:
-			anim = MIX_ANIMATION_BLOCKING_1H_RIGHT if player.animation_set == 0 else QUAT_ANIMATION_BLOCKING_1H_RIGHT
+			animation = MIX_ANIMATION_BLOCKING_1H_RIGHT if player.animation_set == 0 else QUAT_ANIMATION_BLOCKING_1H_RIGHT
 		elif player.is_swinging_1h_right:
-			anim = MIX_ANIMATION_SWINGING_1H_RIGHT if player.animation_set == 0 else QUAT_ANIMATION_SWINGING_1H_RIGHT
+			animation = MIX_ANIMATION_SWINGING_1H_RIGHT if player.animation_set == 0 else QUAT_ANIMATION_SWINGING_1H_RIGHT
 		else:
-			anim = MIX_ANIMATION_HOLDING_1H_RIGHT if player.animation_set == 0 else QUAT_ANIMATION_HOLDING_1H_RIGHT
-		if current != anim:
+			animation = MIX_ANIMATION_HOLDING_1H_RIGHT if player.animation_set == 0 else QUAT_ANIMATION_HOLDING_1H_RIGHT
+		if current_animation != animation:
 			if player.is_swinging_1h_right:
-				_on_animation_finished(current)
+				_on_animation_finished(current_animation)
 				if player.character.has_method("play_attack_short_sound_effect"):
 					player.character.play_attack_short_sound_effect()
 			else:
-				_on_animation_finished(current)
-			player.animation_player_play(anim)
+				_on_animation_finished(current_animation)
+			player.animation_player_play(animation)
 
 	# 👐 -- 2H animations --
 	elif player.is_holding_2h:
-		var anim: String
+		var animation: String
 		if player.is_blocking_2h:
-			anim = MIX_ANIMATION_BLOCKING_2H if player.animation_set == 0 else QUAT_ANIMATION_BLOCKING_2H
+			animation = MIX_ANIMATION_BLOCKING_2H if player.animation_set == 0 else QUAT_ANIMATION_BLOCKING_2H
 		elif player.is_swinging_2h:
-			anim = MIX_ANIMATION_SWINGING_2H if player.animation_set == 0 else QUAT_ANIMATION_SWINGING_2H
+			animation = MIX_ANIMATION_SWINGING_2H if player.animation_set == 0 else QUAT_ANIMATION_SWINGING_2H
 		else:
-			anim = MIX_ANIMATION_HOLDING_2H if player.animation_set == 0 else QUAT_ANIMATION_HOLDING_2H
-		if current != anim:
+			animation = MIX_ANIMATION_HOLDING_2H if player.animation_set == 0 else QUAT_ANIMATION_HOLDING_2H
+		if current_animation != animation:
 			if player.is_swinging_2h:
-				_on_animation_finished(current)
+				_on_animation_finished(current_animation)
 				if player.character.has_method("play_attack_long_sound_effect"):
 					player.character.play_attack_long_sound_effect()
 			else:
-				_on_animation_finished(current)
-			player.animation_player_play(anim)
+				_on_animation_finished(current_animation)
+			player.animation_player_play(animation)
 
 	# 🤾 -- Throwing animations --
 	elif player.is_holding_left and player.is_throwing_left:
-		var anim = MIX_ANIMATION_THROWING_LEFT if player.animation_set == 0 else QUAT_ANIMATION_THROWING_LEFT
-		if current != anim:
-			_on_animation_finished(current)
-			player.animation_player_play(anim)
+		var animation = MIX_ANIMATION_THROWING_LEFT if player.animation_set == 0 else QUAT_ANIMATION_THROWING_LEFT
+		if current_animation != animation:
+			_on_animation_finished(current_animation)
+			player.animation_player_play(animation)
 	elif player.is_holding_right and player.is_throwing_right:
-		var anim = MIX_ANIMATION_THROWING_RIGHT if player.animation_set == 0 else QUAT_ANIMATION_THROWING_RIGHT
-		if current != anim:
-			_on_animation_finished(current)
-			player.animation_player_play(anim)
+		var animation = MIX_ANIMATION_THROWING_RIGHT if player.animation_set == 0 else QUAT_ANIMATION_THROWING_RIGHT
+		if current_animation != animation:
+			_on_animation_finished(current_animation)
+			player.animation_player_play(animation)
 
 	# 🥊 -- Punching animations --
 	elif player.enable_punching and player.is_punching_left:
-		var anim = MIX_ANIMATION_PUNCHING_LEFT if player.animation_set == 0 else QUAT_ANIMATION_PUNCHING_LEFT
-		if current != anim:
-			_on_animation_finished(current)
-			player.animation_player_play(anim)
+		var animation = MIX_ANIMATION_PUNCHING_LEFT if player.animation_set == 0 else QUAT_ANIMATION_PUNCHING_LEFT
+		if current_animation != animation:
+			_on_animation_finished(current_animation)
+			player.animation_player_play(animation)
 			if player.character.has_method("play_attack_short_sound_effect"):
 				player.character.play_attack_short_sound_effect()
 	elif player.enable_punching and player.is_punching_right:
-		var anim = MIX_ANIMATION_PUNCHING_RIGHT if player.animation_set == 0 else QUAT_ANIMATION_PUNCHING_RIGHT
-		if current != anim:
-			_on_animation_finished(current)
-			player.animation_player_play(anim)
+		var animation = MIX_ANIMATION_PUNCHING_RIGHT if player.animation_set == 0 else QUAT_ANIMATION_PUNCHING_RIGHT
+		if current_animation != animation:
+			_on_animation_finished(current_animation)
+			player.animation_player_play(animation)
 			if player.character.has_method("play_attack_short_sound_effect"):
 				player.character.play_attack_short_sound_effect()
 
 	# ✋ -- Unarmed animation --
 	else:
-		var anim: String
+		var animation: String
 		if player.is_target_locked:
-			anim = MIX_ANIMATION_STANDING_READY if player.animation_set == 0 else QUAT_ANIMATION_STANDING_READY
+			animation = MIX_ANIMATION_STANDING_READY if player.animation_set == 0 else QUAT_ANIMATION_STANDING_READY
 		else:
-			anim = MIX_ANIMATION_STANDING_IDLE if player.animation_set == 0 else QUAT_ANIMATION_STANDING_IDLE
-		if current != anim:
-			_on_animation_finished(current)
-			player.animation_player_play(anim)
+			animation = MIX_ANIMATION_STANDING_IDLE if player.animation_set == 0 else QUAT_ANIMATION_STANDING_IDLE
+		if current_animation != animation:
+			_on_animation_finished(current_animation)
+			player.animation_player_play(animation)
 
 
 ## Resets the related state flag when an animation is finished.
 func _on_animation_finished(animation_name: String) -> void:
+	# Do nothing if not the authority
+	if not is_multiplayer_authority(): return
+
 	if animation_name == MIX_ANIMATION_FISHING_CASTING \
 	or animation_name == QUAT_ANIMATION_FISHING_CASTING:
 		player.is_casting_fishing = false
