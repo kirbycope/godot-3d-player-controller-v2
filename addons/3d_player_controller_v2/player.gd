@@ -178,9 +178,6 @@ func _ready() -> void:
 	# Setup animations for all `character` components
 	setup_character.add_animations(character, self)
 
-	# Setup physical bone simulators for all `character` components
-	setup_character.physical_bone_simulators(character)
-
 	_setup_head_look_at()
 
 	# Initialize the state machine

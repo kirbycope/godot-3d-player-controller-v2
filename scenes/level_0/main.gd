@@ -85,6 +85,3 @@ func _input(event: InputEvent) -> void:
 
 		# Setup animations for all `character` components
 		SetupCharacter.add_animations(new_character, player)
-
-		# Setup physical bone simulators for all `character` components
-		SetupCharacter.physical_bone_simulators(new_character)

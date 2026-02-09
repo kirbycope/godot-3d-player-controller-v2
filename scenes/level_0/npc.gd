@@ -34,9 +34,6 @@ func _ready() -> void:
 		# Setup animations for this character component
 		setup_character.add_animations(child, null)
 
-		# Setup physical bone simulators for this character component
-		setup_character.physical_bone_simulators(child)
-
 
 func _process(_delta: float) -> void:
 	play_animation()
@@ -229,3 +226,14 @@ func _on_area_3d_body_entered(body: Node3D) -> void:
 		if _is_reacting_animation_playing():
 			return # Ignore repeated hits while current reaction plays
 		rpc("animate_knocked_over", null)
+
+		#var y_bot = get_node("Y_Bot")
+		#var gs = y_bot.find_child("GeneralSkeleton", true, false)
+		#var pbs3d = gs.get_node_or_null("PhysicalBoneSimulator3D")
+		#var collision_shape = get_node("CollisionShape3D")
+		#collision_shape.set_deferred("disabled", true)
+		#pbs3d.physical_bones_start_simulation()
+		#await get_tree().create_timer(5.0).timeout
+		#pbs3d.physical_bones_stop_simulation()
+		#collision_shape.set_deferred("disabled", false)
+		#is_getting_up = true

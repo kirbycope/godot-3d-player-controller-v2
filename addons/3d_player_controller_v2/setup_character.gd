@@ -106,43 +106,6 @@ static func animations_quaternius_2(character: Node3D, playback_default_blend_ti
 	#print(  "└── Quaternius animations setup complete.") # DEBUGGING
 
 
-## Sets up a [PhysicalBoneSimulator3D] for all child nodes of the `character`.
-static func physical_bone_simulators(character: Node3D) -> void:
-	#print(  "Setting up PhysicalBoneSimulators...") # DEBUGGING
-	# Add a PhysicalBoneSimulator3D to each skeleton and setup bones
-	for child in character.get_children():
-		# Locate the skeleton; adjust the path if your rigs differ
-		var skeleton: Skeleton3D = child.get_node_or_null("%GeneralSkeleton")
-		if skeleton == null: continue
-		# Ensure a simulator exists under the skeleton
-		var simulator: PhysicalBoneSimulator3D = skeleton.get_node_or_null("PhysicalBoneSimulator3D")
-		if simulator == null:
-			simulator = PhysicalBoneSimulator3D.new()
-			simulator.name = "PhysicalBoneSimulator3D"
-			simulator.active = false
-			skeleton.add_child(simulator)
-
-		# If no physical bones exist yet, build them manually
-		if simulator.get_child_count() == 0:
-			var bone_count := skeleton.get_bone_count()
-			for bone_idx in bone_count:
-				var bone_name := skeleton.get_bone_name(bone_idx)
-				var phys_bone := PhysicalBone3D.new()
-				phys_bone.name = "Physical Bone " + bone_name
-				phys_bone.bone_name = bone_name
-				phys_bone.transform = skeleton.get_bone_global_rest(bone_idx)
-				simulator.add_child(phys_bone)
-
-				# Minimal collision so the ragdoll can interact; tune per bone later
-				var shape := CollisionShape3D.new()
-				shape.shape = CapsuleShape3D.new()
-				phys_bone.add_child(shape)
-
-		# Leave simulation disabled; ragdoll state toggles it
-		simulator.active = false
-	#print(  "└── PhysicalBoneSimulators setup complete.") # DEBUGGING
-
-
 ## Helper to find or create an [AnimationPlayer] under the given `character.child`.
 static func _find_or_create_animation_player(child: Node, playback_default_blend_time: float = 0.0) -> AnimationPlayer:
 	var animation_player: AnimationPlayer = null

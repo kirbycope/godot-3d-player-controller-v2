@@ -57,7 +57,6 @@ func start() -> void:
 		player.collision_shape.disabled = true
 
 		# Now activate the ragdoll simulation
-		#player.physical_bone_simulator().active = true
 		player.physical_bone_simulator().physical_bones_start_simulation()
 
 
@@ -73,7 +72,6 @@ func stop() -> void:
 	if player.physical_bone_simulator():
 		if player.physical_bone_simulator().active:
 			player.physical_bone_simulator().physical_bones_stop_simulation()
-			#player.physical_bone_simulator().active = false
 
 	# Ensure collision is re-enabled
 	player.collision_shape.disabled = false

@@ -1,8 +1,10 @@
 [gd_scene format=3 uid="uid://cgbnyctknc7ku"]
 
 [ext_resource type="PackedScene" uid="uid://w6ms664smgwp" path="res://assets/universal_base_characters/Base Characters/Superhero_Male_FullBody.gltf" id="1_jgqlu"]
+[ext_resource type="PackedScene" uid="uid://bny38esola36m" path="res://assets/universal_base_characters/physical_bone_simulator_3d_m.tscn" id="2_2nxoi"]
 [ext_resource type="PackedScene" uid="uid://cv4otv6ufuil" path="res://assets/universal_base_characters/Hairstyles/Rigged/Eyebrows_Regular.gltf" id="2_g4xk2"]
 [ext_resource type="PackedScene" uid="uid://cf3ybwko48ys1" path="res://assets/universal_base_characters/Hairstyles/Rigged/Hair_Beard.gltf" id="3_1qs4a"]
+[ext_resource type="Script" uid="uid://br2h8me6nbbfh" path="res://addons/3d_player_controller_v2/physical_bone_simulator_3d.gd" id="3_aimbq"]
 [ext_resource type="PackedScene" uid="uid://c51ejy2x7toe1" path="res://assets/universal_base_characters/Hairstyles/Rigged/Hair_Buzzed.gltf" id="4_8o8b0"]
 [ext_resource type="PackedScene" uid="uid://cavuabcf7wocy" path="res://assets/universal_base_characters/Hairstyles/Rigged/Hair_SimpleParted.gltf" id="5_u7xjh"]
 
@@ -24,3 +26,7 @@ visible = false
 
 [node name="Hair_SimpleParted2" parent="." unique_id=240575434 instance=ExtResource("5_u7xjh")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+
+[node name="PhysicalBoneSimulator3D" parent="." unique_id=1729240384 instance=ExtResource("2_2nxoi")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+script = ExtResource("3_aimbq")

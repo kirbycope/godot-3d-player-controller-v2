@@ -2,7 +2,9 @@
 
 [ext_resource type="PackedScene" uid="uid://dt28ay8fdf086" path="res://assets/universal_base_characters/Base Characters/Superhero_Female_FullBody.gltf" id="1_1xjc6"]
 [ext_resource type="PackedScene" uid="uid://cj82wecm7uiji" path="res://assets/universal_base_characters/Hairstyles/Rigged/Eyebrows_Female.gltf" id="2_3e7sd"]
+[ext_resource type="PackedScene" uid="uid://dmiotlye0jsgk" path="res://assets/universal_base_characters/physical_bone_simulator_3d_f.tscn" id="2_a8qjs"]
 [ext_resource type="PackedScene" uid="uid://gfl45scyblfp" path="res://assets/universal_base_characters/Hairstyles/Rigged/Hair_Buns.gltf" id="3_54o47"]
+[ext_resource type="Script" uid="uid://br2h8me6nbbfh" path="res://addons/3d_player_controller_v2/physical_bone_simulator_3d.gd" id="3_58fm3"]
 [ext_resource type="PackedScene" uid="uid://bg3j4ap4bd05b" path="res://assets/universal_base_characters/Hairstyles/Rigged/Hair_BuzzedFemale.gltf" id="4_5pui0"]
 [ext_resource type="PackedScene" uid="uid://djwtltfacdltt" path="res://assets/universal_base_characters/Hairstyles/Rigged/Hair_Long.gltf" id="5_xjwcq"]
 
@@ -25,3 +27,7 @@ visible = false
 
 [node name="Hair_Long2" parent="." unique_id=2090125232 instance=ExtResource("5_xjwcq")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+
+[node name="PhysicalBoneSimulator3D" parent="." unique_id=597298066 instance=ExtResource("2_a8qjs")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+script = ExtResource("3_58fm3")

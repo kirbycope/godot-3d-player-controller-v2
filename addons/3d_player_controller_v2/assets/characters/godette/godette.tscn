@@ -1,8 +1,14 @@
 [gd_scene format=3 uid="uid://ba1yxx2ey0bbs"]
 
 [ext_resource type="PackedScene" uid="uid://jj27pdpt5h1b" path="res://addons/3d_player_controller_v2/assets/characters/godette/Godette.gltf" id="1_x1x75"]
+[ext_resource type="PackedScene" uid="uid://chdvjcq4yypnn" path="res://addons/3d_player_controller_v2/assets/characters/godette/physical_bone_simulator_3d.tscn" id="2_vm3oi"]
+[ext_resource type="Script" uid="uid://br2h8me6nbbfh" path="res://addons/3d_player_controller_v2/physical_bone_simulator_3d.gd" id="3_yfcur"]
 
 [node name="Godette" type="Node3D" unique_id=2029293599]
 
 [node name="Godette" parent="." unique_id=1403723215 instance=ExtResource("1_x1x75")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 0)
+
+[node name="PhysicalBoneSimulator3D" parent="." unique_id=338527439 instance=ExtResource("2_vm3oi")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 0)
+script = ExtResource("3_yfcur")
