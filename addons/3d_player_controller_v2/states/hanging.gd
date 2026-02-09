@@ -37,6 +37,8 @@ func _input(event: InputEvent) -> void:
 			else:
 				# Tween player position to target
 				var end_position = player.shape_cast_jump_target.get_collision_point(0)
+				# Adjust down by player height since collision point is at head level
+				end_position.y -= player.collision_height
 				var tween = get_tree().create_tween()
 				tween.set_trans(Tween.TRANS_LINEAR)
 				tween.tween_property(

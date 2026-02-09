@@ -40,7 +40,10 @@ func _process(_delta: float) -> void:
 	if not player.ray_cast_top.is_colliding() \
 	and player.ray_cast_high.is_colliding() \
 	and player.shape_cast_jump_target.is_colliding():
-		player.global_position = player.shape_cast_jump_target.get_collision_point(0)
+		var end_position = player.shape_cast_jump_target.get_collision_point(0)
+		# Adjust down by player height since collision point is at head level
+		end_position.y -= player.collision_height
+		player.global_position = end_position
 		transition_state(NODE_STATE, States.State.STANDING)
 		return
 

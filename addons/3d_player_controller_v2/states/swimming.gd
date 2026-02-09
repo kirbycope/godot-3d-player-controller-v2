@@ -26,7 +26,10 @@ func _input(event: InputEvent) -> void:
 	# Ⓐ/[Space] _pressed_ -> Start "mantling"
 	if event.is_action_pressed(Controls.BUTTON_0):
 		if player.shape_cast_jump_target.is_colliding():
-			player.global_position = player.shape_cast_jump_target.get_collision_point(0)
+			var end_position = player.shape_cast_jump_target.get_collision_point(0)
+			# Adjust down by player height since collision point is at head level
+			end_position.y -= player.collision_height
+			player.global_position = end_position
 			transition_state(NODE_STATE, States.State.STANDING) # TODO: Create a mantling state
 			return
 

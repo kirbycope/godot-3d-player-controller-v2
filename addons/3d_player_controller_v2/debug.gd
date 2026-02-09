@@ -1,4 +1,5 @@
 extends CanvasLayer
+class_name Debug
 ## Debug overlay displaying player state, performance metrics, and configuration toggles with visual debug spheres
 
 var green_sphere: MeshInstance3D
@@ -230,7 +231,7 @@ func draw_debug_sphere(pos: Vector3, color: Color) -> MeshInstance3D:
 	# Create a new mesh instance for the debug sphere
 	var debug_sphere = MeshInstance3D.new()
 	# Add the debug sphere to the scene tree
-	player.get_tree().get_root().add_child(debug_sphere)
+	get_tree().get_root().add_child(debug_sphere)
 	# Create a visual sphere mesh
 	var sphere_mesh = SphereMesh.new()
 	# Set the radius of the sphere mesh
