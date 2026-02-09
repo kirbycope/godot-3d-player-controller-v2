@@ -2,7 +2,8 @@ extends BaseState
 class_name Ragdolling
 ## 🧸 Ragdolling (limp body physics) when knocked out or killed.
 
-const BONE_FOR_CAMERA_TO_FOLLOW := "PhysicalBoneSimulator3D/Physical Bone Hips" # Adjust as needed
+const BONE_FOR_CAMERA_TO_FOLLOW := "Physical Bone Head" # Adjust as needed
+
 const NODE_STATE := States.State.RAGDOLLING
 
 var time_ragdolling := 0.0 ## The time spent in the "ragdolling" state."
@@ -30,8 +31,9 @@ func _process(delta: float) -> void:
 	# Have the player follow the hips bone position, so that the camera follows the ragdoll
 	if not player.pause.visible:
 		time_ragdolling += delta
-		if player.skeleton().has_node(BONE_FOR_CAMERA_TO_FOLLOW):
-			player.global_position = player.skeleton().get_node(BONE_FOR_CAMERA_TO_FOLLOW).global_position
+		var bone_node = player.skeleton().find_child(BONE_FOR_CAMERA_TO_FOLLOW, true, false)
+		if bone_node:
+			player.global_position = bone_node.global_position
 
 
 ## Start ragdoll state
@@ -55,7 +57,7 @@ func start() -> void:
 		player.collision_shape.disabled = true
 
 		# Now activate the ragdoll simulation
-		player.physical_bone_simulator().active = true
+		#player.physical_bone_simulator().active = true
 		player.physical_bone_simulator().physical_bones_start_simulation()
 
 
@@ -71,7 +73,7 @@ func stop() -> void:
 	if player.physical_bone_simulator():
 		if player.physical_bone_simulator().active:
 			player.physical_bone_simulator().physical_bones_stop_simulation()
-			player.physical_bone_simulator().active = false
+			#player.physical_bone_simulator().active = false
 
 	# Ensure collision is re-enabled
 	player.collision_shape.disabled = false
