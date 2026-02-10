@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://bgw2mr57wh170"]
+
+[ext_resource type="Script" uid="uid://csjcd4rngap54" path="res://scenes/level_0/sword.gd" id="1_ri7pq"]
+[ext_resource type="PackedScene" uid="uid://cwb1md00yib3u" path="res://assets/fantasty_props_megakit/Sword_Bronze.gltf" id="2_ad4hg"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ri7pq"]
+
+[node name="Sword" type="Node3D" unique_id=2144086498]
+script = ExtResource("1_ri7pq")
+
+[node name="Sword_Bronze2" parent="." unique_id=1185098054 instance=ExtResource("2_ad4hg")]
+transform = Transform3D(0.17364822, 0.9848077, 0, -0.9848077, 0.17364822, 0, 0, 0, 1, 0.05, 0.075, 0.045)
+
+[node name="PlayerDetection" type="Area3D" parent="." unique_id=1750108419]
+transform = Transform3D(0.9848077, -0.17364818, 0, 0.17364818, 0.9848077, 0, 0, 0, 1, 0.365, 0.1, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerDetection" unique_id=1861905813]
+shape = SubResource("BoxShape3D_ri7pq")
+
+[connection signal="body_entered" from="PlayerDetection" to="." method="_on_player_detection_body_entered"]
+[connection signal="body_exited" from="PlayerDetection" to="." method="_on_player_detection_body_exited"]

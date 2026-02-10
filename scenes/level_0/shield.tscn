@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://cenaq8ljbkf1s"]
+
+[ext_resource type="PackedScene" uid="uid://b0vlyeue1f1rd" path="res://assets/fantasty_props_megakit/Shield_Wooden.gltf" id="1_4jd5a"]
+[ext_resource type="Script" uid="uid://1ur4al8tgy1c" path="res://scenes/level_0/shield.gd" id="1_gtos2"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gtos2"]
+
+[node name="Shield" type="Node3D" unique_id=1718274004]
+script = ExtResource("1_gtos2")
+
+[node name="Shield_Wooden2" parent="." unique_id=310499418 instance=ExtResource("1_4jd5a")]
+
+[node name="PlayerDetection" type="Area3D" parent="." unique_id=1420518190]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerDetection" unique_id=1659992862]
+shape = SubResource("BoxShape3D_gtos2")
+
+[connection signal="body_shape_entered" from="PlayerDetection" to="." method="_on_player_detection_body_shape_entered"]
+[connection signal="body_shape_exited" from="PlayerDetection" to="." method="_on_player_detection_body_shape_exited"]
