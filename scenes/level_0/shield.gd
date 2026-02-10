@@ -1,19 +1,48 @@
 extends Node3D
+## Basic pick-up axe that attaches to player's left hand.
+
+var bone_attachment: BoneAttachment3D
+var player: CharacterBody3D
+
+@onready var initial_parent: Node = get_parent()
+@onready var initial_rotation: Vector3 = global_rotation
+@onready var initial_position: Vector3 = global_position
 
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+func _input(_event: InputEvent) -> void:
+	if player:
+		# Do nothing if the "pause" menu is visible
+		if player.pause.visible: return
+
+		# (D-Pad Down) /[Q] _just_pressed_ -> Drop _this_ node
+		if Input.is_action_just_pressed(Controls.BUTTON_13):
+			player.is_holding_shield = false
+			player.is_blocking_shield = false
+			player = null
+			reparent(initial_parent)
+			global_position = initial_position
+			global_rotation = initial_rotation
+			bone_attachment.queue_free()
+			bone_attachment = null
+			return
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+## Attach _this_ node to the player's left hand when they enter the detection area.
+func _on_player_detection_body_entered(body: Node3D) -> void:
+	if body is CharacterBody3D \
+	and body.is_in_group("Player") \
+	and player == null:
+		player = body
+		player.is_holding_shield = true
+		bone_attachment = BoneAttachment3D.new()
+		bone_attachment.bone_name = player.bone_name_left_hand
+		player.skeleton().add_child(bone_attachment)
+		reparent(bone_attachment)
+		global_position = bone_attachment.global_position
+		global_rotation = bone_attachment.global_rotation
 
 
-func _on_player_detection_body_shape_entered(body_rid: RID, body: Node3D, body_shape_index: int, local_shape_index: int) -> void:
-	pass # Replace with function body.
-
-
-func _on_player_detection_body_shape_exited(body_rid: RID, body: Node3D, body_shape_index: int, local_shape_index: int) -> void:
-	pass # Replace with function body.
+## Detach _this_ node from the player when they exit the detection area.
+func _on_player_detection_body_exited(body: Node3D) -> void:
+	if body == player:
+		pass

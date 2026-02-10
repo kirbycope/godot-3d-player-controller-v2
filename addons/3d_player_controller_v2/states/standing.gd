@@ -13,10 +13,12 @@ const MIX_ANIMATION_FISHING_REELING := "Standing_Fishing_Reel/mixamo_com"
 const MIX_ANIMATION_BLOCKING_1H_LEFT := "Standing_Blocking_1H_Left/mixamo_com"
 const MIX_ANIMATION_BLOCKING_1H_RIGHT := "Standing_Blocking_1H_Right/mixamo_com"
 const MIX_ANIMATION_BLOCKING_2H := "Standing_Blocking_2H/mixamo_com"
+const MIX_ANIMATION_BLOCKING_SWORD_AND_SHIELD := MIX_ANIMATION_BLOCKING_1H_LEFT # TODO: Replace with proper shield blocking animation
 # Standing 🔵 Mixamo animations (holding equipment)
 const MIX_ANIMATION_HOLDING_1H_LEFT := "Standing_Holding_1H_Left/mixamo_com"
 const MIX_ANIMATION_HOLDING_1H_RIGHT := "Standing_Holding_1H_Right/mixamo_com"
 const MIX_ANIMATION_HOLDING_2H := "Standing_Holding_2H/mixamo_com"
+const MIX_ANIMATION_HOLDING_SWORD_AND_SHIELD := "Standing_Sword_And_Shield/mixamo_com"
 # Standing 🔵 Mixamo animations (kicking)
 const MIX_ANIMATION_KICKING_LEFT := "Standing_Kicking_Left/mixamo_com"
 const MIX_ANIMATION_KICKING_RIGHT := "Standing_Kicking_Right/mixamo_com"
@@ -49,10 +51,12 @@ const QUAT_ANIMATION_FISHING_REELING := "UAL2/Fish_Reel"
 const QUAT_ANIMATION_BLOCKING_1H_LEFT := MIX_ANIMATION_BLOCKING_1H_LEFT # There is no Quaternius animation yet (UAl1/UAL2)
 const QUAT_ANIMATION_BLOCKING_1H_RIGHT := MIX_ANIMATION_BLOCKING_1H_RIGHT # There is no Quaternius animation yet (UAl1/UAL2)
 const QUAT_ANIMATION_BLOCKING_2H := MIX_ANIMATION_BLOCKING_2H # There is no Quaternius animation yet (UAl1/UAL2)
+const QUAT_ANIMATION_BLOCKING_SWORD_AND_SHIELD := MIX_ANIMATION_BLOCKING_SWORD_AND_SHIELD # TODO: Replace with proper shield blocking animation when available
 # Standing 🟣 Quaternius animations (holding equipment)
 const QUAT_ANIMATION_HOLDING_1H_LEFT := "UAL1/Sword_Idle" # TODO: Scale -1?
 const QUAT_ANIMATION_HOLDING_1H_RIGHT := "UAL1/Sword_Idle"
 const QUAT_ANIMATION_HOLDING_2H := MIX_ANIMATION_HOLDING_2H # There is no Quaternius animation yet (UAl1/UAL2)
+const QUAT_ANIMATION_HOLDING_SWORD_AND_SHIELD := "UAL1/Sword_And_Shield_Idle" # TODO: Replace with proper sword and shield idle animation when available
 # Standing 🟣 Quaternius animations (kicking)
 const QUAT_ANIMATION_KICKING_LEFT := "UAL1/Kick" # TODO: Scale -1?
 const QUAT_ANIMATION_KICKING_RIGHT := "UAL1/Kick"
@@ -308,6 +312,16 @@ func play_animation() -> void:
 			animation = MIX_ANIMATION_HOLDING_RIFLE if player.animation_set == 0 else QUAT_ANIMATION_HOLDING_RIFLE
 		if current_animation != animation:
 			_on_animation_finished(current_animation)
+			player.animation_player_play(animation)
+
+	#  -- Sword and Shield 🛡️ --
+	elif player.is_holding_shield:
+		var animation: String
+		if player.is_blocking_shield:
+			animation = MIX_ANIMATION_BLOCKING_SWORD_AND_SHIELD if player.animation_set == 0 else QUAT_ANIMATION_BLOCKING_SWORD_AND_SHIELD
+		else:
+			animation = MIX_ANIMATION_HOLDING_SWORD_AND_SHIELD if player.animation_set == 0 else QUAT_ANIMATION_HOLDING_SWORD_AND_SHIELD
+		if current_animation != animation:
 			player.animation_player_play(animation)
 
 	# 🛠️ -- 1H animations --

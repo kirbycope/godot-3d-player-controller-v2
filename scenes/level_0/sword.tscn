@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bgw2mr57wh170"]
 
-[ext_resource type="Script" uid="uid://csjcd4rngap54" path="res://scenes/level_0/sword.gd" id="1_ri7pq"]
+[ext_resource type="Script" path="res://scenes/level_0/sword.gd" id="1_ri7pq"]
 [ext_resource type="PackedScene" uid="uid://cwb1md00yib3u" path="res://assets/fantasty_props_megakit/Sword_Bronze.gltf" id="2_ad4hg"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ri7pq"]
