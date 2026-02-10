@@ -4,8 +4,7 @@ class_name Sliding
 
 # Sliding 🔵 Mixamo animations
 const MIX_ANIMATION_SLIDING := "Running_Slide/mixamo_com"
-# Sliding 🟣 Quaternius animations
-const QUAT_ANIMATION_SLIDING := "UAL2/Slide"
+
 
 const NODE_STATE := States.State.SLIDING
 
@@ -21,7 +20,7 @@ func _process(_delta: float) -> void:
 
 ## Plays the appropriate animation based on player state.
 func play_animation() -> void:
-	var animation = QUAT_ANIMATION_SLIDING if player.animation_set == 1 else MIX_ANIMATION_SLIDING
+	var animation = MIX_ANIMATION_SLIDING
 	var current_animation = player.animation_player_current_animation()
 	if current_animation != animation:
 		player.animation_player_play(animation)
@@ -31,7 +30,7 @@ func _on_animation_finished(animation_name: String) -> void:
 	# Do nothing if not the authority
 	if not is_multiplayer_authority(): return
 
-	if animation_name == MIX_ANIMATION_SLIDING or animation_name == QUAT_ANIMATION_SLIDING:
+	if animation_name == MIX_ANIMATION_SLIDING:
 		if player.animation_player_is_connected("animation_finished", _on_animation_finished):
 			player.animation_player_disconnect("animation_finished", _on_animation_finished)
 		if Input.is_action_pressed(Controls.BUTTON_1):

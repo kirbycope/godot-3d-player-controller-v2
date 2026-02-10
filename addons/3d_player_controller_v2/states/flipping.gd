@@ -5,9 +5,6 @@ class_name Flipping
 # Flipping 🔵 Mixamo animations
 const MIX_ANIMATION_FLIPPING_BACKWARD := "Running_Backward_Flip/mixamo_com"
 const MIX_ANIMATION_FLIPPING_FORWARD := "Running_Forward_Flip/mixamo_com"
-# Flipping 🟣 Quaternius animations
-const QUAT_ANIMATION_FLIPPING_BACKWARD := MIX_ANIMATION_FLIPPING_BACKWARD # TODO: Look for a proper Quaternius flipping backward animation
-const QUAT_ANIMATION_FLIPPING_FORWARD := MIX_ANIMATION_FLIPPING_FORWARD # TODO: Look for a proper Quaternius flipping forward animation
 
 const NODE_STATE := States.State.FLIPPING
 
@@ -44,29 +41,22 @@ func _process(_delta: float) -> void:
 ## Plays the appropriate animation based on flip direction.
 func play_animation() -> void:
 	var mixamo_animation: String
-	var quaternius_animation: String
 
 	# Determine which animation to play based on flip direction
 	if flip_direction.y > 0:  # Backward flip
 		# Adjust the animation playback speed (the animation is too long)
 		player.animation_player_set_speed_scale(1.5)
 		mixamo_animation = MIX_ANIMATION_FLIPPING_BACKWARD
-		quaternius_animation = QUAT_ANIMATION_FLIPPING_BACKWARD
 	else:  # Forward flip
 		# [Re]set the animation playback speed
 		player.animation_player_set_speed_scale(1.0)
 		mixamo_animation = MIX_ANIMATION_FLIPPING_FORWARD
-		quaternius_animation = QUAT_ANIMATION_FLIPPING_FORWARD
 	
-	# Play the appropriate animation based on the player's animation set (🔵 Mixamo or 🟣 Quaternius)
 	var current_animation = player.animation_player_current_animation()
-	var animation = mixamo_animation if player.animation_set == 0 else quaternius_animation
+	var animation = mixamo_animation
 	if current_animation != animation:
-		if player.animation_set == 0:
-			 # Start the animation 0.2 seconds in (to skip the initial crouch)
-			player.animation_player_play_section(animation, 0.2)
-		else:
-			player.animation_player_play(animation)
+		# Start the animation 0.2 seconds in (to skip the initial crouch)
+		player.animation_player_play_section(animation, 0.2)
 
 
 ## Called when the flip animation finishes.
@@ -78,8 +68,6 @@ func _on_animation_finished(animation_name: String) -> void:
 	var expected_animations = [
 		MIX_ANIMATION_FLIPPING_FORWARD,
 		MIX_ANIMATION_FLIPPING_BACKWARD,
-		QUAT_ANIMATION_FLIPPING_FORWARD,
-		QUAT_ANIMATION_FLIPPING_BACKWARD,
 	]
 	if animation_name not in expected_animations:
 		return

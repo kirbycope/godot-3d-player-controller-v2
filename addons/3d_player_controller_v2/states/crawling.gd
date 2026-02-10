@@ -7,11 +7,6 @@ const MIX_ANIMATION_CRAWLING := "Crawling/mixamo_com"
 const MIX_ANIMATION_CRAWLING_HOLDING_RIFLE := "Crouching_Walking_Holding_Rifle/mixamo_com"
 const MIX_ANIMATION_CRAWLING_AIMING_RIFLE := "Crouching_Walking_Aiming_Rifle/mixamo_com"
 const MIX_ANIMATION_CRAWLING_FIRING_RIFLE := "Crouching_Firing_Rifle/mixamo_com"
-# Crawling 🟣 Quaternius animations
-const QUAT_ANIMATION_CRAWLING := "UAL1/Crawl_Fwd"
-const QUAT_ANIMATION_CRAWLING_HOLDING_RIFLE := "Crouching_Walking_Holding_Rifle/mixamo_com" # There is no Quaternius animation yet (UAl1/UAL2)
-const QUAT_ANIMATION_CRAWLING_AIMING_RIFLE := "Crouching_Walking_Aiming_Rifle/mixamo_com" # There is no Quaternius animation yet (UAl1/UAL2)
-const QUAT_ANIMATION_CRAWLING_FIRING_RIFLE := "Crouching_Firing_Rifle/mixamo_com" # There is no Quaternius animation yet (UAl1/UAL2)
 
 const NODE_STATE := States.State.CRAWLING
 
@@ -89,29 +84,23 @@ func play_animation() -> void:
 	# Check if in first person and moving backwards
 	var play_backwards = (player.camera.perspective == player.camera.Perspective.FIRST_PERSON) and Input.is_action_pressed(Controls.MOVE_DOWN)
 	var mixamo_animation: String
-	var quaternius_animation: String
 	if player.is_holding_rifle:
 		if player.is_firing_rifle:
 			mixamo_animation = MIX_ANIMATION_CRAWLING_FIRING_RIFLE
-			quaternius_animation = QUAT_ANIMATION_CRAWLING_FIRING_RIFLE
 		elif player.is_aiming_rifle:
 			mixamo_animation = MIX_ANIMATION_CRAWLING_AIMING_RIFLE
-			quaternius_animation = QUAT_ANIMATION_CRAWLING_AIMING_RIFLE
 		else:
 			mixamo_animation = MIX_ANIMATION_CRAWLING_HOLDING_RIFLE
-			quaternius_animation = QUAT_ANIMATION_CRAWLING_HOLDING_RIFLE
 	else:
 		mixamo_animation = MIX_ANIMATION_CRAWLING
-		quaternius_animation = QUAT_ANIMATION_CRAWLING
 
 	var current_animation = player.animation_player_current_animation()
-	var animation = mixamo_animation if player.animation_set == 0 else quaternius_animation
+	var animation = mixamo_animation
 	if current_animation != animation:
 		if play_backwards:
 			player.animation_player_play_backwards(animation)
 		else:
-			if player.animation_set == 0:
-				_on_animation_finished(current_animation)
+			_on_animation_finished(current_animation)
 			player.animation_player_play(animation)
 
 
@@ -119,8 +108,7 @@ func _on_animation_finished(animation_name: String) -> void:
 	# Do nothing if not the authority
 	if not is_multiplayer_authority(): return
 
-	if animation_name == MIX_ANIMATION_CRAWLING_FIRING_RIFLE \
-	or animation_name == QUAT_ANIMATION_CRAWLING_FIRING_RIFLE:
+	if animation_name == MIX_ANIMATION_CRAWLING_FIRING_RIFLE:
 		player.is_firing_rifle = false
 
 

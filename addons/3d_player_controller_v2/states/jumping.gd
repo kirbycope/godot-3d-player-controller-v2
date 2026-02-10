@@ -5,9 +5,6 @@ class_name Jumping
 # Jumping 🔵 Mixamo animations
 const MIX_ANIMATION_JUMPING := "Falling/mixamo_com"
 const MIX_ANIMATION_JUMPING_HOLDING_RIFLE := "Falling_Holding_Rifle/mixamo_com"
-# Jumping 🟣 Quaternius animations
-const QUAT_ANIMATION_JUMPING := "UAL1/Jump_Start"
-const QUAT_ANIMATION_JUMPING_HOLDING_RIFLE := "UAL1/Jump_Holding_Rifle" # There is no Quaternius animation yet (UAl1/UAL2)
 
 const NODE_STATE := States.State.JUMPING
 
@@ -108,18 +105,15 @@ func _process(_delta: float) -> void:
 ## Plays the appropriate animation based on player state.
 func play_animation() -> void:
 	var mixamo_animation: String ## The name of the Mixamo animation to play.
-	var quaternius_animation: String ## The name of the Quaternius animation to play.
 	# Handle "jumping" (while holding rifle)
 	if player.is_holding_rifle:
 		mixamo_animation = MIX_ANIMATION_JUMPING_HOLDING_RIFLE
-		quaternius_animation = QUAT_ANIMATION_JUMPING_HOLDING_RIFLE
 	# Handle "jumping" (upward, unarmed)
 	else:
 		mixamo_animation = MIX_ANIMATION_JUMPING
-		quaternius_animation = QUAT_ANIMATION_JUMPING
-	# Play the appropriate animation based on the player's animation set (🔵 Mixamo or 🟣 Quaternius)
+
 	var current_animation = player.animation_player_current_animation()
-	var animation = mixamo_animation if player.animation_set == 0 else quaternius_animation
+	var animation = mixamo_animation
 	if current_animation != animation:
 		player.animation_player_play(animation)
 

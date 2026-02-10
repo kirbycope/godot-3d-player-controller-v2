@@ -4,8 +4,6 @@ class_name Paragliding
 
 # Paragliding 🔵 Mixamo animations
 const MIX_ANIMATION_PARAGLIDING := "Hanging/mixamo_com"
-# Paragliding 🟣 Quaternius animations
-const QUAT_ANIMATION_PARAGLIDING := "Hanging/mixamo_com" # There is no Quaternius animation yet (UAl1/UAL2)
 
 const NODE_STATE := States.State.PARAGLIDING
 
@@ -44,7 +42,7 @@ func _process(_delta: float) -> void:
 
 ## Plays the appropriate animation based on player state.
 func play_animation() -> void:
-	var animation = QUAT_ANIMATION_PARAGLIDING if player.animation_set == 1 else MIX_ANIMATION_PARAGLIDING
+	var animation = MIX_ANIMATION_PARAGLIDING
 	var current_animation = player.animation_player_current_animation()
 	if current_animation != animation:
 		player.animation_player_play(animation)

@@ -13,18 +13,20 @@ const MIX_ANIMATION_FISHING_REELING := "Standing_Fishing_Reel/mixamo_com"
 const MIX_ANIMATION_BLOCKING_1H_LEFT := "Standing_Blocking_1H_Left/mixamo_com"
 const MIX_ANIMATION_BLOCKING_1H_RIGHT := "Standing_Blocking_1H_Right/mixamo_com"
 const MIX_ANIMATION_BLOCKING_2H := "Standing_Blocking_2H/mixamo_com"
-const MIX_ANIMATION_BLOCKING_SWORD_AND_SHIELD := MIX_ANIMATION_BLOCKING_1H_LEFT # TODO: Replace with proper shield blocking animation
 # Standing 🔵 Mixamo animations (holding equipment)
 const MIX_ANIMATION_HOLDING_1H_LEFT := "Standing_Holding_1H_Left/mixamo_com"
 const MIX_ANIMATION_HOLDING_1H_RIGHT := "Standing_Holding_1H_Right/mixamo_com"
 const MIX_ANIMATION_HOLDING_2H := "Standing_Holding_2H/mixamo_com"
-const MIX_ANIMATION_HOLDING_SWORD_AND_SHIELD := "Standing_Sword_And_Shield/mixamo_com"
 # Standing 🔵 Mixamo animations (kicking)
 const MIX_ANIMATION_KICKING_LEFT := "Standing_Kicking_Left/mixamo_com"
 const MIX_ANIMATION_KICKING_RIGHT := "Standing_Kicking_Right/mixamo_com"
 # Standing 🔵 Mixamo animations (punching)
 const MIX_ANIMATION_PUNCHING_LEFT := "Standing_Punching_Left/mixamo_com"
 const MIX_ANIMATION_PUNCHING_RIGHT := "Standing_Punching_Right/mixamo_com"
+# Standing 🔵 Mixamo animations (sword and shield)
+const MIX_ANIMATION_BLOCKING_SWORD_AND_SHIELD := "Standing_Blocking_Sword_And_Shield/mixamo_com"
+const MIX_ANIMATION_HOLDING_SWORD_AND_SHIELD := "Standing_Holding_Sword_And_Shield/mixamo_com"
+const MIX_ANIMATION_SWINGING_SWORD_AND_SHIELD := "Standing_Swinging_Sword_And_Shield/mixamo_com"
 # Standing 🔵 Mixamo animations (holding a rifle)
 const MIX_ANIMATION_HOLDING_RIFLE := "Standing_Holding_Rifle/mixamo_com"
 const MIX_ANIMATION_RIFLE_AIMING := "Standing_Aiming_Rifle/mixamo_com"
@@ -40,43 +42,6 @@ const MIX_ANIMATION_THROWING_RIGHT := "Standing_Throwing_Right/mixamo_com"
 const MIX_ANIMATION_TURNING_LEFT := "Standing_Left_Turn/mixamo_com" # TODO: Implement
 const MIX_ANIMATION_TURNING_RIGHT := "Standing_Right_Turn/mixamo_com" # TODO: Implement
 
-# Standing 🟣 Quaternius animations
-const QUAT_ANIMATION_STANDING_IDLE := "UAL1/Idle"
-const QUAT_ANIMATION_STANDING_READY := MIX_ANIMATION_STANDING_READY # TODO look for QUAT alternative
-# Standing 🟣 Quaternius animations (holding a fishing rod)
-const QUAT_ANIMATION_FISHING_CASTING := "UAL2/Fishing_Cast"
-const QUAT_ANIMATION_FISHING_IDLE := "UAL2/Fishing_Cast_Idle"
-const QUAT_ANIMATION_FISHING_REELING := "UAL2/Fish_Reel"
-# Standing 🟣 Quaternius animations (blocking using held equipment)
-const QUAT_ANIMATION_BLOCKING_1H_LEFT := MIX_ANIMATION_BLOCKING_1H_LEFT # There is no Quaternius animation yet (UAl1/UAL2)
-const QUAT_ANIMATION_BLOCKING_1H_RIGHT := MIX_ANIMATION_BLOCKING_1H_RIGHT # There is no Quaternius animation yet (UAl1/UAL2)
-const QUAT_ANIMATION_BLOCKING_2H := MIX_ANIMATION_BLOCKING_2H # There is no Quaternius animation yet (UAl1/UAL2)
-const QUAT_ANIMATION_BLOCKING_SWORD_AND_SHIELD := MIX_ANIMATION_BLOCKING_SWORD_AND_SHIELD # TODO: Replace with proper shield blocking animation when available
-# Standing 🟣 Quaternius animations (holding equipment)
-const QUAT_ANIMATION_HOLDING_1H_LEFT := "UAL1/Sword_Idle" # TODO: Scale -1?
-const QUAT_ANIMATION_HOLDING_1H_RIGHT := "UAL1/Sword_Idle"
-const QUAT_ANIMATION_HOLDING_2H := MIX_ANIMATION_HOLDING_2H # There is no Quaternius animation yet (UAl1/UAL2)
-const QUAT_ANIMATION_HOLDING_SWORD_AND_SHIELD := "UAL1/Sword_And_Shield_Idle" # TODO: Replace with proper sword and shield idle animation when available
-# Standing 🟣 Quaternius animations (kicking)
-const QUAT_ANIMATION_KICKING_LEFT := "UAL1/Kick" # TODO: Scale -1?
-const QUAT_ANIMATION_KICKING_RIGHT := "UAL1/Kick"
-# Standing 🟣 Quaternius animations (punching)
-const QUAT_ANIMATION_PUNCHING_LEFT := "UAL1/Punch_Jab"
-const QUAT_ANIMATION_PUNCHING_RIGHT := "UAL1/Punch_Cross"
-# Standing 🟣 Quaternius animations (holding a rifle)
-const QUAT_ANIMATION_HOLDING_RIFLE := MIX_ANIMATION_HOLDING_RIFLE # There is no Quaternius animation yet (UAl1/UAL2)
-const QUAT_ANIMATION_RIFLE_AIMING := MIX_ANIMATION_RIFLE_AIMING # There is no Quaternius animation yet (UAl1/UAL2)
-const QUAT_ANIMATION_RIFLE_FIRING := MIX_ANIMATION_RIFLE_FIRING # There is no Quaternius animation yet (UAl1/UAL2)
-# Standing 🟣 Quaternius animations (swinging using held equipment, swing a pickaxe or sword)
-const QUAT_ANIMATION_SWINGING_1H_LEFT := "UAL1/Sword_Attack_Standing" # TODO: Scale -1?
-const QUAT_ANIMATION_SWINGING_1H_RIGHT := "UAL1/Sword_Attack_Standing"
-const QUAT_ANIMATION_SWINGING_2H := "UAL1/Sword_Attack_Standing" # TODO: Replace with proper 2H animation
-# Standing 🟣 Quaternius animations (throwing)
-const QUAT_ANIMATION_THROWING_LEFT := "UAL2/OverhandThrow" # TODO: Scale -1?
-const QUAT_ANIMATION_THROWING_RIGHT := "UAL2/OverhandThrow"
-# Standing 🟣 Quaternius animations (rotating in place)
-const QUAT_ANIMATION_TURNING_LEFT := "UAL1/Turn90_L" # TODO: Implement
-const QUAT_ANIMATION_TURNING_RIGHT := "UAL1/Turn90_R" # TODO: Implement
 const NODE_STATE := States.State.STANDING
 
 
@@ -126,6 +91,11 @@ func _input(event: InputEvent) -> void:
 			if event is InputEventMouseButton:
 				player.is_firing_rifle = true
 			return
+		# Shield "blocking"
+		if player.is_holding_sword_and_shield:
+			if not player.is_blocking_sword_and_shield:
+				player.is_blocking_sword_and_shield = true
+			return
 		# Left 1H "swinging"
 		if player.is_holding_1h_left:
 			if not player.is_swinging_1h_right \
@@ -162,6 +132,9 @@ func _input(event: InputEvent) -> void:
 		if event is InputEventJoypadButton:
 			if player.is_holding_rifle:
 				player.is_aiming_rifle = false
+		# Shield "blocking" release
+		if player.is_blocking_sword_and_shield:
+			player.is_blocking_sword_and_shield = false
 		# Right 1H "blocking" release
 		if player.is_blocking_1h_right:
 			player.is_blocking_1h_right = false
@@ -194,6 +167,11 @@ func _input(event: InputEvent) -> void:
 		if player.is_holding_rifle:
 			if event is InputEventJoypadButton:
 				player.is_firing_rifle = true
+			return
+		# Sword (with shield) "swinging"
+		if player.is_holding_sword_and_shield:
+			if not player.is_swinging_sword_and_shield:
+				player.is_swinging_sword_and_shield = true
 			return
 		# Right 1H "swinging"
 		if player.is_holding_1h_right:
@@ -264,6 +242,12 @@ func _process(_delta: float) -> void:
 		if player.enable_crouching and player.is_on_floor():
 			transition_state(NODE_STATE, States.State.CROUCHING)
 
+	# 🄻1/[MB0] _pressed_ -> Shield "blocking"
+	# Not in _input() to allow holding down the button while in other states and transitioning to "standing"
+	if Input.is_action_pressed(Controls.BUTTON_4) and not player.pause.visible:
+		if player.is_holding_sword_and_shield and not player.is_blocking_sword_and_shield:
+			player.is_blocking_sword_and_shield = true
+
 	# Play the animation
 	play_animation()
 
@@ -274,14 +258,14 @@ func play_animation() -> void:
 	
 	# 🦵 -- Kicking animations --
 	if player.enable_kicking and player.is_kicking_left:
-		var animation = MIX_ANIMATION_KICKING_LEFT if player.animation_set == 0 else QUAT_ANIMATION_KICKING_LEFT
+		var animation = MIX_ANIMATION_KICKING_LEFT
 		if current_animation != animation:
 			_on_animation_finished(current_animation)
 			player.animation_player_play(animation)
 			if player.character.has_method("play_attack_long_sound_effect"):
 				player.character.play_attack_long_sound_effect()
 	elif player.enable_kicking and player.is_kicking_right:
-		var animation = MIX_ANIMATION_KICKING_RIGHT if player.animation_set == 0 else QUAT_ANIMATION_KICKING_RIGHT
+		var animation = MIX_ANIMATION_KICKING_RIGHT
 		if current_animation != animation:
 			_on_animation_finished(current_animation)
 			player.animation_player_play(animation)
@@ -292,11 +276,11 @@ func play_animation() -> void:
 	elif player.is_holding_fishing_rod:
 		var animation: String
 		if player.is_casting_fishing:
-			animation = MIX_ANIMATION_FISHING_CASTING if player.animation_set == 0 else QUAT_ANIMATION_FISHING_CASTING
+			animation = MIX_ANIMATION_FISHING_CASTING
 		elif player.is_reeling_fishing:
-			animation = MIX_ANIMATION_FISHING_REELING if player.animation_set == 0 else QUAT_ANIMATION_FISHING_REELING
+			animation = MIX_ANIMATION_FISHING_REELING
 		else:
-			animation = MIX_ANIMATION_FISHING_IDLE if player.animation_set == 0 else QUAT_ANIMATION_FISHING_IDLE
+			animation = MIX_ANIMATION_FISHING_IDLE
 		if current_animation != animation:
 			_on_animation_finished(current_animation)
 			player.animation_player_play(animation)
@@ -305,54 +289,63 @@ func play_animation() -> void:
 	elif player.is_holding_rifle:
 		var animation: String
 		if player.is_firing_rifle:
-			animation = MIX_ANIMATION_RIFLE_FIRING if player.animation_set == 0 else QUAT_ANIMATION_RIFLE_FIRING
+			animation = MIX_ANIMATION_RIFLE_FIRING
 		elif player.is_aiming_rifle:
-			animation = MIX_ANIMATION_RIFLE_AIMING if player.animation_set == 0 else QUAT_ANIMATION_RIFLE_AIMING
+			animation = MIX_ANIMATION_RIFLE_AIMING
 		else:
-			animation = MIX_ANIMATION_HOLDING_RIFLE if player.animation_set == 0 else QUAT_ANIMATION_HOLDING_RIFLE
+			animation = MIX_ANIMATION_HOLDING_RIFLE
 		if current_animation != animation:
 			_on_animation_finished(current_animation)
 			player.animation_player_play(animation)
 
-	#  -- Sword and Shield 🛡️ --
-	elif player.is_holding_shield:
+	#  🗡️ -- Sword and Shield -- 🛡️
+	elif player.is_holding_sword_and_shield:
 		var animation: String
-		if player.is_blocking_shield:
-			animation = MIX_ANIMATION_BLOCKING_SWORD_AND_SHIELD if player.animation_set == 0 else QUAT_ANIMATION_BLOCKING_SWORD_AND_SHIELD
+		if player.is_swinging_sword_and_shield:
+			animation = MIX_ANIMATION_SWINGING_SWORD_AND_SHIELD
+			if current_animation != animation:
+				_on_animation_finished(current_animation)
+				player.animation_player_play(animation)
+				if player.character.has_method("play_attack_short_sound_effect"):
+					player.character.play_attack_short_sound_effect()
+		elif player.is_blocking_sword_and_shield:
+			animation = MIX_ANIMATION_BLOCKING_SWORD_AND_SHIELD
+			if current_animation != animation:
+				player.animation_player_play(animation)
 		else:
-			animation = MIX_ANIMATION_HOLDING_SWORD_AND_SHIELD if player.animation_set == 0 else QUAT_ANIMATION_HOLDING_SWORD_AND_SHIELD
-		if current_animation != animation:
-			player.animation_player_play(animation)
+			animation = MIX_ANIMATION_HOLDING_SWORD_AND_SHIELD
+			if current_animation != animation:
+				player.animation_player_play(animation)
 
-	# 🛠️ -- 1H animations --
+	# 🛠️ -- 1H animations -- ⚔️
 	elif player.is_holding_1h_left and player.is_holding_1h_right:
 		var animation: String
 		if player.is_swinging_1h_left:
-			animation = MIX_ANIMATION_SWINGING_1H_LEFT if player.animation_set == 0 else QUAT_ANIMATION_SWINGING_1H_LEFT
+			animation = MIX_ANIMATION_SWINGING_1H_LEFT
 			if current_animation != animation:
 				_on_animation_finished(current_animation)
 				player.animation_player_play(animation)
 				if player.character.has_method("play_attack_short_sound_effect"):
 					player.character.play_attack_short_sound_effect()
 		elif player.is_swinging_1h_right:
-			animation = MIX_ANIMATION_SWINGING_1H_RIGHT if player.animation_set == 0 else QUAT_ANIMATION_SWINGING_1H_RIGHT
+			animation = MIX_ANIMATION_SWINGING_1H_RIGHT
 			if current_animation != animation:
 				_on_animation_finished(current_animation)
 				player.animation_player_play(animation)
 				if player.character.has_method("play_attack_short_sound_effect"):
 					player.character.play_attack_short_sound_effect()
 		else:
-			animation = MIX_ANIMATION_HOLDING_1H_RIGHT if player.animation_set == 0 else QUAT_ANIMATION_HOLDING_1H_RIGHT
+			animation = MIX_ANIMATION_HOLDING_1H_RIGHT
 			if current_animation != animation:
 				player.animation_player_play(animation)
 	elif player.is_holding_1h_left:
 		var animation: String
 		if player.is_blocking_1h_left:
-			animation = MIX_ANIMATION_BLOCKING_1H_LEFT if player.animation_set == 0 else QUAT_ANIMATION_BLOCKING_1H_LEFT
+			animation = MIX_ANIMATION_BLOCKING_1H_LEFT
 		elif player.is_swinging_1h_left:
-			animation = MIX_ANIMATION_SWINGING_1H_LEFT if player.animation_set == 0 else QUAT_ANIMATION_SWINGING_1H_LEFT
+			animation = MIX_ANIMATION_SWINGING_1H_LEFT
 		else:
-			animation = MIX_ANIMATION_HOLDING_1H_LEFT if player.animation_set == 0 else QUAT_ANIMATION_HOLDING_1H_LEFT
+			animation = MIX_ANIMATION_HOLDING_1H_LEFT
 		if current_animation != animation:
 			if player.is_swinging_1h_left:
 				_on_animation_finished(current_animation)
@@ -364,11 +357,11 @@ func play_animation() -> void:
 	elif player.is_holding_1h_right:
 		var animation: String
 		if player.is_blocking_1h_right:
-			animation = MIX_ANIMATION_BLOCKING_1H_RIGHT if player.animation_set == 0 else QUAT_ANIMATION_BLOCKING_1H_RIGHT
+			animation = MIX_ANIMATION_BLOCKING_1H_RIGHT
 		elif player.is_swinging_1h_right:
-			animation = MIX_ANIMATION_SWINGING_1H_RIGHT if player.animation_set == 0 else QUAT_ANIMATION_SWINGING_1H_RIGHT
+			animation = MIX_ANIMATION_SWINGING_1H_RIGHT
 		else:
-			animation = MIX_ANIMATION_HOLDING_1H_RIGHT if player.animation_set == 0 else QUAT_ANIMATION_HOLDING_1H_RIGHT
+			animation = MIX_ANIMATION_HOLDING_1H_RIGHT
 		if current_animation != animation:
 			if player.is_swinging_1h_right:
 				_on_animation_finished(current_animation)
@@ -382,11 +375,11 @@ func play_animation() -> void:
 	elif player.is_holding_2h:
 		var animation: String
 		if player.is_blocking_2h:
-			animation = MIX_ANIMATION_BLOCKING_2H if player.animation_set == 0 else QUAT_ANIMATION_BLOCKING_2H
+			animation = MIX_ANIMATION_BLOCKING_2H
 		elif player.is_swinging_2h:
-			animation = MIX_ANIMATION_SWINGING_2H if player.animation_set == 0 else QUAT_ANIMATION_SWINGING_2H
+			animation = MIX_ANIMATION_SWINGING_2H
 		else:
-			animation = MIX_ANIMATION_HOLDING_2H if player.animation_set == 0 else QUAT_ANIMATION_HOLDING_2H
+			animation = MIX_ANIMATION_HOLDING_2H
 		if current_animation != animation:
 			if player.is_swinging_2h:
 				_on_animation_finished(current_animation)
@@ -398,26 +391,26 @@ func play_animation() -> void:
 
 	# 🤾 -- Throwing animations --
 	elif player.is_holding_left and player.is_throwing_left:
-		var animation = MIX_ANIMATION_THROWING_LEFT if player.animation_set == 0 else QUAT_ANIMATION_THROWING_LEFT
+		var animation = MIX_ANIMATION_THROWING_LEFT
 		if current_animation != animation:
 			_on_animation_finished(current_animation)
 			player.animation_player_play(animation)
 	elif player.is_holding_right and player.is_throwing_right:
-		var animation = MIX_ANIMATION_THROWING_RIGHT if player.animation_set == 0 else QUAT_ANIMATION_THROWING_RIGHT
+		var animation = MIX_ANIMATION_THROWING_RIGHT
 		if current_animation != animation:
 			_on_animation_finished(current_animation)
 			player.animation_player_play(animation)
 
 	# 🥊 -- Punching animations --
 	elif player.enable_punching and player.is_punching_left:
-		var animation = MIX_ANIMATION_PUNCHING_LEFT if player.animation_set == 0 else QUAT_ANIMATION_PUNCHING_LEFT
+		var animation = MIX_ANIMATION_PUNCHING_LEFT
 		if current_animation != animation:
 			_on_animation_finished(current_animation)
 			player.animation_player_play(animation)
 			if player.character.has_method("play_attack_short_sound_effect"):
 				player.character.play_attack_short_sound_effect()
 	elif player.enable_punching and player.is_punching_right:
-		var animation = MIX_ANIMATION_PUNCHING_RIGHT if player.animation_set == 0 else QUAT_ANIMATION_PUNCHING_RIGHT
+		var animation = MIX_ANIMATION_PUNCHING_RIGHT
 		if current_animation != animation:
 			_on_animation_finished(current_animation)
 			player.animation_player_play(animation)
@@ -428,9 +421,9 @@ func play_animation() -> void:
 	else:
 		var animation: String
 		if player.is_target_locked:
-			animation = MIX_ANIMATION_STANDING_READY if player.animation_set == 0 else QUAT_ANIMATION_STANDING_READY
+			animation = MIX_ANIMATION_STANDING_READY
 		else:
-			animation = MIX_ANIMATION_STANDING_IDLE if player.animation_set == 0 else QUAT_ANIMATION_STANDING_IDLE
+			animation = MIX_ANIMATION_STANDING_IDLE
 		if current_animation != animation:
 			_on_animation_finished(current_animation)
 			player.animation_player_play(animation)
@@ -441,41 +434,31 @@ func _on_animation_finished(animation_name: String) -> void:
 	# Do nothing if not the authority
 	if not is_multiplayer_authority(): return
 
-	if animation_name == MIX_ANIMATION_FISHING_CASTING \
-	or animation_name == QUAT_ANIMATION_FISHING_CASTING:
+	if animation_name == MIX_ANIMATION_FISHING_CASTING:
 		player.is_casting_fishing = false
-	elif animation_name == MIX_ANIMATION_FISHING_REELING \
-	or animation_name == QUAT_ANIMATION_FISHING_REELING:
+	elif animation_name == MIX_ANIMATION_FISHING_REELING:
 		player.is_reeling_fishing = false
-	elif animation_name == MIX_ANIMATION_KICKING_LEFT \
-	or animation_name == QUAT_ANIMATION_KICKING_LEFT:
+	elif animation_name == MIX_ANIMATION_KICKING_LEFT:
 		player.is_kicking_left = false
-	elif animation_name == MIX_ANIMATION_KICKING_RIGHT \
-	or animation_name == QUAT_ANIMATION_KICKING_RIGHT:
+	elif animation_name == MIX_ANIMATION_KICKING_RIGHT:
 		player.is_kicking_right = false
-	elif animation_name == MIX_ANIMATION_RIFLE_FIRING \
-	or animation_name == QUAT_ANIMATION_RIFLE_FIRING:
+	elif animation_name == MIX_ANIMATION_RIFLE_FIRING:
 		player.is_firing_rifle = false
-	elif animation_name == MIX_ANIMATION_PUNCHING_LEFT \
-	or animation_name == QUAT_ANIMATION_PUNCHING_LEFT:
+	elif animation_name == MIX_ANIMATION_PUNCHING_LEFT:
 		player.is_punching_left = false
-	elif animation_name == MIX_ANIMATION_PUNCHING_RIGHT \
-	or animation_name == QUAT_ANIMATION_PUNCHING_RIGHT:
+	elif animation_name == MIX_ANIMATION_PUNCHING_RIGHT:
 		player.is_punching_right = false
-	elif animation_name == MIX_ANIMATION_SWINGING_1H_LEFT \
-	or animation_name == QUAT_ANIMATION_SWINGING_1H_LEFT:
+	elif animation_name == MIX_ANIMATION_SWINGING_1H_LEFT:
 		player.is_swinging_1h_left = false
-	elif animation_name == MIX_ANIMATION_SWINGING_1H_RIGHT \
-	or animation_name == QUAT_ANIMATION_SWINGING_1H_RIGHT:
+	elif animation_name == MIX_ANIMATION_SWINGING_1H_RIGHT:
 		player.is_swinging_1h_right = false
-	elif animation_name == MIX_ANIMATION_SWINGING_2H \
-	or animation_name == QUAT_ANIMATION_SWINGING_2H:
+	elif animation_name == MIX_ANIMATION_SWINGING_2H:
 		player.is_swinging_2h = false
-	elif animation_name == MIX_ANIMATION_THROWING_LEFT \
-	or animation_name == QUAT_ANIMATION_THROWING_LEFT:
+	elif animation_name == MIX_ANIMATION_SWINGING_SWORD_AND_SHIELD:
+		player.is_swinging_sword_and_shield = false
+	elif animation_name == MIX_ANIMATION_THROWING_LEFT:
 		player.is_throwing_left = false
-	elif animation_name == MIX_ANIMATION_THROWING_RIGHT \
-	or animation_name == QUAT_ANIMATION_THROWING_RIGHT:
+	elif animation_name == MIX_ANIMATION_THROWING_RIGHT:
 		player.is_throwing_right = false
 
 
@@ -525,6 +508,8 @@ func stop() -> void:
 	player.is_blocking_1h_left = false
 	player.is_blocking_1h_right = false	
 	player.is_blocking_2h = false
+	player.is_blocking_sword_and_shield = false
+	player.is_swinging_sword_and_shield = false
 	player.is_kicking_left = false
 	player.is_kicking_right = false
 	player.is_punching_left = false

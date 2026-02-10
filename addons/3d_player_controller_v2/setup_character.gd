@@ -6,19 +6,19 @@ static func add_animations(character: Node3D, player: CharacterBody3D) -> void:
 	# https://www.mixamo.com/#/
 	animations_mixamo(character, 0.2)
 	if player:
-		player.animations_mixamo = true
+		pass # placeholder
 
 	# https://quaternius.com/packs/universalanimationlibrary.html
 	if ResourceLoader.exists("res://assets/universal_animation_library/UAL1.glb"):
 		animations_quaternius(character, 0.2)
 		if player:
-			player.animations_quaternius = true
+			pass # placeholder
 
 	# https://quaternius.com/packs/universalanimationlibrary2.html
 	if ResourceLoader.exists("res://assets/universal_animation_library_2/UAL2.glb"):
 		animations_quaternius_2(character, 0.2)
 		if player:
-			player.animations_quaternius_2 = true
+			pass # placeholder
 
 
 ## Adds an [AnimationPlayer] for all child nodes of the `character` (unless one already exists) and loads animations from Mixamo.

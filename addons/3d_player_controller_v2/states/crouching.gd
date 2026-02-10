@@ -7,11 +7,6 @@ const MIX_ANIMATION_CROUCHING_IDLE := "Crouching/mixamo_com"
 const MIX_ANIMATION_CROUCHING_HOLDING_RIFLE := "Crouching_Holding_Rifle/mixamo_com"
 const MIX_ANIMATION_CROUCHING_AIMING := "Crouching_Aiming_Rifle/mixamo_com"
 const MIX_ANIMATION_CROUCHING_FIRING := "Crouching_Firing_Rifle/mixamo_com"
-# Crouching 🟣 Quaternius animations
-const QUAT_ANIMATION_CROUCHING_IDLE := "UAL1/Crouch_Idle"
-const QUAT_ANIMATION_CROUCHING_HOLDING_RIFLE := "Crouching_Holding_Rifle/mixamo_com" # There is no Quaternius animation yet (UAl1/UAL2)
-const QUAT_ANIMATION_CROUCHING_AIMING := "Crouching_Aiming_Rifle/mixamo_com" # There is no Quaternius animation yet (UAl1/UAL2)
-const QUAT_ANIMATION_CROUCHING_FIRING := "Crouching_Firing_Rifle/mixamo_com" # There is no Quaternius animation yet (UAl1/UAL2)
 
 const NODE_STATE := States.State.CROUCHING
 
@@ -90,23 +85,18 @@ func _process(_delta: float) -> void:
 ## Plays the appropriate animation based on player state.
 func play_animation() -> void:
 	var mixamo_animation: String
-	var quaternius_animation: String
 	if player.is_holding_rifle:
 		if player.is_firing_rifle:
 			mixamo_animation = MIX_ANIMATION_CROUCHING_FIRING
-			quaternius_animation = QUAT_ANIMATION_CROUCHING_FIRING
 		elif player.is_aiming_rifle:
 			mixamo_animation = MIX_ANIMATION_CROUCHING_AIMING
-			quaternius_animation = QUAT_ANIMATION_CROUCHING_AIMING
 		else:
 			mixamo_animation = MIX_ANIMATION_CROUCHING_HOLDING_RIFLE
-			quaternius_animation = QUAT_ANIMATION_CROUCHING_HOLDING_RIFLE
 	else:
 		mixamo_animation = MIX_ANIMATION_CROUCHING_IDLE
-		quaternius_animation = QUAT_ANIMATION_CROUCHING_IDLE
 
 	var current_animation = player.animation_player_current_animation()
-	var animation = mixamo_animation if player.animation_set == 0 else quaternius_animation
+	var animation = mixamo_animation
 	if current_animation != animation:
 		_on_animation_finished(current_animation)
 		player.animation_player_play(animation)
@@ -116,7 +106,7 @@ func _on_animation_finished(animation_name: String) -> void:
 	# Do nothing if not the authority
 	if not is_multiplayer_authority(): return
 
-	if animation_name == MIX_ANIMATION_CROUCHING_FIRING or animation_name == QUAT_ANIMATION_CROUCHING_FIRING:
+	if animation_name == MIX_ANIMATION_CROUCHING_FIRING:
 		player.is_firing_rifle = false
 
 

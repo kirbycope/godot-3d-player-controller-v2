@@ -5,9 +5,6 @@ class_name Falling
 # Falling 🔵 Mixamo animations
 const MIX_ANIMATION_FALLING := "Falling/mixamo_com"
 const MIX_ANIMATION_FALLING_HOLDING_RIFLE := "Falling_Holding_Rifle/mixamo_com"
-# Falling 🟣 Quaternius animations
-const QUAT_ANIMATION_FALLING := "UAL1/Jump"
-const QUAT_ANIMATION_FALLING_HOLDING_RIFLE := "Falling_Holding_Rifle/mixamo_com" # There is no Quaternius animation yet (UAl1/UAL2)
 
 const NODE_STATE := States.State.FALLING
 
@@ -76,10 +73,9 @@ func _process(_delta: float) -> void:
 ## Plays the appropriate animation based on player state.
 func play_animation() -> void:
 	var mixamo_animation = MIX_ANIMATION_FALLING_HOLDING_RIFLE if player.is_holding_rifle else MIX_ANIMATION_FALLING
-	var quaternius_animation = QUAT_ANIMATION_FALLING_HOLDING_RIFLE if player.is_holding_rifle else QUAT_ANIMATION_FALLING
 
 	var current_animation = player.animation_player_current_animation()
-	var animation = mixamo_animation if player.animation_set == 0 else quaternius_animation
+	var animation = mixamo_animation
 	if current_animation != animation:
 		player.animation_player_play(animation)
 

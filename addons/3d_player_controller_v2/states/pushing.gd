@@ -4,10 +4,6 @@ class_name Pushing
 
 # Pushing 🔵 Mixamo animations
 const MIX_ANIMATION_PUSHING := "Standing_Pushing/mixamo_com"
-# Pushing 🟣 Quaternius animations
-const QUAT_ANIMATION_PUSHING := "UAL1/Push"
-const QUAT_ANIMATION_PUSHING_START := "UAL1/Push_Enter"
-const QUAT_ANIMATION_PUSHING_STOP := "UAL1/Push_Exit"
 
 const NODE_STATE := States.State.PUSHING
 
@@ -27,7 +23,7 @@ func _process(_delta: float) -> void:
 
 ## Plays the appropriate animation based on player state.
 func play_animation() -> void:
-	var animation = QUAT_ANIMATION_PUSHING if player.animation_set == 1 else MIX_ANIMATION_PUSHING
+	var animation = MIX_ANIMATION_PUSHING
 	var current_animation = player.animation_player_current_animation()
 	if current_animation != animation:
 		# Play the "pushing" animation

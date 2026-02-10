@@ -5,9 +5,6 @@ class_name Swimming
 # Swimming 🔵 Mixamo animations
 const MIX_ANIMATION_SWIMMING := "Swimming/mixamo_com"
 const MIX_ANIMATION_WADING := "Swimming_Treading_Water/mixamo_com"
-# Swimming 🟣 Quaternius animations
-const QUAT_ANIMATION_SWIMMING := "UAL1/Swim_Fwd"
-const QUAT_ANIMATION_WADING := "UAL1/Swim_Idle"
 
 const NODE_STATE := States.State.SWIMMING
 
@@ -59,10 +56,9 @@ func _process(delta: float) -> void:
 ## Plays the appropriate animation based on player state.
 func play_animation() -> void:
 	var mixamo_animation = MIX_ANIMATION_WADING if player.input_direction == Vector2.ZERO else MIX_ANIMATION_SWIMMING
-	var quaternius_animation = QUAT_ANIMATION_WADING if player.input_direction == Vector2.ZERO else QUAT_ANIMATION_SWIMMING
 
 	var current_animation = player.animation_player_current_animation()
-	var animation = mixamo_animation if player.animation_set == 0 else quaternius_animation
+	var animation = mixamo_animation
 	if current_animation != animation:
 		player.animation_player_play(animation)
 

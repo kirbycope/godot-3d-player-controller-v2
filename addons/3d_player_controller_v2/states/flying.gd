@@ -5,9 +5,6 @@ class_name Flying
 # Flying 🔵 Mixamo animations
 const ANIMATION_FLYING := "Flying/mixamo_com"
 const ANIMATION_FLYING_FAST := "Flying_Fast/mixamo_com"
-# Flying 🟣 Quaternius animations
-const QUAT_ANIMATION_FLYING := "Flying/mixamo_com" # There is no Quaternius animation yet (UAl1/UAL2)
-const QUAT_ANIMATION_FLYING_FAST := "Flying_Fast/mixamo_com" # There is no Quaternius animation yet (UAl1/UAL2)
 
 const NODE_STATE := States.State.FLYING
 
@@ -55,10 +52,9 @@ func _process(delta: float) -> void:
 ## Plays the appropriate animation based on player state.
 func play_animation() -> void:
 	var mixamo_animation = ANIMATION_FLYING_FAST if player.speed_current == player.speed_flying * 2 else ANIMATION_FLYING
-	var quaternius_animation = QUAT_ANIMATION_FLYING_FAST if player.speed_current == player.speed_flying * 2 else QUAT_ANIMATION_FLYING
 
 	var current_animation = player.animation_player_current_animation()
-	var animation = mixamo_animation if player.animation_set == 0 else quaternius_animation
+	var animation = mixamo_animation
 	if current_animation != animation:
 		player.animation_player_play(animation)
 

@@ -5,9 +5,6 @@ class_name Mantling
 # Mantling 🔵 Mixamo animations
 const MIX_ANIMATION_MANTLING_BRACED := "Hanging_Braced_To_Crouch/mixamo_com"
 const MIX_ANIMATION_MANTLING_HANGING := "Hanging_Climb_To_Standing/mixamo_com"
-# Mantling 🟣 Quaternius animations
-const QUAT_ANIMATION_MANTLING_BRACED := "UAL1/ClimbLedge"
-const QUAT_ANIMATION_MANTLING_HANGING := "UAL1/ClimbLedge"
 
 const NODE_STATE := States.State.MANTLING
 
@@ -26,8 +23,7 @@ func play_animation() -> void:
 	# Check if the player's hang is braced (the collider has somewhere for the player's footing)
 	var is_braced = player.ray_cast_low.is_colliding()
 	var mixamo_animation = MIX_ANIMATION_MANTLING_BRACED if is_braced else MIX_ANIMATION_MANTLING_HANGING
-	var quaternius_animation = QUAT_ANIMATION_MANTLING_BRACED if is_braced else QUAT_ANIMATION_MANTLING_HANGING
-	var animation = quaternius_animation if player.animation_set == 1 else mixamo_animation
+	var animation = mixamo_animation
 
 	var current_animation = player.animation_player_current_animation()
 	if current_animation != animation:
@@ -53,9 +49,7 @@ func _on_animation_finished(anim_name: String) -> void:
 
 	if anim_name in [
 		MIX_ANIMATION_MANTLING_BRACED,
-		MIX_ANIMATION_MANTLING_HANGING,
-		QUAT_ANIMATION_MANTLING_BRACED,
-		QUAT_ANIMATION_MANTLING_HANGING
+		MIX_ANIMATION_MANTLING_HANGING
 	]:
 		if player.animation_player_is_connected("animation_finished", _on_animation_finished):
 			player.animation_player_disconnect("animation_finished", _on_animation_finished)

@@ -4,7 +4,6 @@ extends CharacterBody3D
 ## 3D player controller with state machine supporting climbing, combat, driving, swimming, and various movement modes
 
 @export_group("CONFIG")
-@export_enum("Mixamo", "Quaternius") var animation_set := 0 ## Animation set selection; 0=Mixamo, 1=Quaternius
 @export var enable_climbing := false ## Enable climbing
 @export var enable_crawling := false ## Enable crawling
 @export var enable_crouching := false ## Enable crouching
@@ -117,8 +116,9 @@ var is_holding_1h_left := false ## Is the player holding a 1-handed tool or weap
 var is_swinging_1h_left := false ## Is the player swinging a 1-handed tool or weapon with their left hand?
 var is_holding_1h_right := false ## Is the player holding a 1-handed tool or weapon with their right hand?
 var is_swinging_1h_right := false ## Is the player swinging a 1-handed tool or weapon with their right hand?
-var is_holding_shield := false ## Is the player holding a shield (with their left hand)?
-var is_blocking_shield := false ## Is the player blocking with a shield (with their left hand)?
+var is_holding_sword_and_shield := false ## Is the player holding a shield (with their left hand)?
+var is_blocking_sword_and_shield := false ## Is the player blocking with a shield (with their left hand)?
+var is_swinging_sword_and_shield := false ## Is the player swinging a sword while holding a shield?
 var is_holding_2h := false ## Is the player holding a 2-handed tool or weapon?
 var is_swinging_2h := false ## Is the player swinging a 2-handed tool or weapon?
 var is_holding_left := false ## Is the player holding an object with their left hand?
@@ -132,9 +132,6 @@ var is_holding_rifle := false ## Is the player wielding a rifle?
 var is_aiming_rifle := false ## Is the player aiming a rifle?
 var is_firing_rifle := false ## Is the player firing a rifle?
 ## -- Character VARIABLES --
-var animations_mixamo := false ## Are Mixamo animations enabled?
-var animations_quaternius := false ## Are Quaternius animations enabled?
-var animations_quaternius_2 := false ## Are Quaternius 2 animations enabled?
 var setup_character: GDScript = preload("res://addons/3d_player_controller_v2/setup_character.gd")
 var targets = {}
 var current_focused_target: Node3D = null ## The current strafing focus target

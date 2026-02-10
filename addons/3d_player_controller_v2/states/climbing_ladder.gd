@@ -4,8 +4,6 @@ class_name ClimbingLadder
 
 # Climbing Ladder 🔵 Mixamo animations
 const MIX_ANIMATION_CLIMBING_LADDER := "Climbing_Ladder/mixamo_com"
-# Climbing Ladder 🟣 Quaternius animations
-const QUAT_ANIMATION_CLIMBING_LADDER := MIX_ANIMATION_CLIMBING_LADDER # There is no Quaternius animation yet (UAl1/UAL2)
 
 const NODE_STATE := States.State.CLIMBING_LADDER
 
@@ -60,7 +58,7 @@ func play_animation() -> void:
 	var speed_scale = 1.5 if player.speed_current > player.speed_climbing else 1.0
 	player.animation_player_set_speed_scale(speed_scale)
 
-	var animation = MIX_ANIMATION_CLIMBING_LADDER if player.animation_set == 0 else QUAT_ANIMATION_CLIMBING_LADDER
+	var animation = MIX_ANIMATION_CLIMBING_LADDER
 	var current_animation = player.animation_player_current_animation()
 
 	# ↑ "climbing ladder" up
@@ -103,8 +101,7 @@ func start() -> void:
 	await get_tree().process_frame
 
 	# Begin playing the "climbing ladder" animation (locked) as a transition
-	var target_animation = MIX_ANIMATION_CLIMBING_LADDER if player.animation_set == 0 else QUAT_ANIMATION_CLIMBING_LADDER
-	player.animation_player_play_locked(target_animation, 0.2)
+	player.animation_player_play_locked(MIX_ANIMATION_CLIMBING_LADDER, 0.2)
 
 
 ## Stop "climbing ladder".

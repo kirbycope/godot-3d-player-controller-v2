@@ -4,8 +4,6 @@ class_name Rolling
 
 # Rolling 🔵 Mixamo animations
 const MIX_ANIMATION_ROLLING := "Rolling/mixamo_com"
-# Rolling 🟣 Quaternius animations
-const QUAT_ANIMATION_ROLLING := "UAL1/Roll"
 
 const NODE_STATE := States.State.ROLLING
 
@@ -32,7 +30,7 @@ func _process(_delta: float) -> void:
 
 ## Plays the appropriate animation based on player state.
 func play_animation() -> void:
-	var animation = QUAT_ANIMATION_ROLLING if player.animation_set == 1 else MIX_ANIMATION_ROLLING
+	var animation = MIX_ANIMATION_ROLLING
 	var current_animation = player.animation_player_current_animation()
 	if current_animation != animation:
 		_on_animation_finished(current_animation)
@@ -43,8 +41,7 @@ func _on_animation_finished(animation_name: String) -> void:
 	# Do nothing if not the authority
 	if not is_multiplayer_authority(): return
 
-	if animation_name == MIX_ANIMATION_ROLLING \
-	or animation_name == QUAT_ANIMATION_ROLLING:
+	if animation_name == MIX_ANIMATION_ROLLING:
 		if Input.is_action_pressed(Controls.BUTTON_3):
 			transition_state(NODE_STATE, States.State.CROUCHING)
 			return

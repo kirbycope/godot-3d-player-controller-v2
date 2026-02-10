@@ -4,8 +4,6 @@ class_name Navigating
 
 # Navigating 🔵 Mixamo animations
 const MIX_ANIMATION_RUNNING := "Running/mixamo_com"
-# Navigating 🟣 Quaternius animations
-const QUAT_ANIMATION_RUNNING := "UAL1/Jog_Fwd"
 
 const NODE_STATE := States.State.NAVIGATING
 
@@ -53,7 +51,7 @@ func _physics_process(_delta: float) -> void:
 
 ## Plays the appropriate animation based on player state.
 func play_animation() -> void:
-	var animation = QUAT_ANIMATION_RUNNING if player.animation_set == 1 else MIX_ANIMATION_RUNNING
+	var animation = MIX_ANIMATION_RUNNING
 	var current_animation = player.animation_player_current_animation()
 	if current_animation != animation:
 		player.animation_player_play(animation)

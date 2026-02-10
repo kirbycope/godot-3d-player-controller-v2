@@ -17,11 +17,11 @@
 [ext_resource type="PackedScene" uid="uid://bga8sxeufkcky" path="res://scenes/level_0/tennis_ball.tscn" id="12_r3gsl"]
 [ext_resource type="PackedScene" uid="uid://dhkotoaker1cn" path="res://scenes/level_0/cat.tscn" id="14_tvgdf"]
 [ext_resource type="Texture2D" uid="uid://b1itpgfbfsopo" path="res://assets/textures/prototype_textures/Orange/texture_08.png" id="15_pjumf"]
-[ext_resource type="PackedScene" path="res://scenes/level_0/sword.tscn" id="16_1jnxa"]
+[ext_resource type="PackedScene" uid="uid://bgw2mr57wh170" path="res://scenes/level_0/sword.tscn" id="16_1jnxa"]
 [ext_resource type="Texture2D" uid="uid://cpjlls7li4sdq" path="res://assets/textures/prototype_textures/Orange/texture_05.png" id="16_tdw8c"]
 [ext_resource type="PackedScene" uid="uid://bra5h4ewvogkf" path="res://scenes/level_0/punching_bag.tscn" id="17_07c6r"]
 [ext_resource type="PackedScene" uid="uid://civrt6ecmuj2m" path="res://scenes/level_0/stool.tscn" id="18_07c6r"]
-[ext_resource type="PackedScene" path="res://scenes/level_0/shield.tscn" id="21_rwxx6"]
+[ext_resource type="PackedScene" uid="uid://mvjulkrfjtya" path="res://scenes/level_0/shield.tscn" id="21_rwxx6"]
 [ext_resource type="PackedScene" uid="uid://o0sk0jyjm1dv" path="res://scenes/level_3/blocks/dirt_block.tscn" id="22_1jlf3"]
 [ext_resource type="PackedScene" uid="uid://dnvd8inn503gd" path="res://scenes/level_0/watering_can.tscn" id="22_hd8a5"]
 [ext_resource type="PackedScene" uid="uid://j5twp0ffld88" path="res://scenes/level_3/blocks/grass_block.tscn" id="23_c4gmo"]
@@ -32,6 +32,7 @@
 [ext_resource type="PackedScene" uid="uid://ba1yxx2ey0bbs" path="res://addons/3d_player_controller_v2/assets/characters/godette/godette.tscn" id="29_xc83s"]
 [ext_resource type="PackedScene" uid="uid://cgbnyctknc7ku" path="res://assets/universal_base_characters/male.tscn" id="30_6npof"]
 [ext_resource type="PackedScene" uid="uid://7l472kewn4r3" path="res://assets/universal_base_characters/female.tscn" id="30_ekdm7"]
+[ext_resource type="PackedScene" uid="uid://dvq8rhbj7gwq8" path="res://scenes/level_0/dummy.tscn" id="30_huyyi"]
 [ext_resource type="PackedScene" uid="uid://f7yfxivr5rmg" path="res://assets/universal_animation_library_2/mannequin_female.tscn" id="31_ffetv"]
 [ext_resource type="PackedScene" uid="uid://cigyajcwkv7wp" path="res://assets/universal_animation_library/mannequin_male.tscn" id="32_ekdm7"]
 [ext_resource type="PackedScene" uid="uid://bq173p46qjxly" path="res://addons/3d_player_controller_v2/assets/characters/mixamo/x_bot.tscn" id="34_q7wdv"]
@@ -545,7 +546,7 @@ transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -2.5, 0.0035429, -4)
 
 [node name="Axe" parent="." unique_id=2048937064 instance=ExtResource("7_up5x4")]
-transform = Transform3D(0.17364813, 0.9848077, 0, -0.9848077, 0.17364813, 0, 0, 0, 1, -6.1000004, 0.19999999, 3.5)
+transform = Transform3D(0.17364813, 0.9848077, 0, -0.9848077, 0.17364813, 0, 0, 0, 1, -6.1000004, 0.19999999, 2)
 
 [node name="Car" parent="." unique_id=1377681688 instance=ExtResource("6_mf6xi")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 5, 0, -4)
@@ -563,10 +564,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, -0.059921123, 0.39999998)
 transform = Transform3D(0.09767043, 0.28365555, 4.5298737e-08, 0.26654902, -0.0917802, 0.102606036, -0.097015925, 0.033405215, 0.28190777, -6, 0.19999999, -2.5)
 
 [node name="Sword" parent="." unique_id=555460968 instance=ExtResource("16_1jnxa")]
-transform = Transform3D(0.17364813, -0.9848077, 0, 0.9848077, 0.17364813, 0, 0, 0, 1, -5.945462, 0.2, 2)
+transform = Transform3D(0.17364813, -0.9848077, 0, 0.9848077, 0.17364813, 0, 0, 0, 1, -5.945462, 0.2, 3.5)
 
 [node name="Shield" parent="." unique_id=1718274004 instance=ExtResource("21_rwxx6")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -6, 0.5, 5)
+transform = Transform3D(-4.304731e-08, -0.1736482, 0.9848077, 0.17364816, 0.96984625, 0.17101009, -0.9848077, 0.17101006, 0.030153649, -6, 0.5, 5)
 
 [node name="TennisBall" parent="." unique_id=1165445244 instance=ExtResource("12_r3gsl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0.053589858, -4.5)
@@ -607,26 +608,29 @@ transform = Transform3D(-1, 0, -8.742278e-08, -8.742278e-08, -4.371139e-08, 1, -
 text = "Press [E]/(X) to \"use\" tools
 Press [Q]/(DPad-Down) to \"drop\" tools"
 
+[node name="Dummy" parent="." unique_id=1141124795 groups=["Focusable"] instance=ExtResource("30_huyyi")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -8.5, 0, 4.3)
+
 [node name="Godette" parent="." unique_id=647098479 instance=ExtResource("29_xc83s")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.2)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -11, 0, 1.2000003)
 
 [node name="Female" parent="." unique_id=1932551248 instance=ExtResource("30_ekdm7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 6.2)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -10.999999, 0, -0.7999997)
 
 [node name="Male" parent="." unique_id=547792811 instance=ExtResource("30_6npof")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 6.2)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -11, 0, 3.2000008)
 
 [node name="Mannequin_Female" parent="." unique_id=1676470452 instance=ExtResource("31_ffetv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 6.2)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -10.999999, 0, -2.7999997)
 
 [node name="Mannequin_Male" parent="." unique_id=2021633820 instance=ExtResource("32_ekdm7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 6.2)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -11, 0, 5.200001)
 
 [node name="X_Bot" parent="." unique_id=835807755 instance=ExtResource("34_q7wdv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 6.2)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -10.999999, 0, -4.7999997)
 
 [node name="Y_Bot" parent="." unique_id=1193744009 instance=ExtResource("35_jubdp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 6.2)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -11, 0, 7.200001)
 
 [node name="NPC" parent="." unique_id=1410988741 instance=ExtResource("36_jubdp")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, -3)

@@ -12,6 +12,7 @@ script = ExtResource("1_gtos2")
 transform = Transform3D(-0.17364824, -0.9848077, -8.609462e-08, -0.96984625, 0.1710101, 0.17364818, -0.17101005, 0.030153783, -0.9848077, 0, 0.04, 0.02)
 
 [node name="PlayerDetection" type="Area3D" parent="." unique_id=1420518190]
+transform = Transform3D(0.9848077, 0.17364821, 4.4219064e-09, -0.17101009, 0.96984625, -0.17364815, -0.03015369, 0.17101005, 0.9848077, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerDetection" unique_id=1659992862]
 shape = SubResource("BoxShape3D_gtos2")

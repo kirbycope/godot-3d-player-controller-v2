@@ -1,7 +1,5 @@
 extends CharacterBody3D
 
-@export_enum("Mixamo", "Quaternius") var animation_set := 0 ## Animation set selection; 0=Mixamo, 1=Quaternius
-
 const DAMAGE_1_ALEX = preload("res://assets/audio/super_dialogue_audio_pack_v1/7 - Damage/Male/Alex Brodie/damage_1_alex.wav")
 const DAMAGE_2_ALEX = preload("res://assets/audio/super_dialogue_audio_pack_v1/7 - Damage/Male/Alex Brodie/damage_2_alex.wav")
 const DAMAGE_3_ALEX = preload("res://assets/audio/super_dialogue_audio_pack_v1/7 - Damage/Male/Alex Brodie/damage_3_alex.wav")
@@ -40,55 +38,40 @@ func _process(_delta: float) -> void:
 
 
 func play_animation() -> void:
-	var mix_anim := ""
-	var quat_anim := ""
+	var animation := ""
 	if is_reacting_low_left:
-		mix_anim = Reacting.MIX_ANIMATION_REACTING_LOW_LEFT
-		quat_anim = Reacting.QUAT_ANIMATION_REACTING_LOW_LEFT
+		animation = Reacting.MIX_ANIMATION_REACTING_LOW_LEFT
 	elif is_reacting_low_right:
-		mix_anim = Reacting.MIX_ANIMATION_REACTING_LOW_RIGHT
-		quat_anim = Reacting.QUAT_ANIMATION_REACTING_LOW_RIGHT
+		animation = Reacting.MIX_ANIMATION_REACTING_LOW_RIGHT
 	elif is_reacting_high_left:
-		mix_anim = Reacting.MIX_ANIMATION_REACTING_HIGH_LEFT
-		quat_anim = Reacting.QUAT_ANIMATION_REACTING_HIGH_LEFT
+		animation = Reacting.MIX_ANIMATION_REACTING_HIGH_LEFT
 	elif is_reacting_high_right:
-		mix_anim = Reacting.MIX_ANIMATION_REACTING_HIGH_RIGHT
-		quat_anim = Reacting.QUAT_ANIMATION_REACTING_HIGH_RIGHT
+		animation = Reacting.MIX_ANIMATION_REACTING_HIGH_RIGHT
 	elif is_reacting_knocked_over:
-		mix_anim = Reacting.MIX_ANIMATION_REACTING_KNOCKED_OVER
-		quat_anim = Reacting.QUAT_ANIMATION_REACTING_KNOCKED_OVER
+		animation = Reacting.MIX_ANIMATION_REACTING_KNOCKED_OVER
 	elif is_getting_up:
-		mix_anim = Reacting.MIX_ANIMATION_REACTING_GETTING_UP
-		quat_anim = Reacting.QUAT_ANIMATION_REACTING_GETTING_UP
+		animation = Reacting.MIX_ANIMATION_REACTING_GETTING_UP
 	else:
-		mix_anim = Standing.MIX_ANIMATION_STANDING_IDLE
-		quat_anim = Standing.QUAT_ANIMATION_STANDING_IDLE
+		animation = Standing.MIX_ANIMATION_STANDING_IDLE
 
-	var anim = quat_anim if animation_set == 1 else mix_anim
-	if animation_player_current_animation() != anim:
-		animation_player_play(anim)
+	if animation_player_current_animation() != animation:
+		animation_player_play(animation)
 		animation_player_connect("animation_finished", _on_animation_finished)
 
 
 func _on_animation_finished(animation_name: String) -> void:
-	if animation_name == Reacting.MIX_ANIMATION_REACTING_LOW_LEFT \
-	or animation_name == Reacting.QUAT_ANIMATION_REACTING_LOW_LEFT:
+	if animation_name == Reacting.MIX_ANIMATION_REACTING_LOW_LEFT:
 		is_reacting_low_left = false
-	elif animation_name == Reacting.MIX_ANIMATION_REACTING_LOW_RIGHT \
-	or animation_name == Reacting.QUAT_ANIMATION_REACTING_LOW_RIGHT:
+	elif animation_name == Reacting.MIX_ANIMATION_REACTING_LOW_RIGHT:
 		is_reacting_low_right = false
-	elif animation_name == Reacting.MIX_ANIMATION_REACTING_HIGH_LEFT \
-	or animation_name == Reacting.QUAT_ANIMATION_REACTING_HIGH_LEFT:
+	elif animation_name == Reacting.MIX_ANIMATION_REACTING_HIGH_LEFT:
 		is_reacting_high_left = false
-	elif animation_name == Reacting.MIX_ANIMATION_REACTING_HIGH_RIGHT \
-	or animation_name == Reacting.QUAT_ANIMATION_REACTING_HIGH_RIGHT:
+	elif animation_name == Reacting.MIX_ANIMATION_REACTING_HIGH_RIGHT:
 		is_reacting_high_right = false
-	elif animation_name == Reacting.MIX_ANIMATION_REACTING_KNOCKED_OVER \
-	or animation_name == Reacting.QUAT_ANIMATION_REACTING_KNOCKED_OVER:
+	elif animation_name == Reacting.MIX_ANIMATION_REACTING_KNOCKED_OVER:
 		is_reacting_knocked_over = false
 		is_getting_up = true
-	elif animation_name == Reacting.MIX_ANIMATION_REACTING_GETTING_UP \
-	or animation_name == Reacting.QUAT_ANIMATION_REACTING_GETTING_UP:
+	elif animation_name == Reacting.MIX_ANIMATION_REACTING_GETTING_UP:
 		is_getting_up = false
 
 
@@ -212,11 +195,6 @@ func _is_reacting_animation_playing() -> bool:
 		Reacting.MIX_ANIMATION_REACTING_HIGH_LEFT,
 		Reacting.MIX_ANIMATION_REACTING_HIGH_RIGHT,
 		Reacting.MIX_ANIMATION_REACTING_KNOCKED_OVER,
-		Reacting.QUAT_ANIMATION_REACTING_LOW_LEFT,
-		Reacting.QUAT_ANIMATION_REACTING_LOW_RIGHT,
-		Reacting.QUAT_ANIMATION_REACTING_HIGH_LEFT,
-		Reacting.QUAT_ANIMATION_REACTING_HIGH_RIGHT,
-		Reacting.QUAT_ANIMATION_REACTING_KNOCKED_OVER,
 	]
 	return current_anim in reacting_animations
 

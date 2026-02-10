@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://dvq8rhbj7gwq8"]
+
+[ext_resource type="PackedScene" uid="uid://mukbc1kwhsvd" path="res://assets/fantasty_props_megakit/Dummy.gltf" id="1_hxttb"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wxjjy"]
+radius = 0.40425047
+height = 1.8626795
+
+[node name="Dummy" type="CharacterBody3D" unique_id=1858653076]
+
+[node name="Dummy2" parent="." unique_id=1064781415 instance=ExtResource("1_hxttb")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=56164909]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00020378828, 0.9284518, 0.00022149086)
+shape = SubResource("CapsuleShape3D_wxjjy")

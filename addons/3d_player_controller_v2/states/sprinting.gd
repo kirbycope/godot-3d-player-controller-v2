@@ -7,16 +7,14 @@ const MIX_ANIMATION := "Sprinting/mixamo_com"
 const MIX_ANIMATION_BACKWARD := "Sprinting_Backward/mixamo_com"
 const MIX_ANIMATION_STRAFE_LEFT := Running.MIX_ANIMATION_STRAFE_LEFT
 const MIX_ANIMATION_STRAFE_RIGHT := Running.MIX_ANIMATION_STRAFE_RIGHT
+# Sprinting 🔵 Mixamo animations (sword and shield)
+const MIX_ANIMATION_SWORD_AND_SHIELD := Running.MIX_ANIMATION_SWORD_AND_SHIELD
+const MIX_ANIMATION_BACKWARD_SWORD_AND_SHIELD := Running.MIX_ANIMATION_BACKWARD_SWORD_AND_SHIELD
+const MIX_ANIMATION_STRAFE_LEFT_SWORD_AND_SHIELD := Running.MIX_ANIMATION_STRAFE_LEFT_SWORD_AND_SHIELD
+const MIX_ANIMATION_STRAFE_RIGHT_SWORD_AND_SHIELD := Running.MIX_ANIMATION_STRAFE_RIGHT_SWORD_AND_SHIELD
 # Sprinting 🔵 Mixamo animations (holding a rifle)
 const MIX_ANIMATION_HOLDING_RIFLE := "Sprinting_Holding_Rifle/mixamo_com"
-
-# Sprinting 🟣 Quaternius animations
-const QUAT_ANIMATION := "UAL1/Sprint"
-const QUAT_ANIMATION_BACKWARD := MIX_ANIMATION_BACKWARD # TODO: Look for a proper Quaternius sprinting backward animation
-const QUAT_ANIMATION_STRAFE_LEFT := MIX_ANIMATION_STRAFE_LEFT # TODO: Look for a proper Quaternius sprinting strafe left animation
-const QUAT_ANIMATION_STRAFE_RIGHT := MIX_ANIMATION_STRAFE_RIGHT # TODO: Look for a proper Quaternius sprinting strafe right animation
-# Sprinting 🟣 Quaternius animations (holding a rifle)
-const QUAT_ANIMATION_HOLDING_RIFLE := "UAL1/Sprint_Holding_Rifle"
+const MIX_ANIMATION_BACKWARD_HOLDING_RIFLE := Running.MIX_ANIMATION_BACKWARD_HOLDING_RIFLE
 
 const NODE_STATE := States.State.SPRINTING
 
@@ -79,36 +77,50 @@ func play_animation() -> void:
 		or player.is_strafing \
 		or player.is_target_locked)
 	var mixamo_animation: String ## The name of the Mixamo animation to play.
-	var quaternius_animation: String ## The name of the Quaternius animation to play.
 
 	# Handle "running" (while "strafing")
 	if is_strafe_left or is_strafe_right:
 		# Strafing+Sprinting animations are just Running animations played at a faster speed
 		player.animation_player_set_speed_scale(1.5)
-		# Handle "running" (while "strafing" left and unarmed)
-		if is_strafe_left:
-			mixamo_animation = MIX_ANIMATION_STRAFE_LEFT
-			quaternius_animation = QUAT_ANIMATION_STRAFE_LEFT
-		# Handle "running" (while "strafing" right and unarmed)
-		elif is_strafe_right:
-			mixamo_animation = MIX_ANIMATION_STRAFE_RIGHT
-			quaternius_animation = QUAT_ANIMATION_STRAFE_RIGHT
+		# Handle "running" (while "strafing" and holding a shield)
+		if player.is_holding_sword_and_shield:
+			# Handle "running" (while "strafing" left and holding a shield)
+			if is_strafe_left:
+				mixamo_animation = MIX_ANIMATION_STRAFE_LEFT_SWORD_AND_SHIELD
+			# Handle "running" (while "strafing" right and holding a shield)
+			elif is_strafe_right:
+				mixamo_animation = MIX_ANIMATION_STRAFE_RIGHT_SWORD_AND_SHIELD
+		# Handle "running" (while "strafing" and unarmed)
+		else:
+			# Handle "running" (while "strafing" left and unarmed)
+			if is_strafe_left:
+				mixamo_animation = MIX_ANIMATION_STRAFE_LEFT
+			# Handle "running" (while "strafing" right and unarmed)
+			elif is_strafe_right:
+				mixamo_animation = MIX_ANIMATION_STRAFE_RIGHT
 	# Handle "running" (while backpedaling)
 	elif is_backpedaling:
-		mixamo_animation = MIX_ANIMATION_BACKWARD
-		quaternius_animation = QUAT_ANIMATION_BACKWARD
+		# Handle "running" (while backpedaling and holding a shield)
+		if player.is_holding_sword_and_shield:
+			mixamo_animation = MIX_ANIMATION_BACKWARD_SWORD_AND_SHIELD
+		# Handle "running" (while backpedaling and unarmed)
+		else:
+			mixamo_animation = MIX_ANIMATION_BACKWARD
+		# [Re]set the animation playback speed
+		player.animation_player_set_speed_scale(1.0)
+	# Handle "sprinting" (while holding a shield)
+	elif player.is_holding_sword_and_shield:
+		mixamo_animation = MIX_ANIMATION_SWORD_AND_SHIELD
 		# [Re]set the animation playback speed
 		player.animation_player_set_speed_scale(1.0)
 	# Handle "sprinting" (unarmed)
 	else:
 		mixamo_animation = MIX_ANIMATION
-		quaternius_animation = QUAT_ANIMATION
 		# [Re]set the animation playback speed
 		player.animation_player_set_speed_scale(1.0)
 
-	# Play the appropriate animation based on the player's animation set (🔵 Mixamo or 🟣 Quaternius)
 	var current_animation = player.animation_player_current_animation()
-	var animation = mixamo_animation if player.animation_set == 0 else quaternius_animation
+	var animation = mixamo_animation
 	if current_animation != animation:
 		player.animation_player_play(animation)
 

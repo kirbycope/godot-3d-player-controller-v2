@@ -10,14 +10,6 @@ const MIX_ANIMATION_REACTING_HIGH_RIGHT := "Standing_Reaction_High_Right/mixamo_
 const MIX_ANIMATION_REACTING_KNOCKED_OVER := "Standing_Falling_Down/mixamo_com"
 const MIX_ANIMATION_REACTING_GETTING_UP := "Standing_Getting_Up/mixamo_com"
 
-# Reacting 🟣 Quaternius animations
-const QUAT_ANIMATION_REACTING_LOW_LEFT := "UAL1/Hit_Stomach"
-const QUAT_ANIMATION_REACTING_LOW_RIGHT := "UAL1/Hit_Stomach"
-const QUAT_ANIMATION_REACTING_HIGH_LEFT := "UAL1/Hit_Shoulder_L"
-const QUAT_ANIMATION_REACTING_HIGH_RIGHT := "UAL1/Hit_Shoulder_R"
-const QUAT_ANIMATION_REACTING_KNOCKED_OVER := MIX_ANIMATION_REACTING_KNOCKED_OVER # TODO: Find QUAT animation
-const QUAT_ANIMATION_REACTING_GETTING_UP := MIX_ANIMATION_REACTING_KNOCKED_OVER # TODO: Find QUAT animation
-
 const NODE_STATE := States.State.REACTING
 
 
@@ -33,26 +25,20 @@ func _process(_delta: float) -> void:
 ## Plays the appropriate animation based on player state.
 func play_animation() -> void:
 	var mixamo_animation := ""
-	var quaternius_animation := ""
 	if player.is_reacting_low_left:
 		mixamo_animation = MIX_ANIMATION_REACTING_LOW_LEFT
-		quaternius_animation = QUAT_ANIMATION_REACTING_LOW_LEFT
 	elif player.is_reacting_low_right:
 		mixamo_animation = MIX_ANIMATION_REACTING_LOW_RIGHT
-		quaternius_animation = QUAT_ANIMATION_REACTING_LOW_RIGHT
 	elif player.is_reacting_high_left:
 		mixamo_animation = MIX_ANIMATION_REACTING_HIGH_LEFT
-		quaternius_animation = QUAT_ANIMATION_REACTING_HIGH_LEFT
 	elif player.is_reacting_high_right:
 		mixamo_animation = MIX_ANIMATION_REACTING_HIGH_RIGHT
-		quaternius_animation = QUAT_ANIMATION_REACTING_HIGH_RIGHT
 	elif player.is_reacting_knocked_over:
 		mixamo_animation = MIX_ANIMATION_REACTING_KNOCKED_OVER
-		quaternius_animation = QUAT_ANIMATION_REACTING_KNOCKED_OVER
 	else:
 		return
 
-	var animation = quaternius_animation if player.animation_set == 1 else mixamo_animation
+	var animation = mixamo_animation
 	var current_animation = player.animation_player_current_animation()
 	if current_animation != animation:
 		player.animation_player_play(animation)
@@ -63,16 +49,13 @@ func _on_animation_finished(animation_name: String) -> void:
 	# Do nothing if not the authority
 	if not is_multiplayer_authority(): return
 
-	if animation_name == MIX_ANIMATION_REACTING_LOW_LEFT or animation_name == QUAT_ANIMATION_REACTING_LOW_LEFT:
+	if animation_name == MIX_ANIMATION_REACTING_LOW_LEFT:
 		player.is_reacting_left = false
-	elif animation_name == MIX_ANIMATION_REACTING_LOW_RIGHT \
-	or animation_name == QUAT_ANIMATION_REACTING_LOW_RIGHT:
+	elif animation_name == MIX_ANIMATION_REACTING_LOW_RIGHT:
 		player.is_reacting_right = false
-	elif animation_name == MIX_ANIMATION_REACTING_HIGH_LEFT \
-	or animation_name == QUAT_ANIMATION_REACTING_HIGH_LEFT:
+	elif animation_name == MIX_ANIMATION_REACTING_HIGH_LEFT:
 		player.is_reacting_left = false
-	elif animation_name == MIX_ANIMATION_REACTING_HIGH_RIGHT \
-	or animation_name == QUAT_ANIMATION_REACTING_HIGH_RIGHT:
+	elif animation_name == MIX_ANIMATION_REACTING_HIGH_RIGHT:
 		player.is_reacting_right = false
 	transition_state(NODE_STATE, player.previous_state)
 

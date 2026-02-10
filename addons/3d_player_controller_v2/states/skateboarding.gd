@@ -6,10 +6,6 @@ class_name Skateboarding
 const MIX_ANIMATION_SKATEBOARDING := "Skateboarding/mixamo_com"
 const MIX_ANIMATION_SKATEBOARDING_FAST := "Skateboarding_Fast/mixamo_com"
 const MIX_ANIMATION_SKATEBOARDING_SLOW := "Skateboarding_Slow/mixamo_com"
-# Skateboarding 🟣 Quaternius animations
-const QUAT_ANIMATION_SKATEBOARDING := "Skateboarding/mixamo_com" # There is no Quaternius animation yet (UAl1/UAL2)
-const QUAT_ANIMATION_SKATEBOARDING_FAST := "Skateboarding_Fast/mixamo_com" # There is no Quaternius animation yet (UAl1/UAL2)
-const QUAT_ANIMATION_SKATEBOARDING_SLOW := "Skateboarding_Slow/mixamo_com" # There is no Quaternius animation yet (UAl1/UAL2)
 
 const NODE_STATE := States.State.SKATEBOARDING
 
@@ -47,22 +43,18 @@ func _process(_delta: float) -> void:
 ## Plays the appropriate animation based on player state.
 func play_animation() -> void:
 	var mixamo_animation: String
-	var quaternius_animation: String
 	var height_scale := 1.0
 	if player.input_direction == Vector2.ZERO:
 		mixamo_animation = MIX_ANIMATION_SKATEBOARDING_SLOW
-		quaternius_animation = QUAT_ANIMATION_SKATEBOARDING_SLOW
 		height_scale = 1.0
 	elif player.speed_current == player.speed_skateboarding:
 		mixamo_animation = MIX_ANIMATION_SKATEBOARDING
-		quaternius_animation = QUAT_ANIMATION_SKATEBOARDING
 		height_scale = 0.95
 	elif player.speed_current > player.speed_skateboarding:
 		mixamo_animation = MIX_ANIMATION_SKATEBOARDING_FAST
-		quaternius_animation = QUAT_ANIMATION_SKATEBOARDING_FAST
 		height_scale = 0.9
 
-	var animation = quaternius_animation if player.animation_set == 1 else mixamo_animation
+	var animation = mixamo_animation
 	var current_animation = player.animation_player_current_animation()
 	if current_animation != animation:
 		player.animation_player_play(animation)

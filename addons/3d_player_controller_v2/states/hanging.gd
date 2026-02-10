@@ -9,13 +9,6 @@ const MIX_ANIMATION_HANGING_SHIMMY_RIGHT := "Hanging_Shimmy_Right/mixamo_com"
 const MIX_ANIMATION_HANGING_BRACED := "Hanging_Braced/mixamo_com"
 const MIX_ANIMATION_HANGING_BRACED_SHIMMY_LEFT := "Hanging_Braced_Shimmy_Left/mixamo_com"
 const MIX_ANIMATION_HANGING_BRACED_SHIMMY_RIGHT := "Hanging_Braced_Shimmy_Right/mixamo_com"
-# Hanging 🟣 Quaternius animations
-const QUAT_ANIMATION_HANGING := "Hanging/mixamo_com" # There is no Quaternius animation yet (UAl1/UAL2)
-const QUAT_ANIMATION_HANGING_SHIMMY_LEFT := "Hanging_Shimmy_Left/mixamo_com" # There is no Quaternius animation yet (UAl1/UAL2)
-const QUAT_ANIMATION_HANGING_SHIMMY_RIGHT := "Hanging_Shimmy_Right/mixamo_com" # There is no Quaternius animation yet (UAl1/UAL2)
-const QUAT_ANIMATION_HANGING_BRACED := "Hanging_Braced/mixamo_com" # There is no Quaternius animation yet (UAl1/UAL2)
-const QUAT_ANIMATION_HANGING_BRACED_SHIMMY_LEFT := "Hanging_Braced_Shimmy_Left/mixamo_com" # There is no Quaternius animation yet (UAl1/UAL2)
-const QUAT_ANIMATION_HANGING_BRACED_SHIMMY_RIGHT := "Hanging_Braced_Shimmy_Right/mixamo_com" # There is no Quaternius animation yet (UAl1/UAL2)
 
 const NODE_STATE := States.State.HANGING
 
@@ -99,21 +92,17 @@ func play_animation() -> void:
 	var is_braced = player.ray_cast_low.is_colliding()
 
 	var mixamo_animation: String
-	var quaternius_animation: String
 	# "shimmy" left ←
 	if Input.is_action_pressed(Controls.MOVE_LEFT):
 		mixamo_animation = MIX_ANIMATION_HANGING_BRACED_SHIMMY_LEFT if is_braced else MIX_ANIMATION_HANGING_SHIMMY_LEFT
-		quaternius_animation = QUAT_ANIMATION_HANGING_BRACED_SHIMMY_LEFT if is_braced else QUAT_ANIMATION_HANGING_SHIMMY_LEFT
 	# "shimmy" right →
 	elif Input.is_action_pressed(Controls.MOVE_RIGHT):
 		mixamo_animation = MIX_ANIMATION_HANGING_BRACED_SHIMMY_RIGHT if is_braced else MIX_ANIMATION_HANGING_SHIMMY_RIGHT
-		quaternius_animation = QUAT_ANIMATION_HANGING_BRACED_SHIMMY_RIGHT if is_braced else QUAT_ANIMATION_HANGING_SHIMMY_RIGHT
 	# "hanging" idle
 	else:
 		mixamo_animation = MIX_ANIMATION_HANGING_BRACED if is_braced else MIX_ANIMATION_HANGING
-		quaternius_animation = QUAT_ANIMATION_HANGING_BRACED if is_braced else QUAT_ANIMATION_HANGING
 
-	var animation = quaternius_animation if player.animation_set == 1 else mixamo_animation
+	var animation = mixamo_animation
 	player.animation_player_play(animation)
 
 
