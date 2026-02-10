@@ -25,8 +25,13 @@ const MIX_ANIMATION_PUNCHING_LEFT := "Standing_Punching_Left/mixamo_com"
 const MIX_ANIMATION_PUNCHING_RIGHT := "Standing_Punching_Right/mixamo_com"
 # Standing 🔵 Mixamo animations (sword and shield)
 const MIX_ANIMATION_BLOCKING_SWORD_AND_SHIELD := "Standing_Blocking_Sword_And_Shield/mixamo_com"
+const MIX_ANIMATION_CASTING_SWORD_AND_SHIELD := "Standing_Casting_Sword_And_Shield/mixamo_com" # TODO: Implement. Casting up into the sky and then crashing weapon hand into the ground.
+const MIX_ANIMATION_CASTING_2_SWORD_AND_SHIELD := "Standing_Casting_2_Sword_And_Shield/mixamo_com" # TODO: Implement. Casting forward using shield hand.
 const MIX_ANIMATION_HOLDING_SWORD_AND_SHIELD := "Standing_Holding_Sword_And_Shield/mixamo_com"
-const MIX_ANIMATION_SWINGING_SWORD_AND_SHIELD := "Standing_Swinging_Sword_And_Shield/mixamo_com"
+const MIX_ANIMATION_POWERING_SWORD_AND_SHIELD := "Standing_Powering_Sword_And_Shield/mixamo_com" # TODO: Implement. "Powering Up" by puffing out chest and lowering arms.
+const MIX_ANIMATION_SWINGING_SWORD_AND_SHIELD := "Standing_Swinging_Sword_And_Shield/mixamo_com" # TODO: Implement combo 1/3.
+const MIX_ANIMATION_SWINGING_2_SWORD_AND_SHIELD := "Standing_Swinging_2_Sword_And_Shield/mixamo_com" # TODO: Implement combo 2/3.
+const MIX_ANIMATION_SWINGING_3_SWORD_AND_SHIELD := "Standing_Swinging_3_Sword_And_Shield/mixamo_com" # TODO: Implement combo 3/3.
 # Standing 🔵 Mixamo animations (holding a rifle)
 const MIX_ANIMATION_HOLDING_RIFLE := "Standing_Holding_Rifle/mixamo_com"
 const MIX_ANIMATION_RIFLE_AIMING := "Standing_Aiming_Rifle/mixamo_com"
