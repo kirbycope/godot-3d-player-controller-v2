@@ -49,6 +49,8 @@ const MIX_ANIMATION_TURNING_RIGHT := "Standing_Right_Turn/mixamo_com" # TODO: Im
 
 const NODE_STATE := States.State.STANDING
 
+var combo_count := 0 # Current sword-and-shield combo swing step (0 = idle)
+
 
 ## Called when there is an input event.
 func _input(event: InputEvent) -> void:
@@ -175,8 +177,20 @@ func _input(event: InputEvent) -> void:
 			return
 		# Sword (with shield) "swinging"
 		if player.is_holding_sword_and_shield:
+			# Queue "combo 1/3" if not currently swinging
 			if not player.is_swinging_sword_and_shield:
 				player.is_swinging_sword_and_shield = true
+				combo_count = 1
+			# Queue "combo 2/3" if currently in "combo 1/3"
+			elif player.is_swinging_sword_and_shield \
+			and combo_count == 1 \
+			and player.animation_player_current_animation() == MIX_ANIMATION_SWINGING_SWORD_AND_SHIELD:
+				combo_count = 2
+			# Queue "combo 3/3" if currently in "combo 2/3"
+			elif player.is_swinging_sword_and_shield \
+			and combo_count == 2 \
+			and player.animation_player_current_animation() == MIX_ANIMATION_SWINGING_2_SWORD_AND_SHIELD:
+				combo_count = 3
 			return
 		# Right 1H "swinging"
 		if player.is_holding_1h_right:
@@ -307,7 +321,12 @@ func play_animation() -> void:
 	elif player.is_holding_sword_and_shield:
 		var animation: String
 		if player.is_swinging_sword_and_shield:
-			animation = MIX_ANIMATION_SWINGING_SWORD_AND_SHIELD
+			if combo_count == 2:
+				animation = MIX_ANIMATION_SWINGING_2_SWORD_AND_SHIELD
+			elif combo_count == 3:
+				animation = MIX_ANIMATION_SWINGING_3_SWORD_AND_SHIELD
+			else:
+				animation = MIX_ANIMATION_SWINGING_SWORD_AND_SHIELD
 			if current_animation != animation:
 				_on_animation_finished(current_animation)
 				player.animation_player_play(animation)
@@ -459,7 +478,11 @@ func _on_animation_finished(animation_name: String) -> void:
 		player.is_swinging_1h_right = false
 	elif animation_name == MIX_ANIMATION_SWINGING_2H:
 		player.is_swinging_2h = false
-	elif animation_name == MIX_ANIMATION_SWINGING_SWORD_AND_SHIELD:
+	#elif animation_name == MIX_ANIMATION_SWINGING_SWORD_AND_SHIELD:
+	#	player.is_swinging_sword_and_shield = false
+	#elif animation_name == MIX_ANIMATION_SWINGING_2_SWORD_AND_SHIELD:
+	#	player.is_swinging_sword_and_shield = false
+	elif animation_name == MIX_ANIMATION_SWINGING_3_SWORD_AND_SHIELD:
 		player.is_swinging_sword_and_shield = false
 	elif animation_name == MIX_ANIMATION_THROWING_LEFT:
 		player.is_throwing_left = false
