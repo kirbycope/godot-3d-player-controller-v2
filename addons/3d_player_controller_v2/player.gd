@@ -577,13 +577,27 @@ func animation_player_current_animation() -> String:
 	return animation_name
 
 
-## Get the length of the _current animation_ from the first [AnimationPlayer] node found as a child of [character].
-func animation_player_current_animation_length() -> float:
-	var animation_length: float = 0.0 ## The length (in seconds) of the currently playing animation.
+## Get the length of a named animation (or the current animation) from the first [AnimationPlayer] node found as a child of [character].
+func animation_player_current_animation_length(_name: StringName = &"") -> float:
+	var animation_length: float = 0.0 ## The length (in seconds) of the target animation.
 	for animation_player in animation_players():
-		animation_length = animation_player.current_animation_length
-		break
+		# Prefer explicit animation lookup so deferred `play` calls still return the requested length immediately.
+		if _name != &"" and animation_player.has_animation(_name):
+			var animation: Animation = animation_player.get_animation(_name)
+			if animation:
+				return animation.length
+		# Fallback: report the currently playing animation length from the first player.
+		if animation_length == 0.0:
+			animation_length = animation_player.current_animation_length
+	# If the named animation was not found, return the best fallback we have (possibly 0.0).
 	return animation_length
+
+
+## Get the playback position (seconds) of the current animation from the first [AnimationPlayer] under [character].
+func animation_player_current_animation_position() -> float:
+	for animation_player in animation_players():
+		return animation_player.current_animation_position
+	return 0.0
 
 
 ## Disconnects a [Signal] (by name) from a [Callable] on all [AnimationPlayer] nodes found under [character] (recursively).
@@ -607,10 +621,11 @@ func animation_player_pause() -> void:
 		animation_player.call_deferred("pause")
 
 
-## Plays an animation on all [AnimationPlayer] nodes found under [character] (recursively).
-func animation_player_play(_name: StringName = &"", custom_blend: float = -1, custom_speed: float = 1.0, from_end: bool = false) -> void:
+## Plays an animation on all [AnimationPlayer] nodes found under [character] (recursively) and returns its length.
+func animation_player_play(_name: StringName = &"", custom_blend: float = -1, custom_speed: float = 1.0, from_end: bool = false) -> float:
 	# Skip if no animation name was provided
-	if _name == &"": return
+	if _name == &"":
+		return 0.0
 
 	# Play the animation on each AnimationPlayer that has it
 	for animation_player in animation_players():
@@ -618,16 +633,23 @@ func animation_player_play(_name: StringName = &"", custom_blend: float = -1, cu
 			animation_player.call_deferred("play", _name, custom_blend, custom_speed, from_end)
 		#else: push_warning("Animation '%s' not found on AnimationPlayer '%s'" % [name, animation_player.name]) ## DEBUGGING
 
+	# Return the animation length (seconds) if available
+	return animation_player_current_animation_length(_name)
 
-## Plays an animation backwards on all [AnimationPlayer] nodes found under [character] (recursively).
-func animation_player_play_backwards(_name: StringName = &"", custom_blend: float = -1) -> void:
+
+## Plays an animation backwards on all [AnimationPlayer] nodes found under [character] (recursively) and returns its length.
+func animation_player_play_backwards(_name: StringName = &"", custom_blend: float = -1) -> float:
 	# Skip if no animation name was provided
-	if _name == &"": return
+	if _name == &"":
+		return 0.0
 	# Play the animation backwards on each AnimationPlayer that has it
 	for animation_player in animation_players():
 		if animation_player.has_animation(_name):
 			animation_player.call_deferred("play_backwards", _name, custom_blend)
 		#else: push_warning("Animation '%s' not found on AnimationPlayer '%s'" % [name, animation_player.name]) ## DEBUGGING
+
+	# Return the animation length (seconds) if available
+	return animation_player_current_animation_length(_name)
 
 
 ## Plays a locked animation that disables state processing until it finishes.
@@ -654,18 +676,33 @@ func animation_player_play_locked(_name: String, duration: float = -1.0) -> floa
 		animation_player_play_section(_name, 0.0, duration)
 	animation_player_connect("animation_finished", _on_locked_animation_finished)
 	is_animation_locked = true
-	return animation_player_current_animation_length()
+	return duration if duration != -1.0 else animation_player_current_animation_length(_name)
 
 
-## Plays a section of an animation on all [AnimationPlayer] nodes found under [character] (recursively).
-func  animation_player_play_section(_name: StringName = &"", start_time: float = -1, end_time: float = -1, custom_blend: float = -1, custom_speed: float = 1.0, from_end: bool = false) -> void:
+## Plays a section of an animation on all [AnimationPlayer] nodes found under [character] (recursively) and returns the anticipated play time (seconds).
+func  animation_player_play_section(_name: StringName = &"", start_time: float = -1, end_time: float = -1, custom_blend: float = -1, custom_speed: float = 1.0, from_end: bool = false) -> float:
 	# Skip if no animation name was provided
-	if _name == &"": return
+	if _name == &"":
+		return 0.0
 
 	# Play the animation section on each AnimationPlayer that has it
+	var section_length := 0.0
 	for animation_player in animation_players():
 		if animation_player.has_animation(_name):
 			animation_player.call_deferred("play_section", _name, start_time, end_time, custom_blend, custom_speed, from_end)
+			if section_length == 0.0:
+				var anim: Animation = animation_player.get_animation(_name)
+				if anim:
+					var start := start_time if start_time >= 0.0 else 0.0
+					var stop := end_time if end_time >= 0.0 else anim.length
+					var span := max(stop - start, 0.0)
+					var speed := abs(custom_speed)
+					if speed > 0.0:
+						section_length = span / speed
+					else:
+						section_length = 0.0
+
+	return section_length
 
 
 ## Sets the _speed scale_ on all [AnimationPlayer] nodes found under [character] (recursively).

@@ -39,7 +39,7 @@ func play_animation() -> void:
 			player.camera,
 			"global_position",
 			camera_end_position,
-			player.animation_player_current_animation_length()
+			player.animation_player_current_animation_length(animation)
 		)
 
 

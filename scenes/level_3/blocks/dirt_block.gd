@@ -26,7 +26,7 @@ func _input(event: InputEvent) -> void:
 				player.animation_player_play_locked("Standing_Watering/mixamo_com")
 				is_moist = true
 				# Tween albedo color starting halfway through the animation
-				var animation_length = player.animation_player_current_animation_length()
+				var animation_length = player.animation_player_current_animation_length("Standing_Watering/mixamo_com")
 				var material = $MeshInstance3D.get_active_material(0).duplicate()
 				$MeshInstance3D.set_surface_override_material(0, material)
 				var tween = get_tree().create_tween()

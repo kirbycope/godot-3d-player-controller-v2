@@ -5,8 +5,9 @@ class_name Sliding
 # Sliding 🔵 Mixamo animations
 const MIX_ANIMATION_SLIDING := "Running_Slide/mixamo_com"
 
-
 const NODE_STATE := States.State.SLIDING
+
+var camera_mount_height := 0.0
 
 
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -23,9 +24,15 @@ func play_animation() -> void:
 	var animation = MIX_ANIMATION_SLIDING
 	var current_animation = player.animation_player_current_animation()
 	if current_animation != animation:
-		player.animation_player_play(animation)
+		var animation_length = player.animation_player_play(animation)
 		player.animation_player_connect("animation_finished", _on_animation_finished)
+		# Reset camera position near the end of the animation
+		await get_tree().create_timer(animation_length * 0.75).timeout
+		var tween = get_tree().create_tween()
+		tween.tween_property(player.camera_mount, "position:y", camera_mount_height, 0.5)
 
+
+## Called when an animation finishes.
 func _on_animation_finished(animation_name: String) -> void:
 	# Do nothing if not the authority
 	if not is_multiplayer_authority(): return
@@ -55,6 +62,11 @@ func start() -> void:
 	# Flag the player as "sliding"
 	player.is_sliding = true
 
+	# Set the camera mount height
+	camera_mount_height = player.camera_mount.position.y
+	var tween = get_tree().create_tween()
+	tween.tween_property(player.camera_mount, "position:y", camera_mount_height / 2, 0.5)
+
 	# Set the player collision shape's height
 	player.collision_shape.shape.height = player.collision_height / 2
 
@@ -72,6 +84,9 @@ func stop() -> void:
 
 	# Flag the player as not "sliding"
 	player.is_sliding = false
+
+	# [Re]set the camera mount height
+	player.camera_mount.position.y = camera_mount_height
 
 	# [Re]set the player collision shape's height
 	player.collision_shape.shape.height = player.collision_height
