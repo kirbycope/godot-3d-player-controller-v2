@@ -135,7 +135,7 @@ func play_animation() -> void:
 			elif is_strafe_right:
 				mixamo_animation = MIX_ANIMATION_STRAFE_RIGHT_HOLDING_RIFLE
 		# Handle "running" (while "strafing" and holding a shield)
-		elif player.is_holding_sword_and_shield:
+		elif player.is_holding_shield_1h_left:
 			# Handle "running" (while "strafing" left and holding a shield)
 			if is_strafe_left:
 				mixamo_animation = MIX_ANIMATION_STRAFE_LEFT_SWORD_AND_SHIELD
@@ -156,7 +156,7 @@ func play_animation() -> void:
 		if player.is_holding_rifle:
 			mixamo_animation = MIX_ANIMATION_BACKWARD_HOLDING_RIFLE
 		# Handle "running" (while backpedaling and holding a shield)
-		elif player.is_holding_sword_and_shield:
+		elif player.is_holding_shield_1h_left:
 			mixamo_animation = MIX_ANIMATION_BACKWARD_SWORD_AND_SHIELD
 		# Handle "running" (while backpedaling and unarmed)
 		else:
@@ -173,7 +173,7 @@ func play_animation() -> void:
 		else:
 			mixamo_animation = MIX_ANIMATION_HOLDING_RIFLE
 	# Handle "running" (while holding a shield)
-	elif player.is_holding_sword_and_shield:
+	elif player.is_holding_shield_1h_left:
 		mixamo_animation = MIX_ANIMATION_SWORD_AND_SHIELD
 	# Handle "running" (unarmed)
 	else:

@@ -99,9 +99,9 @@ func _input(event: InputEvent) -> void:
 				player.is_firing_rifle = true
 			return
 		# Shield "blocking"
-		if player.is_holding_sword_and_shield:
-			if not player.is_blocking_sword_and_shield:
-				player.is_blocking_sword_and_shield = true
+		if player.is_holding_shield_1h_left:
+			if not player.is_blocking_shield:
+				player.is_blocking_shield = true
 			return
 		# Left 1H "swinging"
 		if player.is_holding_1h_left:
@@ -140,8 +140,8 @@ func _input(event: InputEvent) -> void:
 			if player.is_holding_rifle:
 				player.is_aiming_rifle = false
 		# Shield "blocking" release
-		if player.is_blocking_sword_and_shield:
-			player.is_blocking_sword_and_shield = false
+		if player.is_blocking_shield:
+			player.is_blocking_shield = false
 		# Right 1H "blocking" release
 		if player.is_blocking_1h_right:
 			player.is_blocking_1h_right = false
@@ -176,7 +176,7 @@ func _input(event: InputEvent) -> void:
 				player.is_firing_rifle = true
 			return
 		# Sword (with shield) "swinging"
-		if player.is_holding_sword_and_shield:
+		if player.is_holding_shield_1h_left:
 			# Queue "combo 1/3" if not currently swinging
 			if not player.is_swinging_sword_and_shield:
 				player.is_swinging_sword_and_shield = true
@@ -266,8 +266,8 @@ func _process(_delta: float) -> void:
 	# 🄻1/[MB0] _pressed_ -> Shield "blocking"
 	# Not in _input() to allow holding down the button while in other states and transitioning to "standing"
 	if Input.is_action_pressed(Controls.BUTTON_4) and not player.pause.visible:
-		if player.is_holding_sword_and_shield and not player.is_blocking_sword_and_shield:
-			player.is_blocking_sword_and_shield = true
+		if player.is_holding_shield_1h_left and not player.is_blocking_shield:
+			player.is_blocking_shield = true
 
 	# Play the animation
 	play_animation()
@@ -320,7 +320,7 @@ func play_animation() -> void:
 			player.animation_player_play(animation)
 
 	#  🗡️ -- Sword and Shield -- 🛡️
-	elif player.is_holding_sword_and_shield:
+	elif player.is_holding_shield_1h_left:
 		var animation: String
 		if player.is_swinging_sword_and_shield:
 			if combo_count == 2:
@@ -339,7 +339,7 @@ func play_animation() -> void:
 				player.animation_player_play(animation)
 				if player.character.has_method("play_attack_short_sound_effect"):
 					player.character.play_attack_short_sound_effect()
-		elif player.is_blocking_sword_and_shield:
+		elif player.is_blocking_shield:
 			animation = MIX_ANIMATION_BLOCKING_SWORD_AND_SHIELD
 			if current_animation != animation:
 				player.animation_player_play(animation)
@@ -543,7 +543,7 @@ func stop() -> void:
 	player.is_blocking_1h_left = false
 	player.is_blocking_1h_right = false	
 	player.is_blocking_2h = false
-	player.is_blocking_sword_and_shield = false
+	player.is_blocking_shield = false
 	player.is_swinging_sword_and_shield = false
 	player.is_kicking_left = false
 	player.is_kicking_right = false

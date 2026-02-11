@@ -65,9 +65,6 @@ var current_state: States.State ## The current state of the player
 var input_direction := Vector2.ZERO ## The direction of the player input (UP/DOWN, LEFT/RIGHT).
 var is_animation_locked := false ## Is the player's animation locked?
 var is_auto_running := false ## Is the player auto-running?
-var is_blocking_1h_left := false ## Is the player blocking with a 1-handed tool or weapon with their left hand?
-var is_blocking_1h_right := false ## Is the player blocking with a 1-handed tool or weapon with their right hand?
-var is_blocking_2h := false ## Is the player blocking with a 2-handed tool or weapon?
 var is_climbing := false ## Is the player climbing a surface?
 var is_climbing_ladder := false ## Is the player climbing a ladder?
 var is_crawling := false ## Is the player crawling?
@@ -105,34 +102,44 @@ var is_swimming := false ## Is the player swimming?
 var is_throwing := false ## Is the player throwing an object?
 var is_walking := false ## Is the player walking?
 var previous_state: States.State ## The previous state of the player
-var speed_current := 0.0 ## Current speed
 var virtual_velocity := Vector3.ZERO ## The player's velocity is movement were unlocked
 ## -- ENVIRONMENT VARIABLES --
 var gravitating_towards ## The Node the player is being pulled towards (if any)
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity") ## Default gravity value
 var swimming_in ## The body of water the player is swimming in (if any)
 ## -- EQUIPMENT VARIABLES --
+# ⛏️🫲 - Left Handed Tools/Weapon
+var is_blocking_1h_left := false ## Is the player blocking with a 1-handed tool or weapon with their left hand?
 var is_holding_1h_left := false ## Is the player holding a 1-handed tool or weapon with their left hand?
 var is_swinging_1h_left := false ## Is the player swinging a 1-handed tool or weapon with their left hand?
+# 🫱⛏️ - Right Handed Tools/Weapon
+var is_blocking_1h_right := false ## Is the player blocking with a 1-handed tool or weapon with their right hand?
 var is_holding_1h_right := false ## Is the player holding a 1-handed tool or weapon with their right hand?
 var is_swinging_1h_right := false ## Is the player swinging a 1-handed tool or weapon with their right hand?
-var is_holding_sword_and_shield := false ## Is the player holding a shield (with their left hand)?
-var is_blocking_sword_and_shield := false ## Is the player blocking with a shield (with their left hand)?
-var is_swinging_sword_and_shield := false ## Is the player swinging a sword while holding a shield?
+# 🪏👐 - Two Handed Tools/Weapons
+var is_blocking_2h := false ## Is the player blocking with a 2-handed tool or weapon?
 var is_holding_2h := false ## Is the player holding a 2-handed tool or weapon?
 var is_swinging_2h := false ## Is the player swinging a 2-handed tool or weapon?
+# 🛡️👐🗡️ - Left Handed Shield and Right Handed Tool/Weapons
+var is_holding_shield_1h_left := false ## Is the player holding a shield (with their left hand)?
+var is_blocking_shield := false ## Is the player blocking with a shield (with their left hand)?
+var is_swinging_sword_and_shield := false ## Is the player swinging a sword while holding a shield?
+# 💟 - "Holding" item, like in the 2007 PC game "Portal"
 var is_holding_left := false ## Is the player holding an object with their left hand?
 var is_throwing_left := false ## Is the player throwing an object with their left hand?
 var is_holding_right := false ## Is the player holding an object with their right hand?
 var is_throwing_right := false ## Is the player throwing an object with their right hand?
+# 🎣 - Two Handed Fishing
 var is_holding_fishing_rod := false ## Is the player wielding a fishing rod?
 var is_casting_fishing := false ## Is the player casting a fishing line?
 var is_reeling_fishing := false ## Is the player reeling in a fishing line?
-var is_holding_rifle := false ## Is the player wielding a rifle?
+# 🔫 - Two Handed Rifle
 var is_aiming_rifle := false ## Is the player aiming a rifle?
+var is_holding_rifle := false ## Is the player wielding a rifle?
 var is_firing_rifle := false ## Is the player firing a rifle?
 ## -- Character VARIABLES --
 var setup_character: GDScript = preload("res://addons/3d_player_controller_v2/setup_character.gd")
+var speed_current := 0.0 ## Current speed
 var targets = {}
 var current_focused_target: Node3D = null ## The current strafing focus target
 var is_target_locked := false ## Is the player actively locked onto a target?

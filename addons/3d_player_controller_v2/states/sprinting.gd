@@ -83,7 +83,7 @@ func play_animation() -> void:
 		# Strafing+Sprinting animations are just Running animations played at a faster speed
 		player.animation_player_set_speed_scale(1.5)
 		# Handle "running" (while "strafing" and holding a shield)
-		if player.is_holding_sword_and_shield:
+		if player.is_holding_shield_1h_left:
 			# Handle "running" (while "strafing" left and holding a shield)
 			if is_strafe_left:
 				mixamo_animation = MIX_ANIMATION_STRAFE_LEFT_SWORD_AND_SHIELD
@@ -101,7 +101,7 @@ func play_animation() -> void:
 	# Handle "running" (while backpedaling)
 	elif is_backpedaling:
 		# Handle "running" (while backpedaling and holding a shield)
-		if player.is_holding_sword_and_shield:
+		if player.is_holding_shield_1h_left:
 			mixamo_animation = MIX_ANIMATION_BACKWARD_SWORD_AND_SHIELD
 		# Handle "running" (while backpedaling and unarmed)
 		else:
@@ -109,7 +109,7 @@ func play_animation() -> void:
 		# [Re]set the animation playback speed
 		player.animation_player_set_speed_scale(1.0)
 	# Handle "sprinting" (while holding a shield)
-	elif player.is_holding_sword_and_shield:
+	elif player.is_holding_shield_1h_left:
 		mixamo_animation = MIX_ANIMATION_SWORD_AND_SHIELD
 		# [Re]set the animation playback speed
 		player.animation_player_set_speed_scale(1.0)

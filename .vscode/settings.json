@@ -16,7 +16,8 @@
         "pathfinding",
         "Quaternius",
         "ragdoll",
-        "ragdolling"
+        "ragdolling",
+        "reparent"
     ]
 
 }
