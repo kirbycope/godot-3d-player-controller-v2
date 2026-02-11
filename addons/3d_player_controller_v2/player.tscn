@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" path="res://addons/3d_player_controller_v2/pause.tscn" id="5_7fj78"]
 [ext_resource type="PackedScene" path="res://addons/3d_player_controller_v2/emotes.tscn" id="6_nlsti"]
 [ext_resource type="Texture2D" uid="uid://bvr74sywbui7h" path="res://addons/3d_player_controller_v2/assets/textures/game_icons/white/2x/audioOn.png" id="8_7nn76"]
-[ext_resource type="PackedScene" path="res://addons/3d_player_controller_v2/focus_target_indicator.tscn" id="8_twkb2"]
+[ext_resource type="PackedScene" uid="uid://y43ofen5o2s3" path="res://addons/3d_player_controller_v2/focus_target_indicator.tscn" id="8_twkb2"]
 [ext_resource type="PackedScene" uid="uid://cto31sxtpfiop" path="res://addons/3d_player_controller_v2/loading.tscn" id="8_wgsvs"]
 [ext_resource type="PackedScene" path="res://addons/3d_player_controller_v2/settings.tscn" id="9_ok7gw"]
 [ext_resource type="PackedScene" uid="uid://ba1yxx2ey0bbs" path="res://addons/3d_player_controller_v2/assets/characters/godette/godette.tscn" id="12_ahy2k"]

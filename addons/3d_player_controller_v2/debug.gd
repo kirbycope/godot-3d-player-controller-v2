@@ -84,6 +84,10 @@ var yellow_sphere: MeshInstance3D
 @onready var is_blocking_2h: CheckBox = $COMBAT_2H/IsBlocking2H
 @onready var is_holding_2h: CheckBox = $COMBAT_2H/IsHolding2H
 @onready var is_swinging_2h: CheckBox = $COMBAT_2H/IsSwinging2H
+# -- SHIELD --
+@onready var is_blocking_shield: CheckBox = $COMBAT_SHIELD/IsBlockingShield
+@onready var is_holding_shield: CheckBox = $COMBAT_SHIELD/IsHoldingShield
+@onready var is_swinging_weapon_holding_shield: CheckBox = $COMBAT_SHIELD/IsSwingingWeapon
 # -- THROWING --
 @onready var is_holding_left: CheckBox = $THROWING/IsHoldingLeft
 @onready var is_holding_right: CheckBox = $THROWING/IsHoldingRight
@@ -217,6 +221,10 @@ func _process(_delta: float) -> void:
 		is_swinging_1h_left.button_pressed = player.is_swinging_1h_left
 		is_swinging_1h_right.button_pressed = player.is_swinging_1h_right
 		is_swinging_2h.button_pressed = player.is_swinging_2h
+		is_blocking_shield.button_pressed = player.is_blocking_shield
+		is_holding_shield.button_pressed = player.is_holding_shield_1h_left
+		is_swinging_weapon_holding_shield.button_pressed = player.is_swinging_sword_and_shield
+		$COMBAT_SHIELD.visible = player.is_blocking_shield or player.is_holding_shield_1h_left or player.is_swinging_sword_and_shield
 		is_throwing_left.button_pressed = player.is_throwing_left
 		is_throwing_right.button_pressed = player.is_throwing_right
 		is_walking.button_pressed = player.is_walking

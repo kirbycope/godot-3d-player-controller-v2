@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://emb66txrumsr"]
+
+[ext_resource type="Script" uid="uid://dln5j7wb7pnfu" path="res://scenes/level_0/axe_double.gd" id="1_qtyyi"]
+[ext_resource type="PackedScene" uid="uid://bhjq0npgk2ttv" path="res://assets/fantasty_props_megakit/Axe_Double_Bronze.gltf" id="1_tnlpt"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qtyyi"]
+
+[node name="AxeDouble" type="Node3D" unique_id=1180279788]
+script = ExtResource("1_qtyyi")
+
+[node name="Axe_Double_Bronze2" parent="." unique_id=415571425 instance=ExtResource("1_tnlpt")]
+transform = Transform3D(-0.49999997, 0.86602545, -8.609462e-08, 0.85286856, 0.49240384, -0.17364818, -0.1503837, -0.08682416, -0.9848077, 0, 0.08, 0.04)
+
+[node name="PlayerDetection" type="Area3D" parent="." unique_id=2083518813]
+transform = Transform3D(0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerDetection" unique_id=1760587526]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+shape = SubResource("BoxShape3D_qtyyi")
+
+[connection signal="body_entered" from="PlayerDetection" to="." method="_on_player_detection_body_entered"]
+[connection signal="body_exited" from="PlayerDetection" to="." method="_on_player_detection_body_exited"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=4 uid="uid://cg7c5p0uk7mjf"]
+[gd_scene format=4 uid="uid://cg7c5p0uk7mjf"]
 
 [ext_resource type="Script" uid="uid://d3i35ptojbxw7" path="res://scenes/level_0/gun.gd" id="1_wrdi0"]
 
@@ -173,280 +173,279 @@ _data = {
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_14sfe"]
 
-[node name="Gun" type="Node3D"]
+[node name="Gun" type="Node3D" unique_id=1869538187]
 script = ExtResource("1_wrdi0")
 
-[node name="Visuals" type="Node3D" parent="."]
+[node name="Visuals" type="Node3D" parent="." unique_id=2123332219]
 transform = Transform3D(-8.742278e-08, 2, 0, -1.9318516, -8.444392e-08, 0.5176381, 0.5176381, 2.262668e-08, 1.9318516, -0.125, 0.375, -0.035)
 
-[node name="pCylinder1" type="Node3D" parent="Visuals"]
+[node name="pCylinder1" type="Node3D" parent="Visuals" unique_id=416297806]
 transform = Transform3D(0, 19.82339, 0, 0, 0, 1, 1, 0, 0, 0, 0.13031171, 0)
 
-[node name="transform13" type="Node3D" parent="Visuals/pCylinder1"]
+[node name="transform13" type="Node3D" parent="Visuals/pCylinder1" unique_id=1426996080]
 
-[node name="pCylinder2" type="Node3D" parent="Visuals"]
+[node name="pCylinder2" type="Node3D" parent="Visuals" unique_id=1063091445]
 transform = Transform3D(0, -5.948284, 0, 1.5485802, 0, 0, 0, 0, 1.5485802, 0.01748188, 0.13031171, 0)
 
-[node name="transform35" type="Node3D" parent="Visuals/pCylinder2"]
+[node name="transform35" type="Node3D" parent="Visuals/pCylinder2" unique_id=1265192044]
 
-[node name="pCylinder3" type="Node3D" parent="Visuals"]
+[node name="pCylinder3" type="Node3D" parent="Visuals" unique_id=287706265]
 transform = Transform3D(0, -5.1099644, 0, 1.1496714, 0, 0, 0, 0, 1.5485802, 0.01748188, 0.10823431, 0)
 
-[node name="transform18" type="Node3D" parent="Visuals/pCylinder3"]
+[node name="transform18" type="Node3D" parent="Visuals/pCylinder3" unique_id=1397176253]
 
-[node name="pCube1" type="Node3D" parent="Visuals"]
+[node name="pCube1" type="Node3D" parent="Visuals" unique_id=1873204095]
 transform = Transform3D(10.103418, 0, 0, 0, 0.5461427, 0, 0, 0, 2.233454, 0.017616006, 0.11824182, 0)
 
-[node name="transform29" type="Node3D" parent="Visuals/pCube1"]
+[node name="transform29" type="Node3D" parent="Visuals/pCube1" unique_id=1346496186]
 
-[node name="pCube2" type="Node3D" parent="Visuals"]
+[node name="pCube2" type="Node3D" parent="Visuals" unique_id=1650485704]
 transform = Transform3D(2.079543, 0, 0, 0, 2.6695762, 0, 0, 0, 3.3806322, -0.023695024, 0.10967281, 0)
 
-[node name="transform41" type="Node3D" parent="Visuals/pCube2"]
+[node name="transform41" type="Node3D" parent="Visuals/pCube2" unique_id=641339242]
 
-[node name="pCylinder4" type="Node3D" parent="Visuals"]
+[node name="pCylinder4" type="Node3D" parent="Visuals" unique_id=724682543]
 transform = Transform3D(0, -3.6284058, 0, 0.81634116, 0, 0, 0, 0, 1.0995923, -0.0014166195, 0.10823431, 0)
 
-[node name="transform36" type="Node3D" parent="Visuals/pCylinder4"]
+[node name="transform36" type="Node3D" parent="Visuals/pCylinder4" unique_id=1057202354]
 
-[node name="pCube3" type="Node3D" parent="Visuals"]
+[node name="pCube3" type="Node3D" parent="Visuals" unique_id=2020559123]
 transform = Transform3D(1.2067221, 0, 0, 0, 2.6695762, 0, 0, 0, 3.3806322, 0.063240364, 0.10940442, 0)
 
-[node name="transform44" type="Node3D" parent="Visuals/pCube3"]
+[node name="transform44" type="Node3D" parent="Visuals/pCube3" unique_id=1994318167]
 
-[node name="pCylinder5" type="Node3D" parent="Visuals"]
+[node name="pCylinder5" type="Node3D" parent="Visuals" unique_id=658929519]
 transform = Transform3D(0, -5.948284, 0, 1.5485802, 0, 0, 0, 0, 1.5485802, 0.16394976, 0.13031171, 0)
 
-[node name="transform14" type="Node3D" parent="Visuals/pCylinder5"]
+[node name="transform14" type="Node3D" parent="Visuals/pCylinder5" unique_id=502727517]
 
-[node name="pCylinder6" type="Node3D" parent="Visuals"]
+[node name="pCylinder6" type="Node3D" parent="Visuals" unique_id=43788278]
 transform = Transform3D(0, -4.745538, 0, 1.2354565, 0, 0, 0, 0, 1.2354565, 0.15233658, 0.10934927, 0)
 
-[node name="transform38" type="Node3D" parent="Visuals/pCylinder6"]
+[node name="transform38" type="Node3D" parent="Visuals/pCylinder6" unique_id=1971668613]
 
-[node name="pCube4" type="Node3D" parent="Visuals"]
+[node name="pCube4" type="Node3D" parent="Visuals" unique_id=368466476]
 transform = Transform3D(1, 0, 0, 0, 2.1735175, 0, 0, 0, 3.5151594, 0.1291453, 0.11955872, 2.3737646e-05)
 
-[node name="transform22" type="Node3D" parent="Visuals/pCube4"]
+[node name="transform22" type="Node3D" parent="Visuals/pCube4" unique_id=119958483]
 
-[node name="pCube5" type="Node3D" parent="Visuals"]
+[node name="pCube5" type="Node3D" parent="Visuals" unique_id=1064093457]
 transform = Transform3D(0, 8.314433, 0, -1.3917736, 0, 0, 0, 0, 3.5151594, 0.14672346, 0.10361886, 0.00013647502)
 
-[node name="transform6" type="Node3D" parent="Visuals/pCube5"]
+[node name="transform6" type="Node3D" parent="Visuals/pCube5" unique_id=465864170]
 
-[node name="pCylinder7" type="Node3D" parent="Visuals"]
+[node name="pCylinder7" type="Node3D" parent="Visuals" unique_id=516120931]
 transform = Transform3D(0, -1.3749177, 0, 1.762153, 0, 0, 0, 0, 1.762153, 0.1291725, 0.13031171, 0)
 
-[node name="transform3" type="Node3D" parent="Visuals/pCylinder7"]
+[node name="transform3" type="Node3D" parent="Visuals/pCylinder7" unique_id=1242365765]
 
-[node name="pCube7" type="Node3D" parent="Visuals"]
+[node name="pCube7" type="Node3D" parent="Visuals" unique_id=53532656]
 transform = Transform3D(4.905261, 2.3239498, 0, -8.496161, 1.3417331, 0, 0, 0, 3.6418567, 0.17645197, 0.060447022, -0.0004610987)
 
-[node name="transform2" type="Node3D" parent="Visuals/pCube7"]
+[node name="transform2" type="Node3D" parent="Visuals/pCube7" unique_id=1721523493]
 
-[node name="pCube8" type="Node3D" parent="Visuals"]
+[node name="pCube8" type="Node3D" parent="Visuals" unique_id=1564147086]
 transform = Transform3D(0.08110494, 1.5605985, 0, -0.081043035, 1.5617906, 0, 0, 0, 0.6024501, 0.1360502, 0.08813463, 0)
 
-[node name="transform16" type="Node3D" parent="Visuals/pCube8"]
+[node name="transform16" type="Node3D" parent="Visuals/pCube8" unique_id=105591087]
 
-[node name="pCube9" type="Node3D" parent="Visuals"]
+[node name="pCube9" type="Node3D" parent="Visuals" unique_id=2106234227]
 transform = Transform3D(3.877331, 0, 0, 0, 1.3193767, 0, 0, 0, 1, 0.21725047, 0.13031171, 0)
 
-[node name="transform49" type="Node3D" parent="Visuals/pCube9"]
+[node name="transform49" type="Node3D" parent="Visuals/pCube9" unique_id=1430532768]
 
-[node name="pCube10" type="Node3D" parent="Visuals"]
+[node name="pCube10" type="Node3D" parent="Visuals" unique_id=1341668595]
 transform = Transform3D(1.5218129, 0, 0, 0, 1, 0, 0, 0, 1.3015504, 0.23126894, 0.17602235, 0)
 
-[node name="transform34" type="Node3D" parent="Visuals/pCube10"]
+[node name="transform34" type="Node3D" parent="Visuals/pCube10" unique_id=1187675571]
 
-[node name="pCylinder8" type="Node3D" parent="Visuals"]
+[node name="pCylinder8" type="Node3D" parent="Visuals" unique_id=1440468277]
 transform = Transform3D(0, 0.050887145, 0, -0.40124553, 0, 0, 0, 0, 0.53074247, 0.2219807, 0.17607123, 0)
 
-[node name="transform24" type="Node3D" parent="Visuals/pCylinder8"]
+[node name="transform24" type="Node3D" parent="Visuals/pCylinder8" unique_id=1471951244]
 
-[node name="pCylinder10" type="Node3D" parent="Visuals"]
+[node name="pCylinder10" type="Node3D" parent="Visuals" unique_id=1275934351]
 transform = Transform3D(0, 7.8034077, 0, -2.7645195, 0, 0, 0, 0, 2.7645195, 0.08316198, 0.17597254, 0)
 
-[node name="transform46" type="Node3D" parent="Visuals/pCylinder10"]
+[node name="transform46" type="Node3D" parent="Visuals/pCylinder10" unique_id=942671016]
 
-[node name="pCylinder11" type="Node3D" parent="Visuals"]
+[node name="pCylinder11" type="Node3D" parent="Visuals" unique_id=1395431485]
 transform = Transform3D(0, 0.050887145, 0, -0.40124553, 0, 0, 0, 0, 0.53074247, 0.2219807, 0.17607123, 0)
 
-[node name="transform40" type="Node3D" parent="Visuals/pCylinder11"]
+[node name="transform40" type="Node3D" parent="Visuals/pCylinder11" unique_id=1837757452]
 
-[node name="pCylinder12" type="Node3D" parent="Visuals"]
+[node name="pCylinder12" type="Node3D" parent="Visuals" unique_id=657728988]
 transform = Transform3D(0, 0.13231844, 0, -0.6503065, 0, 0, 0, 0, 0.8601847, 0.22329916, 0.17607123, 0)
 
-[node name="transform31" type="Node3D" parent="Visuals/pCylinder12"]
+[node name="transform31" type="Node3D" parent="Visuals/pCylinder12" unique_id=1583701191]
 
-[node name="pCylinder13" type="Node3D" parent="Visuals"]
+[node name="pCylinder13" type="Node3D" parent="Visuals" unique_id=940246157]
 transform = Transform3D(0, 9.100437, 0, 0, 0, 0.45907578, 0.45907578, 0, 0, 0.08195293, 0.107834704, 0)
 
-[node name="transform10" type="Node3D" parent="Visuals/pCylinder13"]
+[node name="transform10" type="Node3D" parent="Visuals/pCylinder13" unique_id=1041475197]
 
-[node name="pCylinder14" type="Node3D" parent="Visuals"]
+[node name="pCylinder14" type="Node3D" parent="Visuals" unique_id=307037867]
 transform = Transform3D(0, -0.88198, 0, 2.8179443, 0, 0, 0, 0, 2.8179443, 0.12811324, 0.17643365, 0)
 
-[node name="transform32" type="Node3D" parent="Visuals/pCylinder14"]
+[node name="transform32" type="Node3D" parent="Visuals/pCylinder14" unique_id=2129400136]
 
-[node name="pCylinder15" type="Node3D" parent="Visuals"]
+[node name="pCylinder15" type="Node3D" parent="Visuals" unique_id=1680073234]
 transform = Transform3D(0, -0.23021293, 0, 2.8895955, 0, 0, 0, 0, 2.8895955, 0.12192144, 0.17643365, 0)
 
-[node name="transform7" type="Node3D" parent="Visuals/pCylinder15"]
+[node name="transform7" type="Node3D" parent="Visuals/pCylinder15" unique_id=1077311997]
 
-[node name="pCube11" type="Node3D" parent="Visuals"]
+[node name="pCube11" type="Node3D" parent="Visuals" unique_id=1532884388]
 transform = Transform3D(2.0229886, 0, 0, 0, 1, 0, 0, 0, 1.3015504, 0.1281347, 0.14942402, 0)
 
-[node name="transform9" type="Node3D" parent="Visuals/pCube11"]
+[node name="transform9" type="Node3D" parent="Visuals/pCube11" unique_id=776607674]
 
-[node name="pCylinder17" type="Node3D" parent="Visuals"]
+[node name="pCylinder17" type="Node3D" parent="Visuals" unique_id=1695250275]
 transform = Transform3D(0, -0.08888917, 0, 1.2114402, 0, 0, 0, 0, 1.6317813, -0.011355122, 0.10823431, 0)
 
-[node name="transform48" type="Node3D" parent="Visuals/pCylinder17"]
+[node name="transform48" type="Node3D" parent="Visuals/pCylinder17" unique_id=162948404]
 
-[node name="pCylinder18" type="Node3D" parent="Visuals"]
+[node name="pCylinder18" type="Node3D" parent="Visuals" unique_id=278106091]
 transform = Transform3D(0, -0.08888917, 0, 1.2114402, 0, 0, 0, 0, 1.6317813, -0.008642936, 0.10823431, 0)
 
-[node name="transform43" type="Node3D" parent="Visuals/pCylinder18"]
+[node name="transform43" type="Node3D" parent="Visuals/pCylinder18" unique_id=986689522]
 
-[node name="pCylinder19" type="Node3D" parent="Visuals"]
+[node name="pCylinder19" type="Node3D" parent="Visuals" unique_id=143869328]
 transform = Transform3D(0, -0.08888917, 0, 1.2114402, 0, 0, 0, 0, 1.6317813, -0.006000143, 0.10823431, 0)
 
-[node name="transform45" type="Node3D" parent="Visuals/pCylinder19"]
+[node name="transform45" type="Node3D" parent="Visuals/pCylinder19" unique_id=70147860]
 
-[node name="pCylinder20" type="Node3D" parent="Visuals"]
+[node name="pCylinder20" type="Node3D" parent="Visuals" unique_id=1286759315]
 transform = Transform3D(0, -0.08888917, 0, 1.2114402, 0, 0, 0, 0, 1.6317813, 0.0020183227, 0.10823431, 0)
 
-[node name="transform30" type="Node3D" parent="Visuals/pCylinder20"]
+[node name="transform30" type="Node3D" parent="Visuals/pCylinder20" unique_id=2046825091]
 
-[node name="pCylinder21" type="Node3D" parent="Visuals"]
+[node name="pCylinder21" type="Node3D" parent="Visuals" unique_id=1319516138]
 transform = Transform3D(0, -0.08888917, 0, 1.2114402, 0, 0, 0, 0, 1.6317813, -0.0006244701, 0.10823431, 0)
 
-[node name="transform17" type="Node3D" parent="Visuals/pCylinder21"]
+[node name="transform17" type="Node3D" parent="Visuals/pCylinder21" unique_id=1641909593]
 
-[node name="pCylinder22" type="Node3D" parent="Visuals"]
+[node name="pCylinder22" type="Node3D" parent="Visuals" unique_id=111023802]
 transform = Transform3D(0, -0.08888917, 0, 1.2114402, 0, 0, 0, 0, 1.6317813, -0.0033366557, 0.10823431, 0)
 
-[node name="transform15" type="Node3D" parent="Visuals/pCylinder22"]
+[node name="transform15" type="Node3D" parent="Visuals/pCylinder22" unique_id=1926142343]
 
-[node name="pCylinder23" type="Node3D" parent="Visuals"]
+[node name="pCylinder23" type="Node3D" parent="Visuals" unique_id=1370294340]
 transform = Transform3D(0, -0.08888917, 0, 1.2114402, 0, 0, 0, 0, 1.6317813, 0.010121201, 0.10823431, 0)
 
-[node name="transform8" type="Node3D" parent="Visuals/pCylinder23"]
+[node name="transform8" type="Node3D" parent="Visuals/pCylinder23" unique_id=1659682582]
 
-[node name="pCylinder24" type="Node3D" parent="Visuals"]
+[node name="pCylinder24" type="Node3D" parent="Visuals" unique_id=597232060]
 transform = Transform3D(0, -0.08888917, 0, 1.2114402, 0, 0, 0, 0, 1.6317813, 0.007478408, 0.10823431, 0)
 
-[node name="transform5" type="Node3D" parent="Visuals/pCylinder24"]
+[node name="transform5" type="Node3D" parent="Visuals/pCylinder24" unique_id=1670509544]
 
-[node name="pCylinder25" type="Node3D" parent="Visuals"]
+[node name="pCylinder25" type="Node3D" parent="Visuals" unique_id=20412933]
 transform = Transform3D(0, -0.08888917, 0, 1.2114402, 0, 0, 0, 0, 1.6317813, 0.0047662226, 0.10823431, 0)
 
-[node name="transform12" type="Node3D" parent="Visuals/pCylinder25"]
+[node name="transform12" type="Node3D" parent="Visuals/pCylinder25" unique_id=1547271075]
 
-[node name="pCylinder26" type="Node3D" parent="Visuals"]
+[node name="pCylinder26" type="Node3D" parent="Visuals" unique_id=778153624]
 transform = Transform3D(0, -0.08888917, 0, 1.2114402, 0, 0, 0, 0, 1.6317813, 0.034153193, 0.10823431, 0)
 
-[node name="transform39" type="Node3D" parent="Visuals/pCylinder26"]
+[node name="transform39" type="Node3D" parent="Visuals/pCylinder26" unique_id=1155189296]
 
-[node name="pCylinder27" type="Node3D" parent="Visuals"]
+[node name="pCylinder27" type="Node3D" parent="Visuals" unique_id=1324644244]
 transform = Transform3D(0, -0.08888917, 0, 1.2114402, 0, 0, 0, 0, 1.6317813, 0.031510398, 0.10823431, 0)
 
-[node name="transform4" type="Node3D" parent="Visuals/pCylinder27"]
+[node name="transform4" type="Node3D" parent="Visuals/pCylinder27" unique_id=1702896973]
 
-[node name="pCylinder28" type="Node3D" parent="Visuals"]
+[node name="pCylinder28" type="Node3D" parent="Visuals" unique_id=1872597678]
 transform = Transform3D(0, -0.08888917, 0, 1.2114402, 0, 0, 0, 0, 1.6317813, 0.028798213, 0.10823431, 0)
 
-[node name="transform26" type="Node3D" parent="Visuals/pCylinder28"]
+[node name="transform26" type="Node3D" parent="Visuals/pCylinder28" unique_id=1900532646]
 
-[node name="pCylinder29" type="Node3D" parent="Visuals"]
+[node name="pCylinder29" type="Node3D" parent="Visuals" unique_id=1856677186]
 transform = Transform3D(0, -0.08888917, 0, 1.2114402, 0, 0, 0, 0, 1.6317813, 0.026050312, 0.10823431, 0)
 
-[node name="transform19" type="Node3D" parent="Visuals/pCylinder29"]
+[node name="transform19" type="Node3D" parent="Visuals/pCylinder29" unique_id=1489344045]
 
-[node name="pCylinder30" type="Node3D" parent="Visuals"]
+[node name="pCylinder30" type="Node3D" parent="Visuals" unique_id=1679359818]
 transform = Transform3D(0, -0.08888917, 0, 1.2114402, 0, 0, 0, 0, 1.6317813, 0.02340752, 0.10823431, 0)
 
-[node name="transform27" type="Node3D" parent="Visuals/pCylinder30"]
+[node name="transform27" type="Node3D" parent="Visuals/pCylinder30" unique_id=718924969]
 
-[node name="pCylinder31" type="Node3D" parent="Visuals"]
+[node name="pCylinder31" type="Node3D" parent="Visuals" unique_id=1345146798]
 transform = Transform3D(0, -0.08888917, 0, 1.2114402, 0, 0, 0, 0, 1.6317813, 0.020695334, 0.10823431, 0)
 
-[node name="transform42" type="Node3D" parent="Visuals/pCylinder31"]
+[node name="transform42" type="Node3D" parent="Visuals/pCylinder31" unique_id=47987008]
 
-[node name="pCylinder32" type="Node3D" parent="Visuals"]
+[node name="pCylinder32" type="Node3D" parent="Visuals" unique_id=823258212]
 transform = Transform3D(0, -0.08888917, 0, 1.2114402, 0, 0, 0, 0, 1.6317813, 0.018031847, 0.10823431, 0)
 
-[node name="transform21" type="Node3D" parent="Visuals/pCylinder32"]
+[node name="transform21" type="Node3D" parent="Visuals/pCylinder32" unique_id=209657929]
 
-[node name="pCylinder33" type="Node3D" parent="Visuals"]
+[node name="pCylinder33" type="Node3D" parent="Visuals" unique_id=1228282247]
 transform = Transform3D(0, -0.08888917, 0, 1.2114402, 0, 0, 0, 0, 1.6317813, 0.015389055, 0.10823431, 0)
 
-[node name="transform25" type="Node3D" parent="Visuals/pCylinder33"]
+[node name="transform25" type="Node3D" parent="Visuals/pCylinder33" unique_id=1929229618]
 
-[node name="pCylinder34" type="Node3D" parent="Visuals"]
+[node name="pCylinder34" type="Node3D" parent="Visuals" unique_id=383068881]
 transform = Transform3D(0, -0.08888917, 0, 1.2114402, 0, 0, 0, 0, 1.6317813, 0.0126768695, 0.10823431, 0)
 
-[node name="transform33" type="Node3D" parent="Visuals/pCylinder34"]
+[node name="transform33" type="Node3D" parent="Visuals/pCylinder34" unique_id=1344007390]
 
-[node name="pCylinder36" type="Node3D" parent="Visuals"]
+[node name="pCylinder36" type="Node3D" parent="Visuals" unique_id=1867355096]
 transform = Transform3D(0, -0.08888917, 0, 1.2114402, 0, 0, 0, 0, 1.6317813, 0.055343382, 0.10823431, 0)
 
-[node name="transform50" type="Node3D" parent="Visuals/pCylinder36"]
+[node name="transform50" type="Node3D" parent="Visuals/pCylinder36" unique_id=11042924]
 
-[node name="pCylinder37" type="Node3D" parent="Visuals"]
+[node name="pCylinder37" type="Node3D" parent="Visuals" unique_id=1119872554]
 transform = Transform3D(0, -0.08888917, 0, 1.2114402, 0, 0, 0, 0, 1.6317813, 0.052631196, 0.10823431, 0)
 
-[node name="transform51" type="Node3D" parent="Visuals/pCylinder37"]
+[node name="transform51" type="Node3D" parent="Visuals/pCylinder37" unique_id=885343512]
 
-[node name="pCylinder38" type="Node3D" parent="Visuals"]
+[node name="pCylinder38" type="Node3D" parent="Visuals" unique_id=2063865106]
 transform = Transform3D(0, -0.08888917, 0, 1.2114402, 0, 0, 0, 0, 1.6317813, 0.049883295, 0.10823431, 0)
 
-[node name="transform23" type="Node3D" parent="Visuals/pCylinder38"]
+[node name="transform23" type="Node3D" parent="Visuals/pCylinder38" unique_id=1076995942]
 
-[node name="pCylinder39" type="Node3D" parent="Visuals"]
+[node name="pCylinder39" type="Node3D" parent="Visuals" unique_id=687620822]
 transform = Transform3D(0, -0.08888917, 0, 1.2114402, 0, 0, 0, 0, 1.6317813, 0.047240503, 0.10823431, 0)
 
-[node name="transform20" type="Node3D" parent="Visuals/pCylinder39"]
+[node name="transform20" type="Node3D" parent="Visuals/pCylinder39" unique_id=989138902]
 
-[node name="pCylinder40" type="Node3D" parent="Visuals"]
+[node name="pCylinder40" type="Node3D" parent="Visuals" unique_id=692149945]
 transform = Transform3D(0, -0.08888917, 0, 1.2114402, 0, 0, 0, 0, 1.6317813, 0.044528317, 0.10823431, 0)
 
-[node name="transform11" type="Node3D" parent="Visuals/pCylinder40"]
+[node name="transform11" type="Node3D" parent="Visuals/pCylinder40" unique_id=199100932]
 
-[node name="pCylinder41" type="Node3D" parent="Visuals"]
+[node name="pCylinder41" type="Node3D" parent="Visuals" unique_id=1972015090]
 transform = Transform3D(0, -0.08888917, 0, 1.2114402, 0, 0, 0, 0, 1.6317813, 0.04186483, 0.10823431, 0)
 
-[node name="transform37" type="Node3D" parent="Visuals/pCylinder41"]
+[node name="transform37" type="Node3D" parent="Visuals/pCylinder41" unique_id=1823666337]
 
-[node name="pCylinder42" type="Node3D" parent="Visuals"]
+[node name="pCylinder42" type="Node3D" parent="Visuals" unique_id=1506805500]
 transform = Transform3D(0, -0.08888917, 0, 1.2114402, 0, 0, 0, 0, 1.6317813, 0.039222036, 0.10823431, 0)
 
-[node name="transform47" type="Node3D" parent="Visuals/pCylinder42"]
+[node name="transform47" type="Node3D" parent="Visuals/pCylinder42" unique_id=136815993]
 
-[node name="pCylinder43" type="Node3D" parent="Visuals"]
+[node name="pCylinder43" type="Node3D" parent="Visuals" unique_id=1523863641]
 transform = Transform3D(0, -0.08888917, 0, 1.2114402, 0, 0, 0, 0, 1.6317813, 0.036509853, 0.10823431, 0)
 
-[node name="transform28" type="Node3D" parent="Visuals/pCylinder43"]
+[node name="transform28" type="Node3D" parent="Visuals/pCylinder43" unique_id=1814002942]
 
-[node name="pCylinder44" type="Node3D" parent="Visuals"]
+[node name="pCylinder44" type="Node3D" parent="Visuals" unique_id=1285506855]
 transform = Transform3D(0, -0.23021293, 0, 2.8895955, 0, 0, 0, 0, 2.8895955, 0.13458571, 0.17643365, 0)
 
-[node name="transform1" type="Node3D" parent="Visuals/pCylinder44"]
+[node name="transform1" type="Node3D" parent="Visuals/pCylinder44" unique_id=1087546106]
 
-[node name="pCylinder45" type="MeshInstance3D" parent="Visuals"]
+[node name="pCylinder45" type="MeshInstance3D" parent="Visuals" unique_id=3053962]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.010243816, 0.10811678, -6.028166e-09)
 mesh = SubResource("ArrayMesh_7ryhl")
 skeleton = NodePath("")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Visuals"]
-libraries = {
-&"": SubResource("AnimationLibrary_d6hmm")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Visuals" unique_id=2023039227]
+libraries/ = SubResource("AnimationLibrary_d6hmm")
 
-[node name="PlayerDetection" type="Area3D" parent="."]
+[node name="PlayerDetection" type="Area3D" parent="." unique_id=1870055303]
+transform = Transform3D(1, 0, 0, 0, 0.9659258, 0.25881904, 0, -0.25881904, 0.9659258, 0, 0.4, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerDetection"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerDetection" unique_id=473556350]
 shape = SubResource("BoxShape3D_14sfe")
 
 [connection signal="body_entered" from="PlayerDetection" to="." method="_on_player_detection_body_entered"]
