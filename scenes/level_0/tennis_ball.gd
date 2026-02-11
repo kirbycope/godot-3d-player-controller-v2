@@ -9,6 +9,7 @@ var player: CharacterBody3D
 @onready var initial_position: Vector3 = global_position
 
 
+## Called when there is an input event.
 func _input(_event: InputEvent) -> void:
 	if player:
 		# Do nothing if the "pause" menu is visible
@@ -18,15 +19,12 @@ func _input(_event: InputEvent) -> void:
 		if Input.is_action_just_pressed(Controls.BUTTON_13):
 			player.is_holding_right = false
 			player.is_throwing_right = false
+			player.set_meta("is_holding_ball", false)
 			player = null
 			collision_layer = 1
 			reparent(initial_parent)
 			global_position = initial_position
 			global_rotation = initial_rotation
-			linear_velocity = Vector3.ZERO
-			angular_velocity = Vector3.ZERO
-			# optionally stop simulation
-			#sleeping = true
 			bone_attachment.queue_free()
 			bone_attachment = null
 			return
@@ -38,6 +36,7 @@ func _on_player_detection_body_entered(body: Node3D) -> void:
 	and player == null:
 		player = body
 		player.is_holding_right = true
+		player.set_meta("is_holding_ball", true)
 		bone_attachment = BoneAttachment3D.new()
 		bone_attachment.bone_name = player.bone_name_right_hand
 		player.skeleton().add_child(bone_attachment)
@@ -47,6 +46,7 @@ func _on_player_detection_body_entered(body: Node3D) -> void:
 		collision_layer = 2
 
 
+## Placeholder.
 func _on_player_detection_body_exited(body: Node3D) -> void:
 	if body == player:
 		pass

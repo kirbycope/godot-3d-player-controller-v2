@@ -8,6 +8,7 @@ var player: CharacterBody3D
 @onready var initial_position: Vector3 = global_position
 
 
+## Called when there is an input event.
 func _input(_event: InputEvent) -> void:
 	if player:
 		# Do nothing if the "pause" menu is visible
@@ -29,14 +30,20 @@ func _on_player_detection_body_entered(body: Node3D) -> void:
 	and player == null:
 		player = body
 		if not player.is_skateboarding:
-			reparent(player.visuals, true)
-			position = Vector3(0.0, 0.0, 0.0)
-			rotation = Vector3(0.0, deg_to_rad(90.0), 0.0)
+			call_deferred("_attach_to_player")
 			# Start "skateboarding"
 			player.base_state.transition_state(player.current_state, States.State.SKATEBOARDING)
 			return
 
 
+## [Deferred] Attach _this_ node to the player after the current frame, to avoid errors about modifying the scene tree during physics processing.
+func _attach_to_player() -> void:
+	reparent(player.visuals, true)
+	position = Vector3(0.0, 0.0, 0.0)
+	rotation = Vector3(0.0, deg_to_rad(90.0), 0.0)
+
+
+## Placeholder.
 func _on_player_detection_body_exited(body: Node3D) -> void:
 	if body == player:
 		pass

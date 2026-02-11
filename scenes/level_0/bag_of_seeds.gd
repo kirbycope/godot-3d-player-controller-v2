@@ -9,6 +9,7 @@ var player: CharacterBody3D
 @onready var initial_position: Vector3 = global_position
 
 
+## Called when there is an input event.
 func _input(_event: InputEvent) -> void:
 	if player:
 		# Do nothing if the "pause" menu is visible
@@ -28,6 +29,7 @@ func _input(_event: InputEvent) -> void:
 			return
 
 
+## Attach _this_ node to the player's bone_attachment when they enter the detection area.
 func _on_player_detection_body_entered(body: Node3D) -> void:
 	if body is CharacterBody3D \
 	and body.is_in_group("Player") \
@@ -38,11 +40,17 @@ func _on_player_detection_body_entered(body: Node3D) -> void:
 		bone_attachment = BoneAttachment3D.new()
 		bone_attachment.bone_name = player.bone_name_right_hand
 		player.skeleton().add_child(bone_attachment)
-		reparent(bone_attachment)
-		global_position = bone_attachment.global_position
-		global_rotation = bone_attachment.global_rotation
+		call_deferred("_attach_to_bone")
 
 
+## [Deferred] Attach _this_ node to the player's bone_attachment after the current frame, to avoid errors about modifying the scene tree during physics processing.
+func _attach_to_bone() -> void:
+	reparent(bone_attachment)
+	global_position = bone_attachment.global_position
+	global_rotation = bone_attachment.global_rotation
+
+
+## Placeholder.
 func _on_player_detection_body_exited(body: Node3D) -> void:
 	if body == player:
 		pass
