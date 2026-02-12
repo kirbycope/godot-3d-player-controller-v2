@@ -48,6 +48,7 @@ func _ready() -> void:
 	player.enable_sitting = true
 	player.enable_sliding = true
 	player.enable_sprinting = true
+	player.enable_strafing = true
 	player.enable_swimming = true
 	player.enable_throwing = true
 	player.enable_vibration = true
