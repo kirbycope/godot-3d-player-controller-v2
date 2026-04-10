@@ -65,7 +65,14 @@ func navigate_to_next_position() -> void:
 	player.velocity.z = new_velocity.z
 	player.virtual_velocity = Vector3(player.velocity.x, 0, player.velocity.z)
 	# Face the direction of movement
-	player.visuals.look_at(player.position + Vector3(player.velocity.x, 0, player.velocity.z), player.up_direction)
+	player.visuals.look_at(
+		Vector3(
+			player.global_position.x + player.velocity.x,
+			player.global_position.y,
+			player.global_position.z + player.velocity.z
+		),
+		player.up_direction
+	)
 
 
 ## Called when the NavigationAgent3D has finished.
@@ -78,6 +85,7 @@ func _on_navigation_finished() -> void:
 	player.velocity = Vector3.ZERO
 	# Start "standing"
 	transition_state(NODE_STATE, States.State.STANDING)
+	return
 
 
 ## Start "navigating".

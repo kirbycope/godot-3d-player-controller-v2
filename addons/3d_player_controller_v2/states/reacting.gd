@@ -24,24 +24,24 @@ func _process(_delta: float) -> void:
 
 ## Plays the appropriate animation based on player state.
 func play_animation() -> void:
-	var mixamo_animation := ""
+	var current_animation = player.animation_player_current_animation()
+	var target_animation: String
+
 	if player.is_reacting_low_left:
-		mixamo_animation = MIX_ANIMATION_REACTING_LOW_LEFT
+		target_animation = MIX_ANIMATION_REACTING_LOW_LEFT
 	elif player.is_reacting_low_right:
-		mixamo_animation = MIX_ANIMATION_REACTING_LOW_RIGHT
+		target_animation = MIX_ANIMATION_REACTING_LOW_RIGHT
 	elif player.is_reacting_high_left:
-		mixamo_animation = MIX_ANIMATION_REACTING_HIGH_LEFT
+		target_animation = MIX_ANIMATION_REACTING_HIGH_LEFT
 	elif player.is_reacting_high_right:
-		mixamo_animation = MIX_ANIMATION_REACTING_HIGH_RIGHT
+		target_animation = MIX_ANIMATION_REACTING_HIGH_RIGHT
 	elif player.is_reacting_knocked_over:
-		mixamo_animation = MIX_ANIMATION_REACTING_KNOCKED_OVER
+		target_animation = MIX_ANIMATION_REACTING_KNOCKED_OVER
 	else:
 		return
 
-	var animation = mixamo_animation
-	var current_animation = player.animation_player_current_animation()
-	if current_animation != animation:
-		player.animation_player_play(animation)
+	if current_animation != target_animation:
+		player.animation_player_play(target_animation)
 		player.animation_player_connect("animation_finished", _on_animation_finished)
 
 
@@ -50,14 +50,21 @@ func _on_animation_finished(animation_name: String) -> void:
 	if not is_multiplayer_authority(): return
 
 	if animation_name == MIX_ANIMATION_REACTING_LOW_LEFT:
-		player.is_reacting_left = false
+		player.is_reacting_low_left = false
 	elif animation_name == MIX_ANIMATION_REACTING_LOW_RIGHT:
-		player.is_reacting_right = false
+		player.is_reacting_low_right = false
 	elif animation_name == MIX_ANIMATION_REACTING_HIGH_LEFT:
-		player.is_reacting_left = false
+		player.is_reacting_high_left = false
 	elif animation_name == MIX_ANIMATION_REACTING_HIGH_RIGHT:
-		player.is_reacting_right = false
+		player.is_reacting_high_right = false
+	elif animation_name == MIX_ANIMATION_REACTING_KNOCKED_OVER:
+		if "is_reacting_knocked_over" in player:
+			player.is_reacting_knocked_over = false
+	else:
+		return # Not a reacting animation
+
 	transition_state(NODE_STATE, player.previous_state)
+	return
 
 
 ## Start "reacting".
@@ -83,8 +90,13 @@ func stop() -> void:
 	# Flag the player as not "reacting"
 	player.is_reacting = false
 
-	# Clear state specific flags
-	_on_animation_finished(player.animation_player_current_animation()) 
+	# Clear ALL reacting flags instead of calling _on_animation_finished
+	player.is_reacting_low_left = false
+	player.is_reacting_low_right = false
+	player.is_reacting_high_left = false
+	player.is_reacting_high_right = false
+	if "is_reacting_knocked_over" in player:
+		player.is_reacting_knocked_over = false
 
 	# Disconnect animation finished signal
 	if player.animation_player_is_connected("animation_finished", _on_animation_finished):

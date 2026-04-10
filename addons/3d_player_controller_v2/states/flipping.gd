@@ -30,9 +30,11 @@ func _process(_delta: float) -> void:
 		# Fell too fast -> Start "ragdolling"
 		if player.virtual_velocity.y < -player.gravity and player.enable_ragdolling:
 			transition_state(NODE_STATE, States.State.RAGDOLLING)
+			return
 		# Fell safely -> Start "standing"
 		else:
 			transition_state(NODE_STATE, States.State.STANDING)
+			return
 
 	# Play the animation
 	play_animation()
@@ -40,23 +42,22 @@ func _process(_delta: float) -> void:
 
 ## Plays the appropriate animation based on flip direction.
 func play_animation() -> void:
-	var mixamo_animation: String
+	var current_animation = player.animation_player_current_animation()
+	var target_animation: String
 
 	# Determine which animation to play based on flip direction
 	if flip_direction.y > 0:  # Backward flip
 		# Adjust the animation playback speed (the animation is too long)
 		player.animation_player_set_speed_scale(1.5)
-		mixamo_animation = MIX_ANIMATION_FLIPPING_BACKWARD
+		target_animation = MIX_ANIMATION_FLIPPING_BACKWARD
 	else:  # Forward flip
 		# [Re]set the animation playback speed
 		player.animation_player_set_speed_scale(1.0)
-		mixamo_animation = MIX_ANIMATION_FLIPPING_FORWARD
+		target_animation = MIX_ANIMATION_FLIPPING_FORWARD
 	
-	var current_animation = player.animation_player_current_animation()
-	var animation = mixamo_animation
-	if current_animation != animation:
+	if current_animation != target_animation:
 		# Start the animation 0.2 seconds in (to skip the initial crouch)
-		player.animation_player_play_section(animation, 0.2)
+		player.animation_player_play_section(target_animation, 0.2)
 
 
 ## Called when the flip animation finishes.
@@ -64,13 +65,10 @@ func _on_animation_finished(animation_name: String) -> void:
 	# Do nothing if not the authority
 	if not is_multiplayer_authority(): return
 
-	# Only transition when the flip animation finishes (ignore other AnimationPlayers)
-	var expected_animations = [
-		MIX_ANIMATION_FLIPPING_FORWARD,
-		MIX_ANIMATION_FLIPPING_BACKWARD,
-	]
-	if animation_name not in expected_animations:
-		return
+	# [Re]set the animation playback speed
+	player.animation_player_set_speed_scale(1.0)
+
+	# Flag the player as not "flipping"
 	player.is_flipping = false
 
 

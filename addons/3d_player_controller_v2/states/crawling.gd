@@ -74,6 +74,7 @@ func _process(_delta: float) -> void:
 	# Check if there is no input (but still crouching) -> Start "crouching"
 	if player.input_direction == Vector2.ZERO and Input.is_action_pressed(Controls.BUTTON_3) and not player.pause.visible:
 		transition_state(NODE_STATE, States.State.CROUCHING)
+		return
 	
 	# Play the animation
 	play_animation()
@@ -83,19 +84,19 @@ func _process(_delta: float) -> void:
 func play_animation() -> void:
 	# Check if in first person and moving backwards
 	var play_backwards = (player.camera.perspective == player.camera.Perspective.FIRST_PERSON) and Input.is_action_pressed(Controls.MOVE_DOWN)
-	var mixamo_animation: String
+	var target_animation: String
 	if player.is_holding_rifle:
 		if player.is_firing_rifle:
-			mixamo_animation = MIX_ANIMATION_CRAWLING_FIRING_RIFLE
+			target_animation = MIX_ANIMATION_CRAWLING_FIRING_RIFLE
 		elif player.is_aiming_rifle:
-			mixamo_animation = MIX_ANIMATION_CRAWLING_AIMING_RIFLE
+			target_animation = MIX_ANIMATION_CRAWLING_AIMING_RIFLE
 		else:
-			mixamo_animation = MIX_ANIMATION_CRAWLING_HOLDING_RIFLE
+			target_animation = MIX_ANIMATION_CRAWLING_HOLDING_RIFLE
 	else:
-		mixamo_animation = MIX_ANIMATION_CRAWLING
+		target_animation = MIX_ANIMATION_CRAWLING
 
 	var current_animation = player.animation_player_current_animation()
-	var animation = mixamo_animation
+	var animation = target_animation
 	if current_animation != animation:
 		if play_backwards:
 			player.animation_player_play_backwards(animation)

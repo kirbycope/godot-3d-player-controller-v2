@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://chdvjcq4yypnn"]
 
+[ext_resource type="Script" uid="uid://br2h8me6nbbfh" path="res://addons/3d_player_controller_v2/physical_bone_simulator_3d.gd" id="1_xuu8s"]
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0a1qr"]
 radius = 0.013947885
 height = 0.13947885
@@ -245,6 +247,8 @@ radius = 0.004607166
 height = 0.046071663
 
 [node name="PhysicalBoneSimulator3D" type="PhysicalBoneSimulator3D" unique_id=338527439]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 0)
+script = ExtResource("1_xuu8s")
 
 [node name="Physical Bone Root" type="PhysicalBone3D" parent="." unique_id=336091535]
 transform = Transform3D(-0.45175856, -0.6809507, -0.5763856, 0, 0.64607066, -0.7632777, 0.89214027, -0.34481722, -0.2918679, 0.040196802, 0.05323054, 0.020354701)

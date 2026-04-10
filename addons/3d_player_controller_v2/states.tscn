@@ -13,6 +13,7 @@
 [ext_resource type="Script" uid="uid://bkyh00o4i441c" path="res://addons/3d_player_controller_v2/states/hanging.gd" id="7_smmr0"]
 [ext_resource type="Script" uid="uid://c1uvv1dvb1537" path="res://addons/3d_player_controller_v2/states/navigating.gd" id="7_uuywk"]
 [ext_resource type="Script" uid="uid://ccn7s5h0qq54p" path="res://addons/3d_player_controller_v2/states/flying.gd" id="8_8p57p"]
+[ext_resource type="Script" uid="uid://d3vff8et4xdf6" path="res://addons/3d_player_controller_v2/states/dying.gd" id="8_fu7li"]
 [ext_resource type="Script" uid="uid://bkt6xfceqexr" path="res://addons/3d_player_controller_v2/states/sprinting.gd" id="8_smmr0"]
 [ext_resource type="Script" uid="uid://bvtiaixm1em7a" path="res://addons/3d_player_controller_v2/states/flipping.gd" id="9_pyce2"]
 [ext_resource type="Script" uid="uid://fep426f0srya" path="res://addons/3d_player_controller_v2/states/standing.gd" id="9_qtidm"]
@@ -54,6 +55,10 @@ script = ExtResource("4_ta1xp")
 [node name="Driving" type="Node" parent="." unique_id=885657]
 process_mode = 4
 script = ExtResource("6_80cnw")
+
+[node name="Dying" type="Node" parent="." unique_id=2124528334]
+process_mode = 4
+script = ExtResource("8_fu7li")
 
 [node name="Falling" type="Node" parent="." unique_id=198950633]
 process_mode = 4

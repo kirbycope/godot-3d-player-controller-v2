@@ -46,6 +46,7 @@ var yellow_sphere: MeshInstance3D
 @onready var is_crouching: CheckBox = $States/IsCrouching
 @onready var is_double_jumping: CheckBox = $States/IsDoubleJumping
 @onready var is_driving: CheckBox = $States/IsDriving
+@onready var is_dying: CheckBox = $States/IsDying
 @onready var is_falling: CheckBox = $States/IsFalling
 @onready var is_flipping: CheckBox = $States/IsFlipping
 @onready var is_flying: CheckBox = $States/IsFlying
@@ -61,13 +62,15 @@ var yellow_sphere: MeshInstance3D
 @onready var is_sliding: CheckBox = $States/IsSliding
 @onready var is_sprinting: CheckBox = $States/IsSprinting
 @onready var is_standing: CheckBox = $States/IsStanding
-@onready var is_strafing: CheckBox = $States2/IsStrafing
 @onready var is_swimming: CheckBox = $States/IsSwimming
 @onready var is_walking: CheckBox = $States/IsWalking
 # -- STATES 2 --
 @onready var is_on_floor: CheckBox = $States2/IsOnFloor
 @onready var is_navigating: CheckBox = $States2/IsNavigating
 @onready var is_ragdolling: CheckBox = $States2/IsRagdolling
+@onready var is_riding: CheckBox = $States2/IsRiding
+@onready var is_shapeshifted: CheckBox = $States2/IsShapeshifted
+@onready var is_strafing: CheckBox = $States2/IsStrafing
 # -- UNARMED --
 @onready var is_kicking_left: CheckBox = $UNARMED/IsKickingLeft
 @onready var is_kicking_right: CheckBox = $UNARMED/IsKickingRight
@@ -129,6 +132,7 @@ func _input(event: InputEvent) -> void:
 	and event.pressed \
 	and event.keycode == KEY_R:
 		player.base_state.transition_state(player.current_state, States.State.RAGDOLLING)
+		return
 
 
 ## Called every frame. '_delta' is the elapsed time since the previous frame.
@@ -179,6 +183,7 @@ func _process(_delta: float) -> void:
 		is_crawling.button_pressed = player.is_crawling
 		is_crouching.button_pressed = player.is_crouching
 		is_driving.button_pressed = player.is_driving
+		is_dying.button_pressed = player.is_dying
 		is_double_jumping.button_pressed = player.is_double_jumping
 		is_falling.button_pressed = player.is_falling
 		is_firing_rifle.button_pressed = player.is_firing_rifle
@@ -197,23 +202,26 @@ func _process(_delta: float) -> void:
 		$FISHING.visible = player.is_holding_fishing_rod
 		is_holding_rifle.button_pressed = player.is_holding_rifle
 		$SHOOTING.visible = player.is_holding_rifle
-		is_jumping.button_pressed = player.is_jumping
 		is_kicking_left.button_pressed = player.is_kicking_left
 		is_kicking_right.button_pressed = player.is_kicking_right
+		is_punching_left.button_pressed = player.is_punching_left
+		is_punching_right.button_pressed = player.is_punching_right
+		#$UNARMED.visible = player.enable_kicking or player.enable_punching
+		is_jumping.button_pressed = player.is_jumping
 		is_mantling.button_pressed = player.is_mantling
 		is_navigating.button_pressed = player.is_navigating
 		is_on_floor.button_pressed = player.is_on_floor()
 		is_paragliding.button_pressed = player.is_paragliding
-		is_punching_left.button_pressed = player.is_punching_left
-		is_punching_right.button_pressed = player.is_punching_right
 		is_pushing.button_pressed = player.is_pushing
 		is_ragdolling.button_pressed = player.is_ragdolling
 		is_reeling_fishing.button_pressed = player.is_reeling_fishing
+		is_riding.button_pressed = player.is_riding
 		is_rolling.button_pressed = player.is_rolling
 		is_running.button_pressed = player.is_running
-		is_skateboarding.button_pressed = player.is_skateboarding
 		is_sitting.button_pressed = player.is_sitting
+		is_skateboarding.button_pressed = player.is_skateboarding
 		is_sliding.button_pressed = player.is_sliding
+		is_shapeshifted.button_pressed = player.is_shapeshifted
 		is_sprinting.button_pressed = player.is_sprinting
 		is_standing.button_pressed = player.is_standing
 		is_strafing.button_pressed = player.is_strafing
@@ -356,7 +364,7 @@ func _on_enable_ragdolling_toggled(toggled_on: bool) -> void:
 	player.enable_ragdolling = toggled_on
 
 
-func _on_enable_retical_toggled(toggled_on: bool) -> void:
+func _on_enable_reticle_toggled(toggled_on: bool) -> void:
 	player.enable_reticle = toggled_on
 
 

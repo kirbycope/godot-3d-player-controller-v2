@@ -26,6 +26,7 @@ func _process(delta: float) -> void:
 	# Check if the player is on the ground -> Start "standing"
 	if player.is_on_floor() and abs(player.velocity).length() < 0.2:
 		transition_state(NODE_STATE, States.State.STANDING)
+		return
 
 	# Ⓐ/[Space] button currently _pressed_
 	if Input.is_action_pressed(Controls.BUTTON_0) \
@@ -51,12 +52,13 @@ func _process(delta: float) -> void:
 
 ## Plays the appropriate animation based on player state.
 func play_animation() -> void:
-	var mixamo_animation = ANIMATION_FLYING_FAST if player.speed_current == player.speed_flying * 2 else ANIMATION_FLYING
-
 	var current_animation = player.animation_player_current_animation()
-	var animation = mixamo_animation
-	if current_animation != animation:
-		player.animation_player_play(animation)
+	var target_animation: String
+
+	target_animation = ANIMATION_FLYING_FAST if player.speed_current == player.speed_flying * 2 else ANIMATION_FLYING
+
+	if current_animation != target_animation:
+		player.animation_player_play(target_animation)
 
 
 ## Start "flying".

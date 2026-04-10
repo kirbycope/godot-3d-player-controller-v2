@@ -36,6 +36,7 @@ func _ready() -> void:
 	# Remove any baked local tilt from the Camera3D node
 	rotation_degrees = Vector3.ZERO
 
+
 ## Called when there is an input event.
 func _input(event: InputEvent) -> void:
 	# Do nothing if not the authority
@@ -174,6 +175,7 @@ func _input(event: InputEvent) -> void:
 		var force_direction = -global_transform.basis.z.normalized()
 		child.apply_impulse(force_direction * 5.0, Vector3.ZERO)
 		#player.base_state.transition_state(player.current_state, States.State.THROWING)
+		#return
 
 	# Ⓛ3/[M-Scroll-Down] _pressed_ -> Zoom out (third-person only)
 	if event.is_action_pressed(Controls.BUTTON_10) \
@@ -232,7 +234,7 @@ func camera_rotate_by_controller(delta: float) -> void:
 	var input_y = Input.get_action_strength(Controls.LOOK_UP) - Input.get_action_strength(Controls.LOOK_DOWN)
 
 	# Disable left/right camera movement if player is locked onto a target
-	if player.current_focused_target:
+	if player.targeting.current_locked_target:
 		input_x = 0.0
 
 	camera_pitch = clamp(camera_pitch + input_y * look_sensitivity_controller * delta, -80, 90)
@@ -246,11 +248,11 @@ func camera_rotate_by_controller(delta: float) -> void:
 func camera_rotate_by_mouse(event: InputEvent) -> void:
 	camera_pitch = clamp(camera_pitch - event.relative.y * look_sensitivity_mouse, -80, 90)
 	var relative_x = event.relative.x
-	
+
 	# Disable left/right camera movement if player is locked onto a target
-	if player.current_focused_target:
+	if player.targeting.current_locked_target:
 		relative_x = 0.0
-	
+
 	var new_rotation_y = -relative_x * look_sensitivity_mouse
 	player.rotate(player.basis.y, deg_to_rad(new_rotation_y))
 	if perspective == Perspective.THIRD_PERSON:

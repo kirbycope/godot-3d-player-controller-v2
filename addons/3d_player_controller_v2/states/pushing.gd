@@ -8,7 +8,7 @@ const MIX_ANIMATION_PUSHING := "Standing_Pushing/mixamo_com"
 const NODE_STATE := States.State.PUSHING
 
 
-## Called every frame. '_delta' is the elapsed time since the previous frame.
+## Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	# Do nothing if not the authority
 	if not is_multiplayer_authority(): return
@@ -16,6 +16,7 @@ func _process(_delta: float) -> void:
 	# Check if the player has stopped pushing -> Transition to "standing" state
 	if player.input_direction == Vector2.ZERO or (not player.ray_cast_middle.is_colliding() and not player.ray_cast_high.is_colliding()):
 		transition_state(NODE_STATE, States.State.STANDING)
+		return
 
 	# Play the animation
 	play_animation()

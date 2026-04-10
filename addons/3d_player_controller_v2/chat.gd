@@ -1,7 +1,6 @@
 extends CanvasLayer
 ## Manages multiplayer chat interface with message display, input handling, and RPC communication
 
-
 @onready var player: CharacterBody3D = get_parent()
 @onready var scroll_container: ScrollContainer = $ScrollContainer
 @onready var messages_container: VBoxContainer = scroll_container.get_node("VBoxContainer")
@@ -9,10 +8,11 @@ extends CanvasLayer
 @onready var send_button: Button = $SEND
 
 
+## Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	clear_and_hide_input()
 
-
+## Called when there is an input event.
 func _input(event: InputEvent) -> void:
 	# Do nothing if not the authority
 	if not is_multiplayer_authority(): return

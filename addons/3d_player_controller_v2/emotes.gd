@@ -1,16 +1,17 @@
 extends CanvasLayer
 ## Manages emote selection UI with controller and keyboard input for triggering player animations
 
-
 @onready var d_pad = $DPad
 @onready var keyboard = $Keyboard
 @onready var player = get_parent()
 
 
+## Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	hide()
 
 
+## Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	# Do nothing if not the authority
 	if not is_multiplayer_authority(): return

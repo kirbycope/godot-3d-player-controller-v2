@@ -1,4 +1,6 @@
 extends Node3D
+class_name SetupCharacter
+## 🧑‍🔧 Sets up a character with animations.
 
 
 ## Adds animation libraries to the character and sets flags on the `player` to indicate which sets are available.
@@ -113,20 +115,19 @@ static func _find_or_create_animation_player(child: Node, playback_default_blend
 	if child is AnimationPlayer:
 		animation_player = child
 		if animation_player != null:
-			pass
+			animation_player.playback_default_blend_time = playback_default_blend_time
 			#print(  "│    Found existing (character.child) AnimationPlayer in `", animation_player.get_path(), "`") # DEBUGGING
 	# Otherwise, check for a grandchild named "AnimationPlayer"
 	else:
 		animation_player = child.get_node_or_null("AnimationPlayer")
 		if animation_player != null:
-			pass
+			animation_player.playback_default_blend_time = playback_default_blend_time
 			#print(  "│    Found existing (character.child.child) AnimationPlayer in `", animation_player.get_path(), "`") # DEBUGGING
 	# If no [AnimationPlayer] is found, the create one and add it to the current character.child
 	if animation_player == null:
 		animation_player = AnimationPlayer.new()
 		animation_player.name = "AnimationPlayer"
 		child.add_child(animation_player)
+		animation_player.playback_default_blend_time = playback_default_blend_time
 		#print(  "│    Created new (character.child.child) AnimationPlayer in `", animation_player.get_path(), "`") # DEBUGGING
-	# Configuration - Set the default blend time
-	animation_player.playback_default_blend_time = playback_default_blend_time
 	return animation_player

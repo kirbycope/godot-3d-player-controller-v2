@@ -55,10 +55,12 @@ func _process(delta: float) -> void:
 
 ## Plays the appropriate animation based on player state.
 func play_animation() -> void:
-	var mixamo_animation = MIX_ANIMATION_WADING if player.input_direction == Vector2.ZERO else MIX_ANIMATION_SWIMMING
-
 	var current_animation = player.animation_player_current_animation()
-	var animation = mixamo_animation
+	var target_animation: String
+
+	target_animation = MIX_ANIMATION_WADING if player.input_direction == Vector2.ZERO else MIX_ANIMATION_SWIMMING
+
+	var animation = target_animation
 	if current_animation != animation:
 		player.animation_player_play(animation)
 

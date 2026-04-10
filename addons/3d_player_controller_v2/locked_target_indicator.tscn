@@ -1,12 +1,12 @@
 [gd_scene format=3 uid="uid://y43ofen5o2s3"]
 
-[ext_resource type="Texture2D" uid="uid://dlq5ogue3t74f" path="res://addons/3d_player_controller_v2/assets/textures/game_icons/white/2x/down.png" id="1_rwodh"]
+[ext_resource type="Texture2D" uid="uid://dlq5ogue3t74f" path="res://addons/3d_player_controller_v2/assets/textures/game_icons/white/2x/down.png" id="1_7pqk2"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m64og"]
 transparency = 1
 cull_mode = 2
 shading_mode = 0
-albedo_texture = ExtResource("1_rwodh")
+albedo_texture = ExtResource("1_7pqk2")
 billboard_mode = 1
 billboard_keep_scale = true
 
@@ -51,7 +51,7 @@ _data = {
 &"bounce": SubResource("Animation_m64og")
 }
 
-[node name="FocusTargetIndicator" type="Node3D" unique_id=1112065412]
+[node name="LockedTargetIndicator" type="Node3D" unique_id=1112065412]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1540475698]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)

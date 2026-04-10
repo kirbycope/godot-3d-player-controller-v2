@@ -17,6 +17,7 @@ var player_initial_position: Vector3
 @onready var exit_button = panel.get_node("VBoxContainer/Exit")
 
 
+## Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	player_initial_position = player.global_position
 

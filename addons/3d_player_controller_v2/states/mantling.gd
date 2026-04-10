@@ -20,14 +20,15 @@ func _process(_delta: float) -> void:
 
 ## Plays the appropriate animation based on player state.
 func play_animation() -> void:
+	var current_animation = player.animation_player_current_animation()
+	var target_animation: String
+
 	# Check if the player's hang is braced (the collider has somewhere for the player's footing)
 	var is_braced = player.ray_cast_low.is_colliding()
-	var mixamo_animation = MIX_ANIMATION_MANTLING_BRACED if is_braced else MIX_ANIMATION_MANTLING_HANGING
-	var animation = mixamo_animation
+	target_animation = MIX_ANIMATION_MANTLING_BRACED if is_braced else MIX_ANIMATION_MANTLING_HANGING
 
-	var current_animation = player.animation_player_current_animation()
-	if current_animation != animation:
-		player.animation_player_play(animation)
+	if current_animation != target_animation:
+		player.animation_player_play(target_animation)
 		player.animation_player_connect("animation_finished", _on_animation_finished)
 		# Tween camera position during animation
 		var camera_start_position = player.camera.global_position
@@ -39,7 +40,7 @@ func play_animation() -> void:
 			player.camera,
 			"global_position",
 			camera_end_position,
-			player.animation_player_current_animation_length(animation)
+			player.animation_player_current_animation_length(target_animation)
 		)
 
 
@@ -56,6 +57,7 @@ func _on_animation_finished(anim_name: String) -> void:
 		player.animation_player_play("Standing/mixamo_com", 0.0, 1.0, false)
 		player.global_position = player.shape_cast_jump_target.get_collision_point()
 		transition_state(NODE_STATE, States.State.STANDING)
+		return
 
 
 ## Start "mantling".

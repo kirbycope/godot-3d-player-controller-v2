@@ -62,12 +62,24 @@ func _process(_delta: float) -> void:
 	play_animation()
 
 	# 🔊 Play sound effect
-	if player.character.has_method("play_sprint_sound_effect"):
-		player.character.play_sprint_sound_effect()
+	if player.character.has_method("play_random_sound_effect"):
+		if not player.audio_stream_player_dialog.playing \
+		or (player.audio_stream_player_dialog.stream and player.audio_stream_player_dialog.stream.resource_path not in player.character.character_details.details.sounds.get("sprint", [])):
+			player.character.play_random_sound_effect("sprint")
 
 
 ## Plays the appropriate animation based on player state.
 func play_animation() -> void:
+	var current_animation = player.animation_player_current_animation()
+	var target_animation: String
+
+	# 🐎 -- Riding animations --
+	if player.is_riding:
+		var animation = Sitting.MIX_ANIMATION_SITTING
+		if current_animation != animation:
+			player.animation_player_play(animation)
+		return
+
 	# Check if strafing left or right
 	var is_strafe_left: bool = player.is_strafing and player.input_direction.x < 0.0
 	var is_strafe_right: bool = player.is_strafing and player.input_direction.x > 0.0
@@ -76,53 +88,42 @@ func play_animation() -> void:
 		and (player.camera.perspective == player.camera.Perspective.FIRST_PERSON \
 		or player.is_strafing \
 		or player.is_target_locked)
-	var mixamo_animation: String ## The name of the Mixamo animation to play.
 
 	# Handle "running" (while "strafing")
 	if is_strafe_left or is_strafe_right:
-		# Strafing+Sprinting animations are just Running animations played at a faster speed
-		player.animation_player_set_speed_scale(1.5)
 		# Handle "running" (while "strafing" and holding a shield)
 		if player.is_holding_shield_1h_left:
 			# Handle "running" (while "strafing" left and holding a shield)
 			if is_strafe_left:
-				mixamo_animation = MIX_ANIMATION_STRAFE_LEFT_SWORD_AND_SHIELD
+				target_animation = MIX_ANIMATION_STRAFE_LEFT_SWORD_AND_SHIELD
 			# Handle "running" (while "strafing" right and holding a shield)
 			elif is_strafe_right:
-				mixamo_animation = MIX_ANIMATION_STRAFE_RIGHT_SWORD_AND_SHIELD
+				target_animation = MIX_ANIMATION_STRAFE_RIGHT_SWORD_AND_SHIELD
 		# Handle "running" (while "strafing" and unarmed)
 		else:
 			# Handle "running" (while "strafing" left and unarmed)
 			if is_strafe_left:
-				mixamo_animation = MIX_ANIMATION_STRAFE_LEFT
+				target_animation = MIX_ANIMATION_STRAFE_LEFT
 			# Handle "running" (while "strafing" right and unarmed)
 			elif is_strafe_right:
-				mixamo_animation = MIX_ANIMATION_STRAFE_RIGHT
+				target_animation = MIX_ANIMATION_STRAFE_RIGHT
 	# Handle "running" (while backpedaling)
 	elif is_backpedaling:
 		# Handle "running" (while backpedaling and holding a shield)
 		if player.is_holding_shield_1h_left:
-			mixamo_animation = MIX_ANIMATION_BACKWARD_SWORD_AND_SHIELD
+			target_animation = MIX_ANIMATION_BACKWARD_SWORD_AND_SHIELD
 		# Handle "running" (while backpedaling and unarmed)
 		else:
-			mixamo_animation = MIX_ANIMATION_BACKWARD
-		# [Re]set the animation playback speed
-		player.animation_player_set_speed_scale(1.0)
+			target_animation = MIX_ANIMATION_BACKWARD
 	# Handle "sprinting" (while holding a shield)
 	elif player.is_holding_shield_1h_left:
-		mixamo_animation = MIX_ANIMATION_SWORD_AND_SHIELD
-		# [Re]set the animation playback speed
-		player.animation_player_set_speed_scale(1.0)
+		target_animation = MIX_ANIMATION_SWORD_AND_SHIELD
 	# Handle "sprinting" (unarmed)
 	else:
-		mixamo_animation = MIX_ANIMATION
-		# [Re]set the animation playback speed
-		player.animation_player_set_speed_scale(1.0)
+		target_animation = MIX_ANIMATION
 
-	var current_animation = player.animation_player_current_animation()
-	var animation = mixamo_animation
-	if current_animation != animation:
-		player.animation_player_play(animation)
+	if current_animation != target_animation:
+		player.animation_player_play(target_animation)
 
 
 #func _on_animation_finished(animation_name: String) -> void:

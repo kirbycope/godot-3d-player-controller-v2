@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://8n703wcs51nr"]
+
+[ext_resource type="PackedScene" uid="uid://dred5d64juy7w" path="res://assets/paraglider/Paraglider.glb" id="1_k2m36"]
+[ext_resource type="Script" uid="uid://c5c0en0wjuv6q" path="res://scenes/props/contrail.gd" id="2_contrail"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_trail"]
+transparency = 1
+blend_mode = 1
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+
+[node name="Paraglider" type="Node3D" unique_id=1263909656]
+
+[node name="Paraglider2" parent="." unique_id=3385547 instance=ExtResource("1_k2m36")]
+transform = Transform3D(-1, -8.709011e-08, -7.619402e-09, 0, 0.087155804, -0.9961947, 8.742278e-08, -0.9961947, -0.087155804, 0, 2.125, 0.11)
+
+[node name="RightWing" type="MeshInstance3D" parent="." unique_id=105171344]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.79999995, 1.9748816, -0.09)
+material_override = SubResource("StandardMaterial3D_trail")
+script = ExtResource("2_contrail")
+
+[node name="LeftWing" type="MeshInstance3D" parent="." unique_id=105171345]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8000001, 1.9739678, -0.09)
+material_override = SubResource("StandardMaterial3D_trail")
+script = ExtResource("2_contrail")

@@ -4,10 +4,11 @@ class_name Paragliding
 
 # Paragliding 🔵 Mixamo animations
 const MIX_ANIMATION_PARAGLIDING := "Hanging/mixamo_com"
+var SFX_PARAGLIDING = preload("res://addons/3d_player_controller_v2/assets/sounds/651541__nsstudios__wind-draft-loop-1.wav")
 
 const NODE_STATE := States.State.PARAGLIDING
 
-@export var paraglider_gravity := 3.0 ## Reduced gravity value while paragliding.
+@export var paraglider_gravity := 2.0 ## Reduced gravity value while paragliding.
 
 var paraglider
 
@@ -35,6 +36,7 @@ func _process(_delta: float) -> void:
 	if player.is_on_floor():
 		# Start "standing"
 		transition_state(NODE_STATE, States.State.STANDING)
+		return
 
 	# Play the animation
 	play_animation()
@@ -46,6 +48,8 @@ func play_animation() -> void:
 	var current_animation = player.animation_player_current_animation()
 	if current_animation != animation:
 		player.animation_player_play(animation)
+		player.audio_stream_player_sfx.stream = SFX_PARAGLIDING
+		player.audio_stream_player_sfx.play()
 
 
 ## Start "paragliding".
@@ -71,10 +75,10 @@ func start() -> void:
 	player.gravity = paraglider_gravity
 
 	# Spawn the paraglider
-	paraglider = load("uid://crkvmowfmaa1r").instantiate() ## Adjust resource loaded as needed
-	player.visuals.add_child(paraglider)
-	paraglider.position = Vector3(0, 1.8, 0)  # Adjust position as needed
-	paraglider.rotation = Vector3(0, deg_to_rad(180), 0)  # Adjust rotation as needed
+	var paraglider_scene = load("res://scenes/props/paraglider.tscn")
+	if paraglider_scene:
+		paraglider = paraglider_scene.instantiate()
+		player.visuals.add_child(paraglider)
 
 
 ## Stop "paragliding".
@@ -89,4 +93,9 @@ func stop() -> void:
 	player.gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 	# Remove the paraglider
-	paraglider.queue_free()
+	if paraglider:
+		paraglider.queue_free()
+
+	# Stop the paragliding SFX
+	if player.audio_stream_player_sfx.stream == SFX_PARAGLIDING:
+		player.audio_stream_player_sfx.stop()

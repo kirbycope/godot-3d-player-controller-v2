@@ -12,6 +12,6 @@ func _ready() -> void:
 	player.enable_crouching = true
 	player.enable_jumping = true
 	player.enable_punching = true
-	player.enable_retical = true
+	player.enable_reticle = true
 	player.enable_sprinting = true
 	player.enable_swimming = true

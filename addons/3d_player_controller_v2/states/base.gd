@@ -15,7 +15,7 @@ func _physics_process(_delta: float) -> void:
 	# Do nothing if the "pause" menu is visible
 	if player.pause.visible: return
 
-	# Check if the player is looking at a grabable ledge -> Start "hanging"
+	# Check if the player is looking at a grabble ledge -> Start "hanging"
 	if player.enable_hanging:
 		var can_hang = not player.is_flying \
 			and not player.is_hanging \
@@ -37,6 +37,7 @@ func _physics_process(_delta: float) -> void:
 		or player.is_crawling \
 		or player.is_crouching \
 		or player.is_driving \
+		or player.is_dying \
 		or player.is_falling \
 		or player.is_flipping \
 		or player.is_flying \
@@ -46,6 +47,7 @@ func _physics_process(_delta: float) -> void:
 		or player.is_paragliding \
 		or player.is_pushing \
 		or player.is_ragdolling \
+		or player.is_reacting \
 		or player.is_rolling \
 		or player.is_sitting \
 		or player.is_sliding \
@@ -81,7 +83,11 @@ func _physics_process(_delta: float) -> void:
 		return
 
 	# Ⓑ/[shift] _pressed_ -> Start "sprinting"
-	if has_input and Input.is_action_pressed(Controls.BUTTON_1) and player.enable_sprinting and not player.is_sprinting:
+	if has_input and Input.is_action_pressed(Controls.BUTTON_1) \
+	and player.enable_sprinting \
+	and not player.is_dead \
+	and not player.is_riding \
+	and not player.is_sprinting:
 		transition_state(player.current_state, States.State.SPRINTING)
 		return
 
@@ -93,6 +99,7 @@ func _physics_process(_delta: float) -> void:
 	# Check if the player speed is faster than "walking" but slower than or equal to "running" -> Start "running"
 	if input_len > walk_run_threshold and not player.is_running and not player.is_sprinting:
 		transition_state(player.current_state, States.State.RUNNING)
+		return
 
 
 ## Returns the string name of a state.
@@ -105,7 +112,6 @@ func transition_state(from_state: States.State, to_state: States.State) -> void:
 	var states_parent = get_parent()
 	var from_scene = states_parent.find_child(get_state_name(from_state))
 	var to_scene = states_parent.find_child(get_state_name(to_state))
-
 	if from_scene and to_scene:
 		from_scene.stop()
 		to_scene.start()

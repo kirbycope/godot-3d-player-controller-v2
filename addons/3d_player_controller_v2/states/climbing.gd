@@ -65,34 +65,35 @@ func _process(_delta: float) -> void:
 
 ## Plays the appropriate animation based on player state.
 func play_animation() -> void:
+	var current_animation = player.animation_player_current_animation()
+
 	# Set animation playback speed based on climbing speed
 	var speed_scale = 1.5 if player.speed_current > player.speed_climbing else 1.0
 	player.animation_player_set_speed_scale(speed_scale)
 
-	var mixamo_animation: String
+	var target_animation: String
 
 	# "climbing" left ←
 	if player.input_direction.x < 0:
-		mixamo_animation = MIX_ANIMATION_CLIMBING_LEFT
+		target_animation = MIX_ANIMATION_CLIMBING_LEFT
 	# "climbing" right →
 	elif player.input_direction.x > 0:
-		mixamo_animation = MIX_ANIMATION_CLIMBING_RIGHT
+		target_animation = MIX_ANIMATION_CLIMBING_RIGHT
 	else: # Left/Right animations have priority over Up/Down, so if left/right is not pressed, then process up/down input
 		# "climbing" up ↑
 		if player.input_direction.y < 0:
-			mixamo_animation = MIX_ANIMATION_CLIMBING_UP
+			target_animation = MIX_ANIMATION_CLIMBING_UP
 		# "climbing" down ↓
 		elif player.input_direction.y > 0:
-			mixamo_animation = MIX_ANIMATION_CLIMBING_DOWN
+			target_animation = MIX_ANIMATION_CLIMBING_DOWN
 		# "climbing" idle
 		else:
 			player.animation_player_pause()
 			return
 
-	var animation = mixamo_animation
-	var current_animation = player.animation_player_current_animation()
-	if current_animation != animation:
-		player.animation_player_play(animation)
+	if current_animation != target_animation:
+		#_on_animation_finished(current_animation)
+		player.animation_player_play(target_animation)
 
 
 ## Start "climbing".

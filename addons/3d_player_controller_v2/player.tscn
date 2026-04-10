@@ -10,18 +10,18 @@
 [ext_resource type="PackedScene" path="res://addons/3d_player_controller_v2/pause.tscn" id="5_7fj78"]
 [ext_resource type="PackedScene" path="res://addons/3d_player_controller_v2/emotes.tscn" id="6_nlsti"]
 [ext_resource type="Texture2D" uid="uid://bvr74sywbui7h" path="res://addons/3d_player_controller_v2/assets/textures/game_icons/white/2x/audioOn.png" id="8_7nn76"]
-[ext_resource type="PackedScene" path="res://addons/3d_player_controller_v2/focus_target_indicator.tscn" id="8_twkb2"]
+[ext_resource type="PackedScene" uid="uid://y43ofen5o2s3" path="res://addons/3d_player_controller_v2/locked_target_indicator.tscn" id="8_twkb2"]
 [ext_resource type="PackedScene" uid="uid://cto31sxtpfiop" path="res://addons/3d_player_controller_v2/loading.tscn" id="8_wgsvs"]
 [ext_resource type="PackedScene" path="res://addons/3d_player_controller_v2/settings.tscn" id="9_ok7gw"]
 [ext_resource type="PackedScene" uid="uid://ba1yxx2ey0bbs" path="res://addons/3d_player_controller_v2/assets/characters/godette/godette.tscn" id="12_ahy2k"]
+[ext_resource type="Script" uid="uid://ckyq1iyrp7d6" path="res://addons/3d_player_controller_v2/targeting.gd" id="14_twkb2"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ifhah"]
 radius = 0.3
 height = 1.8
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_wgsvs"]
-height = 5.0
-radius = 5.0
+[sub_resource type="SphereShape3D" id="SphereShape3D_twkb2"]
+radius = 40.0
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_nlsti"]
 properties/0/path = NodePath(".:current_state")
@@ -77,8 +77,18 @@ radius = 0.2
 [node name="Player" type="CharacterBody3D" unique_id=346875681 groups=["Player"]]
 floor_constant_speed = true
 script = ExtResource("1_ifhah")
+enable_strafing = true
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=1320316015]
+[node name="AudioListener3D" type="AudioListener3D" parent="." unique_id=2020800689]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0.1)
+current = true
+
+[node name="AudioStreamPlayer3D_Dialog" type="AudioStreamPlayer3D" parent="." unique_id=891428557]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, -0.2)
+volume_db = -40.0
+
+[node name="AudioStreamPlayer3D_SFX" type="AudioStreamPlayer3D" parent="." unique_id=1320316015]
+volume_db = -10.0
 
 [node name="CameraMount" type="Node3D" parent="." unique_id=1071985085]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
@@ -88,6 +98,7 @@ spring_length = 1.5
 
 [node name="Camera3D" type="Camera3D" parent="CameraMount/CameraSpringArm" unique_id=152078509]
 transform = Transform3D(1, 0, 0, 0, 0.9659259, 0.25881907, 0, -0.25881907, 0.9659258, 0, 0, 0)
+current = true
 script = ExtResource("2_mpser")
 
 [node name="RayCast3D" type="RayCast3D" parent="CameraMount/CameraSpringArm/Camera3D" unique_id=1984525815]
@@ -134,6 +145,7 @@ shape = SubResource("CapsuleShape3D_ifhah")
 [node name="Chat" parent="." unique_id=251638172 instance=ExtResource("4_pyrav")]
 
 [node name="Controls" parent="." unique_id=2103074329 instance=ExtResource("3_uu7fq")]
+visible = false
 
 [node name="Debug" parent="." unique_id=426142649 instance=ExtResource("4_uu7fq")]
 visible = false
@@ -141,12 +153,13 @@ visible = false
 [node name="Emotes" parent="." unique_id=1795697336 instance=ExtResource("6_nlsti")]
 
 [node name="EnemyDetection" type="Area3D" parent="." unique_id=127445399]
+collision_mask = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="EnemyDetection" unique_id=323991624]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("CylinderShape3D_wgsvs")
+shape = SubResource("SphereShape3D_twkb2")
 
-[node name="FocusTargetIndicator" parent="EnemyDetection" unique_id=1112065412 instance=ExtResource("8_twkb2")]
+[node name="LockedTargetIndicator" parent="EnemyDetection" unique_id=1112065412 instance=ExtResource("8_twkb2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 visible = false
 
@@ -183,6 +196,9 @@ visible = false
 
 [node name="States" parent="." unique_id=1887746606 instance=ExtResource("5_5e1u4")]
 
+[node name="Targeting" type="Node" parent="." unique_id=822789995]
+script = ExtResource("14_twkb2")
+
 [node name="Timers" type="Node" parent="." unique_id=2078331381]
 
 [node name="KickLeft" type="Timer" parent="Timers" unique_id=195208033]
@@ -205,6 +221,9 @@ one_shot = true
 
 [node name="Character" parent="Visuals" unique_id=76213539 instance=ExtResource("12_ahy2k")]
 
+[node name="LookAtMarker" type="Marker3D" parent="Visuals" unique_id=1692653700]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6137265, -0.15906607)
+
 [node name="RayCast3D_Top" type="RayCast3D" parent="Visuals" unique_id=1088517173]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
 target_position = Vector3(0, 0, -1)
@@ -226,12 +245,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, 0)
 target_position = Vector3(0, -0.5, 0)
 
 [node name="ShapeCast3D_JumpTarget" type="ShapeCast3D" parent="Visuals" unique_id=2127367137]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, -0.4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.6999998, -0.6)
 shape = SubResource("CylinderShape3D_a5e81")
-collide_with_areas = true
 
-[connection signal="body_entered" from="EnemyDetection" to="." method="_on_enemy_detection_body_entered"]
-[connection signal="body_exited" from="EnemyDetection" to="." method="_on_enemy_detection_body_exited"]
+[node name="WaistMarker" type="Marker3D" parent="Visuals" unique_id=865507062]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
+
+[connection signal="body_entered" from="EnemyDetection" to="Targeting" method="_on_enemy_detection_body_entered"]
+[connection signal="body_exited" from="EnemyDetection" to="Targeting" method="_on_enemy_detection_body_exited"]
 [connection signal="navigation_finished" from="NavigationAgent3D" to="NavigationAgent3D" method="_on_navigation_finished"]
 [connection signal="timeout" from="Timers/KickLeft" to="." method="_on_kick_left_timeout"]
 [connection signal="timeout" from="Timers/KickRight" to="." method="_on_kick_right_timeout"]

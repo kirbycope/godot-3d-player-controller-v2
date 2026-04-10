@@ -47,7 +47,9 @@ func _input(event: InputEvent) -> void:
 
 	# Ⓐ/[Space] _pressed_ -> Start "paragliding"
 	if event.is_action_pressed(Controls.BUTTON_0):
-		if player.enable_paragliding:
+		if player.enable_paragliding \
+		and not player.is_riding \
+		and not player.is_shapeshifted:
 			transition_state(player.current_state, States.State.PARAGLIDING)
 			return
 
@@ -62,9 +64,11 @@ func _process(_delta: float) -> void:
 		# Fell too fast -> Start "ragdolling"
 		if player.virtual_velocity.y < -player.gravity and player.enable_ragdolling:
 			transition_state(NODE_STATE, States.State.RAGDOLLING)
+			return
 		# Fell safely -> Start "standing"
 		else:
 			transition_state(NODE_STATE, States.State.STANDING)
+			return
 
 	# Play the animation
 	play_animation()
@@ -72,10 +76,18 @@ func _process(_delta: float) -> void:
 
 ## Plays the appropriate animation based on player state.
 func play_animation() -> void:
-	var mixamo_animation = MIX_ANIMATION_FALLING_HOLDING_RIFLE if player.is_holding_rifle else MIX_ANIMATION_FALLING
-
 	var current_animation = player.animation_player_current_animation()
-	var animation = mixamo_animation
+
+	# 🐎 -- Riding animations --
+	if player.is_riding:
+		var target_animation = Sitting.MIX_ANIMATION_SITTING
+		if current_animation != target_animation:
+			player.animation_player_play(target_animation)
+		return
+
+	var target_animation = MIX_ANIMATION_FALLING_HOLDING_RIFLE if player.is_holding_rifle else MIX_ANIMATION_FALLING
+
+	var animation = target_animation
 	if current_animation != animation:
 		player.animation_player_play(animation)
 

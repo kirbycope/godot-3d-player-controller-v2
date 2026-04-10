@@ -30,8 +30,7 @@ func _input(event: InputEvent) -> void:
 			else:
 				# Tween player position to target
 				var end_position = player.shape_cast_jump_target.get_collision_point(0)
-				# Adjust down by player height since collision point is at head level
-				end_position.y -= player.collision_height
+				#player.debug.draw_debug_sphere(end_position, Color.RED) # DEBUGGING
 				var tween = get_tree().create_tween()
 				tween.set_trans(Tween.TRANS_LINEAR)
 				tween.tween_property(
@@ -40,7 +39,11 @@ func _input(event: InputEvent) -> void:
 					end_position,
 					0.2
 				)
-				tween.tween_callback(func(): transition_state(NODE_STATE, States.State.STANDING))
+				tween.tween_callback(
+					func():
+						transition_state(NODE_STATE, States.State.STANDING)
+						return
+				)
 
 	# Ⓨ/[Ctrl] _pressed_ -> Start "falling"
 	if event.is_action_pressed(Controls.BUTTON_3):
@@ -60,11 +63,13 @@ func _process(_delta: float) -> void:
 	if not player.ray_cast_top.is_colliding() and not player.ray_cast_high.is_colliding():
 		# Start falling
 		transition_state(NODE_STATE, States.State.FALLING)
+		return
 
 	# Check if the player is on the ground -> Start "standing"
 	if player.is_on_floor() and abs(player.velocity).length() < 0.2:
 		# Start "standing"
 		transition_state(NODE_STATE, States.State.STANDING)
+		return
 
 	# Ⓑ/[shift] _pressed_ -> Move faster while "hanging"
 	if player.enable_sprinting:
@@ -82,6 +87,9 @@ func _process(_delta: float) -> void:
 
 ## Plays the appropriate animation based on player state.
 func play_animation() -> void:
+	var current_animation = player.animation_player_current_animation()
+	var target_animation: String
+
 	# 🐢🐇 Set animation playback speed based on [Hanging] speed
 	if player.speed_current > player.speed_hanging:
 		player.animation_player_set_speed_scale(1.5)
@@ -91,19 +99,18 @@ func play_animation() -> void:
 	# Check if the player's hang is braced (the collider has somewhere for the player's footing)
 	var is_braced = player.ray_cast_low.is_colliding()
 
-	var mixamo_animation: String
 	# "shimmy" left ←
 	if Input.is_action_pressed(Controls.MOVE_LEFT):
-		mixamo_animation = MIX_ANIMATION_HANGING_BRACED_SHIMMY_LEFT if is_braced else MIX_ANIMATION_HANGING_SHIMMY_LEFT
+		target_animation = MIX_ANIMATION_HANGING_BRACED_SHIMMY_LEFT if is_braced else MIX_ANIMATION_HANGING_SHIMMY_LEFT
 	# "shimmy" right →
 	elif Input.is_action_pressed(Controls.MOVE_RIGHT):
-		mixamo_animation = MIX_ANIMATION_HANGING_BRACED_SHIMMY_RIGHT if is_braced else MIX_ANIMATION_HANGING_SHIMMY_RIGHT
+		target_animation = MIX_ANIMATION_HANGING_BRACED_SHIMMY_RIGHT if is_braced else MIX_ANIMATION_HANGING_SHIMMY_RIGHT
 	# "hanging" idle
 	else:
-		mixamo_animation = MIX_ANIMATION_HANGING_BRACED if is_braced else MIX_ANIMATION_HANGING
+		target_animation = MIX_ANIMATION_HANGING_BRACED if is_braced else MIX_ANIMATION_HANGING
 
-	var animation = mixamo_animation
-	player.animation_player_play(animation)
+	if current_animation != target_animation:
+		player.animation_player_play(target_animation)
 
 
 ## Start "hanging".

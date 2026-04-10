@@ -9,24 +9,25 @@ enum State {
 	CRAWLING,        # 2
 	CROUCHING,       # 3
 	DRIVING,         # 4
-	FALLING,         # 5
-	FLIPPING,        # 6
-	FLYING,          # 7
-	HANGING,         # 8
-	JUMPING,         # 9
-	MANTLING,		 # 10
-	NAVIGATING,      # 11
-	PARAGLIDING,     # 12
-	PUSHING,         # 13
-	RAGDOLLING,      # 14
-	REACTING,        # 15
-	ROLLING,         # 16
-	RUNNING,         # 17
-	SITTING,         # 18
-	SLIDING,         # 19
-	SKATEBOARDING,   # 20
-	SPRINTING,       # 21
-	STANDING,        # 22
-	SWIMMING,        # 23
-	WALKING,         # 24
+	DYING,           # 6
+	FALLING,         # 6
+	FLIPPING,        # 7
+	FLYING,          # 8
+	HANGING,         # 9
+	JUMPING,         # 10
+	MANTLING,        # 11
+	NAVIGATING,      # 12
+	PARAGLIDING,     # 13
+	PUSHING,         # 14
+	RAGDOLLING,      # 15
+	REACTING,        # 16
+	ROLLING,         # 17
+	RUNNING,         # 18
+	SITTING,         # 19
+	SLIDING,         # 20
+	SKATEBOARDING,   # 21
+	SPRINTING,       # 22
+	STANDING,        # 23
+	SWIMMING,        # 24
+	WALKING,         # 25
 }

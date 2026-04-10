@@ -621,6 +621,17 @@ layout_mode = 0
 offset_right = 164.0
 offset_bottom = 31.0
 
+[node name="IsDying" type="CheckBox" parent="States" unique_id=172394454]
+layout_mode = 2
+disabled = true
+text = "IsDying"
+
+[node name="Panel" type="Panel" parent="States/IsDying" unique_id=907224440]
+z_index = -1
+layout_mode = 0
+offset_right = 164.0
+offset_bottom = 31.0
+
 [node name="IsFalling" type="CheckBox" parent="States" unique_id=1302464746]
 layout_mode = 2
 disabled = true
@@ -817,7 +828,7 @@ theme_override_constants/separation = 2
 
 [node name="Label" type="Label" parent="States2" unique_id=1386772223]
 layout_mode = 2
-text = "STATES"
+text = "STATUS"
 horizontal_alignment = 1
 
 [node name="Panel" type="Panel" parent="States2/Label" unique_id=362992448]
@@ -859,6 +870,28 @@ layout_mode = 0
 offset_right = 164.0
 offset_bottom = 31.0
 
+[node name="IsRiding" type="CheckBox" parent="States2" unique_id=1346143141]
+layout_mode = 2
+disabled = true
+text = "IsRiding"
+
+[node name="Panel" type="Panel" parent="States2/IsRiding" unique_id=114660009]
+z_index = -1
+layout_mode = 0
+offset_right = 164.0
+offset_bottom = 31.0
+
+[node name="IsShapeshifted" type="CheckBox" parent="States2" unique_id=1740244305]
+layout_mode = 2
+disabled = true
+text = "IsShapeshifted"
+
+[node name="Panel" type="Panel" parent="States2/IsShapeshifted" unique_id=1237842040]
+z_index = -1
+layout_mode = 0
+offset_right = 164.0
+offset_bottom = 31.0
+
 [node name="IsStrafing" type="CheckBox" parent="States2" unique_id=2109753545]
 layout_mode = 2
 disabled = true
@@ -873,9 +906,9 @@ offset_bottom = 31.0
 [node name="COMBAT_1H" type="VBoxContainer" parent="." unique_id=1644522861]
 visible = false
 offset_left = 167.0
-offset_top = 313.0
+offset_top = 380.0
 offset_right = 331.0
-offset_bottom = 534.0
+offset_bottom = 601.0
 theme_override_constants/separation = 2
 
 [node name="Label" type="Label" parent="COMBAT_1H" unique_id=451264442]
@@ -958,9 +991,9 @@ offset_bottom = 31.0
 [node name="COMBAT_2H" type="VBoxContainer" parent="." unique_id=2130046035]
 visible = false
 offset_left = 167.0
-offset_top = 313.0
+offset_top = 380.0
 offset_right = 331.0
-offset_bottom = 435.0
+offset_bottom = 502.0
 theme_override_constants/separation = 2
 
 [node name="Label" type="Label" parent="COMBAT_2H" unique_id=949082013]
@@ -1010,9 +1043,9 @@ offset_bottom = 31.0
 [node name="COMBAT_SHIELD" type="VBoxContainer" parent="." unique_id=1231951365]
 visible = false
 offset_left = 167.0
-offset_top = 537.0
+offset_top = 604.0
 offset_right = 352.0
-offset_bottom = 659.0
+offset_bottom = 726.0
 theme_override_constants/separation = 2
 
 [node name="Label" type="Label" parent="COMBAT_SHIELD" unique_id=1400270547]
@@ -1060,10 +1093,11 @@ offset_right = 185.0
 offset_bottom = 31.0
 
 [node name="FISHING" type="VBoxContainer" parent="." unique_id=1257750104]
+visible = false
 offset_left = 167.0
-offset_top = 312.0
+offset_top = 380.0
 offset_right = 352.0
-offset_bottom = 434.0
+offset_bottom = 502.0
 theme_override_constants/separation = 2
 
 [node name="Label" type="Label" parent="FISHING" unique_id=674359917]
@@ -1113,9 +1147,9 @@ offset_bottom = 31.0
 [node name="SHOOTING" type="VBoxContainer" parent="." unique_id=1789174847]
 visible = false
 offset_left = 167.0
-offset_top = 313.0
+offset_top = 225.0
 offset_right = 331.0
-offset_bottom = 435.0
+offset_bottom = 347.0
 theme_override_constants/separation = 2
 
 [node name="Label" type="Label" parent="SHOOTING" unique_id=1286495057]
@@ -1165,9 +1199,9 @@ offset_bottom = 31.0
 [node name="THROWING" type="VBoxContainer" parent="." unique_id=547691069]
 visible = false
 offset_left = 167.0
-offset_top = 313.0
+offset_top = 223.0
 offset_right = 331.0
-offset_bottom = 468.0
+offset_bottom = 378.0
 theme_override_constants/separation = 2
 
 [node name="Label" type="Label" parent="THROWING" unique_id=1647241063]
@@ -1227,9 +1261,9 @@ offset_bottom = 31.0
 
 [node name="UNARMED" type="VBoxContainer" parent="." unique_id=258243805]
 offset_left = 167.0
-offset_top = 156.0
+offset_top = 223.0
 offset_right = 331.0
-offset_bottom = 311.0
+offset_bottom = 378.0
 theme_override_constants/separation = 2
 
 [node name="Label" type="Label" parent="UNARMED" unique_id=1576877435]
@@ -1311,8 +1345,9 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -158.5
-offset_top = -73.0
+offset_top = -153.0
 offset_right = 158.5
+offset_bottom = -80.0
 grow_horizontal = 2
 grow_vertical = 0
 
@@ -1413,5 +1448,5 @@ scroll_active = false
 [connection signal="toggled" from="Configuration2/LockMovementY" to="." method="_on_lock_movement_y_toggled"]
 [connection signal="toggled" from="Configuration2/LockMovementZ" to="." method="_on_lock_movement_z_toggled"]
 [connection signal="toggled" from="Configuration2/EnableEmotes" to="." method="_on_enable_emotes_toggled"]
-[connection signal="toggled" from="Configuration2/EnableReticle" to="." method="_on_enable_retical_toggled"]
+[connection signal="toggled" from="Configuration2/EnableReticle" to="." method="_on_enable_reticle_toggled"]
 [connection signal="toggled" from="Configuration2/EnableVibration" to="." method="_on_enable_vibration_toggled"]

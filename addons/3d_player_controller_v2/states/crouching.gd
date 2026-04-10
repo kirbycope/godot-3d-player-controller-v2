@@ -77,6 +77,7 @@ func _process(_delta: float) -> void:
 	if player.enable_crawling:
 		if player.input_direction != Vector2.ZERO:
 			transition_state(NODE_STATE, States.State.CRAWLING)
+			return
 
 	# Play the animation
 	play_animation()
@@ -84,19 +85,19 @@ func _process(_delta: float) -> void:
 
 ## Plays the appropriate animation based on player state.
 func play_animation() -> void:
-	var mixamo_animation: String
+	var target_animation: String
 	if player.is_holding_rifle:
 		if player.is_firing_rifle:
-			mixamo_animation = MIX_ANIMATION_CROUCHING_FIRING
+			target_animation = MIX_ANIMATION_CROUCHING_FIRING
 		elif player.is_aiming_rifle:
-			mixamo_animation = MIX_ANIMATION_CROUCHING_AIMING
+			target_animation = MIX_ANIMATION_CROUCHING_AIMING
 		else:
-			mixamo_animation = MIX_ANIMATION_CROUCHING_HOLDING_RIFLE
+			target_animation = MIX_ANIMATION_CROUCHING_HOLDING_RIFLE
 	else:
-		mixamo_animation = MIX_ANIMATION_CROUCHING_IDLE
+		target_animation = MIX_ANIMATION_CROUCHING_IDLE
 
 	var current_animation = player.animation_player_current_animation()
-	var animation = mixamo_animation
+	var animation = target_animation
 	if current_animation != animation:
 		_on_animation_finished(current_animation)
 		player.animation_player_play(animation)

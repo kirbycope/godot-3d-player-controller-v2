@@ -39,6 +39,7 @@ func _input(event: InputEvent) -> void:
 		and not player.chat.line_edit.visible:
 			if player.enable_flipping \
 			and player.is_strafing \
+			and not player.is_riding \
 			and (Input.is_action_pressed(Controls.MOVE_DOWN) or Input.is_action_pressed(Controls.MOVE_UP)):
 				# Start "flipping"
 				transition_state(player.current_state, States.State.FLIPPING)
@@ -47,14 +48,6 @@ func _input(event: InputEvent) -> void:
 				# Start "jumping"
 				transition_state(player.current_state, States.State.JUMPING)
 				return
-
-	# Ⓑ/[shift] _pressed_ -> Start "sprinting"
-	if event.is_action_pressed(Controls.BUTTON_1):
-		if player.enable_sprinting \
-		and player.input_direction != Vector2.ZERO \
-		and player.is_on_floor():
-			transition_state(NODE_STATE, States.State.SPRINTING)
-			return
 
 	# 🄻1/[MB0] _pressed_
 	if event.is_action_pressed(Controls.BUTTON_4):
@@ -114,6 +107,16 @@ func _process(_delta: float) -> void:
 
 ## Plays the appropriate animation based on player state.
 func play_animation() -> void:
+	var current_animation = player.animation_player_current_animation()
+	var target_animation: String
+
+	# 🐎 -- Riding animations --
+	if player.is_riding:
+		var animation = Sitting.MIX_ANIMATION_SITTING
+		if current_animation != animation:
+			player.animation_player_play(animation)
+		return
+
 	# Check if strafing left or right
 	var is_strafe_left: bool = player.is_strafing and player.input_direction.x < 0.0
 	var is_strafe_right: bool = player.is_strafing and player.input_direction.x > 0.0
@@ -122,7 +125,6 @@ func play_animation() -> void:
 		and (player.camera.perspective == player.camera.Perspective.FIRST_PERSON \
 		or player.is_strafing \
 		or player.is_target_locked)
-	var mixamo_animation: String ## The name of the Mixamo animation to play.
 
 	# Handle "running" (while "strafing")
 	if is_strafe_left or is_strafe_right:
@@ -130,60 +132,58 @@ func play_animation() -> void:
 		if player.is_holding_rifle:
 			# Handle "running" (while "strafing" left and holding a rifle)
 			if is_strafe_left:
-				mixamo_animation = MIX_ANIMATION_STRAFE_LEFT_HOLDING_RIFLE
+				target_animation = MIX_ANIMATION_STRAFE_LEFT_HOLDING_RIFLE
 			# Handle "running" (while "strafing" right and holding a rifle)
 			elif is_strafe_right:
-				mixamo_animation = MIX_ANIMATION_STRAFE_RIGHT_HOLDING_RIFLE
+				target_animation = MIX_ANIMATION_STRAFE_RIGHT_HOLDING_RIFLE
 		# Handle "running" (while "strafing" and holding a shield)
 		elif player.is_holding_shield_1h_left:
 			# Handle "running" (while "strafing" left and holding a shield)
 			if is_strafe_left:
-				mixamo_animation = MIX_ANIMATION_STRAFE_LEFT_SWORD_AND_SHIELD
+				target_animation = MIX_ANIMATION_STRAFE_LEFT_SWORD_AND_SHIELD
 			# Handle "running" (while "strafing" right and holding a shield)
 			elif is_strafe_right:
-				mixamo_animation = MIX_ANIMATION_STRAFE_RIGHT_SWORD_AND_SHIELD
+				target_animation = MIX_ANIMATION_STRAFE_RIGHT_SWORD_AND_SHIELD
 		# Handle "running" (while "strafing" and unarmed)
 		else:
 			# Handle "running" (while "strafing" left and unarmed)
 			if is_strafe_left:
-				mixamo_animation = MIX_ANIMATION_STRAFE_LEFT
+				target_animation = MIX_ANIMATION_STRAFE_LEFT
 			# Handle "running" (while "strafing" right and unarmed)
 			elif is_strafe_right:
-				mixamo_animation = MIX_ANIMATION_STRAFE_RIGHT
+				target_animation = MIX_ANIMATION_STRAFE_RIGHT
 	# Handle "running" (while backpedaling)
 	elif is_backpedaling:
 		# Handle "running" (while backpedaling and holding a rifle)
 		if player.is_holding_rifle:
-			mixamo_animation = MIX_ANIMATION_BACKWARD_HOLDING_RIFLE
+			target_animation = MIX_ANIMATION_BACKWARD_HOLDING_RIFLE
 		# Handle "running" (while backpedaling and holding a shield)
 		elif player.is_holding_shield_1h_left:
-			mixamo_animation = MIX_ANIMATION_BACKWARD_SWORD_AND_SHIELD
+			target_animation = MIX_ANIMATION_BACKWARD_SWORD_AND_SHIELD
 		# Handle "running" (while backpedaling and unarmed)
 		else:
-			mixamo_animation = MIX_ANIMATION_BACKWARD
+			target_animation = MIX_ANIMATION_BACKWARD
 	# Handle "running" (while holding a rifle)
 	elif player.is_holding_rifle:
 		# Handle "running" (while holding a rifle and firing)
 		if player.is_firing_rifle:
-			mixamo_animation = MIX_ANIMATION_FIRING_RIFLE
+			target_animation = MIX_ANIMATION_FIRING_RIFLE
 		# Handle "running" (while holding a rifle and aiming)
 		elif player.is_aiming_rifle:
-			mixamo_animation = MIX_ANIMATION_AIMING_RIFLE
+			target_animation = MIX_ANIMATION_AIMING_RIFLE
 		# Handle "running" (while holding a rifle)
 		else:
-			mixamo_animation = MIX_ANIMATION_HOLDING_RIFLE
+			target_animation = MIX_ANIMATION_HOLDING_RIFLE
 	# Handle "running" (while holding a shield)
 	elif player.is_holding_shield_1h_left:
-		mixamo_animation = MIX_ANIMATION_SWORD_AND_SHIELD
+		target_animation = MIX_ANIMATION_SWORD_AND_SHIELD
 	# Handle "running" (unarmed)
 	else:
-		mixamo_animation = MIX_ANIMATION
+		target_animation = MIX_ANIMATION
 
-	var animation = mixamo_animation
-	var current_animation = player.animation_player_current_animation()
-	if current_animation != animation:
+	if current_animation != target_animation:
 		_on_animation_finished(current_animation)
-		player.animation_player_play(animation)
+		player.animation_player_play(target_animation)
 
 
 ## Called when an animation finishes playing, if the signal has been connected.

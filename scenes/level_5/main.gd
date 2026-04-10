@@ -13,7 +13,7 @@ func _ready() -> void:
 	player.enable_crouching = true
 	player.enable_holding_objects = true
 	player.enable_jumping = true
-	player.enable_retical = true
+	player.enable_reticle = true
 	player.enable_throwing = true
 	$BluePortal/Portal3D.deactivate()
 	$RedPortal/Portal3D.deactivate()

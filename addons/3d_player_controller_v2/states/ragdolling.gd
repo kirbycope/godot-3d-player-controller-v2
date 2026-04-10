@@ -9,7 +9,7 @@ const NODE_STATE := States.State.RAGDOLLING
 var time_ragdolling := 0.0 ## The time spent in the "ragdolling" state."
 
 
-## Called once for every event before _unhandled_input(), allowing you to consume some events.
+## Called when there is an input event.
 func _input(event: InputEvent) -> void:
 	# Do nothing if not the authority
 	if not is_multiplayer_authority(): return

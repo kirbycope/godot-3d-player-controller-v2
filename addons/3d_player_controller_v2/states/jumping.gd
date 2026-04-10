@@ -5,6 +5,7 @@ class_name Jumping
 # Jumping 🔵 Mixamo animations
 const MIX_ANIMATION_JUMPING := "Falling/mixamo_com"
 const MIX_ANIMATION_JUMPING_HOLDING_RIFLE := "Falling_Holding_Rifle/mixamo_com"
+const MIX_ANIMATION_STANDING_TO_JUMPING := "Standing_To_Jumping/mixamo_com"
 
 const NODE_STATE := States.State.JUMPING
 
@@ -19,7 +20,8 @@ func _input(event: InputEvent) -> void:
 
 	# Ⓐ/[Space] _pressed_ -> Start "climbing"
 	if event.is_action_pressed(Controls.BUTTON_0):
-		if player.enable_climbing:
+		if player.enable_climbing \
+		and not player.is_riding:
 			if player.ray_cast_high.is_colliding():
 				var collision_object = player.ray_cast_high.get_collider()
 				if not collision_object is CharacterBody3D \
@@ -48,7 +50,9 @@ func _input(event: InputEvent) -> void:
 	# Ⓐ/[Space] _pressed_ -> Start "paragliding"
 	if event.is_action_pressed(Controls.BUTTON_0) \
 	and not player.is_on_floor():
-		if player.enable_paragliding:
+		if player.enable_paragliding \
+		and not player.is_riding \
+		and not player.is_shapeshifted:
 			transition_state(player.current_state, States.State.PARAGLIDING)
 			return
 
@@ -104,18 +108,26 @@ func _process(_delta: float) -> void:
 
 ## Plays the appropriate animation based on player state.
 func play_animation() -> void:
-	var mixamo_animation: String ## The name of the Mixamo animation to play.
+	var current_animation = player.animation_player_current_animation()
+	var target_animation: String
+
+	# 🐎 -- Riding animations --
+	if player.is_riding:
+		target_animation = Sitting.MIX_ANIMATION_SITTING
+		if current_animation != target_animation:
+			player.animation_player_play(target_animation)
+		return
+
 	# Handle "jumping" (while holding rifle)
 	if player.is_holding_rifle:
-		mixamo_animation = MIX_ANIMATION_JUMPING_HOLDING_RIFLE
+		target_animation = MIX_ANIMATION_JUMPING_HOLDING_RIFLE
 	# Handle "jumping" (upward, unarmed)
 	else:
-		mixamo_animation = MIX_ANIMATION_JUMPING
+		target_animation = MIX_ANIMATION_JUMPING
 
-	var current_animation = player.animation_player_current_animation()
-	var animation = mixamo_animation
-	if current_animation != animation:
-		player.animation_player_play(animation)
+	if current_animation != target_animation:
+		player.animation_player_play(target_animation)
+
 
 ## Start "jumping".
 func start() -> void:
@@ -132,8 +144,8 @@ func start() -> void:
 	player.velocity += player.up_direction * player.speed_jumping
 
 	# 🔊 Play "jumping" sound effect
-	if player.character.has_method("play_jump_sound_effect"):
-		player.character.play_jump_sound_effect()
+	if player.character.has_method("play_random_sound_effect"):
+		player.character.play_random_sound_effect("jump")
 
 
 ## Stop "jumping".

@@ -1,13 +1,8 @@
 [gd_scene format=3 uid="uid://bq173p46qjxly"]
 
 [ext_resource type="PackedScene" uid="uid://ceqdq2iwuohsy" path="res://addons/3d_player_controller_v2/assets/characters/mixamo/X_Bot.fbx" id="1_vhxac"]
-[ext_resource type="PackedScene" uid="uid://clb3llqky3ai1" path="res://addons/3d_player_controller_v2/assets/characters/mixamo/physical_bone_simulator_3d_x.tscn" id="2_6ehn6"]
-[ext_resource type="Script" uid="uid://br2h8me6nbbfh" path="res://addons/3d_player_controller_v2/physical_bone_simulator_3d.gd" id="3_c2sn5"]
 
 [node name="X_Bot" type="Node3D" unique_id=835807755]
 
 [node name="X_Bot" parent="." unique_id=1925265932 instance=ExtResource("1_vhxac")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
-
-[node name="PhysicalBoneSimulator3D" parent="." unique_id=373036060 instance=ExtResource("2_6ehn6")]
-script = ExtResource("3_c2sn5")

@@ -1,7 +1,7 @@
 extends PhysicalBoneSimulator3D
 
 
-# Called when the node enters the scene tree for the first time.
+## Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	var parent = get_parent()
 	for child in parent.get_children():

@@ -42,22 +42,23 @@ func _process(_delta: float) -> void:
 
 ## Plays the appropriate animation based on player state.
 func play_animation() -> void:
-	var mixamo_animation: String
+	var current_animation = player.animation_player_current_animation()
+
+	var target_animation: String
 	var height_scale := 1.0
 	if player.input_direction == Vector2.ZERO:
-		mixamo_animation = MIX_ANIMATION_SKATEBOARDING_SLOW
+		target_animation = MIX_ANIMATION_SKATEBOARDING_SLOW
 		height_scale = 1.0
 	elif player.speed_current == player.speed_skateboarding:
-		mixamo_animation = MIX_ANIMATION_SKATEBOARDING
+		target_animation = MIX_ANIMATION_SKATEBOARDING
 		height_scale = 0.95
 	elif player.speed_current > player.speed_skateboarding:
-		mixamo_animation = MIX_ANIMATION_SKATEBOARDING_FAST
+		target_animation = MIX_ANIMATION_SKATEBOARDING_FAST
 		height_scale = 0.9
 
-	var animation = mixamo_animation
-	var current_animation = player.animation_player_current_animation()
-	if current_animation != animation:
-		player.animation_player_play(animation)
+	if current_animation != target_animation:
+		#_on_animation_finished(current_animation)
+		player.animation_player_play(target_animation)
 		# Set the player collision shape's height
 		player.collision_shape.shape.height = player.collision_height * height_scale
 		# Set the player collision shape's position
