@@ -6,6 +6,8 @@ Use the [addon](https://github.com/kirbycope/godot-3d-player-controller-addon) i
 
 <details>
 
+<summary>Show V1 (old) Readme</summary>
+
 ![Preview](/godot-3d-player-controller-v2.png)
 
 # godot-3d-player-controller-v2
