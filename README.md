@@ -1,3 +1,11 @@
+# DEPRECATION #
+
+Use the [addon]([https://github.com/kirbycope/godot-3d-player-controller-v2](https://github.com/kirbycope/godot-3d-player-controller-addon)) instead.
+
+----
+
+<details>
+
 ![Preview](/godot-3d-player-controller-v2.png)
 
 # godot-3d-player-controller-v2
@@ -49,3 +57,5 @@ You can remove the Node at `$Visuals/Character` and then replace it with your ow
 
 ### Animations
 This pack comes with [Mixamo](https://www.mixamo.com/#/) animations.
+
+</details>
